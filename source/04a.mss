@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -3465,6 +3465,7 @@ either of the above checks fails.
 
 @end{RunTime}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Notes}
 @Leading@;The conventional meaning of the logical operators is given by the
 following truth table:
@@ -4664,7 +4665,7 @@ True, division by zero raises Constraint_Error.]
 @end{RunTime}
 
 @begin{Notes}
-@Leading@;For positive A and B, A/B is the quotient and A @key(rem) B is
+@Leading@Keepnext@;For positive A and B, A/B is the quotient and A @key(rem) B is
 the remainder when A is divided by B. The following relations are satisfied
 by the rem operator:
 @begin{Example}
@@ -4922,6 +4923,7 @@ a negative value is provided for the exponent.
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubclause{Version=[3],Name=[Conditional Expressions]}
 
 @begin{Intro}

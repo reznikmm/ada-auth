@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.104 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.105 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1053,6 +1053,7 @@ regardless of whether the active priority of the task actually changes.]}
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Preemptive Dispatching]}
 
 @begin{Intro}
@@ -1202,6 +1203,7 @@ regardless of whether the active priority of the task actually changes.]}
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Non-Preemptive Dispatching]}
 
 @begin{Intro}
@@ -1371,6 +1373,7 @@ Interrupt_Handler, or Attach_Handler]}.]}
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed RM Ada 2012}
 @LabeledAddedSubClause{Version=[2],Name=[Round Robin Dispatching]}
 
 @begin{Intro}
@@ -2512,6 +2515,7 @@ implementation-defined queuing policies.]}]}
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Dynamic Priorities}
 
 
@@ -3892,6 +3896,7 @@ There is no requirement that these be the same.
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Delay Accuracy}
 
 @begin{Intro}
@@ -4248,6 +4253,7 @@ may leave a task blocked forever.]}
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Asynchronous Task Control}
 
 @begin{Intro}
@@ -5964,6 +5970,7 @@ Timing_Event objects.]}
 @end{Diffword2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedClause{Version=[3],Name=[Multiprocessor Implementation]}
 
 @begin{Intro}

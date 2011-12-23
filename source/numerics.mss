@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2011/11/01 05:34:03 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1368,6 +1368,7 @@ Ada 83.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Model of Floating Point Arithmetic}
 
 @begin{Intro}

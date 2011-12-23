@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.60 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.61 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2369,6 +2369,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}
 
 @begin{Intro}
@@ -3221,6 +3222,7 @@ call may specify
 either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
 @end[Notes]
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Examples}
 @Leading@Keepnext@i{Examples of Interfaces.COBOL:}
 @begin{Example}

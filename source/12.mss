@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2522,6 +2522,7 @@ run-time check to a compile-time check.
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Formal Scalar Types}
 
 @begin{Intro}

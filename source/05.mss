@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.52 $}
+@Comment{$Revision: 1.53 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -625,7 +625,7 @@ RHS="@Chg{Version=[3],New=[],Old=[@SynI{boolean_}@Syn2{expression}]}"}
 A @nt{condition} is expected to be of any boolean type.]}
 @end{Resolution}
 @begin{NotIso}
-@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 3 and 4
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 3 and 4
 were deleted.>}]}@Comment{This message should be
 deleted if the paragraphs are ever renumbered.}
 @end{NotIso}

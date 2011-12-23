@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -332,6 +332,7 @@ Note that there are more such cases in Ada 95.
 The syntax rule for @nt{choice_parameter_specification} is new.
 @end{DiffWord83}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Raise Statements}
 
 @begin{Intro}
@@ -1371,6 +1372,7 @@ effect will not affect normal operation of the program.]}
 Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend95}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}

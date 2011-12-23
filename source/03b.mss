@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2011/11/01 23:14:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @LabeledClause{Array Types}
 
@@ -1875,7 +1875,7 @@ is constrained or unconstrained.]
 @end{Intro}
 
 @begin{StaticSem}
-For @PrefixType{a @nt<prefix> A that is of a
+@Leading@Keepnext@;For @PrefixType{a @nt<prefix> A that is of a
 discriminated type @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin(description)

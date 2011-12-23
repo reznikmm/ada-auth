@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2011/11/01 05:34:03 $ $Author: randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -246,6 +246,7 @@ to query information about the partition.
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Categorization of Library Units}
 
 @begin{Intro}

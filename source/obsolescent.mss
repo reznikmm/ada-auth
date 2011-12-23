@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:05 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -285,6 +285,7 @@ floating point types only as an obsolescent feature).
 @end{DiffWord83}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{The Constrained Attribute}
 
 @begin{StaticSem}
@@ -600,6 +601,7 @@ was replaced by @nt{accept_statement}.], Old=[]}
 @end{DiffWord95}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Mod Clauses}
 
 @begin{Syntax}
@@ -1070,6 +1072,7 @@ all of the denoted entities.]}
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Pragma No_Return]}
 
 @begin{Syntax}
@@ -1191,6 +1194,7 @@ to the value of the @nt{expression} of the @nt{pragma}.]}
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Interfacing Pragmas]}
 
 @begin{Syntax}
@@ -1447,6 +1451,7 @@ creation time].]}
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Shared Variable Pragmas]}
 
 @begin{Syntax}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -4183,6 +4183,7 @@ place is not specified explicitly in the @nt<record_@!representation_@!clause>.
 @end{Reason}
 @end{ImplPerm}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{ImplAdvice}
 @Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{record_representation_clause})}
 The recommended level of support for @nt{record_representation_clause}s is:

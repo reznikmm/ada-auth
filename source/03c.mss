@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -6044,6 +6044,7 @@ uses of anonymous access types.]}
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Declarative Parts}
 
 @begin{Intro}

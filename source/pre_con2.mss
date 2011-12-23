@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1694,7 +1694,7 @@ it would for an empty container, or it raises Constraint_Error or Program_Error.
 
 @begin{Erron}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[A Cursor
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[A Cursor
 value is @i<invalid> if any of the following have occurred since
 it was created:@Defn2{Term=[invalid cursor],Sec=[of a tree]}
 @PDefn2{Term=[cursor],Sec=[invalid]}]}
@@ -3704,6 +3704,7 @@ minimize copying does not apply to bounded trees.]}]}
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubclause{Version=[2],Name=[Array Sorting]}
 
 @begin{Intro}
@@ -4629,7 +4630,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[Similarly, the effect of the loop:]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[Similarly, the effect of the loop:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4642,7 +4643,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[is the same as:]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[is the same as:]}
 
 @begin{Example}
 
@@ -4660,7 +4661,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[which is the same as:]}
+@ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[which is the same as:]}
 
 @begin{Example}
 

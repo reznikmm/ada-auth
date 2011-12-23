@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -491,6 +491,7 @@ The syntax rules for @nt{defining_designator} and
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
@@ -1067,7 +1068,6 @@ by-copy type. A parameter of a by-copy type is passed by
 copy@Chg{Version=[3],New=[, unless the
 formal parameter is explicitly aliased],Old=[]}.
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @leading@keepnext@Defn{by-reference type}
 A type is a @i(by-reference type) if it
 is a descendant of one of the following:
@@ -3955,6 +3955,7 @@ subtype of this object.]}]}
 
 @end{ImplPerm}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Examples}
 @leading@keepnext@i{Examples of return statements:}
 @begin{Example}
@@ -4488,6 +4489,7 @@ as the result type is not Boolean.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedClause{Version=[2],Name=[Null Procedures]}
 
 @begin{Intro}

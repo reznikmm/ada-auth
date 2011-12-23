@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -2140,23 +2140,28 @@ encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
 an element, and returns False otherwise.]}]}
-
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}]}
 @end{Honest}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 225 and 226
+were moved above.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3877,23 +3882,28 @@ designating the first equal element encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
 an element, and returns False otherwise.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}]}
 @end{Honest}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 139 and 140
+were moved above.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5105,23 +5115,28 @@ designating the matching node is returned; otherwise, No_Element is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
 an element, and returns False otherwise.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}]}
 @end{Honest}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 72 and 73
+were moved above.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -7387,23 +7402,28 @@ matching element is returned; otherwise, No_Element is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Deleted]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@Chg{Version=[3],New=[],Old=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[],Old=[Returns True if Position designates
 an element, and returns False otherwise.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0212-1]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This function may not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}]}
 @end{Honest}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 83 and 84
+were moved above.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

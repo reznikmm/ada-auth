@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2011/11/01 05:34:05 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:05 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1089,7 +1089,7 @@ designated by Item is categorized as @ntf{letter_uppercase},
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Lower (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Lower (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}

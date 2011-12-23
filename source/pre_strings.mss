@@ -1,8 +1,9 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2011/11/01 05:34:05 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/11/01 05:34:05 $}
+@Comment{$Date: 2011/11/01 23:14:15 $}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
 
 @begin{Intro}

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1496,6 +1496,7 @@ There is no Unchecked_Access attribute for subprograms.
 
 @end{Notes}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Storage Management}
 
 @begin{Intro}
@@ -4141,6 +4142,7 @@ No_Implementation_Units.]}
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Streams}
 
 @begin{Intro}

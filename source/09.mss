@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/11/01 23:14:14 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 
@@ -1064,7 +1064,7 @@ protected declaration.]}
 @end(Honest)
 @end{Legality}
 @begin{NotIso}
-@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 10 was
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 10 was
 deleted.>}]}@Comment{This message should be deleted if the paragraphs
 are ever renumbered.}
 @end{NotIso}
