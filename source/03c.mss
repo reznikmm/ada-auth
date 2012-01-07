@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -478,7 +478,7 @@ is a @i<descendant> of
 a type T1 if it is the same as T1, or if its parent type or one of its
 progenitor types is a descendant of type T1 by this rule@Redundant[,
 even if at the point of the declaration of T2, one of the derivations
-in the chain is not visible].@Defn2{Term=[descendant],Sec=[at runtime]}]}
+in the chain is not visible].@Defn2{Term=[descendant],Sec=[at run-time]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -4812,11 +4812,13 @@ type of an access discriminant in any other context is that of the
 enclosing object.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00254-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0270-1]}
 The accessibility level of
 the anonymous access type of an access
 parameter@Chg{Version=[2],New=[ specifying an access-to-object type],Old=[]}
 is the same as that of
-the view designated by the actual.@Chg{Version=[2],New=[],Old=[ If the
+the view designated by the actual@Chg{Version=[3],New=[ (or library-level
+if the actual is null)],Old=[]}.@Chg{Version=[2],New=[],Old=[ If the
 actual is an @nt{allocator},
 this is the accessibility level of the execution of the called
 subprogram.]}
@@ -6040,6 +6042,11 @@ uses of anonymous access types.]}
   of the call@rdquote to simplify other wording, especially that for the
   accessibility checks associated with return statements and explicitly aliased
   parameters.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0270-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Defined the (omitted)
+  accessibility level of null values when those are passed as the actual of an
+  access-to-object parameter.]}
 @end{DiffWord2005}
 
 

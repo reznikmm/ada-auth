@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.53 $}
+@Comment{$Revision: 1.54 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1511,6 +1511,14 @@ constant indexing function for the type of the iterable object for the loop;
 otherwise it uses the default variable indexing function.]}
 
 @end{Runtime}
+
+@begin{Examples}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[For examples of use of generalized iterators,
+see @RefSecNum{Example of Container Use} and the corresponding container
+packages in @RefSecNum{The Generic Package Containers.Vectors} and
+@RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}.]}
+@end{Examples}
 
 
 @begin{Extend2005}

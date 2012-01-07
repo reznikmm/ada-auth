@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -843,10 +843,14 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Vector'Write writes exactly Length(Vector) elements
-of the vector to the stream. It may write additional information about the
-vector as well. Vector'Read reads exactly Length(Vector) elements of Vector from
-the stream and consumes any additional information written by Vector'Write.]}
+@ChgAdded{Version=[3],Text=[Vector'Write for a Vector object @i<V> writes
+Length(@i<V>) elements of the vector to the stream. It also may write
+additional information about the vector.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Vector'Read reads the representation of a vector
+from the stream, and assigns to @i<Item> a vector with the same length and
+elements as was written by Vector'Write.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -859,7 +863,9 @@ the stream and consumes any additional information written by Vector'Write.]}
   This will require a custom stream attribute
   implementation; the language-defined default implementation will not work
   (even for a bounded form, as that would most likely stream the entire
-  capacity of the vector).]}
+  capacity of the vector). There is a separate requirement that the unbounded
+  and Bounded form use the same streaming representation for the same element
+  type, see @RefSecNum{The Generic Package Containers.Bounded_Vectors}.]}
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -925,6 +931,14 @@ it calls the Insert, Insert_Space, Clear, Delete, or Set_Length procedures with
 @ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<V> as the Target parameter;
 or]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[We don't need to explicitly mention
+  @nt{assignment_statement}, because that finalizes the target object
+  as part of the operation, and finalization of an object is already defined
+  as tampering with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<V> as
 a parameter.]}
@@ -965,12 +979,18 @@ parameter.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a vector]}
 @Defn2{Term=[tampering],Sec=[prohibited for a vector]}
-If tampering with cursors is @i<prohibited> for a particular vector
-object @i<V>, Program_Error is propagated by any language-defined subprogram
-that is defined to tamper with the cursors of @i<V>. Similarly, if tampering with
-elements is @i<prohibited> for a particular vector object @i<V>,
-Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the elements of @i<V>.]}
+When tampering with cursors is @i<prohibited> for a particular vector object
+@i<V>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the cursors of @i<V>, leaving @i<V> unmodified.
+Similarly, when tampering with elements is @i<prohibited> for a particular vector
+object @i<V>, Program_Error is propagated by a call of any language-defined
+subprogram that is defined to tamper with the elements of @i<V> @Redundant[(or
+tamper with the cursors of @i<V>)], leaving @i<V> unmodified.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}
+@end{TheProof}
 
 @begin{DescribeCode}
 
@@ -1294,7 +1314,7 @@ position Index as the argument.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{Reason}
@@ -1323,8 +1343,8 @@ Process.@key{all} with the element designated by Position as the argument.
 is propagated if Process.@key{all} tampers]}
 with the elements of @Chg{Version=[3],New=[the vector that contains the
 element designated by Position is prohibited during the
-execution of Process.@key{all}],Old=[Container]}. Any exception raised by
-Process.@key{all} is propagated.]}
+execution of the call on Process.@key{all}],Old=[Container]}. Any
+exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1343,7 +1363,7 @@ at position Index as the argument.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1386,7 +1406,7 @@ Process.@key{all} with the element designated by Position as the argument.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2177,7 +2197,7 @@ cursor that designates each element in Container, in index order.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the cursors of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of a call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{Discussion}
@@ -2240,10 +2260,10 @@ finalization.]}
    @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
-is No_Element, the call is equivalent to Iterate (Container). Otherwise, Iterate
+is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
 returns a reversible iterator object that will generate a value for the
 loop parameter designating each node in Container, starting with the node
 designated by Start and moving the cursor as per the Next function when used as
@@ -3124,10 +3144,14 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[List'Write writes exactly Length(List) elements of
-the list to the stream. It may write additional information about the list as
-well. List'Read reads exactly Length(List) elements of List from the stream and
-consumes any additional information written by List'Write.]}
+@ChgAdded{Version=[3],Text=[List'Write for a List object @i<L> writes
+Length(@i<L>) elements of the list to the stream. It also may write
+additional information about the list.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[List'Read reads the representation of a list
+from the stream, and assigns to @i<Item> a list with the same length and
+elements as was written by List'Write.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3176,6 +3200,14 @@ Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter; or
 @ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<L> as the
 Target parameter; or]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[We don't need to explicitly mention
+  @nt{assignment_statement}, because that finalizes the target object
+  as part of the operation, and finalization of an object is already defined
+  as tampering with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<L> as a
 parameter.]}
@@ -3216,12 +3248,18 @@ a parameter.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a list]}
 @Defn2{Term=[tampering],Sec=[prohibited for a list]}
-If tampering with cursors is @i<prohibited> for a particular list
-object @i<L>, Program_Error is propagated by any language-defined subprogram
-that is defined to tamper with the cursors of @i<L>. Similarly, if tampering with
-elements is @i<prohibited> for a particular list object @i<L>,
-Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the elements of @i<L>.]}
+When tampering with cursors is @i<prohibited> for a particular list object
+@i<L>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the cursors of @i<L>, leaving @i<L> unmodified.
+Similarly, when tampering with elements is @i<prohibited> for a particular list
+object @i<L>, Program_Error is propagated by a call of any language-defined
+subprogram that is defined to tamper with the elements of @i<L> @Redundant[(or
+tamper with the cursors of @i<L>)], leaving @i<L> unmodified.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}
+@end{TheProof}
 
 @begin{DescribeCode}
 
@@ -3334,7 +3372,7 @@ Process.@key{all} with the element designated by Position as the argument.
 is propagated if Process.@key{all} tampers]}
 with the elements of @Chg{Version=[3],New=[the list that contains the
 element designated by Position is prohibited during the
-execution of Process.@key{all}],Old=[Container]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[Container]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{Example}
@@ -3355,7 +3393,7 @@ Process.@key{all} with the element designated by Position as the
 argument. @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3920,7 +3958,7 @@ node and moving the cursor as per the Next function.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the cursors of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of a call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{ImplNote}
@@ -3978,10 +4016,10 @@ finalization.]}
    @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
-is No_Element, the call is equivalent to Iterate (Container). Otherwise, Iterate
+is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
 returns a reversible iterator object that will generate a value for the loop
 parameter designating each node in Container, starting with the node designated
 by Start and moving the cursor as per the Next function when used as a forward
@@ -4486,6 +4524,14 @@ as a parameter; or]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<M> as the Target parameter; or]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We don't need to explicitly mention
+  @nt{assignment_statement}, because that finalizes the target object
+  as part of the operation, and finalization of an object is already defined
+  as tampering with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<M> as a
 parameter; or]}
@@ -4530,12 +4576,18 @@ as a parameter.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a map]}
 @Defn2{Term=[tampering],Sec=[prohibited for a map]}
-If tampering with cursors is @i<prohibited> for a particular map
-object @i<M>, Program_Error is propagated by any language-defined subprogram
-that is defined to tamper with the cursors of @i<M>. Similarly, if tampering with
-elements is @i<prohibited> for a particular map object @i<M>,
-Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the elements of @i<M>.]}
+When tampering with cursors is @i<prohibited> for a particular map object
+@i<M>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the cursors of @i<M>, leaving @i<M> unmodified.
+Similarly, when tampering with elements is @i<prohibited> for a particular map
+object @i<M>, Program_Error is propagated by a call of any language-defined
+subprogram that is defined to tamper with the elements of @i<M> @Redundant[(or
+tamper with the cursors of @i<M>)], leaving @i<M> unmodified.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_Map represents the empty Map object. It has a
@@ -4566,10 +4618,14 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Map'Write writes exactly Length(Map) elements of the
-map to the stream. It may write additional information about the map as well.
-Map'Read reads exactly Length(Map) elements of Map from the stream and consumes
-any additional information written by Map'Write.]}
+@ChgAdded{Version=[3],Text=[Map'Write for a Map object @i<M> writes
+Length(@i<M>) elements of the map to the stream. It also may write
+additional information about the map.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Map'Read reads the representation of a map
+from the stream, and assigns to @i<Item> a map with the same length and
+elements as was written by Map'Write.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4711,7 +4767,7 @@ as the arguments.
 is propagated if Process.@key{all} tampers]}
 with the elements of @Chg{Version=[3],New=[the map that contains the
 element designated by Position is prohibited during the
-execution of Process.@key{all}],Old=[Container]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[Container]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{Example}
@@ -4733,7 +4789,7 @@ Process.@key{all} with the key and element from the node designated by Position
 as the arguments. @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5153,7 +5209,7 @@ node and moving the cursor according to the successor relation.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the cursors of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of a call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{ImplNote}
@@ -6286,6 +6342,10 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Map)
       @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Map; Start : @key[in] Cursor)
+      @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
 
@@ -6587,6 +6647,39 @@ the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
 finalization.]}
 
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Map; Start : @key[in] Cursor)
+   @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does not designate an item in Container,
+then Program_Error is propagated. If Start is No_Element, then Constraint_Error
+is propagated. Iterate returns a reversible iterator object that will generate a
+value for the loop parameter designating each node in Container, starting with
+the node designated by Start and moving the cursor according to the successor
+relation when used as a forward iterator, or moving the cursor according to the
+predecessor relation when used as a reverse iterator. Tampering with the cursors
+of Container is prohibited while the iterator object exists (in particular, in
+the @nt{sequence_of_statements} of the @nt{loop_statement} whose
+@nt{iterator_specification} denotes this object). The iterator object needs
+finalization.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Exits are allowed from the loops
+  created using the iterator objects. In particular, to stop the iteration at a
+  particular cursor, just add]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[exit when] Cur = Stop;]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
+  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  want to stop at).]}
+@end{Discussion}
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -6775,6 +6868,14 @@ procedures with @i{S} as a parameter; or]}
 @ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<S> as the Target parameter;
 or]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We don't need to explicitly mention
+  @nt{assignment_statement}, because that finalizes the target object
+  as part of the operation, and finalization of an object is already defined
+  as tampering with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<S> as a
 parameter; or]}
@@ -6816,12 +6917,18 @@ object @i<S> if:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a set]}
 @Defn2{Term=[tampering],Sec=[prohibited for a set]}
-If tampering with cursors is @i<prohibited> for a particular set
-object @i<S>, Program_Error is propagated by any language-defined subprogram
-that is defined to tamper with the cursors of @i<S>. Similarly, if tampering with
-elements is @i<prohibited> for a particular set object @i<S>,
-Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the elements of @i<S>.]}
+When tampering with cursors is @i<prohibited> for a particular set object
+@i<S>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the cursors of @i<S>, leaving @i<S> unmodified.
+Similarly, when tampering with elements is @i<prohibited> for a particular set
+object @i<S>, Program_Error is propagated by a call of any language-defined
+subprogram that is defined to tamper with the elements of @i<S> @Redundant[(or
+tamper with the cursors of @i<S>)], leaving @i<S> unmodified.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}
+@end{TheProof}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Empty_Set represents the empty Set object. It has a
@@ -6852,10 +6959,14 @@ Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Set'Write writes exactly Length(Set) elements of the
-set to the stream. It may write additional information about the set as well.
-Set'Read reads exactly Length(Set) elements of Set from the stream and consumes
-any additional information written by Set'Write.]}
+@ChgAdded{Version=[3],Text=[Set'Write for a Set object @i<S> writes
+Length(@i<S>) elements of the set to the stream. It also may write
+additional information about the set.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Set'Read reads the representation of a set
+from the stream, and assigns to @i<Item> a set with the same length and
+elements as was written by Set'Write.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7014,8 +7125,8 @@ Process.@key{all} with the element designated by Position as the argument.
 is propagated if Process.@key{all} tampers]}
 with the elements of @Chg{Version=[3],New=[the set that contains the
 element designated by Position is prohibited during the
-execution of Process.@key{all}],Old=[Container]}. Any exception raised by
-Process.@key{all} is propagated.]}
+execution of the call on Process.@key{all}],Old=[Container]}. Any exception
+raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -7440,7 +7551,7 @@ first element and moving the cursor according to the successor relation.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the cursors of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any exception raised by
+execution of a call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{ImplNote}
@@ -7520,7 +7631,7 @@ Process.@key{all} with that element as the argument.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of Container@Chg{Version=[3],New=[ is prohibited during the
-execution of Process.@key{all}],Old=[]}. Any
+execution of the call on Process.@key{all}],Old=[]}. Any
 exception raised by Process.@key{all} is propagated. After Process.@key{all}
 returns, Update_@!Element_@!Preserving_Key checks if @i<K> determines the same
 equivalence class as that for the new element; if not, the element is removed
@@ -8668,6 +8779,10 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Set)
       @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Set; Start : @key[in] Cursor)
+      @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{type} Key_Type (<>) @key{is private};
@@ -9006,6 +9121,40 @@ the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
 finalization.]}
 
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set; Start : @key[in] Cursor)
+   @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
+not designate an item in Container, then Program_Error is propagated. If Start
+is No_Element, then Constraint_Error is propagated. Iterate returns a reversible
+iterator object that will generate a value for the loop parameter designating
+each element in Container, starting with the element designated by Start and
+moving the cursor according to the successor relation when used as a forward
+iterator, or moving the cursor according to the predecessor relation when used
+as a reverse iterator. Tampering with the cursors of Container is prohibited
+while the iterator object exists (in particular, in the
+@nt{sequence_of_statements} of the @nt{loop_statement} whose
+@nt{iterator_specification} denotes this object). The iterator object needs
+finalization.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[Exits are allowed from the loops
+  created using the iterator objects. In particular, to stop the iteration at a
+  particular cursor, just add]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[exit when] Cur = Stop;]}
+@end{Example}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
+  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  want to stop at).]}
+@end{Discussion}
 @end{DescribeCode}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

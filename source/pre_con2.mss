@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -388,16 +388,20 @@ container.]}
 @ChgAdded{Version=[3],Text=[Execution of the default implementation of the
 Input, Output, Read, or Write attribute of type Cursor raises Program_Error.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
-@ChgAdded{Version=[3],Text=[Tree'Write writes exactly Node_Count (Tree) - 1
-elements of the tree to the stream. It may write additional information about
-the tree as well. Tree'Read reads exactly Node_Count (Tree) - 1 elements of Tree
-from the stream and consumes any additional information written by Tree'Write.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Tree'Write for a Tree object @i<T> writes
+Node_Count(@i<T>) - 1 elements of the tree to the stream. It also may write
+additional information about the tree.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Tree'Read reads the representation of a tree
+from the stream, and assigns to @i<Item> a tree with the same elements and
+structure as was written by Tree'Write.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Streaming more elements than the container
-  length is wrong. For implementation implications of this rule, see the Implementation Note in
+  holds is wrong. For implementation implications of this rule, see the Implementation Note in
   @RefSecNum{The Generic Package Containers.Vectors}.]}
 @end{Ramification}
 
@@ -442,6 +446,14 @@ A subprogram is said to
 @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[it calls Assign with @i<T> as the Target parameter; or]}
 
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[We don't need to explicitly mention
+  @nt{assignment_statement}, because that finalizes the target object
+  as part of the operation, and finalization of an object is already defined
+  as tampering with cursors.]}
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[it calls the Move procedure with @i<T> as a parameter.]}
 
@@ -472,18 +484,31 @@ A subprogram is said to
     to it. That can't be allowed. However, a simple modification of (part of) an
     element is not a problem, so Update_Element does not cause a problem.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[Assign is defined in terms of Clear and Replace_Element,
+  so we don't need to mention it explicitly. Similarly, we don't need to
+  explicitly mention @nt{assignment_statement}, because that finalizes the
+  target object as part of the operation, and finalization of an object is
+  already defined as tampering with the element.]}
+@end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a tree]}
 @Defn2{Term=[tampering],Sec=[prohibited for a tree]}
-If tampering with cursors is @i<prohibited> for a particular tree
-object @i<T>, Program_Error is propagated by any language-defined subprogram
-that is defined to tamper with the cursors of @i<T>. Similarly, if tampering with
-elements is @i<prohibited> for a particular tree object @i<T>,
-Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the elements of @i<T>.]}
-
+When tampering with cursors is @i<prohibited> for a particular tree object
+@i<T>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the cursors of @i<T>, leaving @i<T> unmodified.
+Similarly, when tampering with elements is @i<prohibited> for a particular tree
+object @i<T>, Program_Error is propagated by a call of any language-defined
+subprogram that is defined to tamper with the elements of @i<T> @Redundant[(or
+tamper with the cursors of @i<T>)], leaving @i<T> unmodified.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}
+@end{TheProof}
 
 @begin{DescribeCode}
 
@@ -724,8 +749,8 @@ an element, and returns False otherwise.]}
   tree, then Program_Error is propagated. Otherwise, Query_Element calls
   Process.@key{all} with the element designated by Position as the argument.
   Tampering with the elements of the tree that contains the element designated
-  by Position is prohibited during the execution of Process.@key{all}. Any
-  exception raised by Process.@key{all} is propagated.]}
+  by Position is prohibited during the execution of the call on
+  Process.@key{all}. Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -742,7 +767,7 @@ an element, and returns False otherwise.]}
   in Container (including if it designates the root node), then Program_Error is
   propagated. Otherwise, Update_Element calls Process.@key{all} with the element
   designated by Position as the argument. Tampering with the elements of
-  Container is prohibited during the execution of Process.@key{all}.
+  Container is prohibited during the execution of the call on Process.@key{all}.
   Any exception raised by Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1040,7 +1065,7 @@ an element, and returns False otherwise.]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate calls Process.@key{all}
   with a cursor that designates each element in Container, starting with the
   root node and proceeding in a depth-first order. Tampering with the cursors
-  of Container is prohibited during the execution of Process.@key{all}.
+  of Container is prohibited during the execution of a call on Process.@key{all}.
   Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Ramification}
@@ -1079,7 +1104,7 @@ an element, and returns False otherwise.]}
   designated by Position, starting with the node designated by Position and
   proceeding in a depth-first order.
   Tampering with the cursors of the tree containing Position
-  is prohibited during the execution of Process.@key{all}.
+  is prohibited during the execution of a call on Process.@key{all}.
   Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Ramification}
@@ -1624,8 +1649,8 @@ node and moving the cursor as per the Next_Sibling function.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[Tampering with the cursors of the tree containing
-Parent is prohibited during the execution of Process.@key{all}. Any exception
-raised by Process.@key{all} is propagated.]}
+Parent is prohibited during the execution of a call on Process.@key{all}.
+Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1645,8 +1670,8 @@ child node and moving the cursor as per the Previous_Sibling function.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[Tampering with the cursors of the tree containing
-Parent is prohibited during the execution of Process.@key{all}. Any exception
-raised by Process.@key{all} is propagated.]}
+Parent is prohibited during the execution of a call on Process.@key{all}.
+Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1782,7 +1807,7 @@ object to that of the source object.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[An assignment of a Tree is a @lquotes@;deep@rquotes
-  copy; that is the elements are copied as well as the data structures.
+  copy; that is the elements are copied as well the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
@@ -2432,9 +2457,9 @@ it calls the Replace_Element procedure with @i<H> as a parameter;]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
 @Defn2{Term=[tampering],Sec=[prohibited for a holder]}
-If tampering with the element is @i<prohibited> for a particular holder object
-@i<H>, Program_Error is propagated by any language-defined subprogram that is defined
-to tamper with the element of @i<H>.]}
+When tampering with the element is @i<prohibited> for a particular holder object
+@i<H>, Program_Error is propagated by a call of any language-defined subprogram
+that is defined to tamper with the element of @i<H>, leaving @i<H> unmodified.]}
 
 @begin{DescribeCode}
 
@@ -2518,8 +2543,8 @@ Container is not empty after a successful call to Replace_Element.]}
 Constraint_Error is propagated. Otherwise, Query_Element calls
 Process.@key[all] with the contained element as the argument.
 Tampering with the element
-of Container is prohibited during the execution of Process.@key[all]. Any
-exception raised by Process.@key[all] is propagated.]}
+of Container is prohibited during the execution of the call on
+Process.@key[all]. Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2542,8 +2567,8 @@ exception raised by Process.@key[all] is propagated.]}
 Constraint_Error is propagated. Otherwise, Update_Element calls
 Process.@key[all] with the contained element as the argument.
 Tampering with the element
-of Container is prohibited during the execution of Process.@key[all]. Any
-exception raised by Process.@key[all] is propagated.]}
+of Container is prohibited during the execution of the call on Process.@key[all].
+Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2628,7 +2653,8 @@ called. Otherwise, Replace_Element (Target, Element (Source)) is called.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[This routine exists for compatibility with the
   other containers. For a holder, @exam{Assign(A, B)} and
-  @exam{A := B} behave identically.]}
+  @exam{A := B} behave effectively the same. (Assign Clears the Target, while
+  := finalizes the Target, but these should have similar effects.)]}
 @end{Discussion}
 
 @begin{Example}
@@ -2714,9 +2740,9 @@ source holder object to the target holder object.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[An assignment of a holder is a
-  @ldquote@;deep@rdquote copy; that is the elements are copied as well as the
+  @ldquote@;deep@rdquote copy; that is the element is copied as well as any
   data structures. We say @ldquote@;effect of@rdquote in order to allow the
-  implementation to avoid copying elements immediately if it wishes. For
+  implementation to avoid copying the element immediately if it wishes. For
   instance, an implementation that avoided copying until one of the containers
   is modified would be allowed.]}
 @end{ImplNote}
@@ -2823,11 +2849,39 @@ as Containers.Vectors except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded vector
-if it was the target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded vector object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded vector object @i<V> is
+finalized, if tampering with cursors is prohibited for @i<V> other than due
+to an assignment from another vector, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -2964,11 +3018,40 @@ as Containers.Doubly_Linked_Lists except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded list if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded list object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded list object @i<L> is
+finalized, if tampering with cursors is prohibited for @i<L> other than due
+to an assignment from another list, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
+
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -3112,11 +3195,39 @@ as Containers.Hashed_Maps except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded map if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded map object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded map object @i<M> is
+finalized, if tampering with cursors is prohibited for @i<M> other than due
+to an assignment from another map, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -3243,11 +3354,39 @@ as Containers.Ordered_Maps except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded map if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded map object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded map object @i<M> is
+finalized, if tampering with cursors is prohibited for @i<M> other than due
+to an assignment from another map, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -3389,11 +3528,39 @@ as Containers.Hashed_Sets except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded set if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded set object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded set object @i<S> is
+finalized, if tampering with cursors is prohibited for @i<S> other than due
+to an assignment from another set, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -3516,11 +3683,39 @@ as Containers.Ordered_Sets except:]}
 @begin{Bounded}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded set if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded set object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded set object @i<S> is
+finalized, if tampering with cursors is prohibited for @i<S> other than due
+to an assignment from another set, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}
@@ -3649,13 +3844,41 @@ semantics as Containers.Multiway_Trees except:]}
 @end{StaticSem}
 
 @begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0160-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to use a bounded tree if it was the
-target of an @nt{assignment_statement} whose source was in the middle of
-an operation that prohibits tampering with elements @Redundant[or cursors].
-Either Program_Error is raised, or the operation proceeds as defined.]}
+It is a bounded error to assign from a bounded tree object while tampering
+with elements @Redundant[or cursors] of that object is prohibited. Either
+Program_Error is raised by the assignment, execution proceeds with the target
+object prohibiting tampering with elements @Redundant[or cursors], or execution
+proceeds normally.]}
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
+  with cursors, so we only really need to talk about tampering with elements
+  here; we mention cursors for clarity.]}
+@end{TheProof}
 @end{Bounded}
+
+@begin{Erron}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgAdded{Version=[3],Text=[When a bounded tree object @i<T> is
+finalized, if tampering with cursors is prohibited for @i<T> other than due
+to an assignment from another tree, then execution is erroneous.
+@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a tampering event, but since the
+  implementation is not allowed to use Ada.Finalization, it is not possible in a
+  pure Ada implementation to detect this error. (There is no Finalize routine
+  that will be called that could make the check.) Since the check probably
+  cannot be made, the bad effects that could occur (such as an iterator going
+  into an infinite loop or accessing a non-existent element) cannot be prevented
+  and we have to allow anything. We do allow re-assigning an object that only
+  prohibits tampering because it was copied from another object as that cannot
+  cause any negative effects.]}
+@end{Reason}
+@end{Erron}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0184-1],ARef=[AI05-0264-1]}

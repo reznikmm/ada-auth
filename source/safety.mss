@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.55 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@Comment{ $Revision: 1.56 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -956,12 +956,13 @@ prior to program execution]:]}
 @end{InnerItemize}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1],ARef=[AI05-0272-1]}
 If an implementation supports @nt[pragma] Restrictions for a particular
 argument, then except for the restrictions No_Unchecked_Deallocation,
 No_Unchecked_Conversion, No_Access_Subprograms,
 @Chg{Version=[3],New=[],Old=[and ]}No_Unchecked_Access,
-@Chg{Version=[3],New=[and the equivalent use of No_Dependence, ],Old=[]}the
+@Chg{Version=[3],New=[No_Specification_of_Aspect, No_Use_of_Attribute,
+No_Use_of_Pragma, and the equivalent use of No_Dependence, ],Old=[]}the
 associated restriction applies to the run-time system.
 @begin[reason]
 Permission is granted for the run-time system to use the specified
@@ -987,6 +988,11 @@ could be envisaged.
 
 If the run-time system is not written in Ada, then the wording needs to be
 applied in an appropriate fashion.
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1]}
+@ChgAdded{Version=[3],Text=["the equivalent use of No_Dependence" refers
+to @exam{No_Dependence => Ada.Unchecked_Conversion} and the like, not all
+uses of No_Dependence.]}
 
 @end{Discussion}
 @end{ImplReq}
@@ -1152,6 +1158,14 @@ proscribed
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0263-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Ada 2005 restriction No_Dependence
   is added where needed (this was missed in Ada 2005).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0272-1]}
+  @ChgAdded{Version=[3],Text=[Restrictions against individual aspects, pragmas,
+  and attributes do not apply to the run-time system, in order that an
+  implementation can use whatever aspects, pragmas, and attributes are needed
+  to do the job. For instance, attempting to write a run-time system for Linux
+  that does not use the Import aspect would be very difficult and probably is
+  not what the user is trying to prevent anyway.]}
 @end{DiffWord2005}
 
 

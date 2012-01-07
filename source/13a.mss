@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3380,8 +3380,10 @@ rhs="@Chg{Version=[3],New=<@SynI<aspect_>@Syn2<identifier>['Class]>,Old=<>}"}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,Old=<>}"}
 
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@end{Syntax}
+
+@begin{Metarules}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
   @ChgAdded{Version=[3],Text=[The @nt{aspect_specification} is an
    optional element in most kinds of declarations. Here is a list
    of all kinds of declarations and an indication
@@ -3427,9 +3429,10 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 @nt{loop_parameter_specification}  --  NO
 @nt{iterator_specification}  --  NO
 @nt{parameter_specification}  --  NO
-@nt{subprogram_body}*  --  @Examcom{ - but only if there is no explicit specification}
+@nt{subprogram_body}*  --  @Examcom{ - but language-defined aspects only if there is no explicit specification}
 @nt{entry_declaration}*
 @nt{entry_index_specification}  --  NO
+@nt{subprogram_body_stub}*  --  @Examcom{ - but language-defined aspects only if there is no explicit specification}
 @nt{choice_parameter_specification}  --  NO
 @nt{generic_formal_parameter_declaration}
     -- @Examcom{There are no language-defined aspects that may be specified}
@@ -3441,11 +3444,35 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
     @nt{formal_abstract_subprogram_declaration}*
   @nt{formal_package_declaration}*
 @nt{extended_return_statement}  --  NO]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[-- @Examcom{We also allow @nt{aspect_specification}s on all kinds of bodies, but are no language-defined aspects}
+-- @Examcom{that may be specified on a body. These are allowed for implementation-defined aspects.}
+-- @Examcom{See above for subprogram bodies and stubs (as these can be declarations).}
+@nt{package_body}*
+@nt{task_body}*
+@nt{protected_body}*
+@nt{package_body_stub}*
+@nt{task_body_stub}*
+@nt{protected_body_stub}*]}
 @end{Display}
 
-@end{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0267-1]}
+  @ChgAdded{Version=[3],Text=[Syntactically, @nt{aspect_specification}s
+  generally are located at the end of declarations. When a declaration is all in
+  one piece such as a @nt{null_procedure_declaration}, @nt{object_declaration},
+  or @nt{generic_instantiation} the @nt{aspect_specification} goes at the end of
+  the declaration; it is then more visible and less likely to interfere with the
+  layout of the rest of the structure. However, we make an exception for program
+  units (other than subprogram specifications) and bodies, in which the
+  @nt{aspect_specification} goes before the @key[is]. In these cases, the entity
+  could be large and could contain other declarations that also have
+  @nt{aspect_specification}s, so it is better to put the
+  @nt{aspect_specification} toward the top of the declaration. (Some aspects @en
+  such as Pure @en also affect the legality of the contents of a unit, so it
+  would be annoying to only see those after reading the entire unit.)]}
 
-@end{Syntax}
+@end{Metarules}
 
 @begin{Resolution}
 
@@ -3533,6 +3560,39 @@ aspect of a boolean type, in which case it is equivalent to the
 @ChgAdded{Version=[3],Text=[If the @nt{aspect_mark} includes 'Class, then the
 associated entity shall be a tagged type or a primitive subprogram of a tagged
 type.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
+@ChgAdded{Version=[3],Text=[There are no language-defined aspects that
+may be specified on a @nt{renaming_declaration},
+a @nt{generic_formal_parameter_declaration}, a @nt{subunit}, a @nt{package_body},
+a @nt{task_body}, a @nt{protected_body}, or a @nt{body_stub} other than a
+@nt{subprogram_body_stub}.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Implementation-defined aspects can be allowed on
+  these, of course; the implementation will need to define the semantics. In
+  particular, the implementation will need to define actual type matching
+  rules for any aspects allowed on formal types; there are no default matching
+  rules defined by the language.]}
+@end{Discussion}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
+@ChgAdded{Version=[3],Text=[A language-defined aspect shall not be specified in
+an @nt{aspect_specification} given on a @nt{subprogram_body} or
+@nt{subprogram_body_stub} that is a completion of another declaration.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Most language-defined aspects (for example,
+    preconditions) are intended to be available to callers, and specifying them
+    on a body that has a separate declaration hides them from callers. Specific
+    language-defined aspects may allow this, but they have to do so explicitly
+    (by defining an alternative @LegalityName), and provide any needed rules
+    about visibility. Note that this rule does not apply to
+    implementation-defined aspects, so implementers need to carefully define
+    whether such aspects can be applied to bodies and stubs, and what happens
+    if they are specified on both the declaration and body of a unit.]}
+@end{Reason}
 @end{Legality}
 
 @begin{StaticSem}
@@ -3624,7 +3684,7 @@ The expression shall be static.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[In addition, certain
+@ChgAdded{Version=[3],Text=[In addition,
 other operational and representation aspects not associated with specifiable
 attributes or representation pragmas may be specified, as specified elsewhere
 in this International Standard.]}
@@ -3650,34 +3710,6 @@ of the application of the rule.]}
   only be true when the specification of the aspect is visible. In particular,
   if the Variable_Indexing aspect is specified on the full view of a private
   type, the private type is not considered an indexable type.]}
-@end{Reason}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[There are no language-defined aspects that may be
-specified on a @nt{renaming_declaration} or on a @nt{formal_type_declaration}.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Implementation-defined aspects can be allowed on
-  these, of course; the implementation will need to define the semantics. In
-  particular, the implementation will need to define actual type matching
-  rules for any aspects allowed on formal types; there are no default matching
-  rules defined by the language.]}
-@end{Discussion}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[An aspect shall not be specified in an
-@nt{aspect_specification} given on a @nt{subprogram_body} that is a
-completion of another declaration.]}
-
-@begin{Reason}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Most aspects (for example, preconditions) are intended to be
-    available to callers, and specifying them on a body that has a separate
-    declaration hides them from callers. Specific aspects (both language-defined
-    and implementation-defined) may allow this, but they have to do so
-    explicitly (by appealing to the following rule or the @ImplPermTitle),
-    and provide any needed rules about visibility.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
@@ -3715,7 +3747,7 @@ follow implementation-defined legality and semantics rules.]}
 @end{ImplPerm}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0229-1],ARef=[AI05-0267-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect specifications are new.]}
 @end{Extend2005}

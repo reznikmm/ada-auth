@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -735,29 +735,59 @@ assertion policy in effect at the point of a subprogram or entry declaration is
 Check, then preconditions and postconditions are considered to be @i<enabled>
 for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[A @nt{subexpression} is
+@i{potentially unevaluated} if occurs within:@Defn{potentially unevaluated expression}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[any part of a @nt{if_expression} other than the
+  first @nt{condition};]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
+  @nt{case_expression};]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[the right operand of a short-circuit control
+  form; or]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[a @nt{membership_choice} other than the first
+  of a membership operation.]}
+@end{Itemize}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object of a nonlimited type}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1],
-  Text=[@Chg{Version=[3],New=[Within a postcondition expression, denotes the value
-  of X at the beginning of the execution of the subprogram or entry to which the
-  postcondition applies. For each X'Old in a postcondition
-  expression that is enabled, a constant is implicitly declared at the beginning
-  of the subprogram or entry, of the type of X, initialized to X. The value of
-  X'Old in the postcondition expression is the value of this constant. The type
-  of X'Old is the type of X. These implicit declarations occur in an arbitrary
-  order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}],Old=[]}]}@Comment{End of Annex text here.}
+  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1],
+  Text=[@Chg{Version=[3],New=[For each X'Old in a postcondition expression that
+   is enabled, a constant is implicitly declared at the beginning of the subprogram
+   or entry. The constant is of the type of X and is initialized to the result
+   of evaluating X (as an expression) at the point of the constant declaration.
+   The value of X'Old in the postcondition expression is the value of this
+   constant; the type of X'Old is the type of X. These implicit constant
+   declarations occur in an
+   arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}],Old=[]}]}@Comment{End of Annex text here.}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this attribute is allowed only
-  within a postcondition expression.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[Reference to this attribute is only
+  allowed within a postcondition expression. The @nt{prefix} of an Old
+  @nt{attribute_reference} shall not contain a Result @nt{attribute_reference},
+  nor an Old @nt{attribute_reference}, nor a use of an entity declared within
+  the postcondition expression but not within @nt{prefix} itself (for example,
+  the loop parameter of an enclosing @nt{quantified_expression}).
+  The @nt{prefix} of an Old @nt{attribute_reference} that is
+  potentially unevaluated shall statically denote an entity.]}
+
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=<The @nt{prefix} X can be any
-  nonlimited object that obeys the syntax for prefix. Useful cases are: the name
-  of a formal parameter of mode [@key[in]] @key[out], the name of a global
+  nonlimited object that obeys the syntax for prefix other than the few
+  exceptions given above (discussed below). Useful cases are: the @nt{name}
+  of a formal parameter of mode [@key[in]] @key[out], the @nt{name} of a global
   variable updated by the subprogram, a function call passing those as
   parameters, a subcomponent of those things, etc.>}
 
@@ -773,7 +803,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   necessarily equal. The former calls F(X) and saves that value for later use
   during the postcondition. The latter saves the value of X, and during the
   postcondition, passes that saved value to F. In most cases, the former is what
-  one wants.]}
+  one wants (but it is not always legal, see below).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If X has controlled parts, adjustment and
@@ -787,8 +817,57 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   @ChgAdded{Version=[3],Text=['Old makes no sense for limited types, because its
   implementation involves copying. It might make semantic sense to allow
   build-in-place, but it's not worth the trouble.]}
-
 @end{Discussion}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
+  @ChgAdded{Version=[3],Text=[Since the @nt{prefix} is evaluated unconditionally
+  when the subprogram is called, we cannot allow it to include values that do
+  not exist at that time (like 'Result and loop parameters of @nt{quantified_expression}s).
+  We also do not allow it to include 'Old references, as those would be
+  redundant (the entire @nt{prefix} is evaluated when the subprogram is called),
+  and allowing them would require some sort of order to the implicit constant
+  declarations (because in A(I'Old)'Old, we surely would want the value of
+  I'Old evaluated before the A(I'Old) is evaluated).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[In addition, we only allow simple names as the
+  @nt{prefix} of the Old attribute if the @nt{attribute_reference} might not
+  be evaluated when the postcondition expression is evaluated. This is necessary because
+  the Old @nt{prefix}es have to be unconditionally evaluated when the subprogram
+  is called; the compiler cannot in general know whether they will be needed
+  in the postcondition expression. To see the problem, consider:]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Table : @key[array] (1..10) @key[of] Integer := ...
+@key[procedure] Bar (I : @key[in out] Natural)
+   @key[with] Post => I > 0 @key[and then] Tab(I)'Old = 1; -- @Examcom{Illegal}]}
+@end{Example}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[In this example, the compiler
+  cannot know the value of I when the subprogram returns (since the subprogram
+  execution can change it), and thus it does not know whether Tab(I)'Old will
+  be needed then. Thus it has to always create an implicit constant
+  and evaluate Tab(I) when Bar is called (because not having the value when
+  it is needed is not acceptable). But if I = 0 when the subprogram is called,
+  that evaluation will raise Constraint_Error, and that will happen even if I
+  is unchanged by the subprogram and the value of Tab(I)'Old is not ultimately
+  needed. It's easy to see how a similar problem could occur for a dereference
+  of an access type. This would be mystifying (since the point of the short
+  circuit is to eliminate this possibility, but it cannot do so). Therefore, we
+  require the @nt{prefix} of any Old attribute in such a context to statically
+  denote an object, which eliminates anything that could change at during
+  execution.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[It is easy to work around most errors that occur
+  because of this rule. Just move the 'Old to the outer object, before any
+  indexing, dereferences, or components. (That does not work for function calls,
+  however, nor does it work for array indexing if the index can change during
+  the execution of the subprogram.)]}
+@end{Reason}
 @end(description)
 @EndPrefixType{}
 
@@ -900,10 +979,10 @@ parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
-exception is raised at the point of the call. @Redundant[The exception cannot
-be handled inside the called subprogram or entry.] An exception raised by the
-evaluation of a precondition or postcondition expression is also raised at the
-point of call.]}
+exception is raised at the point of the call@Redundant[; the exception cannot
+be handled inside the called subprogram or entry]. Similarly, any exception
+raised by the evaluation of a precondition or postcondition expression is
+raised at the point of call.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
@@ -994,32 +1073,17 @@ check is performed on a call on that subprogram or entry.
 For a dispatching call, if the assertion policy in effect at the point of the
 declaration of the denoted callable entity is not the same as the assertion
 policy in effect at the point of the declaration of the invoked callable entity,
-it is implementation defined whether any precondition or postcondition checks
-are made.]}
+it is unspecified whether any precondition or postcondition checks are
+made.@PDefn{unspecified}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[For a dispatching call with different policies,
   whether a check is made probably will be different for different checks,
-  depending on whether the implementation makes them at the call site, in a
-  wrapper, or inside the called subprogram or entry.]}
+  depending on whether the implementation makes the check at the call site,
+  in a wrapper, or inside the called subprogram or entry.]}
 @end{Discussion}
-@ChgImplDef{Version=[3],Kind=[Added],Text=[@Chg{Version=[3],New=[Whether
-precondition or postcondition checks are made for a dispatching call when
-the assertion policy differs between the denoted and
-invoked entity.],Old=[]}]}
 @end{Runtime}
-
-@begin{Bounded}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error to invoke a potentially blocking operation (see
-@RefSecNum{Protected Subprograms and Protected Actions}) during the evaluation
-of a precondition or postcondition expression. If the bounded error is detected,
-Program_Error is raised. If not detected, execution proceeds normally, but if it
-is invoked within a protected action, it might result in deadlock or a (nested)
-protected action.]}
-@end{Bounded}
 
 @begin{Notes}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
@@ -1029,7 +1093,7 @@ protected action.]}
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0230-1],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1],ARef=[AI05-0273-1],ARef=[AI05-0274-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Pre and Post aspects are new.]}
 @end{Extend2005}

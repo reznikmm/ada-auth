@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2011/12/23 21:32:48 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3569,8 +3569,8 @@ containing a sequence of values encoded in UTF-16.]}
 correspond to values used at the start of a string to indicate the encoding.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns a UTF_String (respectively
-UTF_8_String and UTF_16_String) value whose characters have position values
+@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns
+a UTF_String, UTF_8_String, or UTF_16_String value whose characters have position values
 that correspond to the encoding of the Item parameter according to the
 encoding scheme required by the function or specified by its Output_Scheme
 parameter. For UTF_8, no overlong encoding is returned. A BOM is included
@@ -3580,15 +3580,15 @@ True. The lower bound of the returned string is 1.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Each of the Encode functions takes a String,
 Wide_String, or Wide_Wide_String Item parameter that is assumed to be an array
-of unencoded characters. Each of the Convert functions takes a UTF_String
-(respectively UTF_8_String and UTF_16_String) Item parameter that is assumed to
+of unencoded characters. Each of the Convert functions takes a UTF_String,
+UTF_8_String, or UTF_16_String Item parameter that is assumed to
 contain characters whose position values correspond to a valid encoding sequence
 according to the encoding scheme required by the function or specified by its
 Input_Scheme parameter.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String
-(respectively UTF_8_String and UTF_16_String) Item parameter which is assumed to
+@ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String,
+UTF_8_String, or UTF_16_String Item parameter which is assumed to
 contain characters whose position values correspond to a valid encoding sequence
 according to the encoding scheme required by the function or specified by its
 Input_Scheme parameter, and returns the corresponding String, Wide_String, or
@@ -3615,14 +3615,6 @@ situations:]}
   @ChgAdded{Version=[3],Text=[By a Decode function yielding a String when
     the decoding of a sequence results in a code point whose value exceeds
     16#FF#.]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[We use "code point" here as that is what
-  ISO 10646:2011 does and this text is directly referring to the contents of
-  that standard; elsewhere in this Standard we have used "code position"
-  to represent the same concept.]}
-@end{Discussion}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[By a Decode function yielding a Wide_String when

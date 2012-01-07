@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -224,8 +224,11 @@ isolated from the internal entities.]
 @end{Intro}
 
 @begin{Syntax}
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<package_body>,rhs="
-    @key{package} @key{body} @Syn2{defining_program_unit_name} @key{is}
+    @key{package} @key{body} @Syn2{defining_program_unit_name}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}
        @Syn2{declarative_part}
    [@key{begin}
         @Syn2{handled_sequence_of_statements}]
@@ -378,6 +381,13 @@ We have corrected that omission.
 The rule about implicit bodies (from RM83-9.3(5))
 is moved here, since it is more generally applicable.
 @end{DiffWord83}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0267-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a @nt{package_body}.
+  This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 @LabeledClause{Private Types and Private Extensions}
 

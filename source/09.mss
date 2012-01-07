@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 
@@ -163,9 +163,10 @@ a named task object of that type.
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Syn{lhs=<task_item>,rhs="@Syn2{entry_declaration} | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
-@Softpage
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<task_body>,rhs="
-   @key{task} @key{body} @Syn2{defining_identifier} @key{is}
+   @key{task} @key{body} @Syn2{defining_identifier}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}
      @Syn2{declarative_part}
    @key{begin}
      @Syn2{handled_sequence_of_statements}
@@ -554,11 +555,11 @@ because a @nt{declarative_part} can be empty.
 @end{DiffWord95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   An optional @nt{aspect_specification} can be used in a
-  @nt{task_type_declaration} and a @nt{single_task_declaration}.
-  This is described in @RefSecNum{Aspect Specifications}.]}
+  @nt{task_type_declaration}, a @nt{single_task_declaration}, and a
+  @nt{task_body}. This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -1031,8 +1032,10 @@ a named protected object of that type.
 @end{Reason}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<protected_body>,rhs="
-  @key{protected} @key{body} @Syn2{defining_identifier} @key{is}
+  @key{protected} @key{body} @Syn2{defining_identifier}@Chg{Version=[3],New=<
+        [@Syn2{aspect_specification}]>,Old=[]} @key{is}
    { @Syn2{protected_operation_item} }
   @key{end} [@SynI{protected_}@Syn2{identifier}];"}
 
@@ -1589,11 +1592,11 @@ protected units do not exist in Ada 83.
 @end{DiffWord95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   An optional @nt{aspect_specification} can be used in a
-  @nt{protected_type_declaration} and a @nt{single_protected_declaration}.
-  This is described in @RefSecNum{Aspect Specifications}.]}
+  @nt{protected_type_declaration}, a @nt{single_protected_declaration},
+  and a @nt{protected_body}. This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1928,9 +1928,10 @@ the following attribute is defined:
     Text=[Yields a value of the type Task_Id that identifies the task
        whose call is now being serviced. Use of this attribute is
        allowed only inside an
-       @Chg{Version=[3],New=[],Old=[@nt{entry_body} or ]}@nt{accept_statement}
-       @Chg{Version=[3],New=[or @nt{entry_body} (after the
-       @nt{entry_barrier}) ],Old=[]}corresponding
+       @Chg{Version=[3],New=[],Old=[@nt{entry_body}
+       or ]}@nt{accept_statement}@Chg{Version=[3],New=[,
+       or @nt{entry_body} after the
+       @nt{entry_barrier}, ],Old=[]}corresponding
        to the @nt{entry_declaration} denoted by E.]}
 @end{Description}
 @EndPrefixType{}

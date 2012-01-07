@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1608,9 +1608,9 @@ the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-sta
   operator, where one operand is the current instance, and the other is a
   static expression;]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[a call to a predefined boolean logical operator,
-  where both operands are predicate-static; or]}
+  where each operand is predicate-static; or]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[a parenthesized predicate-static @nt{expression}.]}
@@ -4758,11 +4758,11 @@ See also the similar permission for Get in
 @RefSecNum{Input-Output for Real Types}.
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0182-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0182-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[An implementation may extend the Wide_Wide_Value, Wide_Value, and Value
 attributes of a character type to accept strings starting with "Hex_"
 (ignoring case) for graphics characters and those with a code
-position smaller than 16#100#, and three character strings of the form
+point smaller than 16#100#, and three character strings of the form
 "'@i<nongraphic character>'".]}
 @end{ImplPerm}
 
@@ -4933,9 +4933,10 @@ More explicit rules are provided for nongraphic characters.
 @begin{Inconsistent2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0181-1]}
   @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b<Correction:>
-  Soft hyphen (position 173) is nongraphic in ISO/IEC 10646:2003. Thus, we have given it
-  the language-defined name @i{soft_hyphen}. This changes the result of
-  Character'Image (and all of the related types and Image attributes)
+  Soft hyphen (code point 173) is nongraphic in ISO/IEC 10646:2011 (and also
+  in the 2003 version of that standard). Thus, we
+  have given it the language-defined name @i{soft_hyphen}. This changes the
+  result of Character'Image (and all of the related types and Image attributes)
   for this character, and changes the behavior of Character'Value (and all of
   the related types and Value attributes) for this character, and
   (in unusual circumstances), changes the result for Character'Width (and all
@@ -4950,8 +4951,8 @@ More explicit rules are provided for nongraphic characters.
   "Hex_hhhhhhhh" for Latin-1 and graphic characters. These were required to
   raise Constraint_Error in Ada 2005. Since these attributes aren't very
   useful, implementations were inconsistent as to whether these were accepted,
-  and code that would care why the attribute failed seems unlikely, this should
-  not be a problem in practice.]}
+  and since code that would care why the attribute failed seems unlikely,
+  this should not be a problem in practice.]}
 @end{Inconsistent2005}
 
 @begin{Extend2005}
@@ -5136,19 +5137,21 @@ An enumeration type is said to be a @i(character type) if at least
 one of its enumeration literals is a @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
 @Defn{Latin-1}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 @Defn{Character}
 The predefined type Character is a character type whose values
-correspond to the 256 code positions of Row 00 (also
-known as Latin-1) of the @Chg{Version=[2],New=[ISO/IEC 10646:2003],
-Old=[ISO 10646]}
+correspond to the 256 code @Chg{Version=[3],New=[points],Old=[positions]}
+of Row 00 (also known as Latin-1) of the
+@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[ISO 10646]}
 Basic Multilingual Plane (BMP).
 Each of the graphic characters of Row 00 of the BMP has
 a corresponding @nt<character_literal> in Character.
-Each of the nongraphic positions of Row 00@Chg{Version=[3],New=[],Old=[ (0000-001F and 007F-009F)]}
+Each of the nongraphic @Chg{Version=[3],New=[characters],Old=[positions]}
+of Row 00@Chg{Version=[3],New=[],Old=[ (0000-001F and 007F-009F)]}
 has a corresponding language-defined name, which is not usable as an
 enumeration literal,
 but which is usable with the attributes @Chg{Version=[2],New=[Image,
@@ -5157,14 +5160,23 @@ Old=[(Wide_)Image and (Wide_)Value]};
 these names are given in the definition of type Character
 in @RefSec{The Package Standard}, but are set in @i{italics}.
 @Defn2{Term=[italics],Sec=(nongraphic characters)}
+@Chg{Version=[3],New=[@PDefn2{Term=[code point],Sec=[for characters]}],Old=[]}
+
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[@i{Code point} is defined in ISO/IEC 10646:2011.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @Defn{Wide_Character}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Character is a character type whose
-values correspond to the 65536 code positions of the @Chg{Version=[2],
-New=[ISO/IEC 10646:2003],Old=[ISO 10646]}
+values correspond to the 65536 code
+@Chg{Version=[3],New=[points],Old=[positions]} of the @Chg{Version=[2],
+New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[ISO 10646]}
 Basic Multilingual Plane (BMP).
 Each of the graphic characters of the BMP has
 a corresponding @nt<character_literal> in Wide_Character.
@@ -5184,22 +5196,27 @@ All other values of Wide_Character are considered graphic characters,
 and have]} a corresponding @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Defn{Wide_Wide_Character}
-@Defn{BMP}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}],Old=[@Defn{ISO 10646}]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Wide_Character is a character type whose values
-correspond to the 2147483648 code positions of the ISO/IEC 10646:2003 character
-set. Each of the @ntf{graphic_character}s has a corresponding
-@nt{character_literal} in
+correspond to the 2147483648 code @Chg{Version=[3],New=[points],Old=[positions]}
+of the ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} character set.
+Each of the @ntf{graphic_character}s
+has a corresponding @nt{character_literal} in
 Wide_Wide_Character. The first 65536 values of Wide_Wide_Character have the
 same @nt{character_literal} or language-defined name as defined for
 Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[The characters whose code position is larger
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[2],Text=[The characters whose code
+@Chg{Version=[3],New=[point],Old=[position]} is larger
 than 16#FF# and which are not @ntf{graphic_character}s have language-defined
 names which are formed by appending to the string "Hex_" the
-representation of their code position in hexadecimal as eight extended digits.
+representation of their code @Chg{Version=[3],New=[point],Old=[position]}
+in hexadecimal as eight extended digits.
 As with other language-defined names, these names are usable only with the
 attributes (Wide_)Wide_Image and (Wide_)Wide_Value; they are not usable as
 enumeration literals.]}
@@ -5329,10 +5346,11 @@ Context is used to resolve their type.
   Wide_Character'Wide_Image will change for such non-graphic characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[2],Text=[The language-defined names FFFE and FFFF were
   replaced by a consistent set of language-defined names for all non-graphic
-  characters with positions greater than 16#FF#. That means that
+  characters with @Chg{Version=[3],New=[code points],Old=[positions]}
+  greater than 16#FF#. That means that
   in Ada 2005, Wide_Character'Wide_Value("FFFE") will raise Constraint_Error
   while Ada 95 would have accepted it. Similarly, the result of
   Wide_Character'Wide_Image will change for the position numbers 16#FFFE#
@@ -5381,6 +5399,15 @@ Context is used to resolve their type.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Removed the position numbers
   of nongraphic characters from the text, as it is wrong and thus
   misleading.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[Changed "code position" to "code point"
+  consistently throughout the standard, as ISO/IEC 10646:2011 prefers
+  "code point" and we are referring to the definition in that Standard.
+  This change also reduces confusion between "code point"
+  and "position number"; while these have the same values for the predefined
+  character types, there is no required relationship for other character
+  types.@PDefn2{Term=[code point],Sec=[for characters]}]}
 @end{DiffWord2005}
 
 

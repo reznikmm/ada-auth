@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1542,10 +1542,11 @@ Duration the user might have declared.
 
 @begin{WideAbove}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0004-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[The delimiters, compound delimiters, reserved words, and
 @nt{numeric_literal}s are exclusively made of the
-characters whose code position is between 16#20# and 16#7E#, inclusively.
+characters whose code @Chg{Version=[3],New=[point],Old=[position]} is
+between 16#20# and 16#7E#, inclusively.
 The special characters for which names are defined in this
 International Standard (see @RefSecNum{Character Set}) belong to the same range.
 @Redundant[For example, the character E in the definition of @Chg{Version=[3],
@@ -1565,7 +1566,7 @@ conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
 @Chg{Version=[3],New=[simple upper case mapping],Old=[locale-independent
 full case folding]}, as defined by documents referenced in the note in section 1
-of ISO/IEC 10646:2003.]}
+of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[DeletedAdded]}
@@ -1947,30 +1948,36 @@ ISO/IEC 8859-1:1987,
     character sets @em Part 1: Latin alphabet No. 1}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 9899:1999}
-@Defn{9899:1999, ISO/IEC standard}],
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 9899:2011}
+@Defn{9899:2011, ISO/IEC standard}],Old=[@Defn{ISO/IEC 9899:1999}
+@Defn{9899:1999, ISO/IEC standard}]}],
 Old=[@Defn{ISO/IEC 9899:1990}
 @Defn{9899:1990, ISO/IEC standard}]}
 @Defn{C standard}
-ISO/IEC 9899:@Chg{Version=[2],New=[1999],Old=[1990]},
-@i{Programming
-languages @em C}@Chg{Version=[2],New=[, supplemented by Technical
-Corrigendum 1:2001 and Technical Corrigendum 2:2004],Old=[]}.
+ISO/IEC 9899:@Chg{Version=[2],New=[@Chg{Version=[3],New=[2011],Old=[1999]}],
+Old=[1990]},
+@i{@Chg{Version=[3],New=[Information technology @em ],Old=[]}Programming
+languages @em C}@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[, supplemented by Technical
+Corrigendum 1:2001 and Technical Corrigendum 2:2004]}],Old=[]}.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Unlike Fortran and COBOL, which added the
-  @i{Information technology} prefix to the titles of their standard, C did
-  not. This was confirmed in the list of standards titles on the ISO web site.
-  No idea why ISO allowed that@Comment{, or whether C is planning to secede
-  from SC22}.]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Unlike Fortran and
+  COBOL, which added the @i{Information technology} prefix to the titles of
+  their standard, C did not. This was confirmed in the list of standards titles
+  on the ISO web site. No idea why ISO allowed that@Comment{, or whether C is
+  planning to secede from SC22}.]}]}
 @end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 10646:2003}
-@Defn{10646:2003, ISO/IEC standard}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}
+@Defn{10646:2011, ISO/IEC standard}],Old=[@Defn{ISO/IEC 10646:2003}
+@Defn{10646:2003, ISO/IEC standard}]}
 @Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
-ISO/IEC 10646:2003, @i{Information technology @em Universal Multiple-Octet
+ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}, @i{Information technology @em Universal Multiple-Octet
 Coded Character Set (UCS)}.],
 Old=[@Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
@@ -1995,15 +2002,19 @@ which would exclude them from being letters as defined in
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00376-01]}
-@ChgAdded{Version=[2],Text=[@Defn{ISO/IEC 14882:2003}
-@Defn{14882:2003, ISO/IEC standard}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[@Defn{ISO/IEC 14882:2011}
+@Defn{14882:2011, ISO/IEC standard}],Old=[@Defn{ISO/IEC 14882:2003}
+@Defn{14882:2003, ISO/IEC standard}]}
 @Defn{C++ standard}
-ISO/IEC 14882:2003, @i{Programming languages @em C++}.]}
+ISO/IEC 14882:@Chg{Version=[3],New=[2011],Old=[2003]},
+@i{@Chg{Version=[3],New=[Information technology @em ],Old=[]}Programming languages @em C++}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[This title is also missing the
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[This title is also missing the
   @i{Information technology} part. That was confirmed in the list of standards
-  titles on the ISO web site.]}
+  titles on the ISO web site.]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
@@ -2034,6 +2045,10 @@ POSIX,
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0127-2]}
   @ChgAdded{Version=[3],Text=[Added language and country code standards for
   locale support.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
+  @ChgAdded{Version=[3],Text=[Updated references to the most recent versions
+  of these standards.]}
 @end{DiffWord2005}
 
 

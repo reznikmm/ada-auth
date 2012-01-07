@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1200,11 +1200,27 @@ exception contains such a character.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0274-1]}
 @ChgAdded{Version=[2],Text=[Pragma Assert is used to assert the truth of a
-Boolean expression at any point within a sequence of declarations or statements.
-Pragma Assertion_Policy is used to control whether such assertions@Defn{Assertions}
-are to be ignored by the implementation, checked at run-time, or handled in
-some implementation-defined manner.]}
+@Chg{Version=[3],New=[boolean],Old=[Boolean]} expression at
+@Chg{Version=[3],New=[a],Old=[any]} point within a sequence of declarations or
+statements.@Chg{Version=[3],New=[],Old=[ Pragma Assertion_Policy is used to
+control whether such assertions@Defn{Assertions} are to be ignored by the
+implementation, checked at run-time, or handled in some implementation-defined
+manner.]}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[Assert pragmas, subtype predicates (see
+@RefSecNum{Subtype Predicates}), preconditions and postconditions (see
+@RefSecNum{Preconditions and Postconditions}), and type invariants (see
+@RefSecNum{Type Invariants}) are collectively referred to as
+@i{assertions}; their boolean expressions are referred to as @i{assertion
+expressions}.@Defn{assertions}@Defn{assertion expressions}]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[Pragma Assertion_Policy is used to control whether
+assertions are to be ignored by the implementation, checked at run time, or
+handled in some implementation-defined manner.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -1343,6 +1359,55 @@ effects independently of the assertion policy in effect.]}
 
 @end{RunTime}
 
+@begin{Bounded}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error to invoke a potentially
+blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions})
+during the evaluation of an assertion expression. If the bounded error is
+detected, Program_Error is raised. If not detected, execution proceeds normally,
+but if it is invoked within a protected action, it might result in deadlock or a
+(nested) protected action.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error in an assertion expression to
+alter the value of any variable that could alter the value of the assertion
+expression. If the bounded error is detected, Program_Error is raised.
+Otherwise, execution proceeds normally with the affected assertion, but the
+assertion expression need not hold if immediately reevaluated.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[It is a bounded error in an assertion expression
+associated with a call of or return from a callable entity @i{C} to alter the
+value of any variable that could alter the value of any other such assertion
+expression of the callable entry @i{C}. If the bounded error is detected,
+Program_Error is raised. Otherwise, execution proceeds normally with the
+affected assertion expressions. @Redundant[Possible consequences of not
+detecting the bounded error are that the value denoted by @i{X}'Old for
+any @nt{prefix} @i{X} might no longer denote the value denoted by @i{X} at the
+beginning of the subprogram call with the affected postcondition, or that a
+condition that evaluated to true is no longer true after evaluation of the
+affected precondition or postcondition.]]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The intended effect is that an evaluation of
+  the involved assertion expressions (subtype predicates, type invariants,
+  preconditions and postconditions) in any order yields identical results.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The rule above is intended to apply to all of the
+  assertion expressions that are evaluated at the start of call (and similarly
+  for the assertion expressions that are evaluated during the return from a
+  call), but not other assertions actually given in the body, nor between the
+  expressions given at the start and end. Specifically, a side effect in a
+  function called from a precondition expression that changes the result of
+  a postcondition expression of the same subprogram does @i<not> trigger
+  this rule.]}
+@end{Discussion}
+
+
+@end{Bounded}
+
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[Assertion_Error may be declared by renaming an
@@ -1356,6 +1421,12 @@ would be incorrect, as Exception_Name would return the wrong name.]}
 @end{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[Implementations may define their own assertion policies.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[If the result of a function call in an assertion is
+not needed to determine the value of the assertion expression, an implementation
+is permitted to omit the function call. @Redundant[This permission applies even
+if the function has side effects.]]}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -1371,6 +1442,21 @@ effect will not affect normal operation of the program.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
+  It is now a bounded error for an assertion expression to call a function
+  that has a side-effect that could change the value of the assertion.
+  This means that a pragma Assert that works in Ada 2005 might raise
+  Program_Error in Ada 2012 in the unlikely event that the compiler detected
+  such an error. This should be unlikely to occur in practice, and it
+  is considered a good thing, as the original expression was tricky and
+  probably was not portable (as order of evaluation is unspecified within
+  an expression). Moreover, no compiler is required to detect a bounded
+  error, so there is no need for any compiler to change behavior.]}
+@end{Inconsistent2005}
+
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Example of Exception Handling}

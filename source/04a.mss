@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:46 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1175,6 +1175,12 @@ named reference object.]}
 
 @begin{Examples}
 @begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[@key[type] Barrel @key[is tagged] ...  -- @Examcom{holds objects of type Element}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[B: @key[aliased] Barrel;]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[@key[type] Ref_Element(Data : @key[access] Element) @key[is]
    @key[new] Ada.Finalization.Limited_Controlled @key[with private]
@@ -1182,19 +1188,19 @@ named reference object.]}
         -- @Examcom{This Ref_Element type is a "reference" type.}
         -- @ExamCom{"Data" is its reference discriminant.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Find(C : @key[access] Container; Key : String) @key[return] Ref_Element;
-   -- @Examcom{Return a reference to an element of a container}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String) @key[return] Ref_Element;
+   -- @Examcom{Return a reference to an element of a barrel.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[...]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Find(C, "abc") := Element'(...);  -- @Examcom{Assign through a reference}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[Find (B, "grape") := Element'(...);  -- @Examcom{Assign through a reference.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[-- @Examcom{This is equivalent to:}
---   Find(C, "abc").Data.@key[all] := Element'(...);]}
+Find (B, "grape").Data.@key[all] := Element'(...);]}
 
 @end{Example}
 @end{Examples}
@@ -1388,6 +1394,33 @@ the @nt{prefix} of the prefixed view.]}
 @end{Ramification}
 
 @end{Resolution}
+
+@begin{Examples}
+@begin{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[@key[type] Indexed_Barrel @key[is tagged] ...
+  @key[with] Variable_Indexing => Find;
+  -- @Examcom{Indexed_Barrel is an indexable type,}
+  -- @Examcom{Find is the generalized indexing operation.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Indexed_Barrel; Key : String) @key[return] Ref_Element;
+   -- @Examcom{Return a reference to an element of a barrel (see @RefSecNum{User-Defined References}).}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[IB: @key[aliased] Indexed_Barrel;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgAdded{Version=[3],Text=[-- @Examcom{All of the following calls are then equivalent:}
+Find (IB,"pear").Data.@key[all] := Element'(...); -- @Examcom{Traditional call}
+IB.Find ("pear").Data.@key[all] := Element'(...); -- @Examcom{Call of prefixed view}
+IB.Find ("pear")          := Element'(...); -- @Examcom{Implicit dereference (see @RefSecNum{User-Defined References})}
+IB      ("pear")          := Element'(...); -- @Examcom{Implicit indexing and dereference}
+IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing only}]}
+
+@end{Example}
+@end{Examples}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}

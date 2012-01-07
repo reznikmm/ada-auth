@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2011/11/01 05:34:03 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -344,6 +344,7 @@ the given name (in the absence of Name_Error).]}
                        Form          : @key{in} String := "");]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0271-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Creates zero or more directories with
 name New_Directory. Each
 non-existent directory named by New_Directory is created.@Redundant[ For example, on a
@@ -356,7 +357,8 @@ new directory. The exception Name_Error is propagated if the string given as
 New_Directory does not allow the identification of any directory. The exception
 Use_Error is propagated if the external environment does not support the
 creation of any directories with the given name (in the absence of Name_Error)
-and form.]}
+and form.@Chg{Version=[3],New=[ If Use_Error is propagated, it is unspecified
+whether a portion of the directory path is created.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Delete_Tree (Directory : @key{in} String);]}
@@ -418,6 +420,7 @@ New_Name.]}
                      Form        : @key{in} String@Chg{Version=[3],New=[ := ""],Old=[]});]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0271-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Copies the contents of the existing
 external file with name Source_Name to an external file with name Target_Name.
 The resulting external file is a duplicate of the source external file. The
@@ -429,7 +432,9 @@ or if the string given as Target_Name does not allow the identification of an
 external file. The exception Use_Error is propagated if the external
 environment does not support creating the file with the name given by
 Target_Name and form given by Form, or copying of the file with the name given
-by Source_Name (in the absence of Name_Error).]}
+by Source_Name (in the absence of Name_Error).@Chg{Version=[3],New=[ If
+Use_Error is propagated, it is unspecified whether a portion of the file
+is copied.],Old=[]}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Name_Error is always raised if Source_Name
@@ -788,7 +793,7 @@ altered while a search is in progress.],Old=[]}]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Search (
     Directory : @key{in} String;
     Pattern   : @key{in} String;
-    Filter    : @key{in} Filter_Type := (others => True);
+    Filter    : @key{in} Filter_Type := (@key{others} => True);
     Process   : @key{not null access procedure} (
         Directory_Entry : @key{in} Directory_Entry_Type));]}
 @end{Example}
@@ -1230,6 +1235,14 @@ should be deleted first.]}
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
 @end{Incompatible2005}
+
+@begin{Diffword2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0271-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> We now explicitly say that
+  the behavior of Create_Path and Copy_File is unspecified when Use_Error
+  is raised. Nothing has changed here, as the behavior was (implicitly)
+  unspecified in the 2007 Amendment.]}
+@end{Diffword2005}
 
 
 

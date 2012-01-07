@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3686,7 +3686,7 @@ comprising the partition and is enforced via a post-compilation check.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[3],Text=[A restriction may impose requirements on the
-runtime behavior of the program, as indicated by the specification of runtime
+run-time behavior of the program, as indicated by the specification of run-time
 behavior associated with a violation of the requirement.]}
 
 @begin{Ramification}
@@ -4035,12 +4035,23 @@ language defined:]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Dependence)}@Defn{No_Dependence restriction}No_Dependence @\Specifies
    a library unit on which there are no semantic dependences.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0242-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0241-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Specification_of_Aspect)}@Defn{No_Specification_of_Aspect restriction}No_Specification_of_Aspect
    @\Identifies an aspect for which no
    @nt{aspect_specification}, @nt{attribute_definition_clause}, or @nt{pragma}
    is given.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0272-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Use_Of_Attribute)}@Defn{No_Use_Of_Attribute restriction}No_Use_Of_Attribute
+   @\Identifies an attribute for which no @nt{attribute_reference} or
+   @nt{attribute_definition_clause} is given.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0272-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
+   Sec=(No_Use_Of_Pragma)}@Defn{No_Use_Of_Pragma restriction}No_Use_Of_Pragma
+   @\Identifies a @nt{pragma} which is not to be used.]}
 
 @end{Description}
 @end{StaticSem}
@@ -4061,15 +4072,46 @@ present in the environment.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0241-1]}
 @ChgAdded{Version=[3],Text=[The @nt{restriction_parameter_argument} of a
 No_Specification_of_Aspect restriction shall be an @nt{identifier}; this
-@nt{identifier} does not denote any declaration.]}
+is an identifier specific to a pragma (see @RefSecNum{Pragmas}) and
+does not denote any declaration.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This @nt{restriction_parameter_argument} is not
-    resolved. As for No_Dependence, there is no check that the aspect
+    resolved as it is an identifier specific to a pragma. As
+    for No_Dependence, there is no check that the aspect
     @nt{identifier} is meaningful; it might refer to an implementation-defined
-    aspect on one implementation, but nothing at all on another implementation.
-    Of course, a good implementation will warn if the aspect is unknown to it.]}
+    aspect on one implementation, but nothing at all on another implementation.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0272-1]}
+@ChgAdded{Version=[3],Text=[The @nt{restriction_parameter_argument} of a
+No_Use_Of_Attribute restriction
+shall be an @nt{identifier} or one of the reserved words Access, Delta, Digits,
+Mod, or Range; this is an identifier specific to a pragma.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This @nt{restriction_parameter_argument} is not
+    resolved as it is an identifier specific to a pragma. There is no check that
+    the attribute identifier refers to a known @nt{attribute_designator};
+    it might refer to an implementation-defined
+    attribute on one implementation, but nothing at all on another implementation.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0272-1]}
+@ChgAdded{Version=[3],Text=[The @nt{restriction_parameter_argument} of a
+No_Use_Of_Pragma restriction
+shall be an @nt{identifier} or the reserved word Interface;
+this is an identifier specific to a pragma.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This @nt{restriction_parameter_argument} is not
+    resolved as it is an identifier specific to a pragma. There is no check that
+    the pragma identifier refers to a known @nt{pragma};
+    it might refer to an implementation-defined pragma on one implementation,
+    but nothing at all on another implementation.]}
 @end{Ramification}
 
 @end{Legality}
@@ -4132,10 +4174,11 @@ No_Implementation_Units.]}
 @end{Extend95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1],ARef=[AI05-0242-1],ARef=[AI05-0246-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0241-1],ARef=[AI05-0242-1],ARef=[AI05-0246-1],ARef=[AI05-0272-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Restrictions No_Implementation_Aspect_Specifications, No_Implementation_Identifiers,
-  No_Implementation_Units, and No_Specification_of_Aspect are new.]}
+  No_Implementation_Units, No_Specification_of_Aspect, No_Use_of_Attribute, and
+  No_Use_of_Pragma are new.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0246-1]}
   @ChgAdded{Version=[3],Text=[Profile No_Implementation_Extensions is new.]}

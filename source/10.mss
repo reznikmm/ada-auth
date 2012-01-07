@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2011/12/23 21:32:47 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -417,16 +417,16 @@ limited view of a package contains:]}
 
 @begin(Itemize)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0129-1]}
-@ChgAdded{Version=[2],Text=[For each nested
-@nt{package_declaration}@Chg{Version=[3],New=[ immediately within the visible part],Old=[]},
-a declaration of the limited view of that package, with the
-same @nt{defining_program_unit_name}.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0129-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[2],Text=[For each@Chg{Version=[3],New=[],Old=[ nested]}
+@nt{package_declaration}@Chg{Version=[3],New=[ occurring immediately within
+the visible part],Old=[]}, a declaration of the limited view of that package,
+with the same @nt{defining_program_unit_name}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00217-06],ARef=[AI95-00326-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0129-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0108-1],ARef=[AI05-0129-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[For each @nt{type_declaration}
-@Chg{Version=[3],New=[immediately within],Old=[in]} the visible
+@Chg{Version=[3],New=[occurring immediately within],Old=[in]} the visible
 part@Chg{Version=[3],New=[ that is not an
 @nt{incomplete_type_declaration}],Old=[]}, an incomplete view
 of the type@Chg{Version=[3],New=[ with no @nt{discriminant_part}],Old=[]};
@@ -1633,9 +1633,11 @@ can be visible within the subunits.]
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00218-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<subprogram_body_stub>,rhs="@Chg{Version=[2],New=<
    [@Syn2{overriding_indicator}]
-   >,Old=[]}@Syn2{subprogram_specification} @key{is} @key{separate};"}
+   >,Old=[]}@Syn2{subprogram_specification} @key{is} @key{separate}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 @begin{Discussion}
 Although this syntax allows a @nt{parent_unit_name},
@@ -1643,13 +1645,19 @@ that is disallowed by @RefSec{Compilation Units - Library Units}.
 @end{Discussion}
 
 
-@Syn{lhs=<package_body_stub>,rhs="@key{package} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
+@Syn{lhs=<package_body_stub>,rhs="@Chg{Version=[3],New=<
+   >,Old=[]}@key{package} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
-@Syn{lhs=<task_body_stub>,rhs="@key{task} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
+@Syn{lhs=<task_body_stub>,rhs="@Chg{Version=[3],New=<
+   >,Old=[]}@key{task} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
-@Syn{lhs=<protected_body_stub>,rhs="@key{protected} @key{body} @Syn2{defining_identifier} @key{is} @key{separate};"}
+@Syn{lhs=<protected_body_stub>,rhs="@Chg{Version=[3],New=<
+   >,Old=[]}@key{protected} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
+      [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
 @Syn{lhs=<subunit>,rhs="@key{separate} (@Syn2{parent_unit_name}) @Syn2{proper_body}"}
@@ -1832,6 +1840,13 @@ Instead, we require only that the full expanded names be distinct.
   @ChgAdded{Version=[2],Text=[Clarified that a subunit of a subunit is still a
   subunit.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0267-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  An optional @nt{aspect_specification} can be used in a
+  @nt{body_stub}. This is described in @RefSecNum{Aspect Specifications}.]}
+@end{Extend2005}
 
 
 @LabeledSubClause{The Compilation Process}
@@ -3722,17 +3737,23 @@ the same as they were at the earlier call.
 produces other side effects when called.]
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 A declared-pure @nt{library_item} has no variable state.
 Hence, a call on one of its (nonnested) subprograms cannot
 @Chg{Version=[2],New=[normally],Old=[@lquotes@;normally@rquotes]}
-have side effects.
-The only possible side effects from such a call would be
-through machine code insertions,@Chg{Version=[2],New=[ imported subprograms,],
-Old=[]}unchecked conversion to an access type declared within the
-subprogram, and similar features.
-The compiler may omit a call to such a subprogram even if such
-side effects exist, so the writer of such a subprogram
-has to keep this in mind.
+have side effects. @Chg{Version=[3],New=[Side effects are still possible
+via dispatching calls and via indirect calls through access-to-subprogram
+values. Other mechanisms that might be used to modify variable state
+include],Old=[The only possible side effects from such a call would be
+through]}
+machine code insertions,@Chg{Version=[2],New=[ imported subprograms,
+@Chg{Version=[3],New=[ and ],Old=[]}],Old=[]}unchecked conversion to an access type declared within the
+subprogram@Chg{Version=[3],New=[; this list is not exhaustive],Old=[, and
+similar features]}.@Chg{Version=[3],New=[ Thus, the permissions described
+in this section may apply to a subprogram whose execution has
+side-effects.],Old=[]} The compiler may omit a call to such a subprogram
+even if @Chg{Version=[3],New=[],Old=[such]} side effects exist, so the
+writer of such a subprogram has to keep this in mind.
 @end{Discussion}
 
 @end{ImplPerm}

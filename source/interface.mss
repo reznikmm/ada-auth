@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.61 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.62 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2011/12/23 21:32:48 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -25,6 +25,27 @@ Every implementation must support all non-optional features defined here
 Ada should have strong support for mixed-language programming.
 @end{MetaRules}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[3],Text=[Support for interfacing to any foreign language is
+optional. However, an implementation shall not provide any optional
+aspect, attribute, library unit, or pragma having the same name as an
+aspect, attribute, library unit, or pragma (respectively) specified in
+the clauses of this Annex unless the provided construct is either as specified
+in those clauses or is more limited in capability than that required by those
+clauses. A program that attempts to use an unsupported capability of this Annex
+shall either be identified by the implementation before run time or shall raise
+an exception at run time.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The intent is that the same rules apply for
+  the optional parts of language interfacing as apply for Specialized
+  Needs Annexes. See
+  @RefSecNum{Conformity of an Implementation with the Standard} for a
+  discussion of the purpose of these rules.]}
+@end{Discussion}
+@end{ImplReq}
+
 @begin{Extend83}
 @Defn{extensions to Ada 83}
 Much of the functionality in this Annex is new to Ada 95.
@@ -33,6 +54,13 @@ Much of the functionality in this Annex is new to Ada 95.
 @begin{DiffWord83}
 This Annex contains what used to be RM83-13.8.
 @end{DiffWord83}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[Moved the clarification that interfacing to
+  foreign languages is optional and has the same restrictions as a Specialized
+  Needs Annex here.]}
+@end{DiffWord2005}
 
 
 @LabeledRevisedClause{Version=[3],New=[Interfacing Aspects],Old=[Interfacing Pragmas]}
@@ -868,24 +896,25 @@ precision, respectively.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[2],Text=[Support for interfacing to any foreign language is
-optional. However, an implementation shall not provide any
-@Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library
-unit, or pragma having the same name as an
-@Chg{Version=[3],New=[aspect, ],Old=[]}attribute, library unit, or pragma
-(respectively) specified in the @Chg{Version=[3],New=[],Old=[following ]}clauses
+@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0262-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Support for
+interfacing to any foreign language is optional. However, an implementation
+shall not provide any attribute, library
+unit, or pragma having the same name as an attribute, library unit, or pragma
+(respectively) specified in the following clauses
 of this Annex unless the
 provided construct is either as specified in those clauses or is more limited
 in capability than that required by those clauses. A program that attempts to
 use an unsupported capability of this Annex shall either be identified by the
-implementation before run time or shall raise an exception at run time.]}
+implementation before run time or shall raise an exception at run time.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The intent is that the same rules apply for
+  @ChgRef{Version=[3],Kind=[Deleted]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The intent is that
+  the same rules apply for
   language interfacing as apply for Specialized Needs Annexes. See
   @RefSecNum{Conformity of an Implementation with the Standard} for a
-  discussion of the purpose of these rules.]}
+  discussion of the purpose of these rules.]}]}
 @end{Discussion}
 @end{ImplReq}
 
@@ -962,6 +991,12 @@ should be declared as a renaming:
   @ChgAdded{Version=[2],Text=[Clarified that interfacing to foreign languages
   is optional and has the same restrictions as a Specialized Needs Annex.]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[Move the restrictions on implementations of
+  optional features to the start of this Annex.]}
+@end{DiffWord2005}
 
 
 @LabeledRevisedClause{Version=[2],New=[Interfacing with C and C++],
