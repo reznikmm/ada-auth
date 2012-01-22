@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -3069,9 +3069,9 @@ in which case the assignment does not involve any copying. In particular:]}
   is for determining the technique of parameter passing). That is, privacy is
   ignored for this purpose.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0067-1]}
   @ChgAdded{Version=[3],Text=[For function calls, we only require building in
-  place for immutable types. These are the types that would have been
+  place for immutably limited types. These are the types that would have been
   return-by-reference types in Ada 95. We limited the requirement because
   we want to minimize disruption to Ada 95 implementations and users.]}
 @end{Reason}

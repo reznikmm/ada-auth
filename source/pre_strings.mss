@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2012/01/07 08:37:07 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2011/12/23 21:32:48 $}
+@Comment{$Date: 2012/01/07 08:37:07 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3047,7 +3047,7 @@ function Strings.Bounded.Hash has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<generic>@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash]}
    @key<with package> Bounded @key<is>
-                     @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+      @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
    @key<return> Containers.Hash_Type;
 @key<pragma> Preelaborate(Hash);]}
@@ -3128,7 +3128,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key[generic]
    @key[with package] Bounded @key[is]
-          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+      @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash_Case_Insensitive]}
    (Key : Bounded.Bounded_String) @key[return] Containers.Hash_Type;
 @key[pragma] Preelaborate(Hash_Case_Insensitive);]}
@@ -3236,7 +3236,7 @@ function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[with package] Bounded @key[is]
-          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+      @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Equal_Case_Insensitive]}
    (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
 @key[pragma] Preelaborate(Equal_Case_Insensitive);]}
@@ -3307,7 +3307,7 @@ function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[with package] Bounded @key[is]
-          @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
+      @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Less_Case_Insensitive]}
   (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
 @key[pragma] Preelaborate(Less_Case_Insensitive);]}
@@ -3410,7 +3410,7 @@ the following declarations:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Encoding} (Item    : UTF_String;
                       Default : Encoding_Scheme := UTF_8)
-   @key[return] Encoding_Scheme;]}
+      @key[return] Encoding_Scheme;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Strings.UTF_Encoding;]}
@@ -3592,7 +3592,7 @@ UTF_8_String, or UTF_16_String Item parameter which is assumed to
 contain characters whose position values correspond to a valid encoding sequence
 according to the encoding scheme required by the function or specified by its
 Input_Scheme parameter, and returns the corresponding String, Wide_String, or
-value. The lower bound of the returned string is 1.]}
+Wide_Wide_String value. The lower bound of the returned string is 1.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For each of the Convert and Decode functions, an

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1100,12 +1100,14 @@ execution, or to other objects becoming abnormal.
 
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0279-1]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 A call to an imported function or an instance of Unchecked_Conversion is
 erroneous if the result is scalar, @Chg{Version=[2],New=[],Old=[and ]}the
 result object has an invalid representation@Chg{Version=[2],New=[, and
 the result is used other than as the @nt{expression} of
-an @nt{assignment_statement} or an @nt{object_declaration}, or as the
+an @nt{assignment_statement} or an @nt{object_declaration},@Chg{Version=[3],New=[
+as the @SynI{object_}@nt{name} of an @nt{object_renaming_declaration},],Old=[]} or as the
 @nt{prefix} of a Valid attribute. If such a result object is used as the source
 of an assignment, and the assigned value is an invalid representation for the
 target of the assignment, then any use of the target object prior to a further
@@ -1160,24 +1162,30 @@ Z : Positive := Y+1; --@RI{ Erroneous to use Y.}],Old=[@RI{ Erroneous.}]}
 
 @end{Example}
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
-The call to Unsafe_Convert @Chg{Version=[2],New=[ is a bounded error, which
-might raise Constraint_Error, Program_Error, or return an invalid value.
-Moreover, if an exception is not raised, most uses of that invalid value
-(including the use of Y) cause],Old=[causes]} erroneous execution.
-The call to Safe_Convert is not erroneous.
-The result object is an object of subtype Integer containing the value 0.
-The assignment to X is required to do a constraint check;
-the fact that the conversion is unchecked does not obviate the need for
-subsequent checks required by the language rules.
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
+  The call to Unsafe_Convert @Chg{Version=[2],New=[ is a bounded error, which
+  might raise Constraint_Error, Program_Error, or return an invalid value.
+  Moreover, if an exception is not raised, most uses of that invalid value
+  (including the use of Y) cause],Old=[causes]} erroneous execution. The call to
+  Safe_Convert is not erroneous. The result object is an object of subtype
+  Integer containing the value 0. The assignment to X is required to do a
+  constraint check; the fact that the conversion is unchecked does not obviate
+  the need for subsequent checks required by the language rules.
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
-@ChgAdded{Version=[2],Text=[The reason for delaying erroneous execution until
-the object is used is so that the invalid representation can be tested
-for validity using the Valid attribute (see @RefSecNum{The Valid Attribute})
-without causing execution to become erroneous. Note that this delay does not
-imply an exception will not be raised; an implementation could treat both
-conversions in the example in the same way and raise Constraint_Error.]}
+  @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00167-01],ARef=[AI95-00426-01]}
+  @ChgAdded{Version=[2],Text=[The reason for delaying erroneous execution until
+  the object is used is so that the invalid representation can be tested for
+  validity using the Valid attribute (see @RefSecNum{The Valid Attribute})
+  without causing execution to become erroneous. Note that this delay does not
+  imply an exception will not be raised; an implementation could treat both
+  conversions in the example in the same way and raise Constraint_Error.]}
+
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0279-1]}
+  @ChgAdded{Version=[3],Text=[The rules are defined in terms of the result
+  object, and thus the name used to reference that object is irrelevant.
+  That is why we don't need any special rules to describe what happens
+  when the function result is renamed.]}
+
 @end{Ramification}
 @begin{ImplNote}
   If an implementation wants to have a @lquotes@;friendly@rquotes@; mode, it
@@ -1282,6 +1290,11 @@ to assign to the object as a whole.
   of this rule, so the impact of this change will be slight.]}
   @ChgNote{This is not an extension, as such a program was already legal
   (although erroneous).}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0279-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> The description of erroneous
+  execution for Unchecked_Conversion and imported objects was adjusted to
+  clarify that renaming such an object is not, by itself, erroneous.]}
 @end{Diffword2005}
 
 
@@ -3439,7 +3452,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Mark and Release work in a stack fashion, and allocations are not allowed}
    -- @Examcom{from a subpool other than the one at the top of the stack. This is also}
-   -- @Examcom{the default pool}.]}
+   -- @Examcom{the default pool.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[subtype] Subpool_Handle @key[is] Subpools.Subpool_Handle;]}
@@ -3551,7 +3564,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
       Pool : @key[in out] Mark_Release_Pool_Type;
       Subpool : @key[in out] Subpool_Handle) @key[is]
    @key[begin]
-      @key[if] Subpool /= Pool.Markers(Pool.Current_Pool)'Unchecked_Access then
+      @key[if] Subpool /= Pool.Markers(Pool.Current_Pool)'Unchecked_Access @key[then]
          @key[raise] Program_Error; -- @Examcom{Only the last marked subpool can be released.}
       @key[end if];
       @key[if] Pool.Current_Pool /= 1 @key[then]
@@ -3994,7 +4007,8 @@ only to the current compilation or environment, not the entire partition.]}
    Sec=(No_Obsolescent_Features)}@Chg{Version=[3],New=[@Defn{No_Obsolescent_Features restriction}],
    Old=[]}No_Obsolescent_Features @\There
    is no use of language features defined in Annex J. It is
-   implementation-defined if uses of the renamings of
+   @Chg{Version=[3],New=[implementation defined whether],
+   Old=[implementation-defined if]} uses of the renamings of
    @RefSecNum{Renamings of Library Units} @Chg{Version=[3],New=[and of the
    @nt{pragma}s of @RefSecNum{Aspect-related Pragmas} ],Old=[]}are detected
    by this restriction. This restriction applies only to the current

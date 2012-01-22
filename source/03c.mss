@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3124,11 +3124,13 @@ and aliased subcomponents of other objects.
 @end(ImplNote)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1],ARef=[AI05-0142-4],ARef=[AI05-0277-1]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
-it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,
-@nt{parameter_@!specification},],Old=[]} or @nt<component_@!definition>
+it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,],Old=[ or]}
+@nt<component_@!definition>@Chg{Version=[3],New=[,
+@nt{parameter_@!specification}, or
+@nt{extended_return_object_declaration}],Old=[]}
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
@@ -3138,10 +3140,7 @@ value denotes an aliased view, as does a view conversion
 is],Old=[a limited@Chg{Version=[2],New=[ tagged],Old=[]} type,
 @Chg{Version=[2],New=[a protected type, a task type, or a type that has the
 reserved word @key{limited} in its full definition is also],Old=[]}]}
-@Chg{Version=[2],New=[defined to be aliased],Old=[]}@Chg{Version=[3],
-New=[, as is the return object of an @nt{extended_return_statement}
-(see @RefSecNum{Return Statements}) that is of an immutably limited type],
-Old=[]}@Chg{Version=[2],New=[. Finally,],Old=[and]}
+@Chg{Version=[2],New=[defined to be aliased. Finally,],Old=[and]}
 a formal parameter or generic formal object of a
 tagged type @Chg{Version=[2],New=[is],Old=[are]} defined to be aliased.
 @Redundant[Aliased views are the ones that can be designated by an
@@ -3741,10 +3740,14 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0053-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1],ARef=[AI05-0277-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> The rule about a current instance
-  being aliased now is worded in terms of immutably limited types. Return
-  objects of such types are also considered aliased.]}
+  being aliased now is worded in terms of immutably limited types.
+  Wording was also added to make extended return object declarations that have the
+  keyword @key[aliased] be considered aliased. This latter was a significant
+  oversight in Ada 2005 @em technically, the keyword @key[aliased] had no
+  effect. But of course implementations followed the intent, not the letter of
+  the the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
@@ -4755,12 +4758,20 @@ the associated value (or library level if the value is null);]}
   @end{InnerItemize}
 @end{Discussion}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
-@ChgAdded{Version=[3],Text=[If the value for this rule and the next one is
-derived from an Unchecked_Access attribute, the accessibility is library-level
-no matter what the accessibility level of the object is  (see
-@RefSecNum{Unchecked Access Value Creation}).]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0281-1]}
+  @ChgAdded{Version=[3],Text=[The @nt{subtype_indication} mentioned in this
+  bullet is not necessarily the one given in the @nt{allocator} or
+  return statement that is determining the accessibility level; the constrained
+  subtype might have been defined in an earlier declaration (as a named
+  subtype).]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[If the value for this rule and the next one is
+  derived from an Unchecked_Access attribute, the accessibility is library-level
+  no matter what the accessibility level of the object is (see
+  @RefSecNum{Unchecked Access Value Creation}).]}
 @end{Ramification}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[If the value of the access discriminant is
 determined by a @nt{default_expression} in the declaration of the discriminant,

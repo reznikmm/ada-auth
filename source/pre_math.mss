@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.40 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
+@comment{ $Revision: 1.41 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -577,9 +577,19 @@ The repeatability provided by the implicit initialization may be exploited for
 testing or debugging purposes.
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0280-1]}
 An object of the private type State can be used to hold the internal state of a
 generator. Such objects are only needed if the application is designed to
-save and restore generator states or to examine or manufacture them.
+save and restore generator states or to examine or manufacture
+them.@Chg{Version=[3],New=[ The implicit initial value of type State
+corresponds to the implicit initial value of all generators.],Old=[]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0280-1]}
+  @ChgAdded{Version=[3],Text=[All generators are implicitly initialized to
+  the same unchanging value, and using Reset on a default initialized object
+  of type State will produce a generator with that same value.]}
+@end{Discussion}
 
 @Trailing@;The operations on generators affect the state and therefore the future values
 of the associated sequence. The semantics of the operations on generators and
@@ -902,3 +912,14 @@ generators in each Worker task.
   Image of a generator a bounded error, as it may not be practical to check
   for problems (if a generator consists of several related values).]}
 @end{DiffWord95}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0280-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Specified the implicit initial
+  value for (sub)type State. This was unspecified in Ada 95 and Ada 2005,
+  so a program depending on some other initial value is very unlikely
+  and certainly was not portable. An implementation can use default expressions,
+  aspect Default_Value, or aspect Default_Component_Value to keep the
+  representation of the type unchanged while meeting this new requirement.]}
+@end{DiffWord2005}
+

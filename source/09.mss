@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 
@@ -1728,7 +1728,8 @@ attribute.],Old=[]}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0225-1]}
   @ChgAdded{Version=[3],Text=[The point is to prevent any calls to such a
-  @nt{name}, directly, or via an access value, renames, or generic formal
+  @nt{name} whose target object is a constant view of a protected object,
+  directly, or via an access value, renames, or generic formal
   subprogram. It is, however, legal to say P'Count in a protected function body,
   even though the protected object is a constant view there.]}
 @end{Reason}
@@ -3069,7 +3070,7 @@ the profile of the innermost enclosing callable construct.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
 @ChgAdded{Version=[3],Text=[If the target is a procedure, the name shall
-denote a renaming of an entry, or shall denote a view or prefixed view of a
+denote a renaming of an entry, or shall denote a view or a prefixed view of a
 primitive subprogram of a synchronized interface, where the first parameter
 of the unprefixed view of the primitive subprogram shall be a
 controlling parameter, and the Synchronization aspect shall be specified

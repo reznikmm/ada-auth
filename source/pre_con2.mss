@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.16 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
+@comment{ $Revision: 1.17 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -2547,10 +2547,10 @@ of Container is prohibited during the execution of the call on
 Process.@key[all]. Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[3],Text=[The @ldquote@;tamper with the element@rdquote
   check is intended to prevent the Element parameter of Process from being
-  modified or deleted outside of Process. The check prevents data loss (if
+  replaced or deleted outside of Process. The check prevents data loss (if
   Element_Type is passed by copy) or erroneous execution (if Element_Type is an
   unconstrained type).]}
 @end{ImplNote}
@@ -3173,7 +3173,7 @@ as Containers.Hashed_Maps except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Map;
                  Capacity : Count_Type := 0;
                  Modulus  : Hash_Type := 0) @key[return] Map;]}
 @end{Example}
@@ -3336,7 +3336,7 @@ as Containers.Ordered_Maps except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Map;
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Map;
                  Capacity : Count_Type := 0) @key[return] Map;]}
 @end{Example}
 @begin{Indent}
@@ -3506,7 +3506,7 @@ as Containers.Hashed_Sets except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Set;
                  Capacity : Count_Type := 0;
                  Modulus  : Hash_Type := 0) @key[return] Set;]}
 @end{Example}
@@ -3665,7 +3665,7 @@ as Containers.Ordered_Sets except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : Set;
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Set;
                  Capacity : Count_Type := 0) @key[return] Set;]}
 @end{Example}
 @begin{Indent}
@@ -4207,7 +4207,7 @@ package Containers.Synchronized_Queue_Interfaces has the following declaration:]
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0262-1],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[A queue type that implements this
-interface may have a bounded @i<capacity>@Defn2{Term=[capacity],Sec=[of a queue]}.
+interface is allowed to have a bounded @i<capacity>@Defn2{Term=[capacity],Sec=[of a queue]}.
 If the queue object has a bounded
 capacity, and the number of existing elements equals the capacity, then Enqueue
 blocks until storage becomes available; otherwise, Enqueue does not block. In any
@@ -4478,9 +4478,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
    @key[type] Queue_Priority @key[is private];
    @key[with] @key[function] Get_Priority
-     (Element: Queue_Interfaces.Element_Type) @key[return] Queue_Priority is <>;
+     (Element : Queue_Interfaces.Element_Type) @key[return] Queue_Priority @key[is] <>;
    @key[with] @key[function] Before
-     (Left, Right : Queue_Priority) @key[return] Boolean is <>;
+     (Left, Right : Queue_Priority) @key[return] Boolean @key[is] <>;
    Default_Ceiling : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Unbounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Priority_Queues]}
    @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}
@@ -4610,9 +4610,9 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
    @key[type] Queue_Priority @key[is private];
    @key[with function] Get_Priority
-     (Element: Queue_Interfaces.Element_Type) @key[return] Queue_Priority is <>;
+     (Element : Queue_Interfaces.Element_Type) @key[return] Queue_Priority @key[is] <>;
    @key[with function] Before
-     (Left, Right : Queue_Priority) @key[return] Boolean is <>;
+     (Left, Right : Queue_Priority) @key[return] Boolean @key[is] <>;
    Default_Capacity : Count_Type;
    Default_Ceiling  : System.Any_Priority := System.Priority'Last;
 @key[package] Ada.Containers.Bounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Priority_Queues]}

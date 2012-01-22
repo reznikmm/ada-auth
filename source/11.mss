@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1399,10 +1399,10 @@ affected precondition or postcondition.]]}
   assertion expressions that are evaluated at the start of call (and similarly
   for the assertion expressions that are evaluated during the return from a
   call), but not other assertions actually given in the body, nor between the
-  expressions given at the start and end. Specifically, a side effect in a
-  function called from a precondition expression that changes the result of
-  a postcondition expression of the same subprogram does @i<not> trigger
-  this rule.]}
+  expressions given at the start and end. Specifically, a side effect that
+  alters a variable in a function called from a precondition expression that
+  changes the result of a postcondition expression of the same subprogram
+  does @i<not> trigger this rule.]}
 @end{Discussion}
 
 

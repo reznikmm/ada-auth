@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.68 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
+@comment{ $Revision: 1.69 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1617,16 +1617,19 @@ These @nt{pragma}s are representation pragmas
 For an atomic object (including an atomic component) all reads and
 updates of the object as a whole are indivisible.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1]}
-@Chg{Version=[3],New=[All tasks of the program (on all processors) that read or update volatile
-variables see the same order of updates to the variables.
-],Old=[For a volatile object all reads and updates of the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1],ARef=[AI05-0275-1]}
+@Chg{Version=[3],New=[All tasks of the program (on all processors) that
+read or update volatile @Redundant[and atomic] variables see the same order of
+updates to the variables. A use of an atomic variable or other mechanism may be
+necessary to avoid erroneous execution and to ensure that access to volatile
+variables is sequential (see @RefSecNum{Shared Variables}).],
+Old=[For a volatile object all reads and updates of the
 object as a whole are performed directly to memory.]}
 
 @begin{ImplNote}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1],ARef=[AI05-0275-1]}
 @Chg{Version=[3],New=[To ensure this, on a multiprocessor, any read or
-update of a volatile object should involve the use of an appropriate memory
+update of an atomic object may require the use of an appropriate memory
 barrier.],Old=[This precludes any use of register temporaries,
 caches, and other similar optimizations for that object.]}
 @end{ImplNote}
@@ -1801,7 +1804,7 @@ because the pragma was not used to mark variables as shared.
 @end{Extend2005}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0117-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0117-1],ARef=[AI05-0275-1]}
   @ChgAdded{Version=[3],Text=[Revised the definition of volatile to
   eliminate overspecification and simply focus on the root requirement (that
   all tasks see the same view of volatile objects). This is not an

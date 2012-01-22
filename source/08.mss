@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -930,11 +930,6 @@ declaration, except:
   the declaration is hidden from all visibility only
   until the reserved word @b(record);
 
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0205-1]}
-  @ChgAdded{Version=[3],Text=[For an @nt{extended_return_statement}, the
-  declaration is hidden from all visibility only until the reserved word
-  @key[do] of the statement;]}
-
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00345-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1]}
   For a @nt{package_declaration}, @Chg{Version=[2],New=[],Old=[task declaration,
@@ -1489,15 +1484,6 @@ complex than they already are.]}
   @ChgAdded{Version=[3],Text=[The visibility of an
   @nt{aspect_specification} is defined so that it can be used in various other
   rules.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1]}
-  @ChgAdded{Version=[3],Text=[@b{Correction:} Added a rule allowing
-  visibility of the declared return object within an
-  @nt{extended_return_statement}. While this is technically an extension (since
-  the wording said that the return object was always hidden from all
-  visibility), this is so obviously not intended (a declaration that can never
-  be used is pointless) that the actual language rule was never implemented. So
-  this just makes the wording consistent with practice.]}
 @end{DiffWord2005}
 
 

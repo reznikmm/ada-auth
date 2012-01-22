@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1085,10 +1085,10 @@ The semantics of the Get and Put procedures are as follows:
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0092],ARef=[AI95-00029-01]}
 @Leading@;The input sequence is a pair of
 optionally signed real literals representing
-the real and imaginary components of a complex value@Chg{New=[ These components
+the real and imaginary components of a complex value@Chg{New=[. These components
 have the format defined for the corresponding Get procedure of an instance of
 Text_IO.Float_IO (see @RefSecNum{Input-Output for Real Types}) for the base
-subtype of Complex_Types.Real. T],Old=[; optionally, t]}he pair of components
+subtype of Complex_Types.Real. The],Old=[; optionally, the]} pair of components
 may be separated by a comma @Chg{New=[],Old=[and/]}or surrounded by a pair of
 parentheses@Chg{New=[ or both],Old=[]}. Blanks are freely allowed before each
 of the components and before the parentheses and comma, if either is used.

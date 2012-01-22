@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -2341,27 +2341,35 @@ in an arbitrary order, except that the @nt<expression>
 for a discriminant is evaluated prior to any other evaluation
 or initialization that depends on it.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0282-1]}
 @IndexCheck{Discriminant_Check}
 If the type of the @nt<ancestor_part> has
-discriminants that are not inherited by the
+discriminants @Chg{Version=[3],New=[and],Old=[that are not inherited by the
 type of the @nt{extension_aggregate},
-then, unless the @nt<ancestor_part> is a @nt<subtype_mark> that
-denotes an unconstrained subtype,
-a check is made that each discriminant of the ancestor
-has the value specified for a corresponding discriminant,
+then, unless]} the @nt<ancestor_part> is@Chg{Version=[3],New=[ not],Old=[]}
+a @nt<subtype_mark> that
+denotes an unconstrained subtype,@Chg{Version=[3],New=[ then],Old=[]}
+a check is made that each discriminant @Chg{Version=[3],New=[determined by the
+@nt{ancestor_part}],Old=[of the ancestor]}
+has the value specified for a corresponding discriminant,@Chg{Version=[3],New=[ if any,],Old=[]}
 either in the @nt{record_@!component_@!association_@!list}, or in
 the @nt<derived_type_definition> for some ancestor of the type of
 the @nt{extension_aggregate}.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Constraint_Error is raised if this check fails.
 @begin{Ramification}
-Corresponding and specified
-discriminants are defined in @RefSecNum{Discriminants}.
-The rules requiring static compatibility between
-new discriminants of a derived type
-and the parent discriminant(s) they constrain
-ensure that at most one check is required per discriminant
-of the ancestor expression.
+  Corresponding and specified
+  discriminants are defined in @RefSecNum{Discriminants}.
+  The rules requiring static compatibility between
+  new discriminants of a derived type
+  and the parent discriminant(s) they constrain
+  ensure that at most one check is required per discriminant
+  of the ancestor expression.
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0282-1]}
+  @ChgAdded{Version=[3],Text=[The check needs to be made any time that the
+  ancestor is constrained; the source of the discriminants or the constraints
+  is irrelevant.]}
 @end{Ramification}
 @end{RunTime}
 
@@ -2413,6 +2421,22 @@ The extension aggregate syntax is new.
   @ChgAdded{Version=[2],Text=[Limited @nt{extension_aggregate}s are allowed (since
   all kinds of aggregates can now be limited, see @RefSecNum{Aggregates}).]}
 @end{DiffWord95}
+
+@begin{Inconsistent2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0282-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}@b[Correction:]
+  An @nt{extension_aggregate} with an @nt{ancestor_part} whose discriminants
+  are constrained and inherited might now raise Constraint_Error if the
+  @nt{aggregate}'s type is constrained, while it was OK in Ada 2005. In almost
+  all cases, this will make no difference as the constraint will be checked
+  by the immediately following use of the @nt{aggregate}, but it is possible to
+  compare such an aggregate for equality;
+  in this case, no exception would be raised by Ada 2005, while Ada 2012 will
+  raise Constraint_Error. This should be very rare, and having the possibility
+  means that the representation of the aggregate type has to be able to support
+  unconstrained values of the type, even if the first subtype is constrained
+  and no such objects can be created any other way.]}
+@end{Inconsistent2005}
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
@@ -4142,7 +4166,7 @@ the corresponding membership test using @key(in).
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
   @ChgAdded{Version=[3],Text=[@exam{@i<X> @key[not in] @i<A> | @i<B> | @i<C>}
   is intended to be exactly equivalent to @exam{@key[not] (@i<X> @key[in] @i<A> | @i<B> | @i<C>)},
-  including in the order of evaluation of the @nt{simple_expression} and
+  including the order of evaluation of the @nt{simple_expression} and
   @nt{membership_choice}s.]}
 @end{Honest}
 @end{RunTime}
@@ -4279,7 +4303,8 @@ conversions.],Old=[]}
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0149-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Membership tests
-  for the accessibility and designated tags for general access types are new.]}
+  for valid accessibility levels and tag coverage by the designated type
+  for general access types are new.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
   @ChgAdded{Version=[3],Text=[Membership tests now include a predicate check.]}

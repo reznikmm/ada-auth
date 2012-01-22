@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:02 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1669,7 +1669,7 @@ if either such check fails.@IndexCheck{Accessibility_Check}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1]}
   @ChgAdded{Version=[2],Text=[The
-  @Chg{Version=[3],New=[master],Old=[accessibility check]} on class-wide types
+  @Chg{Version=[3],New=[master],Old=[accessibility]} check on class-wide types
   prevents the allocated object from outliving its type. We need the run-time
   check in instance bodies, or when the type of the @nt{qualified_expression}
   is class-wide (other cases are statically detected).]}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -68,7 +68,7 @@ declaration).>}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1],ARef=[AI05-0277-1]}
 @Defn{declaration}
 Each of the following is defined to be a declaration:
 any @nt{basic_@!declaration};
@@ -78,13 +78,14 @@ a @nt{component_@!declaration};
 a @nt{loop_@!parameter_@!specification};@Chg{Version=[3],New=[
 an @nt{iterator_@!specification};],Old=[]}
 a @nt{parameter_@!specification};
-a @nt{subprogram_@!body};
+a @nt{subprogram_@!body};@Chg{Version=[3],New=[
+an @nt{extended_@!return_@!object_@!declaration};],Old=[]}
 an @nt{entry_@!declaration};
 an @nt{entry_@!index_@!specification};
 a @nt{choice_@!parameter_@!specification};
-a @nt{generic_@!formal_@!parameter_@!declaration}.@Chg{Version=[2],New=[
+a @nt{generic_@!formal_@!parameter_@!declaration}.@Chg{Version=[3],New=[],Old=[@Chg{Version=[2],New=[
 In addition, an @nt{extended_return_statement} is a declaration of its
-@nt{defining_identifier}.],Old=[]}
+@nt{defining_identifier}.],Old=[]}]}
 @begin(Discussion)
   This list (when @nt<basic_declaration> is expanded out)
   contains all syntactic categories that end in "_declaration"
@@ -1697,7 +1698,7 @@ unit.@PDefn{generic contract issue}]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=<Predicates are not evaluated at the point of the
-  [sub]type declaration.>}
+  (sub)type declaration.>}
 @end{Ramification}
 
 @begin{ImplNote}
@@ -1712,14 +1713,17 @@ unit.@PDefn{generic contract issue}]}
 @ChgAdded{Version=[3],Text=[A value @i<satisfies> a predicate if the
 predicate is True for that value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0276-1]}
 @ChgAdded{Version=[3],Text=[If any of the above @LegalityTitle is violated in an
-instance of a generic unit, Program_Error is raised.]}
+instance of a generic unit, Program_Error is raised at the point of the
+violation.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This is the usual way around the contract model;
-  this applies even in generic bodies.]}
+  this applies even in instance bodies. Note that errors in instance
+  specifications will be detected at compile-time by the "re-check" of the
+  specification, only errors in the body should raise Program_Error.]}
 @end{Discussion}
 @end{Runtime}
 
@@ -1739,7 +1743,7 @@ modified.]}
 
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1],ARef=[AI05-0276-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Predicate aspects are new in Ada 2012.]}
 @end{Extend2005}
@@ -4762,7 +4766,7 @@ See also the similar permission for Get in
 @ChgAdded{Version=[3],Text=[An implementation may extend the Wide_Wide_Value, Wide_Value, and Value
 attributes of a character type to accept strings starting with "Hex_"
 (ignoring case) for graphics characters and those with a code
-point smaller than 16#100#, and three character strings of the form
+point smaller than 16#100#, and to accept three character strings of the form
 "'@i<nongraphic character>'".]}
 @end{ImplPerm}
 
@@ -4784,6 +4788,12 @@ Default_Value shall be specified only on a
   @ChgAdded{Version=[3],Text=[The part about requiring an explicit expression is
   to disallow omitting the value for this aspect, which would otherwise be
   allowed by the rules of @RefSecNum{Aspect Specifications}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is a representation aspect in order to
+  disallow specifying it on a derived type that has inherited primitive
+  subprograms; that is necessary as the sizes of @key[out] parameters could be
+  different whether or not a Default_Value is specified (see @RefSecNum{Parameter Associations}).]}
 @end{Reason}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Value],
   Text=[@ChgAdded{Version=[3],Text=[Default value for a scalar subtype.]}]}

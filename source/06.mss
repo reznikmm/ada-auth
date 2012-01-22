@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -736,7 +736,7 @@ Check, then preconditions and postconditions are considered to be @i<enabled>
 for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[A @nt{subexpression} is
+@ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{expression} is
 @i{potentially unevaluated} if occurs within:@Defn{potentially unevaluated expression}]}
 
 @begin{Itemize}
@@ -2721,8 +2721,8 @@ or]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{indexed_component}s, their
 @nt{prefix}es are known to denote the same object, and each of the pairs of
-corresponding index values are either bodt static expressions with the same
-value or both @nt{name}s that are known to denote the same object; or]}
+corresponding index values are either both static expressions with the same
+static value or both @nt{name}s that are known to denote the same object; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[both @nt{name}s are @nt{slice}s, their
@@ -3254,11 +3254,16 @@ innermost enclosing @nt{subprogram_@!body},
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @Syn{lhs=<@Chg{Version=[2],New=[simple_return_statement],Old=[return_statement]}>,rhs="@key{return} [@Syn2{expression}];"}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
+@AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=[extended_return_object_declaration],Old=[]}>,
+rhs="@Chg{Version=[3],New=<
+    @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>,Old=[]}"}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
-    @key{return} @Syn2{defining_identifier} : [@Chg{Version=[3],New=<@Key{constant}>,Old=[@Key{aliased}]}] @Syn2{return_subtype_indication} [:= @Syn2{expression}] [@Key{do}
+    @Chg{Version=[3],New=<@Syn2{extended_return_object_declaration}>,Old=<@key{return} @Syn2{defining_identifier} : [@Chg{Version=[3],New=<@Key{constant}>,Old=[@Key{aliased}]}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>} [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
@@ -3454,6 +3459,10 @@ of the master that elaborated the function body.]}
 @end{Discussion}
 @end{Itemize}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
+@ChgAdded{Version=[3],Text=[If the keyword @key[aliased] is present in an
+@nt{extended_return_object_declaration},
+the type of the extended return object shall be immutably limited.]}
 @end{Legality}
 
 @begin{StaticSem}
@@ -4185,14 +4194,15 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{Inconsistent2005}
 
 @begin{Incompatible2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0053-1],ARef=[AI05-0277-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
-  Eliminated the @key{aliased} keyword from the syntax of
-  @nt{extended_return_statement}s, as this would provide a way to get
-  an aliased view of an object that is not
-  necessarily aliased. This is technically incompatible, but since the
-  feature was added in Ada 2005 and not widely implemented, it is
-  very unlikely that it appears in existing programs.]}
+  The @key{aliased} keyword can now only appear on extended return objects
+  with an immutably limited type. Other types would provide a way to get
+  an aliased view of an object that is not necessarily aliased, which would be
+  very bad. This is incompatible, but since the feature was added in
+  Ada 2005, the keyword had no defined meaning in Ada 2005
+  (a significant oversight), and most sensible uses involve immutably limited
+  types, it is unlikely that it appears meaningfully in existing programs.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0103-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added wording to require
@@ -4231,6 +4241,11 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   defining returns for @nt{extended_return_statement}s, since leaving by
   an exit or goto is considered @ldquote@;normal@rdquote completion of the
   statement.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0205-1],ARef=[AI05-0277-1]}
+  @ChgAdded{Version=[3],Text=[@b<Correction:> Added the
+  @nt{extended_return_object_declaration} to make other rules easier to write
+  and eliminate the problem described in AI05-0205-1.]}
 @end{DiffWord2005}
 
 

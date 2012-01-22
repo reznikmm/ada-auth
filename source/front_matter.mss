@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.73 $ $Date: 2011/11/01 05:34:04 $}
+@comment{$Revision: 1.74 $ $Date: 2012/01/07 08:37:07 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -870,7 +870,9 @@ giving better control over the suppression of checks. See clauses
 @ChgAdded{Version=[3],Text=[In addition, this third edition makes
 enhancements to address two important issues, namely, the particular problems of
 multiprocessor architectures, and the need to further increase the capabilities
-regarding assertions for correctness.]}
+regarding assertions for correctness. It also makes additional changes and
+additions that improve the capability of the language and the reliability of
+programs written in the language.]}
 
 @ChgNote{The original "Amendment 2" version of this text follows:
 Amendment 2 modifies the 1995 International Standard

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -3642,7 +3642,7 @@ with the entity, and @i<apply> to all views of the entity, unless otherwise
 specified in this International Standard.@PDefn2{Term=[applies],Sec=[aspect]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If the aspect_mark includes 'Class,
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the @nt{aspect_mark} includes 'Class,
 then:]}
 @begin{Itemize}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.87 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
+@comment{ $Revision: 1.88 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1318,10 +1318,10 @@ execution of the call on Process.@key{all}],Old=[]}. Any exception raised by
 Process.@key{all} is propagated.]}
 
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[The @lquotes@;tamper with the elements@rquotes@;
   check is intended to prevent the Element parameter of Process from being
-  modified or deleted
+  @Chg{Version=[3],New=[replaced],Old=[modified]} or deleted
   outside of Process. The check prevents data loss (if Element_Type is passed by
   copy) or erroneous execution (if Element_Type is an unconstrained type in an
   indefinite container).]}
@@ -4148,7 +4148,7 @@ all of the modifications to the List.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 It is a bounded error to call any subprogram
-declared in the visible part of Containers.Doubly_Linked_List
+declared in the visible part of Containers.Doubly_Linked_Lists
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
 Program_Error. Otherwise, the operation either proceeds as it would

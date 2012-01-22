@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.105 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.106 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2012/01/07 08:37:06 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1749,7 +1749,7 @@ Relative_Deadline @Chg{Version=[3],New=[is not specified,],Old=[pragma]}
 then the initial absolute deadline of a task is the
 value of Default_Deadline. The environment task is also given
 an initial deadline by this rule@Chg{Version=[3],New=[, using the value of
-the Relative_Deadline aspect of the main subprogram],Old=[]}.]}
+the Relative_Deadline aspect of the main subprogram (if any)],Old=[]}.]}
 
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5348,7 +5348,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0169-1]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget}@Chg{Version=[3],New=[(CPU : System.Multiprocessors.CPU :=
-                                  System.Multiprocessors.CPU'First)
+                             System.Multiprocessors.CPU'First)
    ],Old=[]} @key{is tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -6211,7 +6211,7 @@ Domain; Get_Last_CPU returns the last one.]}
 @ChgAdded{Version=[3],Text=[The function Get_Dispatching_Domain returns the
 Dispatching_Domain on which the task is assigned.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
 @ChgAdded{Version=[3],Text=[A call of the procedure Assign_Task assigns task T
 to the CPU within Dispatching_Domain Domain. Task T can now execute only on CPU
 unless CPU designates Not_A_Specific_CPU, in which case it can execute on any
@@ -6219,19 +6219,24 @@ processor within Domain. The exception Dispatching_Domain_Error is propagated if
 T is already assigned to a Dispatching_Domain other than
 System_Dispatching_Domain, or if CPU is not one of the processors of Domain (and
 is not Not_A_Specific_CPU). A call of Assign_Task is a task dispatching point
-for task T. If T is the Current_Task the effect is immediate, otherwise the
-effect is as soon as practical. Assigning a task to System_Dispatching_Domain
-that is already assigned to that domain has no effect.]}
+for task T unless T is inside of a protected action, in which case the effect on
+task T is delayed until its next task dispatching point. If T is the
+Current_Task the effect is immediate if T is not inside a protected action,
+otherwise the effect is as soon as practical. Assigning a task to
+System_Dispatching_Domain that is already assigned to that domain has no
+effect.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
 @ChgAdded{Version=[3],Text=[A call of procedure Set_CPU assigns task T to the
 CPU. Task T can now execute only on CPU, unless CPU designates
 Not_A_Specific_CPU, in which case it can execute on any processor within its
 Dispatching_Domain. The exception Dispatching_Domain_Error is propagated if CPU
 is not one of the processors of the Dispatching_Domain on which T is assigned
 (and is not Not_A_Specific_CPU). A call of Set_CPU is a task dispatching point
-for task T. If T is the Current_Task the effect is immediate, otherwise the
-effect is as soon as practical.]}
+for task T unless T is inside of a protected action, in which case the effect on
+task T is delayed until its next task dispatching point. If T is the
+Current_Task the effect is immediate if T is not inside a protected action},
+otherwise the effect is as soon as practical.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[The function Get_CPU returns the processor assigned
@@ -6293,7 +6298,7 @@ attempt is made to exceed this number.]}
 @end{ImplPerm}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The package System.Multiprocessors.Dispatching_Domains and the aspect
   Dispatching_Domains are new.]}

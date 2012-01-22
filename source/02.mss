@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/07 08:37:04 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -143,14 +143,14 @@ the text of an Ada program is not specified.
 characters]} are @Chg{Version=[2],New=[categorized],Old=[defined]} as follows:
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
 @ChgAdded{Version=[2],Text=[Our character classification considers that the
 cells not allocated in ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} are graphic characters, except for
 those whose relative code @Chg{Version=[3],New=[point],Old=[position]}
 in their plane is 16#FFFE# or 16#FFFF#. This
 seems to provide the best compatibility with future versions of ISO/IEC 10646,
-as future characters can be already be used in Ada character and string
-literals.]}
+as future characters can @Chg{Version=[3],New=[],Old=[be ]}already be
+used in Ada character and string literals.]}
 @end{Discussion}
 @begin{Description}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
@@ -1897,14 +1897,14 @@ Some compilers might even ignore the pragma altogether.
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@key[pragma] List(Off); --@Examcom{ turn off listing generation}
-@key[pragma] Optimize(Off); --@Examcom{ turn off optional optimizations}
-@Chg{Version=[3],New=[@key[pragma] Pure(Rational_Numbers); --@Examcom{ set categorization for package}
+@key[pragma] List(Off); -- @Examcom{turn off listing generation}
+@key[pragma] Optimize(Off); -- @Examcom{turn off optional optimizations}
+@Chg{Version=[3],New=[@key[pragma] Pure(Rational_Numbers); -- @Examcom{set categorization for package}
 @key[pragma] Assert(Exists(File_Name),
-              Message => "Nonexistent file"); --@Examcom{ assert file exists}],
+              Message => "Nonexistent file"); -- @Examcom{assert file exists}],
 Old=[@key[pragma] Inline(Set_Mask); --@Examcom{ generate code for Set_Mask inline}
 @Chg{Version=[2],New=[@key[pragma] Import(C, Put_Char, External_Name => "putchar"); --@Examcom{ import C putchar function}],
-Old=[@key[pragma] Suppress(Range_Check, On => Index); --@Examcom{ turn off range checking on Index}]}]}
+Old=[@key[pragma] Suppress(Range_Check, On => Index); -- @Examcom{turn off range checking on Index}]}]}
 @end{Example}
 @end{Examples}
 

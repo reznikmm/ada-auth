@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:13 $}
+@Comment{$Date: 2012/01/07 08:37:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @LabeledClause{Array Types}
 
@@ -293,7 +293,7 @@ may be specified with an @nt{aspect_specification} (see
 @ChgAdded{Version=[3],Text=[Default_Component_Value@\This aspect
 shall be specified by a static expression, and that
 expression shall be explicit, even if the aspect has a boolean type.
-Default_Value shall be specified only on
+Default_Component_Value shall be specified only on
 a @nt{full_type_declaration}.@AspectDefn{Default_Component_Value}]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -316,7 +316,7 @@ a @nt{full_type_declaration}.@AspectDefn{Default_Component_Value}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0228-1]}
 @ChgAdded{Version=[3],Text=[If a derived type with no primitive subprograms
-inherits a boolean Default_Value aspect, the aspect may be specified to have any
+inherits a boolean Default_Component_Value aspect, the aspect may be specified to have any
 value for the derived type.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
