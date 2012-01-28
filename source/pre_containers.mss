@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:09 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -326,7 +326,7 @@ properly on machines with native sizes that are not 32 bits. For instance, a
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Exception Capacity_Error
-  is newly added to Containers. If Containers is referenced in a @nt{use_clause},
+  is added to Containers. If Containers is referenced in a @nt{use_clause},
   and an entity with the name Capacity_Error is defined in a package that is
   also referenced in a @nt{use_clause}, the entity Capacity_Error may no
   longer be use-visible, resulting in errors. This should be rare and is
@@ -2749,7 +2749,7 @@ value of Last_Index.]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Vectors. If an instance of Containers.Vectors
+  are added to Containers.Vectors. If an instance of Containers.Vectors
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Vectors is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -2776,7 +2776,7 @@ value of Last_Index.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a @BoundedName
-  to cover access to finalized Vector containers.]}
+  to cover access to finalized vector containers.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0044-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Redefined "<" actuals
@@ -3482,8 +3482,7 @@ object returned by Reference exists and has not been finalized.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} List;
-                Source : @key{in} List);]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} List; Source : @key{in} List);]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
@@ -4367,7 +4366,7 @@ probably not a stable sort.]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Doubly_Linked_Lists. If an instance of Containers.Doubly_Linked_Lists
+  are added to Containers.Doubly_Linked_Lists. If an instance of Containers.Doubly_Linked_Lists
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Doubly_Linked_Lists is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -6063,7 +6062,7 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Hashed_Maps. If an instance of Containers.Hashed_Maps
+  are added to Containers.Hashed_Maps. If an instance of Containers.Hashed_Maps
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -6729,7 +6728,7 @@ a cursor parameter should be @i{O}(1).]}]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Ordered_Maps. If an instance of Containers.Ordered_Maps
+  are added to Containers.Ordered_Maps. If an instance of Containers.Ordered_Maps
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Ordered_Maps is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -8487,7 +8486,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Hashed_Sets. If an instance of Containers.Hashed_Sets
+  are added to Containers.Hashed_Sets. If an instance of Containers.Hashed_Sets
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Hashed_Sets is
   defined in a package that is also referenced in a @nt{use_clause}, the
@@ -9207,7 +9206,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}Subprograms Assign and Copy
-  are newly added to Containers.Ordered_Sets. If an instance of Containers.Ordered_Sets
+  are added to Containers.Ordered_Sets. If an instance of Containers.Ordered_Sets
   is referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Containers.Ordered_Sets is
   defined in a package that is also referenced in a @nt{use_clause}, the

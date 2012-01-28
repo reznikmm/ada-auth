@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -510,7 +510,7 @@ converts from that record type to type Address.
 @key[package] System.Address_To_Access_Conversions @key[is]
    @key[pragma] Preelaborate(Address_To_Access_Conversions);
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] Object_Pointer @key[is] @key[access] @key[all] Object;
    @key[function] @AdaSubDefn{To_Pointer}(Value : Address) @key[return] Object_Pointer@Chg{Version=[3],New=[
       @key(with) Convention => Intrinsic],Old=[]};
@@ -2736,7 +2736,8 @@ immediate scope of another @nt{pragma} Default_Storage_Pool.]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
-used to define the default pool for access types within an instance.@AspectDefn{Default_Storage_Pool}
+specified for a generic instance; it defines the default pool for
+access types within an instance.@AspectDefn{Default_Storage_Pool}
 The expected type for the
 Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
 must be a name that denotes a variable. This aspect overrides any
@@ -2781,60 +2782,60 @@ while the objects still exist.]}
 pool is used for the type as described in @RefSecNum{Storage Management}.]]}
 
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[Default_Storage_Pool is the only way to specify the
-storage pool for an anonymous access type],
-Old=[Storage reclamation upon leaving a master is not considered garbage
-collection]}.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+  @Chg{Version=[3],New=[Default_Storage_Pool is the only way to specify the
+  storage pool for an anonymous access type],
+  Old=[Storage reclamation upon leaving a master is not considered garbage
+  collection]}.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-Note that @Chg{Version=[3],New=[coextensions should be allocated in the same
-pool (or on the stack) as the outer object (see @RefSecNum{Storage Management});
-the Storage_Pool of the access discriminant
-(and hence the Default_Storage_Pool) is supposed to be ignored for
-coextensions. This matches the required finalization point for coextensions],
-Old=[garbage collection includes compaction of a pool (@lquotes@;moved to
-a different Address@rquotes@;), even if storage reclamation is not done]}.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+  Note that @Chg{Version=[3],New=[coextensions should be allocated in the same
+  pool (or on the stack) as the outer object (see @RefSecNum{Storage Management});
+  the Storage_Pool of the access discriminant
+  (and hence the Default_Storage_Pool) is supposed to be ignored for
+  coextensions. This matches the required finalization point for coextensions],
+  Old=[garbage collection includes compaction of a pool (@lquotes@;moved to
+  a different Address@rquotes@;), even if storage reclamation is not done]}.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-@ChgAdded{Version=[3],Text=[The default storage pool for an allocator that
-occurs within an instance of a generic is defined by the Default_Storage_Pool
-aspect of the instantiation (if specified), or by the Default_Storage_Pool
-pragma that applied to the generic; the Default_Storage_Pool pragma that applies
-to the instantiation is irrelevant.]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[The default storage pool for an allocator that
+  occurs within an instance of a generic is defined by the Default_Storage_Pool
+  aspect of the instantiation (if specified), or by the Default_Storage_Pool
+  pragma that applied to the generic; the Default_Storage_Pool pragma that applies
+  to the instantiation is irrelevant.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-@ChgAdded{Version=[3],Text=[It is possible to specify the Default_Storage_Pool
-aspect for an instantiation such that allocations will fail. For example, the
-generic unit might be expecting a pool that supports certain sizes and
-alignments, and the one on the instance might be more restrictive. It is the
-programmer's responsibility to get this right.]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[It is possible to specify the Default_Storage_Pool
+  aspect for an instantiation such that allocations will fail. For example, the
+  generic unit might be expecting a pool that supports certain sizes and
+  alignments, and the one on the instance might be more restrictive. It is the
+  programmer's responsibility to get this right.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-@ChgAdded{Version=[3],Text=[The semantics of the Default_Storage_Pool aspect are
-similar to passing a pool object as a generic formal, and putting pragma
-Default_Storage_Pool at the top of the generic's visible part, specifying that
-formal.]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+  @ChgAdded{Version=[3],Text=[The semantics of the Default_Storage_Pool aspect are
+  similar to passing a pool object as a generic formal, and putting pragma
+  Default_Storage_Pool at the top of the generic's visible part, specifying that
+  formal.]}
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[Programs that will be damaged by automatic storage
-reclamation are just as likely to be damaged by having objects moved to
-different locations in memory. A @nt{pragma} Controlled should turn off both
-flavors of garbage collection.]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[Programs that will be damaged by automatic storage
+  reclamation are just as likely to be damaged by having objects moved to
+  different locations in memory. A @nt{pragma} Controlled should turn off both
+  flavors of garbage collection.]}
 @end{Reason}
 @begin{ImplNote}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[If garbage collection reclaims the storage of
-a controlled object, it should first finalize it.
-Finalization is not done when moving an object;
-any self-relative pointers will have to be updated by the garbage
-collector.
-If an implementation provides garbage collection
-for a storage pool containing controlled objects
-(see @RefSecNum{Assignment and Finalization}),
-then it should provide a means for deferring garbage collection of
-those controlled objects.]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
+  @ChgDeleted{Version=[3],Text=[If garbage collection reclaims the storage of
+  a controlled object, it should first finalize it.
+  Finalization is not done when moving an object;
+  any self-relative pointers will have to be updated by the garbage
+  collector.
+  If an implementation provides garbage collection
+  for a storage pool containing controlled objects
+  (see @RefSecNum{Assignment and Finalization}),
+  then it should provide a means for deferring garbage collection of
+  those controlled objects.]}
 @end{ImplNote}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -3115,9 +3116,9 @@ which is a storage pool whose type is descended from
 Root_Storage_Pool_With_Subpools. A subpool is created by calling Create_Subpool
 or a similar constructor; the constructor returns the subpool handle.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[A @i<subpool object> is an object of a type
-descended from Root_Subpool_Type. @Redundant[Typically, subpool objects are
+descended from Root_Subpool. @Redundant[Typically, subpool objects are
 managed by the containing storage pool; only the handles need be exposed to
 clients of the storage pool. Subpool objects are designated by subpool handles,
 and are the run-time representation of a subpool.]]}
@@ -3902,16 +3903,17 @@ restrictions are defined in the Specialized Needs Annexes):]}
 
 @Comment{The end part of this and the bullets are Redundant, but that would
 cause bad nesting, so we don't mark it}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0246-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0246-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
    Sec=(No_Implementation_Identifiers)}@Defn{No_Implementation_Identifiers restriction}No_Implementation_Identifiers
    @\There are no usage names that denote declarations with
    implementation-defined identifiers that occur within language-defined
-   packages. Such identifiers can arise as follows:]}
+   packages or instances of language-defined generic packages.
+   Such identifiers can arise as follows:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The following language-defined
-  packages allow implementation-defined identifiers:]}
+  packages and generic packages allow implementation-defined identifiers:]}
 
   @begin{InnerItemize}
     @ChgRef{Version=[3],Kind=[Added]}

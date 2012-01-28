@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:03 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2333,8 +2333,10 @@ return as soon as a line terminator is read.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  The Get_Line functions are newly added to Ada.Text_IO.
+  The Get_Line functions are @Chg{Version=[3],New=[],Old=[newly ]}added
+  to Ada.Text_IO.
   If Ada.Text_IO is referenced in a @nt{use_clause}, and a function Get_Line
   is defined in a package that is also referenced in a @nt{use_clause}, the
   user-defined Get_Line may no longer be use-visible, resulting in errors.

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2012/01/07 08:37:07 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/01/07 08:37:07 $}
+@Comment{$Date: 2012/01/22 06:25:09 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -62,8 +62,10 @@ common to the string handling packages.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Constant Wide_Wide_Space is newly added to Ada.Strings. If Ada.Strings is
+  Constant Wide_Wide_Space is @Chg{Version=[3],New=[],Old=[newly ]}added
+  to Ada.Strings. If Ada.Strings is
   referenced in a @nt{use_clause}, and an entity @i<E> with a
   @nt{defining_identifier} of Wide_Wide_Space is defined in a package that is
   also referenced in a @nt{use_clause}, the entity @i<E> may no longer be
@@ -919,11 +921,11 @@ are in Set.
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0031-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Source is not the null string and
 From is not in Source'Range, then Index_Error is raised. Otherwise, First is set
-to the index of the first character in Source(From..Source'Last) that satisfies
-the Test condition. Last is set to the largest index such that all characters in
-Source(First..Last) satisfy the Test condition. If no characters in
-Source(From..Source'Last) satisfy the Test condition, First is set to From, and
-Last is set to 0.]}
+to the index of the first character in Source(From .. Source'Last) that
+satisfies the Test condition. Last is set to the largest index such that all
+characters in Source(First .. Last) satisfy the Test condition. If no characters
+in Source(From .. Source'Last) satisfy the Test condition, First is set to From,
+and Last is set to 0.]}
 
 @begin{Example}@Keepnext
 @key[procedure] Find_Token (Source : @key[in] String;
@@ -1191,8 +1193,10 @@ string handling subprograms, Constraint_Error is propagated.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Overloaded versions of Index and Index_Non_Blank are newly added to
+  Overloaded versions of Index and Index_Non_Blank are
+  @Chg{Version=[3],New=[],Old=[newly ]}added to
   Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Index or Index_Non_Blank is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
@@ -1214,7 +1218,7 @@ string handling subprograms, Constraint_Error is propagated.
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  An overloaded version of Find_Token is newly added to
+  An overloaded version of Find_Token is added to
   Strings.Fixed. If Strings.Fixed is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Find_Token is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
@@ -1862,9 +1866,11 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Procedure Set_Bounded_String, two Bounded_Slice subprograms, and overloaded
-  versions of Index and Index_Non_Blank are newly added to
+  versions of Index and Index_Non_Blank are
+  @Chg{Version=[3],New=[],Old=[newly ]}added to
   Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
   referenced in a @nt{use_clause}, and an entity @i<E> with the
   @nt{defining_identifier} as a new entity in Generic_Bounded_Length is defined in a
@@ -1887,7 +1893,7 @@ Null_Bounded_String : @key[constant] Bounded_String :=
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  An overloaded version of Find_Token is newly added to
+  An overloaded version of Find_Token is added to
   Strings.Bounded.Generic_Bounded_Length. If an instance of Generic_Bounded_Length is
   referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Find_Token is
@@ -2352,9 +2358,11 @@ New=[Ada 95 ],Old=[]}Rationale.
   Unbounded_String, and thus would be illegal.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00301-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[Procedure Set_Unbounded_String,
   two Unbounded_Slice subprograms, and overloaded
-  versions of Index and Index_Non_Blank are newly added to Strings.Unbounded.
+  versions of Index and Index_Non_Blank are
+  @Chg{Version=[3],New=[],Old=[newly ]}added to Strings.Unbounded.
   If Strings.Unbounded is
   referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Strings.Unbounded is defined in a
@@ -2374,7 +2382,7 @@ New=[Ada 95 ],Old=[]}Rationale.
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0031-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  An overloaded version of Find_Token is newly added to
+  An overloaded version of Find_Token is added to
   Strings.Unbounded. If Strings.Unbounded is referenced in a @nt{use_clause},
   and an entity @i<E> with a @nt{defining_identifier} of Find_Token is
   defined in a package that is also referenced in a @nt{use_clause}, the entity

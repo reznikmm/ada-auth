@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2012/01/22 06:25:08 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1228,7 +1228,7 @@ should be deleted first.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
   A new enumeration type Name_Case_Kind and a new function
-  Name_Case_Equivalence is newly added to Directories. If Directories
+  Name_Case_Equivalence is added to Directories. If Directories
   is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of one of the new entities is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
@@ -1306,11 +1306,12 @@ Directories.Hierarchical_File_Names has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key{end} Ada.Directories.Hierarchical_File_Names;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[In addition to the operations provided in package
-Directories.Hierarchical_File_Names, operations in package Directories
-can be used. In particular, functions Full_Name, Base_Name, and Extension are
-usable with hierarchical file names.]}
+Directories.Hierarchical_File_Names, the operations in package Directories can
+be used with hierarchical file names. In particular, functions Full_Name,
+Base_Name, and Extension are provide additional capabilities for hierarchical
+file names.]}
 
 @begin{DescribeCode}
 @begin{Example}
@@ -1537,6 +1538,16 @@ parameters.]}
 not have a containing directory, including when any of Is_Simple_Name,
 Is_Root_Directory_Name, Is_Parent_Directory_Name, or Is_Current_Directory_Name
 are True.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[In particular, the default directory is not used
+  to find the containing directory either when Is_Parent_Directory_Name or
+  Is_Current_Directory_Name is True. As noted above, these functions operate
+  purely on the syntax of the file names and do not attempt to interpret them.
+  If interpretation is needed, Directories.Full_Name can be to expand any
+  shorthands used before calling Containing_Directory.]}
+@end{Ramification}
 @end{Notes}
 
 @begin{Extend2005}

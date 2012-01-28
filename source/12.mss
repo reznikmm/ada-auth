@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:14 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1955,10 +1955,10 @@ had to.
 @Redundant[@Chg{Version=[2],New=[In its most general form, the category],
 Old=[The class]}
 determined for a formal private type @Chg{Version=[2],New=[is all types,
-but @Chg{Version=[2],New=[the category],Old=[it]} can be restricted to
+but @Chg{Version=[3],New=[the category],Old=[it]} can be restricted to
 only nonlimited types or to only tagged types],
 Old=[can be either limited or nonlimited, and either tagged or untagged;
-no more specific class is known for such a type]}.@Chg{Version=[2],New=[
+no more specific class is known for such a type]}.@Chg{Version=[3],New=[
 Similarly, the category for a formal incomplete type is all types but the
 category can be restricted to only tagged types; unlike other formal types,
 the actual type does not need to be able to be frozen (see @RefSecNum{Freezing Rules}).],Old=[]}
@@ -1978,7 +1978,7 @@ derived type is the derivation class rooted at the ancestor type.]
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
   @ChgAdded{Version=[3],Text=[Since the actual of a formal incomplete type
   does not need to be able to be frozen, the actual can be an incomplete
-  type or a partial view before it's completion.]}
+  type or a partial view before its completion.]}
 @end{Ramification}
 @end{Intro}
 
@@ -2224,7 +2224,7 @@ A formal derived tagged type is a private extension.
 word @key(abstract) appears in its declaration.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00233-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0110-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0110-1]}
 @Chg{Version=[3],New=[For a formal derived type, the characteristics],Old=[If
 the ancestor type is a composite type that is not an array type, the formal type
 inherits components from the ancestor type]} (including
@@ -2489,7 +2489,7 @@ run-time check to a compile-time check.
 @end{Incompatible2005}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Formal incomplete types are a new kind of generic formal; these can
   be instantiated with incomplete types and unfrozen private types.]}
@@ -3227,7 +3227,7 @@ be available as possible resolutions as follows:]}
   and do not have a controlling parameter of @i<T> are not covered by this
   rule, as any call would be required to raise Program_Error by
   @RefSecNum{Formal Private and Derived Types}. It is better to detect the
-  error earlier than at runtime.]}
+  error earlier than at run time.]}
 @end{Ramification}
 
 If a generic unit has a @nt<subprogram_default> specified by a box, and

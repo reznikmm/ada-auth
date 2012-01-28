@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1157,10 +1157,12 @@ exception contains such a character.]}
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Functions Wide_Exception_Name and Wide_Wide_Exception_Name, and procedures
   Read_Exception_Occurrence and Write_Exception_Occurrence
-  are newly added to Exceptions. If Exceptions is referenced in a
+  are @Chg{Version=[3],New=[],Old=[newly ]}added
+  to Exceptions. If Exceptions is referenced in a
   @nt{use_clause}, and an entity @i<E> with the same @nt{defining_identifier}
   as a new entity in Exceptions is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no

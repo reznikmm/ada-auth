@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:48 $}
+@Comment{$Date: 2012/01/22 06:25:09 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -71,17 +71,16 @@ This Annex contains what used to be RM83-13.8.
 aspect that is one of the aspects Import, Export, Link_Name, External_Name, or
 Convention.@Defn{interfacing aspect}@Defn2{Term=[aspect],Sec=[interfacing]}]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[@AspectDefn{Import}Specifying aspect],Old=[A @nt{pragma}]} Import
-@Chg{Version=[3],New=[to have the value True ],Old=[]}is used to import
-an entity defined in a foreign language into an Ada program,
-thus allowing
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
+@Chg{Version=[3],New=[@AspectDefn{Import}Specifying the],Old=[A @nt{pragma}]} Import
+@Chg{Version=[3],New=[aspect  to have the value True ],Old=[]}is used to import
+an entity defined in a foreign language into an Ada program, thus allowing
 a foreign-language subprogram to be called from Ada,
 or a foreign-language variable to be accessed from Ada.
 In contrast,
-@Chg{Version=[3],New=[@AspectDefn{Export}specifying aspect],Old=[a @nt{pragma}]}
-Export @Chg{Version=[3],New=[to have the value True ],Old=[]}is used to export
-an Ada entity to a foreign language, thus allowing
+@Chg{Version=[3],New=[@AspectDefn{Export}specifying the],Old=[a @nt{pragma}]}
+Export @Chg{Version=[3],New=[aspect to have the value True ],Old=[]}is used
+to export an Ada entity to a foreign language, thus allowing
 an Ada subprogram to be called from a foreign language,
 or an Ada object to be accessed from a foreign language.
 The@Chg{Version=[3],New=[],Old=[ @nt[pragma]s]}
@@ -732,12 +731,14 @@ that violates Ada semantics.]}
 @begin{Examples}
 @leading@keepnext@i{Example of interfacing pragmas:}
 @begin{Example}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @key[package] Fortran_Library @key[is]
   @key[function] Sqrt (X : Float) @key[return] Float@Chg{Version=[3],New=[
-     @key[with] Import => True, Convention => Fortran],Old=[]};
-  @key[function] Exp  (X : Float) @key[return] Float@Chg{Version=[3],New=[
-     @key[with] Import => True, Convention => Fortran],Old=[]};@Chg{Version=[3],New=[],Old=[
+    @key[with] Import => True, Convention => Fortran],Old=[]};
+  @Chg{Version=[3],New=[@key[type] Matrix @key[is array] (Natural @key[range] <>, Natural @key[range] <>) @key[of] Float
+    @key[with] Convention => Fortran;
+  ],Old=[]}@key[function] @Chg{Version=[3],New=[Invert (M : Matrix],Old=[Exp  (X : Float]}) @key[return] @Chg{Version=[3],New=[Matrix
+    @key[with] Import => True, Convention => Fortran],Old=[Float]};@Chg{Version=[3],New=[],Old=[
 @key[private]
   @key[pragma] Import(Fortran, Sqrt);
   @key[pragma] Import(Fortran, Exp);]}
@@ -1750,9 +1751,11 @@ specific numbers and types of parameters.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Types char16_t and char32_t and their related
-  types and operations are newly added to Interfaces.C. If Interfaces.C is
+  types and operations are @Chg{Version=[3],New=[],Old=[newly ]}added to
+  Interfaces.C. If Interfaces.C is
   referenced in a @nt{use_clause}, and an entity @i<E> with the same
   @nt{defining_identifier} as a new entity in Interfaces.C is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
@@ -2409,7 +2412,7 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[union],Sec=[C]}
 @Redundant[@Chg{Version=[3],New=[Specifying aspect],Old=[A pragma]}
 Unchecked_Union @Chg{Version=[3],New=[to have the value True
@@ -2417,7 +2420,8 @@ defines],Old=[specifies]} an interface correspondence
 between a given discriminated type and some C union. The
 @Chg{Version=[3],New=[aspect requires],Old=[pragma specifies]}
 that the associated type shall be given a representation
-that leaves no space for its discriminant(s).]]}
+that @Chg{Version=[3],New=[allocates],Old=[leaves]} no space
+for its discriminant(s).]]}
 @end{Intro}
 
 

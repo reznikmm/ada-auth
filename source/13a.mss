@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2828,14 +2828,14 @@ is expected to be of any integer type.]}
 @end{Resolution}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
 anonymous type of a @nt{single_task_declaration}),
 the following language-defined representation aspect may be specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[Storage_Size@\The aspect Storage_Size is
+@ChgAdded{Version=[3],Text=[Storage_Size@\The Storage_Size aspect is
 an @nt{expression}, which shall be of any integer
 type.@AspectDefn{Storage_Size (task)}]}
 

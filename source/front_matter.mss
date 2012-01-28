@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.74 $ $Date: 2012/01/07 08:37:07 $}
+@comment{$Revision: 1.75 $ $Date: 2012/01/22 06:25:09 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -236,18 +236,33 @@ RLB - 2000-05-17}
 @begin{AARMOnly}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0245-1]}
+@Chg{Version=[3],New=[Ada 2012 Rationale. This gives an introduction to the changes and
+new features in Ada 2012, and explains the rationale behind them.
+Programmers should read this rationale before reading this Standard
+in depth. Rationales for Ada 83, Ada 95, and Ada 2005 are also
+available.],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
 new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition
 of this Standard],Old=[]}, and explains the rationale behind them.
 Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
-Old=[]}should read this first.
+Old=[]}should read this first.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0245-1]}
+  @ChgAdded{Version=[3],Text=[As of this writing (January 2012), only two
+  chapters of the Ada 2012 Rationale have been published. Additional
+  chapters are in development and should be published during 2012.]}
+  @ChgNote{** Try to remember to update this note after Draft 15, when the
+  CD draft is created.**}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction to the
-changes and new features in Ada 2005 (compared with the 1995 edition), and
-explains the rationale behind them. Programmers should read this rationale
-before reading this Standard in depth.]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0245-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Ada 2005 Rationale.
+This gives an introduction to the changes and new features in Ada 2005 (compared
+with the 1995 edition), and explains the rationale behind them. Programmers
+should read this rationale before reading this Standard in depth.]}]}
 
 @ChgRef{Version=[1],Kind=[Deleted]}
 @ChgDeleted{Version=[1],Text=[Changes to Ada @em 1987 to 1995. This document
@@ -280,17 +295,24 @@ documents into a single document.]}]}
 @begin{RMOnly}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00387-01]}
-@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0245-1]}
+@Chg{Version=[3],New=[Ada 2012 Rationale. This gives an introduction to the changes and
+new features in Ada 2012, and explains the rationale behind them.
+Programmers should read this rationale before reading this Standard
+in depth. Rationales for Ada 83, Ada 95, and Ada 2005 are also
+available.],Old=[@Chg{Version=[2],New=[Ada 95 Rationale. This],Old=[Rationale for the Ada
 Programming Language @em 1995 edition, which]} gives an introduction to the
-new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition of this Standard],Old=[]},
-and explains the rationale behind them. Programmers @Chg{Version=[2],New=[unfamiliar
-with Ada 95 ],Old=[]}should read this first.
+new features of Ada@Chg{Version=[2],New=[ incorporated in the 1995 edition
+of this Standard],Old=[]}, and explains the rationale behind them.
+Programmers @Chg{Version=[2],New=[unfamiliar with Ada 95 ],
+Old=[]}should read this first.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgAdded{Version=[2],Text=[Ada 2005 Rationale. This gives an introduction
-to the changes and new features in Ada 2005 (compared with the 1995 edition),
-and explains the rationale behind them. Programmers should read this rationale
-before reading this Standard in depth.]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0245-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Ada 2005 Rationale.
+This gives an introduction to the changes and new features in Ada 2005 (compared
+with the 1995 edition), and explains the rationale behind them. Programmers
+should read this rationale before reading this Standard in depth.]}]}
 
 @ChgRef{Version=[1],Kind=[Deleted]}
 @ChgDeleted{Version=[1], Text=[Changes to Ada @em 1987 to 1995. This document lists in
@@ -913,7 +935,7 @@ Membership tests are also made more flexible. See clauses
 @RefSecNum{Expressions} and @RefSecNum{Relational Operators and Membership Tests}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A number of changes are made to parameters.
+@ChgAdded{Version=[3],Text=[A number of changes are made to subprogram parameters.
 Functions may now have parameters of all modes. In order to mitigate consequent
 (and indeed existing) problems of inadvertent order dependence, rules are
 introduced to reduce aliasing. A parameter may now be explicitly marked as
@@ -949,7 +971,8 @@ objects, multiway trees, and queues. See clause @RefSecNum{Containers}.]}
 @ChgAdded{Version=[3],Text=[Finally, certain features are added primarily to
 ease the use of containers, such as the ability to iterate over all elements in a
 container without having to encode the iteration. These can also be used for
-iteration over arrays. See clauses @RefSecNum{User-Defined References},
+iteration over arrays, and within quantified expressions. See
+clauses @RefSecNum{User-Defined References},
 @RefSecNum{User-Defined Indexing},  @RefSecNum{User-Defined Iterator Types},
 and @RefSecNum{Generalized Loop Iteration}.]}
 @end{Itemize}
@@ -1275,7 +1298,7 @@ recently.}
 Association, without whose help and support this third edition of the
 Ada Standard would not have been possible. A special mention has to go to
 A. Beneschan (USA) for his efforts in eliminating sloppiness in our wording.
-M. Heaney (USA) also requires a mention for his efforts to improve the
+M. Heaney (USA) also deserves a mention for his efforts to improve the
 containers packages. Finally, special thanks go to the convenor of ISO/IEC JTC
 1/SC 22/WG 9, J. Tokar (USA), who guided the document through the
 standardization process.],Old=[]} @Comment{The other financial contributors

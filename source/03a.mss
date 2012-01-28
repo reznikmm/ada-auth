@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/22 06:25:07 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1535,11 +1535,15 @@ The description of S'Base has been moved to
 @LabeledAddedSubClause{Version=[3],Name=[Subtype Predicates]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
-for one of the two predicate aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}]}
+for one of the two predicate
+aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}
+General rules for aspects and @nt{aspect_specification}s are found in
+chapter @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Items}
+and @RefSecNum{Aspect Specifications} respectively).]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
     a given subtype; the subtype may be static.]}]}
@@ -1584,14 +1588,13 @@ predicate of a base subtype is True)].@Defn2{Term=[Predicate],Sec=(of a subtype)
 
 @begin{Legality}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The @nt{expression} of a
 Static_Predicate specification shall be @i<predicate-static>; that is, one of
 the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-static]}]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[a static expression that does not raise
-  any exception;]}
+  @ChgAdded{Version=[3],Text=[a static expression;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[a membership test whose @nt{simple_expression}
@@ -1990,10 +1993,10 @@ types because they might denote stand-alone aliased unconstrained variables.
 That's true even for access-to-constant types (the denoted object does not
 have to be a constant).]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Text=[There are other cases that could have been
 included in this definition (view conversions, the current instance of
-a type, implementation-defined attributes, objects of a formal discriminated
+a type, objects of a formal discriminated
 private type), but these are not relevant to the places this term is
 used, so they were not included. If this term is used in additional places,
 the definition should be checked to see if any of these additional cases
@@ -3551,7 +3554,7 @@ similar, but not the same.]}
   non-limited types in generic private parts. This is disallowed as it would
   make it possible to pass a limited object to a non-limited class-wide type,
   which could then be copied. This is only possible using Ada 2005 syntax,
-  so examples in existing programs should be very rare.]}
+  so examples in existing programs should be rare.]}
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
@@ -4762,12 +4765,14 @@ See also the similar permission for Get in
 @RefSecNum{Input-Output for Real Types}.
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0182-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[An implementation may extend the Wide_Wide_Value, Wide_Value, and Value
-attributes of a character type to accept strings starting with "Hex_"
-(ignoring case) for graphics characters and those with a code
-point smaller than 16#100#, and to accept three character strings of the form
-"'@i<nongraphic character>'".]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0182-1],ARef=[AI05-0262-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[An implementation may extend the Wide_Wide_Value,
+Wide_Value, and Value attributes of a character type to accept
+strings of the form @ldquote@;Hex_@i<hhhhhhhh>@rdquote (ignoring case) for any
+character (not just the ones for which Wide_Wide_Image would produce that form
+@em see @RefSecNum{Character Types}), as well as three-character strings of
+the form @ldquote@;'@i<X>'@rdquote, where @i<X> is any character, including
+non-graphic characters.]}
 @end{ImplPerm}
 
 @begin{StaticSem}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @LabeledClause{Array Types}
 
@@ -1854,7 +1854,7 @@ child units).]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the rules on
   access subtypes having discriminant constraints to depend on the
   @ldquote@;known to be constrained@rdquote rules. This centralizes
-  the rules so that future fixes only need to be made in one place,
+  the rules so that future fixes need to be made in only one place,
   as well as fixing bugs in obscure cases.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0102-1]}
@@ -1917,10 +1917,11 @@ the following attribute is defined:
 @end{Reason}
 
 @begin{Discussion}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0214-1]}
 @ChgAdded{Version=[3],Text=[If the type of A is a type derived from an untagged
  partial view of a tagged type such that it is not a tagged type, then A is not
- considered a tagged object, and A'Constrained can return either True or False.]}
+ considered a tagged object, and A'Constrained can return either True or
+ False depending on the nature of the object.]}
 @end{Discussion}
 @end(description)
 @EndPrefixType{}

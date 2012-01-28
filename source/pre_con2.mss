@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.17 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
+@comment{ $Revision: 1.18 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -30,7 +30,7 @@ node, if any). A cursor keeps designating the same node (and element) as long as
 the node is part of the container, even if the node is moved within
 the container.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[A @i<subtree> is a particular node (which @i<roots the subtree>) and all of its child
 nodes (including all of the children of the child nodes, recursively).
 @Defn2{Term=[subtree],Sec=[of a tree]}@Defn{roots the subtree}@Defn2{Term=[subtree],Sec=[node which roots]} There is
@@ -39,7 +39,7 @@ associated element value nor any parent node. The root node provides a place
 to add nodes to an otherwise empty tree and
 represents the bottom of the tree.@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[A node that has no children is called a
 @i<leaf node>.@Defn2{Term=[leaf node],Sec=[of a tree]} The @i<ancestors> of a node
 are the parent node, the parent of the parent node, and so on until a node with
@@ -47,7 +47,7 @@ no parent is reached.@Defn2{Term=[ancestor],Sec=[of a tree node]} Similarly,
 the @i<descendants> of a node are the child nodes,
 the children of each child node, and so on.@Defn2{Term=[descendant],Sec=[of a tree node]}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The nodes of a subtree can be visited in several
 different orders. For a @i<depth-first order>, the last step of visiting a node
 is to visit the nodes of its child list in order, recursively.@Defn{depth-first
@@ -519,7 +519,8 @@ tamper with the cursors of @i<T>)], leaving @i<T> unmodified.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if Position designates
-an element, and returns False otherwise.]}
+an element, and returns False otherwise. @Redundant[In particular, Has_Element
+returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2498,7 +2499,7 @@ containing an element initialized to New_Item.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the holder is
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if Container is
 empty, and False if it contains an element.]}
 
 @begin{Example}
@@ -2664,7 +2665,7 @@ called. Otherwise, Replace_Element (Target, Element (Source)) is called.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Source is empty, returns an empty
-holder; otherwise, returns To_Holder (Element (Source)).]}
+holder container; otherwise, returns To_Holder (Element (Source)).]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2703,11 +2704,11 @@ Constraint_Error or Program_Error.]}
 @end{Bounded}
 
 @begin{Erron}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[Execution is erroneous if the holder associated with
-the result of a call to Reference or Constant_Reference is finalized before the
-result object returned by the call to Reference or Constant_Reference is
-finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Execution is erroneous if the holder container
+associated with the result of a call to Reference or Constant_Reference is
+finalized before the result object returned by the call to Reference or
+Constant_Reference is finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -2732,14 +2733,14 @@ finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]}
 @ChgAdded{Version=[3],Text=[No storage associated with a holder object shall be
 lost upon assignment or scope exit.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[The execution of an @nt{assignment_statement}
-for a holder shall have the effect of copying the element (if any) from the
-source holder object to the target holder object.]}
+for a holder container shall have the effect of copying the element (if any)
+from the source holder object to the target holder object.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[An assignment of a holder is a
+  @ChgAdded{Version=[3],Text=[An assignment of a holder container is a
   @ldquote@;deep@rdquote copy; that is the element is copied as well as any
   data structures. We say @ldquote@;effect of@rdquote in order to allow the
   implementation to avoid copying the element immediately if it wishes. For
@@ -2750,11 +2751,11 @@ source holder object to the target holder object.]}
 
 @begin{ImplAdvice}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Text=[Move should not copy elements, and should minimize
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Move should not copy the element, and should minimize
 copying of internal data structures.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Containers.Indefinite_Holders.Move should not copy elements, and should
+Text=[Containers.Indefinite_Holders.Move should not copy the element, and should
 minimize copying of internal data structures.]}]}
 
 @begin{ImplNote}
@@ -2764,14 +2765,14 @@ minimize copying of internal data structures.]}]}
   Target holder.]}
 @end{ImplNote}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[If an exception is propagated from a holder
 operation, no storage should be lost, nor should the element be removed from a
-holder unless specified by the operation.]}
+holder container unless specified by the operation.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[If an exception is propagated from a holder
 operation, no storage should be lost, nor should the element be removed from a
-holder unless specified by the operation.]}]}
+holder container unless specified by the operation.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3257,11 +3258,11 @@ or Map'Read of the other instance, respectively:]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Bounded hashed map objects should be implemented without
 implicit pointers or dynamic allocation.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded map objects should be implemented without
+Text=[Bounded hashed map objects should be implemented without
 implicit pointers or dynamic allocation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -3269,7 +3270,7 @@ implicit pointers or dynamic allocation.]}]}
 minimize copying does not apply.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded maps.]}]}
+minimize copying does not apply to bounded hashed maps.]}]}
 
 @end{ImplAdvice}
 
@@ -3416,15 +3417,19 @@ or Map'Read of the other instance, respectively:]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded map objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Bounded ordered map objects should be implemented
+without implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded ordered map objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
 minimize copying does not apply.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded ordered maps.]}]}
 
 @end{ImplAdvice}
 
@@ -3586,11 +3591,11 @@ or Set'Read of the other instance, respectively:]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
-implicit pointers or dynamic allocation.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Bounded hashed set objects should be implemented
+without implicit pointers or dynamic allocation.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Bounded set objects should be implemented without
+Text=[Bounded hashed set objects should be implemented without
 implicit pointers or dynamic allocation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -3598,7 +3603,7 @@ implicit pointers or dynamic allocation.]}]}
 minimize copying does not apply.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The implementation advice for procedure Move to
-minimize copying does not apply to bounded sets.]}]}
+minimize copying does not apply to bounded hashed sets.]}]}
 
 @end{ImplAdvice}
 
@@ -3741,15 +3746,19 @@ or Set'Read of the other instance, respectively:]}
 @end{ImplReq}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[Bounded set objects should be implemented without
-implicit pointers or dynamic allocation.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Bounded ordered set objects should be implemented
+without implicit pointers or dynamic allocation.]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Bounded ordered set objects should be implemented without
+implicit pointers or dynamic allocation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The implementation advice for procedure Move to
 minimize copying does not apply.]}
-@Comment{We omit the @ChgImplAdvice as it is identical to that of the previous clause.}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation advice for procedure Move to
+minimize copying does not apply to bounded ordered sets.]}]}
 
 @end{ImplAdvice}
 

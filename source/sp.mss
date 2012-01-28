@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:09 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1027,7 +1027,7 @@ Device_5_Driver : Device_Interface(5);
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  Functions Get_CPU is newly added to Interrupts. If Interrupts is referenced in
+  Functions Get_CPU is added to Interrupts. If Interrupts is referenced in
   a @nt{use_clause}, and an entity @i<E> with a @nt{defining_identifier} of
   Get_CPU is defined in a package that is also referenced in a @nt{use_clause},
   the entity @i<E> may no longer be use-visible, resulting in errors. This
@@ -2029,7 +2029,7 @@ Task_Id value that identifies the environment task.
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0189-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  Functions Environment_Task and Activation_Is_Complete are newly added to
+  Functions Environment_Task and Activation_Is_Complete are added to
   Task_Identification. If Task_Identification is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Environment_Task or
   Activation_Is_Complete is defined in a package that is also referenced in a

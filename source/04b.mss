@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @LabeledClause{Type Conversions}
 
@@ -921,6 +921,11 @@ Sec=(raised by failure of run-time check)}],Old=[]}
   for discriminated subtypes. The Length_Check for an array conversion is
   performed as part of the conversion to the target type.@Chg{Version=[2],
   New=[ The check for exclusion of null is an Access_Check.],Old=[]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0153-3]}
+  @ChgAdded{Version=[3],Text=[Note that the predicate evaluation is not
+  defined to be a @i{check}, as the failure of a check is defined below to
+  always raise Constraint_Error, and we want this to raise Assertion_Error.]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -2345,10 +2350,10 @@ the @nt{condition}s and @Syni{dependent_}@nt{expression}s of a single
 reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
-@nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and is
-not covered by the corresponding @nt{discrete_choice_list}; or]}
+@nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and
+whose value is not covered by the corresponding @nt{discrete_choice_list}; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgAdded{Version=[3],Text=[a @nt{choice_expression} (or a @nt{simple_expression}

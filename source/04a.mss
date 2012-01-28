@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -106,7 +106,7 @@ discriminant values.],Old=[]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0008-1]}
   @ChgAdded{Version=[3],Text=[The last sentence was not present in Ada 95;
     it is necessary in Ada 2005 because general access types can designate
-    unconstrained objects (that was not possible in Ada 95). Thus, the rules
+    unconstrained objects, which was not possible in Ada 95. Thus, the rules
     that had this effect in Ada 95 (the object being constrained by its initial
     value) don't work in Ada 2005 and we have to say this explicitly.]}
 
@@ -279,7 +279,7 @@ of implicit dereference.
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}A
-  @nt{qualified_expression} is now a @nt{name} representing a constant view;
+  @nt{qualified_expression} is now a @nt{name} denoting a constant view;
   this allows them to be used as a prefix and to be renamed as an object.
   They are often used to remove ambiguity from function calls, and there
   may be no other way to do that. Interestingly, a @nt{type_conversion} of
@@ -1128,9 +1128,9 @@ rhs="@Chg{Version=[3],New=<@SynI{reference_object_}@Syn2{name}>,Old=<>}"}
 
 @begin{Resolution}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the @SynI{reference_object_}@nt{name}
-in a @nt{generalized_reference} is expected to be of any reference type.@PDefn2{Term=[expected type],
+in a @nt{generalized_reference} is any reference type.@PDefn2{Term=[expected type],
   Sec=(@SynI{reference_object_}@nt{name})}]}
 @end{Resolution}
 
@@ -1240,7 +1240,7 @@ by a @nt{name} that denotes one or more functions declared immediately within
 the same declaration list in which @i<T> is declared. All such functions
 shall have at least two parameters, the first of which is of type @i<T> or
 @i<T>'Class, or is an access parameter with designated type @i<T> or @i<T>'Class.
-All of such functions shall have a return type that is a reference
+All such functions shall have a return type that is a reference
 type (see @RefSecNum{User-Defined References}), whose reference discriminant
 is of an access-to-variable type.@AspectDefn{Variable_Indexing}]}
 @begin{Reason}
@@ -4058,6 +4058,10 @@ left operand is lexicographically less than that of the right (the
 @i(tail) consists of the remaining components beyond the first and
 can be null).
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[An @i<individual membership test> is the
+membership test of a single @nt{membership_choice}.@Defn{individual membership test}]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
 @PDefn2{Term=[evaluation], Sec=(membership test)}
 For the evaluation of a membership test@Chg{Version=[3],New=[ using @key[in]
@@ -4083,8 +4087,8 @@ combined with the short-circuit control form @b[or else].]}
   evaluates to True.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
-@Leading@;@Chg{Version=[3],New=[An @i{individual membership test}@Defn{individual membership test}],Old=[A
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1],ARef=[AI05-0269-1]}
+@Leading@;@Chg{Version=[3],New=[An individual membership test],Old=[A
 membership test using @key(in)]} yields the result True if:
 @begin(itemize)
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1],ARef=[AI05-0264-1]}
@@ -4149,10 +4153,10 @@ membership test using @key(in)]} yields the result True if:
     @ChgAdded{Version=[3],Text=[if the tested type is a general access-to-object
     type, the type of the @nt{simple_expression} is convertible to the tested
     type and its accessibility level is no deeper than that of the tested type;
-    further, if the designated type is tagged and the @nt{simple_expression} is
-    non-null, the tag of the object designated by the value of the
-    @nt{simple_expression} is covered by the designated type of the tested
-    type.]}
+    further, if the designated type of the tested type is tagged and the
+    @nt{simple_expression} is non-null, the tag of the object designated by the
+    value of the @nt{simple_expression} is covered by the designated type of the
+    tested type.]}
   @end{Inneritemize}
 @end(itemize)
 

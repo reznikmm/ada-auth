@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.106 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
+@comment{ $Revision: 1.107 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/22 06:25:09 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -691,7 +691,7 @@ deferred while the affected task performs a protected action.]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  Procedure Yield is newly added to Dispatching.
+  Procedure Yield is added to Dispatching.
   If Dispatching is referenced in a @nt{use_clause}, and an
   entity @i<E> with a @nt{defining_identifier} of Yield is
   defined in a package that is also referenced in a @nt{use_clause}, the entity
@@ -3877,8 +3877,10 @@ There is no requirement that these be the same.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00386-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  Functions Seconds and Minutes are newly added to Real_Time. If
+  Functions Seconds and Minutes are @Chg{Version=[3],New=[],Old=[newly ]}added
+  to Real_Time. If
   Real_Time is referenced in a @nt{use_clause}, and an entity @i<E> with a
   @nt{defining_identifier} of Seconds or Minutes is defined in a package that
   is also referenced in a @nt{use_clause}, the entity @i<E> may no longer be
@@ -5076,9 +5078,9 @@ configuration mechanisms to change the value of Execution_Time.CPU_Tick.]}]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
   Function Clock_For_Interrupts, and constants Interrupt_Clocks_Supported and
-  Separate_Interrupt_Clocks_Supported are newly added to Execution_Time.
+  Separate_Interrupt_Clocks_Supported are added to Execution_Time.
   If Execution_Time is referenced in a @nt{use_clause}, and an
-  entity @i<E> with a @nt{defining_identifier} of one of the newly added entities
+  entity @i<E> with a @nt{defining_identifier} of one of the added entities
   is defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}

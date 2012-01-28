@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -414,11 +414,13 @@ has not yet been created (see @RefSecNum{Freezing Rules}).],Old=[]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[The check for uncreated library-level types
   prevents a reference to the type before execution reaches the freezing point
   of the type. This is important so that T'Class'Input or an instance of
   Tags.Generic_Dispatching_Constructor do not try to create an object of a type
-  that hasn't been frozen (which may not have yet elaborated its constraints).
+  that hasn't been frozen (which @Chg{Version=[3],New=[might],Old=[may]}
+  not have yet elaborated its constraints).
   We don't require this behavior for non-library-level types as the tag can
   be created multiple times and possibly multiple copies can exist at the
   same time, making the check complex.]}
@@ -929,10 +931,12 @@ Tagged types are a new concept.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00260-02],ARef=[AI95-00344-01],ARef=[AI95-00400-01],ARef=[AI95-00405-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
   Constant No_Tag, and functions Parent_Tag, Interface_Ancestor_Tags,
   Descendant_Tag, Is_Descendant_At_Same_Level, Wide_Expanded_Name,
-  and Wide_Wide_Expanded_Name are newly added to Ada.Tags.
+  and Wide_Wide_Expanded_Name are @Chg{Version=[3],New=[],Old=[newly ]}added
+  to Ada.Tags.
   If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
   same @nt{defining_identifier} as a new entity in Ada.Tags is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
@@ -979,7 +983,7 @@ Tagged types are a new concept.
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0173-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  Function Is_Abstract is newly added to Ada.Tags.
+  Function Is_Abstract is added to Ada.Tags.
   If Ada.Tags is referenced in a @nt{use_clause}, and an entity @i<E> with the
   @nt{defining_identifier} Is_Abstract is defined in a
   package that is also referenced in a @nt{use_clause}, the entity @i<E> may no
@@ -1654,7 +1658,7 @@ must be provided by @nt{subprogram_declaration}s.)],Old=[]}
 @end{Ramification}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0222-1]}
-  @ChgAdded{Version=[3],Text=[This rule only applies to "original" declarations
+  @ChgAdded{Version=[3],Text=[This rule applies only to "original" declarations
   and not to the completion of a primitive subprogram, even though a completion
   is technically an explicit declaration, and it may declare a primitive
   subprogram.]}
@@ -1826,19 +1830,19 @@ is that body; that is, the @lquotes@;corresponding explicit body@rquotes@; in
 the above rule is the body itself.]}
 @end{Honest}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0005-1],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[@ldquote@;Corresponding dispatching operation@rdquote
 refers to the inheritance relationship between subprograms. Primitive
-operations are always inherited for a type T, but they may not be declared if
+operations are always inherited for a type T, but they might not be declared if
 the primitive operation is never visible within the immediate scope of the type
 T. If no corresponding operation is declared, the last bullet is used and the
 corresponding operation of the parent type is executed (an explicit body that
 happens to have the same name and profile is not called in that case).]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0005-1],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[We have to talk about progenitors in the last
 bullet in case the corresponding operation is a null procedure inherited
-from an interface. In that case, the parent type may not even have the
+from an interface. In that case, the parent type might not even have the
 operation in question.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0197-1]}
@@ -4139,10 +4143,10 @@ be completely defined before it is frozen, and a body freezes
 all types declared prior to it in the same @nt<declarative_part>
 (see @RefSecNum{Freezing Rules}).
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0151-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[A @nt{name} that denotes an object of an
 incomplete view is defined to be of a limited type. Hence, the target of
-an assignment statement shall not be of an incomplete view.]}
+an assignment statement cannot be of an incomplete view.]}
 
 @end{Notes}
 
@@ -4953,11 +4957,11 @@ The accessibility level of a view of an object or subprogram
 @Chg{Version=[3],New=[designated by],Old=[denoted by a dereference of]} an
 access value is the same as that of the access type.
 @begin{Discussion}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0014-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0014-1]}
 @ChgAdded{Version=[3],Text=[This rule applies even when no dereference exists,
 for example when an access value is passed as an access parameter.
 This rule ensures that implementations are not required to include dynamic
-accessibility values with access values.]}
+accessibility values with all access values.]}
 @end{Discussion}
 
 The accessibility level of
@@ -4974,7 +4978,7 @@ conversion, parenthesized
 expression or @nt{qualified_expression} is considered to be used in a context
 if the view conversion, parenthesized expression or @nt{qualified_expression}
 itself is used in that context.@Chg{Version=[3],New=[
-Similarly, the @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
+Similarly, a @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
 is considered to be used in a context if the @nt{conditional_expression} itself
 is used in that context.],Old=[]}]}
 
@@ -6307,9 +6311,8 @@ parts@Chg{Version=[3],New=[],Old=[ now]}.],Old=[]}
 @ChgAdded{Version=[3],Text=[In Ada 2012, there are no language-defined pragmas
 that act as completions. Pragma Import (which is obsolescent) has the effect of
 setting aspect Import to True; such an aspect makes giving a completion illegal.
-We considered removing the wording which allows pragmas as completions, but
-decided to leave it for the benefit for implementation-defined pragmas which may
-want to act as a completion. ]}
+The wording that allows pragmas as completions was left as it is harmless and
+appears in many places in this Standard.]}
 @end{Discussion}
 @end{Intro}
 

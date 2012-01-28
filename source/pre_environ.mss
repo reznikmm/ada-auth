@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.10 $ $Date: 2011/08/17 00:29:40 $ $Author: randy $ }
+@comment{ $Revision: 1.11 $ $Date: 2012/01/22 06:25:08 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2011/08/17 00:29:40 $}
+@Comment{$Date: 2012/01/22 06:25:08 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -113,12 +113,11 @@ Clear.],Old=[]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If the external execution
 environment supports environment variables, then Clear deletes all existing
-environment variable with the given name.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is
-propagated.]}
+environment @Chg{Version=[3],New=[variables],Old=[variable]} with the given
+name. Otherwise@Chg{Version=[3],New=[,],Old=[]} Program_Error is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
