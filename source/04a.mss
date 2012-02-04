@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -530,9 +530,11 @@ of the type. The @nt{selected_component} denotes the
 corresponding component of the object or value.
 @begin{Reason}
   @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00015}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   The components of a protected object cannot be named except
   by an expanded name, even from within the corresponding protected body.
-  The protected body may not reference @Chg{New=[],Old=[the ]}the private
+  The protected body @Chg{Version=[3],New=[cannot],Old=[may not]} reference
+  @Chg{New=[],Old=[the ]}the private
   components of some arbitrary object of the protected
   type; the protected body may reference components of the current
   instance only (by an expanded name or a @nt<direct_name>).

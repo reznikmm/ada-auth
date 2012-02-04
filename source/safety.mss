@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.56 $ $Date: 2011/12/23 21:32:47 $ $Author: randy $ }
+@Comment{ $Revision: 1.57 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:47 $}
+@Comment{$Date: 2012/01/28 08:23:03 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -670,12 +670,13 @@ facilitate the demonstration of program correctness by allowing
 tailored versions of the run-time system.
 @begin{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 Note that the restrictions are absolute. If a partition has 100 library
 units and just one needs Unchecked_Conversion, then the pragma cannot be
 used to ensure the other 99 units do not use Unchecked_Conversion. Note also
 that these are restrictions on all Ada code within a partition, and
-therefore it may not be evident from the specification of a package whether
-a restriction can be imposed.
+therefore it @Chg{Version=[3],New=[might],Old=[may]} not be evident
+from the specification of a package whether a restriction can be imposed.
 
 @end{Discussion}
 @end{Intro}
@@ -1046,7 +1047,9 @@ during the execution of a subprogram by a task, another task invokes
 the same subprogram.
 @begin{Discussion}
 
-In practice, many implementations may not exploit the absence of recursion
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+In practice, many implementations @Chg{Version=[3],New=[might],Old=[may]}
+not exploit the absence of recursion
 or need for reentrancy, in which case the program execution would be
 unaffected by the use of recursion or reentrancy, even though the program is
 still formally erroneous.

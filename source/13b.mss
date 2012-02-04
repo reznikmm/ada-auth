@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1876,15 +1876,15 @@ unconstrained discriminated subtype with defaults.]}
 @end{Discussion}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1],ARef=[AI05-0193-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1],ARef=[AI05-0116-1],ARef=[AI05-0193-1],ARef=[AI05-0262-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[For each of the calls of Allocate described above,
 @i{P} (equivalent to @i{T}'Storage_Pool) is passed as the Pool parameter. The
-Size_In_Storage_Elements parameter indicates the number
-of storage elements to be allocated, and is no more than
-@i{D}'Max_Size_In_Storage_Elements, where @i{D} is the designated subtype of @i{T}.
-The Alignment parameter is at least @i{D}'Alignment if @i{D} is a specific type, and
-otherwise is at least the alignment of the specific type identified by the tag
-of the object being created. The Alignment parameter is no more than
+Size_In_Storage_Elements parameter indicates the number of storage elements to
+be allocated, and is no more than @i{D}'Max_Size_In_Storage_Elements, where
+@i{D} is the designated subtype of @i{T}. The Alignment parameter is a nonzero
+integral multiple of @i{D}'Alignment if @i{D} is a specific type, and otherwise
+is a nonzero integral multiple of the alignment of the specific type identified
+by the tag of the object being created. The Alignment parameter is no more than
 @i{D}'Max_Alignment_For_Allocation. The result returned in the Storage_Address
 parameter is used as the address of the allocated storage, which is a contiguous
 block of memory of Size_In_Storage_Elements storage elements. @Redundant[Any
@@ -1895,6 +1895,10 @@ the call.]]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Note that the implementation does not turn other
   exceptions into Storage_Error.]}@ChgNote{Moved from 13.11(16).}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[@ldquote@;Nonzero integral multiple@rdquote
+  of an alignment includes the alignment value itself, of course.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
@@ -4752,11 +4756,14 @@ subprograms execute as follows:]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[The default implementations of the
 Output and Input attributes, where available, execute as follows:]}
 @begin(Itemize)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0269-1]}
 If @i(T) is an array type, S'Output first writes the bounds,
 and S'Input first reads the bounds.
 If @i(T) has discriminants without defaults, S'Output first writes
-the discriminants (using S'Write for each), and S'Input first
-reads the discriminants (using S'Read for each).
+the discriminants (using @Chg{Version=[3],New=[the Write attribute of the
+discriminant type],Old=[S'Write]} for each), and S'Input first
+reads the discriminants (using @Chg{Version=[3],New=[the Read attribute of the
+discriminant type],Old=[S'Read]} for each).
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0023-1]}

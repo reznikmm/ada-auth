@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.107 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
+@comment{ $Revision: 1.108 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/01/22 06:25:09 $}
+@Comment{$Date: 2012/01/28 08:23:03 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -682,10 +682,12 @@ deferred while the affected task performs a protected action.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[This description is simplified to describe only
   the parts of the dispatching model common to all policies. In particular,
   rules about preemption are moved elsewhere. This makes
-  it easier to add other policies (which may not involve preemption).]}
+  it easier to add other policies (which @Chg{Version=[3],New=[might],Old=[may]}
+  not involve preemption).]}
 @end{DiffWord95}
 
 @begin{Incompatible2005}
@@ -859,12 +861,14 @@ task.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[If we have priority specific dispatching then we
   want preemption across the entire range of priorities. That prevents higher
   priority tasks from being blocked by lower priority tasks that have a
   different policy. On the other hand, if we have a single policy for the
   entire partition, we want the characteristics of that policy to apply for
-  preemption; specifically, we may not require any preemption. Note that policy
+  preemption; specifically, we @Chg{Version=[3],New=[might],Old=[may]}
+  not require any preemption. Note that policy
   Non_Preemptive_FIFO_Within_Priorities is not allowed in a priority specific
   dispatching pragma.]}
 @end{Discussion}
@@ -1046,10 +1050,12 @@ regardless of whether the active priority of the task actually changes.]}
   per partition.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[This description is simplified to describe only
   the rules for the Task_Dispatching_Policy pragma that are common to
   all policies. In particular, rules about preemption are moved elsewhere. This
-  makes it easier to add other policies (which may not involve preemption).]}
+  makes it easier to add other policies (which
+  @Chg{Version=[3],New=[might],Old=[may]} not involve preemption).]}
 @end{DiffWord95}
 
 

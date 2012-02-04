@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3656,17 +3656,19 @@ closed file.]}
 
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00283-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   @b[Amendment Correction:] The description of the subprograms for
   managing files was corrected so that they do not require truncation of the
   external file @em a stream file is not a sequential file. An Ada 95
-  program that expects truncation of the stream file may not work under
-  Ada 2005.
+  program that expects truncation of the stream file
+  @Chg{Version=[3],New=[might],Old=[may]} not work under Ada 2005.
   Note that the Ada 95 standard was ambiguous on this point (the normative
   wording seemed to require truncation, but didn't explain where; the
   AARM notes seemed to expect behavior like Direct_IO), and implementations
   varied widely. Therefore, as a practical matter, code that depends on
-  stream truncation may not work even in Ada 95; deleting the file before
+  stream truncation @Chg{Version=[3],New=[might],Old=[may]} not work
+  even in Ada 95; deleting the file before
   opening it provides truncation that works in both Ada 95 and Ada 2005.]}
 @end{Inconsistent95}
 

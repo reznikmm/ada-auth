@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -3933,11 +3933,11 @@ contains the @nt{allocator}.]}
 @ChgAdded{Version=[3],Text=[For the type of an access result, within the master of
 the call (see @RefSecNum{Operations of Access Types}).]}
 @begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0190-1]}
   @ChgAdded{Version=[3],Text=[We mean at a place within the master consistent
   with the execution of the call within the master. We don't say that
   normatively, as it is difficult to explain that when the master of the call
-  may not be the master that immediately includes the call (such as when an
+  need not be the master that immediately includes the call (such as when an
   anonymous result is converted to a named access type).]}
 @end{Honest}
 

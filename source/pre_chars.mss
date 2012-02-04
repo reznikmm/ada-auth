@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:48 $}
+@Comment{$Date: 2012/01/28 08:23:03 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -419,7 +419,7 @@ are not considered lower case letters by Ada.Characters.Handling.]}
   @ChgAdded{Version=[3],Text=[No version of Characters.Handling is intended
   to do portable (Ada-version independent) manipulation of Ada identifiers.
   The classification given by Wide_Characters.Handling will be correct for
-  the current implementation for Ada 2012 identifiers, but it may not be
+  the current implementation for Ada 2012 identifiers, but it might not be
   correct for a different implementation or version of Ada.]}
 @end{Ramification}
 @end{Notes}

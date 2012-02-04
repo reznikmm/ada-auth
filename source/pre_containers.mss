@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:09 $}
+@Comment{$Date: 2012/01/28 08:23:03 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1004,8 +1004,8 @@ tamper with the cursors of @i<V>)], leaving @i<V> unmodified.]}
 an element, and returns False otherwise.]}
 
 @begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This function may not detect cursors that
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[This function might not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
@@ -1454,10 +1454,10 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with an
+gain read access to an individual element of a vector given an
 index value.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
@@ -1475,11 +1475,11 @@ and has not been finalized.]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with an index value.]}
+gain read and write access to an individual element of a vector given
+an index value.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Index is not in the range First_Index (Container)
@@ -1500,11 +1500,10 @@ element after successful completion of this operation.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with a
-cursor.]}
+gain read access to an individual element of a vector given a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -1521,11 +1520,11 @@ object returned by Constant_Reference exists and has not been finalized.]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a cursor.]}
+gain read and write access to an individual element of a vector given
+a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -2242,9 +2241,11 @@ except that elements are traversed in reverse index order.]}
    @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter (see
+@RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
@@ -2260,12 +2261,14 @@ finalization.]}
    @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a reversible iterator object that will generate a value for the
-loop parameter designating each node in Container, starting with the node
+returns a reversible iterator object
+(see @RefSecNum{User-Defined Iterator Types}) that will generate
+a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
+designating each node in Container, starting with the node
 designated by Start and moving the cursor as per the Next function when used as
 a forward iterator, or moving the cursor as per the Previous function when used
 as a reverse iterator. Tampering with the cursors of Container is prohibited
@@ -2285,7 +2288,7 @@ finalization.]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
-  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  that @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
   want to stop at).]}
 @end{Discussion}
 
@@ -3273,8 +3276,8 @@ tamper with the cursors of @i<L>)], leaving @i<L> unmodified.]}
 an element, and returns False otherwise.]}
 
 @begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This function may not detect cursors that
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[This function might not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
@@ -3445,10 +3448,10 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with a
+gain read access to an individual element of a list given a
 cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
@@ -3466,11 +3469,11 @@ object returned by Constant_Reference exists and has not been finalized.]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a cursor.]}
+gain read and write access to an individual element of a list given
+a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -3997,9 +4000,11 @@ function.]}
    @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter (see
+@RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
@@ -4015,12 +4020,15 @@ finalization.]}
    @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a reversible iterator object that will generate a value for the loop
-parameter designating each node in Container, starting with the node designated
+returns a reversible iterator object
+(see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter (see
+@RefSecNum{Generalized Loop Iteration}) designating
+each node in Container, starting with the node designated
 by Start and moving the cursor as per the Next function when used as a forward
 iterator, or moving the cursor as per the Previous function when used as a
 reverse iterator. Tampering with the cursors of Container is prohibited while
@@ -4040,7 +4048,7 @@ finalization.]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
-  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  that @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
   want to stop at).]}
 @end{Discussion}
 
@@ -4646,8 +4654,8 @@ elements as was written by Map'Write.]}
 an element, and returns False otherwise.]}
 
 @begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This function may not detect cursors that
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[This function might not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
@@ -4840,11 +4848,10 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with a
-cursor.]}
+gain read access to an individual element of a map given a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -4861,11 +4868,11 @@ object returned by Constant_Reference exists and has not been finalized.]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a cursor.]}
+gain read and write access to an individual element of a map given
+a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -4882,11 +4889,10 @@ object returned by Reference exists and has not been finalized.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with a
-key value.]}
+gain read access to an individual element of a map given a key value.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Equivalent to
@@ -4899,11 +4905,11 @@ Constant_Reference (Container, Find (Container, Key)).]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Variable_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a key value.]}
+gain read and write access to an individual element of a map given
+a key value.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Equivalent to Reference (Container, Find (Container, Key)).]}
@@ -6009,9 +6015,11 @@ in the cursor in order to implement this function.]}
    @key[return] Map_Iterator_Interfaces.Forward_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter (see
+@RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor
 according to the successor relation.
 Tampering with the cursors of Container is prohibited while
@@ -6633,9 +6641,11 @@ predecessor order, starting with the last node.]}
    @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter
+(see @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor
 according to the successor relation when used as a forward iterator, and
 starting with the last node and moving the cursor according to the predecessor
@@ -6652,11 +6662,13 @@ finalization.]}
    @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does not designate an item in Container,
 then Program_Error is propagated. If Start is No_Element, then Constraint_Error
-is propagated. Iterate returns a reversible iterator object that will generate a
-value for the loop parameter designating each node in Container, starting with
+is propagated. Otherwise, Iterate returns a reversible iterator object
+(see @RefSecNum{User-Defined Iterator Types}) that will generate
+a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
+designating each node in Container, starting with
 the node designated by Start and moving the cursor according to the successor
 relation when used as a forward iterator, or moving the cursor according to the
 predecessor relation when used as a reverse iterator. Tampering with the cursors
@@ -6676,7 +6688,7 @@ finalization.]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
-  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  that @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
   want to stop at).]}
 @end{Discussion}
 @end{DescribeCode}
@@ -6986,8 +6998,8 @@ elements as was written by Set'Write.]}
 an element, and returns False otherwise.]}
 
 @begin{Honest}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This function may not detect cursors that
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0212-1]}
+  @ChgAdded{Version=[3],Text=[This function might not detect cursors that
   designate deleted elements; such cursors are invalid (see below) and the
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
@@ -7160,11 +7172,10 @@ Constant_Reference_Type propagates Program_Error.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Constant_Indexing and Implicit_Dereference aspects) provides a convenient way to
-gain read access to the individual elements of a container starting with a
-cursor.]}
+gain read access to an individual element of a set given a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -7678,11 +7689,10 @@ Reference_Type propagates Program_Error.]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Implicit_Dereference aspect) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a cursor.]}
+gain read and write access to an individual element of a set given a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
@@ -7703,11 +7713,10 @@ if not, the element is removed from the set and Program_Error is propagated.]}
    @key[return] Constant_Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
 Implicit_Dereference aspect) provides a convenient way to
-gain read access to the individual elements of a container starting with a
-key value.]}
+gain read access to an individual element of a set given a key value.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Equivalent to
@@ -7720,11 +7729,10 @@ Constant_Reference (Container, Find (Container, Key)).]}
    @key[return] Reference_Type;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[This function (combined with the
-Implicit_Dereference aspect) provides a convenient way to
-gain read and write access to the individual elements of a container starting
-with a key value.]}
+Implicit_Dereference aspect) provides a convenient way to gain
+read and write access to an individual element of a set given a key value.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Equivalent to Reference_Preserving_Key (Container, Find (Container, Key)).]}
@@ -8422,9 +8430,11 @@ first hashed element in Container.]}
    @key[return] Set_Iterator_Interfaces.Forward_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter
+(see @RefSecNum{Generalized Loop Iteration}) designating
 each element in Container, starting with the first element and moving the cursor
 according to the successor relation.
 Tampering with the cursors of Container is prohibited while
@@ -9107,9 +9117,11 @@ in predecessor order, starting with the last element.]}
    @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
-iterator object that will generate a value for the loop parameter designating
+iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter
+(see @RefSecNum{Generalized Loop Iteration}) designating
 each element in Container, starting with the first element and moving the cursor
 according to the successor relation when used as a forward iterator, and
 starting with the last element and moving the cursor according to the
@@ -9126,11 +9138,13 @@ finalization.]}
    @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
-is No_Element, then Constraint_Error is propagated. Iterate returns a reversible
-iterator object that will generate a value for the loop parameter designating
+is No_Element, then Constraint_Error is propagated. Otherwise, Iterate returns
+a reversible iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+will generate a value for a loop parameter
+(see @RefSecNum{Generalized Loop Iteration}) designating
 each element in Container, starting with the element designated by Start and
 moving the cursor according to the successor relation when used as a forward
 iterator, or moving the cursor according to the predecessor relation when used
@@ -9151,7 +9165,7 @@ finalization.]}
 @end{Example}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[in the body of the loop (assuming
-  the @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
+  that @exam{Cur} is the loop parameter and @exam{Stop} is the cursor that you
   want to stop at).]}
 @end{Discussion}
 @end{DescribeCode}

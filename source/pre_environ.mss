@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.11 $ $Date: 2012/01/22 06:25:08 $ $Author: randy $ }
+@comment{ $Revision: 1.12 $ $Date: 2012/01/28 08:23:02 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -29,6 +29,9 @@ Environment_Variables has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Value} (Name : @key{in} String) @key{return} String;]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0285-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Value} (Name : @key{in} String; Default : @key{in} String) @key{return} String;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Exists} (Name : @key{in} String) @key{return} Boolean;]}
@@ -61,6 +64,19 @@ Environment_Variables has the following declaration:]}
 environment supports environment variables, then Value returns the value of the
 environment variable with the given name. If no environment variable with the
 given name exists, then Constraint_Error is propagated. If the execution
+environment does not support environment variables, then Program_Error is
+propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[3],Kind=[Added]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Value (Name : @key{in} String; Default : @key{in} String) @key{return} String;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0285-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[If the external execution
+environment supports environment variables, then Value returns the value of the
+environment variable with the given name. If no environment variable with the
+given name exists, then Default is returned. If the execution
 environment does not support environment variables, then Program_Error is
 propagated.]}
 
@@ -232,4 +248,14 @@ Environment_Variables should be reflected immediately.]}]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 Package Environment_Variables is new.]}
 @end{Extend95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0285-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  A new overloaded function Value is added to Environment_Variables.
+  If Environment_Variables is referenced in a @nt{use_clause}, and an entity
+  @i<E> with the name Value is defined in a package that is also referenced in a
+  @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting in
+  errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2005}
 

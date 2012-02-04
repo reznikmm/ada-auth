@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2012/01/07 08:37:06 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:06 $}
+@Comment{$Date: 2012/01/28 08:23:03 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -908,8 +908,10 @@ generators in each Worker task.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0050],ARef=[AI95-00089-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Made the passing of an incorrect
-  Image of a generator a bounded error, as it may not be practical to check
+  Image of a generator a bounded error, as it @Chg{Version=[3],New=[might],Old=[may]}
+  not be practical to check
   for problems (if a generator consists of several related values).]}
 @end{DiffWord95}
 

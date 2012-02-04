@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2011/12/23 21:32:46 $}
+@Comment{$Date: 2012/01/28 08:23:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -818,6 +818,7 @@ This heading lists all of the upward inconsistencies between Ada 95 and Ada
 is a legal Ada 2005 program with different semantics.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[2],Text=[Inconsistencies marked with
 @b[Corrigendum:]@Defn{Corrigendum} are corrections to the original Ada 95
 definition introduced by Corrigendum 1. Inconsistencies marked with
@@ -827,7 +828,8 @@ inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 95 are supposed to follow these corrections, not the
 original flawed language definition. Thus, these strictly speaking are not
 inconsistencies between Ada 95 and Ada 2005. Practically, however, they very
-well may be, as early Ada 95 implementations may not follow the recommendation.
+well may be, as early Ada 95 implementations @Chg{Version=[3],New=[might],Old=[may]}
+not follow the recommendation.
 Inconsistencies so marked are not portable between Ada 95 implementations,
 while usually Ada 2005 will have more clearly defined behavior. Therefore, we
 document these for completeness.]}
@@ -847,6 +849,7 @@ above. These are the situations in which a legal Ada 95 program is
 illegal in Ada 2005.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[2],Text=[As with inconsistencies, incompatibilities
 marked with @b[Corrigendum:]
 are corrections to the original Ada 95 definition introduced by Corrigendum
@@ -857,8 +860,10 @@ implementations of Ada 95 are supposed to follow these corrections, not the
 original flawed language definition. Thus,
 these strictly speaking are not incompatibilities between Ada 95 and Ada 2005.
 Practically, however, they very well may be, as early Ada 95 implementations
-may not follow the recommendation. Therefore, some Ada 95 implementations
-may be able to compile the examples, while others may not. In
+@Chg{Version=[3],New=[might],Old=[may]} not follow the recommendation.
+Therefore, some Ada 95 implementations
+may be able to compile the examples, while others
+@Chg{Version=[3],New=[might],Old=[may]} not. In
 @Chg{Version=[3],New=[contrast],Old=[constrast]},
 Ada 2005 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
@@ -879,6 +884,7 @@ legal Ada 95 program.
 The vast majority of language changes fall into this category.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 @ChgAdded{Version=[2],Text=[As with incompatibilities, extensions
 marked with @b[Corrigendum:]
 are corrections to the original Ada 95 definition introduced by Corrigendum
@@ -888,9 +894,10 @@ extensions allowed by Ada Issues classified as Binding Interpretations.
 As corrections, implementations of Ada 95 are allowed to implement these
 extensions. Thus, these strictly speaking are not extensions of Ada 95;
 they're part of Ada 95. Practically, however, they very well may be extensions,
-as early Ada 95 implementations may not implement the extension. Therefore,
-some Ada 95 implementations may be able to compile the examples, while others
-may not. In @Chg{Version=[3],New=[contrast],Old=[constrast]},
+as early Ada 95 implementations @Chg{Version=[3],New=[might],Old=[may]} not
+implement the extension. Therefore, some Ada 95 implementations may be able
+to compile the examples, while others @Chg{Version=[3],New=[might],Old=[may]}
+not. In @Chg{Version=[3],New=[contrast],Old=[constrast]},
 Ada 2005 compilers will always support the extensions.
 Therefore, we document these for completeness.]}
 
@@ -950,7 +957,7 @@ inconsistencies caused by Ada Issues classified as Binding Interpretations;
 implementations of Ada 2005 are supposed to follow these corrections, not the
 original flawed language definition. Thus, these strictly speaking are not
 inconsistencies between Ada 2005 and Ada 2012. Practically, however, they very
-well may be, as early Ada 2005 implementations may not follow the recommendation.
+well may be, as early Ada 2005 implementations might not follow the recommendation.
 Inconsistencies so marked are not portable between Ada 2005 implementations,
 while usually Ada 2012 will have more clearly defined behavior. Therefore, we
 document these for completeness.]}
@@ -977,8 +984,8 @@ implementations of Ada 2005 are supposed to follow these corrections, not the
 original flawed language definition. Thus,
 these strictly speaking are not incompatibilities between Ada 2005 and Ada 2012.
 Practically, however, they very well may be, as early Ada 2005 implementations
-may not follow the recommendation. Therefore, some Ada 2005 implementations
-may be able to compile the examples, while others may not. In
+might not follow the recommendation. Therefore, some Ada 2005 implementations
+may be able to compile the examples, while others might not. In
 @Chg{Version=[3],New=[contrast],Old=[constrast]},
 Ada 2012 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
@@ -1005,9 +1012,9 @@ Formally, these are extensions allowed by Ada Issues classified as Binding
 Interpretations. As corrections, implementations of Ada 2005 (and sometimes Ada 95)
 are allowed to implement these extensions. Thus, these strictly speaking are not
 extensions of Ada 2005; they're part of Ada 2005. Practically, however, they
-very well may be extensions, as early Ada 2005 implementations may not implement
+very well may be extensions, as early Ada 2005 implementations might not implement
 the extension. Therefore, some Ada 2005 implementations may be able to compile
-the examples, while others may not. In contrast, Ada 2012 compilers will always
+the examples, while others moght not. In contrast, Ada 2012 compilers will always
 support the extensions. Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
