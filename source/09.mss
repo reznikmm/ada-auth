@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/02/04 09:08:02 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 
@@ -4784,8 +4784,10 @@ so we can define conditional entry calls in terms of timed entry calls.
 
 @begin{Incompatible95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00345-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
   @ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
-  A procedure can be used as the in a timed or
+  A procedure @Chg{Version=[3],New=[call ],Old=[]}can be used as the
+  @Chg{Version=[3],New=[@nt{entry_call_alternative} ],Old=[]}in a timed or
   conditional entry call, if the procedure
   might actually be an entry. Since the fact that something is an entry
   could be used in resolving these calls in Ada 95, it is possible for
@@ -5023,7 +5025,7 @@ executed after the @nt<abortable_part> is left.
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   A procedure can be used as the
   @nt{triggering_@!statement} of an @nt<asynchronous_select>, if the procedure
-  might actually be an entry]}
+  might actually be an entry.]}
 @end{Extend95}
 
 

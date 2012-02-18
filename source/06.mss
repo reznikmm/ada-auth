@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/02/04 09:08:02 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -147,7 +147,7 @@ is not significant)]}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4]}
 @Syn{lhs=<parameter_specification>,rhs="
-    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]]>,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
+    @Syn2{defining_identifier_list} : @Chg{Version=[3],New=<[@key[aliased]] >,Old=<>}@Syn2{mode} @Chg{Version=[2],New=<[@Syn2{null_exclusion}]>,Old=<>} @Syn2{subtype_mark} [:= @Syn2{default_expression}]
   | @Syn2{defining_identifier_list} : @Syn2{access_definition} [:= @Syn2{default_expression}]"}
 
 @Syn{lhs=<mode>,rhs="[@key{in}] | @key{in} @key{out} | @key{out}"}
@@ -990,10 +990,10 @@ that are performed to verify specific precondition expressions and specific
 and class-wide postcondition expressions are determined by those for the subprogram
 or entry actually invoked. Note that the class-wide postcondition expressions
 verified by the postcondition check that is part of a call on a primitive
-of type @i<T> includes all class-wide postcondition expressions originating
-in any progenitor of @i<T>@Redundant[, even if the primitive called
-is inherited from a type @i<T1> and some of the postcondition expressions do
-not apply to the corresponding primitive of @i<T1>].]}
+subprogram of type @i<T> includes all class-wide postcondition expressions
+originating in any progenitor of @i<T>@Redundant[, even if the primitive
+subprogram called is inherited from a type @i<T1> and some of the postcondition
+expressions do not apply to the corresponding primitive subprogram of @i<T1>].]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3914,8 +3914,8 @@ that object.]}
 @nt{extended_@!return_@!statement} causes a transfer of control that completes
 the @nt{extended_@!return_@!statement}. Upon completion
 of a return statement that applies to a callable construct@Chg{Version=[3],
-New=[ by the normal completion of a @nt{simple_return_statement} or
-by reaching the @key[end return] of an @nt{extended_return_statement}],
+New=[ by the normal completion of a @nt{simple_@!return_@!statement} or
+by reaching the @key[end return] of an @nt{extended_@!return_@!statement}],
 Old=[]}],Old=[Finally]}, a
 transfer of control is performed which completes the execution of the callable
 construct@Chg{Version=[2],New=[], Old=[ to which the @nt{return_@!statement}

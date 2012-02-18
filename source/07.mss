@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/02/04 09:08:02 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -940,6 +940,7 @@ declared by a @nt<private_extension_declaration>.
 These terms are not used in the RM95 version of this document.
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0269-1]}
 A declaration of a partial view and the corresponding
 @nt{full_type_declaration} define two views of a single type.
 The declaration of a partial view
@@ -948,9 +949,11 @@ available to outside program units;
 the declaration of the full view together with
 the private part define other operations whose direct use is
 possible only within the declarative region of the package itself.
-@PDefn{characteristics}
-Moreover, within the scope of the declaration of the full view, the
-@i{characteristics} of the type are determined by the full view;
+@Chg{Version=[3],New=[],Old=[@PDefn{characteristics}]}Moreover,
+within the scope of the declaration of the full view, the
+@Chg{Version=[3],New=[characteristics (see
+@RefSecNum{Derived Types and Classes})],Old=[@i{characteristics}]}
+of the type are determined by the full view;
 in particular, within its scope, the full view determines
 the classes that include the type,
 which components, entries, and protected subprograms are visible,
@@ -1652,8 +1655,8 @@ extension, the following language-defined aspects may be specified with an
 @ChgAdded{Version=[3],Text=[Type_Invariant@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.@Defn{invariant expression}
-   Type_Invariant may be specified on a @nt{private_type_declaration}, on a
-   @nt{private_extension_declaration}, or on a @nt{full_type_declaration} that
+   Type_Invariant may be specified on a @nt{private_@!type_@!declaration}, on a
+   @nt{private_@!extension_@!declaration}, or on a @nt{full_@!type_@!declaration} that
    declares the completion of a private type or private
    extension.@AspectDefn{Type_Invariant}]}
 
@@ -1665,8 +1668,8 @@ extension, the following language-defined aspects may be specified with an
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
-   Type_Invariant'Class may be specified on a @nt{private_type_declaration} or a
-   @nt{private_extension_declaration}.@AspectDefn{Type_Invariant'Class}]}
+   Type_Invariant'Class may be specified on a @nt{private_@!type_@!declaration} or a
+   @nt{private_@!extension_@!declaration}.@AspectDefn{Type_Invariant'Class}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
@@ -1774,8 +1777,8 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
   @ChgAdded{Version=[3],Type=[Leading],Text=[Upon successful return from a call
   on any subprogram or entry that:]}
   @begin{Itemize}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[is explicitly declared within the immediate
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+    @ChgAdded{Version=[3],Text=[is declared within the immediate
       scope of type @i<T> (or by an instance of a generic unit, and the generic
       is declared within the immediate scope of type @i<T>), and]}
 
@@ -1884,7 +1887,7 @@ languages (see @RefSecNum{Interface to Other Languages}).]
 @end{Intro}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @Redundant[@Defn{deferred constant declaration}
 A @i(deferred constant declaration) is an @nt<object_declaration>
 with the reserved word @key(constant) but no initialization expression.]
@@ -1892,19 +1895,20 @@ with the reserved word @key(constant) but no initialization expression.]
 The constant declared by a deferred constant declaration is called
 a @i{deferred constant}.
 @PDefn2{Term=[requires a completion], Sec=(deferred constant declaration)}
-A deferred constant declaration requires a completion,
+@Chg{Version=[3],New=[@Redundant[Unless the Import aspect
+(see @RefSecNum{Interfacing Aspects}) is True for a deferred constant
+declaration, the ]],Old=[A]} deferred constant declaration requires a completion,
 which shall be a full constant declaration
-(called the @i{full declaration} of the deferred constant)@Chg{Version=[3],New=[,
-@Redundant[unless the Import aspect (see @RefSecNum{Interfacing Aspects})
-is True for the deferred constant declaration]],Old=[,
+(called the @i{full declaration} of the deferred
+constant)@Chg{Version=[3],New=[],Old=[,
 or a @nt{pragma} Import (see @RefSecNum(Interface to Other Languages))]}.
 @Defn{full declaration}
 @begin{TheProof}
 The first sentence is redundant, as it is stated officially in
 @RefSecNum(Object Declarations).
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[The last part of the last sentence is redundant,
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[The first part of the last sentence is redundant,
 as no imported entity may have a completion, as stated in
 @RefSecNum{Interfacing Aspects}.]}
 @end{TheProof}
@@ -3044,9 +3048,10 @@ contract model violations.
 or @nt{aggregate} is used to initialize an object, the
 result of the function call or @nt{aggregate} is an anonymous object, which
 is assigned into the newly-created object. For such an assignment,
-the anonymous object might be built in place. Under certain circumstances,
-the anonymous object is required to be @i<built in place>,@Defn{built in place}
-in which case the assignment does not involve any copying. In particular:]}
+the anonymous object might be @i<built in place>,@Defn{built in place}@Seeother{Primary=[build-in-place],Other=[built in place]}
+in which case the assignment does not involve any copying.
+Under certain circumstances, the anonymous object is required to be built in
+place. In particular:]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
@@ -3956,13 +3961,14 @@ in @RefSecNum{Assignment and Finalization}.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0021],ARef=[AI95-00182-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0066-1],ARef=[AI05-0142-4]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0066-1],ARef=[AI05-0142-4],ARef=[AI05-0269-1]}
 @Chg{Version=[2],New=[The master of an object is the master enclosing its
 creation whose accessibility level (see @RefSecNum{Operations of Access Types})
 is equal to that of the object@Chg{Version=[3],New=[, except
 in the case of an anonymous object representing the result of
 an @nt{aggregate} or function call. If such an anonymous object
-is part of the actual parameter expression for an explicitly aliased
+is part of the result of evaluating the actual parameter expression for
+an explicitly aliased
 parameter of a function call, the master of the object is the innermost
 master enclosing the evaluation of the @nt{aggregate} or function call, excluding
 the @nt{aggregate} or function call itself. Otherwise, the master of such

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.108 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@comment{ $Revision: 1.109 $ $Date: 2012/02/04 09:08:02 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/01/28 08:23:03 $}
+@Comment{$Date: 2012/02/04 09:08:02 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -298,7 +298,7 @@ Old=[@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 Likewise, the priority value is associated with the environment task if the
 @Chg{Version=[3],New=[aspect is specified for],Old=[pragma appears in the
-@nt{declarative_part}]} of the main subprogram.
+@nt{declarative_part} of]} the main subprogram.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 The initial value of a task's base priority is specified by default or
@@ -1248,9 +1248,9 @@ is preempted.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[For language-defined policies other than
-  Non_Preemptive, a higher priority task should never be on a ready queue while
-  a lower priority task is executed. Thus, for such policies, Yield_To_Higher
-  does nothing.]}
+  Non_Preemptive_FIFO_Within_Priorities, a higher priority task should never be
+  on a ready queue while a lower priority task is executed. Thus, for such
+  policies, Yield_To_Higher does nothing.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Yield_To_Higher is @i<not> a potentially blocking
@@ -1353,17 +1353,19 @@ Non_Preemptive_FIFO_Within_Priorities and also the locking policy (see
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[2],Text=[Since implementations are allowed to round all
 ceiling priorities in subrange System.Priority to System.Priority'Last (see
-@RefSecNum{Priority Ceiling Locking}), an implementation may allow a task to
+@RefSecNum{Priority Ceiling Locking}), an implementation may allow a
+task@Chg{Version=[3],New=[ of a partition using the
+Non_Premptive_FIFO_Within_Priorities policy],Old=[]} to
 execute within a protected object without raising its active priority provided
 the associated protected unit does not contain @Chg{Version=[3],New=[any
-subprograms with Interrupt_Handler or Attach_Handler specified nor does the
+calls to Yield_To_Higher, any subprograms with Interrupt_Handler or
+Attach_Handler specified, nor does the
 unit have aspect],Old=[pragma]} Interrupt_Priority
 @Chg{Version=[3],New=[ specified],Old=[,
 Interrupt_Handler, or Attach_Handler]}.]}
-
 @end{ImplPerm}
 
 @begin{Extend95}
@@ -4130,12 +4132,14 @@ task is already waiting on that suspension object.
 Suspend_Until_True is a potentially blocking operation
 (see @RefSecNum{Protected Subprograms and Protected Actions}).
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[The procedure Suspend_Until_True_And_Set_Deadline
 blocks the calling task until the state of the object S is True; at that point
 the task becomes ready with a deadline of Ada.Real_Time.Clock + TS, and the
-state of the object becomes False. Suspend_Until_True_And_Set_Deadline is a
-potentially blocking operation.]}
+state of the object becomes False. Program_Error is raised upon calling
+Suspend_Until_True_And_Set_Deadline if another task is already waiting on that
+suspension object. Suspend_Until_True_And_Set_Deadline is a potentially blocking
+operation.]}
 @end{RunTime}
 
 @begin{ImplReq}
@@ -4899,7 +4903,7 @@ language-defined library package exists:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0170-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0170-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[execution time],Sec=[of a task]}
 @Defn2{Term=[CPU time],Sec=[of a task]}
 The @i<execution time> or CPU time of a given task is defined as the time spent by
@@ -4912,7 +4916,8 @@ defined which task, if any, is charged the execution time that is consumed by
 interrupt handlers@Chg{Version=[3],New=[. The Boolean constant
 Separate_Interrupt_Clocks_Supported is set to True if the implementation
 separately accounts for the execution time of individual interrupt
-handlers],Old=[ and run-time services on behalf of the system]}.]}
+handlers (see @RefSecNum{Execution Time of Interrupt Handlers})],Old=[ and
+run-time services on behalf of the system]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The implementation-defined properties above
@@ -5610,7 +5615,7 @@ several Group_Budget objects.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0169-1]}
 @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
 A Group_Budget is now defined to work on a single processor.
-If an implementation managed to make this package work on for
+If an implementation managed to make this package work for
 programs running on a multiprocessor system, and a program
 depends on that fact, it could fail when ported to Ada 2012.
 We believe it is unlikely that such an implementation exists
