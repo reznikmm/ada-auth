@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.109 $ $Date: 2012/02/04 09:08:02 $ $Author: randy $ }
+@comment{ $Revision: 1.110 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/02/04 09:08:02 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -198,7 +198,7 @@ aspects may be specified for a given entity.]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This includes specifying via pragmas
   (see @RefSecNum{Pragmas Priority and Interrupt_Priority}). Note that
-  @RefSecNum{Operational and Representation Items} prevents multiple
+  @RefSecNum{Operational and Representation Aspects} prevents multiple
   specifications of a single representation aspect by any means.]}
 @end{Ramification}
 
@@ -1361,11 +1361,28 @@ task@Chg{Version=[3],New=[ of a partition using the
 Non_Premptive_FIFO_Within_Priorities policy],Old=[]} to
 execute within a protected object without raising its active priority provided
 the associated protected unit does not contain @Chg{Version=[3],New=[any
-calls to Yield_To_Higher, any subprograms with Interrupt_Handler or
-Attach_Handler specified, nor does the
-unit have aspect],Old=[pragma]} Interrupt_Priority
-@Chg{Version=[3],New=[ specified],Old=[,
+subprograms with aspects Interrupt_Handler or Attach_Handler specified, nor
+does the unit have aspect],Old=[pragma]} Interrupt_Priority
+@Chg{Version=[3],New=[ specified. When the locking policy
+(see @RefSecNum{Priority Ceiling Locking}) is
+Ceiling_Locking, an implementation taking advantage of this permission shall
+ensure that a call to Yield_to_Higher that occurs within a protected action uses
+the ceiling priority of the protected object (rather than the active priority of
+the task) when determining whether to preempt the task],Old=[,
 Interrupt_Handler, or Attach_Handler]}.]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],Text=[We explicitly require that the ceiling priority by
+  used in calls to Yield_to_Higher in order to prevent a risk of priority
+  inversion and consequent loss of mutual exclusion when Yield_to_Higher is used
+  in a protected object. This requirement might lessen the value of the
+  permission (as the current Ceiling_Priority will have to be maintained in the
+  TCB), but loss of mutual exclusion cannot be tolerated. The primary benefit of
+  the permission (eliminating the need for preemption at the end of a protected
+  action) is still available. As noted above, an implementation-defined locking
+  policy will need to specify the semantics of Yield_to_Higher, including this
+  case.]}
+@end{Reason}
 @end{ImplPerm}
 
 @begin{Extend95}
@@ -4670,7 +4687,7 @@ defined processor. @Redundant[A task without a CPU aspect will activate and
 execute on the same processor as its activating task.]]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The processor of a task without a aspect CPU is
+  @ChgAdded{Version=[3],Text=[The processor of a task without a CPU aspect is
   defined in @RefSecNum{Multiprocessor Implementation}.]}
 @end{TheProof}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -6104,6 +6121,7 @@ language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Real_Time;
+@key[with] Ada.Task_Identification;
 @key[package] System.Multiprocessors.Dispatching_Domains @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}
    @key[pragma] Preelaborate(Dispatching_Domains);]}
 
@@ -6126,23 +6144,29 @@ language-defined library package exists:]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Last_CPU}  (Domain : Dispatching_Domain) @key[return] CPU;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Dispatching_Domain} (T : Task_Id := Current_Task)
-            @key[return] Dispatching_Domain;]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Dispatching_Domain}
+      (T   : Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task)
+           @key[return] Dispatching_Domain;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign_Task} (Domain : @key[in out] Dispatching_Domain;
-                          CPU    : @key[in]     CPU_Range := Not_A_Specific_CPU;
-                          T      : @key[in]     Task_Id   := Current_Task);]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign_Task}
+      (Domain : @key[in out] Dispatching_Domain;
+       CPU    : @key[in]     CPU_Range := Not_A_Specific_CPU;
+       T      : @key[in]     Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_CPU} (CPU : @key[in] CPU_Range; T : @key[in] Task_Id := Current_Task);]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_CPU}
+      (CPU : @key[in] CPU_Range;
+       T   : @key[in] Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU} (T : Task_Id := Current_Task) @key[return] CPU_Range;]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU}
+      (T   : Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task)
+           @key[return] CPU_Range;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Delay_Until_And_Set_CPU} (
-       Delay_Until_Time : @key[in] Ada.Real_Time.Time; CPU : @key[in] CPU_Range);]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Delay_Until_And_Set_CPU}
+      (Delay_Until_Time : @key[in] Ada.Real_Time.Time; CPU : @key[in] CPU_Range);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[private]

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:09 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -302,7 +302,8 @@ If @Chg{Version=[3],New=[the],Old=[@nt[pragma]]} Convention
 @Chg{Version=[3],New=[aspect is specified for],Old=[applies to]} a type,
 then the type shall either be
 compatible with or eligible for
-the convention specified in the pragma.
+the @Chg{Version=[3],New=[specified ],Old=[]}convention@Chg{Version=[3],
+New=[],Old=[ specified in the pragma]}.
 @begin[ramification]
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
   If a type is derived from an @i[L]-compatible type, the derived type
@@ -586,15 +587,15 @@ should be provided for elaboration and finalization of the environment task.]}]}
   and adafinal after the last.
 @end{ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 Automatic elaboration of preelaborated packages should be provided
-when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
-@Chg{Version=[3],New=[as True ],Old=[]}is supported.
+when @Chg{Version=[3],New=[specifying the],Old=[@nt[pragma]]} Export
+@Chg{Version=[3],New=[aspect as True ],Old=[]}is supported.
 @ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
 Text=[Automatic elaboration of preelaborated packages should be provided
-when @Chg{Version=[3],New=[specifying],Old=[@nt[pragma]]} Export
-@Chg{Version=[3],New=[as True ],Old=[]}is supported.]}]}
+when @Chg{Version=[3],New=[specifying the],Old=[@nt[pragma]]} Export
+@Chg{Version=[3],New=[aspect as True ],Old=[]}is supported.]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 For each supported convention @i[L] other than Intrinsic,
@@ -648,7 +649,7 @@ for example, requiring each exported entity to be declared
 at the library level.
 @begin{TheProof}
 Arbitrary restrictions are allowed by
-@RefSecNum{Operational and Representation Items}.
+@RefSecNum{Operational and Representation Aspects}.
 @end{TheProof}
 @begin{Ramification}
 Such a restriction might be to disallow them altogether.

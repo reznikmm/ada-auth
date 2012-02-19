@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.62 $ $Date: 2011/11/01 23:14:15 $ $Author: randy $ }
+@comment{ $Revision: 1.63 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -310,21 +310,23 @@ which no categorization
 interface, but it cannot be a remote types or shared passive library unit.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1],ARef=[AI05-0269-1]}
 @redundant[The various categories of library units and the associated
 restrictions are described in this clause and its subclauses. The categories are
 related hierarchically in that the library units of one category can depend
-semantically only on library units of that category or an earlier one, except
+semantically only on library units of that category or an earlier
+one@Chg{Version=[3],New=[ in the hierarchy],Old=[]}, except
 that the body of a remote types or remote call interface library unit is
 unrestricted@Chg{Version=[3],New=[, the declaration of a remote types or
 remote call interface library unit may depend on preelaborated normal library
 units that are mentioned only in private with clauses, and all categories can
 depend on limited views],Old=[]}.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1],ARef=[AI05-0269-1]}
 @Leading@;The overall hierarchy (including declared pure) is as
-follows@Chg{Version=[3],New=[ (with a lower-numbered category being earlier in
-the sense of the previous paragraph)],Old=[]}:
+follows@Chg{Version=[3],New=[, with a lower-numbered category being
+@ldquote@;earlier in the hierarchy@rdquote in the sense of the
+previous paragraph],Old=[]}:
 @begin{Enumerate}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Declared Pure]}
@@ -743,10 +745,11 @@ type ],Old=[]}shall @Chg{Version=[2],New=[support external streaming (see
 nonlimited type or a type with],Old=[]} Read and Write attributes@Chg{New=[
 specified via an @nt{attribute_definition_clause};],Old=[.]}]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1],ARef=[AI05-0215-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0060-1],ARef=[AI05-0215-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[The corresponding specific type shall not have
 a primitive procedure with the Synchronization aspect specified unless the
-@nt{synchronization_kind} is Optional;]}
+@nt{synchronization_kind} is Optional (see
+@RefSecNum{Intertask Communication});]}
 
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;

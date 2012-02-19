@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.19 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@comment{ $Revision: 1.20 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -4333,7 +4333,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
-        (Ceiling: System.Any_Priority := Default_Ceiling)
+        (Ceiling : System.Any_Priority := Default_Ceiling)
            @key[with] Priority => Ceiling @key[is]
         @key[new] Queue_Interfaces.Queue @key[with]]}
 
@@ -4427,7 +4427,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling)
+         Ceiling  : System.Any_Priority := Default_Ceiling)
            @key[with] Priority => Ceiling @key[is]
         @key[new] Queue_Interfaces.Queue @key[with]]}
 
@@ -4524,7 +4524,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
-        (Ceiling: System.Any_Priority := Default_Ceiling)
+        (Ceiling : System.Any_Priority := Default_Ceiling)
            @key[with] Priority => Ceiling @key[is]
         @key[new] Queue_Interfaces.Queue @key[with]]}
 
@@ -4658,7 +4658,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[protected type] @AdaTypeDefn{Queue}
         (Capacity : Count_Type := Default_Capacity;
-         Ceiling: System.Any_Priority := Default_Ceiling)
+         Ceiling  : System.Any_Priority := Default_Ceiling)
            @key[with] Priority => Ceiling @key[is]
       @key[new] Queue_Interfaces.Queue @key[with]]}
 

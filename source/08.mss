@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:05 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -624,7 +624,7 @@ because R does not mention Q in a @nt{with_clause}.
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
   @ChgAdded{Version=[3],Text=[The scope of an @nt{aspect_specification}
-  is defined for similar reasons that we did that for
+  is defined for similar reasons that it was defined for
   @nt{attribute_definition_clause}s.]}
 @end{DiffWord2005}
 
@@ -3130,6 +3130,7 @@ and all of the views declared by those declarations.
 @end{Ramification}
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00382-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0287-1]}
   @Defn2{Term=[current instance], Sec=(of a type)}
   If a usage name appears within the declarative region of a
   @nt{type_declaration} and denotes that same @nt{type_declaration},
@@ -3137,8 +3138,11 @@ and all of the views declared by those declarations.
   the type itself)@Chg{Version=[2],New=[; the],Old=[. The]} current
   instance of a type is the object or value
   of the type that is associated with the execution that
-  evaluates the usage name.@Chg{Version=[2],New=[ This rule does not apply
-  if the usage name appears within the @nt{subtype_mark} of an
+  evaluates the usage name.@Chg{Version=[2],New=[ @Chg{Version=[3],
+  New=[ Similarly, if a usage name appears within the declarative region
+  of a @nt{subtype_declaration} and denotes that same @nt{subtype_declaration},
+  then it denotes the current instance of the subtype. These rules do],
+  Old=[This rule does]} not apply if the usage name appears within the @nt{subtype_mark} of an
   @nt{access_definition} for an access-to-object type, or within the subtype
   of a parameter or result of an access-to-subprogram type.],Old=[]}
   @begin{Reason}

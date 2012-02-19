@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:03 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1061,6 +1061,9 @@ Wide_Characters.Handling has the following declaration:]}
    @key[function] @AdaSubDefn{To_Upper} (Item : Wide_String) @key[return] Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Equal_Case_Insensitive} (Left, Right : Wide_String) @key[return] Boolean;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Wide_Characters.Handling;]}
 @end{Example}
 
@@ -1086,7 +1089,7 @@ used for categorizing characters by the implementation.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{other_control}, otherwise returns False.]}
+designated by Item is categorized as @ntf{other_control}; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1106,7 +1109,7 @@ designated by Item is categorized as @ntf{letter_uppercase},
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{letter_lowercase}, otherwise returns
+designated by Item is categorized as @ntf{letter_lowercase}; otherwise returns
 False.]}
 
 @begin{Example}
@@ -1116,7 +1119,7 @@ False.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{letter_uppercase}, otherwise returns
+designated by Item is categorized as @ntf{letter_uppercase}; otherwise returns
 False.]}
 
 @begin{Example}
@@ -1126,7 +1129,7 @@ False.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{number_decimal}, otherwise returns
+designated by Item is categorized as @ntf{number_decimal}; otherwise returns
 False.]}
 
 @begin{Example}
@@ -1137,7 +1140,7 @@ False.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{number_decimal}, or is in the range
-'A' .. 'F' or 'a' .. 'f', otherwise returns False.]}
+'A' .. 'F' or 'a' .. 'f'; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1183,7 +1186,7 @@ Carriage_Return, Next_Line); otherwise returns False.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
 designated by Item is categorized as @ntf{mark_non_spacing} or
-@ntf{mark_spacing_combining}, otherwise returns False.]}
+@ntf{mark_spacing_combining}; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1192,7 +1195,7 @@ designated by Item is categorized as @ntf{mark_non_spacing} or
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{other_format}, otherwise returns False.]}
+designated by Item is categorized as @ntf{other_format}; otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1201,7 +1204,7 @@ designated by Item is categorized as @ntf{other_format}, otherwise returns False
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{punctuation_connector}, otherwise
+designated by Item is categorized as @ntf{punctuation_connector}; otherwise
 returns False.]}
 
 @begin{Example}
@@ -1211,7 +1214,7 @@ returns False.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{separator_space}, otherwise returns
+designated by Item is categorized as @ntf{separator_space}; otherwise returns
 False.]}
 
 @begin{Example}
@@ -1221,7 +1224,7 @@ False.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the Wide_Character
-designated by Item is categorized as @ntf{graphic_character}, otherwise returns
+designated by Item is categorized as @ntf{graphic_character}; otherwise returns
 False.]}
 
 @begin{Example}
@@ -1279,6 +1282,22 @@ Wide_String designated by Item. The result is the null Wide_String if the value
 of the formal parameter is the null Wide_String. The lower bound of the result
 Wide_String is 1.]}
 
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[@key[function] Equal_Case_Insensitive (Left, Right : Wide_String) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings are the same, that is if they consist of the same
+sequence of characters after applying locale-independent simple case folding,
+as defined by documents referenced in the note in section 1 of ISO/IEC
+10646:2011. Otherwise, returns False. This function uses the same method
+as is used to determine whether two identifiers are the same. Note that
+this result is a more accurate comparison than converting the strings to
+upper case and comparing the results; it is possible that the upper case
+conversions are the same but this routine will report the strings as
+different.]}
+
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -1293,7 +1312,7 @@ should include either @ldquote@;10646:@rdquote or @ldquote@;Unicode@rdquote@;.]}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[The intent is that the returned string include the
+@ChgAdded{Version=[3],Text=<The intent is that the returned string include the
 year for 10646 (as in "10646:2011"), and the version number for Unicode (as in
 "Unicode 6.0"). We don't try to specify that further so we don't need to decide
 how to represent Corrigenda for 10646, nor which of these is preferred.
@@ -1301,7 +1320,7 @@ how to represent Corrigenda for 10646, nor which of these is preferred.
 rules always come from a Unicode version [10646 just tells one to look at
 Unicode to get those], and the character classifications ought to be the same
 for equivalent versions, but we don't want to talk about non-ISO standards
-in an ISO standard.)]}
+in an ISO standard.)>}
 @end{Discussion}
 @end{ImplAdvice}
 

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.54 $}
+@Comment{$Revision: 1.55 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -1080,7 +1080,7 @@ all of the denoted entities.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 No_Return, which is a representation pragma
-(see @RefSecNum{Operational and Representation Items}),
+(see @RefSecNum{Operational and Representation Aspects}),
 is as follows:@PDefn2{Term=[representation pragma], Sec=(No_Return)}
 @PDefn2{Term=[pragma, representation], Sec=(No_Return)}]}
 @end{SyntaxText}
@@ -1120,7 +1120,7 @@ by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 Pack, which is a representation pragma
-(see @RefSecNum{Operational and Representation Items}),
+(see @RefSecNum{Operational and Representation Aspects}),
 is as follows:@PDefn2{Term=[representation pragma], Sec=(Pack)}
 @PDefn2{Term=[pragma, representation], Sec=(Pack)}]}
 @end{SyntaxText}
@@ -1248,7 +1248,7 @@ unless the argument for External_Name is given.]}
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type],Sec=(link name)}
-@PDefn2{Term=[expected type],Sec=(external name)} The expected type for a
+@PDefn2{Term=[expected type],Sec=(external name)} The expected type for an
 @SynI{external_name_string_}@nt{expression} and a
 @SynI{link_name_string_}@nt{expression} in an interfacing pragma is String.]}
 @end{Resolution}
@@ -1311,9 +1311,9 @@ various aspects of the entity denoted by the @nt{local_name} as follows:]}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Unchecked_Union was
-  moved here from @RefSecNum{Unchecked Union Types}; aspect Unchecked_Union
-  lives there now.]}
+  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Import, Export, and
+  Convention were moved here from @RefSecNum{Interfacing Aspects}; aspects
+  Import, Export, Convention, Link_Name, and External_Name live there now.]}
 @end{DiffWord2005}
 
 
@@ -1324,7 +1324,7 @@ various aspects of the entity denoted by the @nt{local_name} as follows:]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 Unchecked_Union, which is a representation pragma
-(see @RefSecNum{Operational and Representation Items}),
+(see @RefSecNum{Operational and Representation Aspects}),
 is as follows:@PDefn2{Term=[representation pragma], Sec=(Unchecked_Union)}
 @PDefn2{Term=[pragma, representation], Sec=(Unchecked_Union)}]}
 @end{SyntaxText}
@@ -1516,7 +1516,7 @@ type.]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[These @nt{pragma}s are representation pragmas
-(see @RefSecNum{Operational and Representation Items}).
+(see @RefSecNum{Operational and Representation Aspects}).
 Each of these @nt{pragma}s specifies that the similarly named aspect
 (see @RefSecNum{Shared Variable Control}) of the
 type, object, or component denoted by its argument is True.
@@ -1806,7 +1806,7 @@ for the subprogram that contains the @nt{pragma}.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The form of a @nt{pragma}
 Asynchronous, which is a representation pragma
-(see @RefSecNum{Operational and Representation Items}),
+(see @RefSecNum{Operational and Representation Aspects}),
 is as follows:@PDefn2{Term=[representation pragma], Sec=(Asynchronous)}
 @PDefn2{Term=[pragma, representation], Sec=(Asynchronous)}]}
 @end{SyntaxText}

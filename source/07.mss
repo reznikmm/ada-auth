@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/02/04 09:08:02 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1256,7 +1256,7 @@ Old=[within the immediate scope of the array type.]}
 In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[A type is a @i<descendant>@Defn2{Term=[descendant],
 Sec=[of the full view of a type]} of the full view of some ancestor
 of its parent type only if the current view it has of its parent is a
@@ -1265,7 +1265,7 @@ place, a type is descended from the same view of an ancestor as that from which
 the current view of its parent is descended. This view determines what
 characteristics are inherited from the ancestor@Redundant[, and, for example,
 whether the type is considered to be a descendant of a record type, or a
-descendant only through record extensions of some more distant ancestor].]}
+descendant only through record extensions of a more distant ancestor].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[It is possible for there to be places
@@ -1309,7 +1309,7 @@ Sec=[of an incomplete view]}]]}
     W : T3 := T3(Int);  -- @Examcom{Legal: conversion allowed}
     X : T3 := T3(42);   -- @Examcom{Error: T3 is not a numeric type}
     Y : T3 := X + 1;    -- @Examcom{Error: no visible "+" operator}
-    Z : T3 := T3(Integer(X) + 1);   -- @Examcom{Legal: convert to Int first}
+    Z : T3 := T3(Integer(W) + 1);   -- @Examcom{Legal: convert to Integer first}
 @key[end] P.Child;]}
 @end{Example}
 @end{Discussion}
@@ -1759,22 +1759,52 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
   @ChgAdded{Version=[3],Text=[After successful conversion to type @i<T>, the
     check is performed on the result of the conversion;]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[After assigning to a view conversion, outside the
-    immediate scope of @i<T>, that converts from @i<T> or one or more record
-    extensions (and no private extensions) of @i<T> to an ancestor of type
-    @i<T>, a check is performed on the part of the object that is of type @i<T>;
-    similarly, for passing a view conversion as an @key[out] or @key[in out]
-    parameter outside the immediate scope of @i<T>, this check is performed upon
-    successful return;]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],Text=[For a view conversion, outside the immediate scope
+  of @i<T>, that converts from a descendant of @i<T> (including @i<T> itself) to
+  an ancestor of type @i<T> (other than @i<T> itself), a check is performed on
+  the part of the object that is of type @i<T>:]}
+
+  @begin{InnerItemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[after assigning to the view conversion; and]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[after successful return from a call that passes the view conversion
+    as an @key[in out] or @key[out] parameter.]}
+  @end{InnerItemize}
+
+  @begin{Ramification}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[For a single view conversion that converts
+    between distantly related types, this rule could be triggered for
+    multiple types and thus multiple invariant checks may be needed.]}
+  @end{Ramification}
+  @begin{ImplNote}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[For calls to inherited subprograms (including
+    dispatching calls), the implied view conversions mean that a wrapper is
+    probably needed. (See the Note at the bottom of this clause for more
+    on the model of checked for inherited subprograms.)]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[For view conversions involving class-wide
+    types, the exact checks needed may not be known at compile-time. One
+    way to deal with this is to have an implicit dispatching operation
+    that is given the object to check and the tag of the target of the
+    conversion, and which first checks if the passed tag is not for itself,
+    and if not, checks the its invariant on the object and then calls
+    the operation of its parent type. If the tag is for itself, the
+    operation is complete.]}
+  @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[After a successful call on the Read or Input
     stream attribute of the type @i<T>, the check is performed on the object
     initialized by the stream attribute;]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[Upon successful return from a call
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[An invariant is checked upon successful return from a call
   on any subprogram or entry that:]}
   @begin{Itemize}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
@@ -1793,8 +1823,8 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
       an access to variable parameter whose designated type has a part of type
       @i<T>.]}
   @end{Itemize}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],NoPrefix=[T],Text=[the check is performed on each such
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
   part of type @i<T>.]}
 @end{Itemize}
 
@@ -1848,22 +1878,35 @@ performed on a call on that subprogram or entry.]]}
 @end{Runtime}
 
 @begin{Notes}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1]}
-  @ChgAdded{Version=[3],Text=[A call of a primitive subprogram of type @i<NT>
-  that is inherited from type @i<T> needs to satisfy the specific invariants
-  of both the types @i<NT> and @i<T>. A call of a primitive subprogram of type
-  @i<NT> that is overridden for type @i<NT> needs to satisfy only the specific
-  invariants of type @i<NT>.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0250-1],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],Text=[For a call of a primitive subprogram of type
+  @i<NT> that is inherited from type @i<T>, the specified checks of the specific
+  invariants of both the types @i<NT> and @i<T> are performed. For a call of a
+  primitive subprogram of type @i<NT> that is overridden for type @i<NT>, the
+  specified checks of the specific invariants of only type @i<NT> are
+  performed.]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This follows from the definition of inheritance
-  as view conversions of the parameters of the type, along with the rule
-  require checks on such view conversions. We require this in order that the
-  semantics of an explicitly defined wrapper that does nothing but call the
-  original routine is the same as that of an inherited routine.]}
+  @ChgAdded{Version=[3],Text=[This follows from the definition of a call on
+  an inherited subprogram as view conversions of the parameters of the type
+  and a call to the original subprogram
+  (see @RefSecNum{Derived Types and Classes}), along with the normal invariant
+  checking rules. In particular, the call to the original subprogram takes
+  care of any checks needed on type @i<T>, and the checks required
+  on view conversions take care of any checks needed on type @i<NT>,
+  specifically on @key[in out] and @key[out] parameters. We require this in
+  order that the semantics of an explicitly defined wrapper that does nothing
+  but call the original subprogram is the same as that of an inherited
+  subprogram.]}
 @end{TheProof}
 
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
+  @ChgAdded{Version=[3],Text=[Invariants are not checked after a call for
+  @Key[in] parameters of a type. If the logical properties of an @Key[in]
+  parameter are modified by a subprogram (possibly via an embedded access
+  value), the invariant may not hold on the object after the call. Generally,
+  such parameters should be declared as @Key[in out] parameters.]}
 
 @end{Notes}
 
@@ -3974,7 +4017,7 @@ master enclosing the evaluation of the @nt{aggregate} or function call, excludin
 the @nt{aggregate} or function call itself. Otherwise, the master of such
 an anonymous object is the innermost master enclosing the evaluation of the
 @nt{aggregate} or function call, which may be the @nt{aggregate} or function
-call itself.],Old=[]}.],
+call itself],Old=[]}.],
 Old=[@Chg{New=[If the @i{object_}@nt{name} in an @nt{object_renaming_declaration}, or
 the actual parameter for a generic formal @key[in out] parameter in a
 @nt{generic_instantiation}, denotes any part of an anonymous object created by

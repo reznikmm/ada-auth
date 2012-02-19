@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1884,7 +1884,8 @@ be allocated, and is no more than @i{D}'Max_Size_In_Storage_Elements, where
 @i{D} is the designated subtype of @i{T}. The Alignment parameter is a nonzero
 integral multiple of @i{D}'Alignment if @i{D} is a specific type, and otherwise
 is a nonzero integral multiple of the alignment of the specific type identified
-by the tag of the object being created. The Alignment parameter is no more than
+by the tag of the object being created; it is
+unspecified if there is no such value. The Alignment parameter is no more than
 @i{D}'Max_Alignment_For_Allocation. The result returned in the Storage_Address
 parameter is used as the address of the allocated storage, which is a contiguous
 block of memory of Size_In_Storage_Elements storage elements. @Redundant[Any
@@ -1898,7 +1899,8 @@ the call.]]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[@ldquote@;Nonzero integral multiple@rdquote
-  of an alignment includes the alignment value itself, of course.]}
+  of an alignment includes the alignment value itself, of course. The
+  value is unspecified if the alignment of the specific type is zero.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0107-1]}
@@ -1915,6 +1917,17 @@ particular object is the same as the number of Allocate calls for that object.]}
   @ChgAdded{Version=[3],Text=[This supports objects that are allocated in one or
   more parts. The second sentence prevents extra or missing calls to Deallocate.]}
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[The number of calls to Deallocate from all sources
+  for an object always will be the same as the number of calls to Allocate from
+  all sources for that object. However, in unusual cases, not all of those
+  Deallocate calls may be made by an instance of Unchecked_Deallocation.
+  Specifically, in the unusual case of assigning to an object of a mutable
+  variant record type such that the variant changes, some of the Deallocate
+  calls may be made by the assignment (as may some of the Allocate calls).]}
+@end{Honest}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3059,7 +3072,7 @@ exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_Pool_of_Subpool} (
-      Subpool : @key[not null] Subpool_Handle;
+      Subpool : @key[in not null] Subpool_Handle;
       To : @key[in out] Root_Storage_Pool_With_Subpools'Class);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3068,7 +3081,7 @@ exists:]}
       Storage_Address : @key[out] Address;
       Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
       Alignment : @key[in] Storage_Elements.Storage_Count;
-      Subpool : @key[not null] Subpool_Handle) @key[is abstract]
+      Subpool : @key[in not null] Subpool_Handle) @key[is abstract]
          @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3079,7 +3092,7 @@ exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Default_Subpool_for_Pool} (
-      Pool : @key[in] Root_Storage_Pool_With_Subpools)
+      Pool : Root_Storage_Pool_With_Subpools)
          @key[return not null] Subpool_Handle;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3673,12 +3686,20 @@ and its value shall be nonnegative.
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00394-01]}
-The set of @Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]} is
-implementation defined.
-@ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The set of
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0269-1]}
+@ChgDeleted{Version=[3],Text=[The set of
+@Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]} is
+implementation defined.]}
+@ChgImplDef{Version=[3],Kind=[Deleted],InitialVersion=[0],
+Text=[@ChgDeleted{Version=[3],Text=[The set of
 @Chg{Version=[2],New=[restrictions],Old=[@ntf{restrictions}]}
-allowed in a @nt{pragma} Restrictions.]}
+allowed in a @nt{pragma} Restrictions.]}]}
 @end{StaticSem}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 7 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{LinkTime}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1]}
@@ -3739,6 +3760,14 @@ instantiation.]}
 @end{LinkTime}
 
 @begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[An implementation may provide implementation-defined
+restrictions; the identifier for an implementation-defined restriction
+shall differ from those of the language-defined restrictions.]}
+@ChgImplDef{Version=[3],Kind=[Added],
+Text=[@ChgAdded{Version=[3],Text=[Implementation-defined restrictions
+allowed in a @nt{pragma} Restrictions.]}]}
+
 An implementation may place limitations on the values of the
 @nt{expression} that are supported,
 and limitations on the supported combinations of restrictions.
@@ -3799,6 +3828,16 @@ A @nt{pragma} Profile is a configuration pragma.
 There may be more than one @nt{pragma} Profile for a partition.]}
 @end{Linktime}
 
+@begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[An implementation may provide implementation-defined
+usage profiles; the identifier for an implementation-defined usage profile
+shall differ from those of the language-defined usage profiles.]}
+
+@ChgImplDef{Version=[3],Kind=[Added],
+Text=[@ChgAdded{Version=[3],Text=[Implementation-defined usage profiles
+allowed in a @nt{pragma} Profile.]}]}
+@end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00347-01]}
@@ -4413,7 +4452,7 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Stream_Size is a type-related attribute (see
-  @RefSecNum{Operational and Representation Items}).]}
+  @RefSecNum{Operational and Representation Aspects}).]}
 @end{Discussion}
 
 @begin{Ramification}
@@ -4525,7 +4564,7 @@ derived @Chg{Version=[2],New=[type],Old=[types]}, the Write
 @Chg{Version=[2],New=[(resp.],Old=[and]}
 Read@Chg{Version=[2],New=[) attribute is],Old=[ attributes are]}
 inherited @Chg{Version=[2],New=[according to the rules given],Old=[as specified]}
-in @RefSecNum(Operational and Representation Items)@Chg{Version=[2],
+in @RefSecNum{Operational and Representation Aspects}@Chg{Version=[2],
 New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and] ],
 Old=[]}available for the parent type at the point
 where @i{T} is declared. For a tagged derived type, these attributes are
@@ -4537,7 +4576,7 @@ Read attributes execute as follows:]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0192-1]}
   @ChgAdded{Version=[3],Text=[The inheritance rules of
-  @RefSecNum(Operational and Representation Items) say that only specified or
+  @RefSecNum{Operational and Representation Aspects} say that only specified or
   inherited aspects are inherited; we mention it again here as a clarification.]}
 @end{TheProof}
 
@@ -4735,7 +4774,7 @@ S'Output to determine how much to read.>}
 is],Old=[attributes of the parent type are]}
 inherited @Chg{Version=[2],New=[according to the rules given],
 Old=[as specified]} in
-@RefSecNum(Operational and Representation Items)@Chg{Version=[2],
+@RefSecNum{Operational and Representation Aspects}@Chg{Version=[2],
 New=[ if the attribute is @Chg{Version=[3],New=[@Redundant[specified and] ],
 Old=[]}available for the parent type at the point where @i{T}
 is declared. For a tagged derived type, these attributes are not
@@ -4789,7 +4828,7 @@ an abstract function.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[For an abstract type @i<T>, S'Input can be
-  called in a dispatching call, or passed to a abstract formal
+  called in a dispatching call, or passed to an abstract formal
   subprogram. But it cannot be used in non-dispatching
   contexts, because we don't allow objects of abstract types to exist.
   The designation of this function as abstract has no
@@ -4904,7 +4943,7 @@ parameter. Constraint_Error is raised if this check fails.],Old=[]}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0228-1]}
   @ChgAdded{Version=[3],Text=[An implementation should always be able to detect
-  the error for a null value read into a component of a access subtype with
+  the error for a null value read into a component of an access subtype with
   a null exclusion; the "if the implementation can detect" is intended to cover
   non-null access values.]}
 @end{Honest}
@@ -5160,7 +5199,7 @@ The same rule applies to the result of the Input attribute.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0192-1]}
 @ChgAdded{Version=[3],Text=[An inherited stream attribute has a profile as
 determined by the rules for inheriting primitive subprograms (see
-@RefSecNum{Operational and Representation Items} and
+@RefSecNum{Operational and Representation Aspects} and
 @RefSecNum{Derived Types and Classes}).]}
 @end{Discussion}
 
@@ -5998,11 +6037,14 @@ causes freezing.]}
 @end{Ramification}
 
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1],ARef=[AI05-0296-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(profile of a callable entity by an instantiation)}
 @PDefn2{Term=[freezing], Sec=(expression of an expression function by an instantiation)}
 At the place where a @nt{generic_instantiation} causes freezing of a callable
-entity, the profile of that entity is frozen; if the callable entity is
+entity, the profile of that entity is frozen
+unless the formal subprogram corresponding to the callable entity has a
+parameter or result of a formal incomplete type of the same generic;
+if the callable entity is
 an expression function, the @nt{expression} of the expression function causes
 freezing.]}
 
@@ -6252,7 +6294,7 @@ before the constant is frozen
 @Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
-frozen (see @RefSecNum{Operational and Representation Items}).
+frozen (see @RefSecNum{Operational and Representation Aspects}).
 @ChgNote{A last minute change (requested by WG9) moved this rule to 13.1(9).
 However, the rule there only covers types and subtypes. So this rule is not
 redundant, and I removed the @Redundant for it. I don't have a way to mark
@@ -6276,7 +6318,7 @@ type is frozen, even though the @ntf{_clause} refers to the first subtype.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
 @ChgAdded{Version=[2],Text=[The above @LegalityName is stated
-for types and subtypes in @RefSecNum{Operational and Representation Items},
+for types and subtypes in @RefSecNum{Operational and Representation Aspects},
 but the rule here covers all other entities as well.]}
 @end{Discussion}
 @begin{TheProof}
@@ -6475,8 +6517,8 @@ and certain kinds of @nt{generic_declaration}s that are both harmless
 and very useful.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
-Ada 83 had a case where a @Chg{Version=[2],New=[@nt{aspect_clause}],
-Old=[@nt{representation_clause}]} had a strong
+Ada 83 had a case where @Chg{Version=[2],New=[an @nt{aspect_clause}],
+Old=[a @nt{representation_clause}]} had a strong
 effect on the semantics of the program @em 'Small.
 This caused certain semantic anomalies.
 There are more cases in Ada 95,

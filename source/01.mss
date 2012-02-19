@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -47,6 +47,7 @@ of concurrent threads of control as part of their invocation.
 The language treats modularity in the physical
 sense as well, with a facility to support separate compilation.
 
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0269-1]}
 The language includes a complete facility for
 the support of real-time, concurrent programming.
 Errors can be signaled as exceptions and handled explicitly.
@@ -55,7 +56,9 @@ covers systems programming; this requires precise control over the
 representation of data and access to system-dependent properties. Finally,
 a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
-numeric elementary functions, and random number generation.
+numeric elementary functions, @Chg{Version=[3],New=[],Old=[and ]}random
+number generation@Chg{Version=[3],New=[, and definition and use of
+containers],Old=[]}.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
@@ -403,7 +406,7 @@ The Specialized Needs Annexes extend the core language only in ways that
 users, implementations, and standards bodies are allowed to extend the
 language;
 for example, via additional library units,
-attributes, representation items (see @RefSecNum{Operational and Representation Items}),
+attributes, representation items (see @RefSecNum{Operational and Representation Aspects}),
 @nt{pragma}s,
 and constraints on semantic details that are left unspecified by the
 core language.
@@ -1014,7 +1017,7 @@ are allowed to implement these extensions. Thus, these strictly speaking are not
 extensions of Ada 2005; they're part of Ada 2005. Practically, however, they
 very well may be extensions, as early Ada 2005 implementations might not implement
 the extension. Therefore, some Ada 2005 implementations may be able to compile
-the examples, while others moght not. In contrast, Ada 2012 compilers will always
+the examples, while others might not. In contrast, Ada 2012 compilers will always
 support the extensions. Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

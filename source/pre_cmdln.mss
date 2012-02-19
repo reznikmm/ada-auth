@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2011/10/21 06:41:26 $ $Author: randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:26 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -109,6 +109,24 @@ An alternative declaration is allowed
 for package Command_Line if different functionality is appropriate
 for the external execution environment.
 @end{ImplPerm}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[Functions Argument and Command_Name should return
+a UTF-8 encoded string starting with a BOM (see @RefSecNum{String Encoding}) if
+and only if the result includes characters with code points greater than 255.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[We require that the functions only return UTF-8
+representations when absolutely necessary to maximize compatibility with code
+that is not aware of the possibility of UTF-8 encoded results.]}
+@end{Reason}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Functions Command_Line.Argument and Command_Line.Command_Name
+should return a UTF-8 encoded string that start with a
+BOM if necessary.]}]}
+@end{ImplAdvice}
 
 
 @begin{Notes}

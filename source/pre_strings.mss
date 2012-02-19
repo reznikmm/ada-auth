@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/01/22 06:25:09 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3576,16 +3576,7 @@ containing a sequence of values encoded in UTF-16.]}
 @ChgAdded{Version=[3],Text=[The BOM_8, BOM_16BE, BOM_16LE, and BOM_16 constants
 correspond to values used at the start of a string to indicate the encoding.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns
-a UTF_String, UTF_8_String, or UTF_16_String value whose characters have position values
-that correspond to the encoding of the Item parameter according to the
-encoding scheme required by the function or specified by its Output_Scheme
-parameter. For UTF_8, no overlong encoding is returned. A BOM is included
-at the start of the returned string if the Output_BOM parameter is set to
-True. The lower bound of the returned string is 1.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[Each of the Encode functions takes a String,
 Wide_String, or Wide_Wide_String Item parameter that is assumed to be an array
 of unencoded characters. Each of the Convert functions takes a UTF_String,
@@ -3593,6 +3584,15 @@ UTF_8_String, or UTF_16_String Item parameter that is assumed to
 contain characters whose position values correspond to a valid encoding sequence
 according to the encoding scheme required by the function or specified by its
 Input_Scheme parameter.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[Each of the Convert and Encode functions returns
+a UTF_String, UTF_8_String, or UTF_16_String value whose characters have position values
+that correspond to the encoding of the Item parameter according to the
+encoding scheme required by the function or specified by its Output_Scheme
+parameter. For UTF_8, no overlong encoding is returned. A BOM is included
+at the start of the returned string if the Output_BOM parameter is set to
+True. The lower bound of the returned string is 1.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[Each of the Decode functions takes a UTF_String,
@@ -3646,11 +3646,11 @@ situations:]}
    @key[return] Encoding_Scheme;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Inspects a UTF_String value to
 determine whether it starts with a BOM for UTF-8, UTF-16BE, or UTF_16LE. If so,
-returns the scheme corresponding to the BOM; returns the value of Default
-otherwise.]}
+returns the scheme corresponding to the BOM; otherwise, returns the value of
+Default.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
@@ -3820,8 +3820,7 @@ which is encoded in UTF-8, UTF-16LE, or UTF-16BE as specified by Input_Scheme.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of decoding Item, which is encoded in UTF-8,
-and returns the corresponding Wide_String value.]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of decoding Item, which is encoded in UTF-8.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}
@@ -3879,8 +3878,8 @@ which is encoded in UTF-8, UTF-16LE, or UTF-16BE as specified by Input_Scheme.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of decoding Item, which is encoded in UTF-8,
-and returns the corresponding Wide_Wide_String value.]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the result of decoding Item,
+which is encoded in UTF-8.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0137-2]}

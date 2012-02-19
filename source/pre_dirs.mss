@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2012/01/22 06:25:08 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -404,7 +404,7 @@ New_Name.]}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This operation is expected to work within a
-  a single directory, and implementers are encouraged to support it across
+  single directory, and implementers are encouraged to support it across
   directories on a single device. Copying files from one device to another
   is discouraged (that's what Copy_File is for). However, there is no
   requirement to detect file copying by the target system. If the target
@@ -1147,6 +1147,26 @@ external file.]}]}
   implementers that simply raising Use_Error isn't acceptable.]}
 @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[Subprograms in the package Directories and its
+children that accept a string should allow the use of UTF-8 encoded strings that
+start with a BOM (see @RefSecNum{String Encoding}) if the target file system
+allows characters with code points greater than 255 in any part of a full name.
+Functions in the package Directories and its children that return a string
+should return a UTF-8 encoded string starting with a BOM if and only if the
+result includes characters with code points greater than 255.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[We require that functions only return UTF-8
+representations when absolutely necessary to maximize compatibility with code
+that is not aware of the possibility of UTF-8 encoded results.]}
+@end{Reason}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Subprograms in the package Directories and its children that accept
+or return a string should allow the use of UTF-8 encoded strings that start with
+a BOM.]}]}
+
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1384,9 +1404,10 @@ is a root, and returns False otherwise.]}
 @ChgAdded{Version=[3],Text=[@key{function} Is_Relative_Name (Name : @key{in} String) @key{return} Boolean;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0049-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[Returns True if Name allows the identification of an
-external file but is not a full name, and returns False otherwise.]}
+external file (including directories and special files) but is not a full name,
+and returns False otherwise.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}

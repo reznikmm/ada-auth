@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.90 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@comment{ $Revision: 1.91 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:03 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -12,6 +12,11 @@
 @ChgAdded{Version=[2],Text=[This clause presents the specifications of the package
 Containers and several child packages, which provide facilities for storing
 collections of elements.]}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Container>,
+Text=<@ChgAdded{Version=[3],Text=[A container type is one whose objects contain
+other objects. Several predefined container types are provided by the children
+of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[A variety of sequence and associative containers are
@@ -8886,7 +8891,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Two elements @i<E1> and @i<E2> are @i<equivalent>
 if both @i<E1> < @i<E2> and @i<E2> < @i<E1> return False, using the generic
-formal "<" operator for elements.@Defn2{Term=[equivalent element],Sec=[of a ordered set]}
+formal "<" operator for elements.@Defn2{Term=[equivalent element],Sec=[of an ordered set]}
 Function Equivalent_Elements returns True if Left and Right are equivalent,
 and False otherwise.]}
 
@@ -8923,10 +8928,10 @@ key/element pairs.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[first element],Sec=[of a ordered set]}
-@Defn2{Term=[last element],Sec=[of a ordered set]}
-@Defn2{Term=[successor element],Sec=[of a ordered set]}@Chg{Version=[3],New=[
-@Defn2{Term=[predecessor element],Sec=[of a ordered set]}],Old=[]}
+@ChgAdded{Version=[2],Text=[@Defn2{Term=[first element],Sec=[of an ordered set]}
+@Defn2{Term=[last element],Sec=[of an ordered set]}
+@Defn2{Term=[successor element],Sec=[of an ordered set]}@Chg{Version=[3],New=[
+@Defn2{Term=[predecessor element],Sec=[of an ordered set]}],Old=[]}
 The @Chg{Version=[3],New=[@i<first element>],Old=[first element]}
 of a nonempty set is the one
 which is less than all the other elements in the set.

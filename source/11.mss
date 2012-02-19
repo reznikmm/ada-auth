@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -958,6 +958,14 @@ whereas Exception_Information can be long.
 Exception_Message should not include the Exception_Name.
 Exception_Information should include both the Exception_Name and the
 Exception_Message.
+
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[Function Exception_Message and Exception_Information
+should return a UTF-8 encoded string starting with a BOM (see
+@RefSecNum{String Encoding}) if and only if the result includes characters with
+code points greater than 255.]}
+
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Exception_Information should provide
 information useful for debugging, and should include the Exception_Name
@@ -965,6 +973,10 @@ and Exception_Message.]}]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Exception_Message by default should be short, provide
 information useful for debugging, and should not include the Exception_Name.]}]}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Exception_Message and Exception_Information should return a UTF-8 encoded
+string that starts with a BOM if any characters with a code point greater than
+255.]}]}
 
 @begin{Reason}
 It may seem strange to define two subprograms whose semantics is
@@ -1117,6 +1129,15 @@ which it supports non-Latin-1 characters in identifiers, then it needs to
 define what the above functions return in the case where the name of an
 exception contains such a character.]}
 @end{ImplNote}
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[Since all of the routines and operations that raise
+and set the exception message take a string but do not interpret it, we need to
+say nothing to allow passing UTF-8 encoded strings with a BOM. Since encoding in
+this string is a common programming idiom, implementations should not modify any
+exception message string unless it starts with a BOM and does not contain any
+characters with code points greater than 255.]}
+@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Extend83}
@@ -1218,6 +1239,33 @@ manner.]}]}
 @RefSecNum{Type Invariants}) are collectively referred to as
 @i{assertions}; their boolean expressions are referred to as @i{assertion
 expressions}.@Defn{assertions}@Defn{assertion expressions}]}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Predicate>,
+Text=<@ChgAdded{Version=[3],Text=[A predicate is an assertion that gives a
+boolean expression that is expected to be True for all objects of a given
+subtype.]}>}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Precondition>,
+Text=<@ChgAdded{Version=[3],Text=[A precondition is an assertion that gives a
+boolean expression that is expected to be True when a given subprogram is
+called.]}>}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Postcondition>,
+Text=<@ChgAdded{Version=[3],Text=[A postcondition is an assertion that gives a
+boolean expression that is expected to be True when a given subprogram returns
+normally.]}>}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Invariant>,
+Text=<@ChgAdded{Version=[3],Text=[A invariant is an assertion that gives a
+boolean expression that is expected to be True for all objects of a given
+private type when viewed from outside the enclosing package.]}>}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Assertion>,
+Text=<@ChgAdded{Version=[3],Text=[An assertion is any of the following: a pragma
+Assert, a predicate, a precondition, a postcondition, an invariant, a
+constraint, or a null exclusion. Assertions may be used to specify
+boolean expressions that are expected to be True at run time at certain
+places.]}>}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
 @ChgAdded{Version=[3],Text=[Pragma Assertion_Policy is used to control whether

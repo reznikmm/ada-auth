@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -994,7 +994,7 @@ Tagged types are a new concept.
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0115-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> We explicitly define the meaning
-  of "descendant" at runtime, so that it does not depend upon visibility
+  of "descendant" at runtime, so that it does not depend on visibility
   as does the usual meaning.]}
 @end{DiffWord2005}
 
@@ -3751,7 +3751,7 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   keyword @key[aliased] be considered aliased. This latter was a significant
   oversight in Ada 2005 @em technically, the keyword @key[aliased] had no
   effect. But of course implementations followed the intent, not the letter of
-  the the Standard.]}
+  the Standard.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
   @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
@@ -4597,9 +4597,9 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[If the result is used (in its entirety) to
   directly initialize part of an object, the master is that of the object being
-  initialized. In the case where the initialized object is a coextension that
-  becomes a coextension of another object (see below), the master is that of the
-  eventual object to which the coextension will be transferred.]}
+  initialized. In the case where the initialized object is a coextension
+  (see below) that becomes a coextension of another object, the master is that
+  of the eventual object to which the coextension will be transferred.]}
 
   @begin{Honest}
     @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
@@ -4783,7 +4783,7 @@ the level of the object or subprogram designated by the associated value (or
 library level if null);]}
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[This covers the case of a unconstrained
+  @ChgAdded{Version=[3],Text=[This covers the case of an unconstrained
   subcomponent of a limited type with defaulted access discriminants.]}
 @end{Discussion}
 

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -166,6 +166,30 @@ documentation requirements in @RefSec{Exceptions in Input-Output}, and
 the documentation summary item is provided there.]}
 @end{Discussion}
 @end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[Subprograms that accept the name or form of an
+external file should allow the use of UTF-8 encoded strings that start with a
+BOM (see @RefSecNum{String Encoding}) if the target file system allows
+characters with code points greater than 255 in names. Functions that return
+name or form of an external file should return a UTF-8 encoded string starting
+with a BOM if and only if the result includes characters with code points
+greater than 255.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[We require that functions only return UTF-8
+representations when absolutely necessary to maximize compatibility with code
+that is not aware of the possibility of UTF-8 encoded results.]}
+@end{Reason}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Subprograms that accept or return the name or form of an
+external file should allow the use of UTF-8 encoded strings that start with a
+BOM.]}]}
+@end{ImplAdvice}
+
+
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}

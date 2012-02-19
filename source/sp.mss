@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2012/01/22 06:25:09 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/01/22 06:25:09 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1609,7 +1609,7 @@ subheader}
 @PDefn2{Term=[representation pragma], Sec=(Volatile_Components)}
 @PDefn2{Term=[pragma, representation], Sec=(Volatile_Components)}
 These @nt{pragma}s are representation pragmas
-(see @RefSecNum{Operational and Representation Items}).]}
+(see @RefSecNum{Operational and Representation Aspects}).]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1619,12 +1619,12 @@ updates of the object as a whole are indivisible.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1],ARef=[AI05-0275-1]}
 @Chg{Version=[3],New=[All tasks of the program (on all processors) that
-read or update volatile @Redundant[and atomic] variables see the same order of
+read or update volatile variables see the same order of
 updates to the variables. A use of an atomic variable or other mechanism may be
-necessary to avoid erroneous execution and to ensure that access to volatile
-variables is sequential (see @RefSecNum{Shared Variables}).],
-Old=[For a volatile object all reads and updates of the
-object as a whole are performed directly to memory.]}
+necessary to avoid erroneous execution and to ensure that access to
+nonatomic volatile variables is sequential (see @RefSecNum{Shared Variables}).],
+Old=[For a volatile object all reads and updates of the object as a whole are
+performed directly to memory.]}
 
 @begin{ImplNote}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0117-1],ARef=[AI05-0275-1]}

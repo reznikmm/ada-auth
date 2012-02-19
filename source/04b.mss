@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1381,7 +1381,7 @@ uninitialized case illegal as well.]}
 
 @begin{Resolution}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0010],ARef=[AI95-00127-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3],ARef=[AI05-0269-1]}
 @PDefn2{Term=[expected type],Sec=(allocator)}
 The expected type for an @nt<allocator> shall be a single access-to-object
 type @Chg{New=[with],Old=[whose]} designated type
@@ -1390,8 +1390,8 @@ by the @nt<subtype_mark> of the @nt<subtype_@!indication> or
 @nt<qualified_@!expression>@Chg{New=[, or the expected type is anonymous and
 the determined type is @i<D>'Class],Old=[]}.@Chg{Version=[3],New=[
 A @SynI{subpool_handle_}@nt{name} is expected to be of any type descended from
-Subpool_Handle, the type used to identify a subpool, declared in package
-System.Storage_Pools.Subpools
+Subpool_Handle, which is the type used to identify a subpool, declared
+in package System.Storage_Pools.Subpools
 (see @RefSecNum{Storage Subpools}).@PDefn2{Term=[expected type],Sec=(subpool_handle_name)}],Old=[]}
 @begin{Discussion}
   See @RefSec(The Context of Overload Resolution) for the meaning
@@ -2092,12 +2092,12 @@ Adding qualification to an expression shouldn't make it nonstatic, even
 for strings.
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1],ARef=[AI05-0269-1]}
 a membership test
 whose @nt{simple_expression} is a static expression,
 and whose @Chg{Version=[3],New=[@nt{membership_choice_list} consists only of
-@nt{membership_choice}s each of which is either a static @nt{choice_expression},
-a static @nt{range}, or a @nt{subtype_mark} that denotes],Old=[@nt{range}
+@nt{membership_choice}s that are either static @nt{choice_expression}s,
+static @nt{range}s, or @nt{subtype_mark}s that denote],Old=[@nt{range}
 is a static range or whose @nt{subtype_mark} denotes]} a
 static @Redundant[(scalar or string)] subtype;
 @begin{Reason}

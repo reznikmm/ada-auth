@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/18 02:17:38 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2510,8 +2510,8 @@ run-time check to a compile-time check.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Revised the wording for
   inheritance of characteristics and operations of formal derived types
   to be reuse the rules as defined for derived types; this should eliminate
-  holes which have plagued us with this wording (it has been changed five
-  times since Ada 95 was defined).]}
+  holes in the wording which have plagued us since Ada 95 was defined
+  (it has been "corrected" four previous times).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0237-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added missing rule for the
@@ -2754,18 +2754,19 @@ for subtypes that exclude null. We would rather that this sort of requirement
 be reflected in the contract of the generic.]}
 @end{Reason}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1],ARef=[AI05-0288-1]}
 For a formal access-to-subprogram subtype,
 the designated profiles of the formal and the actual
-shall be @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]},
+shall be @Chg{Version=[3],New=[subtype conformant],Old=[mode-conformant,
 and the calling convention of the actual shall be @i{protected}
-if and only if that of the formal is @i{protected}.
-@Defn2{Term=[mode conformance],Sec=(required)}
+if and only if that of the formal is @i{protected}]}.
+@Chg{Version=[3],New=[@Defn2{Term=[subtype conformance],Sec=(required)}],
+Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
 @begin{Reason}
-We considered requiring subtype conformance here,
-but mode conformance is more flexible,
-given that there is no way in general to specify the convention of
-the formal.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0288-1]}
+  @ChgDeleted{Version=[3],Text=[We considered requiring subtype conformance
+  here, but mode conformance is more flexible, given that there is no way in
+  general to specify the convention of the formal.]}
 @end{Reason}
 @end{Legality}
 

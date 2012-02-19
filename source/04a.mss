@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1101,7 +1101,7 @@ the following type-related operational aspect may be specified:]}
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Implicit_Dereference@\This aspect is specified by a
-name that denotes an access discriminant declared for the
+@nt{name} that denotes an access discriminant declared for the
 type @i<T>.@AspectDefn{Implicit_Dereference}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Implicit_Dereference],
@@ -1118,6 +1118,11 @@ discriminant} of the reference type or reference object.@Defn{reference discrimi
 @Redundant[A @nt{generalized_reference} is a @nt{name} that identifies a
 reference object, and denotes the object or subprogram designated by the
 reference discriminant of the reference object.]]}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Reference type>,
+Text=<@ChgAdded{Version=[3],Text=[A reference type is one that has user-defined
+semantics for @ldquote.@key[all]@rdquote, defined by the
+Implicit_Dereference aspect.]}>}
 @end{StaticSem}
 
 @begin{Syntax}
@@ -1273,13 +1278,19 @@ be overridden, but the functions they denote may be.]]}
   aspects.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[An @i<indexable type> is (a view of) a
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
+@ChgAdded{Version=[3],Text=[An @i<indexable container type> is (a view of) a
 tagged type with at least one of the aspects Constant_Indexing or
-Variable_Indexing specified.@Defn{indexable type}
-An @i<indexable object> is an object of an indexable type.@Defn{indexable object}
-@Redundant[A @nt{generalized_indexing} is a @nt{name} that denotes the result
-of calling a function named by a Constant_Indexing or Variable_Indexing aspect.]]}
+Variable_Indexing specified.@Defn{indexable container type}
+An @i<indexable container object> is an object of an indexable container
+type.@Defn{indexable container object} @Redundant[A @nt{generalized_indexing} is
+a @nt{name} that denotes the result of calling a function named by a
+Constant_Indexing or Variable_Indexing aspect.]]}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Indexable container type>,
+Text=<@ChgAdded{Version=[3],Text=[An indexable container type is one that has
+user-defined semantics for indexing, via the Constant_Indexing or
+Variable_Indexing aspects.]}>}
 
 @end{StaticSem}
 
@@ -1319,23 +1330,23 @@ these rules apply also in the private part of an instance of a generic unit.]}
 
 @begin{Syntax}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<generalized_indexing>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@SynI{indexable_object_}@Syn2{prefix} @Syn2{actual_parameter_part}>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@SynI{indexable_container_object_}@Syn2{prefix} @Syn2{actual_parameter_part}>,Old=<>}"}
 
 @end{Syntax}
 
 @begin{Resolution}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the
-@Syni{indexable_object_}@nt{prefix} of a @nt{generalized_indexing}
-is any indexable type.@PDefn2{Term=[expected type],
-  Sec=(@SynI{indexable_object_}@nt{prefix})}]}
+@Syni{indexable_container_object_}@nt{prefix} of a @nt{generalized_indexing}
+is any indexable container type.@PDefn2{Term=[expected type],
+  Sec=(@SynI{indexable_container_object_}@nt{prefix})}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If the Constant_Indexing aspect is
-specified for the type of the @SynI{indexable_object_}@nt{prefix} of a
+specified for the type of the @SynI{indexable_container_object_}@nt{prefix} of a
 @nt{generalized_indexing}, then the @nt{generalized_indexing} is interpreted as
 a @i<constant indexing> under the following
 circumstances:@Defn{constant indexing}@Defn2{Term=[indexing],Sec=[constant]}]}
@@ -1344,10 +1355,10 @@ circumstances:@Defn{constant indexing}@Defn2{Term=[indexing],Sec=[constant]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[when the Variable_Indexing aspect is not specified
-     for the type of the @SynI{indexable_object_}@nt{prefix};]}
+     for the type of the @SynI{indexable_container_object_}@nt{prefix};]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[when the @SynI{indexable_object_}@nt{prefix}
+  @ChgAdded{Version=[3],Text=[when the @SynI{indexable_container_object_}@nt{prefix}
     denotes a constant;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1376,8 +1387,8 @@ interpreted as a
 @ChgAdded{Version=[3],Text=[When a @nt{generalized_indexing} is interpreted as a
 constant (or variable) indexing, it is equivalent to a call on a prefixed view
 of one of the functions named by the Constant_Indexing (or Variable_Indexing)
-aspect of the type of the @Syni{indexable_object_}@nt{prefix} with the given
-@nt{actual_parameter_part}, and with the @Syni{indexable_object_}@nt{prefix} as
+aspect of the type of the @Syni{indexable_container_object_}@nt{prefix} with the given
+@nt{actual_parameter_part}, and with the @Syni{indexable_container_object_}@nt{prefix} as
 the @nt{prefix} of the prefixed view.]}
 
 @begin{Ramification}
@@ -1387,7 +1398,7 @@ the @nt{prefix} of the prefixed view.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@SynI{indexable_object_}@nt{prefix}.Indexing @nt{actual_parameter_part}]}
+@ChgAdded{Version=[3],Text=[@SynI{indexable_container_object_}@nt{prefix}.Indexing @nt{actual_parameter_part}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1400,10 +1411,10 @@ the @nt{prefix} of the prefixed view.]}
 @begin{Examples}
 @begin{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Indexed_Barrel @key[is tagged] ...
   @key[with] Variable_Indexing => Find;
-  -- @Examcom{Indexed_Barrel is an indexable type,}
+  -- @Examcom{Indexed_Barrel is an indexable container type,}
   -- @Examcom{Find is the generalized indexing operation.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
@@ -3590,7 +3601,7 @@ The equality operators are not defined for @i{every} nonlimited
 type @em see below for the exact rule.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1],ARef=[AI05-0269-1]}
 @Defn{membership test}
 @Defn{in (membership test)}
 @Defn{not in (membership test)}
@@ -3599,7 +3610,7 @@ determines whether or not a value
 belongs to @chg{Version=[3],New=[any],Old=[a]} given subtype or range,
 @chg{Version=[3],New=[is equal to any given value,],Old=[or]} has a tag
 that identifies a type that is covered by a given type@chg{Version=[3],New=[,
-or is convertible to and with accessibility level appropriate for a given
+or is convertible to and has accessibility level appropriate for a given
 access type],Old=[]}. Membership tests are allowed for all types.]
 
 @end{Intro}
@@ -3861,7 +3872,7 @@ is defined in terms of the primitive @Redundant[(possibly
 user-defined)] equals operator
 @Chg{Version=[3],New=[for],Old=[of]} the parent type and
 @Chg{Version=[3],New=[for],Old=[of]} any @Chg{Version=[3],New=[],Old=[tagged ]}components
-@Chg{Version=[3],New=[ that have a record type in],Old=[of]} the extension part, and
+@Chg{Version=[3],New=[that have a record type in],Old=[of]} the extension part, and
 predefined equality
 for any other components not inherited from the parent type.
 @begin{Ramification}
@@ -5219,11 +5230,11 @@ statements
 shall be convertible (see @RefSecNum{Type Conversions}) to the type of the
 @nt{conditional_expression}.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1],ARef=[AI05-0188-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[If the expected type of a
 @nt{conditional_expression} is a specific tagged type, all of the
 @SynI{dependent_}@nt{expression}s of the @nt{conditional_expression} shall be
-dynamically tagged, or none shall be dynamically tagged; the
+dynamically tagged, or none shall be dynamically tagged. In this case, the
 @nt{conditional_expression} is dynamically tagged if all of the
 @SynI{dependent_}@nt{expression}s are dynamically tagged, is tag-indeterminate
 if all of the @SynI{dependent_}@nt{expression}s are tag-indeterminate, and is
@@ -5234,10 +5245,10 @@ statically tagged otherwise.]}
 @SynI{dependent_}@nt{expression}, the @nt{if_expression} shall be of
 a boolean type.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[All @LegalityTitle that apply to the
-@nt{discrete_choice}s of a @nt{case_statement} (see @RefSecNum{Case Statements}),
-apply to the @nt{discrete_choice}s of a @nt{case_expression} except
+@nt{discrete_choice}s of a @nt{case_statement} (see @RefSecNum{Case Statements})
+also apply to the @nt{discrete_choice}s of a @nt{case_expression} except
 within an instance of a generic unit.]}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal]}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/02/04 09:08:02 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -737,11 +737,11 @@ for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Ter
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{expression} is
-@i{potentially unevaluated} if occurs within:@Defn{potentially unevaluated expression}]}
+@i{potentially unevaluated} if it occurs within:@Defn{potentially unevaluated expression}]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[any part of a @nt{if_expression} other than the
+  @ChgAdded{Version=[3],Text=[any part of an @nt{if_expression} other than the
   first @nt{condition};]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -928,8 +928,9 @@ precondition checks are performed as follows:@Defn2{Term=[assertion policy],
 @end{Ramification}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
-@ChgAdded{Version=[3],Text=[The checks are performed in an arbitrary order,
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0269-1]}
+@ChgAdded{Version=[3],Text=[The precondition checks are performed in an
+arbitrary order,
 and if any of the class-wide precondition expressions evaluate to True, it is
 not specified whether the other class-wide precondition expressions are
 evaluated. The precondition checks and any check for elaboration of the
@@ -1893,7 +1894,7 @@ are equivalent to calls using prefix notation.
 @key[with] A;
 @key[package] B @key[is]
     @key[package] A_View @key[renames] A;
-    @key[function] F_View(X : Integer := 9999) @key[return] Boolean @key[renames] @Chg{Version=[3],New=[A.],Old=[]}F;
+    @key[function] F_View(X : Integer := 9999) @key[return] Boolean @key[renames] @Chg{Version=[3],New=[A.F],Old=[F]};
 @key[end] B;
 
 @key[with] A, B; @key[use] A, B;
@@ -3436,8 +3437,8 @@ statically deeper than that of the master that elaborated the function body.]}]}
   return statement@Chg{Version=[3],New=[ unless this is
   an @nt{extended_return_statement} whose @nt{return_subtype_indication} is
   a specific type. We have a separate rule to cover that case. Note that
-  if an @nt{extended_return_statement} has an @nt{expression}, then both rules
-  must be satisfied],Old=[. Similarly, if
+  if an @nt{extended_return_statement} has an @nt{expression}, then both this
+  rule and the next one must be satisfied],Old=[. Similarly, if
   the result subtype is unconstrained, then either the
   @nt{return_@!subtype_@!indication} (if any) is constrained, or
   there must be an @nt{expression}]}.]}
@@ -3807,8 +3808,8 @@ that object.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0234-1]}
   @ChgAdded{Version=[3],Text=[The reason for saying @ldquote@;any part of
   the specific type@rdquote is to simplify implementation. In the case of
-  class-wide result objects this allows the testing of a simple flag in the
-  tagged type descriptor that indicates whether specific type has any parts with
+  class-wide result objects, this allows the testing of a simple flag in the
+  tagged type descriptor that indicates whether the specific type has any parts with
   access discriminants. By basing the test on the type of the object rather than
   the object itself, we avoid concerns about whether subcomponents in variant
   parts and of arrays (which might be empty) are present.]}
@@ -3826,10 +3827,10 @@ that object.]}
    initialized descriptor of some kind for each specific tagged type, then an
    additional Boolean could be added to this descriptor.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0234-1]}
   @ChgAdded{Version=[3],Text=[Note that the flag should only be queried in the
-   case where any access discriminants which the result object might have
-   subtypes with "bad" accessibility levels (as determined by the rules of
+   case where the result object might have access discriminants that might
+   have subtypes with "bad" accessibility levels (as determined by the rules of
    @RefSecNum{Operations of Access Types} for determining the accessibility
    level of the type of an access discriminant in the @nt{expression} or
    @nt{return_subtype_indication} of a return statement).]}
@@ -3848,7 +3849,9 @@ that object.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[there is no need for a run-time
-    accessibility check. The setting of the bit doesn't matter and there is no
+    accessibility check. While an object of T'Class "might have" access
+    discriminants, the accessibility of those potential discriminants
+    cannot be bad. The setting of the bit doesn't matter and there is no
     need to query it.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4277,7 +4280,7 @@ should be deleted if the paragraphs are ever renumbered.}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[],Old=[The form
 of a @nt{pragma} No_Return, which is a
-representation pragma (see @RefSecNum{Operational and Representation Items}),
+representation pragma (see @RefSecNum{Operational and Representation Aspects}),
 is as follows:]}]}
 @end{SyntaxText}
 

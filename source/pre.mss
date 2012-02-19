@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:05 $}
+@Comment{$Date: 2012/02/18 02:17:39 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.47 $}
+@comment{$Revision: 1.48 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -285,7 +285,7 @@ denote nonoverlapping objects.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
-@ChgAdded{Version=[3],Text=[If a descendent of a language-defined tagged
+@ChgAdded{Version=[3],Text=[If a descendant of a language-defined tagged
 type is declared, the implementation
 shall ensure that each inherited language-defined subprogram behaves as
 described in this International Standard. In particular, overriding

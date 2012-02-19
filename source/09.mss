@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/02/04 09:08:02 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 
@@ -180,7 +180,7 @@ it shall repeat the @nt{defining_identifier}.
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
 @ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
@@ -192,6 +192,12 @@ task declaration.]}
   if the implementation supports it.]}
 @end(Honest)
 @end{Legality}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 8 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
+
 
 @begin{StaticSem}
 
@@ -1222,17 +1228,24 @@ these rules also apply in the private part of an instance of a generic unit.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0291-1]}
 @ChgAdded{Version=[2],Text=[If an inherited subprogram is implemented by a
 protected procedure or an entry, then the first parameter of the inherited
 subprogram shall be of mode @key{out} or @key{in out}, or an
-access-to-variable parameter.]}
+access-to-variable parameter.@Chg{Version=[3],New=[
+If an inherited subprogram is implemented by a protected function, then the
+first parameter of the inherited subprogram shall be of mode @key{in}, but not
+an access-to-variable parameter.],Old=[]}]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[For a protected procedure or entry, the protected
 object can be read or written (see
 @RefSecNum{Protected Subprograms and Protected Actions}). A subprogram
 that is implemented by a protected procedure or entry must have a profile
-which reflects that in order to avoid confusion.]}
+which reflects that in order to avoid confusion.@Chg{Version=[3],New=[
+Similarly, a protected function has a parameter that is a constant,
+and the inherited routine should reflect that.],Old=[]}]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00397-01]}
@@ -1631,7 +1644,8 @@ indirectly via a shared protected object.
 @end{Intro}
 
 @begin{StaticSem}
-@leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0225-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0225-1],ARef=[AI05-0291-1]}
+@ChgDeleted{Version=[3],Type=[Leading],Text=[]}@Comment{Fake for conditional Leading}.
 @Chg{Version=[3],New=[@Defn2{Term=[target object],
   Sec=(of the name of an entry or a protected subprogram)}],
 Old=[@Defn2{Term=[target object],
@@ -1646,8 +1660,25 @@ protected subprogram@Chg{Version=[3],New=[],Old=[ call]}). The target object
 to the operation, and is determined]} by the operation
 @nt<name> (or @nt<prefix>) used in @Chg{Version=[3],New=[a],Old=[the]} call
 on @Chg{Version=[3],New=[an entry or a protected subprogram is considered an
-implicit parameter to the call. The target object is determined],Old=[the
-operation,]} as follows:
+implicit parameter to the call. In addition, a primitive subprogram
+of a limited interface can be implemented by an entry or a protected subprogram,
+and a @nt{name} denoting such a subprogram also identifies a target object.],
+Old=[the operation, as follows:]}
+
+@begin{Honest}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0291-1]}
+  @ChgAdded{Version=[3],Text=[This wording uses "denotes" to mean "denotes a
+  view of an entity" (when the term is used in Legality Rules), and "denotes an
+  entity" (when the term is used in Dynamic Semantics rules). It does not mean
+  "view of a declaration", as that would not include renames (a renames is not
+  an entry or protected subprogram).]}
+@end{Honest}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0291-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[When the @nt{name} denotes an entry,
+protected subprogram, or a prefixed view of a primitive subprogram of a limited
+interface whose first parameter is a controlling parameter, the target object is
+determined as follows:]}
 @begin(Itemize)
   If it is a @nt<direct_name> or expanded name
   that denotes the declaration (or body) of the operation, then
@@ -1657,9 +1688,10 @@ operation,]} as follows:
   @Defn{internal call}
   such a call is defined to be an @i(internal call);
 
-  @leading@;If it is a @nt<selected_component> that is not
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0291-1]}
+  If it is a @nt<selected_component> that is not
   an expanded name, then the target object is explicitly
-  specified to be the task or protected object
+  specified to be the @Chg{Version=[3],New=[],Old=[task or protected]} object
   denoted by the @nt<prefix> of the @nt<name>;
   @Defn{external call}
   such a call is defined to be an @i(external call);
@@ -1704,6 +1736,25 @@ Other_Object : Some_Other_Protected_Type;
 
 @end(Itemize)
 
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0291-1]}
+@ChgAdded{Version=[3],Text=[Any call that might be on an entry or protected
+subprogram and that is not included above is an @i<external call>. For a call
+other than via a prefixed view on a
+primitive subprogram of a limited interface whose first parameter is a
+controlling parameter, the first parameter of the call is the target object of
+the call. For a call on a subprogram rename, the @nt{name} of the renamed item
+and possibly the first parameter determine the target object of the call. For a
+call on a generic formal subprogram, the @nt{name} of the actual callable entity
+and possibly the first parameter determine the target object of the call.]}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The above says "possibly the first parameter",
+  because Ada allows entries and protected subprograms to be renamed and passed
+  as formal subprograms. In those cases, the target object can be (but is not
+  required to be in the case of subprograms) implicit in the name of the
+  routine; otherwise the object is an explicit parameter to the call.]}
+@end{Discussion}
+
 @Defn2{Term=[target object],
   Sec=(of a @nt<requeue_statement>)}
 @Defn{internal requeue}
@@ -1712,6 +1763,7 @@ A corresponding definition of target object applies
 to a @nt<requeue_statement> (see @RefSecNum(Requeue Statements)),
 with a corresponding distinction between an @i(internal requeue)
 and an @i(external requeue).
+
 @end{StaticSem}
 
 @begin{Legality}
@@ -3936,10 +3988,10 @@ and another time zone.]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0119-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0119-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns, as a number of minutes, the
 @Chg{Version=[3],New=[result of subtracting],Old=[difference between]}
-the implementation-defined time zone of Calendar, and
+the implementation-defined time zone of Calendar@Chg{Version=[3],New=[ from],Old=[, and]}
 UTC time, at the time Date. If the time zone of the Calendar implementation is
 unknown, then Unknown_Zone_Error is raised.]}
 @begin{Ramification}
@@ -4629,8 +4681,8 @@ to have several open
       @key(select)
          @key(accept) Next_Work_Item(WI : @key(in) Work_Item) @key(do)
             Current_Work_Item := WI;
-          @key(end);
-          Process_Work_Item(Current_Work_Item);
+         @key(end);
+         Process_Work_Item(Current_Work_Item);
       @key(or)
          @key(accept) Shut_Down;
          @key(exit);       --@RI[ Premature shut down requested]
@@ -4707,18 +4759,22 @@ possible.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgAdded{Version=[2],Text=[If a @nt{procedure_call_statement} is used for a
-@nt{procedure_or_entry_call}, and the procedure is implemented by an entry,
-then the @SynI{procedure_}@nt{name}, or @SynI{procedure_}@nt{prefix} and
-possibly the first parameter of the @nt{procedure_call_statement}, determine
-the target object of the call and the entry to be called.]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0291-1]}@Comment{
+We don't need a message here, as this is the last inserted paragraph}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[If a
+@nt{procedure_call_statement} is used for a @nt{procedure_or_entry_call}, and
+the procedure is implemented by an entry, then the @SynI{procedure_}@nt{name},
+or @SynI{procedure_}@nt{prefix} and possibly the first parameter of the
+@nt{procedure_call_statement}, determine the target object of the call and the
+entry to be called.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The above says @lquotes@;possibly the first
-    parameter@rquotes@;, because Ada allows entries
-    to be renamed and passed as formal subprograms. In those cases, the
-    task or protected object is implicit in the name of the routine; otherwise
-    the object is an explicit parameter to the call.]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The above says @lquotes@;possibly the first
+    parameter@rquotes@;, because Ada allows entries to be renamed and passed as
+    formal subprograms. In those cases, the task or protected object is implicit
+    in the name of the routine; otherwise the object is an explicit parameter to
+    the call.]}]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -4982,15 +5038,15 @@ executed after the @nt<abortable_part> is left.
 @i(Example of a main command loop for a command interpreter:)
 @begin(Example)
 @key(loop)
-    @key(select)
-        Terminal.Wait_For_Interrupt;
-        Put_Line("Interrupted");
-    @key(then abort)
-        -- @RI(This will be abandoned upon terminal interrupt)
-        Put_Line("-> ");
-        Get_Line(Command, Last);
-        Process_Command(Command(1..Last));
-    @key(end) @key(select);
+   @key(select)
+      Terminal.Wait_For_Interrupt;
+      Put_Line("Interrupted");
+   @key(then abort)
+      -- @RI(This will be abandoned upon terminal interrupt)
+      Put_Line("-> ");
+      Get_Line(Command, Last);
+      Process_Command(Command(1..Last));
+   @key(end) @key(select);
 @key(end) @key(loop);
 @end(Example)
 

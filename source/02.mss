@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/01/07 08:37:04 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -558,6 +558,30 @@ But the character set standard used cannot be older than ISO/IEC 10646:2003
 @end{Discussion}
 @end{ImplPerm}
 
+@begin{ImplAdvice}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[An Ada implementation should accept Ada source code
+in UTF-8 encoding, with or without a BOM (see @RefSecNum{String Encoding}),
+where line endings are marked by the pair Carriage Return/Line Feed (16#0D#
+16#0A#) and every other character is represented by its code point.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[This is simply recommending that an Ada
+implementation be able to directly process the ACATS, which is provided in the
+described format. Note that files that only contain characters with code points
+in the first 128 (which is the majority of the ACATS) are represented in the
+same way in both UTF-8 and in "plain" string format. The ACATS includes a BOM in
+files that have any characters with code points greater than 127. Note that the
+BOM contains characters not legal in Ada source code, so an implementation can
+use that to automatically distinguish between files formatted as plain Latin-1
+strings and UTF-8 with BOM.]}
+
+@end{Reason}
+@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[The implementation should accept Ada source code in UTF-8 format.]}]}
+@end{ImplAdvice}
+
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[The characters in categories @ntf{other_control},
@@ -586,17 +610,6 @@ reserved words might be in bold face,
 and that should be irrelevant to the semantics.
 
 @end(Discussion)
-@begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0079-1]}
-  @ChgAdded{Version=[3],Text=[In order to process the ACATS, an implementation
-  will have to have the ability to process Latin-1 and UTF-8 formatted files.
-  UTF-8 files by convention start with the character zero width no-break space
-  (16#0000FEFF#), also known as byte order mark (BOM); Latin-1 Ada source files
-  do not start with these characters (the BOM is encoded as 16#EF# 16#BB#
-  16#BF# for UTF-8; the last two characters are not legal in Ada programs
-  outside of comments). That means it is possible for a compiler to determine
-  which of these file formats is used without operator intervention.]}
-@end{ImplNote}
 @end{Notes}
 
 @begin{Extend83}

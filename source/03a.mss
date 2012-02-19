@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:07 $}
+@Comment{$Date: 2012/02/18 02:17:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1542,7 +1542,7 @@ subtypes. A @i{predicate specification} is an @nt{aspect_specification}
 for one of the two predicate
 aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}
 General rules for aspects and @nt{aspect_specification}s are found in
-chapter @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Items}
+Section @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
 and @RefSecNum{Aspect Specifications} respectively).]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
@@ -1614,7 +1614,11 @@ the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-sta
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[a call to a predefined boolean logical operator,
-  where each operand is predicate-static; or]}
+  where each operand is predicate-static;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
+  @ChgAdded{Version=[3],Text=[a short-circuit control form where both operands
+  are predicate-static; or]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[a parenthesized predicate-static @nt{expression}.]}
@@ -1632,6 +1636,29 @@ subtype.]}
   needed to support it.]}
 @end{Reason}
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0287-1]}
+@ChgAdded{Version=[3],Text=[If a predicate applies to a subtype, then that
+predicate shall not mention any other subtype to which the same predicate
+applies.]}
+
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[This is intended to prevent
+  recursive predicates, which cause definitional problems for static predicates.
+  Inside of the predicate, the subtype name refers to the current instance of
+  the subtype, which is an object, so a direct use of the subtype name cannot be
+  recursive. But other subtypes naming the same type might:]}
+@begin{Example}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[   @key[type] Really_Ugly @key[is private];
+@key[private]
+   @key[subtype] Ugly @key[is] Really_Ugly;
+   @key[type] Really_Ugly @key[is new] Integer
+      @key[with] Static_Predicate => Really_Ugly @key[not in] Ugly; --@ExamCom{ Illegal!}]}
+@end{Example}
+@end{Reason}
+
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[An index subtype, @nt{discrete_range} of an
 @nt{index_constraint} or @nt{slice}, or a
@@ -1646,8 +1673,9 @@ scalar subtype to which predicate specifications apply.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_subtype_definition} of a
-@nt{loop_parameter_specification} shall not denote a subtype to which
-Dynamic_Predicate specifications apply.]}
+@nt{loop_parameter_specification} shall not denote a
+nonstatic subtype to which predicate specifications apply or any
+subtype to which Dynamic_Predicate specifications apply.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_choice} of a
