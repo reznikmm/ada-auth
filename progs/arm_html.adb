@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011  AXE Consultants. All rights reserved.
+    --		 2008, 2009, 2011, 2012  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -170,6 +170,10 @@ package body ARM_HTML is
     --  5/ 7/09 - RLB - Added code to prevent making links to dead clauses.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    --  2/15/12 - RLB - Removed horizontal rules from page breaks in HTML;
+    --			they never are necessary and cause weird looks for
+    --			breaks put in solely to make the "final" version look
+    --			good in PDF form.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -2892,9 +2896,14 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 			"Page in paragraph");
 		end if;
 		-- No real page breaks supported.
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<P><BR><BR></P>");
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line.
-		Ada.Text_IO.Put_Line (Output_Object.Output_File, "<P><BR></P>");
+		--Ada.Text_IO.Put_Line (Output_Object.Output_File, "<P><BR><BR></P>");
+		--Ada.Text_IO.Put_Line (Output_Object.Output_File, "<HR>"); -- Horizontal line.
+		--Ada.Text_IO.Put_Line (Output_Object.Output_File, "<P><BR></P>");
+		-- This horizontal rule looks awful when inserted solely to
+		-- make PDF formats look good; and it doesn't make much sense
+		-- any other time, either. (Why would we want to start a page
+		-- with this?) So it's been removed completely; and we have no
+		-- other page breaks in HTML.
 	    when ARM_Output.Soft_Page =>
 		if not Output_Object.Is_In_Paragraph then
 		    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
