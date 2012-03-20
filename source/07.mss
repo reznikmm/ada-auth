@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2040,7 +2040,7 @@ elaborates the @nt<subtype_indication>@Chg{Version=[3],New=[,
 imported constant) the @nt<array_type_definition>.
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1]}
-  @ChgAdded{Version=[3],Text=[For non-imported constants, these elaborations
+  @ChgAdded{Version=[3],Text=[For nonimported constants, these elaborations
   cannot require any code or checks for a legal program, because the given
   @nt<subtype_indication> has to be indefinite or statically match that of
   the full constant, meaning that either it is a @nt<subtype_mark> or it has
@@ -2416,7 +2416,7 @@ following:@Defn{immutably limited}@Defn2{Term=[limited type],Sec=[immutably]}]}
 @key[limited];]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[A non-formal limited private type that is
+@ChgAdded{Version=[3],Text=[A nonformal limited private type that is
 tagged or has at least one access discriminant with a @nt{default_expression};]}
 
 @begin{Reason}
@@ -2448,7 +2448,7 @@ synchronized interface;]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[A non-synchronized limited interface type is
+  @ChgAdded{Version=[3],Text=[A nonsynchronized limited interface type is
   not immutably limited; a type derived from it can be nonlimited.]}
 @end{Ramification}
 
@@ -3294,7 +3294,7 @@ built in place:]}
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0022],ARef=[AI95-00083-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0067-1]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[1],New=[For an @nt{aggregate} of a
 controlled type whose value is assigned,
 other than by an @nt{assignment_statement}@Chg{Version=[2],New=[],Old=[ or
@@ -3305,14 +3305,14 @@ of the assignment operation and Adjust is not called on the target object.],Old=
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0067-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0067-1]}
 @ChgDeleted{Version=[3],Type=[Leading],Text=[@Chg{Version=[1],New=[@Chg{Version=[2],
 New=[@PDefn{build-in-place}],Old=[]}This@Chg{Version=[2],
 New=[ @i<build-in-place> requirement],Old=[]} is necessary to prevent
 elaboration problems with deferred constants of controlled types. Consider:],Old=[]}]}
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@Chg{New=[@key[package] P @key[is]
    @key[type] Dyn_String @key[is private];
    Null_String : @key[constant] Dyn_String;
@@ -3328,7 +3328,7 @@ elaboration problems with deferred constants of controlled types. Consider:],Old
 @key[end] P;],Old=[]}]}
 @end{Example}
 @ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@Chg{New=[When Null_String is elaborated, the bodies of Finalize and Adjust
 clearly have not been elaborated. Without this rule, this declaration would
 necessarily raise Program_Error (unless the permissions given below are
@@ -3336,7 +3336,7 @@ used by the implementation).],Old=[]}]}
 @end{Reason}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
 @ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An @nt{aggregate} of a controlled type
 used in the return expression
 of a @nt{simple_@!return_@!statement} has to be built-in-place in the anonymous

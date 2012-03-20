@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -224,7 +224,7 @@ that only allows a decimal fixed point subtype).
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
   @ChgDeleted{Version=[2],Text=[We may need a better way to deal with
-  obsolescent features with rules that contradict those of the non-obsolescent
+  obsolescent features with rules that contradict those of the nonobsolescent
   parts of the standard.]}
 @end(Discussion)
 @end{Legality}
@@ -1101,14 +1101,14 @@ procedure nor an instance of a generic unit.]]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[@nt{Pragma} No_Return specifies that the No_Return
-aspect (see @RefSecNum{Non-returning Procedures}) for each procedure denoted
+aspect (see @RefSecNum{Nonreturning Procedures}) for each procedure denoted
 by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[This clause is new. Pragma No_Return was moved
-  here from @RefSecNum{Non-returning Procedures}; aspect No_Return lives
+  here from @RefSecNum{Nonreturning Procedures}; aspect No_Return lives
   there now.]}
 @end{DiffWord2005}
 
@@ -1502,10 +1502,10 @@ Text=[@key{pragma} @prag<Independent_Components> (@Syn2[local_name]);]}>
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile pragma
-shall resolve to denote either an @nt{object_declaration}, a non-inherited
+shall resolve to denote either an @nt{object_declaration}, a noninherited
 @nt{component_declaration}, or a @nt{full_type_declaration}. The
 @SynI{component_}@nt{local_name} in an Independent pragma shall resolve to
-denote a non-inherited @nt{component_declaration}. The @SynI{array_}@nt{local_name}
+denote a noninherited @nt{component_declaration}. The @SynI{array_}@nt{local_name}
 in an Atomic_Components or Volatile_Components pragma shall resolve to denote
 the declaration of an array type or an array object of an anonymous type. The
 @nt{local_name} in an Independent_Components pragma shall resolve to denote the

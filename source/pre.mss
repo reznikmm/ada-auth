@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/02/19 01:58:38 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.48 $}
+@comment{$Revision: 1.49 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -252,7 +252,7 @@ the parent of a given library unit.
 However, we have tried to place as many things as possible under Ada,
 except that interfacing is a separate category,
 and we have tried to place library units whose use is highly
-non-portable under System.
+nonportable under System.
 @end{Reason}
 @end{Intro}
 

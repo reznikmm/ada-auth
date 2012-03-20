@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2011/10/21 06:41:25 $ $Author: randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2011/10/21 06:41:25 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -316,7 +316,7 @@ indicates the space character.
 The generic packages Text_IO.Decimal_IO@Chg{Version=[2],New=[,],Old=[ and]}
 Wide_Text_IO.Decimal_IO@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Decimal_IO],Old=[]}
 (see @RefSec(Input-Output for Real Types))
-provide text input and non-edited text output for decimal types.
+provide text input and nonedited text output for decimal types.
 @end{Intro}
 
 @begin{Notes}
@@ -632,7 +632,7 @@ in Pic_String is inconsistent; no edited output string is defined.
 
 
 A layout error is identified in the rules below if leading
-non-zero digits of Item, character values of the Currency string,
+nonzero digits of Item, character values of the Currency string,
 or a negative sign would be
 truncated; in such cases no edited output string is defined.
 
@@ -692,7 +692,7 @@ is produced.
 @Table{Columns=<3>,Alignment=<AllCenter>,FirstColWidth=[1],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{Table F-1: Edited Output for Sign Control Symbols}>,
-Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Non-Negative Number}@\@b{Edited Output for @*Negative Number}>,
+Headers=<@b{Sign Control Symbol}@\@b{Edited Output for @*Nonnegative Number}@\@b{Edited Output for @*Negative Number}>,
 Body=['+'@\'+'@\'@en@;'
 '@en@;'@\'b'@\'@en@;'
 '<'@\'b'@\'('

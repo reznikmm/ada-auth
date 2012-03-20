@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -211,7 +211,7 @@ implementation defined. A reserved interrupt is either an interrupt for
 which user-defined handlers are not supported, or one which
 already has an attached handler by some other implementation-defined means.
 @Defn{interrupt handler}@PDefn2{Term=[handler],Sec=[interrupt]}
-Program units can be connected to non-reserved interrupts. While
+Program units can be connected to nonreserved interrupts. While
 connected, the program unit is said to be @i{attached} to that interrupt.
 The execution of that program unit, the @i{interrupt handler}, is invoked upon
 delivery of the interrupt occurrence.
@@ -293,7 +293,7 @@ reading device registers, acknowledging devices).
 
 Any timing or other limitations imposed on the execution of interrupt handlers.
 
-The state (blocked/unblocked) of the non-reserved interrupts
+The state (blocked/unblocked) of the nonreserved interrupts
 when the program starts; if some interrupts are unblocked, what
 is the mechanism a program can use to protect itself before it
 can attach the corresponding handlers.
@@ -1188,7 +1188,7 @@ or as a configuration pragma.
 @end{Syntax}
 
 @begin{Legality}
-The @nt{local_name} (if present) shall denote a non-derived
+The @nt{local_name} (if present) shall denote a nonderived
 enumeration @Redundant[first] subtype,
 a tagged @Redundant[first] subtype, or an exception.
 The pragma applies to the type or exception.
@@ -1490,7 +1490,7 @@ subheader}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgDeleted{Version=[3],Text=[The @nt{local_name} in an Atomic or Volatile
 pragma shall resolve to denote either an @nt{object_declaration}, a
-non-inherited @nt{component_@!declaration}, or a @nt{full_type_@!declaration}.
+noninherited @nt{component_@!declaration}, or a @nt{full_type_@!declaration}.
 The @SynI{array_}@nt{local_name} in an Atomic_@!Components or
 Volatile_@!Components pragma shall resolve to denote the declaration of an array
 type or an array object of an anonymous type.]}
@@ -1785,7 +1785,7 @@ because the pragma was not used to mark variables as shared.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0218-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Plugged a hole involving volatile components of formal types when the formal
-  type's component has a non-volatile type. This was done by making certain
+  type's component has a nonvolatile type. This was done by making certain
   actual types illegal for formal derived and formal array types; these types
   were allowed for Ada 95 and Ada 2005.]}
 @end{Incompatible2005}
@@ -2236,7 +2236,7 @@ predefined @Chg{Version=[2],New=[type Integer],Old=[integer size]}.
 For each measurement, two cases shall be documented: one
 where the accessed attributes are of the calling task @Redundant[(that is,
 the default value for the T parameter is used)], and the other, where T
-identifies another, non-terminated, task.
+identifies another, nonterminated, task.
 
 @Leading@;The following calls (to subprograms in the Task_Attributes package)
 shall be measured:
@@ -2446,7 +2446,7 @@ Each task has two termination handlers, a @i<fall-back handler> and a
 @i<specific handler>. The specific handler applies only to the task itself,
 while the fall-back handler applies only to the dependent tasks of the task.
 A handler is said to be @i<set> if it is associated
-with a non-null value of type Termination_Handler, and @i<cleared> otherwise.
+with a nonnull value of type Termination_Handler, and @i<cleared> otherwise.
 When a task is created, its specific handler and fall-back handler are cleared.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}

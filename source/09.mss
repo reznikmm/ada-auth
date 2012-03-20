@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 
@@ -232,7 +232,7 @@ a single entry with the same identifier within the task declaration,
 whose profile is type conformant with the
 prefixed view profile of the inherited subprogram, the inherited subprogram is
 said to be @i{implemented} by the conforming task entry@Chg{Version=[3],
-New=[ using an implicitly declared non-abstract subprogram which
+New=[ using an implicitly declared nonabstract subprogram which
 has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
@@ -299,7 +299,7 @@ access parameter designating the task type.@Defn2{Term=[type conformance],Sec=(r
   @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
   with the same name and profile which could be called with a prefixed view.
   If the operation was inherited, this would be illegal by the following rules;
-  this rule puts inherited and non-inherited routines on the same footing.
+  this rule puts inherited and noninherited routines on the same footing.
   Note that this only applies to tagged task types (that is, those with an
   interface in their declaration); we do that as there is no problem with
   prefixed view calls of primitive operations for @lquotes@;normal@rquotes
@@ -1110,7 +1110,7 @@ with the same identifier within the protected declaration, whose
 profile is type conformant with the prefixed view profile of the
 inherited subprogram, the inherited subprogram is said to be
 @i{implemented} by the conforming protected subprogram or
-entry@Chg{Version=[3],New=[ using an implicitly declared non-abstract
+entry@Chg{Version=[3],New=[ using an implicitly declared nonabstract
 subprogram which has the same profile as the inherited subprogram and which
 overrides it@PDefn2{Term=[override],Sec=[when implemented by]}],
 Old=[]}.@PDefn2{Term=[implemented],
@@ -1182,7 +1182,7 @@ the protected type.@Defn2{Term=[type conformance],Sec=(required)}]}
   @ChgAdded{Version=[2],Text=[This prevents the existence of two operations
   with the same name and profile which could be called with a prefixed view.
   If the operation was inherited, this would be illegal by the following rules;
-  this rule puts inherited and non-inherited routines on the same footing.
+  this rule puts inherited and noninherited routines on the same footing.
   Note that this only applies to tagged protected types (that is, those with an
   interface in their declaration); we do that as there is no problem with
   prefixed view calls of primitive operations for @lquotes@;normal@rquotes
@@ -5386,7 +5386,7 @@ and after queuing a given caller.
 @LabeledClause{Shared Variables}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0201-1],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0201-1],ARef=[AI05-0229-1],ARef=[AI05-0295-1]}
 @Defn2{Term=[shared variable], Sec=(protection of)}
 @Defn{independently addressable}
 If two different objects, including nonoverlapping
@@ -5398,8 +5398,9 @@ addressable if either object is specified as independently addressable (see
 @RefSecNum{Shared Variable Control}). Otherwise,
 two nonoverlapping objects are independently addressable
 except when they are both parts of a composite object for which
-a non-confirming representation item is used to specify
-record layout, Component_Size, Pack, Atomic, or convention, in which case
+a nonconfirming representation value is specified for any of the
+following aspects: (record) Layout, Component_Size, Pack, Atomic, or
+Convention; in this case
 it is unspecified whether the parts are independently
 addressable.@PDefn{unspecified}],
 Old=[Normally, any two
@@ -5441,10 +5442,10 @@ independently if the hardware efficiently supports it.
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
 @ChgAdded{Version=[3],Text=[An atomic object (including atomic
 components) is always independently addressable from any other nonoverlapping
-object. Any representation item which would prevent this from being true should
-be rejected, notwithstanding what this Standard says elsewhere.
-Note, however, that the components of an atomic object are not necessarily
-atomic.]}
+object. Any @nt{aspect_specification} or representation item which would prevent
+this from being true should be rejected, notwithstanding what this Standard says
+elsewhere. Note, however, that the components of an atomic object are not
+necessarily atomic.]}
 @end{Ramification}
 @end{StaticSem}
 

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -691,7 +691,7 @@ they all have the same defining name
 and there is a place where they are all directly visible.]
 @begin{Ramification}
 Note that a @nt{name} can have more than one possible interpretation
-even if it denotes a non-overloadable entity.
+even if it denotes a nonoverloadable entity.
 For example, if there are two functions F that return records,
 both containing a component called C, then
 the name F.C has two possible interpretations,
@@ -747,7 +747,7 @@ Old=[An explicit declaration overrides an implicit declaration of a primitive
 subprogram]}, @Redundant[regardless of which declaration occurs first];
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],ARef=[AI95-00044-01]}
-And regardless of whether the @Chg{New=[non-overridable],Old=[explicit]}
+And regardless of whether the @Chg{New=[nonoverridable],Old=[explicit]}
 declaration is overloadable or not.
 @Chg{New=[For example, @nt{statement_identifier}s are covered by this rule.],Old=[]}
 
@@ -1096,11 +1096,11 @@ hiding, since there is no way to declare homographs.
 @begin{Legality}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0025],Ref=[8652/0026],ARef=[AI95-00044-01],ARef=[AI95-00150-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00377-01]}
-@Chg{New=[A non-overridable],Old=[An explicit]} declaration is illegal if there is a
+@Chg{New=[A nonoverridable],Old=[An explicit]} declaration is illegal if there is a
 homograph occurring immediately within the same
 declarative region that is visible at the place of the
 declaration, and is not hidden from all visibility by the
-@Chg{New=[non-overridable],Old=[explicit]} declaration.
+@Chg{New=[nonoverridable],Old=[explicit]} declaration.
 @Chg{New=[In addition, a type extension is illegal if somewhere within its
 immediate scope it has two visible components with the same name.],Old=[]}
 Similarly, the @nt<context_clause> for a @Chg{Version=[2],
@@ -1162,7 +1162,7 @@ and is therefore illegal.
 @NoPrefix@;A previous version of Ada 9X allowed the subunit,
 and said that references to P.Q would tend to be ambiguous.
 However, that was a bad idea, because it requires overload resolution
-to resolve references to directly visible non-overloadable
+to resolve references to directly visible nonoverloadable
 homographs, which is something compilers have never before been
 required to do.
 
@@ -1349,7 +1349,7 @@ the visibility rules don't apply to them either.
 
 Because of the way we have defined "declaration",
 it is possible for a usage name to denote a @nt{subprogram_body}, either
-within that body, or (for a non-library unit) after it
+within that body, or (for a nonlibrary unit) after it
 (since the body hides the corresponding declaration, if any).
 Other bodies do not work that way.
 Completions of @nt{type_declaration}s and
@@ -1889,7 +1889,7 @@ neither one is use-visible.
 The considered rule would have made just one of them use-visible.
 We gave up on this idea due to the complexity of the rule.
 It would have had to account for both overloadable and
-non-overloadable @nt{renaming_declaration}s,
+nonoverloadable @nt{renaming_declaration}s,
 the case where the rule should apply only to some subset of the
 declarations with the same defining name,
 and the case of @nt{subtype_declaration}s
@@ -2779,7 +2779,7 @@ profile, and by where it occurs, as for any declaration of
 primitiveness is not determined by the renamed view.
 In order to perform a dispatching call,
 the subprogram name has to denote a primitive subprogram,
-not a non-primitive renaming of a primitive subprogram.
+not a nonprimitive renaming of a primitive subprogram.
 @begin{Reason}
 A @nt{subprogram_renaming_declaration} could more properly be called
 @ntf{renaming_@!as_@!subprogram_@!declaration}, since you're renaming something
@@ -2963,7 +2963,7 @@ it is assumed not to be the intended interpretation;
 some other possible interpretation
 is assumed to be the actual interpretation.
 On the other hand,
-violations of non-overloading rules do not affect which
+violations of nonoverloading rules do not affect which
 interpretation is chosen; instead,
 they cause the construct to be illegal.
 To be legal, there usually has to be exactly one acceptable

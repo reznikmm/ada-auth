@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:35 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -41,7 +41,7 @@ allowed outside of @nt{comment}s are the @nt{graphic_character}s and
 force, since the implementation can represent characters in the source in any
 way it sees fit.
 For example, an implementation could simply define that what seems to be
-a non-graphic, non-format-effector character is actually a
+a nongraphic, non-format-effector character is actually a
 representation of the space character.]}
 @end{Ramification}
 @begin(Discussion)

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -329,10 +329,13 @@ An object is considered to be more concrete.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0112-1],ARef=[AI05-0295-1]}
 @RootDefn{aspect of representation}
 @Defn{representation aspect}
-@Defn2{Term=[directly specified],
-  Sec=(of an aspect of representation of an entity)}
+@Chg{Version=[3],New=[@Defn2{Term=[directly specified],
+  Sec=(of a representation aspect of an entity)}],
+Old=[@Defn2{Term=[directly specified],
+  Sec=(of an aspect of representation of an entity)}]}
 A representation item @i{directly specifies}
-an @i{aspect of representation} of the entity denoted
+@Chg{Version=[3],New=[a @i{representation aspect}],
+Old=[an @i{aspect of representation}]} of the entity denoted
 by the @nt{local_name},
 except in the case of a type-related representation item,
 whose @nt{local_name} shall denote a first subtype,
@@ -585,21 +588,30 @@ parameter.]}
   and operational items are all covered by this (and similar) rules.]}
 @end{Reason}
 
-For an untagged derived type, no type-related representation items
-are allowed if the parent type is a by-reference type,
-or has any user-defined primitive subprograms.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+For an untagged derived type, @Chg{Version=[3],New=[it is illegal to
+specify a],Old=[no]} type-related representation
+@Chg{Version=[3],New=[aspect],Old=[items are allowed]} if the parent type is a
+by-reference type, or has any user-defined primitive subprograms.
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-  On the other hand, subtype-specific representation items may be given
-  for the first subtype of such a type@Chg{New=[, as can operational items],
-  Old=[]}.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  On the other hand, subtype-specific representation
+  @Chg{Version=[3],New=[aspects],Old=[items]} may
+  be @Chg{Version=[3],New=[specified],Old=[given]}
+  for the first subtype of such a type@Chg{New=[, as can operational
+  @Chg{Version=[3],New=[aspects],Old=[items]}],Old=[]}.
 @end{Ramification}
 @begin{Reason}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-  The reason for forbidding type-related representation items on
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0295-1]}
+  The reason for forbidding
+  @Chg{Version=[3],New=[specification of ],Old=[]}type-related
+  representation @Chg{Version=[3],New=[aspects],Old=[items]} on
   untagged by-reference types is because a change of representation
   is impossible when passing by reference (to an inherited subprogram).
-  The reason for forbidding type-related representation items on
+  The reason for forbidding
+  @Chg{Version=[3],New=[specification of ],Old=[]}type-related
+  representation @Chg{Version=[3],New=[aspects],Old=[items]} on
   untagged types with user-defined primitive subprograms
   was to prevent implicit change of representation for type-related
   aspects of representation upon calling inherited subprograms,
@@ -608,69 +620,90 @@ or has any user-defined primitive subprograms.
   Changes of subtype-specific representation attributes, however, are
   likely to be cheap.
   This rule is not needed for tagged types,
-  because other rules prevent a type-related representation item
+  because other rules prevent a type-related representation
+  @Chg{Version=[3],New=[aspect],Old=[item]}
   from changing the representation of the parent part;
-  we want to allow a type-related representation item on a type extension
-  to specify aspects of the extension part.
+  we want to allow
+  @Chg{Version=[3],New=[specifying ],Old=[]}a type-related
+  representation @Chg{Version=[3],New=[aspect],Old=[item]}
+  on a type extension to specify aspects of the extension part.
   For example, @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
   Pack will cause packing of the extension part, but not of the parent part.
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @Chg{New=[Operational and representation],Old=[Representation]} aspects of
 a generic formal parameter are the same as those of the actual.
 @Chg{New=[Operational and representation aspects
 @Chg{Version=[2],New=[],Old=[of a partial view ]}are the
 same @Chg{Version=[2],New=[for all views of a type],Old=[as those of the full view]}.],Old=[]}
-A type-related representation item is not allowed for a
-descendant of a generic formal untagged type.
+@Chg{Version=[3],New=[Specification of a],Old=[A]}
+type-related representation @Chg{Version=[3],New=[aspect],Old=[item]}
+is not allowed for a descendant of a generic formal untagged type.
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-Representation items are allowed for types whose subcomponent types
-or index subtypes are generic formal types.
-@Chg{New=[Operational items and subtype-related representation items are
-allowed on descendants of generic formal types.],Old=[]}
+  @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  @Chg{Version=[3],New=[Specifying representation aspects is],Old=[Representation
+  items are]} allowed for
+  types whose subcomponent types
+  or index subtypes are generic formal types.
+  @Chg{New=[@Chg{Version=[3],New=[Specifying operational
+  aspects],Old=[Operational items]} and subtype-related representation
+  @Chg{Version=[3],New=[aspects is],Old=[items are]}
+  allowed on descendants of generic formal types.],Old=[]}
 @end{Ramification}
 @begin{Reason}
-Since it is not known whether a formal type has
-user-defined primitive subprograms, specifying
-type-related representation items for them
-is not allowed, unless they are tagged (in which case only
-the extension part is affected in any case).
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  Since it is not known whether a formal type has
+  user-defined primitive subprograms, specifying
+  type-related representation @Chg{Version=[3],New=[aspects],Old=[items]}
+  for them is not allowed, unless they are tagged (in which case only
+  the extension part is affected in any case).
 @end{Reason}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],Text=[All views of a type, including the incomplete
-and partial views, have the same operational and representation aspects.
-That's important so that the properties don't change when changing views.
-While most aspects are not available for an incomplete view, we don't want
-to leave any holes by not saying that they are the same.]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgAdded{Version=[2],Text=[All views of a type, including the incomplete
+  and partial views, have the same operational and representation aspects.
+  That's important so that the properties don't change when changing views.
+  While most aspects are not available for an incomplete view, we don't want
+  to leave any holes by not saying that they are the same.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
-@ChgAdded{Version=[3],Text=[However, this does not apply to objects.
-Different views of an object can have
-different representation aspects. For instance, an actual object passed
-by reference and the associated formal parameter may have different values for
-Alignment even though the formal parameter is merely a view of the
-actual object. This is necessary to maintain the language design principle
-that Alignments are always known at compile time.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0083-1]}
+  @ChgAdded{Version=[3],Text=[However, this does not apply to objects.
+  Different views of an object can have
+  different representation aspects. For instance, an actual object passed
+  by reference and the associated formal parameter may have different values for
+  Alignment even though the formal parameter is merely a view of the
+  actual object. This is necessary to maintain the language design principle
+  that Alignments are always known at compile time.]}
 @end{Ramification}
 
-A representation item that specifies the Size for a given subtype,
-or the size or storage place for an object (including a component)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@Chg{Version=[3],New=[The specification of],Old=[A
+representation item that specifies]} the Size@Chg{Version=[3],New=[ aspect],Old=[]}
+for a given subtype, or the size or storage place for an object (including a component)
 of a given subtype, shall allow for enough storage space to
 accommodate any value of the subtype.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-A representation @Chg{New=[or operational ],Old=[]}item that is not supported
-by the implementation is illegal, or raises an exception
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@Chg{Version=[3],New=[Specifying a],Old=[A]}
+representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect
+such],Old=[item]} that @Chg{Version=[3],New=[the aspect ],Old=[]}is
+not supported by the implementation is illegal, or raises an exception
 at run time.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[2],Text=[A @nt{type_declaration} is illegal if it has one or
-more progenitors, and a representation item applies to an ancestor, and this
-representation item conflicts with the representation of
+more progenitors, and a
+@Chg{Version=[3],New=[nonconfirming ],Old=[]}representation
+@Chg{Version=[3],New=[value was specified for ],Old=[ item applies to]}
+an ancestor, and this
+representation @Chg{Version=[3],New=[aspect],Old=[item]}
+conflicts with the representation of
 some other ancestor. The cases that cause conflicts are
 implementation defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
@@ -697,8 +730,8 @@ the ancestors of a @nt{type_declaration}.]}]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[Assume the implementation uses a
   single tag with a default offset of zero, and that it allows the use of
-  non-default locations for the tag (and thus accepts representation items
-  like the one above). The representation item will force a non-default
+  nondefault locations for the tag (and thus accepts representation items
+  like the one above). The representation item will force a nondefault
   location for the tag (by putting a component other than the tag into the
   default location). Clearly, this package will be accepted by the
   implementation. However, other declarations could cause trouble. For
@@ -711,24 +744,30 @@ the ancestors of a @nt{type_declaration}.]}]}
 @key{end} Pkg2;]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   @ChgAdded{Version=[2],Text=[because the declarations of T and Ifc have a
   conflict in their representation items. This is clearly necessary (it's hard
   to imagine how Ifc'Class could work with the tag at a location other than the
-  one it is expecting).]}
+  one it is expecting@Chg{Version=[3],New=[ without introducing distributed
+  overhead],Old=[]}).]}@Comment{Make Steve happy.}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   @ChgAdded{Version=[2],Text=[Conflicts will usually involve
   implementation-defined attributes (for specifying the location of the tag,
   for instance), although the example above shows that doesn't have to be the
   case. For this reason, we didn't try to specify exactly what causes a
   conflict; it will depend on the implementation's implementation model and
-  what representation items it allows.]}
+  what representation @Chg{Version=[3],New=[aspects],Old=[items]} it allows.]}
 @end{Reason}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   @ChgAdded{Version=[2],Text=[An implementation can only use this rule to
-  reject @nt{type_declaration}s where one of its ancestors has a representation
-  item. An implementation must ensure that
+  reject @nt{type_declaration}s where one of its ancestors
+  @Chg{Version=[3],New=[had a nonconfirming],Old=[has a]} representation
+  @Chg{Version=[3],New=[value specified],Old=[item]}.
+  An implementation must ensure that
   the default representations of ancestors cannot conflict.]}
 @end{ImplNote}
 @end{Legality}
@@ -739,11 +778,15 @@ then their subtype-specific aspects (Size and Alignment)
 are the same.
 @PDefn2{Term=[statically matching],Sec=(effect on subtype-specific aspects)}
 @begin{Reason}
-This is necessary because we allow (for example)
-conversion between access types whose designated subtypes
-statically match.
-Note that it is illegal to specify an aspect (including a subtype-specific one)
-for a nonfirst subtype.
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  This is necessary because we allow (for example)
+  conversion between access types whose designated subtypes
+  statically match.
+  Note that @Chg{Version=[3],New=[most aspects (including the subtype-specific aspects
+  Size and Alignment) may not be specified for a nonfirst subtype. The only
+  language-defined exceptions to this rule are the Static_Predicate and
+  Dynamic_Predicate aspects.],Old=[it is illegal to specify an aspect
+  (including a subtype-specific one) for a nonfirst subtype.]}
 
 @Leading@Keepnext@;Consider, for example:
 @begin{Example}
@@ -801,23 +844,29 @@ The same issues apply to Alignment.
 @end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-A derived type inherits each type-related aspect
-@Chg{New=[of representation ],Old=[]}of its parent type that
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
+A derived type inherits each type-related
+@Chg{Version=[3],New=[representation ],Old=[]}aspect
+@Chg{Version=[3],New=[],Old=[@Chg{New=[of representation ],Old=[]}]}of
+its parent type that
 was directly specified before the declaration of the derived type,
 or (in the case where the parent is derived)
 that was inherited by the parent type from the grandparent type.
-A derived subtype inherits each subtype-specific aspect
-@Chg{New=[of representation ],Old=[]}of its parent subtype that
+A derived subtype inherits each subtype-specific
+@Chg{Version=[3],New=[representation ],Old=[]}aspect
+@Chg{Version=[3],New=[],Old=[@Chg{New=[of representation ],Old=[]}]}of
+its parent subtype that
 was directly specified before the declaration of the derived type,
 or (in the case where the parent is derived)
 that was inherited by the parent subtype from the grandparent subtype,
 but only if the parent subtype statically matches the first subtype of
 the parent type.
-An inherited aspect of representation is overridden by a subsequent
-representation item that specifies
-@Chg{Version=[3],New=[a different value for ],Old=[]}the same aspect of
-the type or subtype.
+An inherited @Chg{Version=[3],New=[representation ],Old=[]}aspect
+@Chg{Version=[3],New=[],Old=[of representation ]}is
+overridden by a subsequent
+@Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}representation
+item that specifies @Chg{Version=[3],New=[a different value for ],Old=[]}the
+same aspect of the type or subtype.
 @begin{Honest}
 A @nt{record_representation_clause} for a record extension
 does not override the layout of the parent part;
@@ -829,18 +878,19 @@ If a representation item for the parent appears after the
 @nt{derived_@!type_@!definition},
 then inheritance does not happen for that representation item.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1]}
-@ChgAdded{Version=[3],Text=[If an inherited aspect is confirmed by a later
-representation item for a derived type, the confirming representation item does
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[3],Text=[If an inherited aspect is confirmed by
+an @nt{aspect_specification} or a later representation item for a derived type,
+the confirming specification does
 not override the inherited one. Thus the derived type has both a specified
-confirming and an inherited non-confirming representation item @em this means
-that rules that apply only to non-confirming representation items still apply
-to this type.]}
+confirming value and an inherited nonconfirming representation value @em this
+means that rules that apply only to nonconfirming representation values still
+apply to this type.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00444-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[1],Text=[In contrast, whether operational aspects are
 inherited by @Chg{Version=[3],New=[a],Old=[@Chg{Version=[2],New=[an untagged],Old=[a]}]}
 derived type depends on each specific aspect@Chg{Version=[3],New=[; unless specified,
@@ -848,13 +898,15 @@ an operational aspect is not inherited],Old=[]}. @Chg{Version=[3],New=[],
 Old=[@Chg{Version=[2],New=[@Redundant[Operational aspects are never inherited
 for a tagged type.] ],Old=[]}]}When operational aspects are
 inherited by @Chg{Version=[3],New=[a],Old=[@Chg{Version=[2],New=[an untagged],Old=[a]}]} derived type,
-aspects that were directly specified @Chg{Version=[2],New=[by operational
+aspects that were directly specified @Chg{Version=[2],New=[by
+@Chg{Version=[3],New=[@nt{aspect_specification}s or ],Old=[]}operational
 items that are visible at the point],Old=[before the declaration]} of
 the derived type@Chg{Version=[2],New=[ declaration],Old=[]}, or
 (in the case where the parent is derived)
 that were inherited by the parent type from the grandparent type are inherited.
-An inherited operational aspect is overridden by a subsequent operational item
-that specifies the same aspect of the type.]}
+An inherited operational aspect is overridden by a subsequent
+@Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}operational
+item that specifies the same aspect of the type.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgAdded{Version=[1],Text=[As with representation items, if an operational
@@ -915,7 +967,9 @@ it is chosen by default in an unspecified manner.
 @end{Itemize}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-Note that @Chg{New=[representation items],Old=[@nt{representation_clause}s]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+Note that @Chg{New=[@Chg{Version=[3],New=[specifying an ],Old=[]}representation
+@Chg{Version=[3],New=[aspect],Old=[items]}],Old=[@nt{representation_clause}s]}
 can affect the semantics of the entity.
 
 The rules forbid things like
@@ -949,9 +1003,24 @@ entity is as specified. Otherwise, the aspect of the entity has the default
 value for that aspect.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[A representation item that specifies an aspect of
-representation that would have been chosen in the absence of the representation
-item is said to be @i{confirming}.@Defn2{Term=[confirming], Sec=(representation item)}]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[2],Text=[A
+@Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}representation
+item that specifies @Chg{Version=[3],New=[a],Old=[an aspect of]}
+representation@Chg{Version=[3],New=[ aspect],Old=[]}
+that would have been chosen in the absence of the
+@Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}
+representation item is said to be
+@i{confirming}.@Defn2{Term=[confirming], Sec=(representation item)}@Chg{Version=[3],New=[
+The aspect value specified in this case is said to be a
+@i<confirming> representation aspect value. Other values of the aspect
+are said to be @i<nonconfirming>, as are the
+@nt{aspect_specification}s and representation items that specified
+them.@Defn2{Term=[confirming], Sec=(representation value)}
+@Defn2{Term=[confirming], Sec=(aspect specification)}
+@Defn2{Term=[nonconfirming], Sec=(representation value)}
+@Defn2{Term=[nonconfirming], Sec=(representation item)}
+@Defn2{Term=[nonconfirming], Sec=(aspect specification)}],Old=[]}]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -968,18 +1037,32 @@ general rules for pragmas in Section 2.
 @end{RunTime}
 
 @begin{ImplPerm}
-An implementation may interpret aspects of representation in an
-implementation-defined manner.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+An implementation may interpret
+@Chg{Version=[3],New=[],Old=[aspects of
+]}representation@Chg{Version=[3],New=[ aspects],Old=[]}
+in an implementation-defined manner.
 An implementation may place implementation-defined restrictions on
-representation items.
+@Chg{Version=[3],New=[the specification of ],Old=[]}representation
+@Chg{Version=[3],New=[aspects],Old=[items]}.
 @RootDefn{recommended level of support}
-A @i{recommended level of support} is specified for representation items
+A @i{recommended level of support} is
+@Chg{Version=[3],New=[defined],Old=[specified]} for
+@Chg{Version=[3],New=[the specification of ],Old=[]}representation
+@Chg{Version=[3],New=[aspects],Old=[items]}
 and related features in each subclause.
 These recommendations are changed to requirements
 for implementations that support the Systems Programming Annex
 (see @RefSec{Required Representation Support}).
-@ImplDef{The interpretation of each aspect of representation.}
-@ImplDef{Any restrictions placed upon representation items.}
+
+@ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[0],Text=[The
+interpretation of each @Chg{Version=[3],New=[],Old=[aspect of
+]}representation@Chg{Version=[3],New=[ aspect],Old=[]}.]}
+
+@ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[0],Text=[Any restrictions
+placed upon @Chg{Version=[3],New=[the specification of ],Old=[]}representation
+@Chg{Version=[3],New=[aspects],Old=[items]}.]}
+
 @begin{Ramification}
 Implementation-defined restrictions may be enforced either at compile
 time or at run time.
@@ -994,26 +1077,40 @@ or on avoiding excessive inefficiency, for example.
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@Leading@PDefn2{Term=[recommended level of support], Sec=(with respect to
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@PDefn2{Term=[recommended level of support], Sec=(with respect to
 nonstatic expressions)}
-The recommended level of support for all representation items
+The recommended level of support for
+@Chg{Version=[3],New=[the specification of ],Old=[]}all representation
+@Chg{Version=[3],New=[aspects],Old=[items]}
 is qualified as follows:
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[A confirming representation item should
-be supported.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[2],Text=[A confirming
+@Chg{Version=[3],New=[specification for a ],Old=[]}representation
+@Chg{Version=[3],New=[aspect],Old=[item]}
+should be supported.]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[A confirming representation item might not be
-  possible for some entities. For instance, consider an unconstrained array.
-  The size of such a type is implementation-defined, and might not actually
-  be a representable value, or might not be static.]}
+  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
+  @ChgAdded{Version=[2],Text=[A confirming representation
+  @Chg{Version=[3],New=[value],Old=[item]} might not be possible for some
+  entities. For instance, consider an unconstrained array. The size of such a
+  type is implementation-defined, and might not actually be a representable
+  value, or might not be static.]}
 @end{Honest}
-An implementation need not support representation items containing
-nonstatic expressions,
+
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+An implementation need not support representation items@Chg{Version=[3],New=[ or
+@nt{aspect_specification}s for representation aspects],Old=[]}
+containing nonstatic expressions,
 except that an implementation should support a representation item
+@Chg{Version=[3],New=[@i<R> or @nt{aspect_specification} for a representation
+aspect @i<S>],Old=[]}
 for a given entity
-if each nonstatic expression in the representation item
+if each nonstatic expression in
+@Chg{Version=[3],New=[@i<R> or @i<S>],Old=[the representation item]}
 is a name that statically denotes a constant declared
 before the entity.
 @begin{Reason}
@@ -1054,8 +1151,11 @@ are all static constraints.
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
-@Chg{Version=[2],New=[An implementation need not support a nonconfirming
-representation item if it could cause an aliased object or an object of a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@Chg{Version=[2],New=[An implementation need not support
+@Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
+representation @Chg{Version=[3],New=[aspect value],Old=[item]}
+if it could cause an aliased object or an object of a
 by-reference type to be allocated at a nonaddressable location or, when the
 alignment attribute of the subtype of such an object is nonzero, at an address
 that is not an integral multiple of that alignment.],Old=[An aliased component,
@@ -1085,8 +1185,11 @@ when a bit-aligned component is passed as a parameter.
 @end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
-representation item if it could cause an aliased object of an elementary type
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[2],Text=[An implementation need not support
+@Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
+representation @Chg{Version=[3],New=[aspect value],Old=[item]}
+if it could cause an aliased object of an elementary type
 to have a size other than that which would have been chosen by default.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1096,8 +1199,11 @@ to have a size other than that which would have been chosen by default.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
-representation item if it could cause an aliased object of a composite type, or
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[2],Text=[An implementation need not support
+@Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
+representation @Chg{Version=[3],New=[aspect value],Old=[item]}
+if it could cause an aliased object of a composite type, or
 an object whose type is by-reference, to have a size smaller than that which
 would have been chosen by default.]}
 @begin{Reason}
@@ -1116,19 +1222,24 @@ would have been chosen by default.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[An implementation need not support a nonconfirming
-subtype-specific representation item specifying an aspect of representation of
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@ChgAdded{Version=[2],Text=[An implementation need not support
+@Chg{Version=[3],New=[specifying ],Old=[]}a nonconfirming
+subtype-specific representation @Chg{Version=[3],New=[aspect value
+for],Old=[item specifying an aspect of representation of]}
 an indefinite or abstract subtype.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Aspects of representations are often not
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Representation aspects],
+  Old=[Aspects of representations]} are often not
   well-defined for such types.]}
 @end{Reason}
 
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00075}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[A type with the Pack aspect specified],Old=[A pragma Pack]}
 will typically not @Chg{Version=[3],New=[be packed],Old=[pack]} so tightly as to
 disobey the above
@@ -1141,8 +1252,11 @@ Atomic components have similar restrictions
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00291-02]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[2],Text=[For purposes of these rules, the determination of
-whether a representation item applied to a type @i{could cause} an object to have
+whether @Chg{Version=[3],New=[specifying ],Old=[]}a
+representation @Chg{Version=[3],New=[aspect value for],Old=[item applied to]}
+a type @i{could cause} an object to have
 some property is based solely on the properties of the type itself, not on any
 available information about how the type is used. In particular, it presumes
 that minimally aligned objects of this type might be declared at some point.]}
@@ -1288,9 +1402,9 @@ Some of the more stringent requirements are moved to
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Defined that overriding of
-  an aspect of representation only happens for a non-confirming representation
+  an representation aspect only happens for a nonconfirming representation
   item. This prevents a derived type from being considered to have
-  only a confirming representation item when the value would be non-confirming
+  only a confirming representation item when the value would be nonconfirming
   if given on a type that does not inherit any aspects of representation.
   This change just eliminates a wording confusion and ought not change any
   behavior.]}
@@ -1305,6 +1419,12 @@ Some of the more stringent requirements are moved to
   @nt{aspect_specification}s; generalized operational aspects so that they
   can be defined for entities other than types. Any extensions are documented
   elsewhere.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0295-1]}
+  @ChgAdded{Version=[3],Text=[Rewrote many rules to be in terms of
+  "specifying a representation aspect" rather than use of
+  a "representation item". This better separates @i<how> an aspect is
+  specified from @i<what> rules apply to the value of the aspect.]}
 @end{DiffWord2005}
 
 
@@ -1314,9 +1434,10 @@ Some of the more stringent requirements are moved to
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Certain representation or operational
 aspects of an entity may be specified as part of its declaration using an
-@nt{aspect_specification}, rather than using a separate representation or operational
-item.] The declaration with the @nt{aspect_specification} is termed the
-@i{associated declaration}.@Defn2{Term=[associated declaration],Sec=[of an aspect specification]}]}
+@nt{aspect_specification}, rather than using a separate representation or
+operational item.] The declaration with the @nt{aspect_specification} is termed
+the @i{associated declaration}.@Defn2{Term=[associated declaration],Sec=[of an
+aspect specification]}]}
 @end{Intro}
 
 @begin{Syntax}
@@ -1747,8 +1868,9 @@ Text=[@key{pragma} @prag(Pack)(@SynI{first_subtype_}@Syn2{local_name});]}>
 following language-defined representation aspect may be specified:],
 Old=[@PDefn2{Term=[representation pragma], Sec=(Pack)}
 @PDefn2{Term=[pragma, representation], Sec=(Pack)}
-@PDefn2{Term=[aspect of representation], Sec=(packing)}
-@Defn2{Term=[packing], Sec=(aspect of representation)}
+@Chg{Version=[3],New=[@PDefn2{Term=[representation aspect], Sec=(packing)}],
+Old=[@PDefn2{Term=[aspect of representation], Sec=(packing)}
+@Defn2{Term=[packing], Sec=(aspect of representation)}]}
 @Defn{packed}
 A @nt{pragma} Pack specifies the @i{packing} aspect of representation;
 the type (or the extension part) is said to be @i{packed}.
@@ -1882,6 +2004,7 @@ followed.]}]}
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedClause{Version=[1],New=[Operational and Representation Attributes], Old=[Representation Attributes]}
 
 @begin{Intro}
@@ -1962,7 +2085,8 @@ An @nt{attribute_designator} is allowed in an
 explicitly allows it,
 or for an implementation-defined attribute
 if the implementation allows it.
-@PDefn2{Term=[aspect of representation], Sec=(specifiable attributes)}
+@Chg{Version=[3],New=[@PDefn2{Term=[representation aspect], Sec=(specifiable attributes)}],
+Old=[@PDefn2{Term=[aspect of representation], Sec=(specifiable attributes)}]}
 Each specifiable attribute constitutes an
 @Chg{New=[@PDefn2{Term=[operational aspect], Sec=(specifiable attributes)}
 operational aspect or ],Old=[]}aspect of representation@Chg{Version=[3],New=[;
@@ -2193,7 +2317,7 @@ its use],Old=[]}; otherwise, program execution is erroneous.
 @ChgAdded{Version=[3],Text=[@ldquote@;Appropriate for the entity and its
 use@rdquote covers cases such as
 misaligned addresses, read-only code addresses for variable data objects (and
-non-executable data addresses for code units), and addresses which would
+nonexecutable data addresses for code units), and addresses which would
 force objects that are supposed to be independently addressable to not be.
 Such addresses may be @ldquote@;valid@rdquote as they designate locations that
 are accessible to the program, but the program execution is still erroneous
@@ -3119,7 +3243,7 @@ enumeration types, record types, and array types.]}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0155-1]}
   @ChgAdded{Version=[3],Text=[Only Size clauses with a size greater than or
   equal to the Size that would be chosen by default may be safely presumed to be
-  supported on non-static elementary subtypes. Implementations may choose to
+  supported on nonstatic elementary subtypes. Implementations may choose to
   support smaller sizes, but only if the Size allows any value of the subtype to
   be represented, for any possible value of the bounds.]}
 @end{Ramification}
@@ -3832,8 +3956,9 @@ satisfy the predefined ordering relation of the type.
 @end{Legality}
 
 @begin{StaticSem}
-@PDefn2{Term=[aspect of representation], Sec=(coding)}
-@Defn2{Term=[coding], Sec=(aspect of representation)}
+@Chg{Version=[3],New=[@PDefn2{Term=[representation aspect], Sec=(coding)}],
+Old=[@PDefn2{Term=[aspect of representation], Sec=(coding)}
+@Defn2{Term=[coding], Sec=(aspect of representation)}]}
 An @nt{enumeration_representation_clause} specifies the
 @i{coding} aspect of representation.
 @Defn{internal code}
@@ -3971,12 +4096,19 @@ This is satisfied by all known implementations.
 @LabeledClause{Record Layout}
 
 @begin{Intro}
-@PDefn2{Term=[aspect of representation], Sec=(layout)}
+@Chg{Version=[3],New=[@AspectDefn{Layout}
+@PDefn2{Term=[representation aspect], Sec=(layout)}
+@PDefn2{Term=[representation aspect], Sec=(record layout)}
+@AspectDefn{Record layout}
+@PDefn2{Term=[representation aspect], Sec=(storage place)}
+@Defn2{Term=[storage place], Sec=(representation aspect)}
+@Defn2{Term=[storage place], Sec=(of a component)}],
+Old=[@PDefn2{Term=[aspect of representation], Sec=(layout)}
 @Defn2{Term=[layout], Sec=(aspect of representation)}
 @PDefn2{Term=[aspect of representation], Sec=(record layout)}
 @Defn2{Term=[record layout], Sec=(aspect of representation)}
 @PDefn2{Term=[aspect of representation], Sec=(storage place)}
-@Defn2{Term=[storage place], Sec=(of a component)}
+@Defn2{Term=[storage place], Sec=(of a component)}]}
 The @i{(record) layout} aspect of representation
 consists of the @i{storage places} for some or all components,
 that is, storage place attributes of the components.
@@ -4239,7 +4371,6 @@ place is not specified explicitly in the @nt<record_@!representation_@!clause>.
 @end{Reason}
 @end{ImplPerm}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{ImplAdvice}
 @Leading@PDefn2{Term=[recommended level of support], Sec=(@nt{record_representation_clause})}
 The recommended level of support for @nt{record_representation_clause}s is:
@@ -4399,7 +4530,7 @@ first subtype itself;
 surely Ada 83 did not intend to allow arbitrary identifiers.
 
 The RM83-13.4(7) wording incorrectly allows components in
-non-variant records to overlap.
+nonvariant records to overlap.
 We have corrected that oversight.
 @end{DiffWord83}
 
@@ -4413,7 +4544,7 @@ We have corrected that oversight.
   bit 9 in word 0 (for a machine with Storage_Unit = 8) had to be dropped for
   the nondefault bit order. Any @nt{record_representation_clause}s which
   depends on that equivalence will break (although such code would imply a
-  non-contiguous representation for a component, and it seems unlikely that
+  noncontiguous representation for a component, and it seems unlikely that
   compilers were supporting that anyway).]}
 @end{Incompatible95}
 
@@ -4700,6 +4831,7 @@ The Bit_Order attribute is new to Ada 95.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Change of Representation}
 
 @begin{Intro}

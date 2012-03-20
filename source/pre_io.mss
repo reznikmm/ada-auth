@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -366,7 +366,7 @@ or execute with a different effect in Ada 95.
 @ChgDeleted{Version=[2],Text=[@Chg{Version=[1],New=[File_Type cannot be
 implemented as a (directly) controlled type, as Ada.Sequential_IO can be
 instantiated at any nesting depth. File_Type could have a component of a
-controlled type, as long as that type is declared in some other (non-generic)
+controlled type, as long as that type is declared in some other (nongeneric)
 package.],Old=[]}]}@ChgNote{AI-344 allows controlled types to be declared at
 any nesting depth, so this note is obsolete.}
 @end{ImplNote}
@@ -745,7 +745,7 @@ in every instantiation of Direct_IO.]}
 implemented as a (directly)
 controlled type, as Ada.Direct_IO can be instantiated at any nesting depth.
 File_Type could have a component of a controlled type, as long as that type is
-declared in some other (non-generic) package.],Old=[]}]}
+declared in some other (nongeneric) package.],Old=[]}]}
 @end{ImplNote}
 
 @end{StaticSem}

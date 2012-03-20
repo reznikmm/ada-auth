@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:03 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -545,7 +545,7 @@ of @lquotes@;@key[with] Ada.Finalization;@rquotes@; as a context clause):
 Old=[Unfortunately, ]}Numerics.Discrete_Random.Generator @Chg{Version=[2],New=[also can],Old=[cannot]} be
 implemented this way@Chg{Version=[2],New=[],Old=[, as Numerics.Discrete_Random can be instantiated at any
 nesting depth. However, Generator could have a component of a controlled type,
-as long as that type is declared in some other (non-generic) package. One
+as long as that type is declared in some other (nongeneric) package. One
 possible solution would be to implement Numerics.@!Discrete_@!Random in terms
 of Numerics.@!Float_@!Random, using a component of Numerics.@!Float_@!Random.Generator
 to implement Numerics.@!Float_@!Random.@!Generator]}.]}

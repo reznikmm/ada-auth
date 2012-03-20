@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -67,7 +67,7 @@ the @Chg{Version=[3],New=[third edition of the ],Old=[]}Ada Reference
 Manual @Chg{Version=[3],New=[ (the Ada 2012 RM],Old=[@Chg{Version=[2],New=[ with Amendment 1 (the Ada 2005 RM],Old=[(RM95]}]}),
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
-They describe the reason for each non-obvious rule,
+They describe the reason for each nonobvious rule,
 and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
@@ -96,7 +96,7 @@ Technically, such text could be written as a @NotesName
 in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM
 (and the Ada 95 @Chg{Version=[3],New=[and 2005 RMs],Old=[RM]} before it)],Old=[RM95]},
 since it is really a theorem that can
-be proven from the non-redundant rules of the language.
+be proven from the nonredundant rules of the language.
 We use the square brackets instead when it seems to make the
 @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]} more readable.
 
@@ -374,7 +374,7 @@ Specialized Needs Annexes.
 
 @begin{WideAbove}
 @Leading@Keepnext@Defn{informative}
-@IndexSee{Term=[non-normative],See=(informative)}
+@IndexSee{Term=[nonnormative],See=(informative)}
 @Defn2{Term=[Annex],Sec=(informative)}
 The following Annexes are informative:
 @end{WideAbove}
@@ -507,7 +507,7 @@ of a complete context.)
 The only rules used in overload resolution are the @SyntaxName@;s
 and the @ResolutionName@;s.
 
-When dealing with non-overloadable declarations it sometimes makes no
+When dealing with nonoverloadable declarations it sometimes makes no
 semantic difference whether a given rule is a @ResolutionName
 or a @LegalityName,
 and it is sometimes difficult to decide which it should be.
@@ -789,7 +789,7 @@ the next heading does not represent any language change:
 @begin{DiffWord83}
 @ChgRef{Version=[2],Kind=[Revised]}
 @Defn{wording changes from Ada 83}
-This heading lists some of the non-semantic changes between @Chg{Version=[2],
+This heading lists some of the nonsemantic changes between @Chg{Version=[2],
 New=[the Ada 83 RM],Old=[RM83]} and
 the @Chg{Version=[2],New=[Ada 95 RM],Old=[RM95]}.
 It is incomplete; we have not attempted to list all wording
@@ -919,7 +919,7 @@ the next heading does not represent any language change:]}
 @begin{DiffWord95}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @Chg{Version=[2],New=[@Defn{wording changes from Ada 95}
-This heading lists some of the non-semantic changes between the Ada 95 RM and
+This heading lists some of the nonsemantic changes between the Ada 95 RM and
 the Ada 2005 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Changes which
 come from Technical Corrigendum 1 are marked @b{Corrigendum}; unmarked changes
@@ -1033,7 +1033,7 @@ As explained above, the next heading does not represent any language change:]}
 @begin{DiffWord2005}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@Defn{wording changes from Ada 2005}
-This heading lists some of the non-semantic changes between the Ada 2005 RM and
+This heading lists some of the nonsemantic changes between the Ada 2005 RM and
 the Ada 2012 RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Items marked
 @b[Correction:] come from Ada Issues classified
@@ -1608,7 +1608,7 @@ whereas the thing declared by a declaration is an @lquotes@;entity.@rquotes@;
 @lquotes@;Explicit@rquotes@; and @lquotes@;implicit@rquotes@; don't mean exactly what you might think
 they mean: The text of an instance of a generic is
 considered explicit, even though it does not appear explicitly (in
-the non-technical sense) in the program text,
+the nontechnical sense) in the program text,
 and even though its meaning is not defined entirely in terms of that
 text.
 @end{Discussion}
@@ -1850,7 +1850,7 @@ should be raised.]}]}
 Some situations that are erroneous in Ada 83 are no longer errors
 at all.
 For example, depending on the parameter passing mechanism when
-unspecified is possibly non-portable, but not erroneous.
+unspecified is possibly nonportable, but not erroneous.
 
 Other situations that are erroneous in Ada 83 are changed
 to be bounded errors.
@@ -1870,7 +1870,7 @@ range.
 Violating a check that is suppressed remains erroneous.
 
 The @lquotes@;incorrect order dependences@rquotes@; category of errors is removed.
-All such situations are simply considered potential non-portabilities.
+All such situations are simply considered potential nonportabilities.
 This category was removed due to the difficulty of defining
 what it means for two executions to have a @lquotes@;different effect.@rquotes@;
 For example, if a function with a side-effect is called twice in a single

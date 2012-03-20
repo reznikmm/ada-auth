@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -160,7 +160,7 @@ or in a generic formal part
 @Defn2{Term=[extension], Sec=(of a private type)}
 Every type extension is also a tagged type, and
 is a @i(record extension) or a @i(private extension) of some other
-tagged type, or a non-interface synchronized tagged type (see
+tagged type, or a noninterface synchronized tagged type (see
 @RefSecNum{Interface Types}).
 A record extension is defined by a @nt<derived_type_definition>
 with a @nt<record_extension_part> (see @RefSecNum{Type Extensions})@Redundant[,
@@ -1012,7 +1012,7 @@ Tagged types are a new concept.
 Every type extension is a tagged type, and
 is @Chg{Version=[2],New=[],Old=[either ]}a @i(record extension) or a
 @i(private extension) of
-some other tagged type@Chg{Version=[2],New=[, or a non-interface
+some other tagged type@Chg{Version=[2],New=[, or a noninterface
 synchronized tagged type],Old=[]}.]
 @end{Intro}
 
@@ -1370,7 +1370,7 @@ list are not dispatching as there is no guarantee that descendants of the
 type have available attributes (there is such a guarantee for visibly
 available attributes). If we allowed dispatching for any available
 attribute, then for attributes defined in the private part we could end up
-executing a non-existent body.]}
+executing a nonexistent body.]}
 @end{Reason}
 
 @end{Intro}
@@ -1643,7 +1643,7 @@ Because of this rule,
 the type descriptor can be created (presumably containing linker
 symbols pointing at the not-yet-compiled bodies) at the first
 freezing point of the type.
-It also prevents, for a @Chg{Version=[2],New=[(non-incomplete) ],Old=[]}tagged
+It also prevents, for a @Chg{Version=[2],New=[(nonincomplete) ],Old=[]}tagged
 type declared in a
 @nt{package_specification}, overriding in the body or by a child subprogram.
 @end{ImplNote}
@@ -1850,7 +1850,7 @@ operation in question.]}
 corresponding operations for the parent and progenitors, all but one of them
 have to be a null procedure. (If the progenitors declared abstract routines,
 there would have to be an explicit overriding of the operation, and then the
-first bullet would apply.) We call the non-null routine if one exists.]}
+first bullet would apply.) We call the nonnull routine if one exists.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0126-1]}
 @ChgAdded{Version=[3],Text=[Any explicit declaration for an inherited
@@ -2196,7 +2196,7 @@ primitive subprogram of],Old=[For a derived type, if]}
 the parent or ancestor type
 @Chg{Version=[2],New=[is abstract or is a function with a controlling access
 result, or if a type other than a
-@Chg{Version=[3],New=[non-abstract ],Old=[]}null extension inherits a],
+@Chg{Version=[3],New=[nonabstract ],Old=[]}null extension inherits a],
 Old=[has an abstract primitive subprogram, or a primitive]}
 function with a controlling result, then:
 @begin{Ramification}
@@ -2379,7 +2379,7 @@ abstract type.],Old=[]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0073-1]}
   @ChgAdded{Version=[3],Text=[Generic functions returning a formal
   abstract type are illegal because any instance would have to be
-  instantiated with a non-abstract type in order to avoid violating
+  instantiated with a nonabstract type in order to avoid violating
   the function rule (generic functions cannot be declared abstract).
   But that would be an implied contract; it would be better for the
   contract to be explicit by the formal type not being declared
@@ -2435,9 +2435,9 @@ end P2;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@Chg{Version=[2],New=[Type T2 inherits a non-abstract procedure P (2) from the
+@Chg{Version=[2],New=[Type T2 inherits a nonabstract procedure P (2) from the
 primitive procedure P (1) of T1. P (2) is overridden by the explicitly declared
-abstract procedure P (3). Type D inherits a non-abstract procedure P (4) from P
+abstract procedure P (3). Type D inherits a nonabstract procedure P (4) from P
 (1). In instantiation I, the operation corresponding to P (4) is the one which
 is not overridden, that is, P (3): the overridden operation P (2) does not
 @lquotes@;reemerge@rquotes@;. Therefore, the instantiation is illegal.],Old=[]}
@@ -2456,11 +2456,11 @@ in the private part, unless it is overriding a function
 implicitly declared in the visible part.
 @begin{Reason}
 @Leading@;The @lquotes@;visible part@rquotes@; could be that of a package
-or a generic package. This rule is needed because a non-abstract type extension
+or a generic package. This rule is needed because a nonabstract type extension
 declared outside the package would not know about any abstract primitive
 subprograms or primitive functions with controlling results
 declared in the private part, and wouldn't know that they
-need to be overridden with non-abstract subprograms.
+need to be overridden with nonabstract subprograms.
 The rule applies to a tagged record type or record extension declared
 in a visible part,
 just as to a tagged private type or private extension.
@@ -2475,9 +2475,9 @@ subprograms:
 @key[end] Pack;
 @end{Example}
 
-The above example would be illegal if T1 has a non-abstract primitive
+The above example would be illegal if T1 has a nonabstract primitive
 procedure P, but T2 overrides P with an abstract one;
-the private part should override P with a non-abstract version.
+the private part should override P with a nonabstract version.
 On the other hand, if the P were abstract for both T1 and T2,
 the example would be legal as is.
 @end{Reason}
@@ -2957,7 +2957,7 @@ interface and a synchronized interface extending it:}]}
 people. (A similar design could be created to define any kind of queue simply
 by replacing Person_Name by an appropriate type.) The Queue interface has four
 dispatching operations, Append, Remove_First, Cur_Count, and Max_Count. The
-body of a class-wide operation, Transfer is also shown. Every non-abstract
+body of a class-wide operation, Transfer is also shown. Every nonabstract
 extension of Queue must provide implementations for at least its four
 dispatching operations, as they are abstract. Any object of a type derived from
 Queue may be passed to Transfer as either the From or the To operand. The two
@@ -3435,21 +3435,21 @@ obtained by (implicitly) converting the literal @key{null} to the access
 type],Old=[]}.
 @Redundant[The null value of @Chg{Version=[2],New=[an],Old=[a named]} access
 type is the default initial value of the type.]
-@Chg{Version=[2],New=[Non-null],Old=[Other]} values of an
+@Chg{Version=[2],New=[Nonnull],Old=[Other]} values of an
 access@Chg{Version=[2],New=[-to-object],Old=[]} type are
 obtained by evaluating @Chg{Version=[2],New=[],Old=[an
 @nt<attribute_reference> for the Access or Unchecked_Access
-attribute of an aliased view of an object or non-intrinsic
+attribute of an aliased view of an object or nonintrinsic
 subprogram, or, in the case of a named access-to-object type,]}
 an @nt<allocator>@Redundant[, which
 returns an access value designating a newly created object
 (see @RefSecNum(Operations of Access Types))]@Chg{Version=[2],New=[, or in the
 case of a general access-to-object type, evaluating an
 @nt{attribute_reference} for the Access or Unchecked_Access
-attribute of an aliased view of an object. Non-null values of an
+attribute of an aliased view of an object. Nonnull values of an
 access-to-subprogram type are obtained by evaluating an
 @nt{attribute_reference} for the Access attribute of a
-non-intrinsic subprogram.],Old=[]}.
+nonintrinsic subprogram.],Old=[]}.
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}
@@ -3672,7 +3672,7 @@ The syntax rules for @nt{general_access_modifier} and
 @begin{Inconsistent95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
-  Access discriminants and non-controlling access parameters no longer
+  Access discriminants and noncontrolling access parameters no longer
   exclude null. A program which passed @key{null} to such an access
   discriminant or access parameter and expected it to raise Constraint_Error
   may fail @ChgNote{but not if the parameter is dereferenced in the subprogram or
@@ -4337,7 +4337,7 @@ not at all) for different designated subtypes.
 
 @begin{Intro}
 @Redundant[The attribute Access is used to create access values
-designating aliased objects and non-intrinsic subprograms.
+designating aliased objects and nonintrinsic subprograms.
 The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
 @em see Section 13).]
@@ -4526,7 +4526,7 @@ invocation of the entity],Old=[]}.
   inherited from the parent have the same accessibility as they did in the
   parent; those in the extension part have the accessibility
   determined by the scope where the type extension is declared.
-  Similarly, the types of the non-discriminant access components
+  Similarly, the types of the nondiscriminant access components
   of a derived untagged type have the same accessibility as they
   did in the parent.]}
 @end{Ramification}
@@ -5714,7 +5714,7 @@ denotes a subprogram}:
   generic @Chg{Version=[2],New=[unit, and the expression P'Access occurs within
   the body of that generic unit or within the body of a generic unit declared
   within the declarative region of the generic unit, then the ultimate ancestor
-  of @i{S} shall be either a non-formal type declared within the generic unit
+  of @i{S} shall be either a nonformal type declared within the generic unit
   or an anonymous access type of an access parameter.],
   Old=[body, @i{S} shall be declared within the generic body.]}
 

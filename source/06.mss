@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1100,7 +1100,7 @@ made.@PDefn{unspecified}]}
 @end{Extend2005}
 
 
-
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Formal Parameter Modes}
 
 @begin{Intro}
@@ -1435,8 +1435,8 @@ or itself be the initial declaration of the subprogram.
 @end{StaticSem}
 
 @begin{RunTime}
-@PDefn2{Term=[elaboration], Sec=(non-generic subprogram_body)}
-The elaboration of a non-generic
+@PDefn2{Term=[elaboration], Sec=(nongeneric subprogram_body)}
+The elaboration of a nongeneric
 @nt{subprogram_body} has no other effect than to establish
 that the subprogram can from then on be called without
 failing the Elaboration_Check.
@@ -1500,7 +1500,7 @@ because a @nt{declarative_part} can be empty.
 We have incorporated some rules from RM83-6.5 here.
 
 RM83 forgot to restrict the definition of elaboration of a
-@nt{subprogram_body} to non-generics.
+@nt{subprogram_body} to nongenerics.
 @end{DiffWord83}
 
 @begin{DiffWord95}
@@ -2059,6 +2059,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Diffword2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Inline Expansion of Subprograms}
 
 @begin{Intro}
@@ -3197,7 +3198,7 @@ as it is subsumed by earlier clauses and subclauses.
   object to more than one @key[in out] or @key[out] parameters of the same
   call. In this case, the result in the object could depend on the compiler
   version, optimization settings, and potentially the phase of the moon, so
-  this check will mostly reject programs that are non-portable and could
+  this check will mostly reject programs that are nonportable and could
   fail with any change. Even when the result is expected to be the same in both
   parameters, the code is unnecessarily tricky. Programs which fail this
   new check should be rare and are easily fixed by adding a temporary object.]}
@@ -4031,7 +4032,6 @@ subtype of this object.]}]}
 
 @end{ImplPerm}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Examples}
 @leading@keepnext@i{Examples of return statements:}
 @begin{Example}
@@ -4252,7 +4252,8 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord2005}
 
 
-@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Non-returning Procedures],Old=[Pragma No_Return]}
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Nonreturning Procedures],Old=[Pragma No_Return]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -4299,7 +4300,7 @@ language-defined representation aspect may be specified:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[No_Return@\The type of aspect No_Return is Boolean.
 When aspect No_Return is True for an entity, the entity is said to be
-@i<non-returning>.@Defn{non-returning}@AspectDefn{No_Return}]}
+@i<nonreturning>.@Defn{nonreturning}@AspectDefn{No_Return}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[If directly specified, the
@@ -4311,8 +4312,8 @@ never inherited;] if not directly specified, the aspect is False.]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}@ChgNote{Moved from below}
-@ChgAdded{Version=[3],Text=[If a generic procedure is non-returning, then so are
-its instances. If a procedure declared within a generic unit is non-returning,
+@ChgAdded{Version=[3],Text=[If a generic procedure is nonreturning, then so are
+its instances. If a procedure declared within a generic unit is nonreturning,
 then so are the corresponding copies of that procedure in instances.]}
 
 @end{StaticSem}
@@ -4322,16 +4323,16 @@ then so are the corresponding copies of that procedure in instances.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Aspect No_Return],
-Old=[@Defn{non-returning}Each @SynI{procedure_}@nt{local_name} shall denote one
+Old=[@Defn{nonreturning}Each @SynI{procedure_}@nt{local_name} shall denote one
 or more procedures or generic procedures; the denoted entities are
-@i<non-returning>. The @SynI{procedure_}@nt{local_name}]} shall not
+@i<nonreturning>. The @SynI{procedure_}@nt{local_name}]} shall not
 @Chg{Version=[3],New=[be specified for],Old=[denote]} a
 null procedure nor an instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[A null procedure cannot have the appropriate
-  non-returning semantics, as it does not raise an exception or loop forever.]}
+  nonreturning semantics, as it does not raise an exception or loop forever.]}
 @end{Reason}
 
 @begin{Ramification}
@@ -4340,18 +4341,18 @@ null procedure nor an instance of a generic unit.]}
   @ChgAdded{Version=[2],Text=[The procedure can be abstract.@Chg{Version=[3],New=[],
   Old=[ The denoted declaration can be a @nt{renaming_declaration} if it obeys the usual rules
   for representation pragmas: the renaming has to occur immediately within the
-  same declarative region as the renamed subprogram.]} If a non-returning
+  same declarative region as the renamed subprogram.]} If a nonreturning
   procedure is renamed (anywhere) calls through the new name still have the
-  non-returning semantics.]}
+  nonreturning semantics.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[A return statement shall not apply to a
-non-returning procedure or generic procedure.]}
+nonreturning procedure or generic procedure.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[A procedure shall be non-returning if it overrides
-a dispatching non-returning procedure.
+@ChgAdded{Version=[2],Text=[A procedure shall be nonreturning if it overrides
+a dispatching nonreturning procedure.
 @PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
@@ -4360,12 +4361,12 @@ this rule applies also in the private part of an instance of a generic unit.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This ensures that dispatching calls to
-  non-returning procedures will, in fact, not return.]}
+  nonreturning procedures will, in fact, not return.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[If a renaming-as-body completes a non-returning
-procedure declaration, then the renamed procedure shall be non-returning.]}
+@ChgAdded{Version=[2],Text=[If a renaming-as-body completes a nonreturning
+procedure declaration, then the renamed procedure shall be nonreturning.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4387,14 +4388,14 @@ the old, now unused, subheader}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[If a generic procedure
-is non-returning, then so are its instances. If a procedure declared within
-a generic unit is non-returning, then so are the corresponding copies of
+is nonreturning, then so are its instances. If a procedure declared within
+a generic unit is nonreturning, then so are the corresponding copies of
 that procedure in instances.]}]}
 @end{StaticSem}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[If the body of a non-returning procedure completes
+@ChgAdded{Version=[2],Text=[If the body of a nonreturning procedure completes
 normally, Program_Error is raised at the point of the call.
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{RunTime}
@@ -4407,7 +4408,7 @@ normally, Program_Error is raised at the point of the call.
 @end{Discussion}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[If a non-returning procedure tries to return, we
+  @ChgAdded{Version=[2],Text=[If a nonreturning procedure tries to return, we
   raise Program_Error. This is stated as happening at the call site, because we
   do not wish to allow the procedure to handle the exception (and then,
   perhaps, try to return again!). However, the expected run-time model is that
@@ -4416,11 +4417,11 @@ normally, Program_Error is raised at the point of the call.
   doing it at the call site. (This is just like the typical run-time model for
   functions that fall off the end without returning a value). The reason is
   indirect calls: in P.@key{all}(...);, the compiler cannot know whether P
-  designates a non-returning procedure or a normal one. Putting the @key{raise}
+  designates a nonreturning procedure or a normal one. Putting the @key{raise}
   Program_Error in the procedure's generated code solves this problem neatly.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Similarly, if one passes a non-returning
+  @ChgAdded{Version=[2],Text=[Similarly, if one passes a nonreturning
   procedure to a generic formal parameter, the compiler cannot know this at
   call sites (in shared code implementations); the raise-in-body solution
   deals with this neatly.]}

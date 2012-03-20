@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:35 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -263,8 +263,8 @@ we are implicitly defining execution of that construct.
 
 We also use the term "execution" for things like @nt{statement}s,
 which are executable, but neither elaborable nor evaluable.
-We considered using the term "execution" only for non-elaborable,
-non-evaluable constructs, and defining the term "action" to mean what
+We considered using the term "execution" only for nonelaborable,
+nonevaluable constructs, and defining the term "action" to mean what
 we have defined "execution" to mean.
 We rejected this idea because we thought three terms that mean the
 same thing was enough @em four would be overkill.
@@ -784,13 +784,13 @@ otherwise, the subtype is called a @i(constrained) subtype
 (since it has no unconstrained characteristics).
 @begin{Discussion}
   In an earlier version of Ada 9X,
-  "constrained" meant "has a non-null
+  "constrained" meant "has a nonnull
   constraint." However, we changed to this definition
   since we kept having to special
-  case composite non-array/non-discriminated types. It also corresponds
+  case composite non-array/nondiscriminated types. It also corresponds
   better to the (now obsolescent) attribute 'Constrained.
 
-  For scalar types, @lquotes@;constrained@rquotes@; means @lquotes@;has a non-null
+  For scalar types, @lquotes@;constrained@rquotes@; means @lquotes@;has a nonnull
   constraint@rquotes@;.
   For composite types, in implementation terms, @lquotes@;constrained@rquotes@; means
   that the size of all objects of the subtype is the same, assuming a
@@ -1488,9 +1488,9 @@ is called a @i(primitive operator).
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}
 The attribute S'Base is no longer defined for
-non-scalar subtypes. Since this was only permitted
+nonscalar subtypes. Since this was only permitted
 as the prefix of another attribute, and there are no
-interesting non-scalar attributes defined for an unconstrained
+interesting nonscalar attributes defined for an unconstrained
 composite or access subtype, this should not affect any
 existing programs.
 @end{Incompatible83}
@@ -1679,12 +1679,12 @@ subtype to which Dynamic_Predicate specifications apply.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_choice} of a
-@nt{named_array_aggregate} shall not denote a non-static subtype to which
+@nt{named_array_aggregate} shall not denote a nonstatic subtype to which
 predicate specifications apply.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-  @ChgAdded{Version=[3],Text=[This rule prevents non-contiguous
+  @ChgAdded{Version=[3],Text=[This rule prevents noncontiguous
   dynamically bounded array aggregates, which could be expensive to check for.
   (Array aggregates have rules to prevent problems with static subtypes.) We
   define this rule here so that the runtime generic body check applies.]}
@@ -2805,7 +2805,7 @@ We now allow a static expression of any numeric type
 to initialize a named
 number. For integer types, it was possible in Ada 83
 to use 'Pos to define a named number, but there was
-no way to use a static expression of some non-universal
+no way to use a static expression of some nonuniversal
 real type to define a named number. This change is
 upward compatible because of the preference rule for
 the operators of the root numeric types.
@@ -3379,7 +3379,7 @@ and @key{null record} as the @nt{record_component_association_list}],Old=[]}.
 @begin(Discussion)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
   If an inherited function returns the derived type, and the type
-  is a @Chg{Version=[2],New=[non-null ],Old=[]}record extension, then the
+  is a @Chg{Version=[2],New=[nonnull ],Old=[]}record extension, then the
   inherited function @Chg{Version=[2],New=[shall be overridden, unless
   the type is abstract (in which case the function ],Old=[]}is abstract,
   and (unless overridden) cannot be called except via
@@ -3579,8 +3579,8 @@ similar, but not the same.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0096-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Added a (re)check that limited type extensions never are derived from
-  non-limited types in generic private parts. This is disallowed as it would
-  make it possible to pass a limited object to a non-limited class-wide type,
+  nonlimited types in generic private parts. This is disallowed as it would
+  make it possible to pass a limited object to a nonlimited class-wide type,
   which could then be copied. This is only possible using Ada 2005 syntax,
   so examples in existing programs should be rare.]}
 @end{Incompatible2005}
@@ -4800,7 +4800,7 @@ strings of the form @ldquote@;Hex_@i<hhhhhhhh>@rdquote (ignoring case) for any
 character (not just the ones for which Wide_Wide_Image would produce that form
 @em see @RefSecNum{Character Types}), as well as three-character strings of
 the form @ldquote@;'@i<X>'@rdquote, where @i<X> is any character, including
-non-graphic characters.]}
+nongraphic characters.]}
 @end{ImplPerm}
 
 @begin{StaticSem}
@@ -4990,7 +4990,7 @@ More explicit rules are provided for nongraphic characters.
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0182-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:>
   Added an @ImplPermTitle to let Wide_Wide_Value, Wide_Value, and Value accept
-  strings in the form of literals containing non-graphic characters and
+  strings in the form of literals containing nongraphic characters and
   "Hex_hhhhhhhh" for Latin-1 and graphic characters. These were required to
   raise Constraint_Error in Ada 2005. Since these attributes aren't very
   useful, implementations were inconsistent as to whether these were accepted,
@@ -5382,16 +5382,16 @@ Context is used to resolve their type.
   @ChgAdded{Version=[2],Text=[@Defn{inconsistencies with Ada 95}
   Ada 95 defined most characters in Wide_Character to be graphic characters,
   while Ada 2005 uses the categorizations from ISO-10646:2003. It also
-  provides language-defined names for all non-graphic characters. That
+  provides language-defined names for all nongraphic characters. That
   means that in Ada 2005, Wide_Character'Wide_Value will raise Constraint_Error
-  for a string representing a @nt{character_literal} of a non-graphic character,
+  for a string representing a @nt{character_literal} of a nongraphic character,
   while Ada 95 would have accepted it. Similarly, the result of
-  Wide_Character'Wide_Image will change for such non-graphic characters.]}
+  Wide_Character'Wide_Image will change for such nongraphic characters.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00395-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[2],Text=[The language-defined names FFFE and FFFF were
-  replaced by a consistent set of language-defined names for all non-graphic
+  replaced by a consistent set of language-defined names for all nongraphic
   characters with @Chg{Version=[3],New=[code points],Old=[positions]}
   greater than 16#FF#. That means that
   in Ada 2005, Wide_Character'Wide_Value("FFFE") will raise Constraint_Error
@@ -5802,7 +5802,7 @@ It is implementation defined for which powers of 2, if any, this
 permission is exercised.
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0003],ARef=[AI95-00095-01]}
-@Chg{New=[For a one's complement machine, implementations may support non-binary
+@Chg{New=[For a one's complement machine, implementations may support nonbinary
 modulus values greater than System.Max_Nonbinary_Modulus. It is implementation
 defined which specific values greater than System.Max_Nonbinary_Modulus, if
 any, are supported.],Old=[]}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1508,7 +1508,6 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Inconsistent2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}
@@ -1992,7 +1991,7 @@ costs more than overflow checking,
 but overflow checking still costs something.
 Different compilers will suppress different checks when asked to
 suppress Overflow_Check @em
-the non-uniformity in this case is not harmful,
+the nonuniformity in this case is not harmful,
 and removing it would have a serious impact on optimizers.
 
 Under Access_Check,
@@ -2022,7 +2021,7 @@ null in Ada 2005.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[The On parameter of pragma Suppress was moved to
 Annex J.
-This feature's effect is inherently non-portable, depending on the
+This feature's effect is inherently nonportable, depending on the
 implementation's model of computation. Compiler surveys demonstrated this,
 showing that implementations vary widely in the interpretation of these
 parameters, even on the same target. While this is relatively harmless for
@@ -2059,7 +2058,7 @@ set of possible external effects that can result from the execution of
 the program with given inputs.]
 @begin{Ramification}
 Note that the canonical semantics is a set of possible behaviors,
-since some reordering, parallelism, and non-determinism is allowed by
+since some reordering, parallelism, and nondeterminism is allowed by
 the canonical semantics.
 @end{Ramification}
 @begin{Discussion}

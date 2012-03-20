@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/01/22 06:25:08 $}
+@Comment{$Date: 2012/02/19 01:58:35 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @LabeledClause{Array Types}
 
@@ -1037,7 +1037,7 @@ instance of a generic unit.@PDefn{generic contract issue}
   of this rule that only a return-by-reference
   type can have an access discriminant (see @RefSecNum{Return Statements}).
   This is important to avoid dangling references to local variables.]}
-  @ChgAdded{Version=[3],Text=[A (non-formal) limited private type can always
+  @ChgAdded{Version=[3],Text=[A (nonformal) limited private type can always
   have a default for an access discriminant, because having the default itself
   makes the type immutably limited. Such a private type must necessarily
   have a full type with the same access discriminant with a default, and
@@ -1544,7 +1544,7 @@ when the discriminant is initialized.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00230-01],ARef=[AI95-00402-01],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Access discriminants (anonymous access types
   used as a discriminant) can be used on any type allowing discriminants.
-  Defaults aren't allowed on discriminants of non-limited types, however, so
+  Defaults aren't allowed on discriminants of nonlimited types, however, so
   that accessibility problems don't happen on assignment.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00231-01]}
@@ -2051,9 +2051,10 @@ a @nt{name} that denotes a component, protected subprogram,
 or entry of the type is allowed only in the following cases:
 
 @begin{Itemize}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1],ARef=[AI05-0295-1]}
 A @nt{name} that denotes any component, protected subprogram,
-or entry is allowed within @Chg{Version=[3],New=[an operational or],Old=[a]}
+or entry is allowed within @Chg{Version=[3],New=[an @nt{aspect_specification},
+an operational item, or ],Old=[]}a
 representation item that occurs within the declaration of the composite type.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
@@ -2099,8 +2100,10 @@ in order to avoid unnecessary changes to existing compilers.
   @Chg{Version=[2],New=[They],Old=[It]} also prevent circularities.
 @end{Reason}
 @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   Inherited discriminants are not allowed to be denoted,
-  except within representation items.
+  except within @Chg{Version=[3],New=[@nt{aspect_specification}s
+  and ],Old=[]}representation items.
   However, the @SynI{discriminant_}@nt{selector_name} of
   the parent @nt{subtype_indication} is allowed to denote
   a discriminant of the parent.

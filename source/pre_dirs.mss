@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -347,7 +347,7 @@ the given name (in the absence of Name_Error).]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0271-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Creates zero or more directories with
 name New_Directory. Each
-non-existent directory named by New_Directory is created.@Redundant[ For example, on a
+nonexistent directory named by New_Directory is created.@Redundant[ For example, on a
 typical Unix system, Create_Path ("/usr/me/my"); would create directory "me" in
 directory "usr", then create directory "my" in directory "me".] The Form parameter
 can be used to give system-dependent characteristics of the directory; the
@@ -552,7 +552,7 @@ base name. The exception Name_Error is propagated if the string given as
 Containing_Directory is not null and does not allow the identification of a
 directory, or if the string given as Extension is not null and is not a
 possible extension, or if the string given as Name is not a possible simple
-name (if Extension is null) or base name (if Extension is non-null).]}
+name (if Extension is null) or base name (if Extension is nonnull).]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -745,7 +745,7 @@ external environment does not support the searching of the directory with the
 given name (in the absence of Name_Error). When Start_Search propagates
 Name_Error or Use_Error, the object Search will have no entries available.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
-interpretation of a non-null search pattern in Directories.],Old=[]}]}
+interpretation of a nonnull search pattern in Directories.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} End_Search (Search : @key{in out} Search_Type);]}
@@ -1237,7 +1237,7 @@ should be deleted first.]}
   Rename. If an implementation followed the original incorrect wording, it might
   raise Use_Error instead of Name_Error for Start_Search and Search,
   Name_Error instead of Use_Error for Rename, and might have deleted a
-  non-empty directory instead of raising Use_Error for Delete_Directory.
+  nonempty directory instead of raising Use_Error for Delete_Directory.
   The first two cases are very unlikely to matter in practice, and it unlikely
   that an implementation would have followed the latter implementation
   strategy, as it would be more work and would make Delete_Directory

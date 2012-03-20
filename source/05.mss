@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.55 $}
+@Comment{$Revision: 1.56 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -806,7 +806,7 @@ For example, if X: Integer := Integer'Last;, and the case @Chg{Version=[3],New=[
 X+1, then the implementation might choose to produce the correct value, which
 is outside the bounds of Integer.
 (It might raise Constraint_Error instead.)
-This case can only happen for non-generic subtypes that are either
+This case can only happen for nongeneric subtypes that are either
 unconstrained or
 non@Chg{Version=[2],New=[],Old=[-]}@ChgNote{Make spelling consistent}static
 (or both).

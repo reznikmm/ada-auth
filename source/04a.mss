@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -913,7 +913,7 @@ the result subtype is a subtype of the type without any constraint or
   a concern when an @nt{attribute_reference}, or
   a call on an @nt{attribute_reference}, is used as the @nt{expression}
   of a case statement, due to the full coverage requirement based on
-  the nominal subtype. For non-discrete cases, we define the
+  the nominal subtype. For nondiscrete cases, we define the
   nominal subtype mainly for completeness. Implementations may
   specify otherwise for implementation-defined attribute functions.]}
 
@@ -1511,7 +1511,7 @@ the component type of the expected string type.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
 @ChgDeleted{Version=[2],Text=[A literal @s<null>@ChgNote{We use @S since this
-isn't a non-terminal, and since it is deleted we don't want to fix it.} shall
+isn't a nonterminal, and since it is deleted we don't want to fix it.} shall
 not be of an anonymous
 access type@Redundant[, since such types do not have a null value
 (see @RefSecNum{Access Types})].]}
@@ -2184,7 +2184,7 @@ a record aggregate. Now we do.
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Corrected wording so that the rule for discriminants governing @nt{variant_part}s
   was not effectively circular. The change makes a few @nt{aggregate}s where a
-  non-static discriminant governs an empty @nt{variant_part} illegal. However,
+  nonstatic discriminant governs an empty @nt{variant_part} illegal. However,
   most Ada implementations already enforce some version of the new rule and
   already reject these @nt{aggregate}s. So it is unlikely that any
   incompatibility will be noticed in practice.]}
@@ -3535,7 +3535,6 @@ either of the above checks fails.
 
 @end{RunTime}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Notes}
 @Leading@;The conventional meaning of the logical operators is given by the
 following truth table:
@@ -3773,7 +3772,7 @@ access-to-object type whose designated type is @i<D> or @i<D>'Class, where
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[We don't need a similar rule for anonymous
   access-to-subprogram types because they can't be primitive for any type.
-  Note that any non-primitive user-defined equality operators still are hidden
+  Note that any nonprimitive user-defined equality operators still are hidden
   by the universal operators; they'll have to be called with a package
   prefix, but they are likely to be very uncommon.]}
 @end{Ramification}
@@ -4167,7 +4166,7 @@ membership test using @key(in)]} yields the result True if:
     type, the type of the @nt{simple_expression} is convertible to the tested
     type and its accessibility level is no deeper than that of the tested type;
     further, if the designated type of the tested type is tagged and the
-    @nt{simple_expression} is non-null, the tag of the object designated by the
+    @nt{simple_expression} is nonnull, the tag of the object designated by the
     value of the @nt{simple_expression} is covered by the designated type of the
     tested type.]}
   @end{Inneritemize}
@@ -5119,7 +5118,7 @@ P(Formal => @key[if] X @key[then] Y @key[else] Z);]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This English-language rule could have been
-  implemented instead by adding a non-terminal
+  implemented instead by adding a nonterminal
   @ntf{expression_within_parentheses}, which would consist of @nt{expression}s
   and @nt{conditional_expression}s. Then, that could be used in all of the
   syntax which could consist of parens directly around an @nt{expression}. We

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2012/02/19 01:58:38 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/02/19 01:58:38 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -751,7 +751,7 @@ string, then Pattern_Error is propagated.]}
    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0056-1]}
    @ChgAdded{Version=[3],Text=[The language does not define when the
    Pattern_Error check is made. (That's because many common searching
-   implementations require a non-empty pattern) That means that the result for
+   implementations require a nonempty pattern) That means that the result for
    a call like @f{Index ("", "")} could be 0 or could raise Pattern_Error.
    Similarly, in the call @f{Index ("", "", From => 2)}, the language does not
    define whether Pattern_Error or Index_Error is raised.]}
@@ -1653,7 +1653,7 @@ implemented as a (directly) controlled type,
 as Ada.Strings.Bounded.Generic_Bounded_Length can be instantiated at any
 nesting depth. Bounded_String could have
 a component of a controlled type, as long as that type is declared in some
-other (non-generic) package (including directly in Ada.Strings.Bounded).],Old=[]}]}
+other (nongeneric) package (including directly in Ada.Strings.Bounded).],Old=[]}]}
 @ChgNote{AI-344 allows controlled types to be declared at
 any nesting depth, so this note is obsolete.}
 
@@ -2258,7 +2258,7 @@ will be initialized to the same value as Null_Unbounded_String.
 
 The function Length returns the length of the String represented by Source.
 
-The type String_Access provides a (non-private) access type for explicit
+The type String_Access provides a (nonprivate) access type for explicit
 processing of unbounded-length strings. The procedure Free performs
 an unchecked deallocation of an object of type String_Access.
 

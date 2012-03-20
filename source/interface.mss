@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -16,7 +16,7 @@ in terms of language interface packages for each of
 these languages.
 @begin{Ramification}
 This Annex is not a @lquotes@;Specialized Needs@rquotes@; annex.
-Every implementation must support all non-optional features defined here
+Every implementation must support all nonoptional features defined here
 (mainly the package Interfaces).
 @end{Ramification}
 @end{Intro}
@@ -90,7 +90,12 @@ subprograms, although implementations are allowed to support other
 entities.@Chg{Version=[3],New=[ The Link_Name and External_Name aspects are
 used to specify the link name and external name, respectively, to be
 used to identify imported or exported entities in the external
-environment.@AspectDefn{Link_Name}@AspectDefn{External_Name}],Old=[]}
+environment.@AspectDefn{Link_Name}@AspectDefn{External_Name}
+@PDefn2{Term=[representation aspect], Sec=(convention, calling convention)}
+@PDefn2{Term=[representation aspect], Sec=(import)}
+@PDefn2{Term=[representation aspect], Sec=(export)}
+@PDefn2{Term=[representation aspect], Sec=(external_name)}
+@PDefn2{Term=[representation aspect], Sec=(link_name)}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Import],
     Text=[@ChgAdded{Version=[3],Text=[Entity is imported from another
@@ -875,7 +880,7 @@ should be operators (not functions named by identifiers).
 but it was changed to a reserved word operator before standardization of
 Ada 83.)
 This is important because the implicit declarations would hide
-non-overloadable declarations with the same name,
+nonoverloadable declarations with the same name,
 whereas operators are always overloadable.
 Therefore, we would have had to make shift and rotate
 into reserved words,
@@ -2147,6 +2152,7 @@ Free, not by a called C function.
 @end{DiffWord95}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{The Generic Package Interfaces.C.Pointers}
 @begin{Intro}
 The generic package Interfaces.C.Pointers allows the Ada programmer to
@@ -2408,7 +2414,6 @@ Some_Pointer : Pointer := Some_Array(0)'Access;
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Unchecked Union Types],Old=[Pragma Unchecked_Union]}
 
 @begin{Intro}

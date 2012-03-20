@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.20 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.21 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1808,7 +1808,7 @@ finalized.]}
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -2513,7 +2513,7 @@ exception raised during the evaluation of element equality is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a non-empty holder
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a nonempty holder
 containing an element initialized to New_Item.]}
 
 @begin{Example}
@@ -2740,7 +2740,7 @@ Constant_Reference is finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -2900,7 +2900,7 @@ to an assignment from another vector, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3069,7 +3069,7 @@ to an assignment from another list, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3246,7 +3246,7 @@ to an assignment from another map, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3405,7 +3405,7 @@ to an assignment from another map, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3583,7 +3583,7 @@ to an assignment from another set, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3738,7 +3738,7 @@ to an assignment from another set, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -3905,7 +3905,7 @@ to an assignment from another tree, then execution is erroneous.
   pure Ada implementation to detect this error. (There is no Finalize routine
   that will be called that could make the check.) Since the check probably
   cannot be made, the bad effects that could occur (such as an iterator going
-  into an infinite loop or accessing a non-existent element) cannot be prevented
+  into an infinite loop or accessing a nonexistent element) cannot be prevented
   and we have to allow anything. We do allow re-assigning an object that only
   prohibits tampering because it was copied from another object as that cannot
   cause any negative effects.]}
@@ -4599,7 +4599,7 @@ inserted after the existing equivalent elements.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[For a call on Dequeue_Only_High_Priority, if the
-head of the non-empty queue is @i<E>, and the function Before(At_Least,
+head of the nonempty queue is @i<E>, and the function Before(At_Least,
 Get_Priority(@i<E>)) returns False, then @i<E> is assigned to
 Element and then removed from the queue, and Success is set to True;
 otherwise, Success is set to False and Element is unchanged.]}

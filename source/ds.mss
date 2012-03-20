@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.63 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.64 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -58,7 +58,7 @@ a distributed system be homogeneous.
 
 
 The partitions comprising a program may be executed on differently
-configured distributed systems or on a non-distributed system without
+configured distributed systems or on a nondistributed system without
 requiring recompilation.
 A distributed program may be partitioned differently from the same set of
 library units without recompilation.
@@ -661,7 +661,7 @@ type declared in the visible part of the
 library unit @Chg{Version=[2],New=[that has any available stream attributes
 shall support external streaming (see
 @RefSecNum{Stream-Oriented Attributes})], Old=[has a part that is of a
-non-remote access type, then that access type, or the type of some
+nonremote access type, then that access type, or the type of some
 part that includes the access type subcomponent,
 shall have user-specified Read and Write attributes]}.
 @begin{Reason}
@@ -738,8 +738,8 @@ shall only have access parameters if they are controlling formal
 parameters@Chg{Version=[3],New=[. The primitive functions of the corresponding
 specific type shall only have an access result if it is a controlling access
 result.],Old=[;]} @Chg{New=[@Chg{Version=[3],New=[Each],Old=[each]}
-non-controlling formal parameter],Old=[the types of all the non-controlling
-formal parameters]} @Chg{Version=[3],New=[and non-controlling result
+noncontrolling formal parameter],Old=[the types of all the noncontrolling
+formal parameters]} @Chg{Version=[3],New=[and noncontrolling result
 type ],Old=[]}shall @Chg{Version=[2],New=[support external streaming (see
 @RefSecNum{Stream-Oriented Attributes});], Old=[have @Chg{New=[either a
 nonlimited type or a type with],Old=[]} Read and Write attributes@Chg{New=[

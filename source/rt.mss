@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.110 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.111 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -855,7 +855,7 @@ for that partition is unspecified.]}
 @ChgAdded{Version=[2],Text=[If a partition contains one or more
 Priority_Specific_Dispatching pragmas@Chg{Version=[3],New=[,],Old=[]}
 a task dispatching point occurs for the
-currently running task of a processor whenever there is a non-empty ready queue
+currently running task of a processor whenever there is a nonempty ready queue
 for that processor with a higher priority than the priority of the running
 task.]}
 
@@ -1059,7 +1059,6 @@ regardless of whether the active priority of the task actually changes.]}
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Preemptive Dispatching]}
 
 @begin{Intro}
@@ -1209,7 +1208,6 @@ regardless of whether the active priority of the task actually changes.]}
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[2],Name=[Non-Preemptive Dispatching]}
 
 @begin{Intro}
@@ -1820,7 +1818,7 @@ which policy EDF_Across_Priorities applies:]}
 active priority of @i<T> with a deadline earlier than the deadline of @i<T>; or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[there is a non-empty ready queue for that processor
+@ChgAdded{Version=[2],Text=[there is a nonempty ready queue for that processor
 with a higher priority than the active priority of the running task.]}
 
 @end{Itemize}
@@ -2214,7 +2212,7 @@ protected object whose ceiling is Priority'Last, which would cause
 Note that the ceiling of such an object has to be at least
 Priority'Last,
 since there is no permission for @nt{allocator}s to fail when evaluated at
-a non-interrupt priority.
+a noninterrupt priority.
 @end{TheProof}
 
 @end{ImplPerm}
@@ -3274,7 +3272,7 @@ Storage_Error should be raised.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01],ARef=[AI95-00394-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Task_Termination)}@Chg{Version=[3],New=[@Defn{No_Task_Termination restriction}],
    Old=[]}No_Task_Termination @\All
-   tasks are non-terminating. It is implementation-defined what happens if
+   tasks are nonterminating. It is implementation-defined what happens if
    a task attempts to terminate. If there is a fall-back handler (see C.7.3)
    set for the partition it should be called when the first task attempts to
    terminate.]}
@@ -4958,7 +4956,7 @@ the creation of the task.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Since it is implementation-defined which task
   is charged execution time for system services, the execution time value
-  may become non-zero even before the start of the activation of the task.]}
+  may become nonzero even before the start of the activation of the task.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
@@ -5186,7 +5184,7 @@ finalization (see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timer is said to be @i<set> if it
-is associated with a non-null value of type Timer_Handler and @i<cleared>
+is associated with a nonnull value of type Timer_Handler and @i<cleared>
 otherwise. All Timer objects are initially cleared.
 @PDefn2{Term=[set],Sec=[execution timer object]}
 @PDefn2{Term=[clear],Sec=[execution timer object]}]}
@@ -5502,7 +5500,7 @@ order of the components of the array is unspecified.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0169-1]}
 @ChgAdded{Version=[2],Text=[The procedure Replenish loads the group budget GB
 with To as the Time_Span value. The exception Group_Budget_Error is raised if
-the Time_Span value To is non-positive. Any execution @Chg{Version=[3],New=[on
+the Time_Span value To is nonpositive. Any execution @Chg{Version=[3],New=[on
 CPU ],Old=[]}of any member of the
 group of tasks results in the budget counting down, unless exhausted. When the
 budget becomes exhausted (reaches Time_Span_Zero), the associated handler is
@@ -5758,7 +5756,7 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
 @ChgAdded{Version=[2],Text=[An object of type Timing_Event is said to be
-@i<set> if it is associated with a non-null value of type Timing_Event_Handler
+@i<set> if it is associated with a nonnull value of type Timing_Event_Handler
 and @i<cleared> otherwise. All Timing_Event objects are initially cleared.
 @PDefn2{Term=[set],Sec=[timing event object]}
 @PDefn2{Term=[clear],Sec=[timing event object]}]}
@@ -6106,6 +6104,7 @@ defined to have failed, and it becomes a completed task (see
   The package System.Multiprocessors and the CPU aspect are new.]}
 @end{Extend2005}
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}

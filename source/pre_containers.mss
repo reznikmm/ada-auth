@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.91 $ $Date: 2012/02/18 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.92 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -860,7 +860,7 @@ elements as was written by Vector'Write.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The Standard requires streaming of all
-  language-defined non-limited types (including containers) to "work" (see
+  language-defined nonlimited types (including containers) to "work" (see
   @RefSecNum{Stream-Oriented Attributes}). In addition, we do not want all
   of the elements that make up the
   capacity of the vector streamed, as those beyond the length of the container
@@ -1298,7 +1298,7 @@ element after successful call to Replace_Element.]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[2],Text=[Replace_Element@Chg{Version=[3],New=[,],Old=[ and]}
   Update_Element@Chg{Version=[3],New=[, and Reference],Old=[]} are the only
-  ways that an element can change from empty to non-empty. Also see the note
+  ways that an element can change from empty to nonempty. Also see the note
   following Update_Element.]}
 @end{Ramification}
 
@@ -2364,7 +2364,7 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If Source is
-empty, then Merge does nothing. If Source and Target are the same non-empty
+empty, then Merge does nothing. If Source and Target are the same nonempty
 container object, then Program_Error is propagated. Otherwise, ],Old=[]}Merge
 removes elements from Source and inserts them into Target; afterwards, Target
 contains the union of the elements that were initially in Source and Target;
@@ -2584,7 +2584,7 @@ by the call to Reference or Constant_Reference is finalized.]}
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -4117,7 +4117,7 @@ evaluation of "<" is propagated.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[3],New=[If Source is
-empty, then Merge does nothing. If Source and Target are the same non-empty
+empty, then Merge does nothing. If Source and Target are the same nonempty
 container object, then Program_Error is propagated. Otherwise, ],Old=[]}Merge
 removes elements from Source
 and inserts them into Target; afterwards,
@@ -4248,7 +4248,7 @@ finalized.]}
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -5322,7 +5322,7 @@ finalized.]}
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -5963,7 +5963,7 @@ hash bucket that contains a node.]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[In a typical implementation, this will return the next node in a bucket; if
 Position is the last node in a bucket, this will return the first node in the
-next non-empty bucket.]}
+next nonempty bucket.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[A typical implementation will need to a keep a pointer at the map container
@@ -7833,7 +7833,7 @@ finalized.]}
   container. If that container is prematurely finalized (which is only possible
   via Unchecked_Deallocation, as accessibility checks prevent passing a
   container to Reference that will not live as long as the result), the
-  finalization of the object of Reference_Type will try to access a non-existent
+  finalization of the object of Reference_Type will try to access a nonexistent
   object. This is a normal case of a dangling pointer created by
   Unchecked_Deallocation; we have to explicitly mention it here as the pointer
   in question is not visible in the specification of the type. (This is the same
@@ -8281,7 +8281,7 @@ unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[3],Text=[If the actual function for the generic formal
-function "=" returns True for any pair of non-equivalent elements, then the
+function "=" returns True for any pair of nonequivalent elements, then the
 behavior of the container function "=" is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -8909,7 +8909,7 @@ call it, is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0044-1]}
 @ChgAdded{Version=[3],Text=[If the actual function for the generic formal
-function "=" returns True for any pair of non-equivalent elements, then the
+function "=" returns True for any pair of nonequivalent elements, then the
 behavior of the container function "=" is unspecified.@PDefn{unspecified}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

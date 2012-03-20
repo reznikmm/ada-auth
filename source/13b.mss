@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1554,7 +1554,7 @@ The Storage_Pool determines the Storage_Size;
 hence it would not make sense to specify both.
 Note that this rule is simplified by the fact that the aspects in
 question cannot be specified for derived types,
-nor for non-first subtypes,
+nor for nonfirst subtypes,
 so we don't have to worry about whether, say, Storage_Pool on a
 derived type overrides Storage_Size on the parent type.
 For the same reason, @lquotes@;specified@rquotes@; means the same thing as
@@ -1645,13 +1645,13 @@ for their pools, if so desired.
 @end{Description}
 
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for
-a non-derived access-to-object type)}
+a nonderived access-to-object type)}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Pool for
-a non-derived access-to-object type)}
+a nonderived access-to-object type)}
 @Defn{Storage_Pool clause}
 @Defn{Storage_Size clause}
 Storage_Size or Storage_Pool may be specified for
-a non-derived access-to-object type
+a nonderived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a
 variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size (access)}],Old=[]}
@@ -2119,7 +2119,7 @@ Storage_Size.
 A user-defined storage pool can then be obtained by declaring
 an object of the type extension.
 The user can override Initialize and Finalize if there is any need
-for non-trivial initialization and finalization for a user-defined
+for nontrivial initialization and finalization for a user-defined
 pool type.
 For example, Finalize might reclaim blocks of storage that are allocated
 separately from the pool object itself.
@@ -2142,7 +2142,7 @@ the mutual exclusion mechanism has to work properly in that context.
 The primitives Allocate, Deallocate, and Storage_Size are declared as
 abstract (see @RefSecNum{Abstract Types and Subprograms}),
 and therefore they have to be overridden when
-a new (non-abstract) storage pool type is declared.
+a new (nonabstract) storage pool type is declared.
 @begin{Ramification}
 Note that the Storage_Pool attribute denotes an object,
 rather than a value,
@@ -2600,19 +2600,19 @@ should actually reclaim the storage.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0157-1]}
 @ChgAdded{Version=[3],Text=[A call on an instance of Unchecked_Deallocation with
-a non-null access value should raise Program_Error if the actual access type of
+a nonnull access value should raise Program_Error if the actual access type of
 the instance is a type for which the Storage_Size has been specified to be zero
 or is defined by the language to be zero.]}
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[A call on an instance of Unchecked_Deallocation with
-a non-null access value should raise Program_Error if the actual access type of
+a nonnull access value should raise Program_Error if the actual access type of
 the instance is a type for which the Storage_Size has been specified to be zero
 or is defined by the language to be zero.]}]}
 @begin{Discussion}
   @ChgAdded{Version=[3],Text=[If the call is not illegal (as in a generic body), we
   recommend that it raise Program_Error. Since the execution of this call is
   erroneous (any allocator from the pool will have raised Storage_Error, so
-  the non-null access value must have been allocated from a different pool or
+  the nonnull access value must have been allocated from a different pool or
   be a stack-allocated object), we can't require any behavior @em anything at
   all would be a legitimate implementation.]}
 @end{Discussion}
@@ -2706,7 +2706,7 @@ of type Root_Storage_Pool'Class.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[The @SynI{storage_pool_}@nt{name} shall denote a variable.],
 Old=[The @SynI{first_subtype_}@nt<local_name> of a @nt{pragma} Controlled
-shall denote a non-derived access subtype.]}
+shall denote a nonderived access subtype.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
 @ChgAdded{Version=[3],Text=[If the @nt{pragma} is used as a configuration pragma,
@@ -3341,7 +3341,7 @@ Default_Subpool_For_Pool if the pool is to support a default subpool for the
 pool. The implementor can override Deallocate if individual object reclamation
 is to be supported, and can override Storage_Size if there is some limit on the
 total size of the storage pool. The implementor can override Initialize and
-Finalize if there is any need for non-trivial initialization and finalization
+Finalize if there is any need for nontrivial initialization and finalization
 for the pool as a whole. For example, Finalize might reclaim blocks of storage
 that are allocated over and above the space occupied by the pool object itself.
 The pool implementor may extend the Root_Subpool type as necessary to carry
@@ -4244,7 +4244,6 @@ No_Implementation_Units.]}
 @end{Extend2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Streams}
 
 @begin{Intro}
@@ -4626,7 +4625,7 @@ S'Read first reads the discriminants from the stream without modifying
 @i<Item>. S'Read then creates an object of type @i<T> constrained by these
 discriminants. The value of this object is then converted to the subtype
 of @i<Item> and is assigned to @i<Item>. Finally, the Read attribute for each
-non-discriminant component of @i<Item> is called in canonical
+nondiscriminant component of @i<Item> is called in canonical
 order as described above. Normal default initialization and finalization
 take place for the created object.]}
 
@@ -4829,7 +4828,7 @@ an abstract function.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[For an abstract type @i<T>, S'Input can be
   called in a dispatching call, or passed to an abstract formal
-  subprogram. But it cannot be used in non-dispatching
+  subprogram. But it cannot be used in nondispatching
   contexts, because we don't allow objects of abstract types to exist.
   The designation of this function as abstract has no
   impact on descendants of @i<T>, as @i<T>'Input is not inherited for
@@ -4945,7 +4944,7 @@ parameter. Constraint_Error is raised if this check fails.],Old=[]}
   @ChgAdded{Version=[3],Text=[An implementation should always be able to detect
   the error for a null value read into a component of an access subtype with
   a null exclusion; the "if the implementation can detect" is intended to cover
-  non-null access values.]}
+  nonnull access values.]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
@@ -5240,7 +5239,7 @@ are provided for sending values of such a type between active
 partitions, with Write marshalling the representation, and Read unmarshalling
 the representation.] A limited type supports external streaming only if
 it has available Read and Write attributes. A type with a part that is of
-@Chg{Version=[3],New=[a non-remote],Old=[an]}
+@Chg{Version=[3],New=[a nonremote],Old=[an]}
 access type supports external streaming only if that access type or the type of
 some part that includes the access type component, has Read and Write
 attributes that have been specified via an @nt{attribute_definition_clause},
@@ -5254,7 +5253,7 @@ external streaming.]}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised]}
   @ChgAdded{Version=[2],Text=[A limited type with a part that is of
-  @Chg{Version=[3],New=[a non-remote],Old=[an]} access
+  @Chg{Version=[3],New=[a nonremote],Old=[an]} access
   type needs to satisfy both rules.]}
 @end{Ramification}
 

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:37 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1719,7 +1719,7 @@ started, Program_Error is raised.@IndexCheck{Allocation_Check}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the object has a controlled or protected part, its
-  finalization is likely to be non-trivial. If the allocation was allowed,
+  finalization is likely to be nontrivial. If the allocation was allowed,
   we could not know whether the finalization would actually be performed.
   That would be dangerous to otherwise safe abstractions, so we mandate
   a check here. On the other hand, if the finalization of the object will
@@ -2526,7 +2526,7 @@ larger static expression, and whose expected type is not a descendant of a
 formal type, the rounding should be the same as the default rounding
 for the target system.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[A real static expression with a non-formal type that is not part of a
+Text=[A real static expression with a nonformal type that is not part of a
 larger static expression should be rounded the same as the target system.]}]}
 @end{ImplAdvice}
 
@@ -2728,7 +2728,7 @@ raising.
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00311-01]}
   @ChgAdded{Version=[2],Text=[We clarify that the first subtype of a scalar
-  formal type has a nonstatic, non-null constraint.]}
+  formal type has a nonstatic, nonnull constraint.]}
 @end{DiffWord95}
 
 @begin{DiffWord2005}
@@ -2748,6 +2748,7 @@ raising.
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Statically Matching Constraints and Subtypes}
 
 @begin{StaticSem}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:38 $}
+@Comment{$Date: 2012/02/19 01:58:36 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2073,16 +2073,16 @@ type shall be a synchronized tagged type.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
-  @ChgAdded{Version=[2],Text=[For a non-formal private extension, we
+  @ChgAdded{Version=[2],Text=[For a nonformal private extension, we
   require the partial view to be synchronized if the full view is synchronized
   tagged. This does not apply to a formal private extension @em it is OK if
   the formal is not synchronized. Any attempt to extend the formal
   type will be rechecked in the instance, where the rule disallowing
   extending a @Chg{Version=[3],New=[synchronized],Old=[sychronized]}
-  non-interface type will be enforced. This is
+  noninterface type will be enforced. This is
   consistent with the @lquotes@;no hidden interfaces@rquotes rule also
-  applying only to non-formal private extensions, as well as the rule that
-  a limited non-formal private extension implies a limited full type.
+  applying only to nonformal private extensions, as well as the rule that
+  a limited nonformal private extension implies a limited full type.
   Formal private extensions are exempted from all these rules to
   enable the construction of generics that can be used with the widest
   possible range of types. In particular, an indefinite tagged
@@ -2414,7 +2414,7 @@ it is forbidden to create objects of the type,
 or to declare functions returning the type.
 @end{Reason}
 @begin{Ramification}
-On the other hand, it is OK to pass a non-abstract actual to an abstract
+On the other hand, it is OK to pass a nonabstract actual to an abstract
 formal @em @key[abstract] on the formal indicates that the actual might
 be abstract.
 @end{Ramification}
