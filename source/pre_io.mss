@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -166,30 +166,6 @@ documentation requirements in @RefSec{Exceptions in Input-Output}, and
 the documentation summary item is provided there.]}
 @end{Discussion}
 @end{StaticSem}
-
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[Subprograms that accept the name or form of an
-external file should allow the use of UTF-8 encoded strings that start with a
-BOM (see @RefSecNum{String Encoding}) if the target file system allows
-characters with code points greater than 255 in names. Functions that return
-name or form of an external file should return a UTF-8 encoded string starting
-with a BOM if and only if the result includes characters with code points
-greater than 255.]}
-
-@begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[We require that functions only return UTF-8
-representations when absolutely necessary to maximize compatibility with code
-that is not aware of the possibility of UTF-8 encoded results.]}
-@end{Reason}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Subprograms that accept or return the name or form of an
-external file should allow the use of UTF-8 encoded strings that start with a
-BOM.]}]}
-@end{ImplAdvice}
-
-
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2508,16 +2484,21 @@ predefined type.
 @end{ImplPerm}
 
 @begin{Notes}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0038-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0038-1]}
 @ChgDeleted{Version=[3],Text=[For Modular_IO, execution of Get propagates
 Data_Error if the sequence of
 characters read forms an integer literal outside the range
 0..Num'Last.]}
 @end{Notes}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 24 and 25 were
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered. This includes the next paragraph.}
+@end{NotIso}
 
 @begin{Examples}
 @begin{Example}
-@ChgRef{Version=[1], Kind=[Deleted]}
+@ChgRef{Version=[1], Kind=[DeletedNoDelMsg]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @key[package] Int_IO @key[is] @key[new] Integer_IO(Small_Int); @key[use] Int_IO;
@@ -3411,8 +3392,10 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 
 @Leading@;The library package Streams.Stream_IO has the following declaration:
 @begin(example)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0283-1]}
 @key(with) Ada.IO_Exceptions;@ChildUnit{Parent=[Ada.Streams],Child=[Stream_@!IO]}
-@key(package) Ada.Streams.Stream_IO @key(is)
+@key(package) Ada.Streams.Stream_IO @key(is)@Chg{Version=[3],New=[
+    @key(pragma) Preelaborate(Stream_IO);],Old=[]}
 
     @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
@@ -3726,6 +3709,15 @@ closed file.]}
   @ChgAdded{Version=[2],Text=[Clarified that Set_Mode can
   be called with the current mode.]}
 @end{DiffWord95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0283-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Package Ada.Streams.Stream_IO is now preelaborated, allowing it to be
+  used in more contexts (including in distributed systems). Note that
+  is @i<not> a remote types package; File_Type objects cannot be
+  passed between partitions.]}
+@end{Extend2005}
 
 
 @LabeledSubClause{The Package Text_IO.Text_Streams}

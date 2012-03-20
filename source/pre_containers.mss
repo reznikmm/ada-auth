@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.92 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.93 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -14,8 +14,9 @@ Containers and several child packages, which provide facilities for storing
 collections of elements.]}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Container>,
-Text=<@ChgAdded{Version=[3],Text=[A container type is one whose objects contain
-other objects. Several predefined container types are provided by the children
+Text=<@ChgAdded{Version=[3],Text=[A container is an object that contain other
+objects all of the same type, which could be class-wide.
+Several predefined container types are provided by the children
 of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}

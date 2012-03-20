@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.111 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.112 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -1370,7 +1370,7 @@ the task) when determining whether to preempt the task],Old=[,
 Interrupt_Handler, or Attach_Handler]}.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0269-1]}
-  @ChgAdded{Version=[3],Text=[We explicitly require that the ceiling priority by
+  @ChgAdded{Version=[3],Text=[We explicitly require that the ceiling priority be
   used in calls to Yield_to_Higher in order to prevent a risk of priority
   inversion and consequent loss of mutual exclusion when Yield_to_Higher is used
   in a protected object. This requirement might lessen the value of the
@@ -2678,7 +2678,7 @@ want the third task to have high priority.
 @end{RunTime}
 
 @begin{Bounded}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00327-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00327-01]}
 @ChgDeleted{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If a task is blocked on a protected entry call, and the call is queued,
 it is a bounded error to raise its base priority
@@ -2694,7 +2694,7 @@ either Program_Error is raised in the task that called the entry,
 or its priority is temporarily lowered,
 or both, or neither.]}
 @begin{Ramification}
-@ChgRef{Version=[2],Kind=[Deleted]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that the error is @lquotes@;blamed@rquotes@; on the task that did the entry call,
 not the task that called Set_Priority.
 This seems to make sense for the case of a task blocked on a call,
@@ -2712,6 +2712,11 @@ This seems relatively harmless, since there is an error,
 and the task is about to start raising an exception anyway.]}
 @end{Ramification}
 @end{Bounded}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 11 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{Erron}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
@@ -4666,12 +4671,17 @@ it to find out how it can help them.}]}
 
 @begin{Linktime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0246-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0246-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[@PDefn2{Term=[configuration pragma], Sec=(Profile)}
 @PDefn2{Term=[pragma, configuration], Sec=(Profile)}
 A @nt{pragma} Profile is a configuration pragma.
 There may be more than one @nt{pragma} Profile for a partition.]}]}
 @end{Linktime}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 7 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
@@ -6121,8 +6131,7 @@ language-defined library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Real_Time;
 @key[with] Ada.Task_Identification;
-@key[package] System.Multiprocessors.Dispatching_Domains @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}
-   @key[pragma] Preelaborate(Dispatching_Domains);]}
+@key[package] System.Multiprocessors.Dispatching_Domains @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Dispatching_Domain_Error} : @key[exception];]}
@@ -6144,23 +6153,27 @@ language-defined library package exists:]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Dispatching_Domain}
-      (T   : Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task)
+      (T   : Ada.Task_Identification.Task_Id :=
+                 Ada.Task_Identification.Current_Task)
            @key[return] Dispatching_Domain;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign_Task}
       (Domain : @key[in out] Dispatching_Domain;
        CPU    : @key[in]     CPU_Range := Not_A_Specific_CPU;
-       T      : @key[in]     Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task);]}
+       T      : @key[in]     Ada.Task_Identification.Task_Id :=
+                 Ada.Task_Identification.Current_Task);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Set_CPU}
       (CPU : @key[in] CPU_Range;
-       T   : @key[in] Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task);]}
+       T   : @key[in] Ada.Task_Identification.Task_Id :=
+                 Ada.Task_Identification.Current_Task);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_CPU}
-      (T   : Ada.Task_Identification.Task_Id := Ada.Task_Identification.Current_Task)
+      (T   : Ada.Task_Identification.Task_Id :=
+                 Ada.Task_Identification.Current_Task)
            @key[return] CPU_Range;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2012/03/20 06:13:58 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1147,26 +1147,6 @@ external file.]}]}
   implementers that simply raising Use_Error isn't acceptable.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[Subprograms in the package Directories and its
-children that accept a string should allow the use of UTF-8 encoded strings that
-start with a BOM (see @RefSecNum{String Encoding}) if the target file system
-allows characters with code points greater than 255 in any part of a full name.
-Functions in the package Directories and its children that return a string
-should return a UTF-8 encoded string starting with a BOM if and only if the
-result includes characters with code points greater than 255.]}
-
-@begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[We require that functions only return UTF-8
-representations when absolutely necessary to maximize compatibility with code
-that is not aware of the possibility of UTF-8 encoded results.]}
-@end{Reason}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Subprograms in the package Directories and its children that accept
-or return a string should allow the use of UTF-8 encoded strings that start with
-a BOM.]}]}
-
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1330,7 +1310,7 @@ Directories.Hierarchical_File_Names has the following declaration:]}
 @ChgAdded{Version=[3],Text=[In addition to the operations provided in package
 Directories.Hierarchical_File_Names, the operations in package Directories can
 be used with hierarchical file names. In particular, functions Full_Name,
-Base_Name, and Extension are provide additional capabilities for hierarchical
+Base_Name, and Extension provide additional capabilities for hierarchical
 file names.]}
 
 @begin{DescribeCode}

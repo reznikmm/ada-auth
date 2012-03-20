@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 
@@ -1604,6 +1604,16 @@ protected units do not exist in Ada 83.
   access types.]}
 @end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0291-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  When an inherited subprogram is implemented by a protected function, the
+  first parameter has to be an @key[in] parameter, but not
+  an access-to-variable type. Ada 2005 allowed access-to-variable parameters
+  in this case; the parameter will need to be changed to access-to-constant
+  with the addition of the @key[constant] keyword.]}
+@end{Incompatible2005}
+
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
@@ -1645,26 +1655,22 @@ indirectly via a shared protected object.
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0225-1],ARef=[AI05-0291-1]}
-@ChgDeleted{Version=[3],Type=[Leading],Text=[]}@Comment{Fake for conditional Leading}.
-@Chg{Version=[3],New=[@Defn2{Term=[target object],
+@Leading@;@Chg{Version=[3],New=[@Defn2{Term=[target object],
   Sec=(of the name of an entry or a protected subprogram)}],
 Old=[@Defn2{Term=[target object],
   Sec=(of a call on an entry or a protected subprogram)}]}
-Any @Chg{Version=[3],New=[@nt{name} that denotes],Old=[call on]} an entry
-or @Chg{Version=[3],New=[],Old=[on ]}a protected subprogram
-identifies a @i(target object)@Chg{Version=[3],New=[],Old=[ for the operation]},
-which is either a task (for an entry@Chg{Version=[3],New=[],Old=[ call]}) or
-a protected object (for an entry@Chg{Version=[3],New=[],Old=[ call]} or a
-protected subprogram@Chg{Version=[3],New=[],Old=[ call]}). The target object
-@Chg{Version=[3],New=[identified],Old=[is considered an implicit parameter
-to the operation, and is determined]} by the operation
-@nt<name> (or @nt<prefix>) used in @Chg{Version=[3],New=[a],Old=[the]} call
-on @Chg{Version=[3],New=[an entry or a protected subprogram is considered an
-implicit parameter to the call. In addition, a primitive subprogram
-of a limited interface can be implemented by an entry or a protected subprogram,
-and a @nt{name} denoting such a subprogram also identifies a target object.],
-Old=[the operation, as follows:]}
-
+@Chg{Version=[3],New=[When a @nt{name} or @nt{prefix} denotes],Old=[Any call on]}
+an entry@Chg{Version=[3],New=[,],Old=[ or on a]}
+protected subprogram@Chg{Version=[3],New=[, or a
+prefixed view of a primitive subprogram of a limited interface whose
+first parameter is a controlling parameter, the @nt{name} or @nt{prefix}
+determines],Old=[ identifies]}
+a @i(target object)@Chg{Version=[3],New=[],Old=[ for the operation,
+which is either a task (for an entry call) or a protected object (for an entry
+call or a protected subprogram call). The target object is considered an
+implicit parameter to the operation, and is determined by the operation
+@nt<name> (or @nt<prefix>) used in the call on the operation]},
+as follows:
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0291-1]}
   @ChgAdded{Version=[3],Text=[This wording uses "denotes" to mean "denotes a
@@ -1674,19 +1680,16 @@ Old=[the operation, as follows:]}
   an entry or protected subprogram).]}
 @end{Honest}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0291-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[When the @nt{name} denotes an entry,
-protected subprogram, or a prefixed view of a primitive subprogram of a limited
-interface whose first parameter is a controlling parameter, the target object is
-determined as follows:]}
 @begin(Itemize)
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0291-1]}
   If it is a @nt<direct_name> or expanded name
   that denotes the declaration (or body) of the operation, then
   the target object is implicitly specified to be
   the current instance of the task or protected unit
   immediately enclosing the operation;
   @Defn{internal call}
-  such a call is defined to be an @i(internal call);
+  @Chg{Version=[3],New=[],Old=[such ]}a call@Chg{Version=[3],New=[ using
+  such a name],Old=[]} is defined to be an @i(internal call);
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0291-1]}
   If it is a @nt<selected_component> that is not
@@ -1694,7 +1697,8 @@ determined as follows:]}
   specified to be the @Chg{Version=[3],New=[],Old=[task or protected]} object
   denoted by the @nt<prefix> of the @nt<name>;
   @Defn{external call}
-  such a call is defined to be an @i(external call);
+  @Chg{Version=[3],New=[],Old=[such ]}a call@Chg{Version=[3],New=[ using
+  such a name],Old=[]} is defined to be an @i(external call);
   @begin{Discussion}
   For example:
 @begin{Example}
@@ -1721,13 +1725,15 @@ Other_Object : Some_Other_Protected_Type;
 @end{Example}
   @end{Discussion}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0291-1]}
   If the @nt<name> or @nt<prefix> is a dereference
   (implicit or explicit) of an
   access-to-protected-subprogram value,
   then the target object is determined by the
   @nt<prefix> of the Access @nt<attribute_reference>
-  that produced the access value originally, and the
-  call is defined to be an @i(external call);
+  that produced the access value originally@Chg{Version=[3],New=[; a],
+  Old=[, and the]} call@Chg{Version=[3],New=[ using
+  such a name],Old=[]} is defined to be an @i(external call);
 
   If the @nt<name> or @nt<prefix> denotes a
   @nt<subprogram_renaming_declaration>,
@@ -1737,23 +1743,12 @@ Other_Object : Some_Other_Protected_Type;
 @end(Itemize)
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0291-1]}
-@ChgAdded{Version=[3],Text=[Any call that might be on an entry or protected
-subprogram and that is not included above is an @i<external call>. For a call
-other than via a prefixed view on a
-primitive subprogram of a limited interface whose first parameter is a
-controlling parameter, the first parameter of the call is the target object of
-the call. For a call on a subprogram rename, the @nt{name} of the renamed item
-and possibly the first parameter determine the target object of the call. For a
-call on a generic formal subprogram, the @nt{name} of the actual callable entity
-and possibly the first parameter determine the target object of the call.]}
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The above says "possibly the first parameter",
-  because Ada allows entries and protected subprograms to be renamed and passed
-  as formal subprograms. In those cases, the target object can be (but is not
-  required to be in the case of subprograms) implicit in the name of the
-  routine; otherwise the object is an explicit parameter to the call.]}
-@end{Discussion}
+@ChgAdded{Version=[3],Text=[A call on an entry or a protected subprogram either
+uses a @nt{name} or @nt{prefix} that determines a target object implicitly, as
+above, or is a call on (a non-prefixed view of) a primitive subprogram of a
+limited interface whose first parameter is a controlling parameter, in which
+case the target object is identified explicitly by the first parameter. This
+latter case is an @i<external call>.]}
 
 @Defn2{Term=[target object],
   Sec=(of a @nt<requeue_statement>)}
@@ -1768,15 +1763,15 @@ and an @i(external requeue).
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0225-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[For a @nt{name} that denotes a
-protected procedure, the],Old=[The]} view of the target
-@Chg{Version=[3],New=[],Old=[protected ]}object@Chg{Version=[3],New=[],Old=[associated
-with a call of a protected procedure or entry]} shall be a
-variable.@Chg{Version=[3],New=[ For a @nt{name}
-that denotes a protected entry, the view of the target object shall be a
-variable unless the @nt{name} is the @nt{prefix} of a reference to the Count
-attribute.],Old=[]}]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0225-1],ARef=[AI05-0291-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If a @nt{name} or
+@nt{prefix} determines a target object, and the name denotes],Old=[The view of
+the target protected object associated with a call of]}
+a protected @Chg{Version=[3],New=[entry],Old=[procedure]} or
+@Chg{Version=[3],New=[procedure, then the target object],Old=[entry]}
+shall be a variable@Chg{Version=[3],New=[, unless the
+@nt{prefix} is for an @nt{attribute_reference} to the Count
+attribute (see @RefSecNum{Task and Entry Attributes})],Old=[]}.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0225-1]}
   @ChgAdded{Version=[3],Text=[The point is to prevent any calls to such a
@@ -1785,8 +1780,16 @@ attribute.],Old=[]}]}
   subprogram. It is, however, legal to say P'Count in a protected function body,
   even though the protected object is a constant view there.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0291-1]}
+  @ChgAdded{Version=[3],Text=[This rule does not apply to calls that are not to
+  a prefixed view. Specifically a "normal" call to a primitive operation of a
+  limited interface is not covered by this rule. In that case, the normal
+  parameter passing mode checks will prevent passing a constant protected
+  object to an operation implemented by a protected entry or procedure
+  as the mode is required to be @key[in out] or @key[out].]}
+@end{Ramification}
 @end{Legality}
-
 
 @begin{RunTime}
 Within the body of a protected operation, the current instance
@@ -2951,7 +2954,7 @@ An implementation may evaluate the @nt<condition>s of all @nt<entry_barrier>s
 of a given protected object any time any entry of the object
 is checked to see if it is open.
 @begin(Ramification)
-  In other words, any side-effects of evaluating an entry barrier
+  In other words, any side effects of evaluating an entry barrier
   should be innocuous, since an entry barrier might be evaluated more
   or less often than is implied by the "official" dynamic semantics.
 @end(Ramification)
@@ -4759,7 +4762,7 @@ possible.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0291-1]}@Comment{
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0291-1]}@Comment{
 We don't need a message here, as this is the last inserted paragraph}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[If a
 @nt{procedure_call_statement} is used for a @nt{procedure_or_entry_call}, and
@@ -5398,10 +5401,9 @@ addressable if either object is specified as independently addressable (see
 @RefSecNum{Shared Variable Control}). Otherwise,
 two nonoverlapping objects are independently addressable
 except when they are both parts of a composite object for which
-a nonconfirming representation value is specified for any of the
-following aspects: (record) Layout, Component_Size, Pack, Atomic, or
-Convention; in this case
-it is unspecified whether the parts are independently
+a nonconfirming value is specified for any of the following representation
+aspects: (record) Layout, Component_Size, Pack, Atomic, or Convention;
+in this case it is unspecified whether the parts are independently
 addressable.@PDefn{unspecified}],
 Old=[Normally, any two
 nonoverlapping objects are independently addressable.

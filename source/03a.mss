@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:35 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -1584,7 +1584,72 @@ certain other subtypes:]}
 predicate specifications that apply, and-ed together; if no predicate
 specifications apply, the predicate is True @Redundant[(in particular, the
 predicate of a base subtype is True)].@Defn2{Term=[Predicate],Sec=(of a subtype)}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Predicate checks are defined to be
+@i<enabled> or @i<disabled> for a given subtype as
+follows:@Defn2{Term=[enabled],Sec=[predicate checks]}@Defn2{Term=[disabled],Sec=[predicate checks]}@Defn2{Term=[predicate check],Sec=[enabled]}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[If a subtype is declared by
+  a @nt{type_declaration} or @nt{subtype_declaration}
+  that includes a predicate specification, then:]}
+  @begin{Itemize}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[if performing checks is required by the
+      Static_Predicate assertion policy (see @RefSecNum{Pragmas Assert and Assertion_Policy})
+      and the declaration includes a Static_Predicate specification, then
+      predicate checks are enabled for the subtype;]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[if performing checks is required by the
+      Dynamic_Predicate assertion policy (see @RefSecNum{Pragmas Assert and Assertion_Policy})
+      and the declaration includes a Dynamic_Predicate specification, then
+      predicate checks are enabled for the subtype;]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[otherwise, predicate checks are disabled for the
+      subtype@Redundant[, regardless of whether predicate checking is enabled
+      for any other subtypes mentioned in the declaration];]}
+  @end{Itemize}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If a subtype is defined by a derived type
+  declaration that does not include a predicate specification, then predicate
+  checks are enabled for the subtype if and only if predicate checks are enabled
+  for at least one of the parent subtype and the progenitor subtypes;]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If a subtype is created by a
+  @nt{subtype_indication} other than in one of the previous cases, then
+  predicate checks are enabled for the subtype if and only if predicate checks
+  are enabled for the subtype denoted by the @nt{subtype_mark};]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Otherwise, predicate checks are disabled for the
+  given subtype.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[In this case, no predicate specifications can
+    apply to the subtype and so it doesn't typically matter whether predicate
+    checks are enabled. This rule does make a difference, however, when
+    determining whether predicate checks are enabled for another type when this
+    type is one of multiple progenitors. See the @ldquote@;derived type declaration@rdquote
+    wording above.]}
+
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgAdded{Version=[3],Text=[Even when predicate checks are disabled,
+    a predicate cam affect various @LegalityTitle, the results of membership
+    tests, the items in a @key[for] loop, and the result of the Valid
+    attribute.]}
+@end{Discussion}
+
+@end{Itemize}
+
 @end{StaticSem}
+
 
 @begin{Legality}
 
@@ -1671,7 +1736,18 @@ subtype to which predicate specifications apply.]}
 whose @nt{attribute_designator} is First, Last, or Range shall not denote a
 scalar subtype to which predicate specifications apply.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0297-1]}
+  @ChgAdded{Version=[3],Text=[This is to prevent confusion about whether the
+  First value is the lowest value of the subtype (which does not depend on the
+  predicate) or the lowest value of the subtype which meets the predicate.
+  (For a dynamic predicate, determining this latter value is expensive as it
+  would usually require a loop.) For a static subtype that has a static
+  predicate, the First_Valid and Last_Valid attributes (see
+  @RefSecNum{Operations of Discrete Types}) can be used instead.]}
+@end{Reason}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1],ARef=[AI05-0287-1]}
 @ChgAdded{Version=[3],Text=[The @nt{discrete_subtype_definition} of a
 @nt{loop_parameter_specification} shall not denote a
 nonstatic subtype to which predicate specifications apply or any
@@ -1699,32 +1775,30 @@ unit.@PDefn{generic contract issue}]}
 
 @begin{Runtime}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If the assertion policy (see
-@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect is Check, then:]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If predicate checks are enabled for a
+given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion, the
-  predicate of the target subtype is evaluated, and a check is made that the
+  predicate of the target subtype is evaluated, and a check is performed that the
   predicate is True. This includes all parameter passing, except for certain
   parameters passed by reference, which are covered by the following rule: ] After
   normal completion and leaving of a subprogram, for each @key[in out] or
   @key[out] parameter
   that is passed by reference, the predicate of the subtype of the actual is
-  evaluated, and a check is made that the predicate is True. For an object created
+  evaluated, and a check is performed that the predicate is True. For an object created
   by an @nt{object_declaration} with no explicit initialization @nt{expression},
   or by an uninitialized @nt{allocator}, if any subcomponents have
   @nt{default_expression}s, the predicate of the
-  nominal subtype of the created object is evaluated, and a check is made
+  nominal subtype of the created object is evaluated, and a check is performed
   that the predicate is True. Assertions.Assertion_Error is raised if any
-  of these checks fail.@Defn2{Term=[assertion policy],
-  Sec=[predicate check]}@Defn2{Term=[predicate check],
+  of these checks fail.@Defn2{Term=[predicate check],
   Sec=[@key[in out] parameters]}@Defn2{Term=[predicate check],
   Sec=[@nt{object_declaration}]}@Defn2{Term=[predicate check],
   Sec=[@nt{allocator}]}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
   Sec=(raised by failure of run-time check)}]}
-
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1774,7 +1848,7 @@ modified.]}
 
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1],ARef=[AI05-0276-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1],ARef=[AI05-0276-1],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Predicate aspects are new in Ada 2012.]}
 @end{Extend2005}
@@ -5285,15 +5359,20 @@ enumeration literals.]}
 @end{StaticSem}
 
 @begin{ImplPerm}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{localization}
 In a nonstandard mode, an implementation may provide
 other interpretations for the predefined types Character and
 Wide_Character@Redundant[, to conform to local conventions].]}
 @end{ImplPerm}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 6 and 7
+were deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{localization}
 If an implementation supports a mode with alternative interpretations
 for Character and Wide_Character, the set of graphic characters
@@ -6024,6 +6103,52 @@ We considered allowing
         anyway, the allowance didn't seem worth the complexity of the rule.@end{reason}
 @end(description)
 @EndPrefixType{}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0297-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{every static
+discrete subtype S for which there exists at least one value belonging to S
+that satisfies any predicate of S},
+the following attributes are defined:]}
+
+@begin(Description)
+@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<First_Valid>, ARef=[AI05-0297-1],
+  Text=[@Chg{Version=[3],New=[S'First_Valid denotes the smallest value
+        that belongs to S and satisfies any predicate of S.
+        The value of this attribute is of the type of S.],Old=[]}]}
+
+@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Last_Valid>, ARef=[AI05-0297-1],
+  Text=[@Chg{Version=[3],New=[S'Last_Valid denotes the largest value
+        that belongs to S and satisfies any predicate of S. The value of
+        this attribute is of the type of S.],Old=[]}]}
+@end(Description)
+@EndPrefixType{}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0297-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[First_Valid and Last_Valid
+@nt{attribute_reference}s are always static expressions. Any predicate of
+S is always a static predicate.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[An @nt{attribute_reference} is static if the
+  prefix is a static subtype (see @RefSecNum{Static Expressions and Static Subtypes}),
+  (true by definition) and any arguments are static (there are none). Similarly,
+  a dynamic predicate always makes a subtype nonstatic. QED.]}
+@end{TheProof}
+@begin{Reason}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[We require there to be at least one value so that
+  these are always values of the subtype. (This sidesteps the question of what
+  to return for a subtype with no values.)]}
+@end{Reason}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[These attributes are intended primarily for use in
+  the case where the Static_Predicate aspect of S has been specified; First and
+  Last are equivalent if these are allowed and there is no predicate.]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{ImplAdvice}
@@ -6100,6 +6225,13 @@ The attributes S'Succ, S'Pred, S'Width, S'Image, and S'Value have
 been generalized to apply to real types as well
 (see @RefSec{Scalar Types}).
 @end{Extend83}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0297-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The attributes S'First_Valid and S'Last_Valid are new.]}
+@end{Extend2005}
+
 
 @LabeledSubClause{Real Types}
 

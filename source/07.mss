@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1741,13 +1741,10 @@ descendants of @i<T>.]]}
 @end{StaticSem}
 @begin{Runtime}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
-apply to a type @i<T>, and the assertion policy (see
-@RefSecNum{Pragmas Assert and Assertion_Policy}) at the point of the partial
-view declaration for @i<T> is Check, then an invariant check is performed at the
-following places, on the specified object(s):@Defn2{Term=[assertion policy],
-  Sec=[invariant check]}@Defn{invariant check}@Defn2{Term=[check, language-defined],
+apply to a type @i<T>, then an invariant check is performed at the
+following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}]}
 
 @begin{Itemize}
@@ -1785,7 +1782,7 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
     @ChgAdded{Version=[3],Text=[For calls to inherited subprograms (including
     dispatching calls), the implied view conversions mean that a wrapper is
     probably needed. (See the Note at the bottom of this clause for more
-    on the model of checked for inherited subprograms.)]}
+    on the model of checks for inherited subprograms.)]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgAdded{Version=[3],Text=[For view conversions involving class-wide
@@ -1817,9 +1814,9 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
       @i<T> or overrides an operation that is visible outside the immediate
       scope of @i<T>, and]}
 
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
     @ChgAdded{Version=[3],Text=[has a result with a part of type @i<T>, or one
-      or more @key[in out] or @key[out] parameters with a part of type @i<T>, or
+      or more parameters with a part of type @i<T>, or
       an access to variable parameter whose designated type has a part of type
       @i<T>.]}
   @end{Itemize}
@@ -1828,9 +1825,24 @@ following places, on the specified object(s):@Defn2{Term=[assertion policy],
   part of type @i<T>.]}
 @end{Itemize}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0250-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[If performing checks is required by the Invariant or
+Invariant'Class assertion policies (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of
+corresponding aspect specification applicable to a given type, then the
+respective invariant expression is considered
+@i(enabled).@Defn2{Term=[enabled],Sec=[invariant expression]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[If a class-wide invariant expression is enabled
+  for a type, it remains enabled when inherited by descendants of that type,
+  even if the policy in effect is Ignore for the inheriting type.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0250-1],ARef=[AI05-0289-1],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Text=[The invariant check consists of the evaluation of
-each invariant expression that applies to @i<T>, on each of the objects
+each enabled invariant expression that applies to @i<T>, on each of the objects
 specified above. If any of these evaluate to False,
 Assertions.Assertion_Error is raised at the point of the object
 initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
@@ -1841,18 +1853,14 @@ an arbitrary order, and if one of them evaluates to False, it is not specified w
 the others are evaluated. Any invariant check is performed prior to copying back
 any by-copy @key[in out] or @key[out] parameters. Invariant checks,
 any postcondition check, and any
-constraint checks associated with by-copy @key[in out] or @key[out]
+constraint or predicate checks associated with @key[in out] or @key[out]
 parameters are performed in an arbitrary order.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
-@ChgAdded{Version=[3],Text=[The invariant checks performed on a call are determined by the subprogram or entry
-actually invoked, whether directly, as part of a dispatching call, or as part of a
-call through an access-to-subprogram value.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[If the assertion policy in effect at the
-point of a subprogram or entry declaration is Ignore, then no invariant check is
-performed on a call on that subprogram or entry.]]}
+@ChgAdded{Version=[3],Text=[The invariant checks performed on a call are
+determined by the subprogram or entry actually invoked, whether directly, as
+part of a dispatching call, or as part of a call through an access-to-subprogram
+value.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1901,17 +1909,10 @@ performed on a call on that subprogram or entry.]]}
   subprogram.]}
 @end{TheProof}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
-  @ChgAdded{Version=[3],Text=[Invariants are not checked after a call for
-  @Key[in] parameters of a type. If the logical properties of an @Key[in]
-  parameter are modified by a subprogram (possibly via an embedded access
-  value), the invariant may not hold on the object after the call. Generally,
-  such parameters should be declared as @Key[in out] parameters.]}
-
 @end{Notes}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1],ARef=[AI05-0289-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Type_Invariant aspects are new.]}
 @end{Extend2005}
@@ -2108,7 +2109,7 @@ Ada 95 to allow more cases, and catch all errors at compile time.
 This change is necessary in order to allow deferred constants of a
 tagged type without violating the principle that for a dispatching call,
 there is always an implementation to dispatch to.
-It has the beneficial side-effect of catching some Ada-83-erroneous
+It has the beneficial side effect of catching some Ada-83-erroneous
 programs at compile time.
 The new rule fits in well with the new freezing-point rules.
 Furthermore, we are trying to convert undefined-value problems into
@@ -2695,6 +2696,7 @@ than being a subclause of
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedClause{Version=[3],New=[Assignment and Finalization],Old=[User-Defined Assignment and Finalization]}
 
 @begin{Intro}

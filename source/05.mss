@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.56 $}
+@Comment{$Revision: 1.57 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1293,6 +1293,11 @@ An @i<iterable container object> is an object of an iterable container type.@Def
 A @i<reversible iterable container object> is an object of a reversible iterable container
 type.@Defn{reversible iterable container object}]}
 
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Iterable container type>,
+Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
+user-defined behavior for iteration, via the Default_Iterator and
+Iterator_Element aspects.]}>}
+
 @end{StaticSem}
 
 @begin{Legality}
@@ -1378,36 +1383,34 @@ an @nt{iterator_specification}.]}
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
     @Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
-  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{array_}@Syn2{name}
   | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgAdded{Version=[3],Text=[The first form of @nt{iterator_specification} is
-called a @i<generalized iterator>;@Defn{generalized iterator}@Defn2{Term=[iterator],Sec=[generalized]}
-the
-expected type for the @SynI<iterator_>@nt{name} is any iterator
+@ChgAdded{Version=[3],Text=[For the first form of @nt{iterator_specification},
+called a @i<generalized iterator>,@Defn{generalized iterator}@Defn2{Term=[iterator],Sec=[generalized]}
+the expected type for the @SynI<iterator_>@nt{name} is any iterator
 type.@PDefn2{Term=[expected type],Sec=[@SynI<iterator_>@nt{name}]}
-The second form of @nt{iterator_specification} is called an @i<array
+For the second form of @nt{iterator_specification},
+the expected type for the @SynI<iterable_>@nt{name} is any array or iterable
+container type.@PDefn2{Term=[expected type],Sec=[@SynI<iterable_>@nt{name}]}
+If the @SynI<iterable_>@nt{name} denotes an array object, the
+@nt{iterator_specification} is called an @i<array
 component iterator>;@Defn{array component iterator}@Defn2{Term=[iterator],Sec=[array component]}
-the expected type for the @SynI<array_>@nt{name} is any array
-type.@PDefn2{Term=[expected type],Sec=[@SynI<array_>@nt{name} in an iterator]}
-The third form of @nt{iterator_specification} is called a
-@i<container element iterator>;@Defn{container element iterator}@Defn2{Term=[iterator],Sec=[container element]}
-the expected type for the @SynI<iterable_>@nt{name} is any iterable container
-type.@PDefn2{Term=[expected type],Sec=[@SynI<iterable_>@nt{name}]}]}
+otherwise it is called a
+@i<container element iterator>.@Defn{container element iterator}@Defn2{Term=[iterator],Sec=[container element]}]}
 @end{Resolution}
 
 @begin{Legality}
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Iterator>,
-Text=<@ChgAdded{Version=[3],Text=[An iterator may be used to loop over the
-elements of an array or container. Generalized iterators may be user defined,
-and may perform arbitrary computations.]}>}
+Text=<@ChgAdded{Version=[3],Text=[An iterator is a construct that is used to
+loop over the elements of an array or container. Iterators may be user defined,
+and may perform arbitrary computations to access elements from a container.]}>}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[If the reserved word @key[reverse] appears,
@@ -1421,7 +1424,7 @@ of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[The type of the @nt{subtype_indication}, if any,
 of an array component iterator shall cover the component type of the type
-of the @SynI<array_>@nt{name}. The type of the @nt{subtype_indication},
+of the @SynI<iterable_>@nt{name}. The type of the @nt{subtype_indication},
 if any, of a container element iterator shall cover the default element type
 for the type of the @SynI<iterable_>@nt{name}.]}
 
@@ -1435,7 +1438,7 @@ then the Constant_Indexing aspect shall be specified for @i<T>.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0269-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0269-1],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[An @nt{iterator_specification} declares a
 @i<loop parameter>.@Defn{loop parameter}
 In a generalized iterator, the nominal subtype of the loop parameter is
@@ -1444,15 +1447,15 @@ container element iterator, if a @nt{subtype_indication} is present, it
 determines the nominal subtype of the loop parameter. In an array
 component iterator, if a @nt{subtype_indication} is not present, the
 nominal subtype of the loop parameter is the component subtype of the
-type of the @SynI{array_}@nt{name}. In a container element iterator, if a
+type of the @SynI{iterable_}@nt{name}. In a container element iterator, if a
 @nt{subtype_indication} is not present, the nominal subtype of the loop
 parameter is the default element subtype for the type of the
 @SynI{iterable_}@nt{name}.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[In a generalized iterator, the loop parameter
 is a constant. In an array component iterator, the loop parameter
-is a constant if the @SynI<array_>@nt{name} denotes a constant; otherwise
+is a constant if the @SynI<iterable_>@nt{name} denotes a constant; otherwise
 it denotes a variable. In a container element iterator, the loop parameter
 is a constant if the @SynI{iterable_}@nt{name} denotes a constant, or if
 the Variable_Indexing aspect is not specified for the type of the
@@ -1485,10 +1488,10 @@ generalized iterator, the operations Last and Previous are called rather than
 First and Next.]}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[For an array component iterator, the
-@SynI<array_>@nt{name} is evaluated and
-the array object denoted by the name becomes the @i<array for the
+@SynI<iterable_>@nt{name} is evaluated and
+the denoted array object becomes the @i<array for the
 loop>.@Defn{array for a loop} If the array for the loop is a null array,
 then the execution of the @nt{loop_statement} is complete. Otherwise, the
 @nt{sequence_of_statements} is executed with the loop parameter denoting
@@ -1509,7 +1512,7 @@ transfer of control.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[For a container element iterator, the @SynI<iterable_>@nt{name} is evaluated
-and the iterable container object denoted by the name becomes the @i<iterable
+and the denoted iterable container object becomes the @i<iterable
 container object for the loop>.@Defn{iterable container object for a loop}
 The default iterator function for the type of
 the iterable container object for the loop is called on the iterable container object

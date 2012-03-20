@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.12 $ $Date: 2012/01/28 08:23:02 $ $Author: randy $ }
+@comment{ $Revision: 1.13 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:02 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -74,11 +74,9 @@ propagated.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0285-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If the external execution
-environment supports environment variables, then Value returns the value of the
-environment variable with the given name. If no environment variable with the
-given name exists, then Default is returned. If the execution
-environment does not support environment variables, then Program_Error is
-propagated.]}
+environment supports environment variables and an environment variable with the
+given name currently exists, then Value returns its value; otherwise, it returns
+Default.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}

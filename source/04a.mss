@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1121,7 +1121,7 @@ reference discriminant of the reference object.]]}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Reference type>,
 Text=<@ChgAdded{Version=[3],Text=[A reference type is one that has user-defined
-semantics for @ldquote.@key[all]@rdquote, defined by the
+behavior for @ldquote.@key[all]@rdquote, defined by the
 Implicit_Dereference aspect.]}>}
 @end{StaticSem}
 
@@ -1289,7 +1289,7 @@ Constant_Indexing or Variable_Indexing aspect.]]}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Indexable container type>,
 Text=<@ChgAdded{Version=[3],Text=[An indexable container type is one that has
-user-defined semantics for indexing, via the Constant_Indexing or
+user-defined behavior for indexing, via the Constant_Indexing or
 Variable_Indexing aspects.]}>}
 
 @end{StaticSem}
@@ -3154,7 +3154,7 @@ or return the value of the object.
   only on an assignment to it. Similarly, it means that
   computing the value of an object of such a subtype
   can be deferred until the first read of the object
-  (presuming no side-effects other than failing an Overflow_Check
+  (presuming no side effects other than failing an Overflow_Check
   are possible). This permission is over and above that provided
   by clause @RefSecNum(Exceptions and Optimization), since
   this allows the Constraint_Error to move to a different handler.
@@ -4690,7 +4690,7 @@ used in the definitions of user-defined operators.]}
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00364-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00364-01]}
 @ChgDeleted{Version=[2],Text=[The above two fixed-fixed multiplying operators
 shall not be used in a context where the expected type for the result
 is itself @i(universal_fixed) @em @Redundant[the context has to
@@ -4715,6 +4715,11 @@ for the result of the multiplication is the type of X, which is necessarily
 not @i(universal_fixed).]}
 @end(Discussion)
 @end{Legality}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 20 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{RunTime}
 The multiplication and division operators for real types have

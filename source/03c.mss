@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:35 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -866,9 +866,11 @@ an @nt<object_declaration> or an @nt<allocator>),
 and that @nt<aggregate>s have to be explicitly qualified with a specific
 type when their expected type is class-wide.
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
-@ChgDeleted{Version=[2],Text=[If S denotes an untagged private type
-whose full type is tagged,
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00326-01]}
+@Chg{Version=[2],New=[The capability provided by
+Tags.Generic_Dispatching_Constructor is sometimes known as a
+@i<factory>.@Defn{factory}@Defn{class factory}],Old=[If S denotes an
+untagged private type whose full type is tagged,
 then S'Class is also allowed before the full type definition,
 but only in the private part of the package in which the type is
 declared
@@ -877,11 +879,6 @@ Similarly, the Class attribute is defined
 for incomplete types whose full type is tagged, but only within
 the library unit in which the incomplete type is declared
 (see @RefSecNum(Incomplete Type Declarations)).]}
-
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
-@ChgAdded{Version=[2],Text=[The capability provided by
-Tags.Generic_Dispatching_Constructor is sometimes known as a
-@i<factory>.@Defn{factory}@Defn{class factory}]}
 @end{Notes}
 
 @begin{Examples}
@@ -4103,10 +4100,9 @@ nor a return type that is an incomplete view.],Old=[]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00326-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00326-01]}
 @ChgDeleted{Version=[2],Text=[@Defn{incomplete type}
-An @nt{incomplete_type_declaration} declares
-an incomplete
+An @nt{incomplete_type_declaration} declares an incomplete
 type and its first subtype; the first subtype is unconstrained if
 a @nt<known_discriminant_part> appears.]}
 @begin{Reason}
@@ -4120,6 +4116,11 @@ a constraint could later be given in a @nt{subtype_indication} naming
 the incomplete type.]}
 @end{Reason}
 @end{StaticSem}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 11 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{RunTime}
 @PDefn2{Term=[elaboration], Sec=(incomplete_type_declaration)}
@@ -4466,6 +4467,14 @@ accessibility rules.]
 object was declared at library-level; this applies even when it is used as the
 value of anonymous access type.
 See @RefSecNum{Unchecked Access Value Creation}.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Clause @RefSecNum{Operations of Access Types},
+home of the accessibility rules, is informally known
+as the @ldquote@;Heart of Darkness@rdquote amongst the maintainers of Ada.
+Woe unto all who enter here (well, at least unto anyone that needs to understand
+any of these rules).
+@Defn{Heart of Darkness}@IndexSeeAlso{Term=[accessibility rules],See=[Heart of Darkness]}]}
 @end{Discussion}
 
 @Defn{statically deeper}
@@ -4692,6 +4701,12 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   discriminants. For most implementations this will mean that functions with
   controlling results will also need a level parameter.]}
 @end{ImplNote}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0284-1]}
+@ChgAdded{Version=[3],NoPrefix=[T],Text=[In the case of a call to a function
+whose result type is an anonymous access type, the accessibility level of the
+type of the result of the function call is also determined by the point of call
+as described above.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Just because the paragraph number is changed}
@@ -6038,7 +6053,7 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   access discriminants so that no cases are omitted.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1],ARef=[AI05-0284-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected accessibility rules for
   anonymous access return types and access discriminants in return statements.]}
 

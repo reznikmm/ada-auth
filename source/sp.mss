@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1634,6 +1634,29 @@ barrier.],Old=[This precludes any use of register temporaries,
 caches, and other similar optimizations for that object.]}
 @end{ImplNote}
 
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0275-1]}
+@ChgAdded{Version=[3],Text=[From @RefSecNum{Shared Variables} it follows that
+(in non-erroneous programs) accesses to variables, including those shared by
+multiple tasks, are always sequential. This guarantees that no task will ever
+see partial updates of any variable. For volatile variables (including atomic
+variables), the above rule additionally specifies that all tasks see the same
+order of updates.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0275-1]}
+@ChgAdded{Version=[3],Text=[If for a shared variable @i<X>, a read of @i<X>
+occurs sequentially after an update of @i<X>, then the read will return the
+updated value if @i<X> is volatile or atomic, but may or or may not return the
+updated value if @i<X> is nonvolatile. For nonvolatile accesses, a signaling
+action is needed in order to share the updated value.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0275-1]}
+@ChgAdded{Version=[3],Text=[Because accesses to the same atomic variable by
+different tasks establish a sequential order between the actions of those tasks,
+implementations may be required to emit memory barriers around such updates or
+use atomic instructions that imply such barriers.]}
+@end{Discussion}
+
 @Defn2{Term=[sequential], Sec=(actions)}
 Two actions are sequential (see @RefSecNum{Shared Variables}) if each
 is the read or update of the same atomic object.
@@ -1673,8 +1696,8 @@ generate any memory reads or updates of atomic or volatile
 objects other than those specified by the program.
 @begin{Discussion}
 The presumption is that volatile or atomic objects might reside in an
-@lquotes@;active@rquotes@; part of the address space where each read has a potential
-side-effect, and at the very least might deliver a different value.
+@lquotes@;active@rquotes@; part of the address space where each read has a
+potential side effect, and at the very least might deliver a different value.
 
 @Leading@;The rule above and the definition of external effect are intended to
 prevent (at least) the following incorrect optimizations, where V is
@@ -2277,7 +2300,7 @@ While the object does not exist, the function Value may
 simply return Initial_Value, rather than implicitly creating the object.
 @begin{Discussion}
   The effect of this permission can only be observed if the assignment
-  operation for the corresponding type has side-effects.
+  operation for the corresponding type has side effects.
 @end{Discussion}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}

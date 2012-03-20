@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.64 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.65 $ $Date: 2012/03/20 06:13:58 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -384,13 +384,18 @@ is required to be preelaborable.
 @end{Intro}
 
 @begin{ImplReq}
-@ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0079],ARef=[AI95-00208-01]}
+@ChgRef{Version=[1],Kind=[DeletedNoDelMsg],Ref=[8652/0079],ARef=[AI95-00208-01]}
 @ChgDeleted{Version=[1],Text=[For a given library-level type declared in
 a preelaborated library unit or in the declaration of a remote types or remote
 call interface library unit, the implementation shall choose the same
 representation for the type upon each elaboration of the type's declaration for
 different partitions of the same program.]}
 @end{ImplReq}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 13 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{ImplPerm}
 
@@ -1977,6 +1982,7 @@ dereferencing the controlling operands T1 and T2.
 @end{Examples}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Partition Communication Subsystem}
 
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -894,7 +894,7 @@ partition).]}
 @end{StaticSem}
 
 @begin{ImplReq}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00438-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00438-01]}
 @ChgDeleted{Version=[2],Text=[The implementation of the Write attribute
 (see @RefSecNum{Stream-Oriented Attributes})
 of Exception_Occurrence shall support writing
@@ -904,12 +904,12 @@ of Exception_Occurrence shall support reconstructing
 an exception occurrence from a stream (including one written in
 a different partition).]}
 @begin{Ramification}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The identity of the exception,
   as well as the Exception_Name and Exception_Message,
   have to be preserved across partitions.]}
 
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[The string returned by Exception_Name
   or Exception_Message on the result of calling the Read
   attribute on a given stream has to be the same as the value returned
@@ -919,7 +919,7 @@ a different partition).]}
   the same, since it is implementation defined anyway.]}
 @end{Ramification}
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Deleted]}
+  @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
   @ChgDeleted{Version=[2],Text=[This is important for supporting writing
   exception occurrences to external files for post-mortem analysis, as well as
   propagating exceptions across remote subprogram calls
@@ -927,6 +927,11 @@ a different partition).]}
   (see @RefSecNum{Remote Subprogram Calls}).]}
 @end{Reason}
 @end{ImplReq}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 16 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{ImplPerm}
 An implementation of Exception_Name in a space-constrained
@@ -960,12 +965,6 @@ Exception_Information should include both the Exception_Name and the
 Exception_Message.
 
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[Function Exception_Message and Exception_Information
-should return a UTF-8 encoded string starting with a BOM (see
-@RefSecNum{String Encoding}) if and only if the result includes characters with
-code points greater than 255.]}
-
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Exception_Information should provide
 information useful for debugging, and should include the Exception_Name
@@ -973,10 +972,6 @@ and Exception_Message.]}]}
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Exception_Message by default should be short, provide
 information useful for debugging, and should not include the Exception_Name.]}]}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Exception_Message and Exception_Information should return a UTF-8 encoded
-string that starts with a BOM if any characters with a code point greater than
-255.]}]}
 
 @begin{Reason}
 It may seem strange to define two subprograms whose semantics is
@@ -1129,15 +1124,6 @@ which it supports non-Latin-1 characters in identifiers, then it needs to
 define what the above functions return in the case where the name of an
 exception contains such a character.]}
 @end{ImplNote}
-@begin{Discussion}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[Since all of the routines and operations that raise
-and set the exception message take a string but do not interpret it, we need to
-say nothing to allow passing UTF-8 encoded strings with a BOM. Since encoding in
-this string is a common programming idiom, implementations should not modify any
-exception message string unless it starts with a BOM and does not contain any
-characters with code points greater than 255.]}
-@end{Discussion}
 @end{ImplAdvice}
 
 @begin{Extend83}
@@ -1241,31 +1227,30 @@ manner.]}]}
 expressions}.@Defn{assertions}@Defn{assertion expressions}]}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Predicate>,
-Text=<@ChgAdded{Version=[3],Text=[A predicate is an assertion that gives a
-boolean expression that is expected to be True for all objects of a given
+Text=<@ChgAdded{Version=[3],Text=[A predicate is an assertion
+that is expected to be True for all objects of a given
 subtype.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Precondition>,
-Text=<@ChgAdded{Version=[3],Text=[A precondition is an assertion that gives a
-boolean expression that is expected to be True when a given subprogram is
+Text=<@ChgAdded{Version=[3],Text=[A precondition is an assertion
+that is expected to be True when a given subprogram is
 called.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Postcondition>,
-Text=<@ChgAdded{Version=[3],Text=[A postcondition is an assertion that gives a
-boolean expression that is expected to be True when a given subprogram returns
+Text=<@ChgAdded{Version=[3],Text=[A postcondition is an assertion
+that is expected to be True when a given subprogram returns
 normally.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Invariant>,
-Text=<@ChgAdded{Version=[3],Text=[A invariant is an assertion that gives a
-boolean expression that is expected to be True for all objects of a given
-private type when viewed from outside the enclosing package.]}>}
+Text=<@ChgAdded{Version=[3],Text=[A invariant is an assertion that is expected
+to be True for all objects of a given private type when viewed from outside the
+defining package.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Assertion>,
-Text=<@ChgAdded{Version=[3],Text=[An assertion is any of the following: a pragma
-Assert, a predicate, a precondition, a postcondition, an invariant, a
-constraint, or a null exclusion. Assertions may be used to specify
-boolean expressions that are expected to be True at run time at certain
-places.]}>}
+Text=<@ChgAdded{Version=[3],Text=[An assertion is a boolean expression that
+appears in any of the following: a @nt{pragma} Assert, a predicate, a
+precondition, a postcondition, an invariant, a constraint, or a null exclusion.
+An assertion is expected to be True at run time at certain specified places.]}>}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
 @ChgAdded{Version=[3],Text=[Pragma Assertion_Policy is used to control whether
@@ -1295,13 +1280,22 @@ Text=`@key{pragma} @prag<Assert>([Check =>] @SynI{boolean_}@Syn2{expression}[, [
 @end{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@AddedPragmaSyn<Version=[2],@ChgAdded{Version=[2],
-Text=<@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});>}>
+@AddedPragmaSyn<Version=[2],@ChgAdded[Version=[2],
+Text=<@key{pragma} @prag<Assertion_Policy>(@SynI{policy_}@Syn2{identifier});>]>
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@AddedPragmaSyn<Version=[3],@ChgAdded[Version=[3],
+Text=[@key{pragma} @prag<Assertion_Policy>(@*
+@ @ @ @ @ @ @ @ @ @SynI(assertion_)@Syn2{aspect_mark} => @SynI{policy_}@Syn2{identifier}@*
+@ @ @ @ @ {, @SynI(assertion_)@Syn2{aspect_mark} => @SynI{policy_}@Syn2{identifier}});]]>
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[configuration pragma], Sec=(Assertion_Policy)}
 @PDefn2{Term=[pragma, configuration], Sec=(Assertion_Policy)}
-A @nt{pragma} Assertion_Policy is a configuration pragma.]}
+A @nt{pragma} Assertion_Policy is@Chg{Version=[3],New=[ allowed only immediately
+within a @nt{declarative_part}, immediately within a @nt{package_specification},
+or as],Old=[]} a configuration pragma.]}
 
 @end{Syntax}
 
@@ -1322,20 +1316,78 @@ of a @nt{pragma} Assert is type String.]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[The @SynI<policy_>@nt<identifier> of a @nt{pragma}
-Assertion_Policy shall be either Check, Ignore, or an implementation-defined
-identifier.]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
-@SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Assertion_Policy.],Old=[]}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The
+@SynI<assertion_>@nt{aspect_mark} of a @nt{pragma} Assertion_Policy shall
+be one of Assert, Static_Predicate, Dynamic_Predicate, Pre, Pre'Class, Post,
+Post'Class, Type_Invariant, Type_Invariant'Class, or some
+implementation defined @nt{aspect_mark}. ],Old=[]}The
+@SynI<policy_>@nt<identifier>@Chg{Version=[3],New=[],Old=[ of a @nt{pragma}
+Assertion_Policy]} shall be either Check, Ignore, or @Chg{Version=[3],New=[some],Old=[an]}
+implementation-defined @nt{identifier}.]}
+@ChgImplDef{Version=[3],Kind=[Revised],InitialVersion=[2],
+Text=[@Chg{Version=[2],New=[Implementation-defined
+@SynI<policy_>@nt{identifier}s @Chg{Version=[3],New=[and
+@SynI<assertion_>@nt{aspect_mark}s ],Old=[]}allowed in a @nt{pragma}
+Assertion_Policy.],Old=[]}]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[A @nt<pragma> Assertion_Policy is a configuration pragma
-that specifies the assertion policy in effect for the compilation units to which it
-applies. Different policies may apply to different compilation
-units within the same partition. The default assertion policy is
-implementation-defined.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[A @nt{pragma} Assertion_Policy
+@Chg{Version=[3],New=[determines for each assertion aspect named in
+the @nt{pragma_argument_association}s whether assertions of the given aspect are to
+be enforced by a run-time check. The @SynI<policy_>@nt{identifier} Check
+requires that assertion expressions of the given aspect be checked that they
+evaluate to True at the points specified for the given aspect; the
+@SynI<policy_>@nt{identifier} Ignore requires that the assertion expression not
+be evaluated at these points, and the run-time checks not be performed.
+@Redundant[Note that for subtype predicate aspects (see @RefSecNum{Subtype Predicates}),
+even when the applicable Assertion_Policy is Ignore, the predicate will still be
+evaluated as part of membership tests and Valid @nt{attribute_reference}s, and
+if static, will still have an effect on loop iteration over the subtype, and the
+selection of @nt{case_statement_alternative}s and @nt{variant}s.]],Old=[is a
+configuration pragma that specifies the assertion policy in effect for the
+compilation units to which it applies. Different policies may apply to different
+compilation units within the same partition. The default assertion policy is
+implementation-defined]}.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[If no @SynI<assertion_>@nt{aspect_mark}s are
+specified in the pragma, the specified policy applies to all assertion
+aspects.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[A @nt{pragma} Assertion_Policy applies to the named
+assertion aspects in a specific region, and applies to all assertion expressions
+specified in that region. A @nt{pragma} Assertion_Policy given in a
+@nt{declarative_part} or immediately within a @nt{package_specification} applies
+from the place of the pragma to the end of the innermost enclosing declarative
+region. The region for a @nt{pragma} Assertion_Policy given as a configuration
+pragma is the declarative region for the entire compilation unit (or units) to
+which it applies.]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[If a @nt{pragma} Assertion_Policy applies to
+a @nt{generic_instantiation}, then
+the @nt{pragma} Assertion_Policy applies to the entire instance.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgAdded{Version=[3],Text=[This means that an Assertion_Policy pragma that
+  occurs in a scope enclosing the declaration of a generic unit but not also
+  enclosing the declaration of a given instance of that generic unit will not
+  apply to assertion expressions occurring within the given instance.]}
+@end{Ramification}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[If multiple Assertion_Policy pragmas apply to a
+given construct for a given assertion aspect, the assertion policy is determined
+by the one in the innermost enclosing region of a @nt{pragma} Assertion_Policy
+specifying a policy for the assertion aspect. If no such Assertion_Policy pragma
+exists, the policy is implementation defined.]}
+
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[The
 default assertion policy.],Old=[]}]}
 
@@ -1360,21 +1412,30 @@ language-defined library package exists:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[A compilation unit containing a @nt{pragma} Assert has a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[A compilation unit containing a
+@Chg{Version=[3],New=[check for an assertion (including a ],Old=[]}@nt{pragma}
+Assert@Chg{Version=[3],New=[)],Old=[]} has a
 semantic dependence on the Assertions library unit.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[The assertion policy that applies to a generic unit
-also applies to all its instances.]}
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The assertion policy
+that applies to a generic unit also applies to all its instances.]}]}
 @end{StaticSem}
 
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
-@ChgAdded{Version=[2],Text=[An assertion policy @defn{assertion policy}specifies
-how a @nt{pragma} Assert is interpreted by the implementation. If the assertion
-policy is Ignore at the point of a @nt{pragma} Assert, the pragma is ignored.
-If the assertion policy is Check at the point of a @nt{pragma} Assert, the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[An assertion policy
+@defn{assertion policy}specifies how a @nt{pragma} Assert is interpreted by the
+implementation. If the assertion
+policy is Ignore at the point of a @nt{pragma} Assert, the pragma is ignored.]}
+If @Chg{Version=[3],New=[performing checks is required by ],Old=[]}the
+@Chg{Version=[3],New=[Assert ],Old=[]}assertion policy
+@Chg{Version=[3],New=[in effect],Old=[is Check]}
+at the @Chg{Version=[3],New=[place],Old=[point]} of a @nt{pragma} Assert, the
 elaboration of the pragma consists of evaluating the boolean expression, and if
 the result is False, evaluating the Message argument, if any, and raising the
 exception Assertions.Assertion_Error, with a message if the Message
@@ -1413,49 +1474,11 @@ effects independently of the assertion policy in effect.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
 @ChgAdded{Version=[3],Text=[It is a bounded error to invoke a potentially
 blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions})
-during the evaluation of an assertion expression. If the bounded error is
+during the evaluation of an assertion expression associated with a call on, or
+return from, a protected operation. If the bounded error is
 detected, Program_Error is raised. If not detected, execution proceeds normally,
 but if it is invoked within a protected action, it might result in deadlock or a
 (nested) protected action.]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error in an assertion expression to
-alter the value of any variable that could alter the value of the assertion
-expression. If the bounded error is detected, Program_Error is raised.
-Otherwise, execution proceeds normally with the affected assertion, but the
-assertion expression need not hold if immediately reevaluated.]}
-
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error in an assertion expression
-associated with a call of or return from a callable entity @i{C} to alter the
-value of any variable that could alter the value of any other such assertion
-expression of the callable entry @i{C}. If the bounded error is detected,
-Program_Error is raised. Otherwise, execution proceeds normally with the
-affected assertion expressions. @Redundant[Possible consequences of not
-detecting the bounded error are that the value denoted by @i{X}'Old for
-any @nt{prefix} @i{X} might no longer denote the value denoted by @i{X} at the
-beginning of the subprogram call with the affected postcondition, or that a
-condition that evaluated to true is no longer true after evaluation of the
-affected precondition or postcondition.]]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The intended effect is that an evaluation of
-  the involved assertion expressions (subtype predicates, type invariants,
-  preconditions and postconditions) in any order yields identical results.]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The rule above is intended to apply to all of the
-  assertion expressions that are evaluated at the start of call (and similarly
-  for the assertion expressions that are evaluated during the return from a
-  call), but not other assertions actually given in the body, nor between the
-  expressions given at the start and end. Specifically, a side effect that
-  alters a variable in a function called from a precondition expression that
-  changes the result of a postcondition expression of the same subprogram
-  does @i<not> trigger this rule.]}
-@end{Discussion}
-
-
 @end{Bounded}
 
 @begin{ImplPerm}
@@ -1477,12 +1500,50 @@ would be incorrect, as Exception_Name would return the wrong name.]}
 not needed to determine the value of the assertion expression, an implementation
 is permitted to omit the function call. @Redundant[This permission applies even
 if the function has side effects.]]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
+@ChgAdded{Version=[3],Text=[An implementation need not allow the specification
+of an assertion expression if the evaluation of the expression has a side effect
+such that an immediate reevaluation of the expression could produce a different
+value. Similarly, an implementation need not allow the specification of an
+assertion expression that is checked as part of a call or on return from a
+callable entity @i<C>, if the evaluation of the expression has a side effect
+such that the evaluation of some other assertion expression associated with the
+same call of (or return from) @i<C> could produce a different value than it
+would if the first expression had not been evaluated.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This allows an implementation to reject such
+  assertions. To maximize portability, assertions should not include expressions
+  that contain these sorts of side effects.]}
+@end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The intended effect of the second part of the
+  rule (the part starting with @ldquote@;Similarly@rdquote) is that an
+  evaluation of the involved assertion expressions (subtype predicates, type
+  invariants, preconditions and postconditions) in any order yields identical
+  results.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The rule is intended to apply to all of the
+  assertion expressions that are evaluated at the start of call (and similarly
+  for the assertion expressions that are evaluated during the return from a
+  call), but not other assertions actually given in the body, nor between the
+  assertions checked at the start and end of the call. Specifically, a side
+  effect that alters a variable in a function called from a precondition
+  expression that changes the result of a postcondition expression of the same
+  subprogram does @i<not> trigger these rules unless it also changes
+  the value of a reevaluation of the precondition expression.]}
+@end{Discussion}
+
 @end{ImplPerm}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[Normally, the boolean expression in a @nt{pragma}
-Assert should not call functions that have significant side-effects when the
+Assert should not call functions that have significant side effects when the
 result of the expression is True, so that the particular assertion policy in
 effect will not affect normal operation of the program.]}
 @end{Notes}
@@ -1493,21 +1554,31 @@ effect will not affect normal operation of the program.]}
 Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend95}
 
-@begin{Inconsistent2005}
+@begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0274-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2005}
-  It is now a bounded error for an assertion expression to call a function
-  that has a side-effect that could change the value of the assertion.
-  This means that a pragma Assert that works in Ada 2005 might raise
-  Program_Error in Ada 2012 in the unlikely event that the compiler detected
-  such an error. This should be unlikely to occur in practice, and it
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  There now is an @ImplPermName to reject an assertion expression
+  that calls a function that has a side effect such that an immediate
+  reevalution of the expression could produce a different value.
+  This means that a @nt{pragma} Assert that works in Ada 2005 might be illegal
+  in Ada 2012 in the unlikely event that the compiler detected
+  such an error. This should be unlikely to occur in practice and it
   is considered a good thing, as the original expression was tricky and
   probably was not portable (as order of evaluation is unspecified within
-  an expression). Moreover, no compiler is required to detect a bounded
-  error, so there is no need for any compiler to change behavior.]}
-@end{Inconsistent2005}
+  an expression). Moreover, no compiler is @i<required> to reject such
+  expressions, so there is no need for any compiler to change behavior.]}
+@end{Incompatible2005}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  Assertion_Policy pragmas are now allowed in more places and can specify
+  behavior for invidivual kinds of assertions.]}
+@end{Extend2005}
 
 
+
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}
@@ -1678,12 +1749,23 @@ pragma is the declarative region for the entire compilation unit (or units) to
 which it applies.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00224-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[2],Text=[If a checking pragma applies to a generic instantiation, then the checking
-pragma also applies to the instance. If a checking pragma applies to a call to
-a subprogram @Chg{Version=[3],New=[for which aspect],Old=[that has a @nt<pragma>]}
-Inline @Chg{Version=[3],New=[is True],Old=[applied to it]}, then the checking
-pragma also applies to the inlined subprogram body.]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[2],Text=[If a checking pragma applies to a
+@Chg{Version=[3],New=[@nt{generic_instantiation}],Old=[generic instantiation]},
+then the checking
+pragma also applies to the @Chg{Version=[3],New=[entire ],Old=[]}instance.
+@Chg{Version=[3],New=[],Old=[ If a checking pragma applies to a call to
+a subprogram that has a @nt<pragma>
+Inline applied to it, then the checking
+pragma also applies to the inlined subprogram body.]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[This means that a Suppress pragma that occurs in a
+  scope enclosing the declaration of a generic unit but not also enclosing the
+  declaration of a given instance of that generic unit will not apply to
+  constructs within the given instance.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00224-01]}
 A @nt{pragma} Suppress gives permission to an implementation to omit the
@@ -1846,21 +1928,35 @@ given that it is not feasible to split Storage_Error.
 @Leading@Redundant[The following check corresponds to all situations in which
 any predefined exception is raised.]
 @begin{Description}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @RootDefn{All_Checks}
 All_Checks @\Represents the union of all checks;
-@Redundant[suppressing All_Checks suppresses all checks.]
+suppressing All_Checks suppresses all checks@Chg{Version=[3],New=[
+other than those associated with assertions. In addition,
+an implementation is allowed (but not required) to behave as if a
+pragma Assertion_Policy(Ignore) applies to any region to which
+pragma Suppress(All_Checks) applies],Old=[]}.
+
 @begin{Ramification}
 All_Checks includes both language-defined and implementation-defined
 checks.
 @end{Ramification}
 @begin{Honest}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
-@ChgAdded{Version=[3],Text=[There are additional checks defined in
-various Specialized Needs Annexes that are not listed here. Nevertheless, they
-are included in All_Checks and named in a Suppress pragma on implementations
-that support the relevant annex. Look up @ldquote@;check,
-language-defined@rdquote in the index to find the complete list.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[There are additional checks defined in various
+  Specialized Needs Annexes that are not listed here. Nevertheless, they are
+  included in All_Checks and named in a Suppress pragma on implementations that
+  support the relevant annex. Look up @ldquote@;check, language-defined@rdquote
+  in the index to find the complete list.]}
 @end{Honest}
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[We don't want to say that assertions are
+  suppressed, because we don't want the potential failure of an assertion to
+  cause erroneous execution (see below). Thus they are excluded from the
+  suppression part of the above rule and then handled with an implicit Ignore
+  policy.]}
+@end{Discussion}
 @end{Description}
 @end{Itemize}
 @end{StaticSem}
@@ -2020,7 +2116,7 @@ null in Ada 2005.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
 @ChgAdded{Version=[2],Text=[The On parameter of pragma Suppress was moved to
-Annex J.
+Annex J (see @RefSecNum{Specific Suppression of Checks}).
 This feature's effect is inherently nonportable, depending on the
 implementation's model of computation. Compiler surveys demonstrated this,
 showing that implementations vary widely in the interpretation of these
@@ -2035,6 +2131,21 @@ On parameter.]}
 Program_Error checks was corrected to be alphabetical.]}
 @end{DiffWord95}
 
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[The effect of a checking pragma no longer
+  applies inside an inlined subprogram body. While this could change the
+  behavior of a program that depends on a check being suppressed in an
+  inlined body, such a program is erroneous and thus no behavior can be
+  depended upon anyway. It's also likely to be very rare. We make this
+  change so that inlining has no effect on the meaning of the subprogram
+  body (since inlining is never requiring, this is necessary in order to be
+  able to reason about the body), and so that assertion policies and
+  suppress work the same way for inlining.]}
+@end{DiffWord2005}
+
+
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Exceptions and Optimization}
 
 @begin{Intro}

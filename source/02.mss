@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:35 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -523,6 +523,45 @@ vertical line@*
 @end(FourCol)
 @end{StaticSem}
 
+@begin{ImplReq}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[An Ada implementation shall accept Ada source code
+in UTF-8 encoding, with or without a BOM (see @RefSecNum{String Encoding}),
+where every character is represented by its code point. The character pair
+CARRIAGE RETURN/LINE FEED (code points 16#0D# 16#0A#) signifies a single end of
+line (see @RefSecNum{Lexical Elements, Separators, and Delimiters}); every other
+occurrence of a @ntf{format_effector} other than the character whose code point
+position is 16#09# (CHARACTER TABULATION) also signifies a single end of line.]}
+
+@begin{Reason}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[This is simply requiring that an Ada implementation
+be able to directly process the ACATS, which is provided in the described
+format. Note that files that only contain characters with code points in the
+first 128 (which is the majority of the ACATS) are represented in the same way
+in both UTF-8 and in "plain" string format. The ACATS includes a BOM in files
+that have any characters with code points greater than 127. Note that the BOM
+contains characters not legal in Ada source code, so an implementation can use
+that to automatically distinguish between files formatted as plain Latin-1
+strings and UTF-8 with BOM.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[We allow line endings to be both represented as the
+pair CR LF (as in Windows and the ACATS), and as single @ntf{format_effector}
+characters (usually LF, as in Linux), in order that files created by standard
+tools on most operating systems will meet the standard format. We specify how
+many line endings each represent so that compilers use the same line numbering
+for standard source files.]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[This requirement increases portability by having a
+format that is accepted by all Ada compilers. Note that implementations can
+support other source representations, including structured representations like
+a parse tree.]}
+
+@end{Reason}
+@end{ImplReq}
+
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
@@ -558,30 +597,6 @@ But the character set standard used cannot be older than ISO/IEC 10646:2003
 @end{Discussion}
 @end{ImplPerm}
 
-@begin{ImplAdvice}
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[An Ada implementation should accept Ada source code
-in UTF-8 encoding, with or without a BOM (see @RefSecNum{String Encoding}),
-where line endings are marked by the pair Carriage Return/Line Feed (16#0D#
-16#0A#) and every other character is represented by its code point.]}
-
-@begin{Reason}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0079-1],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Text=[This is simply recommending that an Ada
-implementation be able to directly process the ACATS, which is provided in the
-described format. Note that files that only contain characters with code points
-in the first 128 (which is the majority of the ACATS) are represented in the
-same way in both UTF-8 and in "plain" string format. The ACATS includes a BOM in
-files that have any characters with code points greater than 127. Note that the
-BOM contains characters not legal in Ada source code, so an implementation can
-use that to automatically distinguish between files formatted as plain Latin-1
-strings and UTF-8 with BOM.]}
-
-@end{Reason}
-@ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[The implementation should accept Ada source code in UTF-8 format.]}]}
-@end{ImplAdvice}
-
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Chg{Version=[2],New=[The characters in categories @ntf{other_control},
@@ -591,11 +606,14 @@ function is defined to be a @nt<graphic_character> by this International Standar
 This includes all code positions other than 0000 - 001F, 007F - 009F,
 and FFFE - FFFF]}.
 
-The language does not specify the source representation of programs.
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0286-1]}
+@ChgDeleted{Version=[3],Text=[The language does not specify the source
+representation of programs.]}
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[Revised]}
-Any source representation is valid so long as the
-implementer can produce an (information-preserving)
+@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0286-1]}
+@ChgDeleted{Version=[3],Text=[Any source representation is valid so long
+as the implementer can produce an (information-preserving)
 algorithm for translating both directions
 between the representation and the standard character set.
 (For example, every character in the standard character set has to be
@@ -607,8 +625,7 @@ It is the intent to allow source representations, such as parse trees,
 that are not even linear sequences of characters.
 It is also the intent to allow different fonts:
 reserved words might be in bold face,
-and that should be irrelevant to the semantics.
-
+and that should be irrelevant to the semantics.]}
 @end(Discussion)
 @end{Notes}
 
@@ -676,6 +693,15 @@ permitted in identifiers (in the standard mode).]}
   characters in the categories defined here are allowed in the source
   of an Ada program. This was clear in Ada 95, but Amendment 1 dropped
   the wording instead of correcting it.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+  @ChgAdded{Version=[3],Text=[A standard source representation is defined
+  that all compilers are expected to process. Since this is the same format
+  as the ACATS, it seems unlikely that there are any implementations that
+  don't meet this requirement. Moreover, other representations are still
+  permitted, and the "impossible or impractical" loophole (see
+  @RefSecnum{Conformity of an Implementation with the Standard}) can be
+  invoked for any implementations that cannot directly process the ACATS.]}
 @end{Diffword2005}
 
 
@@ -773,7 +799,6 @@ of a compound delimiter, or as a character of a @nt{comment},
 @nt{numeric_literal}.
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 
 @Leading@keepnext@;The following names are used when referring to compound
 delimiters:@table{Columns=[2],
@@ -1495,21 +1520,25 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @Syn{lhs=<pragma>,rhs="
    @key{pragma} @Syn2{identifier} [(@Syn2{pragma_argument_association} {, @Syn2{pragma_argument_association}})];"}
 
-
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @Syn{lhs=<pragma_argument_association>,rhs="
      [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{name}
-   | [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{expression}"}
+   | [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{expression}@Chg{Version=[3],New=[
+     @SynI{pragma_argument_}@Syn2{aspect_mark} =>  @Syn2{name}
+   | @SynI{pragma_argument_}@Syn2{aspect_mark} =>  @Syn2{expression}],Old=[]}"}
 
 @begin{SyntaxText}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 In a @nt<pragma>, any @nt<pragma_argument_association>s without a
-@i{pragma_argument_}@nt<identifier> shall precede any
-associations with a
-@i{pragma_argument_}@nt<identifier>.
+@SynI{pragma_argument_}@nt<identifier> @Chg{Version=[3],New=[or
+@SynI{pragma_argument_}@nt<aspect_mark> ],Old=[]}shall
+precede any associations with a
+@i{pragma_argument_}@nt<identifier>@Chg{Version=[3],New=[ or
+@SynI{pragma_argument_}@nt<aspect_mark>],Old=[]}.
 
 @Leading@keepnext@nt{Pragma}s are only allowed at the following places in a program:
 @begin{Itemize}
-After a semicolon delimiter, but not within a
-@nt{formal_part}
+After a semicolon delimiter, but not within a @nt{formal_part}
 or @nt{discriminant_part}.
 
 
@@ -1826,6 +1855,12 @@ RM83), but it was not clear, because there was no definition of
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0272-1]}
   @ChgAdded{Version=[3],Text=[Identifiers specific to a pragma can be
   reserved words.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[Pragma arguments can be identified with
+  @nt{aspect_mark}s; this allows @nt{identifier}'Class in this context.
+  As usual, this is only allowed if specifically allowed by a particular
+  pragma.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}

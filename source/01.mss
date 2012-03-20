@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/02/19 01:58:35 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1873,7 +1873,7 @@ The @lquotes@;incorrect order dependences@rquotes@; category of errors is remove
 All such situations are simply considered potential nonportabilities.
 This category was removed due to the difficulty of defining
 what it means for two executions to have a @lquotes@;different effect.@rquotes@;
-For example, if a function with a side-effect is called twice in a single
+For example, if a function with a side effect is called twice in a single
 expression, it is not in principle possible for the compiler to
 decide whether the correctness of the resulting program depends on the order
 of execution of the two function calls. A compile time warning

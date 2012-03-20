@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @LabeledClause{Type Conversions}
 
@@ -895,7 +895,7 @@ Access Type Conversion
 @end(itemize)
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
 @IndexCheck{Index_Check}
@@ -905,14 +905,12 @@ if the target subtype is constrained,
 a check is performed that the value satisfies this constraint.@Chg{Version=[2],
 New=[ If the target subtype excludes null,
 then a check is made that the value is not null.],Old=[]}@Chg{Version=[3],
-New=[ If the assertion policy (see
-@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect is Check,
-the predicate of the target subtype is applied to the value and
-Assertions.Assertion_Error is raised if the result is False.@Defn2{Term=[assertion policy],
-Sec=[predicate check]}@Defn2{Term=[predicate check],
+New=[ If predicate checks are enabled
+for the target subtype (see @RefSecNum{Subtype Predicates}), a check
+is performed that the predicate of the target subtype is satisfied for the
+value.@Defn2{Term=[predicate check],
 Sec=[subtype conversion]}@Defn2{Term=[check, language-defined],
-Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
-Sec=(raised by failure of run-time check)}],Old=[]}
+Sec=[controlled by assertion policy]}],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
   The @Chg{Version=[2],New=[first],Old=[above]} check
@@ -921,11 +919,6 @@ Sec=(raised by failure of run-time check)}],Old=[]}
   for discriminated subtypes. The Length_Check for an array conversion is
   performed as part of the conversion to the target type.@Chg{Version=[2],
   New=[ The check for exclusion of null is an Access_Check.],Old=[]}
-
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0153-3]}
-  @ChgAdded{Version=[3],Text=[Note that the predicate evaluation is not
-  defined to be a @i{check}, as the failure of a check is defined below to
-  always raise Constraint_Error, and we want this to raise Assertion_Error.]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -978,11 +971,14 @@ performed as above for a value conversion.
   @end(Reason)
 @end(itemize)
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}@Chg{Version=[3],New=[
+@Defn2{Term=(Assertion_Error),Sec=(raised by failure of run-time check)}],Old=[]}
 If an Accessibility_Check fails, Program_Error is raised.
-Any other check associated with a conversion
-raises Constraint_Error if it fails.
+@Chg{Version=[3],New=[If a predicate check fails, Assertions.Assertion_Error is
+raised. ],Old=[]}Any other check associated with a conversion raises
+Constraint_Error if it fails.
 
 Conversion to a type is the same as conversion to an unconstrained
 subtype of the type.
@@ -1244,7 +1240,7 @@ as a @nt<name>.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified that a root numeric
   type is not considered a common ancestor for a conversion.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[Added rules so that predicate aspects (see
   @RefSecNum{Subtype Predicates}) are enforced on subtype conversion.]}
 @end{Diffword2005}
@@ -2868,9 +2864,12 @@ compatible with a subtype @i<S2> if:]}
     @i<S2> apply also to @i<S1>, or]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[both subtypes are static, and every value that
-    obeys the predicate of @i<S1> also obeys the predicate of @i<S2>.]}
-
+    @ChgAdded{Version=[3],Text=[both subtypes are static, every value that
+    satisfies the predicate of @i<S1> also satisfies the predicate of @i<S2>,
+    and it is not the case that both types each have at least one applicable
+    predicate specification, predicate checks are enabled (see
+    @RefSecNum{Pragmas Assert and Assertion_Policy}) for @i<S2>, and
+    predicate checks are not enabled for @i<S1>.]}
   @end{InnerItemize}
 @end{Itemize}
 @end{StaticSem}
@@ -2900,7 +2899,7 @@ This subclause is new to Ada 95.
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[Modified static matching and static compatibility
   to take predicate aspects (see @RefSecNum{Subtype Predicates}) into account.]}
 @end{DiffWord2005}

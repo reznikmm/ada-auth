@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.57 $ $Date: 2012/01/28 08:23:03 $ $Author: randy $ }
+@Comment{ $Revision: 1.58 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2012/01/28 08:23:03 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -830,7 +830,7 @@ operations, and declarations of new fixed point types, are
 not allowed.
 @begin{Discussion}
 
-This restriction would have the side-effect of prohibiting the
+This restriction would have the side effect of prohibiting the
 @nt{delay_relative_statement}.
 As with the No_Floating_Point restriction, this might be used to
 avoid any question of rounding errors. Unless an Ada run-time is written in

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:35 $}
+@Comment{$Date: 2012/03/20 06:13:57 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @LabeledClause{Array Types}
 
@@ -2590,6 +2590,38 @@ by the @nt{discrete_choice_list} of the @nt{variant}.
 This rule applies in turn to any further @nt{variant} that is, itself,
 included in the @nt{component_list} of the given @nt{variant}.
 
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[When an object of a discriminated type @i<T> is
+initialized by default, Constraint_Error is raised if no
+@nt{discrete_choice_list} of any @nt{variant} of a @nt{variant_part} of @i<T>
+covers the value of the discriminant that governs the @nt{variant_part}. When a
+@nt{variant_part} appears in the @nt{component_list} of another @nt{variant}
+@i<V>, this test is only applied if the value of the discriminant governing
+@i<V> is covered by the @nt{discrete_choice_list} of @i<V>.]}
+@begin{ImplNote}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[This is not a @ldquote@;check@rdquote; it cannot
+  be suppressed. However, in most cases it is not necessary to generate any code
+  to raise this exception. A test is needed (and can fail) in the case where the
+  discriminant subtype has a Static_Predicate specified, it also has predicate
+  checking disabled, and the discriminant governs a @nt{variant_part} which
+  lacks a @key[when others] choice.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[The test also could fail for a static discriminant
+  subtype with range checking suppressed and the discriminant governs a
+  @nt{variant_part} which lacks a @key[when others] choice. But execution is erroneous if a range
+  check that would have failed is suppressed (see @RefSecNum{Suppressing Checks}),
+  so an implementation does not have to generate code to check this case. (An
+  unchecked failed predicate does not cause erroneous execution, so the test is
+  required in that case.)]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Like the checks associated with a per-object
+  constraint, this test is not made during the elaboration of a
+  @nt{subtype_indication}.]}
+@end{ImplNote}
+
 @PDefn2{Term=[elaboration], Sec=(variant_part)}
 The elaboration of a @nt{variant_part} consists
 of the elaboration of the @nt{component_list} of each
@@ -2680,3 +2712,13 @@ left implicit in RM83.
   of the actual type does not include all of the case choices. This probably
   isn't useful, but it is consistent with the treatment of @nt{case_expression}s.]}
 @end{Extend2005}
+
+@begin{DiffWord2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[Added a test that some @nt{variant} covers the
+  value of a discriminant that governs a @nt{variant_part}. This is similar
+  to the test that some case limb covers the value of the
+  @SynI{Selecting_}@nt{expression} of a @nt{case_statement}. This test cannot
+  change the behavior of any nonerroneous Ada 2005 program, so it is not
+  an inconsistency.]}
+@end{DiffWord2005}

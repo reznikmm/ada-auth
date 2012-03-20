@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.21 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.22 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1300,9 +1300,9 @@ returns False if the cursor designates a root node or equals No_Element.]]}
                         Count     : @key{in}     Count_Type := 1);]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0269-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Insert_Child
-  (Container, Parent, Last_Child (Container, Parent), New_Item, Count).]}
+  (Container, Parent, No_Element, New_Item, Count).]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}

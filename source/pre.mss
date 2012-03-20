@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:38 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.49 $}
+@comment{$Revision: 1.50 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -165,32 +165,62 @@ New=[],Old=[Standard (@i{...continued})
 @\@\@\@\Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Wide_Strings @em @RefSecNum{String Encoding}
-), Old=()}), Old=()}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}),
-Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+), Old=()}), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
 New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Strings (@i{...continued})
-],Old=[]}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
-@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
-), Old=()}@\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
+],Old=[]}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_String Handling}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Hash_Case_Insensitive @em @RefSecNum{Wide_String Handling}
+), Old=()}), Old=()}@Chg{Version=[3],New=(@\@\@\Wide_Equal_Case_Insensitive @em @RefSecNum{Wide_String Handling}
+), Old=()}@\@\@\Wide_Fixed @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_String Handling}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Hash_Case_Insensitive @em @RefSecNum{Wide_String Handling}
+), Old=()}@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\Wide_Hash_Case_Insensitive @em @RefSecNum{Wide_String Handling}
+), Old=()}), Old=()}@\@\@\Wide_Maps @em @RefSecNum{Wide_String Handling}
 @\@\@\@\Wide_Constants @em @RefSecNum{Wide_String Handling}
 @\@\@\Wide_Unbounded @em @RefSecNum{Wide_String Handling}
-@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
-@\@\@\Wide_Wide_Bounded @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\Wide_Wide_Fixed @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\Wide_Wide_Maps @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_String Handling}
+), Old=()}@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Hash_Case_Insensitive @em @RefSecNum{Wide_String Handling}
+), Old=()}@\@\@\Wide_Wide_Bounded @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old=()}@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Hash_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+@\@\@\Wide_Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old={}}@\@\@\Wide_Wide_Fixed @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old=()}@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Hash_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old=[]}@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\Wide_Wide_Hash_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old=()}@\@\@\Wide_Wide_Maps @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\@\Wide_Wide_Constants @em @RefSecNum{Wide_Wide_String Handling}
 @\@\@\Wide_Wide_Unbounded @em @RefSecNum{Wide_Wide_String Handling}
-@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
-@Chg{Version=[3],New=[@\@\Synchronous_Barriers @em @RefSecNum{Synchronous Barriers}
-], Old=[]}), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Equal_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+), Old=()}@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
+@Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Hash_Case_Insensitive
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
+@\@\Synchronous_Barriers @em @RefSecNum{Synchronous Barriers}
+), Old=[]}), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
 @Chg{Version=[3],New=[@\@\@\EDF @em @RefSecNum{Synchronous Task Control}
-], Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
+], Old=[]}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+],Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
 ), Old=()}@\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
 @\@\Task_Identification @em @RefSecNum{The Package Task_Identification}
@@ -231,7 +261,7 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\@\COBOL @em @RefSecNum{Interfacing with COBOL}
 @\@\Fortran @em @RefSecNum{Interfacing with Fortran}>
 
-@NewColumnVer{Version=[3]}@Noparanum@shrink<@\System @em @RefSecNum{The Package System}
+@Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}

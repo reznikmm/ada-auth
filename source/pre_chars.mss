@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2012/02/18 02:17:39 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2012/02/18 02:17:39 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -319,8 +319,8 @@ Item.
 
 @begin{NotIso}
 @ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@roman{@Shrink{@i<Paragraphs 42
-through 48 were deleted.>}}]}@Comment{This message should be deleted if the
-paragraphs are ever renumbered.}
+through 49 were deleted.>}}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered. This includes the following ImplAdv paragraph.}
 @end{NotIso}
 
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
@@ -359,7 +359,7 @@ To_Wide_Character of the corresponding element in Item.]}
 @end{StaticSem}
 
 @begin{ImplAdvice}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00285-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
 @ChgDeleted{Version=[2],Text=[If an implementation provides a localized
 definition of Character or Wide_Character, then the effects of the subprograms
 in Characters.Handling should reflect the localizations. See also
@@ -1061,9 +1061,6 @@ Wide_Characters.Handling has the following declaration:]}
    @key[function] @AdaSubDefn{To_Upper} (Item : Wide_String) @key[return] Wide_String;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Equal_Case_Insensitive} (Left, Right : Wide_String) @key[return] Boolean;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Wide_Characters.Handling;]}
 @end{Example}
 
@@ -1074,7 +1071,7 @@ Wide_Characters.Handling has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Character_Set_Version @key[return] String;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Character_Set_Version @key[return] String;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0266-1]}
@@ -1084,7 +1081,7 @@ used for categorizing characters by the implementation.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Control (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Control (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1093,7 +1090,7 @@ designated by Item is categorized as @ntf{other_control}; otherwise returns Fals
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Letter (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Letter (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1104,7 +1101,7 @@ designated by Item is categorized as @ntf{letter_uppercase},
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Lower (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Keepnext=[T],Text=[@key[function] Is_Lower (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1114,7 +1111,7 @@ False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Upper (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Upper (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1124,7 +1121,7 @@ False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Digit (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Digit (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1134,7 +1131,7 @@ False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Hexadecimal_Digit (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Hexadecimal_Digit (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1144,7 +1141,7 @@ designated by Item is categorized as @ntf{number_decimal}, or is in the range
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Alphanumeric (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Alphanumeric (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1156,7 +1153,7 @@ returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Special (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Special (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1168,7 +1165,7 @@ designated by Item is categorized as @ntf{graphic_character}, but not categorize
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Line_Terminator (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Line_Terminator (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1180,7 +1177,7 @@ Carriage_Return, Next_Line); otherwise returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Mark (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Mark (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1190,7 +1187,7 @@ designated by Item is categorized as @ntf{mark_non_spacing} or
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Other_Format (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Other_Format (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1199,7 +1196,7 @@ designated by Item is categorized as @ntf{other_format}; otherwise returns False
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Punctuation_Connector (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Punctuation_Connector (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1209,7 +1206,7 @@ returns False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Space (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Space (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1219,7 +1216,7 @@ False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Is_Graphic (Item : Wide_Character) @key[return] Boolean;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Graphic (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1229,7 +1226,7 @@ False.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] To_Lower (Item : Wide_Character) @key[return] Wide_Character;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Lower (Item : Wide_Character) @key[return] Wide_Character;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1]}
@@ -1248,7 +1245,7 @@ returned.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] To_Lower (Item : Wide_String) @key[return] Wide_String;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Lower (Item : Wide_String) @key[return] Wide_String;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1260,7 +1257,7 @@ Wide_String is 1.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] To_Upper (Item : Wide_Character) @key[return] Wide_Character;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Upper (Item : Wide_Character) @key[return] Wide_Character;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1]}
@@ -1272,7 +1269,7 @@ of Item is returned.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] To_Upper (Item : Wide_String) @key[return] Wide_String;]}
+@ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Upper (Item : Wide_String) @key[return] Wide_String;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1]}
@@ -1281,22 +1278,6 @@ To_Upper conversion to each Wide_Character element of the
 Wide_String designated by Item. The result is the null Wide_String if the value
 of the formal parameter is the null Wide_String. The lower bound of the result
 Wide_String is 1.]}
-
-@begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[function] Equal_Case_Insensitive (Left, Right : Wide_String) @key[return] Boolean;]}
-@end{Example}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings are the same, that is if they consist of the same
-sequence of characters after applying locale-independent simple case folding,
-as defined by documents referenced in the note in section 1 of ISO/IEC
-10646:2011. Otherwise, returns False. This function uses the same method
-as is used to determine whether two identifiers are the same. Note that
-this result is a more accurate comparison than converting the strings to
-upper case and comparing the results; it is possible that the upper case
-conversions are the same but this routine will report the strings as
-different.]}
 
 @end{DescribeCode}
 @end{StaticSem}
@@ -1329,6 +1310,11 @@ in an ISO standard.)>}
 @ChgAdded{Version=[3],Text=[The results returned by these functions may depend
 on which particular version of the 10646 standard is supported by the
 implementation (see @RefSecNum{Character Set}).]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+@ChgAdded{Version=[3],Text=[The case insensitive equality comparison routines
+provided in @RefSec{String Comparison} are also available for wide strings
+(see @RefSecNum{Wide_String Handling}).]}
 @end{Notes}
 
 @begin{Extend2005}

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3751,7 +3751,7 @@ machine code insertions,@Chg{Version=[2],New=[ imported subprograms,
 subprogram@Chg{Version=[3],New=[; this list is not exhaustive],Old=[, and
 similar features]}.@Chg{Version=[3],New=[ Thus, the permissions described
 in this section may apply to a subprogram whose execution has
-side-effects.],Old=[]} The compiler may omit a call to such a subprogram
+side effects.],Old=[]} The compiler may omit a call to such a subprogram
 even if @Chg{Version=[3],New=[],Old=[such]} side effects exist, so the
 writer of such a subprogram has to keep this in mind.
 @end{Discussion}

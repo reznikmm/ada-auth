@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1047,7 +1047,7 @@ for another actual if the default includes a @nt{name}
 that denotes the other one.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 Finally, the instance declaration and body are elaborated.
 @begin{Ramification}
-Note that if the evaluation of a default depends on some side-effect
+Note that if the evaluation of a default depends on some side effect
 of some other evaluation,
 the order is still arbitrary.
 @end{Ramification}
@@ -2827,6 +2827,20 @@ types are new concepts.
   (it avoids confusion, since not all interesting properties form a class).]}
 @end{DiffWord95}
 
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0288-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
+  @b<Correction:> Matching of formal access-to-subprogram types now uses
+  subtype conformance rather than mode conformance, which is needed to
+  plug a hole. This could cause some instantiations legal in Ada 95 and
+  Ada 2005 to be rejected in Ada 2012. We believe that formal
+  access-to-subprogram types occur rarely, and actuals that are not
+  subtype conformant are rarer still, so this should not happen often.
+  (In addition, one popular compiler has a bug that causes such instances
+  to be rejected, so no code compiled with that compiler could have an
+  incompatibility.)]}
+@end{Incompatible2005}
+
 
 @LabeledAddedSubClause{Version=[2],Name=[Formal Interface Types]}
 
@@ -3042,6 +3056,7 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0296-1]}
 @ChgAdded{Version=[2],Text=[If a formal parameter of a
 @nt{formal_@!abstract_@!subprogram_@!declaration} is of a
 specific tagged type @i<T> or of an anonymous access type designating a
@@ -3052,7 +3067,8 @@ a specific tagged type @i<T> or of an anonymous access type designating a
 specific tagged type @i<T>, @i<T> is called a controlling type of
 the @nt{formal_@!abstract_@!subprogram_@!declaration}. A
 @nt{formal_@!abstract_@!subprogram_@!declaration} shall have exactly
-one controlling type.
+one controlling type@Chg{Version=[3],New=[, and that type shall not be
+incomplete],Old=[]}.
 @Defn2{Term=[controlling type],Sec=[of a @nt{formal_abstract_subprogram_declaration}]}]}
 
 @begin{Ramification}
@@ -3364,6 +3380,17 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00423-01]}
   @ChgAdded{Version=[2],Text=[Added matching rules for @nt{null_exclusion}s.]}
 @end{Diffword95}
+
+@begin{Incompatible2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0296-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}It
+  is now illegal to declare a formal abstract subprogram whose controlling
+  type is incomplete. It was never intended to allow that, and such a type
+  would have to come from outside of the generic unit in Ada 2005, so it is
+  unlikely to be useful. Moreover, a dispatching call on the subprogram
+  is likely to fail in many implementations. So it is very unlikely that any
+  code will need to be changed because of this new rule.]}
+@end{Incompatible2005}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0071-1],ARef=[AI05-0131-1]}

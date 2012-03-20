@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.75 $ $Date: 2012/01/22 06:25:09 $}
+@comment{$Revision: 1.76 $ $Date: 2012/03/20 06:13:59 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -250,10 +250,10 @@ Old=[]}should read this first.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0245-1]}
-  @ChgAdded{Version=[3],Text=[As of this writing (January 2012), only two
+  @ChgAdded{Version=[3],Text=[As of this writing (March 2012), only three
   chapters of the Ada 2012 Rationale have been published. Additional
   chapters are in development and should be published during 2012.]}
-  @ChgNote{** Try to remember to update this note after Draft 15, when the
+  @ChgNote{** Try to remember to update this note after Draft 16, when the
   CD draft is created.**}
 @end{Discussion}
 
@@ -1286,7 +1286,7 @@ guided the work; T. Taft (USA), whose insights broke many logjams, both in
 design and wording; J. Barnes (UK) whose careful reviews uncovered many
 editorial errors; S. Baird (USA), who
 repeatedly found obscure interactions with the proposals that the rest of
-us missed. Other ARG members who contributed were:
+us missed. Other ARG members who substantially contributed were:
 A. Burns (UK), J. Cousins (UK), R. Dewar (USA), G. Dismukes (USA), R. Duff (USA), P. Leroy
 (France), B. Moore (Canada), E. Ploedereder (Germany), J.P. Rosen (France),
 B. Thomas (USA), and T. Vardanega (Italy).]}@Comment{Pascal Leroy worked

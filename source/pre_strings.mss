@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2012/02/19 01:58:38 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/02/19 01:58:38 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -2481,12 +2481,23 @@ are not considered lower case letters by Ada.Strings.Maps.Constants.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0286-1]}
 Facilities for handling strings of Wide_Character elements are
 found in the packages Strings.@!Wide_Maps, Strings.@!Wide_Fixed,
 Strings.@!Wide_@!Bounded, Strings.@!Wide_@!Unbounded,
 and Strings.@!Wide_Maps.@!Wide_@!Constants@Chg{Version=[2],New=[, and in the
-functions Strings.@!Wide_Hash, Strings.@!Wide_Fixed.@!Wide_Hash,
-Strings.@!Wide_Bounded.@!Wide_Hash, and Strings.@!Wide_Unbounded.@!Wide_Hash],Old=[]}.
+@Chg{Version=[3],New=[library ],Old=[]}functions Strings.@!Wide_Hash,
+Strings.@!Wide_Fixed.@!Wide_Hash,
+Strings.@!Wide_Bounded.@!Wide_Hash,@Chg{Version=[3],New=[],Old=[ and]}
+Strings.@!Wide_Unbounded.@!Wide_Hash@Chg{Version=[3],New=[,
+Strings.@!Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_@!Fixed.Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_@!Bounded.Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_@!Unbounded.Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_@!Equal_@!Case_@!Insensitive,
+Strings.@!Wide_@!Fixed.Wide_@!Equal_@!Case_@!Insensitive,
+Strings.@!Wide_@!Bounded.Wide_@!Equal_@!Case_@!Insensitive, and
+Strings.@!Wide_@!Unbounded.Wide_@!Equal_@!Case_@!Insensitive],Old=[]}],Old=[]}.
 They provide the same string-handling operations
 as the corresponding packages@Chg{Version=[2],New=[ and functions],Old=[]}
 for strings of Character elements.
@@ -2497,6 +2508,14 @@ for strings of Character elements.
 @SubChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Hash]}
 @SubChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Hash]}
 @SubChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash]}
+@Chg{Version=[3],New=[@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Equal_Case_Insensitive]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Fixed],Child=[Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Bounded],Child=[Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_@!Unbounded],Child=[Wide_@!Hash_Case_Insensitive]}],Old=[]}
 @ChildUnit{Parent=[Ada.Strings.Wide_@!Maps],Child=[Wide_@!Constants]}
 @end{Intro}
 
@@ -2609,11 +2628,23 @@ identifies Strings.Wide_Maps instead of Strings.Maps.
 need finalization.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00302-03]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0286-1]}
 @Leading@;For each of the packages Strings.Fixed, Strings.Bounded,
 Strings.Unbounded, and Strings.Maps.Constants@Chg{Version=[2],New=[, and
-for functions Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
-and Strings.Unbounded.Hash,],Old=[]}
-the corresponding wide string package has the same contents except that
+for @Chg{Version=[3],New=[library ],Old=[]}functions
+Strings.Hash, Strings.Fixed.Hash, Strings.Bounded.Hash,
+@Chg{Version=[3],New=[],Old=[and ]}Strings.@!Unbounded.Hash,
+@Chg{Version=[3],New=[Strings.@!Hash_@!Case_@!Insensitive,
+Strings.@!Fixed.Hash_@!Case_@!Insensitive,
+Strings.@!Bounded.Hash_@!Case_@!Insensitive,
+Strings.@!Unbounded.Hash_@!Case_@!Insensitive,
+Strings.@!Equal_@!Case_@!Insensitive,
+Strings.@!Fixed.Equal_@!Case_@!Insensitive,
+Strings.@!Bounded.Equal_@!Case_@!Insensitive, and
+Strings.@!Unbounded.Equal_@!Case_@!Insensitive, ],Old=[]}],Old=[]}the
+corresponding wide string
+package @Chg{Version=[3],New=[or function ],Old=[]}has
+the same contents except that
 @begin{itemize}
 Wide_Space replaces Space
 
@@ -2726,6 +2757,21 @@ any element outside the Character portion of Wide_Character.]}
   mapping isn't necessarily correct anyway.]}
 @end{DiffWord95}
 
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The case insenstive library functions
+  (Strings.Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_@!Fixed.Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_@!Bounded.Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_@!Unbounded.Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_@!Hash_@!Case_@!Insensitive,
+  Strings.Wide_@!Fixed.Wide_@!Hash_@!Case_@!Insensitive,
+  Strings.Wide_@!Bounded.Wide_@!Hash_@!Case_@!Insensitive, and
+  Strings.Wide_@!Unbounded.Wide_@!Hash_@!Case_@!Insensitive)
+  are new.]}
+@end{Extend2005}
+
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0223-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction>: Identified Wide_Character_Set
@@ -2738,14 +2784,24 @@ any element outside the Character portion of Wide_Character.]}
 @LabeledAddedSubClause{Version=[2],Name=[Wide_Wide_String Handling]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0286-1]}
 @ChgAdded{Version=[2],Text=[Facilities for handling strings of
 Wide_Wide_Character elements are found in
 the packages Strings.@!Wide_Wide_@!Maps, Strings.@!Wide_Wide_@!Fixed,
 Strings.@!Wide_Wide_@!Bounded, Strings.@!Wide_Wide_@!Unbounded, and
 Strings.@!Wide_Wide_@!Maps.@!Wide_Wide_@!Constants, and in the
-functions Strings.@!Wide_Wide_@!Hash, Strings.@!Wide_Wide_@!Fixed.@!Wide_Wide_@!Hash,
-Strings.@!Wide_Wide_@!Bounded.@!Wide_@!Wide_@!Hash, and
-Strings.@!Wide_Wide_@!Unbounded.@!Wide_@!Wide_@!Hash.
+@Chg{Version=[3],New=[library ],Old=[]}functions Strings.@!Wide_Wide_@!Hash,
+Strings.@!Wide_Wide_@!Fixed.@!Wide_Wide_@!Hash,
+Strings.@!Wide_Wide_@!Bounded.@!Wide_@!Wide_@!Hash,@Chg{Version=[3],New=[],Old=[ and]}
+Strings.@!Wide_Wide_@!Unbounded.@!Wide_@!Wide_@!Hash@Chg{Version=[3],New=[,
+Strings.@!Wide_Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Fixed.Wide_Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Bounded.Wide_Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Unbounded.Wide_Wide_@!Hash_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Equal_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Fixed.Wide_Wide_@!Equal_@!Case_@!Insensitive,
+Strings.@!Wide_Wide_@!Bounded.Wide_Wide_@!Equal_@!Case_@!Insensitive, and
+Strings.@!Wide_Wide_@!Unbounded.Wide_Wide_@!Equal_@!Case_@!Insensitive],Old=[]}.
 They provide the same
 string-handling operations as the corresponding packages and functions
 for strings of Character elements.
@@ -2756,6 +2812,14 @@ for strings of Character elements.
 @SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash]}
 @SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash]}
 @SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash]}
+@Chg{Version=[3],New=[@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Equal_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Equal_Case_Insensitive]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Fixed],Child=[Wide_Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Bounded],Child=[Wide_Wide_@!Hash_Case_Insensitive]}
+@SubChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Unbounded],Child=[Wide_Wide_@!Hash_Case_Insensitive]}],Old=[]}
 @ChildUnit{Parent=[Ada.Strings.Wide_Wide_@!Maps],Child=[Wide_Wide_@!Constants]}]}
 
 @begin{StaticSem}
@@ -2894,12 +2958,22 @@ Strings.Wide_Wide_Maps instead of Strings.Maps.]}
 Wide_Wide_Character_Mapping need finalization.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0286-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For each of the packages
 Strings.@!Fixed, Strings.@!Bounded, Strings.@!Unbounded, and Strings.@!Maps.Constants,
-and for functions Strings.@!Hash, Strings.@!Fixed.Hash, Strings.@!Bounded.Hash,
-and Strings.@!Unbounded.Hash,
-the corresponding wide wide string package or function has the same contents
-except that]}
+and for @Chg{Version=[3],New=[library ],Old=[]}functions
+Strings.@!Hash, Strings.@!Fixed.Hash, Strings.@!Bounded.Hash,
+@Chg{Version=[3],New=[],Old=[and ]}Strings.@!Unbounded.Hash,
+@Chg{Version=[3],New=[Strings.@!Hash_@!Case_@!Insensitive,
+Strings.@!Fixed.Hash_@!Case_@!Insensitive,
+Strings.@!Bounded.Hash_@!Case_@!Insensitive,
+Strings.@!Unbounded.Hash_@!Case_@!Insensitive,
+Strings.@!Equal_@!Case_@!Insensitive,
+Strings.@!Fixed.Equal_@!Case_@!Insensitive,
+Strings.@!Bounded.Equal_@!Case_@!Insensitive, and
+Strings.@!Unbounded.Equal_@!Case_@!Insensitive,
+],Old=[]}the corresponding wide wide string package or function has the same
+contents except that]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2999,6 +3073,21 @@ Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
   and functions Strings.Wide_Wide_Hash and
   Strings.Wide_Wide_Unbounded.Wide_Wide_Hash are new.]}
 @end{Extend95}
+
+@begin{Extend2005}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
+  The case insenstive library functions
+  (Strings.Wide_Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Fixed.Wide_Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Bounded.Wide_Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Unbounded.Wide_Wide_@!Equal_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Hash_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Fixed.Wide_Wide_@!Hash_@!Case_@!Insensitive,
+  Strings.Wide_Wide_@!Bounded.Wide_Wide_@!Hash_@!Case_@!Insensitive, and
+  Strings.Wide_Wide_@!Unbounded.Wide_Wide_@!Hash_@!Case_@!Insensitive)
+  are new.]}
+@end{Extend2005}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0223-1]}
@@ -3206,7 +3295,7 @@ and similar strings should rarely return the same value.]}]}
 @LabeledAddedSubClause{Version=[3],Name=[String Comparison]}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0286-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Equal_Case_Insensitive has the following declaration:]}
 
@@ -3219,8 +3308,23 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Compares strings Left and Right,
-converted to lower case, for equality.]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings consist
+of the same sequence of characters after applying locale-independent simple case
+folding, as defined by documents referenced in the note in section 1 of ISO/IEC
+10646:2011. Otherwise, returns False. This function uses the same method as is
+used to determine whether two identifiers are the same.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0286-1]}
+  @ChgAdded{Version=[3],Text=[For String, this is equivalent to converting to
+  lower case and comparing. Not so for other string types. For Wide_Strings and
+  Wide_Wide_Strings, note that this result is a more accurate comparison than
+  converting the strings to lower case and comparing the results; it is possible
+  that the lower case conversions are the same but this routine will report the
+  strings as different. Additionally, Unicode says that the result of this
+  function will never change for strings made up solely of defined code points;
+  there is no such guarantee for case conversion to lower case.]}
+@end{Discussion}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
@@ -3348,7 +3452,7 @@ Strings.Less_Case_Insensitive (To_String (Left), To_String (Right));]}
 @end{StaticSem}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0286-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The Strings.Equal_Case_Insensitive, Strings.Fixed.Equal_Case_Insensitive,
   Strings.Bounded.Equal_Case_Insensitive,

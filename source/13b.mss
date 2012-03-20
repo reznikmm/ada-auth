@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -444,10 +444,15 @@ Storage_Offset'First shall be <= (@en@;Storage_Offset'Last).
 @end{ImplReq}
 
 @begin{ImplPerm}
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00362-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00362-01]}
 @ChgDeleted{Version=[2],Text=[Package System.Storage_Elements may be declared
 pure.]}
 @end{ImplPerm}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 15 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{ImplAdvice}
 Operations in System and its children should reflect the
@@ -1544,6 +1549,14 @@ which might mean that storage is reclaimed for an access type
 when leaving the appropriate scope.
 Other schemes are possible.
 @end{Ramification}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Storage pool>,
+Text=<@ChgAdded{Version=[3],Text=[Each access-to-object type has an associated
+storage pool object. The storage for an object created by an @nt{allocator}
+comes from the storage pool of the type of the @nt{allocator}. Some storage
+pools may be partitioned into subpools in order to support finer-grained storage
+management.]}>}
+
 @end{Intro}
 
 @begin{Legality}
@@ -4260,6 +4273,12 @@ or a network channel.
 A stream element will often be the same size as a storage element,
 but that is not required.
 @end{Discussion}
+
+@ChgToGlossary{Version=[3],Kind=[Added],Term=<Stream>,
+Text=<@ChgAdded{Version=[3],Text=[A stream is a sequence of elements that can be
+used, along with the stream-oriented attributes, to support marshalling and
+unmarshalling of values of most types.]}>}
+
 @end{Intro}
 
 @begin{Extend83}
@@ -4717,8 +4736,7 @@ type is specific or class-wide.
 @end{StaticSem}
 
 @begin{ImplAdvice}
-
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00270-01]}
+@ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00270-01]}
 @ChgDeleted{Version=[2],Text=[If a
 stream element is the same size as a storage element,
 then the normal in-memory representation should be used by Read and
@@ -4728,6 +4746,11 @@ number of stream elements needed
 to represent all values in the base range of the scalar type.]}
 @ChgNote{We don't add an Implementation Advice tag here, as we're deleting this.}
 @end{ImplAdvice}
+@begin{NotIso}
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraph 17 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{StaticSem}
 For @PrefixType{every subtype S of a specific type @i(T)},
@@ -6042,7 +6065,7 @@ causes freezing.]}
 At the place where a @nt{generic_instantiation} causes freezing of a callable
 entity, the profile of that entity is frozen
 unless the formal subprogram corresponding to the callable entity has a
-parameter or result of a formal incomplete type of the same generic;
+parameter or result of a formal untagged incomplete type;
 if the callable entity is
 an expression function, the @nt{expression} of the expression function causes
 freezing.]}

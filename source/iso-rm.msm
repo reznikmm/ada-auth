@@ -18,7 +18,8 @@
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
-@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E) Ed. 3]}
+@Comment{@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E)]}}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:CD]}}
 @RTFFooterText{Version=[0],Text=[\'a9 ISO/IEC 1995 \endash  All rights reserved]}
 @RTFFooterText{Version=[1],Text=[\'a9 ISO/IEC 2001 \endash  All rights reserved]}
 @RTFFooterText{Version=[2],Text=[\'a9 ISO/IEC 2007 \endash  All rights reserved]}
@@ -29,7 +30,7 @@
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
-@RTFVersionName{Version=[3],Text=[Amendment 2]}
+@RTFVersionName{Version=[3],Text=[Ada 2012]}
 
 
 @Comment{HTML properties - generally, no HTML version is made of the ISO version,
@@ -42,7 +43,7 @@
 @HTMLTabs{EmulateFixedOnly}
 @HTMLHeader{<DIV><SPAN Style="font-size:200%; color: rgb(0,0,153)"><B>Ada Reference Manual</B></SPAN> &mdash; <A HREF="8652-TTL.html"><B>Legal Information</B></A></DIV>}
 @HTMLFooter{<DIV Style="margin-top:0.0em"><IMG SRC="AE_logo.gif" height=100 width=113 align=right ALT="Ada-Europe">
-<SPAN Style="vertical-align: middle">Sponsored by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
+<SPAN Style="vertical-align: middle">Ada 2005 and 2012 Editions sponsored in part by <SPAN Style="font-size: 125%"><A HREF="http://www.ada-europe.org/"><B>Ada-Europe</B></A></SPAN></SPAN></DIV>}
 @HTMLColor{Text=[#000000],Background=[#FFFFF0],Link=[#000080],VLink=[#330033],ALink=[#0000FF]}
 
 @Comment{Source files and related items, in collating order}
@@ -81,6 +82,8 @@
 @Source{Name=<PRE_Dirs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Environ.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Containers.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
+@Source{Name=<PRE_Con2.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
+@Source{Name=<PRE_Locales.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Comment{Other normative annexes:}
 @Source{Name=<Interface.MSS>,SectionName=<B>,SectionNumber=[B],NewSection=[T]}
 @Source{Name=<SP.MSS>,SectionName=<C>,SectionNumber=[C],NewSection=[T]}

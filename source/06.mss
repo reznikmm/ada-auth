@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -729,11 +729,21 @@ a primitive subprogram of a tagged type @i<T>, then the associated expression
 also applies to the corresponding primitive subprogram of each descendant of
 @i<T>.]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[If the
-assertion policy in effect at the point of a subprogram or entry declaration is
-Check, then preconditions and postconditions are considered to be @i<enabled>
-for that subprogram or entry.@Defn2{Term=[enabled],Sec=[precondition]}@Defn2{Term=[enabled],Sec=[postcondition]}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[If performing checks is required by the Pre,
+Pre'Class, Post, or Post'Class assertion policies (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of a
+corresponding aspect specification applicable to a given subprogram or entry,
+then the respective precondition or postcondition expressions are considered
+@i<enabled>.@Defn2{Term=[enabled],Sec=[precondition expression]}@Defn2{Term=[enabled],Sec=[postcondition expression]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgAdded{Version=[3],Text=[If a class-wide precondition or postcondition
+  expression is enabled, it remains enabled when inherited by an overriding
+  subprogram, even if the policy
+  in effect is Ignore for the inheriting subprogram.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{expression} is
@@ -895,29 +905,28 @@ denotes a function declaration}, the following attribute is defined:]}
 @end{StaticSem}
 
 @begin{Runtime}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Text=[If the assertion policy (see
-@RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of
-a subprogram or entry declaration is Check, then upon a call of the
-subprogram or entry, after evaluating any actual parameters,
-precondition checks are performed as follows:@Defn2{Term=[assertion policy],
-  Sec=[precondition check]}@Defn{precondition check}@Defn2{Term=[check, language-defined],
-  Sec=[controlled by assertion policy]}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[Upon a call of the subprogram or entry, after
+evaluating any actual parameters, precondition checks are performed as
+follows:]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[The specific precondition check begins with the
   evaluation of the specific precondition expression that applies to the
-  subprogram or entry; if the expression evaluates to False,
-  Assertions.Assertion_Error is raised.@Defn2{Term=(Assertion_Error),
-  Sec=(raised by failure of run-time check)}]}
+  subprogram or entry, if it is enabled; if the expression evaluates to False,
+  Assertions.Assertion_Error is raised; if the expression is not enabled,
+  the check succeeds.@Defn2{Term=(Assertion_Error),
+  Sec=(raised by failure of run-time check)}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}@Defn2{Term=[precondition check],Sec=[specific]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[The class-wide precondition check begins with the
-  evaluation of any class-wide precondition expressions that apply to the
-  subprogram or entry. If and only if all the class-wide precondition
+  evaluation of any enabled class-wide precondition expressions that apply
+  to the subprogram or entry. If and only if all the class-wide precondition
   expressions evaluate to False, Assertions.Assertion_Error is raised.@Defn2{Term=(Assertion_Error),
-  Sec=(raised by failure of run-time check)}]}
+  Sec=(raised by failure of run-time check)}@Defn2{Term=[check, language-defined],
+  Sec=[controlled by assertion policy]}@Defn2{Term=[precondition check],Sec=[class-wide]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -925,6 +934,12 @@ precondition checks are performed as follows:@Defn2{Term=[assertion policy],
     entity itself as well as those of any parent or progenitor operations are
     evaluated, as these expressions apply to the corresponding operations
     of all descendants.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgAdded{Version=[3],Text=[Class-wide precondition checks are performed for
+    all appropriate calls, but only enabled precondition expressions are
+    evaluated. Thus, the check would be trivial if no precondition expressions
+    are enabled.]}
 @end{Ramification}
 @end{Itemize}
 
@@ -951,20 +966,19 @@ call, the checks are performed prior to checking whether the entry is open.@PDef
 @end{Reason}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
-subprogram or entry declaration is Check, then upon successful return from a
-call of the subprogram or entry, prior to copying back any by-copy @key[in out]
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
+@ChgAdded{Version=[3],Text=[Upon successful return from a call of the subprogram
+or entry, prior to copying back any by-copy @key[in out]
 or @key[out] parameters, the postcondition check is performed. This consists of
-the evaluation of the specific and class-wide postcondition expressions that
+the evaluation of any enabled specific and class-wide postcondition expressions that
 apply to the subprogram or entry. If any of the postcondition expressions
 evaluate to False, then Assertions.Assertion_Error is raised. The
 postcondition expressions are evaluated in an arbitrary order, and if any
 postcondition expression evaluates to False, it is not specified whether any
-other postcondition expressions are evaluated. The postcondition check and
-constraint checks associated with copying back @key[in out] or @key[out]
-parameters are performed in an arbitrary order.@Defn2{Term=[assertion policy],
-  Sec=[postcondition check]}@Defn{postcondition check}@Defn2{Term=[check, language-defined],
+other postcondition expressions are evaluated. The postcondition check, and any
+constraint or predicate checks associated with
+@key[in out] or @key[out] parameters are performed in
+an arbitrary order.@Defn{postcondition check}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
   Sec=(raised by failure of run-time check)}@PDefn2{Term=(arbitrary order),
   Sec=(allowed)}@PDefn{unspecified}]}
@@ -1066,24 +1080,6 @@ that is invoked).]}
 precondition and postcondition checks performed are determined by the subprogram
 or entry denoted by the prefix of the Access attribute reference that produced
 the value.]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[If the assertion policy in effect at the point of a
-subprogram or entry declaration is Ignore, then no precondition or postcondition
-check is performed on a call on that subprogram or entry.
-For a dispatching call, if the assertion policy in effect at the point of the
-declaration of the denoted callable entity is not the same as the assertion
-policy in effect at the point of the declaration of the invoked callable entity,
-it is unspecified whether any precondition or postcondition checks are
-made.@PDefn{unspecified}]}
-
-@begin{Discussion}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-  @ChgAdded{Version=[3],Text=[For a dispatching call with different policies,
-  whether a check is made probably will be different for different checks,
-  depending on whether the implementation makes the check at the call site,
-  in a wrapper, or inside the called subprogram or entry.]}
-@end{Discussion}
 @end{Runtime}
 
 @begin{Notes}
@@ -3240,6 +3236,7 @@ as it is subsumed by earlier clauses and subclauses.
 @end{DiffWord2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Return Statements}
 
 @begin{Intro}
@@ -4450,6 +4447,7 @@ normally, Program_Error is raised at the point of the call.
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Overloading of Operators}
 
 @begin{Intro}
@@ -4669,6 +4667,7 @@ Null procedures are new.]}
 @end{Extend2005}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedClause{Version=[3],Name=[Expression Functions]}
 
 @begin{Intro}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/03/20 06:13:58 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -42,7 +42,7 @@ which is an optional element
 of most kinds of declarations and applies to the entity or entities being
 declared. Aspects may also be specified by certain other constructs occurring
 subsequent to the declaration of the affected entity: a representation aspect
-value may be specified by means of an representation item
+value may be specified by means of a representation item
 and an operational aspect value may be specified by means of an
 operational item.]]}
 
@@ -105,8 +105,8 @@ value by default.]}
 @end{Metarules}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Aspect>,
-Text=<@ChgAdded{Version=[3],Text=[An aspect is any of a miscellaneous set of
-properties of entities. An aspect may be specified by an
+Text=<@ChgAdded{Version=[3],Text=[An aspect is
+a specifiable property of an entity. An aspect may be specified by an
 @nt{aspect_specification} on the declaration of the entity. Some aspects may be
 queried via attributes.]}>}
 
@@ -689,20 +689,20 @@ accommodate any value of the subtype.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-@Chg{Version=[3],New=[Specifying a],Old=[A]}
-representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect
-such],Old=[item]} that @Chg{Version=[3],New=[the aspect ],Old=[]}is
-not supported by the implementation is illegal, or raises an exception
-at run time.
+@Chg{Version=[3],New=[If a specification of a],Old=[A]}
+representation @Chg{New=[or operational ],Old=[]}@Chg{Version=[3],New=[aspect],
+Old=[item that]} is
+not supported by the implementation@Chg{Version=[3],New=[, it ],Old=[]}is
+illegal@Chg{Version=[3],New=[],Old=[,]} or raises an exception at run time.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[2],Text=[A @nt{type_declaration} is illegal if it has one or
 more progenitors, and a
-@Chg{Version=[3],New=[nonconfirming ],Old=[]}representation
-@Chg{Version=[3],New=[value was specified for ],Old=[ item applies to]}
-an ancestor, and this
-representation @Chg{Version=[3],New=[aspect],Old=[item]}
+@Chg{Version=[3],New=[nonconfirming value was specified
+for a ],Old=[]}representation
+@Chg{Version=[3],New=[aspect of],Old=[item applies to]}
+an ancestor, and this@Chg{Version=[3],New=[],Old=[ representation item]}
 conflicts with the representation of
 some other ancestor. The cases that cause conflicts are
 implementation defined.]}
@@ -711,10 +711,12 @@ Text=[The cases that cause conflicts between the representation of
 the ancestors of a @nt{type_declaration}.]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[This rule is needed because it may be the case
   that only the combination of types in a type declaration causes a conflict.
   Thus it is not possible, in general, to reject the original representation
-  item. For instance:]}
+  item@Chg{Version=[3],New=[ or @nt{aspect_specification}],Old=[]}.
+  For instance:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{package} Pkg1 @key{is}
@@ -758,7 +760,8 @@ the ancestors of a @nt{type_declaration}.]}]}
   for instance), although the example above shows that doesn't have to be the
   case. For this reason, we didn't try to specify exactly what causes a
   conflict; it will depend on the implementation's implementation model and
-  what representation @Chg{Version=[3],New=[aspects],Old=[items]} it allows.]}
+  what representation @Chg{Version=[3],New=[aspects],Old=[items]} it
+  allows@Chg{Version=[3],New=[ to be changed],Old=[]}.]}
 @end{Reason}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -968,7 +971,7 @@ it is chosen by default in an unspecified manner.
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-Note that @Chg{New=[@Chg{Version=[3],New=[specifying an ],Old=[]}representation
+Note that @Chg{New=[@Chg{Version=[3],New=[specifying a ],Old=[]}representation
 @Chg{Version=[3],New=[aspect],Old=[items]}],Old=[@nt{representation_clause}s]}
 can affect the semantics of the entity.
 
@@ -1004,8 +1007,8 @@ value for that aspect.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[2],Text=[A
-@Chg{Version=[3],New=[@nt{aspect_specification} or ],Old=[]}representation
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[An @nt{aspect_specification}
+or ],Old=[A]}representation
 item that specifies @Chg{Version=[3],New=[a],Old=[an aspect of]}
 representation@Chg{Version=[3],New=[ aspect],Old=[]}
 that would have been chosen in the absence of the
@@ -1092,27 +1095,25 @@ is qualified as follows:
 @Chg{Version=[3],New=[aspect],Old=[item]}
 should be supported.]}
 @begin{Honest}
-  @ChgRef{Version=[2],Kind=[Added]}
-  @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0295-1]}
+  @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
   @ChgAdded{Version=[2],Text=[A confirming representation
-  @Chg{Version=[3],New=[value],Old=[item]} might not be possible for some
+  @Chg{Version=[3],New=[aspect value],Old=[item]} might not be possible for some
   entities. For instance, consider an unconstrained array. The size of such a
   type is implementation-defined, and might not actually be a representable
   value, or might not be static.]}
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
-An implementation need not support representation items@Chg{Version=[3],New=[ or
-@nt{aspect_specification}s for representation aspects],Old=[]}
-containing nonstatic expressions,
-except that an implementation should support a representation item
-@Chg{Version=[3],New=[@i<R> or @nt{aspect_specification} for a representation
-aspect @i<S>],Old=[]}
-for a given entity
-if each nonstatic expression in
-@Chg{Version=[3],New=[@i<R> or @i<S>],Old=[the representation item]}
-is a name that statically denotes a constant declared
-before the entity.
+An implementation need not support @Chg{Version=[3],New=[the specification for
+a ],Old=[]}representation
+@Chg{Version=[3],New=[aspect that contains],Old=[items containing]}
+nonstatic expressions,
+@Chg{Version=[3],New=[unless],Old=[except that an implementation should
+support a representation item for a given entity if]} each nonstatic
+expression@Chg{Version=[3],New=[],Old=[ in the representation item]}
+is a @Chg{Version=[3],New=[@nt{name}],Old=[name]} that statically denotes
+a constant declared before the entity.
 @begin{Reason}
 @Leading@;This is to avoid the following sort of thing:
 @begin{Example}
@@ -1390,7 +1391,7 @@ Some of the more stringent requirements are moved to
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0106-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction 2:>
+  @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
   Specifying a language-defined aspect for a generic formal parameter is no
   longer allowed. Most aspects could not be specified on these anyway; moreover,
   this was not allowed in Ada 83, so it is unlikely that compilers are
@@ -4116,6 +4117,7 @@ The layout can be specified with a @nt{record_@!representation_@!clause}.
 @end{Intro}
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Record Representation Clauses}
 
 @begin{Intro}

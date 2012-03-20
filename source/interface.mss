@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.65 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.66 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/03/20 06:13:59 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -903,7 +903,7 @@ precision, respectively.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00204-01]}
-@ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Support for
 interfacing to any foreign language is optional. However, an implementation
 shall not provide any attribute, library
@@ -916,7 +916,7 @@ use an unsupported capability of this Annex shall either be identified by the
 implementation before run time or shall raise an exception at run time.]}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Deleted]}
+  @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The intent is that
   the same rules apply for
   language interfacing as apply for Specialized Needs Annexes. See
@@ -1088,8 +1088,9 @@ the reference also applies to the corresponding entity in C++.],Old=[]}
 
    @key[function] @AdaSubDefn{To_Ada} (Item : @key[in] char) @key[return] Character;
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @key(type) @AdaTypeDefn{char_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char@Chg{Version=[3],New=[],Old=[;
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
+   @key(type) @AdaTypeDefn{char_array} @key(is) @key(array) (size_t @key(range) <>) @key(of) @key[aliased] char@Chg{Version=[3],New=[
+      @key[with] Pack],Old=[;
    @key[pragma] Pack(char_array)]};
    @key(for) char_array'Component_Size @key(use) CHAR_BIT;
 
@@ -1817,6 +1818,7 @@ specific numbers and types of parameters.
 
 
 
+@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{The Package Interfaces.C.Strings}
 
 @begin{Intro}
@@ -2668,14 +2670,17 @@ cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @end{RunTime}
 
 @begin{ImplPerm}
-
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[An implementation may
 require that @nt{pragma} Controlled be specified for the type of an access
 subcomponent of an unchecked union type.]}]}
-
 @end{ImplPerm}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noparanum=[T],Text=[@Shrink{@i<Paragraph 29 was
+deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}
+@end{NotIso}
 
 @begin{Notes}
 
