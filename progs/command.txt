@@ -1,6 +1,6 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -394,6 +394,16 @@ Text commands:
              <version> (and ends a paragraph). Otherwise, does nothing.
 @rmnewpagever{Version=[<version>} - Insert a page break in the RM (that is,
              when HideAnnotations is used) and we are generating <version>,
+	     ignored otherwise. Ends a paragraph. Use to insert page
+	     breaks to make the printed RM look better.
+@isoonlyrmnewpagever{Version=[<version>} - Insert a page break in the RM (that
+	     is, when HideAnnotations is used), @ShowISO was given in
+             the master file, and we are generating <version>,
+	     ignored otherwise. Ends a paragraph. Use to insert page
+	     breaks to make the printed RM look better.
+@notisormnewpagever{Version=[<version>} - Insert a page break in the RM (that
+	     is, when HideAnnotations is used), @ShowISO was not given in
+             the master file, and we are generating <version>,
 	     ignored otherwise. Ends a paragraph. Use to insert page
 	     breaks to make the printed RM look better.
 @newcolumnver{Version=[<version>} -  - Insert a column break if we are generating

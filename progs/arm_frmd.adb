@@ -8,7 +8,7 @@ package body ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -43,6 +43,7 @@ package body ARM_Format.Data is
     -- 10/19/11 - RLB - Added AspectDefn command.
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
     -- 10/26/11 - RLB - Added versioned break commands.
+    --  3/27/12 - RLB - Added more versioned break commands.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -102,6 +103,10 @@ package body ARM_Format.Data is
 	    return New_Page_for_Version;
 	elsif Canonical_Name = "rmnewpagever" then
 	    return RM_New_Page_for_Version;
+	elsif Canonical_Name = "notisormnewpagever" then
+	    return Not_Iso_RM_New_Page_for_Version;
+	elsif Canonical_Name = "isoonlyrmnewpagever" then
+	    return Iso_Only_RM_New_Page_for_Version;
 	elsif Canonical_Name = "newcolumnver" then
 	    return New_Column_for_Version;
 	elsif Canonical_Name = "b" or else Canonical_Name = "bold" then

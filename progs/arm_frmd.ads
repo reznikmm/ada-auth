@@ -6,7 +6,7 @@ private package ARM_Format.Data is
     -- This package contains various data used by the input file parser.
     --
     -- ---------------------------------------
-    -- Copyright 2011  AXE Consultants. All rights reserved.
+    -- Copyright 2011, 2012  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -41,6 +41,7 @@ private package ARM_Format.Data is
     -- 10/19/11 - RLB - Added AspectDefn command.
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
     -- 10/26/11 - RLB - Added versioned break commands.
+    --  3/27/12 - RLB - Added more versioned break commands.
 
 
     type LString is record
@@ -192,7 +193,8 @@ private package ARM_Format.Data is
 	-- Paragraphs:
 	Text_Begin, Text_End, Redundant, Comment, Part, New_Page, Soft_Page,
 	New_Column, RM_New_Page, New_Page_for_Version, New_Column_for_Version,
-	RM_New_Page_for_Version,
+	RM_New_Page_for_Version, Not_Iso_RM_New_Page_for_Version,
+	Iso_Only_RM_New_Page_for_Version,
 	-- Basic text formatting:
 	Bold, Italic, Roman, Swiss, Fixed, Roman_Italic, Shrink, Grow,
 	Black, Red, Green, Blue,

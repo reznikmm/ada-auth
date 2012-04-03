@@ -267,6 +267,7 @@ package body ARM_Format is
     -- 10/26/11 - RLB - Added versioned break commands.
     --  3/19/12 - RLB - Fixed bug that occurred only when paragraph numbers
     --			are off (ISO versions). Fixed sort order of attributes.
+    --  3/27/12 - RLB - Added more versioned break commands.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -998,8 +999,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	-- Change_Deleted, Added_Subheading,
 	-- Added_Pragma_Syntax, Deleted_Pragma_Syntax,
 	-- Added_Syntax, Deleted_Syntax,
-	-- New_Page_for_Version, New_Column_for_Version, and
-	-- RM_New_Page_for_Version.
+	-- New_Page_for_Version, New_Column_for_Version,
+	-- RM_New_Page_for_Version, Not_ISO_RM_New_Page_for_Version, and
+	-- ISO_Only_RM_New_Page_for_Version.
 	Change_Version : ARM_Contents.Change_Version_Type;
 	-- The following are only used if Command = Change,
 	-- Added_Pragma_Syntax, and Deleted_Pragma_Syntax.
@@ -4211,7 +4213,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		-- Versioned breaking:
 		when New_Page_for_Version | RM_New_Page_for_Version |
-		     New_Column_for_Version =>
+		     New_Column_for_Version |
+		     Not_ISO_RM_New_Page_for_Version |
+		     ISO_Only_RM_New_Page_for_Version =>
 		    declare
 			Version : ARM_Contents.Change_Version_Type;
 		    begin
@@ -8764,7 +8768,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Keyword | Non_Terminal | Non_Terminal_Format |
 		     Example_Text | Example_Comment |
 		     Up | Down | Tab_Clear | Tab_Set |
-		     New_Page_for_Version | RM_New_Page_for_Version | New_Column_for_Version |
+		     New_Page_for_Version | RM_New_Page_for_Version |
+		     Not_ISO_RM_New_Page_for_Version |
+		     ISO_Only_RM_New_Page_for_Version |
+		     New_Column_for_Version |
 		     Table | Picture_Alone | Picture_Inline |
 		     Defn | RootDefn | PDefn | Defn2 | RootDefn2 | PDefn2 |
 		     Index_See | Index_See_Also | See_Other | See_Also |
@@ -9314,6 +9321,30 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    -- The version parameter is stored in Change_Version on
 		    -- the stack.
 		    if not Format_Object.Include_Annotations and then
+		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
+			= Format_Object.Change_Version then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        ARM_Output.New_Page (Output_Object, ARM_Output.Any_Page);
+		    -- else do nothing.
+		    end if;
+
+		when Not_ISO_RM_New_Page_for_Version =>
+		    -- The version parameter is stored in Change_Version on
+		    -- the stack.
+		    if not Format_Object.Include_Annotations and then
+		       not Format_Object.Include_ISO and then
+		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
+			= Format_Object.Change_Version then
+		        Check_End_Paragraph; -- End any paragraph that we're in.
+		        ARM_Output.New_Page (Output_Object, ARM_Output.Any_Page);
+		    -- else do nothing.
+		    end if;
+
+		when ISO_Only_RM_New_Page_for_Version =>
+		    -- The version parameter is stored in Change_Version on
+		    -- the stack.
+		    if not Format_Object.Include_Annotations and then
+		       Format_Object.Include_ISO and then
 		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Change_Version
 			= Format_Object.Change_Version then
 		        Check_End_Paragraph; -- End any paragraph that we're in.
