@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -1368,7 +1368,7 @@ Ada 83.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Model of Floating Point Arithmetic}
 
 @begin{Intro}
@@ -2085,6 +2085,7 @@ The last line of the table is meant to apply when
 @i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
 with the indicated sign.
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
@@ -2441,6 +2442,7 @@ In the table, the error bound is given as the coefficient of
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (7) from original RM}>]
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @Table[Columns=<4>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-2: ],Old=[]}Error Bounds for Particular Complex Functions}>,

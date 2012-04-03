@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -2005,7 +2005,7 @@ followed.]}]}
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedClause{Version=[1],New=[Operational and Representation Attributes], Old=[Representation Attributes]}
 
 @begin{Intro}
@@ -4117,7 +4117,7 @@ The layout can be specified with a @nt{record_@!representation_@!clause}.
 @end{Intro}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Record Representation Clauses}
 
 @begin{Intro}
@@ -4833,7 +4833,7 @@ The Bit_Order attribute is new to Ada 95.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Change of Representation}
 
 @begin{Intro}

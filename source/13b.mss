@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -504,6 +504,7 @@ converts from that record type to type Address.
 
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{The Package System.Address_To_Access_Conversions}
 
 @begin{StaticSem}
@@ -1514,7 +1515,7 @@ There is no Unchecked_Access attribute for subprograms.
 
 @end{Notes}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Storage Management}
 
 @begin{Intro}
@@ -3458,6 +3459,7 @@ happen when the collection of the access type is finalized).]}
 @end{Extend2005}
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledAddedSubClause{Version=[3],Name=[Storage Subpool Example]}
 
 @begin{Examples}
@@ -5581,6 +5583,7 @@ class-wide types descended from S.
 
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledClause{Freezing Rules}
 
 @begin{Intro}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @LabeledClause{Array Types}
 
@@ -797,7 +797,7 @@ the meaning of the program will be different.]}
   The type Wide_Wide_String is new.]}
 @end{Extend95}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 
 @LabeledClause{Discriminants}
 
@@ -1604,6 +1604,7 @@ when the discriminant is initialized.
 @end{DiffWord2005}
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{Discriminant Constraints}
 
 @begin{Intro}
@@ -2590,7 +2591,7 @@ by the @nt{discrete_choice_list} of the @nt{variant}.
 This rule applies in turn to any further @nt{variant} that is, itself,
 included in the @nt{component_list} of the given @nt{variant}.
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Text=[When an object of a discriminated type @i<T> is
 initialized by default, Constraint_Error is raised if no
 @nt{discrete_choice_list} of any @nt{variant} of a @nt{variant_part} of @i<T>

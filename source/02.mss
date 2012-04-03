@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:01 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @redundant[The text of a program consists of the texts of one or more
@@ -1524,7 +1524,7 @@ of a program; their sole purpose is the enlightenment of the human reader.
 @Syn{lhs=<pragma_argument_association>,rhs="
      [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{name}
    | [@SynI{pragma_argument_}@Syn2{identifier} =>] @Syn2{expression}@Chg{Version=[3],New=[
-     @SynI{pragma_argument_}@Syn2{aspect_mark} =>  @Syn2{name}
+   | @SynI{pragma_argument_}@Syn2{aspect_mark} =>  @Syn2{name}
    | @SynI{pragma_argument_}@Syn2{aspect_mark} =>  @Syn2{expression}],Old=[]}"}
 
 @begin{SyntaxText}

@@ -19,14 +19,14 @@
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
 @Comment{@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E)]}}
-@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:CD]}}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:CD]}
 @RTFFooterText{Version=[0],Text=[\'a9 ISO/IEC 1995 \endash  All rights reserved]}
 @RTFFooterText{Version=[1],Text=[\'a9 ISO/IEC 2001 \endash  All rights reserved]}
 @RTFFooterText{Version=[2],Text=[\'a9 ISO/IEC 2007 \endash  All rights reserved]}
 @RTFFooterText{Version=[3],Text=[\'a9 ISO/IEC 2012 \endash  All rights reserved]}
 @RTFFooter{UseDate=[F],UseClauseName=[F],UseISOFormat=[T]}
 @RTFPageSize{A4}
-@RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Command{ISO requires the latter}
+@RTFFonts{Serif=[Times],SansSerif=[Helvetica]}@Comment{ISO requires the latter}
 @RTFVersionName{Version=[0],Text=[Original Text]}
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}

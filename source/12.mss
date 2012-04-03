@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -327,6 +327,7 @@ is always the completion of a declaration.
 @end{Examples}
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledClause{Generic Instantiation}
 
 @begin{Intro}
@@ -2522,7 +2523,7 @@ run-time check to a compile-time check.
 @end{DiffWord2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Formal Scalar Types}
 
 @begin{Intro}

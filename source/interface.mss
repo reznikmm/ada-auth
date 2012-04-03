@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1818,7 +1818,7 @@ specific numbers and types of parameters.
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{The Package Interfaces.C.Strings}
 
 @begin{Intro}

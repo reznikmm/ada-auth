@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 Ada is a programming language designed to support the construction of
@@ -1663,7 +1663,7 @@ equivalent to some sequential order.
 @end{Reason}
 @end{Intro}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 
 @begin{Notes}
 The syntax rules describing structured constructs are presented in a

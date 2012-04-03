@@ -1,10 +1,17 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.55 $ $Date: 2012/03/20 06:13:59 $}
+@comment{$Revision: 1.56 $ $Date: 2012/04/03 20:37:03 $}
 
 @begin{ISOOnly}
-@Noparanum@Right{@Swiss{@Grow{@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[3],New=[201z],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
+@Comment{CD draft text}
+
+@Noparanum@Right{@Swiss{@Chg{Version=[3],New=[Date: 2012-03-30],Old=[]}}}
+
+@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@B{ISO/IEC CD 8652}],Old=[]}}}}
+
+@Noparanum@Right{@Swiss{@Chg{Version=[3],New=[ISO/IEC JTC 1/SC 22/WG 9],Old=[]}}}
 @end{ISOOnly}
 @begin{NotISO}
 @Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[201z],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -14,19 +21,21 @@
 @ @*
 @ @*
 
+@Comment{Final header...
 @begin{ISOOnly}
 @Noparanum@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ORGANIZATION FOR STANDARDIZATION}}}}
 
 @Noparanum@swiss{@shrink{@shrink{@shrink{INTERNATIONAL ELECTROTECHNICAL COMMISSION}}}}
 @end{ISOOnly}
+End comment}
 
 @Noparanum@ @*
 @ @*
 
 @begin{ISOOnly}
-@begin{Title}
-@Noparanum@Swiss{@b{Information technology @Em Programming languages @Em Ada}}
-@end{Title}
+@Noparanum@Swiss{@b{@grow{@grow{@grow{@grow{Information technology @Em Programming languages @Em Ada}}}}}}
+@ @*
+@Noparanum@Swiss{@i{Technologies de l'information @Em Langages de programmation @Em Ada}}
 @end{ISOOnly}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
@@ -41,7 +50,7 @@
 
 @begin{ISOOnly}
 @Comment{Jim Moore wanted this deleted in the consolidated editions, as it is confusing.}
-@Noparanum@Chg{Version=[3],New=[Revision of second edition (ISO 8652:1995)],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
+@Noparanum@Chg{Version=[3],New=[@Swiss{Revision of second edition (ISO 8652:1995)}],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
                Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}]}
 @end{ISOOnly}
 
@@ -57,13 +66,14 @@
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[201x],Old=[1995]}(E)@Chg{Version=[3],New=[ (Draft 16)],Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[201x],Old=[1995]}(E)@Chg{Version=[3],New=< (Submission Draft [Draft 17])>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}
 @end{NotISO}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
+@begin{NotISO}
 @Noparanum@Center{@Swiss{@Grow{Language and Standard Libraries}}}
 
 @Noparanum@Comment{The following puts the copyright near the bottom of the page}
@@ -78,11 +88,22 @@
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
 
 @Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012  AXE Consultants], Old=[]}
+@end{NotISO}
+@begin{ISOOnly}
+@ThinLine
+@Noparanum@Center{@Swiss{@Grow{@b{Warning}}}}
+
+@Noparanum@;This document is not an ISO International Standard. It is
+distributed for review and comment. It is subject to change without notice and
+may not be referred to as an International Standard.
+
+@Noparanum@;Recipients of this draft are invited to submit, with their comment,
+notification of any relevant patent rights of which they are aware and to
+provide supporting documentation.
+@ThinLine
+@end{ISOOnly}
 
 @NewPage
-@Comment{For ISO version, the back of the title page is blank, and the
-copyright ought to appear at the bottom of the table of contents. [But that
-probably is changed by now.}
 @begin{NotISO}
 @Comment{The following puts the copyright near the bottom of the page}
 @Noparanum@ @*@*@*@*@*
@@ -200,3 +221,21 @@ OR FUNCTIONING OF THIS DOCUMENT. IN NO EVENT WILL ADA-EUROPE BE LIABLE FOR ANY
 GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
 EVEN IF ADA-EUROPE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 @end{NotISO}
+
+@begin{ISOOnly}
+@ThinLine
+@Noparanum@Center{@Swiss{@Grow{@Grow{@b{Copyright Notice}}}}}
+
+@Noparanum@;This ISO document is a working draft or committee draft and is
+copyright-protected by ISO. While the reproduction of working drafts or
+committee drafts in any form for use by participants in the ISO standards
+development process is permitted without prior permission from ISO, neither this
+document nor any extract from it may be reproduced, stored, or transmitted in
+any form for any other purpose without prior written permission from ISO.
+
+@Noparanum@;Reproduction for sales purposes may be subject to royalty payments or a
+licensing agreement.
+
+@Noparanum@;Violators may be prosecuted.
+@ThinLine
+@end{ISOOnly}

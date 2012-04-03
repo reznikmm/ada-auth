@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1570,7 +1570,7 @@ are also defined for discriminants and inherited components.
    Null_Key : @key[constant] Key := Key'First;
 @key[end] Key_Manager;
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @key[package] @key[body] Key_Manager @key[is]
    Last_Key : Key := Null_Key;
    @key[procedure] Get_Key(K : @key[out] Key) @key[is]
@@ -1919,7 +1919,7 @@ value.]}
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Deferred Constants}
 
 @begin{Intro}

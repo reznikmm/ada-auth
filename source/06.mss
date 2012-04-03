@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1096,7 +1096,7 @@ the value.]}
 @end{Extend2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Formal Parameter Modes}
 
 @begin{Intro}
@@ -1387,6 +1387,7 @@ is changed and one of the parameters depends on the discriminant.
 @end{DiffWord2005}
 
 
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Subprogram Bodies}
 
 @begin{Intro}
@@ -2055,7 +2056,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Diffword2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Inline Expansion of Subprograms}
 
 @begin{Intro}
@@ -4249,7 +4250,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 @end{DiffWord2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Nonreturning Procedures],Old=[Pragma No_Return]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
@@ -4447,7 +4448,7 @@ normally, Program_Error is raised at the point of the call.
 @end{Extend2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Overloading of Operators}
 
 @begin{Intro}

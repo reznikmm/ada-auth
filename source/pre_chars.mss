@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -32,7 +32,7 @@ This clause is new to Ada 95.
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedSubClause{Version=[2],New=[The Packages Characters, Wide_Characters, and Wide_Wide_Characters],Old=[The Package Characters]}
 
 @begin{StaticSem}
@@ -983,6 +983,7 @@ Item.]}
 @end{Extend95}
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledAddedSubClause{Version=[3],Name=[The Package Wide_Characters.Handling]}
 
 @begin{Intro}

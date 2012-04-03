@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1036,6 +1036,7 @@ Device_5_Driver : Device_Interface(5);
 
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledClause{Preelaboration Requirements}
 
 @begin{Intro}

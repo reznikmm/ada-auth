@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2744,7 +2744,7 @@ raising.
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Statically Matching Constraints and Subtypes}
 
 @begin{StaticSem}

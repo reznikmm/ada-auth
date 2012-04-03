@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.65 $ $Date: 2012/03/20 06:13:58 $ $Author: randy $ }
+@comment{ $Revision: 1.66 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1982,7 +1982,7 @@ dereferencing the controlling operands T1 and T2.
 @end{Examples}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Partition Communication Subsystem}
 
 @begin{Intro}

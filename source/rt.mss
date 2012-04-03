@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.112 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.113 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/04/03 20:37:03 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -308,7 +308,7 @@ by means of a Priority or Interrupt_Priority
 its base priority can be changed only by a call to
 Dynamic_Priorities.Set_Priority (see @RefSecNum{Dynamic Priorities}).]
 The initial base priority of a task in the absence of
-@Chg{Version=[3],New=[an aspect],Old=[a pragma]}. is the
+@Chg{Version=[3],New=[an aspect],Old=[a pragma]} is the
 base priority of the task that creates it at the time of creation
 (see @RefSecNum{Task Units and Task Objects}).
 If @Chg{Version=[3],New=[the aspect],Old=[a pragma]} Priority
@@ -2538,7 +2538,7 @@ implementation-defined queuing policies.]}]}
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Dynamic Priorities}
 
 
@@ -3926,7 +3926,7 @@ There is no requirement that these be the same.
 @end{DiffWord95}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Delay Accuracy}
 
 @begin{Intro}
@@ -4285,7 +4285,7 @@ may leave a task blocked forever.]}
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Asynchronous Task Control}
 
 @begin{Intro}
@@ -5364,6 +5364,7 @@ Timer objects.]}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledAddedSubclause{Version=[2],Name=[Group Execution Time Budgets]}
 
 @begin{Intro}
@@ -6008,7 +6009,7 @@ Timing_Event objects.]}
 @end{Diffword2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedClause{Version=[3],Name=[Multiprocessor Implementation]}
 
 @begin{Intro}
@@ -6114,7 +6115,7 @@ defined to have failed, and it becomes a completed task (see
   The package System.Multiprocessors and the CPU aspect are new.]}
 @end{Extend2005}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
@@ -6284,7 +6285,7 @@ is not one of the processors of the Dispatching_Domain on which T is assigned
 (and is not Not_A_Specific_CPU). A call of Set_CPU is a task dispatching point
 for task T unless T is inside of a protected action, in which case the effect on
 task T is delayed until its next task dispatching point. If T is the
-Current_Task the effect is immediate if T is not inside a protected action},
+Current_Task the effect is immediate if T is not inside a protected action,
 otherwise the effect is as soon as practical.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}

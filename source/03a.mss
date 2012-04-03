@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:01 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 This section describes the types in the language and the rules
@@ -2805,6 +2805,7 @@ without an initialization expression.
 
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{Number Declarations}
 
 @begin{Intro}
@@ -6060,6 +6061,7 @@ definition and normal type derivation.
 @end{DiffWord95}
 
 
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Operations of Discrete Types}
 
 @begin{StaticSem}
@@ -6114,21 +6116,21 @@ the following attributes are defined:]}
 @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<First_Valid>, ARef=[AI05-0297-1],
   Text=[@Chg{Version=[3],New=[S'First_Valid denotes the smallest value
-        that belongs to S and satisfies any predicate of S.
+        that belongs to S and satisfies the predicate of S.
         The value of this attribute is of the type of S.],Old=[]}]}
 
 @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Last_Valid>, ARef=[AI05-0297-1],
   Text=[@Chg{Version=[3],New=[S'Last_Valid denotes the largest value
-        that belongs to S and satisfies any predicate of S. The value of
+        that belongs to S and satisfies the predicate of S. The value of
         this attribute is of the type of S.],Old=[]}]}
 @end(Description)
 @EndPrefixType{}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0297-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[First_Valid and Last_Valid
-@nt{attribute_reference}s are always static expressions. Any predicate of
-S is always a static predicate.]]}
+@nt{attribute_reference}s are always static expressions. Any explicit predicate
+of S can only have been specified by a Static_Predicate aspect.]]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6643,6 +6645,7 @@ the definition of Succ and Pred for floating point numbers.
 @end{DiffWord83}
 
 
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Operations of Floating Point Types}
 
 @begin{StaticSem}

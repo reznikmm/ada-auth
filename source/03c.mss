@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3446,7 +3446,7 @@ case of a general access-to-object type, evaluating an
 attribute of an aliased view of an object. Nonnull values of an
 access-to-subprogram type are obtained by evaluating an
 @nt{attribute_reference} for the Access attribute of a
-nonintrinsic subprogram.],Old=[]}.
+nonintrinsic subprogram],Old=[]}.
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00231-01]}

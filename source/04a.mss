@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:57 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -1294,7 +1294,7 @@ Variable_Indexing aspects.]}>}
 
 @end{StaticSem}
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The Constant_Indexing or
@@ -1443,6 +1443,7 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
 @end{Extend2005}
 
 
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Literals}
 
 @begin{Intro}
@@ -3609,7 +3610,7 @@ determines whether or not a value
 belongs to @chg{Version=[3],New=[any],Old=[a]} given subtype or range,
 @chg{Version=[3],New=[is equal to any given value,],Old=[or]} has a tag
 that identifies a type that is covered by a given type@chg{Version=[3],New=[,
-or is convertible to and has accessibility level appropriate for a given
+or is convertible to and has an accessibility level appropriate for a given
 access type],Old=[]}. Membership tests are allowed for all types.]
 
 @end{Intro}
@@ -5002,7 +5003,6 @@ a negative value is provided for the exponent.
 @end{DiffWord2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubclause{Version=[3],Name=[Conditional Expressions]}
 
 @begin{Intro}

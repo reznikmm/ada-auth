@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @redundant[This section defines the facilities for dealing with errors or other
@@ -1351,7 +1351,7 @@ selection of @nt{case_statement_alternative}s and @nt{variant}s.]],Old=[is a
 configuration pragma that specifies the assertion policy in effect for the
 compilation units to which it applies. Different policies may apply to different
 compilation units within the same partition. The default assertion policy is
-implementation-defined]}.]}
+implementation-defined.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Text=[If no @SynI<assertion_>@nt{aspect_mark}s are
@@ -1506,7 +1506,7 @@ if the function has side effects.]]}
 of an assertion expression if the evaluation of the expression has a side effect
 such that an immediate reevaluation of the expression could produce a different
 value. Similarly, an implementation need not allow the specification of an
-assertion expression that is checked as part of a call or on return from a
+assertion expression that is checked as part of a call on or return from a
 callable entity @i<C>, if the evaluation of the expression has a side effect
 such that the evaluation of some other assertion expression associated with the
 same call of (or return from) @i<C> could produce a different value than it
@@ -1578,7 +1578,7 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Example of Exception Handling}
 
 @begin{Examples}

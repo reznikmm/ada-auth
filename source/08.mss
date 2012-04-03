@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:36 $}
+@Comment{$Date: 2012/04/03 20:37:02 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @redundant[The rules defining the scope of declarations and the rules defining
@@ -2346,7 +2346,7 @@ using the type T2 of the previous example:]}
 @end{Extend2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Exception Renaming Declarations}
 
 @begin{Intro}
@@ -2454,7 +2454,7 @@ limited view of the renamed package is visible, a @nt{name} that denotes the
 @end{Extend2005}
 
 
-@RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
+@NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Subprogram Renaming Declarations}
 
 @begin{Intro}
@@ -2875,6 +2875,7 @@ We'll live with the oddity.
 @end{Extend2005}
 
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{Generic Renaming Declarations}
 
 @begin{Intro}
