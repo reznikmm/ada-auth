@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -96,6 +96,9 @@ package ARM_Format is
     --  4/23/10 - RLB - Added Ada 2005 header.
     --  8/ 8/11 - RLB - Added Aspect DB.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  3/12/12 - RLB - Lengthened unit name so
+    --			"Ada.Strings.Wide_Wide_Unbounded.Wide_Wide_Equal_Case_Insensitive"
+    --			would fit (have we lost our minds??).
 
     type Format_Type is tagged limited private;
 
@@ -318,7 +321,7 @@ private
 			-- written into the paragraph, then this is False).
 
 	-- Indexing:
-	Unit : String (1..60);  -- Unit for predefined definitions. Used only
+	Unit : String (1..72);  -- Unit for predefined definitions. Used only
 				-- by a handful of indexing commands.
 	Unit_Len : Natural := 0;
 

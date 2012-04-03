@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011  AXE Consultants. All rights reserved.
+    --           2010, 2011, 2012  AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -265,6 +265,8 @@ package body ARM_Format is
     -- 10/25/11 - RLB - Added optional initial version parameter to
     --			LabeledRevisedSomething commands.
     -- 10/26/11 - RLB - Added versioned break commands.
+    --  3/19/12 - RLB - Fixed bug that occurred only when paragraph numbers
+    --			are off (ISO versions). Fixed sort order of attributes.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -9586,6 +9588,28 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    -- Write the item to the DB; use Prefix_Kind and
 			    -- Text_Kind for the change kind.
 			    Init_Version : Character;
+			    function Sort_Key return String is
+				-- Generate a Sort Key so that these sort
+				-- as they did in Ada 95.
+			    begin
+				if Format_Object.Attr_Prefix_Len > 2 and then
+					Format_Object.Attr_Prefix(2) = ''' then
+				    -- Class-wide prefix. For some reason, this
+				    -- sorts before the main item in the Ada 95 RM.
+				    -- (And this continues in later RMs.)
+				    return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
+					''' & Character'Pred(Format_Object.Attr_Prefix(1)) &
+					"'Class";
+					    -- Sort by name, then by prefix.
+				else
+				    return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
+					''' & Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len);
+					    -- Sort by name, then by prefix.
+				end if;
+				-- Note: Ada 2005 sorted E'Identity and T'Identity
+				-- backwards from Ada 95. This will fix that.
+			    end Sort_Key;
+
 			begin
 			    -- Guess the Initial_Version (eventually, we'll
 			    -- add this as an optional parameter):
@@ -9605,7 +9629,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    end case;
 			    if Format_Object.Attr_Leading then
 			        ARM_Database.Insert (Format_Object.Attr_DB,
-				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Sort_Key => Sort_Key,
 				    Hang_Item =>
 				        Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
 					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -9619,7 +9643,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    Initial_Version => Init_Version);
 			    else -- not leading:
 			        ARM_Database.Insert (Format_Object.Attr_DB,
-				    Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
+				    Sort_Key => Sort_Key,
 				    Hang_Item =>
 				        Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
 					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
@@ -9857,10 +9881,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 			        if Del_Disposition = Do_Not_Display_Text then
 --Ada.Text_IO.Put_Line ("%% Deleted pragma completely omitted");
-				    if Add_Disposition /= Do_Not_Display_Text then
+				    if Add_Disposition /= Do_Not_Display_Text
+					and then Format_Object.Number_Paragraphs then
 					-- If this was in older editions, then
 					-- we need a deletion message (and also
 					-- to get the paragraph numbers right).
+					-- But don't need this if there are no
+					-- paragraph numbers (then there is no
+					-- deleted message).
 --Ada.Text_IO.Put_Line ("   ... but need a deletion message");
 				        ARM_Database.Insert (Format_Object.Pragma_DB,
 					    Sort_Key => My_Sort,

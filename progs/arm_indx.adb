@@ -14,7 +14,7 @@ package body ARM_Index is
     -- This package contains the routines to manage and generate the index.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2010, 2011
+    -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2010, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -60,6 +60,9 @@ package body ARM_Index is
     --  3/31/10 - RLB - Fixed sorting to ignore embedded commands (like
     --			soft hyphens).
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  3/12/12 - RLB - Lengthened indexing so that
+    --			"Ada.Strings.Wide_Wide_@!Unbounded.Wide_Wide_@!Equal_Case_Insensitive"
+    --			would fit. (Don't ask.)
 
     Next_Index_Key : Index_Key;
 
@@ -71,7 +74,7 @@ package body ARM_Index is
 	Clause_Number : ARM_Contents.Clause_Number_Type;
 	Paragraph : String (1..10);
 	Paragraph_Len : Natural;
-	Term : String (1..60);
+	Term : String (1..72);
 	Term_Len : Natural;
 	Subterm : String (1..80);
 	Subterm_Len : Natural;

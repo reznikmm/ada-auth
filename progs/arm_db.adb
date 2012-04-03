@@ -11,7 +11,7 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011
+    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -53,6 +53,7 @@ package body ARM_Database is
     --			handle commands like @ChgAdded).
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/20/11 - RLB - Added Initial_Version parameter.
+    --  3/19/12 - RLB - Added code to suppress indexing of deleted glossary items.
 
     type String_Ptr is access String;
     type Item is record
@@ -160,7 +161,7 @@ package body ARM_Database is
 	function Change_if_Needed (Item : in Item_List) return String is
 	begin
 	    -- Note: In the report, we always decide inserted/not inserted
-	    -- determined by the initial version number, and not the
+	    -- as determined by the initial version number, and not the
 	    -- original class.
 	    case Item.Change_Kind is
 		when None => return "";
@@ -225,14 +226,15 @@ package body ARM_Database is
 		    Temp := Temp.Next;
 		end loop;
 
-		-- Sort the items array (use an insertion sort):
+		-- Sort the items array (use an insertion sort because it is
+		-- stable):
 		declare
 		    Left : Natural;  -- Left sorting stop
 		begin
 		    for Right In Items'First+1 .. Items'Last loop -- Right sorting stop
 			Temp := Items(Right);
 			Left := Right - 1;
-			while Temp.Sort_Key < Items(Left).Sort_Key loop -- Switch items
+			while Temp.Sort_Key <= Items(Left).Sort_Key loop -- Switch items
 			    Items(Left + 1) := Items(Left);
 			    Left := Left - 1;
 			    exit when Left = 0;
@@ -291,13 +293,28 @@ package body ARM_Database is
 		Format_Text ("@begin(intro)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
+		    case Temp.Change_Kind is
+			when None |
+			     Inserted | Inserted_Normal_Number |
+			     Revised | Revised_Inserted_Number =>
 --** Debug:
 --Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp) &
 --			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
 --			Temp.Text.all);
-		    Format_Text (Change_if_Needed (Temp) &
-			"@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
-			Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+			    -- Index this item.
+		            Format_Text (Change_if_Needed (Temp) &
+			        "@defn{" & Ada.Strings.Fixed.Trim (Temp.Sort_Key, Ada.Strings.Right) & "}" & Ascii.LF &
+			        Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+			when Deleted | Deleted_Inserted_Number |
+			     Deleted_No_Delete_Message |
+			     Deleted_Inserted_Number_No_Delete_Message =>
+--** Debug:
+--Ada.Text_IO.Put_Line("Format " & Change_if_Needed (Temp) & Ascii.LF &
+--			Temp.Text.all);
+			    -- Don't index deleted items.
+		            Format_Text (Change_if_Needed (Temp) & Ascii.LF &
+			        Temp.Text.all & Ascii.LF & Ascii.LF, Temp.Sort_Key);
+		    end case;
 		    Temp := Temp.Next;
 		end loop;
 		Format_Text ("@end(intro)" & Ascii.LF, "Suffix");
