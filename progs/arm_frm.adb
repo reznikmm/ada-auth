@@ -268,6 +268,7 @@ package body ARM_Format is
     --  3/19/12 - RLB - Fixed bug that occurred only when paragraph numbers
     --			are off (ISO versions). Fixed sort order of attributes.
     --  3/27/12 - RLB - Added more versioned break commands.
+    --  4/ 3/12 - RLB - Removed dead variables.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -3443,7 +3444,6 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		use type ARM_Database.Paragraph_Change_Kind_Type;
 		Local_Change : ARM_Output.Change_Type;
 		Skip_Header  : Boolean := False;
-		Key          : ARM_Index.Index_Key;
 	    begin
 	        Get_Change_Version (Is_First => True,
 		    Version => Version);
@@ -7664,7 +7664,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    -- otherwise would come too late).
 		    declare
 		        Which_Param : ARM_Input.Param_Num;
-		        Ch, Close_Ch : Character;
+		        Close_Ch : Character;
 
 			NoPrefix, Noparanum, Keepnext : Boolean := False;
 			Space_After : ARM_Output.Space_After_Type := ARM_Output.Normal;

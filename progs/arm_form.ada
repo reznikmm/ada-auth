@@ -17,7 +17,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -73,6 +73,7 @@ procedure ARM_Formatter is
     --  1/12/06 - RLB - Removed Document completely.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Removed junk withs (now in master file handler).
+    --  4/ 3/12 - RLB - Removed dead variable.
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:
@@ -112,7 +113,6 @@ procedure ARM_Formatter is
     Master_File : Ada.Strings.Unbounded.Unbounded_String; -- Master file for document to generate.
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
-    Display_Index_Entries : Boolean; -- Should Index entries be displayed?
 
     procedure Get_Commands is
 	-- Process the command line for this program.

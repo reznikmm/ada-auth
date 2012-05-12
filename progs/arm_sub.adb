@@ -14,7 +14,7 @@ package body ARM_Subindex is
     -- non-normative appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2005, 2006, 2007, 2011
+    -- Copyright 2005, 2006, 2007, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -49,6 +49,7 @@ package body ARM_Subindex is
     --  2/13/07 - RLB - Changed Start_Paragraph to use explicit indents.
     -- 12/19/07 - RLB - Revised Text_Format calls.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  4/ 3/12 - RLB - Removed unused declaration.
 
     type String_Ptr is access String;
     type Item is record
@@ -167,8 +168,6 @@ package body ARM_Subindex is
 	    -- "Minimize_Lines" is True.
 
 	function To_Lower (A : in String) return String renames
-	    Ada.Characters.Handling.To_Lower;
-	function To_Lower (A : in Character) return Character renames
 	    Ada.Characters.Handling.To_Lower;
 
 

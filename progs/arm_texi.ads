@@ -13,19 +13,20 @@ package ARM_Texinfo is
    --
    -- ---------------------------------------
    --
-   --  Copyright (C) 2003, 2007 Stephen Leake.  All Rights Reserved.
+   --  Copyright (C) 2003, 2007, 2011 Stephen Leake.  All Rights Reserved.
    --  E-Mail: stephen_leake@stephe-leake.org
    --
    --  This library is free software; you can redistribute it and/or
    --  modify it under terms of the GNU General Public License as
-   --  published by the Free Software Foundation; either version 2, or (at
+   --  published by the Free Software Foundation; either version 3, or (at
    --  your option) any later version. This library is distributed in the
    --  hope that it will be useful, but WITHOUT ANY WARRANTY; without even
    --  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
    --  PURPOSE. See the GNU General Public License for more details. You
    --  should have received a copy of the GNU General Public License
-   --  distributed with this program; see file gnu-3-0.txt. If not,
-   --  see <http://www.gnu.org/licenses/>.
+   --  distributed with this program; see file gnu-3-0.txt. If not, write to
+   --  the Free Software Foundation, 59 Temple Place - Suite 330, Boston,
+   --  MA 02111-1307, USA.
    --
    --  As a special exception, if other files instantiate generics from
    --  this unit, or you link this unit with other files to produce an
@@ -43,7 +44,8 @@ package ARM_Texinfo is
    --                  Commented out/replaced Ada 2005 features (this is
    --		       Ada 95 code). Updated for a few other changes since
    --		       the last update.
-    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+   -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+   --  4/ 1/12 - S L - Various revisions.
 
    type Texinfo_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -106,7 +108,7 @@ package ARM_Texinfo is
       Clause_Number   : in     String;
       Version         : in     ARM_Contents.Change_Version_Type;
       Old_Version     : in     ARM_Contents.Change_Version_Type;
-      No_Page_Break   : in     Boolean := False);
+      No_Page_Break   : in     Boolean                          := False);
 
    -- overriding
    procedure TOC_Marker (Output_Object : in out Texinfo_Output_Type;
@@ -275,11 +277,11 @@ private
       File     : Ada.Text_IO.File_Type;
       Is_Valid : Boolean := False;
 
-      State            : State_Type;
-      In_Paragraph     : Boolean := False; --  Sub-state within major states
-      Paragraph_Indent : ARM_Output.Paragraph_Indent_Type;
-      Paragraph_Style  : ARM_Output.Paragraph_Style_Type;
-      End_Hang_Seen    : Boolean;
+      State         : State_Type;
+      In_Paragraph  : Boolean := False; --  Sub-state within major states
+      Style         : ARM_Output.Paragraph_Style_Type;
+      Indent        : ARM_Output.Paragraph_Indent_Type;
+      End_Hang_Seen : Boolean;
 
       --  Detecting end of title page
       Line_Empty      : Boolean := False; --  True if current line contains only whitespace.
@@ -296,7 +298,7 @@ private
       Current_Row     : Natural;
       Column_Text     : Column_Text_Ptrs_Type := (others => null);
       Column_Widths   : Column_Widths_Type;
-      Max_Row         : Natural;
+      Max_Row         : Natural := 0;
    end record;
 
 end ARM_Texinfo;

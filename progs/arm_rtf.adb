@@ -18,7 +18,7 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -137,6 +137,7 @@ package body ARM_RTF is
     -- 10/20/11 - RLB - Updated to handle extra-wide paragraph numbers
     --			automatically (there are too many to hand-fix now).
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    --  4/ 3/12 - RLB - Eliminated redundancy.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -2448,7 +2449,7 @@ package body ARM_RTF is
 	       Ada.Strings.Unbounded.To_String(Output_Object.Version_Names('0')) &
 		";}");
 	end if;
-	for Version in '1' .. '9' loop
+	for Version in Character range '1' .. '9' loop
             if Ada.Strings.Unbounded.Length (Output_Object.Version_Names(Version)) /= 0 then
                 Ada.Text_IO.Put (Output_Object.Output_File, "{" &
 	           Ada.Strings.Unbounded.To_String(Output_Object.Version_Names(Version)) &
