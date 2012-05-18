@@ -174,6 +174,8 @@ package body ARM_HTML is
     --			they never are necessary and cause weird looks for
     --			breaks put in solely to make the "final" version look
     --			good in PDF form.
+    --  5/18/12 - RLB - Added anchors to each paragraph number as suggested
+    --			on comp.lang.ada.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1558,7 +1560,7 @@ package body ARM_HTML is
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more than 4 characters allowed in file names.
+	-- should be no more than 5 characters allowed in file names.
 	-- If DOS_Filename is true, use 8.3 file names;
 	-- in that case, File_Prefix must be less than 4 characters in length;
 	-- and no clause or subclause number may exceed 35 if Big_Files is False.
@@ -1634,7 +1636,7 @@ package body ARM_HTML is
 		    "HTML File Prefix too long - MS-DOS mode");
 	    end if;
 	else
-	    if File_Prefix'Length > 4 then
+	    if File_Prefix'Length > 5 then
 	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		    "HTML File Prefix too long");
 	    end if;
@@ -2027,6 +2029,23 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    end if;
 	end Put_Style;
 
+	function Paranum_Anchor (Number : in String) return String is
+	    -- Create the string for an anchor from a paragraph number.
+	    -- Note that anchors cannot use "/", so we strip the
+	    -- slash part. "." is allowed (as well as "-", "_", and ":", but
+	    -- nothing else). We don't need the slash part (the version number),
+	    -- as paragraph numbers are unique without it, and the version
+	    -- is specified by the enclosing document (given by the rest of
+	    -- the page).
+	    Where : constant Natural := Ada.Strings.Fixed.Index (Number, "/");
+	begin
+	    if Where = 0 then
+		return Number;
+	    else
+		return Number(Number'First..Where-1);
+	    end if;
+	end Paranum_Anchor;
+
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -2240,9 +2259,13 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    Output_Object.Version := '0';
 	    Output_Object.Added_Version := '0';
 	    if Number /= "" then -- Has paragraph number.
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<A NAME=""p");
+	        Ada.Text_IO.Put (Output_Object.Output_File, Paranum_Anchor(Number));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, TINY_SWISS_FONT_CODE);
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT> ");
+	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
+	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></A> ");
 	        Output_Object.Char_Count := Output_Object.Char_Count + TINY_SWISS_FONT_CODE'Length + Number'Length + 8;
 	        Output_Object.Disp_Char_Count := Output_Object.Disp_Char_Count + ((Number'Length+1)/2) + 1;
 		    -- Note: Count these as half characters, as the font is so small.
@@ -2253,9 +2276,11 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    if Number /= "" then -- Has paragraph number.
 		Paranum_Used := True;
 		Ada.Text_IO.Put (Output_Object.Output_File, "<div class=""paranum"">");
-	        Ada.Text_IO.Put (Output_Object.Output_File, "<font size=-2>");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<a name=""p");
+	        Ada.Text_IO.Put (Output_Object.Output_File, Paranum_Anchor(Number));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """><font size=-2>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
-	        Ada.Text_IO.Put (Output_Object.Output_File, "</font>");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "</font></a>");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</div>");
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;
@@ -2345,7 +2370,11 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    if Number /= "" then -- Has paragraph number.
 		Paranum_Used := True;
 	        Ada.Text_IO.Put (Output_Object.Output_File, "<div class=""paranum"">");
+	        Ada.Text_IO.Put (Output_Object.Output_File, "<a name=""p");
+	        Ada.Text_IO.Put (Output_Object.Output_File, Paranum_Anchor(Number));
+	        Ada.Text_IO.Put (Output_Object.Output_File, """>");
 	        Ada.Text_IO.Put (Output_Object.Output_File, Number);
+	        Ada.Text_IO.Put (Output_Object.Output_File, "</a>");
 	        Ada.Text_IO.Put_Line (Output_Object.Output_File, "</div>");
 	        Output_Object.Char_Count := 0;
 	        Output_Object.Disp_Char_Count := 0;

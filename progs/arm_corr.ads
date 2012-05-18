@@ -11,7 +11,7 @@ package ARM_Corr is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -65,7 +65,7 @@ package ARM_Corr is
 		      Title : in String := "");
 	-- Create an Output_Object for a document.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more then 4 characters allowed in file names.
+	-- should be no more then 5 characters allowed in file names.
 	-- The title of the document is Title.
 
     procedure Close (Output_Object : in out Corr_Output_Type);
@@ -382,7 +382,7 @@ package ARM_Corr is
 private
 
     subtype Buffer_String is String (1 .. 120);
-    subtype Prefix_String is String(1..4);
+    subtype Prefix_String is String(1..5);
     subtype Clause_String is String(1..20);
     type Corr_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;

@@ -224,7 +224,7 @@ procedure ARM_Formatter is
 
 begin
     Ada.Text_IO.Put_Line ("Ada Manual formatter");
-    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006  AXE Consultants");
+    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;

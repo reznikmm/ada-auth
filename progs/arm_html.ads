@@ -13,7 +13,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011
+    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -145,7 +145,7 @@ package ARM_HTML is
 	-- Generate a few large output files if
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more than 4 characters allowed in file names.
+	-- should be no more than 5 characters allowed in file names.
 	-- If DOS_Filename is true, use 8.3 file names;
 	-- in that case, File_Prefix must be less than 4 characters in length;
 	-- and no clause or subclause number may exceed 35 if Big_Files is False.
@@ -513,7 +513,7 @@ private
     end record;
     type Column_Text_Ptrs_Type is array (1..5) of Column_Text_Ptr;
 
-    subtype Prefix_String is String(1..4);
+    subtype Prefix_String is String(1..5);
     type HTML_Output_Type is new ARM_Output.Output_Type with record
 	Is_Valid : Boolean := False;
 

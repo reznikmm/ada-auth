@@ -208,7 +208,7 @@ procedure Rtf2Form is
 	Ada.Text_IO.Put_Line (File, "@Part(xxx, Root=""rat.msm"")");
 	Ada.Text_IO.Put_Line (File, "");
 	Ada.Text_IO.Put_Line (File, "@comment($Source: e:\\cvsroot/ARM/Progs/rtf2form.ada,v $)");
-	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.3 $ $Date: 2011/10/18 23:27:29 $)");
+	Ada.Text_IO.Put_Line (File, "@comment($Revision: 1.4 $ $Date: 2012/05/19 01:00:26 $)");
 	Ada.Text_IO.Put_Line (File, "");
 
 	while Cursor /= null loop
@@ -574,6 +574,8 @@ procedure Rtf2Form is
 					"\s");
 				-- The style code is generally first.
 			    begin
+--Ada.Text_IO.Put_Line("Style_Code=" & Natural'Image(Style_Code) &
+--                     "; End_of_Style=" & Natural'Image(End_of_Style));
 				if Style_Code = 0 or else End_of_Style = 13 or else
 				    Style_Code > End_of_Style or else
 				    (not Possible_Style (Working, End_of_Style)) then

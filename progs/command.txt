@@ -4,28 +4,30 @@ Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012 AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
-AXE Consultants grants to all users the right to use/modify this formatting
-tool for non-commercial purposes. (ISO/IEC JTC 1 SC 22 WG 9 activities are
-explicitly included as "non-commercial purposes".) Commercial uses of this
-software and its source code, including but not limited to documents for sale
-and sales of modified versions of this tool, are prohibited without the prior
-written permission of AXE Consultants. All rights not explicitly granted above
-are reserved by AXE Consultants.
+ARM_Form is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License version 3
+as published by the Free Software Foundation.
 
-You use this tool and/or its source code on the condition that you indemnify
-and hold harmless AXE Consultants, its agents, and employees, from any and
-all liability or damages to yourself or your hardware or software, or third
-parties, including attorneys' fees, court costs, and other related costs and
-expenses, arising out of your use of this tool and/or its source code
-irrespective of the cause of said liability.
+AXE CONSULTANTS MAKES THIS TOOL AND SOURCE CODE AVAILABLE ON AN "AS IS"
+BASIS AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY,
+CAPABILITY, EFFICIENCY, MERCHANTABILITY, OR FUNCTIONING OF THIS TOOL.
+IN NO EVENT WILL AXE CONSULTANTS BE LIABLE FOR ANY GENERAL,
+CONSEQUENTIAL, INDIRECT, INCIDENTAL, EXEMPLARY, OR SPECIAL DAMAGES,
+EVEN IF AXE CONSULTANTS HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
 
-AXE CONSULTANTS MAKES THIS TOOL AND SOURCE CODE AVAILABLE ON AN "AS IS" BASIS
-AND MAKES NO WARRANTY, EXPRESS OR IMPLIED, AS TO THE ACCURACY, CAPABILITY,
-EFFICIENCY, MERCHANTABILITY, OR FUNCTIONING OF THIS TOOL. IN NO EVENT WILL AXE
-CONSULTANTS BE LIABLE FOR ANY GENERAL, CONSEQUENTIAL, INDIRECT, INCIDENTAL,
-EXEMPLARY, OR SPECIAL DAMAGES, EVEN IF AXE CONSULTANTS HAS BEEN ADVISED OF THE
-POSSIBILITY OF SUCH DAMAGES.
+A copy of the GNU General Public License is available in the file
+gpl-3-0.txt in the standard distribution of the ARM_Form tool.
+Otherwise, see <http://www.gnu.org/licenses/>.
 
+If the GPLv3 license is not satisfactory for your needs, a commercial
+use license is available for this tool. Contact Randy at AXE Consultants
+for more information.
+
+
+The formatting tool is written in Ada 2005, but mainly uses Ada 95 constructs.
+Thus, it should be possible to compile it with an Ada 95 compiler with only
+small modifications.
 
 
 Running the formating tool:
@@ -1276,17 +1278,17 @@ various mathematical symbols.
 
 -------------------
 
-Use to create Ada 95 standard documents.
+Use to create Ada standard documents.
 
 
-The master file AARM.MSM specifies the Annotated Ada 95 Reference Manual. This
+The master file AARM.MSM specifies the Annotated Ada Reference Manual. This
 is mainly intended for implementors and language lawyers. It includes
 annotations and (visible) index entries.
 
 The master file RM.MSM specifies the Ada Reference Manual. This is the
 version used by most users.
 
-The master file ISO-RM.MSM specifies Ada 95 Reference Manual in ISO format.
+The master file ISO-RM.MSM specifies Ada Reference Manual in ISO format.
 This version lacks some sections, paragraph numbers, and is printed on A4
 paper.
 
@@ -1294,6 +1296,12 @@ Versions:
    0-Original Ada 95 (equivalent to No-Changes)
    1-Technical Corrigendum 1
    2-Amendment 1 [Ada 2005 (really Ada 2007)]
-   3-Amendment 2 [Ada 2012]
+   3-3rd Edition (Ada 2012)
+
+Please note that there some changes to earlier versions (mostly typographical, a
+few that are significant) that are not preserved in the Ada 2012 source code, so
+to get an exact match to one of the previous versions, you must use the source
+code appropriate for that version.
+
 
 
