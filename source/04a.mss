@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/05/12 03:15:17 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 @Redundant[The rules applicable to the different forms of @nt<name> and
@@ -5207,7 +5207,7 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If the type of the @nt{conditional_expression}
-  cannot be determined by one of these rules, the Name Resolution has failed for
+  cannot be determined by one of these rules, then Name Resolution has failed for
   that expression, even if the @SynI{dependent_}@nt{expression}s would
   resolve individually.]}
 @end{Ramification}
