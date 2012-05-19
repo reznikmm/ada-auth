@@ -16,13 +16,6 @@ package body ARM_Texinfo is
    --  distributed with this program; see file gnu-3-0.txt. If not, write to
    --  the Free Software Foundation, 59 Temple Place - Suite 330, Boston,
    --  MA 02111-1307, USA.
-   --
-   --  As a special exception, if other files instantiate generics from
-   --  this unit, or you link this unit with other files to produce an
-   --  executable, this  unit  does not  by itself cause  the resulting
-   --  executable to be covered by the GNU General Public License. This
-   --  exception does not however invalidate any other reasons why the
-   --  executable file  might be covered by the  GNU Public License.
 
    -- ---------------------------------------
    --
@@ -35,6 +28,9 @@ package body ARM_Texinfo is
    --		       the last update.
    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
    --  4/ 1/12 - S L - Implemented remaining Texinfo implementation.
+   --  4/22/12 - S L - Move @dircategory, @direntry before first @node.
+   --  4/28/12 - S L - Add @w{} after @anchor; otherwise following whitespace
+   --		       is dropped.
 
 
    use Ada.Text_IO;
@@ -158,12 +154,6 @@ package body ARM_Texinfo is
    begin
 
       New_Line (Output_Object.File); --  Terminate unneeded "@center"
-
-      Put_Line (Output_Object.File, "@dircategory GNU Ada tools");
-      Put_Line (Output_Object.File, "@direntry");
-      Put_Line (Output_Object.File, "* Ada Reference Manual: (arm2005).");
-      Put_Line (Output_Object.File, "* Annotated ARM: (aarm2005).");
-      Put_Line (Output_Object.File, "@end direntry");
 
       Put_Line (Output_Object.File, "@menu");
       Put_Line (Output_Object.File, "* Front Matter:: Copyright, Foreword, etc."); --  Not a section in ARM sources
@@ -771,6 +761,12 @@ package body ARM_Texinfo is
       Create (Output_Object.File, Out_File, File_Name);
 
       Put_Line (Output_Object.File, "\input texinfo");
+      Put_Line (Output_Object.File, "@dircategory GNU Ada tools");
+      Put_Line (Output_Object.File, "@direntry");
+      Put_Line (Output_Object.File, "* Ada Reference Manual: (arm2005).");
+      Put_Line (Output_Object.File, "* Annotated ARM: (aarm2005).");
+      Put_Line (Output_Object.File, "@end direntry");
+
       Put_Line (Output_Object.File, "@settitle " & Title);
       Put_Line (Output_Object.File, "@paragraphindent none");
       Put_Line (Output_Object.File, "@exampleindent" & Integer'Image (Indentation));
@@ -1005,7 +1001,10 @@ package body ARM_Texinfo is
      (Output_Object : in out Texinfo_Output_Type;
       Index_Key     : in     Natural)
    is begin
-      Put (Output_Object.File, "@anchor{" & Integer'Image (Index_Key) & "}");
+      --  Add an empty non-break object, because @anchor ignores
+      --  whitespace after it, which often occurs in the current
+      --  Scribe-like source.
+      Put (Output_Object.File, "@anchor{" & Integer'Image (Index_Key) & "}@w{}");
    end Index_Target;
 
    procedure Line_Break (Output_Object : in out Texinfo_Output_Type)
@@ -1127,7 +1126,10 @@ package body ARM_Texinfo is
       Text          : in     String;
       Target        : in     String)
    is begin
-      Put (Output_Object.File, "@anchor{" & Target & "}");
+      --  Add an empty non-break object, because @anchor ignores
+      --  whitespace after it, which often occurs in the current
+      --  Scheme source.
+      Put (Output_Object.File, "@anchor{" & Target & "}@w{}");
       Ordinary_Text (Output_Object, Text);
    end Local_Target;
 
