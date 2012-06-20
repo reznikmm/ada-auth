@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/05/19 02:05:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3104,9 +3104,9 @@ exists:]}
       Subpool : @key[in out] Subpool_Handle) @key[is abstract]
          @key[with] Pre'Class => Pool_of_Subpool(Subpool) = Pool'Access;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Default_Subpool_for_Pool} (
-      Pool : Root_Storage_Pool_With_Subpools)
+      Pool : @key[in out] Root_Storage_Pool_With_Subpools)
          @key[return not null] Subpool_Handle;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3125,10 +3125,11 @@ exists:]}
       Size_In_Storage_Elements : @key[in] Storage_Elements.Storage_Count;
       Alignment : @key[in] Storage_Elements.Storage_Count) @key[is null];]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[overriding]
    @key[function] @AdaSubDefn{Storage_Size} (Pool : Root_Storage_Pool_With_Subpools)
-      @key[return] Storage_Count @key[is] (Storage_Elements.Storage_Count'Last);]}
+      @key[return] Storage_Elements.Storage_Count
+          @key[is] (Storage_Elements.Storage_Count'Last);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[private
@@ -3480,7 +3481,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 @ChgAdded{Version=[3],Text=[   @key[use] System.Storage_Pools;
       -- @Examcom{For uses of Subpools.}
    @key[use] System.Storage_Elements;
-      -- @Examcom{For uses of Storage_Count and Storage_Array.}]]}
+      -- @Examcom{For uses of Storage_Count and Storage_Array.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   -- @Examcom{Mark and Release work in a stack fashion, and allocations are not allowed}
@@ -3512,18 +3513,18 @@ complete implementation of the classic Mark/Release pool using subpools:]}
    @key[subtype] Subpool_Indexes @key[is] Positive @key[range] 1 .. 10;
    @key[type] Subpool_Array @key[is array] (Subpool_Indexes) @key[of aliased] MR_Subpool;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] Mark_Release_Pool_Type (Pool_Size : Storage_Count) @key[is new]
       Subpools.Root_Storage_Pool_With_Subpools @key[with record]
-      Storage         : Storage_Array (1 .. Pool_Size);
-      Next_Allocation : Storage_Count := 1;
+      Storage         : Storage_Array (0 .. Pool_Size-1);
+      Next_Allocation : Storage_Count := 0;
       Markers         : Subpool_Array;
       Current_Pool    : Subpool_Indexes := 1;
    @key[end record];]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[overriding]
-   @key[function] Create_Subpool (Pool : @key[aliased in out] Mark_Release_Pool_Type)
+   @key[function] Create_Subpool (Pool : @key[in out] Mark_Release_Pool_Type)
       @key[return not null] Subpool_Handle;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3545,10 +3546,10 @@ complete implementation of the classic Mark/Release pool using subpools:]}
       Pool : @key[in out] Mark_Release_Pool_Type;
       Subpool : @key[in out] Subpool_Handle);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[overriding]
-   @key[function] Default_Subpool_for_Pool (
-      Pool : @key[in] Mark_Release_Pool_Type) @key[return not null] Subpool_Handle;]}
+   @key[function] Default_Subpool_for_Pool (Pool : @key[in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[overriding]
@@ -3563,14 +3564,16 @@ complete implementation of the classic Mark/Release pool using subpools:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Keepnext=[T],Text=[@key[package body] MR_Pool @key[is]]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
+@ChgAdded{Version=[3],Text=[   @key[use type] Subpool_Handle;]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] Initialize (Pool : @key[in out] Mark_Release_Pool_Type) @key[is]
       -- @Examcom{Initialize the first default subpool.}
    @key[begin]
       Pool.Markers(1).Start := 1;
       Subpools.Set_Pool_of_Subpool
-         (Pool.Markers(1)'Unchecked_Access,
-          Pool'Unchecked_Access);
+         (Pool.Markers(1)'Unchecked_Access, Pool);
    @key[end] Initialize;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3583,16 +3586,16 @@ complete implementation of the classic Mark/Release pool using subpools:]}
       @key[end if];
       Pool.Current_Pool := Pool.Current_Pool + 1; -- @Examcom{Move to the next subpool}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[      @key[return] Result : @key[constant not null] Subpool_Handle :=
          Pool.Markers(Pool.Current_Pool)'Unchecked_Access
       @key[do]
-         Result.Start := Pool.Next_Allocation;
-         Subpools.Set_Pool_of_Subpool (Result, Pool'Unchecked_Access);
+         Pool.Markers(Pool.Current_Pool).Start := Pool.Next_Allocation;
+         Subpools.Set_Pool_of_Subpool (Result, Pool);
       @key[end return];
    @key[end] Create_Subpool;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] Deallocate_Subpool (
       Pool : @key[in out] Mark_Release_Pool_Type;
       Subpool : @key[in out] Subpool_Handle) @key[is]
@@ -3601,19 +3604,18 @@ complete implementation of the classic Mark/Release pool using subpools:]}
          @key[raise] Program_Error; -- @Examcom{Only the last marked subpool can be released.}
       @key[end if];
       @key[if] Pool.Current_Pool /= 1 @key[then]
-         Pool.Next_Allocation := Pool.Markers(Pool.Current_Pool);
+         Pool.Next_Allocation := Pool.Markers(Pool.Current_Pool).Start;
          Pool.Current_Pool := Pool.Current_Pool - 1; -- @Examcom{Move to the previous subpool}
       @key[else] -- @Examcom{Reinitialize the default subpool:}
          Pool.Next_Allocation := 1;
          Subpools.Set_Pool_of_Subpool
-            (Pool.Markers(1)'Unchecked_Access,
-             Pool'Unchecked_Access);
+            (Pool.Markers(1)'Unchecked_Access, Pool);
       @key[end if];
    @key[end] Deallocate_Subpool;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] Default_Subpool_for_Pool (
-      Pool : @key[in] Mark_Release_Pool_Type) @key[return not null] Subpool_Handle @key[is]
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] Default_Subpool_for_Pool (Pool : @key[in out] Mark_Release_Pool_Type)
+      @key[return not null] Subpool_Handle @key[is]
    @key[begin]
       @key[return] Pool.Markers(Pool.Current_Pool)'Unchecked_Access;
    @key[end] Default_Subpool_for_Pool;]}

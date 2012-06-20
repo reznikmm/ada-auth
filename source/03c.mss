@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/05/19 02:05:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -5461,6 +5461,7 @@ but not when called from (4).
 assume-the-worst manner.
 For example:
 @begin{Example}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
 @key[package] P @key[is]
     @key[type] Int_Ptr @key[is] @key[access] @key[all] Integer;
     @key[type] Rec(D: @key[access] Integer) @key[is] @key[limited] @key[private];
@@ -5469,7 +5470,7 @@ For example:
     @key[function] F(X: Rec_Ptr) @key[return] Boolean;
     @key[function] G(X: @key[access] Rec) @key[return] Boolean;
     @key[type] Rec(D: @key[access] Integer) @key[is]
-        @key[record]
+        @Chg{Version=[3],New=[@key[limited] ],Old=[]}@key[record]
             C1: Int_Ptr := Int_Ptr(D); --@RI{ Illegal!}
             C2: Rec_Ptr := Rec'Access; --@RI{ Illegal!}
             C3: Boolean := F(Rec'Access); --@RI{ Illegal!}

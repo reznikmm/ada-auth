@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2012/05/19 02:05:52 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/05/19 02:05:52 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3109,9 +3109,10 @@ Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
 function Strings.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Hash (Key : String) @key<return> Containers.Hash_Type;@SubChildUnit{Parent=[Ada.Strings],Child=[Hash]}
-@key<pragma> Pure(Hash);]}
+@key<pragma> Pure(@Chg{Version=[3],New=[Ada.Strings.Hash],Old=[Hash]});]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3130,10 +3131,11 @@ Text=[The values returned by Strings.Hash.]}]}
 function Strings.Fixed.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers, Ada.Strings.Hash;
 @key<function> Ada.Strings.Fixed.Hash (Key : String) @key<return> Containers.Hash_Type
-   @key<renames> Ada.Strings.Hash;
-@key<pragma> Pure(Hash);]}
+   @key<renames> Ada.Strings.Hash;@Chg{Version=[3],New=[],Old=[
+@key<pragma> Pure(Hash);]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3141,13 +3143,14 @@ function Strings.Fixed.Hash has the following declaration:]}
 function Strings.Bounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<generic>@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash]}
    @key<with package> Bounded @key<is>
       @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
    @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate(Hash);]}
+@key<pragma> Preelaborate(@Chg{Version=[3],New=[Ada.Strings.Bounded.Hash],Old=[Hash]});]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3165,10 +3168,11 @@ equivalent to the function call]} Strings.Hash (Bounded.To_String (Key));]}
 function Strings.Unbounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
    @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate(Hash);]}
+@key<pragma> Preelaborate(@Chg{Version=[3],New=[Ada.Strings.Unbounded.Hash],Old=[Hash]});]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3182,20 +3186,20 @@ Strings.Hash (To_String (Key));]}
 
 @end{DescribeCode}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Hash_Case_Insensitive]}
    @key<return> Containers.Hash_Type;
-@key<pragma> Pure(Hash_Case_Insensitive);]}
+@key<pragma> Pure(Ada.Strings.Hash_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns an implementation-defined
 value which is a function of the value of Key, converted to lower case. If
 A and B are strings such that Strings.Equal_Case_Insensitive (A, B) (see
@@ -3203,7 +3207,7 @@ A and B are strings such that Strings.Equal_Case_Insensitive (A, B) (see
 True, then Hash_Case_Insensitive(A) equals Hash_Case_Insensitive(B).]}
 @end{DescribeCode}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Fixed.Hash_Case_Insensitive has the following declaration:]}
 
@@ -3211,13 +3215,12 @@ Strings.Fixed.Hash_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers, Ada.Strings.Hash_Case_Insensitive;
 @key[function] Ada.Strings.Fixed.Hash_Case_Insensitive (Key : String)@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Hash_Case_Insensitive]}
-   @key[return] Containers.Hash_Type @key[renames] Ada.Strings.Hash_Case_Insensitive;
-@key[pragma] Pure(Hash_Case_Insensitive);]}
+   @key[return] Containers.Hash_Type @key[renames] Ada.Strings.Hash_Case_Insensitive;]}
 @end{Example}
 
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[2],KeepNext=[T],Type=[Leading],Text=[The generic library
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0298-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
 function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
@@ -3228,7 +3231,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash_Case_Insensitive]}
    (Key : Bounded.Bounded_String) @key[return] Containers.Hash_Type;
-@key[pragma] Preelaborate(Hash_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Bounded.Hash_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3238,7 +3241,7 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
 Strings.Hash_Case_Insensitive (Bounded.To_String (Key));]}
 @end{DescribeCode}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Unbounded.Hash_Case_Insensitive has the following declaration:]}
 
@@ -3247,7 +3250,7 @@ Strings.Unbounded.Hash_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key[function] Ada.Strings.Unbounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash_Case_Insensitive]}
    (Key : Unbounded_String) @key[return] Containers.Hash_Type;
-@key[pragma] Preelaborate(Hash_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Unbounded.Hash_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3295,7 +3298,7 @@ and similar strings should rarely return the same value.]}]}
 @LabeledAddedSubClause{Version=[3],Name=[String Comparison]}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0286-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0286-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Equal_Case_Insensitive has the following declaration:]}
 
@@ -3303,7 +3306,7 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Equal_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Equal_Case_Insensitive]}
    @key[return] Boolean;
-@key[pragma] Pure(Equal_Case_Insensitive);]}
+@key[pragma] Pure(Ada.Strings.Equal_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3327,7 +3330,7 @@ used to determine whether two identifiers are the same.]}
 @end{Discussion}
 @end{DescribeCode}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Fixed.Equal_Case_Insensitive has the following declaration:]}
 
@@ -3336,11 +3339,10 @@ Strings.Fixed.Equal_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Strings.Equal_Case_Insensitive;
 @key[function] Ada.Strings.Fixed.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Equal_Case_Insensitive]}
    (Left, Right : String) @key[return] Boolean
-      @key[renames] Ada.Strings.Equal_Case_Insensitive;
-@key[pragma] Pure(Equal_Case_Insensitive);]}
+      @key[renames] Ada.Strings.Equal_Case_Insensitive;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
 function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
 
@@ -3351,7 +3353,7 @@ function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Equal_Case_Insensitive]}
    (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Equal_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Bounded.Equal_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3361,7 +3363,7 @@ Strings.Equal_Case_Insensitive (Bounded.To_String (Left), Bounded.To_String (Rig
 @end{DescribeCode}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Unbounded.Equal_Case_Insensitive has the following declaration:]}
 
@@ -3369,7 +3371,7 @@ Strings.Unbounded.Equal_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Unbounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Equal_Case_Insensitive]}
    (Left, Right : Unbounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Equal_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Unbounded.Equal_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3379,7 +3381,7 @@ Strings.Equal_Case_Insensitive (To_String (Left), To_String (Right));]}
 @end{DescribeCode}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Less_Case_Insensitive has the following declaration:]}
 
@@ -3387,7 +3389,7 @@ Strings.Less_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Less_Case_Insensitive (Left, Right : String)@SubChildUnit{Parent=[Ada.Strings],Child=[Less_Case_Insensitive]}
    @key[return] Boolean;
-@key[pragma] Pure(Less_Case_Insensitive);]}
+@key[pragma] Pure(Ada.Strings.Less_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3397,7 +3399,7 @@ of strings Left and Right, converted to lower case.]}
 @end{DescribeCode}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Fixed.Less_Case_Insensitive has the following declaration:]}
 
@@ -3406,12 +3408,11 @@ Strings.Fixed.Less_Case_Insensitive has the following declaration:]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Strings.Less_Case_Insensitive;
 @key[function] Ada.Strings.Fixed.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Fixed],Child=[Less_Case_Insensitive]}
    (Left, Right : String) @key[return] Boolean
-      @key[renames] Ada.Strings.Less_Case_Insensitive;
-@key[pragma] Pure(Less_Case_Insensitive);]}
+      @key[renames] Ada.Strings.Less_Case_Insensitive;]}
 @end{Example}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The generic library
 function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
 
@@ -3422,7 +3423,7 @@ function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Less_Case_Insensitive]}
   (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Less_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Bounded.Less_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3432,7 +3433,7 @@ Strings.Less_Case_Insensitive (Bounded.To_String (Left), Bounded.To_String (Righ
 @end{DescribeCode}
 
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1],ARef=[AI05-0248-1],ARef=[AI05-0298-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Type=[Leading],Text=[The library function
 Strings.Unbounded.Less_Case_Insensitive has the following declaration:]}
 
@@ -3440,7 +3441,7 @@ Strings.Unbounded.Less_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Unbounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Less_Case_Insensitive]}
   (Left, Right : Unbounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Less_Case_Insensitive);]}
+@key[pragma] Preelaborate(Ada.Strings.Unbounded.Less_Case_Insensitive);]}
 @end{Example}
 
 @begin{DescribeCode}

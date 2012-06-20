@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.22 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.23 $ $Date: 2012/05/19 02:05:51 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1829,13 +1829,14 @@ object to the target tree object and changing the node count of the target
 object to that of the source object.]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[3],Text=[An assignment of a Tree is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
-  would be allowed.]}
+  would be allowed. (Note that this implementation would
+  require care, see @RefSecNum{The Generic Package Containers.Vectors} for more.)]}
 @end{ImplNote}
 @end{ImplReq}
 
@@ -2762,13 +2763,14 @@ for a holder container shall have the effect of copying the element (if any)
 from the source holder object to the target holder object.]}
 
 @begin{ImplNote}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[3],Text=[An assignment of a holder container is a
   @ldquote@;deep@rdquote copy; that is the element is copied as well as any
   data structures. We say @ldquote@;effect of@rdquote in order to allow the
   implementation to avoid copying the element immediately if it wishes. For
   instance, an implementation that avoided copying until one of the containers
-  is modified would be allowed.]}
+  is modified would be allowed. (Note that this implementation would
+  require care, see @RefSecNum{The Generic Package Containers.Vectors} for more.)]}
 @end{ImplNote}
 @end{ImplReq}
 

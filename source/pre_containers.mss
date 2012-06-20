@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.93 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.94 $ $Date: 2012/05/19 02:05:52 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/05/19 02:05:52 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -2608,12 +2608,17 @@ of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[2],Text=[An assignment of a Vector is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well as the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
-  would be allowed.]}
+  would be allowed.@Chg{Version=[3],New=[ (Note that such an implementation
+  would be require care, as Query_Element and Constant_Reference both could be
+  used to access an element which later needs to be reallocated while
+  the parameter or reference still exists, potentially leaving the
+  parameter or reference pointing at the wrong element.)],Old=[]}]}
 @end{ImplNote}
 @end{ImplReq}
 
@@ -4271,12 +4276,14 @@ of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[2],Text=[An assignment of a List is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well as the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
-  would be allowed.]}
+  would be allowed.@Chg{Version=[3],New=[ (Note that this implementation would
+  require care, see @RefSecNum{The Generic Package Containers.Vectors} for more.)],Old=[]}]}
 @end{ImplNote}
 @end{ImplReq}
 
@@ -5345,12 +5352,14 @@ of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[2],Text=[An assignment of a Map is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well as the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
-  would be allowed.]}
+  would be allowed.@Chg{Version=[3],New=[ (Note that this implementation would
+  require care, see @RefSecNum{The Generic Package Containers.Vectors} for more.)],Old=[]}]}
 @end{ImplNote}
 @end{ImplReq}
 
@@ -7857,12 +7866,14 @@ of the target object to that of the source object],Old=[]}.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
   @ChgAdded{Version=[2],Text=[An assignment of a Set is a @lquotes@;deep@rquotes
   copy; that is the elements are copied as well as the data structures.
   We say @lquotes@;effect of@rquotes in order to allow the implementation to
   avoid copying elements immediately if it wishes. For instance, an
   implementation that avoided copying until one of the containers is modified
-  would be allowed.]}
+  would be allowed.@Chg{Version=[3],New=[ (Note that this implementation would
+  require care, see @RefSecNum{The Generic Package Containers.Vectors} for more.)],Old=[]}]}
 @end{ImplNote}
 
 @end{ImplReq}
@@ -8217,12 +8228,13 @@ package Containers.Hashed_Sets has the following declaration:]}
                          (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[      @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
+@ChgAdded{Version=[3],Text=[      @key[type] @AdaTypeDefn{Reference_Type}
+            (Element : @key[not null access] Element_Type) @key[is private]
          @key[with] Implicit_Dereference => Element;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[      @key[function] @AdaSubDefn{Reference_Preserving_Key} (Container : @key[aliased in out] Set;
-                                                Position  : @key[in] Cursor)
+                                         Position  : @key[in] Cursor)
          @key[return] Reference_Type;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -8232,7 +8244,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[      @key[function] @AdaSubDefn{Reference_Preserving_Key} (Container : @key[aliased in out] Set;
-                                                Key       : @key[in] Key_Type)
+                                         Key       : @key[in] Key_Type)
          @key[return] Reference_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8858,12 +8870,13 @@ package Containers.Ordered_Sets has the following declaration:]}
                           (Element : @key{in out} Element_Type));]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[      @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
+@ChgAdded{Version=[3],Text=[      @key[type] @AdaTypeDefn{Reference_Type}
+            (Element : @key[not null access] Element_Type) @key[is private]
          @key[with] Implicit_Dereference => Element;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[      @key[function] @AdaSubDefn{Reference_Preserving_Key} (Container : @key[aliased in out] Set;
-                                                Position  : @key[in] Cursor)
+                                         Position  : @key[in] Cursor)
          @key[return] Reference_Type;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -8873,7 +8886,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[      @key[function] @AdaSubDefn{Reference_Preserving_Key} (Container : @key[aliased in out] Set;
-                                                Key       : @key[in] Key_Type)
+                                         Key       : @key[in] Key_Type)
          @key[return] Reference_Type;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
