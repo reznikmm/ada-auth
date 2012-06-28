@@ -1,7 +1,7 @@
 @Part(Epilogue, Root="rat.msm")
 
 @comment($Source: e:\\cvsroot/ARM/Rationale/epilogue.mss,v $)
-@comment($Revision: 1.6 $ $Date: 2008/01/31 05:06:19 $)
+@comment($Revision: 1.7 $ $Date: 2012/06/28 03:10:53 $)
 
 @LabeledSection{Epilogue}
 
@@ -1358,8 +1358,6 @@ extended return statement) because the result object (remember that the
 result of a function is itself an object and might indeed be providing the
 initial value of a limited object) need not be aliased and this can lead to
 some curious anomalies.
-
-** Formatting stopped here **
 
 @leading@;Another issue concerning the extended return statement is
 @AILink{AI=[AI05-0032-1],Text=[AI05-32]} regarding class wide functions.
