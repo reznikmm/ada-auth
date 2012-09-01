@@ -22,7 +22,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007, 2009, 2011
+    -- Copyright 2006, 2007, 2009, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -69,6 +69,7 @@ package body ARM_Master is
     --  5/06/09 - RLB - Added the RTFVersionName command.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Texinfo output (from Stephen Leake).
+    --  8/31/12 - RLB - Added Output_Path.
 
     type Command_Type is (
 	-- Source commands:
@@ -1245,7 +1246,8 @@ package body ARM_Master is
 	File_Name : in String;
 	The_Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
 	The_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
-        Output_Format : in Output_Format_Type) is
+        Output_Format : in Output_Format_Type;
+        Output_Path : in String) is
 	-- Read and process the master file given.
 	Input_Object : ARM_File.File_Input_Type;
     begin
@@ -1282,6 +1284,7 @@ package body ARM_Master is
 				     Big_Files => Use_Large_HTML_Files,
 				     File_Prefix => +Output_File_Prefix,
 				     DOS_Filenames => Use_MS_DOS_Filenames,
+				     Output_Path => Output_Path,
 				     HTML_Kind => HTML_Kind,
 				     Use_Unicode => HTML_Use_Unicode,
 				     Number_Paragraphs => Should_Number_Paragraphs,
@@ -1314,6 +1317,7 @@ package body ARM_Master is
 				        Page_Size => Page_Size,
 				        Includes_Changes => False,
 				        Big_Files => Use_Large_RTF_Files,
+				        Output_Path => Output_Path,
 				        Primary_Serif_Font => Serif_Font,
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
@@ -1330,6 +1334,7 @@ package body ARM_Master is
 				        Page_Size => Page_Size,
 				        Includes_Changes => True,
 				        Big_Files => Use_Large_RTF_Files,
+				        Output_Path => Output_Path,
 				        Primary_Serif_Font => Serif_Font,
 				        Primary_Sans_Serif_Font => Sans_Serif_Font,
 				        File_Prefix => +Output_File_Prefix,
@@ -1351,6 +1356,7 @@ package body ARM_Master is
 	        begin
 		    ARM_Text.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
+				     Output_Path => Output_Path,
 				     Title => Get_Versioned_String (Document_Title, Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Text.Close (Output);
@@ -1361,6 +1367,7 @@ package body ARM_Master is
 	        begin
 		    ARM_Corr.Create (Output,
 				     File_Prefix => +Output_File_Prefix,
+				     Output_Path => Output_Path,
 				     Title => Get_Versioned_String (Document_Title, Change_Version));
 		    Generate_Sources (Output);
 		    ARM_Corr.Close (Output);
@@ -1371,6 +1378,7 @@ package body ARM_Master is
 	        begin
 		    ARM_TexInfo.Create (Output,
 				        File_Prefix => +Output_File_Prefix,
+				        Output_Path => Output_Path,
 				        Title => Get_Versioned_String (Document_Title, Change_Version));
 	            Generate_Sources (Output);
 	            ARM_TexInfo.Close (Output);

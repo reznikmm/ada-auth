@@ -407,7 +407,8 @@ package body ARM_RTF is
 
     begin
 	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	    ".\Output\" & File_Name & ".RTF");
+	    Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+	    File_Name & ".RTF");
 
 
 	-- Note: This header (simplified) is from a Word 97 created file.
@@ -2557,10 +2558,11 @@ package body ARM_RTF is
 		      Page_Size : in ARM_RTF.Page_Size;
 		      Includes_Changes : in Boolean;
 		      Big_Files : in Boolean;
+		      File_Prefix : in String;
+		      Output_Path : in String;
 		      Primary_Sans_Serif_Font : in Sans_Serif_Fonts := Arial;
 		      Primary_Serif_Font : in Serif_Fonts := Times_New_Roman;
 		      Body_Font : in ARM_Output.Font_Family_Type := ARM_Output.Roman;
-		      File_Prefix : in String;
 		      Header_Prefix : in String := "";
 		      Footer_Use_Date : in Boolean;
 		      Footer_Use_Clause_Name : in Boolean;
@@ -2575,6 +2577,7 @@ package body ARM_RTF is
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 4 characters allowed in file names.
+	-- The files will be written into Output_Path.
 	-- The title of the document is Title.
 	-- The header prefix appears in the header (if any) before the title,
 	-- separated by a dash.
@@ -2597,11 +2600,13 @@ package body ARM_RTF is
 	Output_Object.Page_Size := Page_Size;
 	Output_Object.Includes_Changes := Includes_Changes;
 	Output_Object.Big_Files := Big_Files;
+	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
+			        Source => File_Prefix);
+	Output_Object.Output_Path :=
+		Ada.Strings.Unbounded.To_Unbounded_String (Output_Path);
 	Output_Object.Primary_Sans_Serif_Font := Primary_Sans_Serif_Font;
 	Output_Object.Primary_Serif_Font := Primary_Serif_Font;
 	Output_Object.Body_Font := Body_Font;
-	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
-			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
 	Output_Object.Header_Prefix :=
 		Ada.Strings.Unbounded.To_Unbounded_String (Header_Prefix);
@@ -5137,7 +5142,8 @@ package body ARM_RTF is
 	    begin
 		Ada.Streams.Stream_IO.Open (Fyle,
 		    Mode => Ada.Streams.Stream_IO.In_File,
-		    Name => ".\Output\" & Name);
+		    Name => Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+			    Name);
 	    exception
 		when Oops:others =>
 		    Ada.Text_IO.Put_Line ("** Unable to open picture file: " &
@@ -5221,7 +5227,8 @@ package body ARM_RTF is
 	    begin
 		Ada.Streams.Stream_IO.Open (Fyle,
 		    Mode => Ada.Streams.Stream_IO.In_File,
-		    Name => ".\Output\" & Name);
+		    Name => Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+			    Name);
 	    exception
 		when Oops:others =>
 		    Ada.Text_IO.Put_Line ("** Unable to open picture file: " &

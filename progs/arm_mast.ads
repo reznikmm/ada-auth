@@ -8,7 +8,7 @@ package ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2011
+    -- Copyright 2006, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -40,6 +40,7 @@ package ARM_Master is
     --  1/05/06 - RLB - Created base package to replace hard-coded main program.
     --  1/12/06 - RLB - Removed obsolete Document parameter.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  8/31/12 - RLB - Added Output_Path.
 
     type Output_Format_Type is (HTML, RTF, Text, Corr, Info);
 
@@ -47,7 +48,8 @@ package ARM_Master is
 	File_Name : in String;
 	The_Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
 	The_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
-        Output_Format : in Output_Format_Type);
+        Output_Format : in Output_Format_Type;
+        Output_Path : in String);
 
 	-- Read and process the master file given.
 

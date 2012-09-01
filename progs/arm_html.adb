@@ -16,7 +16,8 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012  AXE Consultants. All rights reserved.
+    --		 2008, 2009, 2011, 2012
+    -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -176,6 +177,7 @@ package body ARM_HTML is
     --			good in PDF form.
     --  5/18/12 - RLB - Added anchors to each paragraph number as suggested
     --			on comp.lang.ada.
+    --  8/31/12 - RLB - Added Output_Path.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1313,13 +1315,16 @@ package body ARM_HTML is
 --Ada.Text_IO.Put_Line ("--Creating " & File_Name & ".html");
 	if Output_Object.HTML_Kind > HTML_3 then
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	        ".\Output\" & File_Name & ".$$$");
+	        Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+		    File_Name & ".$$$");
 	elsif Output_Object.DOS_Filenames then
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	        ".\Output\" & File_Name & ".HTM");
+	        Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+	            File_Name & ".HTM");
 	else
 	    Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	        ".\Output\" & File_Name & ".html");
+	        Ada.Strings.Unbounded.To_String (Output_Object.Output_Path) &
+	            File_Name & ".html");
 	end if;
 	-- Save the current clause:
 	Output_Object.Current_Clause :=
@@ -1536,6 +1541,7 @@ package body ARM_HTML is
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      Output_Path : in String;
 		      DOS_Filenames : in Boolean;
 		      HTML_Kind : in HTML_Type;
 		      Use_Unicode : in Boolean;
@@ -1561,6 +1567,7 @@ package body ARM_HTML is
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more than 5 characters allowed in file names.
+	-- The files will be written into Output_Path.
 	-- If DOS_Filename is true, use 8.3 file names;
 	-- in that case, File_Prefix must be less than 4 characters in length;
 	-- and no clause or subclause number may exceed 35 if Big_Files is False.
@@ -1610,6 +1617,7 @@ package body ARM_HTML is
 			        Source => File_Prefix);
 	Output_Object.Title := Ada.Strings.Unbounded.To_Unbounded_String (Title);
 	Output_Object.Big_Files := Big_Files;
+	Output_Object.Output_Path := Ada.Strings.Unbounded.To_Unbounded_String(Output_Path);
 	Output_Object.DOS_Filenames := DOS_Filenames;
 	Output_Object.HTML_Kind := HTML_Kind;
 	Output_Object.Use_Unicode := Use_Unicode;

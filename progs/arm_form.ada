@@ -74,6 +74,7 @@ procedure ARM_Formatter is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Removed junk withs (now in master file handler).
     --  4/ 3/12 - RLB - Removed dead variable.
+    --  8/31/12 - RLB - Added output path parameter.
 
     -- Standard commands for Ada standards:
     -- For Original (Ada 95) RM:
@@ -87,9 +88,9 @@ procedure ARM_Formatter is
     --	   Arm_Form RM <Format> New-Only 1
     -- For AARM with Corr:
     --     [HTML; RTF for display]:
-    --	      Arm_Form RM <Format> Show-Changes 1
+    --	      Arm_Form AARM <Format> Show-Changes 1
     --     [TXT; RTF for printing]:
-    --	      Arm_Form RM <Format> New-Only 1
+    --	      Arm_Form AARM <Format> New-Only 1
     -- For RM with Corr and Amd:
     --     [With change bars for Word 97/2000:]
     --	   Arm_Form RM RTF New-Changes 2
@@ -99,12 +100,27 @@ procedure ARM_Formatter is
     --	   Arm_Form RM <Format> New-Only 2
     -- For AARM with Corr and Amd:
     --     [HTML; RTF for display]:
-    --	      Arm_Form RM <Format> Changes-Only 2
+    --	      Arm_Form AARM <Format> Changes-Only 2
     --        (for only Amd changes) or
-    --	      Arm_Form RM <Format> Show-Changes 2
+    --	      Arm_Form AARM <Format> Show-Changes 2
     --        (for all changes)
     --     [TXT; RTF for printing]:
-    --	      Arm_Form RM <Format> New-Only 2
+    --	      Arm_Form AARM <Format> New-Only 2
+    -- For Ada 2012 RM:
+    --     [With change ballons for Word XP/2003:]
+    --	   Arm_Form RM RTF Show-Changes 3
+    --     [For change bar version for Word 97/2000:]
+    --	   Arm_Form RM RTF Changes-Only 3
+    --     [Final versions with no changes:]
+    --	   Arm_Form RM <Format> New-Only 3
+    -- For AARM with Corr and Amd:
+    --     [HTML; RTF for display]:
+    --	      Arm_Form AARM <Format> Changes-Only 3
+    --        (for only Amda 2012 changes) or
+    --	      Arm_Form AARM <Format> Show-Changes 3
+    --        (for all changes)
+    --     [TXT; RTF for printing]:
+    --	      Arm_Form AARM <Format> New-Only 3
 
 
     No_Command_Error : exception;
@@ -113,13 +129,39 @@ procedure ARM_Formatter is
     Master_File : Ada.Strings.Unbounded.Unbounded_String; -- Master file for document to generate.
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
+    Output_Path : Ada.Strings.Unbounded.Unbounded_String; -- Output path.
 
     procedure Get_Commands is
 	-- Process the command line for this program.
     begin
-	if Ada.Command_Line.Argument_Count not in 1 .. 4 then
+	if Ada.Command_Line.Argument_Count not in 1 .. 5 then
 	    Ada.Text_IO.Put_Line ("** Wrong number of arguments");
 	    raise No_Command_Error;
+	end if;
+	if Ada.Command_Line.Argument_Count >= 5 then
+	    Output_Path := Ada.Strings.Unbounded.To_Unbounded_String(
+		    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(1),
+		       Ada.Strings.Right));
+	    -- Check that the Output_Path ends with a path separator.
+	    -- Note: This is a simple Windows check; it doesn't check for and
+	    -- allow bare disk names. This check works on Linux but allows
+	    -- ending with '\' which does not work on Linux (that will be
+	    -- when the files are opened).
+	    declare
+		Last : constant Character :=
+		    Ada.Strings.Unbounded.Element (Ada.Strings.Unbounded.Tail (Output_Path, 1), 1);
+	    begin
+		if Last = '/' or else Last = '\' then
+		    null; -- OK; this ends with a path separator.
+		else
+		    Ada.Text_IO.Put_Line ("** Output path does not end with a path separator: " &
+			Ada.Strings.Unbounded.To_String (Output_Path));
+		    raise No_Command_Error;
+		end if;
+	    end;
+	else
+	    Output_Path := Ada.Strings.Unbounded.To_Unbounded_String
+		("./output/"); -- Use '/' so this works on Linux and Windows.
 	end if;
 	if Ada.Command_Line.Argument_Count >= 4 then
 	    declare
@@ -202,7 +244,7 @@ procedure ARM_Formatter is
         end;
     exception
 	when No_Command_Error =>
-	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Master_File> [<Format>[, <Changes>[, <Version>]]]}");
+	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <Version>[ <Output Path>]]]]}");
 	    Ada.Text_IO.Put_Line ("     where: <Master_File> is the file name (and optional path) for the master file");
 	    Ada.Text_IO.Put_Line ("                        for the document;");
 	    Ada.Text_IO.Put_Line ("     where: <Format> = 'Text' (text files),");
@@ -218,6 +260,8 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("                        0-Original Ada 95 (equivalent to No-Changes)");
 	    Ada.Text_IO.Put_Line ("                        1-Technical Corrigendum 1");
 	    Ada.Text_IO.Put_Line ("                        2-Amendment 1");
+	    Ada.Text_IO.Put_Line ("     where: <Output_Path> = it the path where to write the result files. This must");
+	    Ada.Text_IO.Put_Line ("                        end with a path separator");
 	    raise No_Command_Error;
     end Get_Commands;
 
@@ -238,7 +282,8 @@ Ada.Text_IO.Put_Line ("  Version = " & Change_Version);
 		File_Name => Ada.Strings.Unbounded.To_String(Master_File),
 		The_Change_Kind => Change_Kind,
 		The_Change_Version => Change_Version,
-		Output_Format => Format);
+		Output_Format => Format,
+		Output_Path => Ada.Strings.Unbounded.To_String(Output_Path));
 
     Ada.Text_IO.Put_Line ("Ada document created");
 exception

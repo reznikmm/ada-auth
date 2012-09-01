@@ -9622,8 +9622,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			            Hang_Item => "",
 			            Text => "@b{" & Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len) &
 				        ".} " & Text_Buffer(1..Text_Buffer_Len),
-			            Change_Kind => ARM_Database.None,
-			            Version => '0');
+			            Change_Kind => ARM_Database.None);
 
 			    else
 			        ARM_Database.Insert (Format_Object.Glossary_DB,

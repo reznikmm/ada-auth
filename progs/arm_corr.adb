@@ -14,7 +14,7 @@ package body ARM_Corr is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -63,6 +63,7 @@ package body ARM_Corr is
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    --  8/31/12 - RLB - Added Output_Path.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -73,10 +74,12 @@ package body ARM_Corr is
 
     procedure Create (Output_Object : in out Corr_Output_Type;
 		      File_Prefix : in String;
+		      Output_Path : in String;
 		      Title : in String := "") is
 	-- Create an Output_Object for a document.
 	-- The prefix of the output file names is File_Prefix - this
-	-- should be no more then 4 characters allowed in file names.
+	-- should be no more then 5 characters allowed in file names.
+	-- The result files will be written to Output_Path.
 	-- The title of the document is Title.
     begin
 	if Output_Object.Is_Valid then
@@ -86,6 +89,9 @@ package body ARM_Corr is
 	Output_Object.Is_Valid := True;
 	Ada.Strings.Fixed.Move (Target => Output_Object.File_Prefix,
 				Source => File_Prefix);
+	Ada.Strings.Fixed.Move (Target => Output_Object.Output_Path,
+				Source => Output_Path);
+        Output_Object.Output_Path_Len := Output_Path'Length;
 	-- We don't use the title.
     end Create;
 
@@ -125,7 +131,8 @@ package body ARM_Corr is
 	end if;
 	-- Create a new file for this section:
 	Ada.Text_IO.Create (Output_Object.Output_File, Ada.Text_IO.Out_File,
-	    ".\Output\" & Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
+            Output_Object.Output_Path(1..Output_Object.Output_Path_Len) &
+	        Ada.Strings.Fixed.Trim (Output_Object.File_Prefix, Ada.Strings.Right) &
 		"-Corr-" & Section_Name & ".TXT");
 	Ada.Text_IO.New_Line (Output_Object.Output_File);
     end Section;

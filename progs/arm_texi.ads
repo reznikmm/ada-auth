@@ -39,6 +39,7 @@ package ARM_Texinfo is
    --		       the last update.
    -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
    --  4/ 1/12 - S L - Various revisions.
+   --  8/31/12 - RLB - Added Output_Path.
 
    type Texinfo_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -46,6 +47,7 @@ package ARM_Texinfo is
    procedure Create
      (Output_Object : in out Texinfo_Output_Type;
       File_Prefix   : in     String;
+      Output_Path   : in     String;
       Title         : in     String);
    --  Create an Output_Object for a document.
 

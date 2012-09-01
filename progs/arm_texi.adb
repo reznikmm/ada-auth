@@ -31,6 +31,7 @@ package body ARM_Texinfo is
    --  4/22/12 - S L - Move @dircategory, @direntry before first @node.
    --  4/28/12 - S L - Add @w{} after @anchor; otherwise following whitespace
    --		       is dropped.
+   --  8/31/12 - RLB - Added Output_Path.
 
 
    use Ada.Text_IO;
@@ -746,9 +747,12 @@ package body ARM_Texinfo is
    procedure Create
      (Output_Object : in out Texinfo_Output_Type;
       File_Prefix   : in     String;
+      Output_Path   : in     String;
       Title         : in     String)
    is
-      File_Name : constant String := Ada.Strings.Fixed.Trim (File_Prefix & ".texinfo", Ada.Strings.Right);
+      File_Name : constant String := Output_Path &
+         Ada.Strings.Fixed.Trim (File_Prefix, Ada.Strings.Right) &
+         ".texinfo";
    begin
       if Output_Object.Is_Valid then
          Ada.Exceptions.Raise_Exception

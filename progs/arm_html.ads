@@ -98,6 +98,7 @@ package ARM_HTML is
     --		- RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    --  8/31/12 - RLB - Added Output_Path.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -121,6 +122,7 @@ package ARM_HTML is
     procedure Create (Output_Object : in out HTML_Output_Type;
 		      Big_Files : in Boolean;
 		      File_Prefix : in String;
+		      Output_Path : in String;
 		      DOS_Filenames : in Boolean;
 		      HTML_Kind : in HTML_Type;
 		      Use_Unicode : in Boolean;
@@ -146,6 +148,7 @@ package ARM_HTML is
 	-- Big_Files is True; otherwise generate smaller output files.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more than 5 characters allowed in file names.
+	-- The files will be written into Output_Path.
 	-- If DOS_Filename is true, use 8.3 file names;
 	-- in that case, File_Prefix must be less than 4 characters in length;
 	-- and no clause or subclause number may exceed 35 if Big_Files is False.
@@ -519,6 +522,7 @@ private
 
 	-- Global properties:
 	File_Prefix : Prefix_String; -- Blank padded.
+	Output_Path : Ada.Strings.Unbounded.Unbounded_String;
 	Big_Files : Boolean; -- For HTML, this means to generate a single monster file.
 	DOS_Filenames : Boolean; -- Generate 8.3 MS-DOS filenames.
 	Title : Ada.Strings.Unbounded.Unbounded_String;

@@ -57,15 +57,18 @@ package ARM_Corr is
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    --  8/31/12 - RLB - Added Output_Path.
 
     type Corr_Output_Type is new ARM_Output.Output_Type with private;
 
     procedure Create (Output_Object : in out Corr_Output_Type;
 		      File_Prefix : in String;
+		      Output_Path : in String;
 		      Title : in String := "");
 	-- Create an Output_Object for a document.
 	-- The prefix of the output file names is File_Prefix - this
 	-- should be no more then 5 characters allowed in file names.
+	-- The result files will be written to Output_Path.
 	-- The title of the document is Title.
 
     procedure Close (Output_Object : in out Corr_Output_Type);
@@ -400,6 +403,8 @@ private
 	Output_Buffer_Space_Before : Boolean := False;
 			-- Do we need to output a space before the buffer?
 	Output_File : Ada.Text_IO.File_Type;
+	Output_Path : Buffer_String;
+	Output_Path_Len : Natural := 0;
 	File_Prefix : Prefix_String; -- Blank padded.
 	Char_Count : Natural := 0; -- Characters on current line.
 	Out_Char_Count : Natural := 0; -- Characters output on current line.
