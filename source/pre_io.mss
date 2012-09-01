@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/05/19 02:05:51 $}
+@Comment{$Date: 2012/06/28 03:40:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -2502,7 +2502,7 @@ are ever renumbered. This includes the next paragraph.}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
 
 @ChgRef{Version=[3], Kind=[Revised],ARef=[AI05-0298-1]}
-@Chg{Version=[3],New=[@key[subtype] Byte_Int @key[is] -127 .. 127;
+@Chg{Version=[3],New=[@key[subtype] Byte_Int @key[is] Integer @key[range] -127 .. 127;
 ],Old=[]}@key[package] Int_IO @key[is] @key[new] Integer_IO(@Chg{Version=[3],New=[Byte_Int],Old=[Small_Int]}); @key[use] Int_IO;
 --@RI{ default format used at instantiation,}
 --@RI{ Default_Width = 4, Default_Base = 10}

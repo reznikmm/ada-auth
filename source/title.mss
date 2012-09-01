@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.57 $ $Date: 2012/05/19 02:05:52 $}
+@comment{$Revision: 1.58 $ $Date: 2012/06/28 03:40:12 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -50,7 +50,7 @@ End comment}
 
 @begin{ISOOnly}
 @Comment{Jim Moore wanted this deleted in the consolidated editions, as it is confusing.}
-@Noparanum@Chg{Version=[3],New=[@Swiss{Revision of second edition (ISO 8652:1995)}],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
+@Noparanum@Chg{Version=[3],New=[@Swiss{Revision of second edition (ISO/IEC 8652:1995)}],Old=[@Chg{New=[@ @*@Comment{Dummy paragraph}],
                Old=[@Swiss{[Revision of first edition (ISO 8652:1987)]}]}]}
 @end{ISOOnly}
 

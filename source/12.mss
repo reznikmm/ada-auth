@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/06/28 03:40:12 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1942,7 +1942,7 @@ had to.
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0215-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
   @ChgAdded{Version=[3],Text=[Formal incomplete types are added; these
   are documented as an extension in the next clause.]}
 @end{DiffWord2005}
