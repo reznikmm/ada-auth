@@ -1,5 +1,6 @@
 with Ada.Characters.Handling;
 --with Ada.Text_IO; -- Debug.
+with Ada.Exceptions;
 package body ARM_Contents is
 
     --
@@ -9,7 +10,7 @@ package body ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2007, 2008, 2009, 2011
+    -- Copyright 2000, 2004, 2005, 2006, 2007, 2008, 2009, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -54,11 +55,16 @@ package body ARM_Contents is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Parent_Clause from Stephen Leake's version.
     -- 10/25/11 - RLB - Added version to Old name strings.
+    --  8/30/12 - RLB - Added traps if we're reading Section = UNKNOWN.
 
     function "<" (Left, Right : Clause_Number_Type) return Boolean is
 	-- True if Left comes before Right in the collating order.
     begin
-	if Left.Section < Right.Section then
+	if Left.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "Left has Unknown section";
+	elsif Right.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "Right has Unknown section";
+	elsif Left.Section < Right.Section then
 	    return True;
 	elsif Left.Section > Right.Section then
 	    return False;
@@ -127,17 +133,17 @@ package body ARM_Contents is
 	-- characteristics.
     begin
 	if Level /= Subsubclause and then Clause_Number.Subsubclause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a subsubclause but non-zero subsubclause number";
 	end if;
 	if Level /= Subsubclause and then
 	   Level /= Subclause and then Clause_Number.Subclause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a subclause but non-zero subclause number";
 	end if;
 	if (Level /= Subsubclause and then Level /= Subclause and then
 	    Level /= Clause and then Level /= Unnumbered_Section and then
 	    Level /= Dead_Clause) and then
 	   Clause_Number.Clause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a clause but non-zero clause number";
 	end if;
 	Last_Title := Last_Title + 1;
 	Title_List (Last_Title) :=
@@ -163,17 +169,17 @@ package body ARM_Contents is
 	-- it first was present in the document.
     begin
 	if Level /= Subsubclause and then Clause_Number.Subsubclause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a subsubclause but non-zero subsubclause number";
 	end if;
 	if Level /= Subsubclause and then
 	   Level /= Subclause and then Clause_Number.Subclause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a subclause but non-zero subclause number";
 	end if;
 	if (Level /= Subsubclause and then Level /= Subclause and then
 	    Level /= Clause and then Level /= Unnumbered_Section and then
 	    Level /= Dead_Clause) and then
 	   Clause_Number.Clause /= 0 then
-	    raise Program_Error;
+	    raise Bad_Clause_Error with "not a clause but non-zero clause number";
 	end if;
 	Last_Old_Title := Last_Old_Title + 1;
 	Old_Title_List (Last_Old_Title) :=
@@ -194,17 +200,21 @@ package body ARM_Contents is
 		   Clause_Number : in Clause_Number_Type) return String is
 	-- Returns a properly formatted Section or clause number reference.
     begin
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
 	case Level is
 	    when Plain_Annex | Normative_Annex | Informative_Annex =>
 		if Clause_Number.Clause /= 0 or else Clause_Number.Subclause /= 0 or else
 		   Clause_Number.Subsubclause /= 0 or else Clause_Number.Section <= 30 then
-		    raise Program_Error; -- Illegal numbers.
+		    raise Bad_Clause_Error; -- Illegal numbers.
 		end if;
 		return "Annex " & Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START));
 	    when Section =>
 		if Clause_Number.Clause /= 0 or else Clause_Number.Subclause /= 0 or else
 		   Clause_Number.Section >= ANNEX_START then
-		    raise Program_Error; -- Illegal numbers.
+		    raise Bad_Clause_Error; -- Illegal numbers.
 		end if;
 		if Clause_Number.Section < 10 then
 		    return Character'Val (Character'Pos('0') + Clause_Number.Section) & "";
@@ -218,7 +228,7 @@ package body ARM_Contents is
 	    when Unnumbered_Section =>
 		if Clause_Number.Clause = 0 or else Clause_Number.Subclause /= 0 or else
 		   Clause_Number.Section /= 0 then
-		    raise Program_Error; -- Illegal numbers.
+		    raise Bad_Clause_Error; -- Illegal numbers.
 		end if;
 	        if Clause_Number.Clause < 10 then
 		    return "0." & Character'Val (Character'Pos('0') + Clause_Number.Clause);
@@ -231,7 +241,7 @@ package body ARM_Contents is
 	        end if;
 	    when Clause =>
 		if Clause_Number.Subclause /= 0 then
-		    raise Program_Error; -- Illegal number.
+		    raise Bad_Clause_Error; -- Illegal number.
 		end if;
 		if Clause_Number.Section < 10 then
 		    if Clause_Number.Clause < 10 then
@@ -253,7 +263,7 @@ package body ARM_Contents is
 		        return Character'Val (Character'Pos('0') + Clause_Number.Section) &
 		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
 		    else
-			raise Program_Error; -- Out of range.
+			raise Bad_Clause_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section < 20 then
 		    if Clause_Number.Clause < 10 then
@@ -275,7 +285,7 @@ package body ARM_Contents is
 		        return "1" & Character'Val (Character'Pos('0') + Clause_Number.Section - 10) &
 		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
 		    else
-			raise Program_Error; -- Out of range.
+			raise Bad_Clause_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section < 30 then
 		    if Clause_Number.Clause < 10 then
@@ -297,7 +307,7 @@ package body ARM_Contents is
 		        return "2" & Character'Val (Character'Pos('0') + Clause_Number.Section - 20) &
 		            ".5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
 		    else
-			raise Program_Error; -- Out of range.
+			raise Bad_Clause_Error; -- Out of range.
 		    end if;
 		elsif Clause_Number.Section = 30 then
 		    if Clause_Number.Clause < 10 then
@@ -313,7 +323,7 @@ package body ARM_Contents is
 		    elsif Clause_Number.Clause < 60 then
 		        return "30.5" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
 		    else
-			raise Program_Error; -- Out of range.
+			raise Bad_Clause_Error; -- Out of range.
 		    end if;
 		else
 		    if Clause_Number.Clause < 10 then
@@ -335,11 +345,13 @@ package body ARM_Contents is
 			return Character'Val (Character'Pos('A') + (Clause_Number.Section - ANNEX_START)) &
 		            ".4" & Character'Val (Character'Pos('0') + Clause_Number.Clause - 50);
 		    else
-			raise Program_Error; -- Out of range.
+			raise Bad_Clause_Error; -- Out of range.
 		    end if;
 		end if;
 	    when Subclause =>
-		if Clause_Number.Subclause < 10 then
+		if Clause_Number.Section = UNKNOWN then
+		    raise Bad_Clause_Error with "unknown section number";
+		elsif Clause_Number.Subclause < 10 then
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        "." & Character'Val (Character'Pos('0') + Clause_Number.Subclause);
 		elsif Clause_Number.Subclause < 20 then
@@ -355,7 +367,7 @@ package body ARM_Contents is
 		    return Make_Clause_Number (Clause, (Clause_Number.Section, Clause_Number.Clause, 0, 0)) &
 		        ".4" & Character'Val (Character'Pos('0') + Clause_Number.Subclause - 40);
 	        else
-		    raise Program_Error; -- Out of range.
+		    raise Bad_Clause_Error; -- Out of range.
 		end if;
 	    when Subsubclause =>
 		if Clause_Number.Subsubclause < 10 then
@@ -374,7 +386,7 @@ package body ARM_Contents is
 		    return Make_Clause_Number (Subclause, (Clause_Number.Section, Clause_Number.Clause, Clause_Number.Subclause, 0)) &
 		        ".4" & Character'Val (Character'Pos('0') + Clause_Number.Subsubclause - 40);
 	        else
-		    raise Program_Error; -- Out of range.
+		    raise Bad_Clause_Error; -- Out of range.
 		end if;
 	    when Dead_Clause =>
 		return "X.X";
@@ -473,6 +485,10 @@ package body ARM_Contents is
 		end if;
 	    end if;
 	end if;
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
     end Make_Clause;
 
 
@@ -511,6 +527,10 @@ package body ARM_Contents is
 	-- Given the level and clause numbers, return the appropriate
 	-- title. Raises Not_Found_Error if not found.
     begin
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
 	for I in 1 .. Last_Title loop
 	    if Title_List(I).Level = Level and then
 	       Title_List(I).Clause_Number = Clause_Number then
@@ -527,6 +547,10 @@ package body ARM_Contents is
 	-- old title. Calls Lookup_Title if not found (thus returning the
 	-- regular (new) title.
     begin
+	if Clause_Number.Section = UNKNOWN then
+	    raise Bad_Clause_Error with "unknown section number";
+	-- else not unknown
+	end if;
 	for I in 1 .. Last_Old_Title loop
 	    if Old_Title_List(I).Level = Level and then
 	       Old_Title_List(I).Clause_Number = Clause_Number then

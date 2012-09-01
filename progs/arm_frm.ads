@@ -99,6 +99,8 @@ package ARM_Format is
     --  3/12/12 - RLB - Lengthened unit name so
     --			"Ada.Strings.Wide_Wide_Unbounded.Wide_Wide_Equal_Case_Insensitive"
     --			would fit (have we lost our minds??).
+    --  8/31/12 - RLB - Put glossary components into a subrecord to prevent
+    --			inappropriate usage.
 
     type Format_Type is tagged limited private;
 
@@ -230,6 +232,30 @@ private
 	Ref_Len  : Natural; -- Length of the reference.
 	Is_DR_Ref : Boolean; -- True for a DR reference; False for an AI reference.
         Next : Reference_Ptr;
+    end record;
+
+    type Glossary_Info_Type (Active : Boolean := False;
+                             Change_Kind : ARM_Database.Paragraph_Change_Kind_Type := ARM_Database.None) is record
+				-- The Change_Kind of ToGlossary.
+	case Active is
+	    when False => null; -- No glossary entry in use.
+	    when True =>
+		-- Glossary actively being processed; used only when
+		-- processing [Chg]ToGlossary[Also] commands.
+		Term : String (1..50); -- Glossary term.
+		Term_Len : Natural := 0;
+		Add_to_Glossary : Boolean;
+			-- Add this item to the Glossary.
+--?? Is this the same as "Active"??
+		Displayed : Boolean;
+			-- The text was displayed in the document.
+		case Change_Kind is
+		    when ARM_Database.None => null;
+		    when others =>
+			Version : ARM_Contents.Change_Version_Type;
+			    -- The version number of the changed paragraph.
+		end case;
+	end case;
     end record;
 
     type Format_Type is tagged limited record
@@ -365,17 +391,7 @@ private
 	Pragma_DB : ARM_Database.Database_Type;
 
 	-- Glossary:
-	Glossary_Term : String (1..50); -- Glossary term; used only when
-	Glossary_Term_Len : Natural := 0; -- processing [Chg]ToGlossary[Also] commands.
-	Glossary_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type := ARM_Database.None;
-			-- The change kind of the ToGlossary.
-	Glossary_Version : ARM_Contents.Change_Version_Type;
-			-- If the kind is not "None", this is the version
-			-- number of the changed paragraph.
-	Add_to_Glossary : Boolean;
-			-- Add this item to the Glossary.
-	Glossary_Displayed : Boolean;
-			-- The text was displayed in the document.
+	Glossary_Info : Glossary_Info_Type;
 	Glossary_DB : ARM_Database.Database_Type;
 
 	-- Implementation advice:

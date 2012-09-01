@@ -63,6 +63,7 @@ package body ARM_Index is
     --  3/12/12 - RLB - Lengthened indexing so that
     --			"Ada.Strings.Wide_Wide_@!Unbounded.Wide_Wide_@!Equal_Case_Insensitive"
     --			would fit. (Don't ask.)
+    --  8/31/12 - RLB - Fixed to avoid reading uninitialized section numbers.
 
     Next_Index_Key : Index_Key;
 
@@ -253,11 +254,12 @@ package body ARM_Index is
 	if (Kind = See_Other_Term or else
 	    Kind = See_Also_Other_Term) then
 	    if Clause /= "" or else Paragraph /= "" then
-	        Ada.Exceptions.Raise_Exception (Not_Valid_Error'Identity,
-		    "Clause used in kind without reference");
+	        raise Not_Valid_Error with
+		    "Clause used in kind without reference";
 	    else
 		Temp_Term.Clause_Len := 0;
 		Temp_Term.Paragraph_Len := 0;
+		-- Note: These have no clause numbers.
 	    end if;
 	else
 	    Ada.Strings.Fixed.Move (Target => Temp_Term.Clause,
@@ -701,6 +703,13 @@ package body ARM_Index is
 		    when Greater => return False;
 		    when Equal => null; -- Continue to next compare.
 		end case;
+		if Left.Kind = See_Other_Term or else
+		   Left.Kind = See_Also_Other_Term then
+		    -- These have no clause or paragraph number to compare,
+		    -- and the Kinds must match, so they are equal.
+		    -- Since this is "<" and not "<=", the result is False.
+		    return False;
+		end if;
 		-- Note: We use the numbers, because the references don't
 		-- sort right (11.1 comes before 2.8, etc.)
 		if Left.Clause_Number < Right.Clause_Number then
@@ -870,6 +879,16 @@ package body ARM_Index is
 	    end Partition_Sort_Slice;
 
 	begin
+-- Debug: (This should only print Kinds that have no clause number).
+--for Idx in Items'range loop
+--    if Arm_Contents."=" (Items(Idx).Clause_Number.Section, Arm_Contents.UNKNOWN) then
+--        Ada.Text_IO.Put_Line ("For index item" & Natural'Image(Idx) &
+--            " Clause.Section=" & Arm_Contents.Section_Number_Type'Image(Items(Idx).Clause_Number.Section) &
+--	    " Kind=" & Index_Item_Kind_Type'Image(Items(Idx).Kind));
+--    -- else OK.
+--    end if;
+--end loop;
+
 	    -- Use quicksort to handle most of the array, then
 	    -- insertion sort for the final slices.
 	    Partition_Sort_Slice (Items'First, Items'Last);

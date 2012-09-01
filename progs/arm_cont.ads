@@ -8,7 +8,7 @@ package ARM_Contents is
     -- references.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2006, 2007, 2009, 2011
+    -- Copyright 2000, 2004, 2006, 2007, 2009, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -53,15 +53,18 @@ package ARM_Contents is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Parent_Clause from Stephen Leake's version.
     -- 10/25/11 - RLB - Added version to Old name strings.
+    --  8/30/12 - RLB - Added initialization of Section to UNKNOWN to
+    --			detect bugs earlier.
 
     subtype Title_Type is String (1 .. 80);
 	-- The type of a title.
 
-    type Section_Number_Type is range 0 .. 57;
+    type Section_Number_Type is range 0 .. 58;
 	-- Values > 30 represent annex letters (31 => A, 32 => B, etc.)
 	-- Value = 0 represents the preface, introduction, etc. No
 	-- number is generated if Section_Number = 0.
     ANNEX_START : constant := 31; -- First annex section number.
+    UNKNOWN : constant Section_Number_Type := 58; -- Uninitialized sections get this.
 
     subtype Change_Version_Type is Character range '0' .. '9';
 	-- Defines the change version. Version 0 is the original text.
@@ -70,13 +73,18 @@ package ARM_Contents is
 	Ada.Strings.Unbounded.Unbounded_String;
 
     type Clause_Number_Type is record
-	Section : Section_Number_Type;
+	Section : Section_Number_Type := UNKNOWN;
 	Clause : Natural := 0;
 	Subclause : Natural := 0;
 	Subsubclause : Natural := 0;
     end record;
 
-    Not_Found_Error : exception;
+    Not_Found_Error  : exception;
+
+    Bad_Clause_Error : exception;
+	-- Raised by any of the below if the Clause_Number is
+	-- invalid (potentially depending on the other parameters,
+	-- like the level).
 
     procedure Initialize;
 	-- Initialize this package; make sure the contents are empty.

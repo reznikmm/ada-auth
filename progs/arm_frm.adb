@@ -21,7 +21,8 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012  AXE Consultants. All rights reserved.
+    --           2010, 2011, 2012
+    -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
     --
@@ -269,6 +270,8 @@ package body ARM_Format is
     --			are off (ISO versions). Fixed sort order of attributes.
     --  3/27/12 - RLB - Added more versioned break commands.
     --  4/ 3/12 - RLB - Removed dead variables.
+    --  8/31/12 - RLB - Put glossary components into a subrecord to prevent
+    --			inappropriate usage.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -5786,6 +5789,20 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Close_Ch : Character;
 			Key : ARM_Index.Index_Key;
 		    begin
+			if Format_Object.Glossary_Info.Active then
+			    Ada.Text_IO.Put_Line ("  ** Nested glossary entry on line " & ARM_Input.Line_String (Input_Object));
+			-- else OK.
+			end if;
+			-- Setup glossary information for this command:
+			Format_Object.Glossary_Info :=
+			    (Active	 => True,
+			     Change_Kind => ARM_Database.None,
+				-- No change for this command.
+			     Term	 => <>, -- Set below.
+			     Term_Len    => <>, -- Set below.
+			     Add_to_Glossary => True, -- Always add it.
+			     Displayed	 => False); -- Until we decide differently.
+
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Term" & (5..ARM_Input.Command_Name_Type'Last => ' '),
 			    Is_First => True,
@@ -5795,14 +5812,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    ARM_Input.Copy_to_String_until_Close_Char (
 				Input_Object,
 			        Close_Ch,
-				Format_Object.Glossary_Term,
-				Format_Object.Glossary_Term_Len);
+				Format_Object.Glossary_Info.Term,
+				Format_Object.Glossary_Info.Term_Len);
 			-- else no parameter. Weird.
 			end if;
-			Format_Object.Glossary_Change_Kind := ARM_Database.None;
-			    -- No change for this command.
-			Format_Object.Add_to_Glossary := True;
-			    -- Always add it.
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
@@ -5820,7 +5833,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = To_Glossary_Also then
 				-- The text just goes straight to the file.
 				if Format_Object.Display_Index_Entries then
-				    Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+				    Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
 				    ARM_Output.Ordinary_Text (Output_Object,
 					"[Glossary Entry]");
 				    Format_Object.Last_Non_Space := True;
@@ -5829,13 +5842,13 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 				-- Index the term (because it does appear here):
 				Check_Paragraph; -- We've got to be in a paragraph to write this.
-				ARM_Index.Add (Term => Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len),
+				ARM_Index.Add (Term => Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len),
 					       Kind => ARM_Index.Primary_Term,
 					       Clause => Clause_String (Format_Object),
 					       Paragraph => Paragraph_String,
 					       Key => Key);
 				ARM_Output.Index_Target (Output_Object, Key);
-				Format_Object.Glossary_Displayed := True;
+				Format_Object.Glossary_Info.Displayed := True;
 			    elsif Format_Object.Include_Annotations then
 			        Check_End_Paragraph; -- End any paragraph that we're in.
 			        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
@@ -5845,13 +5858,13 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        Format_Object.Next_Paragraph_Format_Type := Glossary_Marker;
 			        Format_Object.Next_Paragraph_Subhead_Type := Glossary_Marker;
 			        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
-			        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
-			        Format_Object.Glossary_Displayed := True;
+			        Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
+			        Format_Object.Glossary_Info.Displayed := True;
 				-- Note: The term is indexed in the glossary,
 				-- but not here.
 			    else -- No annotations, "To_Glossary"
 			        if Format_Object.Display_Index_Entries then
-				    Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+				    Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
 				    ARM_Output.Ordinary_Text (Output_Object,
 				        "[Glossary Entry]");
 				    Format_Object.Last_Non_Space := True;
@@ -5861,7 +5874,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        ARM_Input.Skip_until_Close_Char (Input_Object,
 				    Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Close_Char);
 			        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-			        Format_Object.Glossary_Displayed := False;
+			        Format_Object.Glossary_Info.Displayed := False;
 				-- Note: The term is indexed in the glossary,
 				-- but not here.
 			    end if;
@@ -5881,97 +5894,142 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Close_Ch : Character;
 			Key : ARM_Index.Index_Key;
 		        Kind : ARM_Database.Paragraph_Change_Kind_Type;
+			Our_Version : ARM_Contents.Change_Version_Type;
 			use type ARM_Database.Paragraph_Change_Kind_Type;
-			Local_Change : ARM_Output.Change_Type;
+			Local_Change  : ARM_Output.Change_Type;
 		    begin
+			if Format_Object.Glossary_Info.Active then
+			    Ada.Text_IO.Put_Line ("  ** Nested glossary entry on line " & ARM_Input.Line_String (Input_Object));
+			-- else OK.
+			end if;
+
 		        Get_Change_Version (Is_First => True,
-			    Version => Format_Object.Glossary_Version);
+			    Version => Our_Version);
 			    -- Read a parameter named "Version".
 
 		        Get_Change_Kind (Kind);
 			    -- Read a parameter named "Kind".
 
-			Format_Object.Glossary_Change_Kind := Kind;
+			-- Setup glossary information for this command (now
+			-- that we know the above):
+			-- Note: Discriminants need to be static, so we have
+			-- to use the following brain-damaged initialization.
+			-- At least this lets us strip the number and message
+			-- information from Inserted and Deleted (which we
+			-- would have to do anyway).
+			case Kind is
+			    when ARM_Database.Inserted |
+			         ARM_Database.Inserted_Normal_Number =>
+				Format_Object.Glossary_Info :=
+				    (Active	 => True,
+				     Change_Kind => ARM_Database.Inserted,
+				     Version	 => Our_Version,
+				     Term	 => <>, -- Set below.
+				     Term_Len    => <>, -- Set below.
+				     Add_to_Glossary => <>, -- Set below.
+				     Displayed	 => <>); -- Set below.
+			    when ARM_Database.Deleted |
+			         ARM_Database.Deleted_Inserted_Number |
+			         ARM_Database.Deleted_No_Delete_Message |
+			         ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
+				Format_Object.Glossary_Info :=
+				    (Active	 => True,
+				     Change_Kind => ARM_Database.Deleted,
+				     Version	 => Our_Version,
+				     Term	 => <>, -- Set below.
+				     Term_Len    => <>, -- Set below.
+				     Add_to_Glossary => <>, -- Set below.
+				     Displayed	 => <>); -- Set below.
+			    when ARM_Database.Revised =>
+				Format_Object.Glossary_Info :=
+				    (Active	 => True,
+				     Change_Kind => ARM_Database.Revised,
+				     Version	 => Our_Version,
+				     Term	 => <>, -- Set below.
+				     Term_Len    => <>, -- Set below.
+				     Add_to_Glossary => <>, -- Set below.
+				     Displayed	 => <>); -- Set below.
+			    when ARM_Database.Revised_Inserted_Number =>
+				Format_Object.Glossary_Info :=
+				    (Active	 => True,
+				     Change_Kind => ARM_Database.Revised_Inserted_Number,
+				     Version	 => Our_Version,
+				     Term	 => <>, -- Set below.
+				     Term_Len    => <>, -- Set below.
+				     Add_to_Glossary => <>, -- Set below.
+				     Displayed	 => <>); -- Set below.
+			    when ARM_Database.None =>
+				raise Program_Error; -- Can't happen.
+			end case;
 
 			if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Command = Change_To_Glossary_Also then
 			    -- The text just goes straight to the file. It will
 			    -- get formatted appropriately. So we only need to
 			    -- figure out whether it will get indexed and displayed
 			    -- in the Glossary.
-			    Format_Object.Glossary_Displayed := True;
+			    Format_Object.Glossary_Info.Displayed := True;
 			    Local_Change := ARM_Output.None;
 		            if Format_Object.Changes = ARM_Format.Old_Only and then
-			        Format_Object.Glossary_Version > '0' then
+			        Format_Object.Glossary_Info.Version > '0' then
 			        -- Old only, don't display it (and it won't be
 			        -- inserted, either).
-			        Format_Object.Add_to_Glossary := False;
-		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Inserted or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Inserted_Normal_Number) then
-			        if Format_Object.Glossary_Version <= Format_Object.Change_Version then
-			            Format_Object.Add_to_Glossary := True;
+			        Format_Object.Glossary_Info.Add_to_Glossary := False;
+		            elsif Format_Object.Glossary_Info.Change_Kind = ARM_Database.Inserted then
+			        if Format_Object.Glossary_Info.Version <= Format_Object.Change_Version then
+			            Format_Object.Glossary_Info.Add_to_Glossary := True;
 			        else --This reference is too new, ignore it.
-			            Format_Object.Glossary_Displayed := False;
-			            Format_Object.Add_to_Glossary := False;
+			            Format_Object.Glossary_Info.Displayed := False;
+			            Format_Object.Glossary_Info.Add_to_Glossary := False;
 			        end if;
-				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
-		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_No_Delete_Message or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
-			        Format_Object.Add_to_Glossary := True;
-				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
+		            elsif Format_Object.Glossary_Info.Change_Kind = ARM_Database.Deleted then
+			        Format_Object.Glossary_Info.Add_to_Glossary := True;
 		            else -- we always display it.
-			        Format_Object.Add_to_Glossary := True;
+			        Format_Object.Glossary_Info.Add_to_Glossary := True;
 		            end if;
 			else
-		            if (Format_Object.Glossary_Change_Kind = ARM_Database.Inserted or else
-			        Format_Object.Glossary_Change_Kind = ARM_Database.Inserted_Normal_Number) then
-				Format_Object.Glossary_Change_Kind := ARM_Database.Inserted;
+		            if Format_Object.Glossary_Info.Change_Kind = ARM_Database.Inserted then
 				Calc_Change_Disposition
 			            (Format_Object => Format_Object,
-				     Version => Format_Object.Glossary_Version,
+				     Version => Format_Object.Glossary_Info.Version,
 				     Operation => ARM_Output.Insertion,
 				     Text_Kind => Local_Change);
 				case Local_Change is
 				    when Do_Not_Display_Text =>
-				        Format_Object.Glossary_Displayed := False;
-				        Format_Object.Add_to_Glossary := False;
+				        Format_Object.Glossary_Info.Displayed := False;
+				        Format_Object.Glossary_Info.Add_to_Glossary := False;
 				        Local_Change := ARM_Output.None;
 				    when ARM_Output.None|ARM_Output.Insertion =>
-			                Format_Object.Glossary_Displayed :=
+			                Format_Object.Glossary_Info.Displayed :=
 					    Format_Object.Include_Annotations;
-			                Format_Object.Add_to_Glossary := True;
+			                Format_Object.Glossary_Info.Add_to_Glossary := True;
 				    when ARM_Output.Deletion =>
 					raise Program_Error;
 				end case;
-		            elsif (Format_Object.Glossary_Change_Kind = ARM_Database.Deleted or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_No_Delete_Message or else
-			           Format_Object.Glossary_Change_Kind = ARM_Database.Deleted_Inserted_Number_No_Delete_Message) then
-				Format_Object.Glossary_Change_Kind := ARM_Database.Deleted;
+		            elsif Format_Object.Glossary_Info.Change_Kind = ARM_Database.Deleted then
+				-- Note: other forms of delete removed previously.
 				Calc_Change_Disposition
 			            (Format_Object => Format_Object,
-				     Version => Format_Object.Glossary_Version,
+				     Version => Format_Object.Glossary_Info.Version,
 				     Operation => ARM_Output.Deletion,
 				     Text_Kind => Local_Change);
 				case Local_Change is
 				    when Do_Not_Display_Text =>
-				        Format_Object.Glossary_Displayed := False;
-				        Format_Object.Add_to_Glossary := True;
+				        Format_Object.Glossary_Info.Displayed := False;
+				        Format_Object.Glossary_Info.Add_to_Glossary := True;
 					-- We still add this to the glossary so that
 					-- the deleted paragraph message can be displayed for it.
 				        Local_Change := ARM_Output.None;
 				    when ARM_Output.None|ARM_Output.Deletion =>
-			                Format_Object.Glossary_Displayed :=
+			                Format_Object.Glossary_Info.Displayed :=
 					    Format_Object.Include_Annotations;
-			                Format_Object.Add_to_Glossary := True;
+			                Format_Object.Glossary_Info.Add_to_Glossary := True;
 				    when ARM_Output.Insertion =>
 					raise Program_Error;
 				end case;
 		            else -- we always display it.
-			        Format_Object.Glossary_Displayed :=
+			        Format_Object.Glossary_Info.Displayed :=
 				    Format_Object.Include_Annotations;
-			        Format_Object.Add_to_Glossary := True;
+			        Format_Object.Glossary_Info.Add_to_Glossary := True;
 			        Local_Change := ARM_Output.None;
 		            end if;
 			end if;
@@ -5985,8 +6043,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    ARM_Input.Copy_to_String_until_Close_Char (
 				Input_Object,
 			        Close_Ch,
-				Format_Object.Glossary_Term,
-				Format_Object.Glossary_Term_Len);
+				Format_Object.Glossary_Info.Term,
+				Format_Object.Glossary_Info.Term_Len);
 			-- else no parameter. Weird.
 			end if;
 
@@ -6005,9 +6063,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 			    if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
 				-- The text just goes straight to the file.
-				if Format_Object.Add_to_Glossary then
+				if Format_Object.Glossary_Info.Add_to_Glossary then
 				    if Format_Object.Display_Index_Entries then
-				        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+				        Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
 				        ARM_Output.Ordinary_Text (Output_Object,
 					    "[Glossary Entry]");
 				        Format_Object.Last_Non_Space := True;
@@ -6016,7 +6074,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 				    -- Index the term (because it does appear here):
 				    Check_Paragraph; -- We've got to be in a paragraph to write this.
-				    ARM_Index.Add (Term => Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len),
+				    ARM_Index.Add (Term => Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len),
 					           Kind => ARM_Index.Primary_Term,
 					           Clause => Clause_String (Format_Object),
 					           Paragraph => Paragraph_String,
@@ -6024,7 +6082,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    ARM_Output.Index_Target (Output_Object, Key);
 				-- else no indexing.
 				end if;
-			    elsif Format_Object.Glossary_Displayed then -- Change_To_Glossary
+			    elsif Format_Object.Glossary_Info.Displayed then -- Change_To_Glossary
 				-- Create the AARM annotation:
 				Check_End_Paragraph; -- End any paragraph that we're in.
 				Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Last_Subhead_Paragraph := Format_Object.Last_Paragraph_Subhead_Type;
@@ -6034,26 +6092,26 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				Format_Object.Next_Paragraph_Format_Type := Glossary_Marker;
 				Format_Object.Next_Paragraph_Subhead_Type := Glossary_Marker;
 				Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
-			        Format_Object.Next_Paragraph_Version := Format_Object.Glossary_Version;
+			        Format_Object.Next_Paragraph_Version := Format_Object.Glossary_Info.Version;
 			        Format_Object.Next_Paragraph_Change_Kind := Kind;
 
                                 -- We assume no outer changes;
 			        -- set new change state:
 			        Format_Object.Text_Format.Change := Local_Change;
 			        Format_Object.Text_Format.Version :=
-				   Format_Object.Glossary_Version;
+				   Format_Object.Glossary_Info.Version;
 			        Format_Object.Text_Format.Added_Version := '0';
 			            -- Change the state *before* outputting the
 				    -- paragraph header, so the AARM prefix is included.
-			        Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+			        Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
 
 			        Format_Object.Text_Format.Change := ARM_Output.None; -- Undo (header) change.
 			        Format_Object.Text_Format.Version := '0';
 
-			    elsif Format_Object.Add_to_Glossary then -- Change_To_Glossary
+			    elsif Format_Object.Glossary_Info.Add_to_Glossary then -- Change_To_Glossary
 				-- No AARM annotation:
 				if Format_Object.Display_Index_Entries then
-			            Display_Index_Entry (Format_Object.Glossary_Term (1..Format_Object.Glossary_Term_Len)); -- Includes Check_Paragraph.
+			            Display_Index_Entry (Format_Object.Glossary_Info.Term (1..Format_Object.Glossary_Info.Term_Len)); -- Includes Check_Paragraph.
 				    ARM_Output.Ordinary_Text (Output_Object,
 					"[Glossary Entry]");
 				    Format_Object.Last_Non_Space := True;
@@ -9524,6 +9582,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Glossary_Text_Param =>
 		    -- Save the glossary entry in the Glossary database.
+		    if not Format_Object.Glossary_Info.Active then
+		        Ada.Text_IO.Put_Line ("  ** Not in glossary command at end of glossary command!? on line " & ARM_Input.Line_String (Input_Object));
+		    -- else OK.
+		    end if;
 		    declare
 			use type ARM_Database.Paragraph_Change_Kind_Type;
 			Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
@@ -9532,36 +9594,45 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Arm_Input.Stop_Recording_and_Read_Result
 			    (Input_Object, Text_Buffer, Text_Buffer_Len);
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-			if Format_Object.Add_to_Glossary then
-			    if Format_Object.Glossary_Change_Kind = ARM_Database.Inserted then
+			if Format_Object.Glossary_Info.Add_to_Glossary then
+			    if Format_Object.Glossary_Info.Change_Kind = ARM_Database.Inserted then
 			        ARM_Database.Insert (Format_Object.Glossary_DB,
-			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Sort_Key => Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len),
 			            Hang_Item => "",
-			            Text => "@chg{Version=[" & Format_Object.Glossary_Version & "],New=[@b{" &
-					Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+			            Text => "@chg{Version=[" & Format_Object.Glossary_Info.Version & "],New=[@b{" &
+					Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len) &
 				        ".}],Old=[]} " & Text_Buffer(1..Text_Buffer_Len),
-			            Change_Kind => Format_Object.Glossary_Change_Kind,
-			            Version => Format_Object.Glossary_Version,
-			            Initial_Version => Format_Object.Glossary_Version);
+			            Change_Kind => Format_Object.Glossary_Info.Change_Kind,
+			            Version => Format_Object.Glossary_Info.Version,
+			            Initial_Version => Format_Object.Glossary_Info.Version);
 
-			    elsif Format_Object.Glossary_Change_Kind = ARM_Database.Deleted then
+			    elsif Format_Object.Glossary_Info.Change_Kind = ARM_Database.Deleted then
 			        ARM_Database.Insert (Format_Object.Glossary_DB,
-			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Sort_Key => Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len),
 			            Hang_Item => "",
-			            Text => "@chg{Version=[" & Format_Object.Glossary_Version & "],New=[],Old=[@b{" &
-					Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+			            Text => "@chg{Version=[" & Format_Object.Glossary_Info.Version & "],New=[],Old=[@b{" &
+					Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len) &
 				        ".}]} " & Text_Buffer(1..Text_Buffer_Len),
-			            Change_Kind => Format_Object.Glossary_Change_Kind,
-			            Version => Format_Object.Glossary_Version);
+			            Change_Kind => Format_Object.Glossary_Info.Change_Kind,
+			            Version => Format_Object.Glossary_Info.Version);
+
+			    elsif Format_Object.Glossary_Info.Change_Kind = ARM_Database.None then
+			        ARM_Database.Insert (Format_Object.Glossary_DB,
+			            Sort_Key => Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len),
+			            Hang_Item => "",
+			            Text => "@b{" & Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len) &
+				        ".} " & Text_Buffer(1..Text_Buffer_Len),
+			            Change_Kind => ARM_Database.None,
+			            Version => '0');
 
 			    else
 			        ARM_Database.Insert (Format_Object.Glossary_DB,
-			            Sort_Key => Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len),
+			            Sort_Key => Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len),
 			            Hang_Item => "",
-			            Text => "@b{" & Format_Object.Glossary_Term(1..Format_Object.Glossary_Term_Len) &
+			            Text => "@b{" & Format_Object.Glossary_Info.Term(1..Format_Object.Glossary_Info.Term_Len) &
 				        ".} " & Text_Buffer(1..Text_Buffer_Len),
-			            Change_Kind => Format_Object.Glossary_Change_Kind,
-			            Version => Format_Object.Glossary_Version);
+			            Change_Kind => Format_Object.Glossary_Info.Change_Kind,
+			            Version => Format_Object.Glossary_Info.Version);
 			    end if;
 			end if;
 		    end;
@@ -9571,7 +9642,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Command = Change_To_Glossary_Also then
 			null; -- Normal text, no special handling needed.
 		    else
-			if Format_Object.Glossary_Displayed then
+			if Format_Object.Glossary_Info.Displayed then
 			    -- End the annotation.
 			    Check_End_Paragraph;
 			    Format_Object.Last_Paragraph_Subhead_Type :=
@@ -9586,6 +9657,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    null; -- No text, no special handling needed.
 			end if;
 		    end if;
+		    -- Remove glossary information as the command is finished:
+		    Format_Object.Glossary_Info :=
+			(Active => False,
+			 Change_Kind => ARM_Database.None);
 
 		when Attribute_Text_Param =>
 		    declare
