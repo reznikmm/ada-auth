@@ -42,7 +42,7 @@ The output of the tool is written into a subdirectory
 does not require any pre or post processing except to have Word create the real
 table of contents for the .RTF outout.
 
-Usage: Arm_Form <Master_File> [<Format>[, <Changes>[, <Version>]]]
+Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <Version>[ <Output_Path>]]]]
 
 The <Master_File> specifies the layout of the document to generate (see below).
 If <Master_File> has no extension, ".MSM" is assumed.
@@ -79,6 +79,8 @@ The formats are:
 
 <Version> = a value in 0 .. 9 representing the change version desired.
 
+<Output_Path> = the path to which to write the result files. This must end
+   with a path separator.
 
 Summary of commands used in the ARM text input files (.MSM and .MSS files):
 
@@ -1289,7 +1291,7 @@ The master file RM.MSM specifies the Ada Reference Manual. This is the
 version used by most users.
 
 The master file ISO-RM.MSM specifies Ada Reference Manual in ISO format.
-This version lacks some sections, paragraph numbers, and is printed on A4
+This version lacks some sections, paragraph numbers, and is formatted for A4
 paper.
 
 Versions:
