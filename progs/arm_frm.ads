@@ -101,6 +101,8 @@ package ARM_Format is
     --			would fit (have we lost our minds??).
     --  8/31/12 - RLB - Put glossary components into a subrecord to prevent
     --			inappropriate usage.
+    -- 10/18/12 - RLB - Put impdef components into a subrecord to prevent
+    --			inappropriate usage.
 
     type Format_Type is tagged limited private;
 
@@ -245,8 +247,10 @@ private
 		Term : String (1..50); -- Glossary term.
 		Term_Len : Natural := 0;
 		Add_to_Glossary : Boolean;
-			-- Add this item to the Glossary.
---?? Is this the same as "Active"??
+			-- Add this item to the Glossary. (Not the same
+			-- as "Active"; when generating older versions
+			-- of a document, this would be False for a
+			-- new glossary entry.)
 		Displayed : Boolean;
 			-- The text was displayed in the document.
 		case Change_Kind is
@@ -254,6 +258,38 @@ private
 		    when others =>
 			Version : ARM_Contents.Change_Version_Type;
 			    -- The version number of the changed paragraph.
+		end case;
+	end case;
+    end record;
+
+    type Impdef_Command_Type is (None, Aspect, Impdef, Docreq, ImplAdv);
+
+    type Impdef_Info_Type (Command : Impdef_Command_Type := None) is record
+	case Command is
+	    when None => null; -- No impdef, docreq, impladv, aspectdesc in use.
+	    when others =>
+		-- Impdef, Docreq, Impladv, Aspectdesc actively being processed;
+		-- used only when processing ImplDef, ChgImplDef,
+		--    ChgDocReq, ChgImplAdv, and ChgAspectDesc.
+                Change_Kind : ARM_Database.Paragraph_Change_Kind_Type := ARM_Database.None;
+			-- The Change_Kind of the command.
+		Version : ARM_Contents.Change_Version_Type;
+			-- If the kind is not "None", this is the version
+			-- number of the changed paragraph.
+		Initial_Version : ARM_Contents.Change_Version_Type;
+			-- This is the version number of the original paragraph.
+		Paragraph_String : String (1 .. 10); -- Paragraph number.
+		Paragraph_Len : Natural;
+		Add_to_DB : Boolean;
+			-- Add this item to the appropriate DB. (Not the same
+			-- as "Active"; when generating older versions
+			-- of a document, this would be False for a
+			-- new impdef, docreq, etc. entry.)
+		case Command is
+		    when Aspect =>
+			Aspect_Name : String (1..30); -- Aspect name text
+			Aspect_Name_Len : Natural := 0;
+		    when others => null;
 		end case;
 	end case;
     end record;
@@ -359,12 +395,6 @@ private
 				    -- processing of the Syn command.
 	Syntax_Tab_Len : Natural := 0;
 
-	-- Aspects:
-	Aspect_Name : String (1..30); -- Aspect name text
-	Aspect_Name_Len : Natural := 0;
-
-	Aspect_DB : ARM_Database.Database_Type;
-
 	-- Attributes:
 	Prefix_Text : String (1..160) := "@b{NONE!}" & (10..160 => ' ');
 	    -- This text is used as part of the attribute list text.
@@ -394,25 +424,26 @@ private
 	Glossary_Info : Glossary_Info_Type;
 	Glossary_DB : ARM_Database.Database_Type;
 
+	-- Aspects:
+	Aspect_DB : ARM_Database.Database_Type;
+	    -- Also see Impdef_Info, below.
+
 	-- Implementation advice:
 	Impladv_DB : ARM_Database.Database_Type;
+	    -- Also see Impdef_Info, below.
 
 	-- Documentation requirements:
 	Docreq_DB : ARM_Database.Database_Type;
+	    -- Also see Impdef_Info, below.
 
 	-- Implementation-defined:
 	Impdef_DB : ARM_Database.Database_Type;
-	-- The next four are used only during processing of ImplDef, ChgImplDef,
-	--    ChgDocReq, ChgImplAdv, and ChgAspectDesc.
-	Impdef_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
-			-- The change kind of the impldef.
-	Impdef_Version : ARM_Contents.Change_Version_Type;
-			-- If the kind is not "None", this is the version
-			-- number of the changed paragraph.
-	Impdef_Initial_Version : ARM_Contents.Change_Version_Type;
-			-- This is the version number of the original paragraph.
-	Impdef_Paragraph_String : String (1 .. 10); -- Paragraph number.
-	Impdef_Paragraph_Len : Natural;
+	    -- Also see Impdef_Info, below.
+
+	-- For all of the above four:
+	Impdef_Info : Impdef_Info_Type;
+	    -- Used only during processing of ImplDef, ChgImplDef,
+	    --    ChgDocReq, ChgImplAdv, and ChgAspectDesc.
 
 	-- Language-Defined entity subindexes:
 	Package_Index : ARM_Subindex.Subindex_Type;

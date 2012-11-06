@@ -272,6 +272,10 @@ package body ARM_Format is
     --  4/ 3/12 - RLB - Removed dead variables.
     --  8/31/12 - RLB - Put glossary components into a subrecord to prevent
     --			inappropriate usage.
+    -- 10/18/12 - RLB - Put impdef components into a subrecord to prevent
+    --			inappropriate usage. Fixed problem caused by putting
+    --			newer items than the generated version into the DB.
+
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -3426,8 +3430,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 
 	    procedure Gen_Chg_xxxx (Param_Cmd   : in Data.Command_Type;
-				    AARM_Prefix : in String;
-				    For_Aspect  : in Boolean := False) is
+				    AARM_Prefix : in String) is
 		-- Implement chgimpdef, chgimpladv, chgdocreq, and
 		-- chgaspectdesc commands.
 		-- The AARM prefix (if needed) is AARM_Prefix, and
@@ -3455,17 +3458,69 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	        Get_Change_Kind (Kind);
 		    -- Read a parameter named "Kind".
 
+		if Format_Object.Impdef_Info.Command /= None then
+		    Ada.Text_IO.Put_Line ("  ** Nested impdef entry on line " & ARM_Input.Line_String (Input_Object));
+		-- else OK.
+		end if;
+		-- Setup impdef information for this command:
+		case Param_Cmd is
+		    when Change_Impdef_Text_Param =>
+			Format_Object.Impdef_Info :=
+			    (Command	 => Impdef,
+			     Change_Kind => <>,      -- Set below.
+			     Version     => <>,      -- Set below.
+			     Initial_Version =>
+					  Version,   -- Until we decide differently.
+			     Add_to_DB   => True,    -- Until we decide differently.
+			     Paragraph_String => <>, -- Set below.
+			     Paragraph_Len    => <>);-- Set below.
+		    when Change_Docreq_Text_Param =>
+			Format_Object.Impdef_Info :=
+			    (Command	 => Docreq,
+			     Change_Kind => <>,      -- Set below.
+			     Version     => <>,      -- Set below.
+			     Initial_Version =>
+					  Version,   -- Until we decide differently.
+			     Add_to_DB   => True,    -- Until we decide differently.
+			     Paragraph_String => <>, -- Set below.
+			     Paragraph_Len    => <>);-- Set below.
+		    when Change_Impladv_Text_Param =>
+			Format_Object.Impdef_Info :=
+			    (Command	 => Impladv,
+			     Change_Kind => <>,      -- Set below.
+			     Version     => <>,      -- Set below.
+			     Initial_Version =>
+					  Version,   -- Until we decide differently.
+			     Add_to_DB   => True,    -- Until we decide differently.
+			     Paragraph_String => <>, -- Set below.
+			     Paragraph_Len    => <>);-- Set below.
+		    when Change_AspectDesc_Text_Param =>
+			Format_Object.Impdef_Info :=
+			    (Command	 => Aspect,
+			     Change_Kind => <>,      -- Set below.
+			     Version     => <>,      -- Set below.
+			     Initial_Version =>
+					  Version,   -- Until we decide differently.
+			     Add_to_DB   => True,    -- Until we decide differently.
+			     Aspect_Name => <>,      -- Set below.
+			     Aspect_Name_Len  => <>, -- Set below.
+			     Paragraph_String => <>, -- Set below.
+			     Paragraph_Len    => <>);-- Set below.
+		    when others =>
+			raise Program_Error; -- Wrong kind of command passed in.
+		end case;
 	        -- Check for the optional "InitialVersion" parameter,
 		-- and the not optional, but only used for some commands
 		-- "Aspect" parameter, stopping when we reach Text:
+
+	        -- Note: If there is no InitialVersion command, use the same
+	        -- version of the rest of the command (which was set when the
+		-- Info was created).
 		declare
 		    Which_Param : ARM_Input.Param_Num;
 		    Ch		: Character;
 		    Saw_Aspect  : Boolean := False;
 		begin
-		    -- If there is no InitialVersion command, use the same
-		    -- version of the rest of the command.
-		    Format_Object.Impdef_Initial_Version := Version;
 		    loop
 	                ARM_Input.Check_One_of_Parameter_Names (Input_Object,
 		            Param_Name_1 => "InitialVersion" & (15..ARM_Input.Command_Name_Type'Last => ' '),
@@ -3478,7 +3533,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        if Which_Param = 1 and then Close_Ch /= ' ' then
 			    -- Found InitialVersion
 		            ARM_Input.Get_Char (Input_Object, Ch);
-			    Format_Object.Impdef_Initial_Version := Ch;
+			    Format_Object.Impdef_Info.Initial_Version := Ch;
 		            ARM_Input.Get_Char (Input_Object, Ch);
 		            if Ch /= Close_Ch then
 			        Ada.Text_IO.Put_Line ("  ** Bad close for InitialVersion parameter on line " &
@@ -3493,14 +3548,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		            ARM_Input.Copy_to_String_until_Close_Char (
 			        Input_Object,
 			        Close_Ch,
-			        Format_Object.Aspect_Name,
-			        Format_Object.Aspect_Name_Len);
+			        Format_Object.Impdef_Info.Aspect_Name,
+			        Format_Object.Impdef_Info.Aspect_Name_Len);
 
 		        else -- We found "Text" (or an error)
 			    exit; -- Handling of Text is below.
 		        end if;
 		    end loop;
-		    if For_Aspect then
+		    if Format_Object.Impdef_Info.Command = Aspect then
 			if not Saw_Aspect then
 			    Ada.Text_IO.Put_Line ("  ** Missing Aspect parameter on line " &
 				ARM_Input.Line_String (Input_Object));
@@ -3532,9 +3587,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        when Do_Not_Display_Text =>
 		            Display_It := False;
 			    Local_Change := ARM_Output.None;
+			    Format_Object.Impdef_Info.Add_to_DB := False;
+				-- Do not add to the database, or display anything.
 		        when ARM_Output.None|ARM_Output.Insertion =>
-		            Format_Object.Impdef_Version := Version;
-		            Format_Object.Impdef_Change_Kind := Kind;
+		            Format_Object.Impdef_Info.Version := Version;
+		            Format_Object.Impdef_Info.Change_Kind := Kind;
 		            Display_It := Format_Object.Include_Annotations;
 			        -- Show impdef notes only if we're showing annotations.
 		        when ARM_Output.Deletion =>
@@ -3560,13 +3617,17 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    -- be output in this case.
 			    Local_Change := ARM_Output.None;
 			    Skip_Header := True;
-		            Format_Object.Impdef_Version := Version;
-		            Format_Object.Impdef_Change_Kind := Kind;
+		            Format_Object.Impdef_Info.Version := Version;
+		            Format_Object.Impdef_Info.Change_Kind := Kind;
 		            Display_It := Format_Object.Include_Annotations;
 			        -- Show impdef notes only if we're showing annotations.
+			    Format_Object.Impdef_Info.Add_to_DB := Display_It;
+				-- This will add deleted text to the database,
+				-- but there isn't a sensible alternative option.
+				-- (And it's consistent with other lists in the standard.)
 		        when ARM_Output.None | ARM_Output.Deletion =>
-		            Format_Object.Impdef_Version := Version;
-		            Format_Object.Impdef_Change_Kind := Kind;
+		            Format_Object.Impdef_Info.Version := Version;
+		            Format_Object.Impdef_Info.Change_Kind := Kind;
 		            Display_It := Format_Object.Include_Annotations;
 			        -- Show impdef notes only if we're showing annotations.
 			    Skip_Header := False;
@@ -3575,8 +3636,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    end case;
 	        else -- we always display it.
 --Ada.Text_IO.Put_Line ("  Other");
-		    Format_Object.Impdef_Version := Version;
-		    Format_Object.Impdef_Change_Kind := Kind;
+		    Format_Object.Impdef_Info.Version := Version;
+		    Format_Object.Impdef_Info.Change_Kind := Kind;
 		    Display_It := Format_Object.Include_Annotations;
 		        -- Show impdef notes only if we're showing annotations.
 		    Local_Change := ARM_Output.None;
@@ -3594,17 +3655,17 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		    if Format_Object.In_Paragraph then
 		        -- Do this to preserve any inserted paragraph info.
-		        Format_Object.Impdef_Paragraph_String :=
+		        Format_Object.Impdef_Info.Paragraph_String :=
 			    Format_Object.Current_Paragraph_String;
-		        Format_Object.Impdef_Paragraph_Len :=
+		        Format_Object.Impdef_Info.Paragraph_Len :=
 			    Format_Object.Current_Paragraph_Len;
 		    else
 		        declare
 			    PNum : constant String := Positive'Image (
 			        Format_Object.Next_Paragraph - 1);
 		        begin
-			    Format_Object.Impdef_Paragraph_Len := PNum'Length - 1;
-			    Format_Object.Impdef_Paragraph_String (1 .. PNum'Last-1) :=
+			    Format_Object.Impdef_Info.Paragraph_Len := PNum'Length - 1;
+			    Format_Object.Impdef_Info.Paragraph_String (1 .. PNum'Last-1) :=
 			        PNum (2 .. PNum'Last);
 		        end;
 		    end if;
@@ -3617,8 +3678,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops := Format_Object.Paragraph_Tab_Stops;
 		        Format_Object.Next_Paragraph_Format_Type := Bare_Annotation;
 		        Format_Object.Next_Paragraph_Subhead_Type := Bare_Annotation;
-		        Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Version;
-		        Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Change_Kind;
+		        Format_Object.Next_Paragraph_Version := Format_Object.Impdef_Info.Version;
+		        Format_Object.Next_Paragraph_Change_Kind := Format_Object.Impdef_Info.Change_Kind;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 		        Check_Paragraph;
 
@@ -3628,7 +3689,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    Format_Object.Text_Format;
 			    begin
 			        Local_Format.Bold := True;
-			        Local_Format.Version := Format_Object.Impdef_Version;
+			        Local_Format.Version := Format_Object.Impdef_Info.Version;
 		                if ARM_Output."/=" (Local_Change, ARM_Output.None) then
 			            Local_Format.Change := Local_Change;
 			            ARM_Output.Text_Format (Output_Object,
@@ -3649,14 +3710,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_Object.Last_Paragraph_Subhead_Type := Bare_Annotation;
 		        Format_Object.Last_Non_Space := False;
 
-			if For_Aspect then
+		        if Format_Object.Impdef_Info.Command = Aspect then
 			    -- Output the aspect name:
 			    declare
 			        Local_Format : ARM_Output.Format_Type :=
 				    Format_Object.Text_Format;
 			    begin
 			        Local_Format.Bold := True;
-			        Local_Format.Version := Format_Object.Impdef_Version;
+			        Local_Format.Version := Format_Object.Impdef_Info.Version;
 		                if ARM_Output."/=" (Local_Change, ARM_Output.None) then
 			            Local_Format.Change := Local_Change;
 			            ARM_Output.Text_Format (Output_Object,
@@ -3666,7 +3727,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 							    Local_Format);
 		                end if;
 		                ARM_Output.Ordinary_Text (Output_Object,
-			             Text => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len));
+			             Text => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len));
 		                ARM_Output.Ordinary_Text (Output_Object,
 			             Text => ": ");
 			        Local_Format.Bold := Format_Object.Text_Format.Bold;
@@ -6139,23 +6200,33 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		    ARM_Input.Start_Recording (Input_Object);
 
-		    Format_Object.Impdef_Change_Kind := ARM_Database.None;
-		    Format_Object.Impdef_Version := '0';
-		    Format_Object.Impdef_Initial_Version := '0';
+		    if Format_Object.Impdef_Info.Command /= None then
+		        Ada.Text_IO.Put_Line ("  ** Nested impdef entry on line " & ARM_Input.Line_String (Input_Object));
+		    -- else OK.
+		    end if;
+		    -- Setup impdef information for this command:
+		    Format_Object.Impdef_Info :=
+		        (Command     => Impdef,
+			 Change_Kind => ARM_Database.None,
+			 Version     => '0',
+			 Initial_Version => '0',
+			 Add_to_DB   => True,    -- Until we decide differently.
+			 Paragraph_String => <>, -- Set below.
+			 Paragraph_Len    => <>);-- Set below.
 
 		    if Format_Object.In_Paragraph then
 			-- Do this to preserve any inserted paragraph info.
-			Format_Object.Impdef_Paragraph_String :=
+			Format_Object.Impdef_Info.Paragraph_String :=
 			    Format_Object.Current_Paragraph_String;
-			Format_Object.Impdef_Paragraph_Len :=
+			Format_Object.Impdef_Info.Paragraph_Len :=
 			    Format_Object.Current_Paragraph_Len;
 		    else
 			declare
 			    PNum : constant String := Positive'Image (
 				Format_Object.Next_Paragraph - 1);
 			begin
-			    Format_Object.Impdef_Paragraph_Len := PNum'Length - 1;
-			    Format_Object.Impdef_Paragraph_String (1 .. PNum'Last-1) :=
+			    Format_Object.Impdef_Info.Paragraph_Len := PNum'Length - 1;
+			    Format_Object.Impdef_Info.Paragraph_String (1 .. PNum'Last-1) :=
 				PNum (2 .. PNum'Last);
 			end;
 		    end if;
@@ -8134,8 +8205,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    -- by the text. As usual, any of the
 		    -- allowed bracketing characters can be used.
 		    Gen_Chg_xxxx (Param_Cmd => Change_AspectDesc_Text_Param,
-				  AARM_Prefix => "Aspect Description for ",
-				  For_Aspect => True);
+				  AARM_Prefix => "Aspect Description for ");
 
 		when Change_Attribute =>
 		     -- @ChgAttribute{Version=[<version>], Kind=(<kind>),
@@ -9147,8 +9217,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	procedure Handle_End_of_Command is
 	    -- Unstack and handle the end of Commands.
 
-	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type;
-					   For_Aspect : in Boolean := False) is
+	    procedure Finish_and_DB_Entry (DB : in out ARM_Database.Database_Type) is
 		-- Close the text parameter for a number of commands
 		-- (impdef, chgimpdef, chgimpladv, chgdocreg)
 		-- and insert the resulting string into the appropriate DB.
@@ -9217,37 +9286,40 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		function See_String return String is
 		begin
-		    case Format_Object.Impdef_Change_Kind is
+		    case Format_Object.Impdef_Info.Change_Kind is
 			when ARM_Database.None | ARM_Database.Revised |
 			     ARM_Database.Revised_Inserted_Number =>
-			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
+			    if Format_Object.Number_Paragraphs and then
+                                Format_Object.Impdef_Info.Command /= Aspect then
 				return " See @RefSecbyNum{" & DB_Clause_String & "}(" &
-				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").";
 			    else -- No paragraph numbers.
 				return " See @RefSecbyNum{" & DB_Clause_String & "}.";
 			    end if;
 			when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
-				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+			    if Format_Object.Number_Paragraphs and then
+                                Format_Object.Impdef_Info.Command /= Aspect then
+				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 			            "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
-				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").],Old=[]}";
 			    else -- No paragraph numbers.
-				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 				    "], New=[ See @RefSecbyNum{" & DB_Clause_String & "}.],Old=[]}";
 			    end if;
 			when ARM_Database.Deleted |
 			     ARM_Database.Deleted_Inserted_Number |
 			     ARM_Database.Deleted_No_Delete_Message |
 			     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-			    if Format_Object.Number_Paragraphs and (not For_Aspect) then
-				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+			    if Format_Object.Number_Paragraphs and then
+                                Format_Object.Impdef_Info.Command /= Aspect then
+				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}(" &
-				    Format_Object.Impdef_Paragraph_String (1..Format_Object.Impdef_Paragraph_Len) &
+				    Format_Object.Impdef_Info.Paragraph_String (1..Format_Object.Impdef_Info.Paragraph_Len) &
 				    ").]}";
 			    else -- No paragraph numbers.
-				return "@Chg{Version=[" & Format_Object.Impdef_Version &
+				return "@Chg{Version=[" & Format_Object.Impdef_Info.Version &
 				    "], New=[],Old=[ See @RefSecbyNum{" & DB_Clause_String & "}.]}";
 			    end if;
 		    end case;
@@ -9257,27 +9329,30 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		Arm_Input.Stop_Recording_and_Read_Result
 		    (Input_Object, Text_Buffer, Text_Buffer_Len);
 		Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
-		if For_Aspect then
+		if not Format_Object.Impdef_Info.Add_to_DB then
+		    null; -- Don't add to the DB
+		elsif Format_Object.Impdef_Info.Command = Aspect then
 	            ARM_Database.Insert (DB,
-		        Sort_Key => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len),
-		        Hang_Item => Format_Object.Aspect_Name(1..Format_Object.Aspect_Name_Len),
+		        Sort_Key => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
+		        Hang_Item => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
 		        Text => Text_Buffer(1..Text_Buffer_Len) &
 		           See_String,
-		        Change_Kind => Format_Object.Impdef_Change_Kind,
-		        Version => Format_Object.Impdef_Version,
-			Initial_Version => Format_Object.Impdef_Initial_Version);
+		        Change_Kind => Format_Object.Impdef_Info.Change_Kind,
+		        Version => Format_Object.Impdef_Info.Version,
+			Initial_Version => Format_Object.Impdef_Info.Initial_Version);
 		else
 	            ARM_Database.Insert (DB,
 		        Sort_Key => Sort_Clause_String,
 		        Hang_Item => "",
 		        Text => Text_Buffer(1..Text_Buffer_Len) &
 		           See_String,
-		        Change_Kind => Format_Object.Impdef_Change_Kind,
-		        Version => Format_Object.Impdef_Version,
-			Initial_Version => Format_Object.Impdef_Initial_Version);
+		        Change_Kind => Format_Object.Impdef_Info.Change_Kind,
+		        Version => Format_Object.Impdef_Info.Version,
+			Initial_Version => Format_Object.Impdef_Info.Initial_Version);
 		end if;
 	        -- Finish the text processing:
-	        if Format_Object.Include_Annotations then
+		if Format_Object.Impdef_Info.Add_to_DB and
+	           Format_Object.Include_Annotations then
 		    -- End the annotation:
 		    Check_End_Paragraph;
 		    if Format_Object.Next_Paragraph_Subhead_Type /=
@@ -9296,6 +9371,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Tab_Stops;
 	        -- else nothing started, nothing to finish.
 	        end if;
+		-- Clear the Impdef information:
+		Format_Object.Impdef_Info := (Command => None);
 	    end Finish_and_DB_Entry;
 
 	begin
@@ -10089,7 +10166,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Change_AspectDesc_Text_Param =>
 		    -- Save the documentation requirement entry in the database.
-		    Finish_and_DB_Entry (Format_Object.Aspect_DB, For_Aspect => True);
+		    Finish_and_DB_Entry (Format_Object.Aspect_DB);
 
 		when Prefix_Type | Change_Prefix_Text_Param =>
 		    -- Copy the text into the Format_Object.Prefix_Text string.
