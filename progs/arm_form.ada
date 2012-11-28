@@ -146,7 +146,7 @@ procedure ARM_Formatter is
 	    -- Note: This is a simple Windows check; it doesn't check for and
 	    -- allow bare disk names. This check works on Linux but allows
 	    -- ending with '\' which does not work on Linux (that will be
-	    -- when the files are opened).
+	    -- failed when the files are opened).
 	    declare
 		Last : constant Character :=
 		    Ada.Strings.Unbounded.Element (Ada.Strings.Unbounded.Tail (Output_Path, 1), 1);
@@ -261,7 +261,7 @@ procedure ARM_Formatter is
 	    Ada.Text_IO.Put_Line ("                        1-Technical Corrigendum 1");
 	    Ada.Text_IO.Put_Line ("                        2-Amendment 1");
 	    Ada.Text_IO.Put_Line ("     where: <Output_Path> = it the path where to write the result files. This must");
-	    Ada.Text_IO.Put_Line ("                        end with a path separator");
+	    Ada.Text_IO.Put_Line ("                        end with a path separator. It defaults to ./output/");
 	    raise No_Command_Error;
     end Get_Commands;
 

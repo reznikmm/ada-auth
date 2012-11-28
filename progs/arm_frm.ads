@@ -103,6 +103,8 @@ package ARM_Format is
     --			inappropriate usage.
     -- 10/18/12 - RLB - Put impdef components into a subrecord to prevent
     --			inappropriate usage.
+    --		- RLB - Added more specific hanging_indent formats, along with
+    --			small.
 
     type Format_Type is tagged limited private;
 
@@ -225,7 +227,9 @@ private
 	Indented_Example_Text, Code_Indented, Indent, Bulleted, Nested_Bulleted,
         Nested_X2_Bulleted,
 	Display, Syntax_Display, Syntax_Indented, Syntax_Production,
-	Enumerated, Nested_Enumerated, Hanging_Indented, Title, In_Table);
+	Enumerated, Nested_Enumerated,
+        Hanging_Indented_1, Hanging_Indented_2, Hanging_Indented_3,
+        Hanging_Indented_4, Small, Title, In_Table);
 
     type Reference;
     type Reference_Ptr is access Reference;

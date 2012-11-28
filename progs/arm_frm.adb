@@ -275,6 +275,8 @@ package body ARM_Format is
     -- 10/18/12 - RLB - Put impdef components into a subrecord to prevent
     --			inappropriate usage. Fixed problem caused by putting
     --			newer items than the generated version into the DB.
+    --		- RLB - Added four specific indent hanging formats and
+    --			"small" format.
 
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
@@ -1122,8 +1124,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		     Nested_Bulleted | Nested_X2_Bulleted |
 		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
-		     Enumerated | Nested_Enumerated | Hanging_Indented |
-		     Title =>
+		     Enumerated | Nested_Enumerated |
+		     Hanging_Indented_1 | Hanging_Indented_2 |
+		     Hanging_Indented_3 | Hanging_Indented_4 |
+		     Small | Title =>
 		    -- This depends on the containing paragraph kind;
 		    -- Last_Paragraph_Subhead_Type should contain that.
 		    if Format_Object.Last_Paragraph_Subhead_Type = Wide_Above or else
@@ -1141,7 +1145,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Production or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Enumerated or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_1 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_2 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_3 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_4 or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Title or else
 		       Format_Object.Last_Paragraph_Subhead_Type = In_Table then
 Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_Input.Line_String (Input_Object));
@@ -1174,7 +1181,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		     Imp_Note | Corr_Change | Discussion |
 		     Honest | Glossary_Marker | Bare_Annotation |
 		     Element_Ref | Child_Ref | Usage_Note |
-		     Notes | Single_Note =>
+		     Notes | Single_Note | Small =>
 		    return True;
 	        when In_Table =>
 		    return False; -- Tables are never considered part of the
@@ -1185,7 +1192,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		     Nested_Bulleted | Nested_X2_Bulleted |
 		     Display | Syntax_Display |
 		     Syntax_Indented | Syntax_Production |
-		     Enumerated | Nested_Enumerated | Hanging_Indented |
+		     Enumerated | Nested_Enumerated |
+		     Hanging_Indented_1 | Hanging_Indented_2 |
+		     Hanging_Indented_3 | Hanging_Indented_4 |
 		     Title =>
 		    -- This depends on the containing paragraph kind;
 		    -- Last_Paragraph_Subhead_Type should contain that.
@@ -1204,7 +1213,10 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Production or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Enumerated or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_1 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_2 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_3 or else
+		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_4 or else
 		       Format_Object.Last_Paragraph_Subhead_Type = Title or else
 		       Format_Object.Last_Paragraph_Subhead_Type = In_Table then
 Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_Input.Line_String (Input_Object));
@@ -1533,12 +1545,16 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 					return 1; -- One unit.
 		        	    when Syntax_Production =>
 					return Nested_Indent(I-1); -- Depends on enclosing.
-		        	    when Hanging_Indented =>
-		                        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-					    return 5; -- Five units.
-					else
-					    return 3; -- Three units.
-					end if;
+		        	    when Hanging_Indented_1 =>
+				        return Nested_Indent(I-1) + 1; -- Depends on enclosing, at least 1.
+		        	    when Hanging_Indented_2 =>
+				        return Nested_Indent(I-1) + 2; -- Depends on enclosing, at least 2.
+		        	    when Hanging_Indented_3 =>
+				        return Nested_Indent(I-1) + 3; -- Depends on enclosing, at least 3.
+		        	    when Hanging_Indented_4 =>
+				        return Nested_Indent(I-1) + 4; -- Depends on enclosing, at least 4.
+		        	    when Small =>
+				        return Nested_Indent(I-1); -- Depends on enclosing, does not change.
 		        	    when Title =>
 					return 0; -- No indent.
 		        	    when In_Table =>
@@ -1590,7 +1606,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Format_Object.Style  := ARM_Output.Normal;
 			Format_Object.Indent := 1; -- One unit.
 			Format_Object.No_Breaks := True;
-		    when Notes | Single_Note => -- Notes (only the numbering varies)
+		    when Notes | Single_Note | Small => -- Notes (only the numbering varies)
 			Format_Object.Style  := ARM_Output.Small;
 			Format_Object.Indent := 1; -- One unit.
 			Format_Object.No_Breaks := False;
@@ -1625,19 +1641,23 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			Indented_Example_Text =>
 			case Format_Object.Examples_Font is
 			    when ARM_Output.Fixed | ARM_Output.Default =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+--if not Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) and then
+--   Format_Object.Last_Paragraph_Subhead_Type /= Small then
+--   Ada.Text_IO.Put_Line ("$$ Example in notes: size change, line " & ARM_Input.Line_String (Input_Object));
+--end if;
 			           Format_Object.Style := ARM_Output.Small_Examples;
-			        else
+				else
 			           Format_Object.Style := ARM_Output.Examples;
 			        end if;
 			    when ARM_Output.Roman =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 				   Format_Object.Style := ARM_Output.Small;
 			        else
 				   Format_Object.Style := ARM_Output.Normal;
 			        end if;
 			    when ARM_Output.Swiss =>
-			        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			        if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 				   Format_Object.Style := ARM_Output.Small_Swiss_Examples;
 			        else
 				   Format_Object.Style := ARM_Output.Swiss_Examples;
@@ -1676,6 +1696,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			      Format_Object.Last_Paragraph_Subhead_Type = Single_Note then
 			    Format_Object.Style  := ARM_Output.Small;
 			    Format_Object.Indent := 3; -- Three units.
+		        elsif Format_Object.Last_Paragraph_Subhead_Type = Small then
+			    Format_Object.Style  := ARM_Output.Small;
+			    Format_Object.Indent := 2; -- Two units.
 			else
 			    Format_Object.Style  := ARM_Output.Normal;
 			    Format_Object.Indent := 2; -- Two indent.
@@ -1779,60 +1802,67 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			null; -- Leave format alone (but line-breaks are preserved).
 			Format_Object.No_Breaks := True;
 
-        	    when Hanging_Indented =>
-                        if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
-        		    if Enclosing_Format = Code_Indented or else
-        		       Enclosing_Format = Indent or else
-        		       Enclosing_Format = Hanging_Indented or else
-                               Enclosing_Format = Syntax_Indented or else
-			       Enclosing_Format = Syntax then
-			        Format_Object.Style  := ARM_Output.Small_Narrow_Hanging;
-        		    elsif Enclosing_Format = Bulleted or else
-        		          Enclosing_Format = Enumerated then
-			        Format_Object.Style  := ARM_Output.Small_Hanging_in_Bulleted;
-			    else
-			        Format_Object.Style  := ARM_Output.Small_Wide_Hanging;
-			    end if;
-			    Format_Object.Indent := 5; -- Five units.
-		        elsif Format_Object.Last_Paragraph_Subhead_Type = Notes or else
-			      Format_Object.Last_Paragraph_Subhead_Type = Single_Note then -- Notes:
-        		    if Enclosing_Format = Code_Indented or else
-        		       Enclosing_Format = Indent or else
-        		       Enclosing_Format = Hanging_Indented or else
-                               Enclosing_Format = Syntax_Indented or else
-			       Enclosing_Format = Syntax then
-			        Format_Object.Style  := ARM_Output.Small_Narrow_Hanging;
-        		    elsif Enclosing_Format = Bulleted or else
-        		          Enclosing_Format = Enumerated then
-			        Format_Object.Style  := ARM_Output.Small_Hanging_in_Bulleted;
-			    else
-			        Format_Object.Style  := ARM_Output.Small_Wide_Hanging;
-			    end if;
-			    Format_Object.Indent := 4; -- Four units.
+        	    when Hanging_Indented_1 =>
+			if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Narrow_Hanging;
 			else -- Normal:
-        		    if Enclosing_Format = Code_Indented or else
-        		       Enclosing_Format = Indent or else
-        		       Enclosing_Format = Hanging_Indented or else
-                               Enclosing_Format = Syntax_Indented or else
-			       Enclosing_Format = Syntax then
-			        Format_Object.Style  := ARM_Output.Narrow_Hanging;
-        		    elsif Enclosing_Format = Bulleted or else
-        		          Enclosing_Format = Enumerated then
-			        Format_Object.Style  := ARM_Output.Hanging_in_Bulleted;
-			    else
-			        Format_Object.Style  := ARM_Output.Wide_Hanging;
-			    end if;
-			    Format_Object.Indent := 3; -- Three units.
+			    Format_Object.Style  := ARM_Output.Narrow_Hanging;
 			end if;
+		        Format_Object.Indent := 1 + Enclosing_Indent;
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
 			Format_Object.No_Breaks := False;
+
+        	    when Hanging_Indented_2 =>
+			if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+        		    if Enclosing_Format = Bulleted or else
+        		       Enclosing_Format = Enumerated then
+			        Format_Object.Style  := ARM_Output.Small_Hanging_in_Bulleted;
+				-- The right margin is also adjusted in this case.
+				-- This is a weird special case, used only in
+				-- RM 11.5.
+			    else
+			        Format_Object.Style  := ARM_Output.Small_Medium_Hanging;
+			    end if;
+			else -- Normal:
+        		    if Enclosing_Format = Bulleted or else
+        		       Enclosing_Format = Enumerated then
+			        Format_Object.Style  := ARM_Output.Hanging_in_Bulleted;
+				-- The right margin is also adjusted in this case.
+			    else
+			        Format_Object.Style  := ARM_Output.Medium_Hanging;
+			    end if;
+			end if;
+		        Format_Object.Indent := 2 + Enclosing_Indent;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			Format_Object.No_Breaks := False;
+
+        	    when Hanging_Indented_3 =>
+			if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Wide_Hanging;
+			else -- Normal:
+			    Format_Object.Style  := ARM_Output.Wide_Hanging;
+			end if;
+		        Format_Object.Indent := 3 + Enclosing_Indent;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			Format_Object.No_Breaks := False;
+
+        	    when Hanging_Indented_4 =>
+			if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			    Format_Object.Style  := ARM_Output.Small_Giant_Hanging;
+			else -- Normal:
+			    Format_Object.Style  := ARM_Output.Giant_Hanging;
+			end if;
+		        Format_Object.Indent := 4 + Enclosing_Indent;
+		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
+			Format_Object.No_Breaks := False;
+
         	    when Title =>
 		        Format_Object.Style := ARM_Output.Title;
 			Format_Object.Indent := 0; -- No indent.
 			Format_Object.No_Breaks := False;
         	    when In_Table =>
                         -- Shouldn't get here.
-			if Is_AARM_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
+			if Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type) then
 			    Format_Object.Style := ARM_Output.Small;
 			else
 			    Format_Object.Style := ARM_Output.Normal;
@@ -1904,8 +1934,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display |
 			 Syntax_Display | Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Title |
-			 Enumerated | Nested_Enumerated |
+			 Hanging_Indented_1 | Hanging_Indented_2 |
+			 Hanging_Indented_3 | Hanging_Indented_4 | Title |
+			 Enumerated | Nested_Enumerated | Small |
 			 In_Table =>
 			null; -- No subheader. We don't change the last
 			    -- subheader generated, either.
@@ -1972,8 +2003,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			 Bulleted | Nested_Bulleted | Nested_X2_Bulleted |
 			 Display | Syntax_Display |
 			 Syntax_Indented | Syntax_Production |
-			 Hanging_Indented | Title |
-			 Enumerated | Nested_Enumerated |
+			 Hanging_Indented_1 | Hanging_Indented_2 |
+			 Hanging_Indented_3 | Hanging_Indented_4 | Title |
+			 Enumerated | Nested_Enumerated | Small |
 			 In_Table =>
 			null; -- Just a format.
 		end case;
@@ -2135,7 +2167,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 				if ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) and then
 				    (Format_Object.Next_Paragraph_Format_Type = Enumerated or else
 				     Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated or else
-				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented) then
+				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_1 or else
+				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_2 or else
+				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_3 or else
+				     Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_4) then
 				    -- We're in a hanging style, we need to end hanging first.
 				    -- Nothing else will be displayed; if we didn't end the hang this
 				    -- would end up on the same line as the next paragraph.
@@ -2851,7 +2886,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "description" then
-		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented;
+		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_3;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "enumerate" then
@@ -2864,6 +2899,22 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		Format_Object.Next_Paragraph_Format_Type := Nested_Enumerated;
 		Format_Object.Next_Enumerated_Num := 1;
 		Format_Object.Enumerated_Level := Format_Object.Enumerated_Level + 1;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "hang1list" then
+		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_1;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "hang2list" then
+		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_2;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "hang3list" then
+		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_3;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "hang4list" then
+		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_4;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "title" then
@@ -3621,10 +3672,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		            Format_Object.Impdef_Info.Change_Kind := Kind;
 		            Display_It := Format_Object.Include_Annotations;
 			        -- Show impdef notes only if we're showing annotations.
-			    Format_Object.Impdef_Info.Add_to_DB := Display_It;
+			    Format_Object.Impdef_Info.Add_to_DB := True;
 				-- This will add deleted text to the database,
-				-- but there isn't a sensible alternative option.
-				-- (And it's consistent with other lists in the standard.)
+				-- but there isn't a sensible alternative option,
+				-- as we need to have the deleted paragraph numbers.
 		        when ARM_Output.None | ARM_Output.Deletion =>
 		            Format_Object.Impdef_Info.Version := Version;
 		            Format_Object.Impdef_Info.Change_Kind := Kind;
@@ -4120,7 +4171,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		       Format_Object.Next_Paragraph_Format_Type = Nested_X2_Bulleted or else
 		       Format_Object.Next_Paragraph_Format_Type = Enumerated or else
 		       Format_Object.Next_Paragraph_Format_Type = Nested_Enumerated or else
-		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented then
+		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_1 or else
+		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_2 or else
+		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_3 or else
+		       Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_4 then
 		        Ada.Text_IO.Put_Line ("  ** Tab set in hang or bulleted format: " &
 			    Paragraph_Type'Image(Format_Object.Next_Paragraph_Format_Type) &
 			    ", line " & ARM_Input.Line_String (Input_Object));
@@ -10495,7 +10549,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    if Ch = '\' then
 		-- This represents a tab, or the end of centered text.
 		-- (According to Bob Duff, from the Scribe manual).
-		if Format_Object.Next_Paragraph_Format_Type = Hanging_Indented then
+		if Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_1 or else
+		   Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_2 or else
+		   Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_3 or else
+		   Format_Object.Next_Paragraph_Format_Type = Hanging_Indented_4 then
 		    -- Instead of a tab, just use this to mark the end
 		    -- of the hanging portion:
 		    Check_Paragraph;

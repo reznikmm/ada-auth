@@ -178,6 +178,7 @@ package body ARM_HTML is
     --  5/18/12 - RLB - Added anchors to each paragraph number as suggested
     --			on comp.lang.ada.
     --  8/31/12 - RLB - Added Output_Path.
+    -- 10/18/12 - RLB - Added additional hanging styles.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1151,6 +1152,18 @@ package body ARM_HTML is
 		else
 		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "SmallEnumerated";
 		end if;
+	    when ARM_Output.Giant_Hanging =>
+                if Indent = 4 then
+		    return "GiantHanging";
+		else
+		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "GiantHanging";
+		end if;
+	    when ARM_Output.Small_Giant_Hanging =>
+                if Indent = 6 then
+		    return "SmallGiantHanging";
+		else
+		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "SmallGiantHanging";
+		end if;
 	    when ARM_Output.Wide_Hanging =>
                 if Indent = 3 then
 		    return "WideHanging";
@@ -1163,14 +1176,26 @@ package body ARM_HTML is
 		else
 		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "SmallWideHanging";
 		end if;
+	    when ARM_Output.Medium_Hanging =>
+                if Indent = 2 then
+		    return "MediumHanging";
+		else
+		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "MediumHanging";
+		end if;
+	    when ARM_Output.Small_Medium_Hanging =>
+                if Indent = 4 then
+		    return "SmallMediumHanging";
+		else
+		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "SmallMediumHanging";
+		end if;
 	    when ARM_Output.Narrow_Hanging =>
-                if Indent = 3 then
+                if Indent = 1 then
 		    return "NarrowHanging";
 		else
 		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "NarrowHanging";
 		end if;
 	    when ARM_Output.Small_Narrow_Hanging =>
-                if Indent = 5 then
+                if Indent = 3 then
 		    return "SmallNarrowHanging";
 		else
 		    return "Indented" & Character'Val(Character'Pos('0') + Indent) & "SmallNarrowHanging";
@@ -2139,9 +2164,11 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
-		 ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		 ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		 ARM_Output.Hanging_in_Bulleted |
-		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		 ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		 ARM_Output.Small_Hanging_in_Bulleted |
 		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if Tab_Stops.Number /= 0 then
@@ -2230,7 +2257,8 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		        Output_Object.Char_Count := Output_Object.Char_Count + 28;
 		    end if;
 
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 		     ARM_Output.Enumerated =>
 		    if No_Prefix then
@@ -2243,7 +2271,8 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		        Output_Object.Saw_Hang_End := False;
 		    end if;
 
-	        when ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	        when ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		     ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    if No_Prefix then
@@ -2320,10 +2349,12 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		    end if;
 		    Put_Compatibility_Font_Info (Output_Object, Style, Indent);
 
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 		     ARM_Output.Enumerated |
-	             ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	             ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+	             ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    declare
@@ -2414,10 +2445,12 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		        Put_Style (Paragraph_Name (Style, Indent), Use_DIV => True);
 		    end if;
 
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 		     ARM_Output.Enumerated |
-	             ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	             ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+	             ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    if No_Prefix then
@@ -2559,12 +2592,14 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    	        Ada.Text_IO.Put (Output_Object.Output_File, "</FONT>");
 		    end if;
 
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 	             ARM_Output.Enumerated =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</DL>");
 
-	        when ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	        when ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		     ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 	             ARM_Output.Small_Enumerated =>
 	    	    Ada.Text_IO.Put (Output_Object.Output_File, "</FONT></DL>");
@@ -2592,10 +2627,12 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	             ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted =>
 		    -- We've overridden the style class here.
 		    Ada.Text_IO.Put (Output_Object.Output_File, "</div>");
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 		     ARM_Output.Enumerated |
-	             ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	             ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+	             ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    -- We've overridden the style class here.
@@ -2626,10 +2663,12 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		    Put_End_Style (Output_Object.Paragraph_Style,
 				   Output_Object.Paragraph_Indent,
 				   Include_Compatibility => False);
-	        when ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+	        when ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		     ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		     ARM_Output.Hanging_in_Bulleted |
 		     ARM_Output.Enumerated |
-	             ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+	             ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+	             ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    Put_End_Style (Output_Object.Paragraph_Style,
@@ -4056,7 +4095,8 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	if Output_Object.HTML_Kind = HTML_3 then
 	    case Output_Object.Paragraph_Style is
 	        -- Part of a definition list.
-		when ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		when ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		     ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		     ARM_Output.Small_Hanging_in_Bulleted |
 		     ARM_Output.Small_Enumerated =>
 		    Ada.Text_IO.Put_Line (Output_Object.Output_File, "</FONT><DD><FONT SIZE=-1>");
@@ -5421,6 +5461,34 @@ begin
 		 After => 5);
     end loop;
 
+    -- Giant Hanging
+    -- Note: Indent < 4 is not allowed.
+    for I in 4 .. ARM_Output.Paragraph_Indent_Type'Last loop
+	Paragraph_Info(ARM_Output.Giant_Hanging, I) :=
+		(Defined => True,
+		 Tag  => DL,
+		 Size => 0, -- 18
+		 Font => ARM_Output.Default,
+		 Indent => Natural(I)-4,
+		 Right_Indent => 0,
+		 Hang_Outdent => 4,
+		 Before => 0,
+		 After => 6);
+    end loop;
+    -- Small Giant Hanging:
+    -- Note: Indent < 4 is not allowed.
+    for I in 4 .. ARM_Output.Paragraph_Indent_Type'Last loop
+	Paragraph_Info(ARM_Output.Small_Giant_Hanging, I) :=
+		(Defined => True,
+		 Tag  => DL,
+		 Size => -1, -- 15
+		 Font => ARM_Output.Default,
+		 Indent => Natural(I)-4,
+		 Right_Indent => 0,
+		 Hang_Outdent => 4,
+		 Before => 0,
+		 After => 6);
+    end loop;
     -- Wide Hanging
     -- Note: Indent < 3 is not allowed.
     for I in 3 .. ARM_Output.Paragraph_Indent_Type'Last loop
@@ -5446,6 +5514,34 @@ begin
 		 Indent => Natural(I)-3,
 		 Right_Indent => 0,
 		 Hang_Outdent => 3,
+		 Before => 0,
+		 After => 6);
+    end loop;
+    -- Medium Hanging
+    -- Note: Indent < 2 is not allowed.
+    for I in 2 .. ARM_Output.Paragraph_Indent_Type'Last loop
+	Paragraph_Info(ARM_Output.Medium_Hanging, I) :=
+		(Defined => True,
+		 Tag  => DL,
+		 Size => 0, -- 18
+		 Font => ARM_Output.Default,
+		 Indent => Natural(I)-2,
+		 Right_Indent => 0,
+		 Hang_Outdent => 2,
+		 Before => 0,
+		 After => 6);
+    end loop;
+    -- Small Medium Hanging:
+    -- Note: Indent < 2 is not allowed.
+    for I in 2 .. ARM_Output.Paragraph_Indent_Type'Last loop
+	Paragraph_Info(ARM_Output.Small_Medium_Hanging, I) :=
+		(Defined => True,
+		 Tag  => DL,
+		 Size => -1, -- 15
+		 Font => ARM_Output.Default,
+		 Indent => Natural(I)-2,
+		 Right_Indent => 0,
+		 Hang_Outdent => 2,
 		 Before => 0,
 		 After => 6);
     end loop;

@@ -42,6 +42,7 @@ private package ARM_Format.Data is
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
     -- 10/26/11 - RLB - Added versioned break commands.
     --  3/27/12 - RLB - Added more versioned break commands.
+    -- 10/18/12 - RLB - Added more specific hanging_indent commands.
 
 
     type LString is record
@@ -114,7 +115,11 @@ private package ARM_Format.Data is
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_1=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_2=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_3=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_4=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Small		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 
@@ -184,7 +189,11 @@ private package ARM_Format.Data is
 	 Syntax_Production=>(Length =>  0, Str => (others => ' ')), -- Not used.
 	 Enumerated	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Nested_Enumerated=>(Length =>  0, Str => (others => ' ')), -- Not used.
-	 Hanging_Indented=> (Length =>  0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_1=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_2=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_3=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Hanging_Indented_4=>(Length => 0, Str => (others => ' ')), -- Not used.
+	 Small		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Title		 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 In_Table	 => (Length =>  0, Str => (others => ' '))); -- Not used.
 

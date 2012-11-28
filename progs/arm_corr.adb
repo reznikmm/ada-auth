@@ -64,6 +64,7 @@ package body ARM_Corr is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
     --  8/31/12 - RLB - Added Output_Path.
+    -- 10/18/12 - RLB - Added additional hanging styles.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -389,6 +390,8 @@ package body ARM_Corr is
 
 	    when ARM_Output.Small_Nested_Bulleted => null; --** TBD.
 
+	    when ARM_Output.Giant_Hanging => null; --** TBD.
+
 	    when ARM_Output.Wide_Hanging =>
 		if Indent = 3 then
 		    Output_Object.Indent_Amount := 0; -- %% Temp.
@@ -406,11 +409,17 @@ package body ARM_Corr is
 		    null; -- ** Tbd.
 		end if;
 
+	    when ARM_Output.Medium_Hanging => null; --** TBD.
+
 	    when ARM_Output.Narrow_Hanging => null; --** TBD.
 
 	    when ARM_Output.Hanging_in_Bulleted => null; --** TBD.
 
+	    when ARM_Output.Small_Giant_Hanging => null; --** TBD.
+
 	    when ARM_Output.Small_Wide_Hanging => null; --** TBD.
+
+	    when ARM_Output.Small_Medium_Hanging => null; --** TBD.
 
 	    when ARM_Output.Small_Narrow_Hanging => null; --** TBD.
 
@@ -452,9 +461,11 @@ package body ARM_Corr is
 		end loop;
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
-		 ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		 ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		 ARM_Output.Hanging_in_Bulleted |
-		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		 ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		 ARM_Output.Small_Hanging_in_Bulleted |
 		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if Tab_Stops.Number /= 0 then
@@ -552,6 +563,8 @@ package body ARM_Corr is
 
 	    when ARM_Output.Small_Nested_Bulleted => null; --** TBD.
 
+	    when ARM_Output.Giant_Hanging => null; --** TBD.
+
 	    when ARM_Output.Wide_Hanging =>
 		if Output_Object.Para_Indent = 3 then
 		    Buffer (Output_Object, '>');
@@ -559,11 +572,17 @@ package body ARM_Corr is
 		    null; -- ** Tbd.
 		end if;
 
+	    when ARM_Output.Medium_Hanging => null; --** TBD.
+
 	    when ARM_Output.Narrow_Hanging => null; --** TBD.
 
 	    when ARM_Output.Hanging_in_Bulleted => null; --** TBD.
 
+	    when ARM_Output.Small_Giant_Hanging => null; --** TBD.
+
 	    when ARM_Output.Small_Wide_Hanging => null; --** TBD.
+
+	    when ARM_Output.Small_Medium_Hanging => null; --** TBD.
 
 	    when ARM_Output.Small_Narrow_Hanging => null; --** TBD.
 

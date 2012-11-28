@@ -13,7 +13,7 @@ package ARM_Output is
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2011, 2012
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -106,6 +106,8 @@ package ARM_Output is
     -- 12/19/07 - RLB - Added limited colors to Text_Format.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/25/11 - RLB - Added old insertion version to Revised_Clause_Header.
+    -- 10/18/12 - RLB - Added additional hanging styles to reflect additional
+    --			hang amounts.
 
     type Output_Type is abstract tagged limited null record;
 
@@ -177,10 +179,20 @@ package ARM_Output is
 			-- bullet. Indent must be at least one.
 	Small_Enumerated, -- Same as Enumerated, except that a smaller font
 			-- (same as for Small) is used.
+	Giant_Hanging,	-- The text is normal, but the first part of each
+			-- paragraph (up to the call of End_Hang_Item) hangs
+			-- out four units. Indent must be at least four.
+	Small_Giant_Hanging, -- Same as Giant_Hanging, except that the text is
+			-- in a smaller font (same as Small).
 	Wide_Hanging,	-- The text is normal, but the first part of each
 			-- paragraph (up to the call of End_Hang_Item) hangs
 			-- out three units. Indent must be at least three.
 	Small_Wide_Hanging, -- Same as Wide_Hanging, except that the text is
+			-- in a smaller font (same as Small).
+	Medium_Hanging,	-- The text is normal, but the first part of each
+			-- paragraph (up to the call of End_Hang_Item) hangs
+			-- out two units. Indent must be at least two.
+	Small_Medium_Hanging, -- Same as Medium_Hanging, except that the text is
 			-- in a smaller font (same as Small).
 	Narrow_Hanging,	-- The text is normal, but the first part of each
 			-- paragraph (up to the call of End_Hang_Item) hangs

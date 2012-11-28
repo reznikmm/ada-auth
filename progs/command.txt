@@ -1081,6 +1081,7 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Description - A paragraph with text indented 3 units; but the item
 		  is a hanging undent to the normal paragraph level. Usually
 		  used for attributes, but sometimes used for other items.
+		  Same as Hang3List.
 	DescExample - The text is formatted in a fixed-width example font with
 		  an indent of 4 units; spaces and breaks are preserved. No page breaks
 		  are allowed within a paragraph.
@@ -1088,6 +1089,20 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 		  The text is indented 1 unit. This is intended to match the
 		  indentation of syntax and is usually used in the syntax
 		  grouping; however syntax is usually in the swiss font.
+	Hang1List -
+  		  A paragraph with text indented 1 unit; but the item
+		  is a hanging undent to the normal paragraph level.
+	Hang2List -
+  		  A paragraph with text indented 2 units; but the item
+		  is a hanging undent to the normal paragraph level.
+	Hang3List -
+  		  A paragraph with text indented 3 units; but the item
+		  is a hanging undent to the normal paragraph level.
+	Hang4List -
+  		  A paragraph with text indented 4 units; but the item
+		  is a hanging undent to the normal paragraph level.
+	Small -	  The text has the size of an AARM note, but doesn't
+		  have any headers or extra indentation.
 	Title -   The text is 5 size units (usually 5 points) larger than
 		  normal.
 	Bundle -  The text in the 'bundle' should never be page-breaked.

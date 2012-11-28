@@ -32,6 +32,7 @@ package body ARM_Texinfo is
    --  4/28/12 - S L - Add @w{} after @anchor; otherwise following whitespace
    --		       is dropped.
    --  8/31/12 - RLB - Added Output_Path.
+   -- 10/18/12 - RLB - Added additional hanging styles.
 
 
    use Ada.Text_IO;
@@ -835,8 +836,12 @@ package body ARM_Texinfo is
             --  Number has just been output; start text.
             Put (Output_Object.File, "@w{  }");
 
-         when Wide_Hanging |
+         when Giant_Hanging |
+           Small_Giant_Hanging |
+           Wide_Hanging |
            Small_Wide_Hanging |
+           Medium_Hanging |
+           Small_Medium_Hanging |
            Narrow_Hanging |
            Small_Narrow_Hanging |
            Hanging_in_Bulleted |
@@ -928,8 +933,12 @@ package body ARM_Texinfo is
             Handle_Indent (Output_Object, "@end itemize");
             New_Line (Output_Object.File);
 
-         when Wide_Hanging |
+         when Giant_Hanging |
+           Small_Giant_Hanging |
+           Wide_Hanging |
            Small_Wide_Hanging |
+           Medium_Hanging |
+           Small_Medium_Hanging |
            Narrow_Hanging |
            Small_Narrow_Hanging |
            Hanging_in_Bulleted |
@@ -1066,8 +1075,12 @@ package body ARM_Texinfo is
            Small_Nested_Bulleted |
            Enumerated |
            Small_Enumerated |
+           Giant_Hanging |
+           Small_Giant_Hanging |
            Wide_Hanging |
            Small_Wide_Hanging |
+           Medium_Hanging |
+           Small_Medium_Hanging |
            Narrow_Hanging |
            Small_Narrow_Hanging |
            Hanging_in_Bulleted |
@@ -1617,8 +1630,12 @@ package body ARM_Texinfo is
             Handle_Indent (Output_Object, "@itemize @w{}");
             Put (Output_Object.File, "@item ");
 
-         when Wide_Hanging |
+         when Giant_Hanging |
+           Small_Giant_Hanging |
+	   Wide_Hanging |
            Small_Wide_Hanging |
+           Medium_Hanging |
+           Small_Medium_Hanging |
            Narrow_Hanging |
            Small_Narrow_Hanging |
            Hanging_in_Bulleted |

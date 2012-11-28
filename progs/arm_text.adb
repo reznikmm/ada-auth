@@ -111,6 +111,7 @@ package body ARM_Text is
     --			paragraph number).
     --          - RLB - Added old insertion version to Revised_Clause_Header.
     --  8/31/12 - RLB - Added Output_Path.
+    -- 10/18/12 - RLB - Added additional hanging styles.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -338,6 +339,15 @@ package body ARM_Text is
 		    Start_Indent := Start_Indent - 4;
 		end if;
 
+	    when ARM_Output.Giant_Hanging | ARM_Output.Small_Giant_Hanging =>
+		Output_Object.Is_Hanging := True;
+		if No_Prefix then -- Four units for prefix.
+		    Output_Object.Saw_Hang_End := True;
+		else -- Has prefix
+		    Output_Object.Saw_Hang_End := False;
+		    Start_Indent := Start_Indent - 16; -- Leave space for prefix.
+		end if;
+
 	    when ARM_Output.Wide_Hanging | ARM_Output.Small_Wide_Hanging =>
 		Output_Object.Is_Hanging := True;
 		if No_Prefix then -- Three units for prefix.
@@ -345,6 +355,15 @@ package body ARM_Text is
 		else -- Has prefix
 		    Output_Object.Saw_Hang_End := False;
 		    Start_Indent := Start_Indent - 12; -- Leave space for prefix.
+		end if;
+
+	    when ARM_Output.Medium_Hanging | ARM_Output.Small_Medium_Hanging =>
+		Output_Object.Is_Hanging := True;
+		if No_Prefix then -- Two units for prefix.
+		    Output_Object.Saw_Hang_End := True;
+		else -- Has prefix
+		    Output_Object.Saw_Hang_End := False;
+		    Start_Indent := Start_Indent - 8; -- Leave space for prefix.
 		end if;
 
 	    when ARM_Output.Narrow_Hanging | ARM_Output.Small_Narrow_Hanging => null;
@@ -471,9 +490,11 @@ package body ARM_Text is
 		end loop;
 	    when ARM_Output.Bulleted | ARM_Output.Nested_Bulleted |
 		 ARM_Output.Small_Bulleted | ARM_Output.Small_Nested_Bulleted |
-		 ARM_Output.Wide_Hanging | ARM_Output.Narrow_Hanging |
+		 ARM_Output.Giant_Hanging | ARM_Output.Wide_Hanging |
+		 ARM_Output.Medium_Hanging | ARM_Output.Narrow_Hanging |
 		 ARM_Output.Hanging_in_Bulleted |
-		 ARM_Output.Small_Wide_Hanging | ARM_Output.Small_Narrow_Hanging |
+		 ARM_Output.Small_Giant_Hanging | ARM_Output.Small_Wide_Hanging |
+		 ARM_Output.Small_Medium_Hanging | ARM_Output.Small_Narrow_Hanging |
 		 ARM_Output.Small_Hanging_in_Bulleted |
 		 ARM_Output.Enumerated | ARM_Output.Small_Enumerated =>
 		if Tab_Stops.Number /= 0 then
