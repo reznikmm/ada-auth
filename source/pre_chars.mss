@@ -1,14 +1,15 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.47 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.48 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1]}
-This clause presents the packages related to character processing:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0243-1],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} presents the packages
+related to character processing:
 an empty @Chg{Version=[3],New=[declared ],Old=[]}pure package Characters
 and child packages Characters.Handling and Characters.Latin_1.
 The package Characters.Handling provides classification and conversion
@@ -20,8 +21,9 @@ constants initialized to values of type Character.
 @end{Intro}
 
 @begin{Extend83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{extensions to Ada 83}
-This clause is new to Ada 95.
+This @Chg{Version=[3],New=[subclause],Old=[clause]} is new to Ada 95.
 @end{Extend83}
 
 @begin{Diffword95}
@@ -1230,9 +1232,9 @@ False.]}
 @ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Lower (Item : Wide_Character) @key[return] Wide_Character;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Lowercase Mapping
-as defined by documents referenced in the note in section 1 of ISO/IEC 10646:2011
+as defined by documents referenced in the note in Clause 1 of ISO/IEC 10646:2011
 of the Wide_Character designated by Item. If the Simple Lowercase Mapping does
 not exist for the Wide_Character designated by Item, then the value of Item is
 returned.]}
@@ -1261,9 +1263,9 @@ Wide_String is 1.]}
 @ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] To_Upper (Item : Wide_Character) @key[return] Wide_Character;]}
 @end{Example}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0185-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns the Simple Uppercase Mapping
-as defined by documents referenced in the note in section 1 of ISO/IEC 10646:2011
+as defined by documents referenced in the note in Clause 1 of ISO/IEC 10646:2011
 of the Wide_Character designated by Item. If the Simple Uppercase
 Mapping does not exist for the Wide_Character designated by Item, then the value
 of Item is returned.]}

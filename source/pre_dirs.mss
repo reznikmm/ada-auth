@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2012/03/20 06:13:58 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -13,7 +13,9 @@
 for manipulating files and directories, and their names.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The notes for this clause contain the expected
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[The notes for this @Chg{Version=[3],New=[subclause],Old=[clause]}
+contain the expected
 interpretations of some of the operations on various target systems.
 @lquotes@;Unix@rquotes@; refers to the UNIX@latin1(174) operating system,
 and in most cases also covers Unix-like systems such as Linux and POSIX.

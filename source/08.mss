@@ -1,19 +1,22 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[The rules defining the scope of declarations and the rules defining
 which @nt{identifier}s, @nt{character_literal}s, and
 @nt{operator_symbol}s are visible at (or from) various places in the text of
-the program are described in this section. The formulation of these
-rules uses the notion of a declarative region.
+the program are described in this @Chg{Version=[3],New=[clause],Old=[section]}.
+The formulation of these rules uses the notion of a declarative region.
 
-As explained in Section 3,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+As explained in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Declarations and Types},
 a declaration declares a view of an entity
 and associates a defining name with that view.
 The view comprises an identification of the viewed entity,
@@ -326,7 +329,8 @@ resolve names that denote things with the same name as this one.
 The immediate scope of a @nt{library_item} includes only its semantic
 dependents.
 @begin{Reason}
-Section 10 defines only a partial ordering of @nt{library_item}s.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Chg{Version=[3],New=[Clause],Old=[Section]} 10 defines only a partial ordering of @nt{library_item}s.
 Therefore, it is a good idea to restrict the immediate scope
 (and the scope, defined below)
 to semantic dependents.
@@ -539,6 +543,7 @@ the body might include some children.
 @end{StaticSem}
 
 @begin{Notes}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 There are notations for denoting visible declarations
 that are not directly visible.
 For example, @nt{parameter_@!specification}s are in the visible part of a
@@ -550,10 +555,11 @@ appearing outside the package,
 and can be made directly visible by a @nt{use_clause}.
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 There are some obscure @Chg{Version=[2],New=[cases ],Old=[]}involving
 generics @Chg{Version=[2],New=[],Old=[cases ]}in which there is
 no such notation.
-See Section 12.
+See @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Generic Units}.
 @end{Ramification}
 @end{Notes}
 
@@ -574,6 +580,7 @@ implementation difficulties and unnecessary semantic complexity.
 We no longer need to talk about the scope of notations,
 @nt{identifier}s, @nt{character_literal}s, and @nt{operator_symbol}s.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The notion of "visible part" has been extended in Ada 95.
 The syntax of
 task and protected units now allows private parts,
@@ -590,7 +597,7 @@ We define visible part for some things elsewhere,
 since it makes a big difference to the user for those things.
 For composite types and subprograms, however,
 the concept is used only in arcane visibility rules,
-so we localize it to this clause.
+so we localize it to this @Chg{Version=[3],New=[subclause],Old=[clause]}.
 
 In Ada 83, the semantics of @nt{with_clause}s was described
 in terms of visibility.
@@ -2458,6 +2465,7 @@ limited view of the renamed package is visible, a @nt{name} that denotes the
 @LabeledSubClause{Subprogram Renaming Declarations}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 A @nt{subprogram_renaming_declaration} can serve as the completion of
 a @nt{subprogram_declaration};
 @Defn{renaming-as-body}
@@ -2468,8 +2476,10 @@ called a @i{renaming-as-declaration}@Redundant[,
 and is used to rename a subprogram
 (possibly an enumeration literal) or an entry].
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 A renaming-as-body is a declaration,
-as defined in Section 3.
+as defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Declarations and Types}.
 @end{Ramification}
 @end{Intro}
 
@@ -2948,12 +2958,14 @@ which has been moved to @RefSecNum{Type Declarations}.
 @LabeledClause{The Context of Overload Resolution}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[@Defn{overload resolution}
 Because declarations can be overloaded,
 it is possible for an occurrence of a usage name
 to have more than one possible interpretation;
 in most cases, ambiguity is disallowed.
-This clause describes how the possible interpretations resolve
+This @Chg{Version=[3],New=[subclause],Old=[clause]} describes
+how the possible interpretations resolve
 to the actual interpretation.
 
 @Defn{overloading rules}
@@ -3362,7 +3374,7 @@ in a class in scope.
   on.]}
 @end{Discussion}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1],ARef=[AI05-0149-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1],ARef=[AI05-0149-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[Other than for the @nt{simple_expression} of a
 membership test, if the expected type for a @nt{name} or @nt{expression} is not
 the same as the actual type of the @nt{name} or @nt{expression}, the actual type
@@ -3374,7 +3386,7 @@ the actual type is an anonymous access-to-object type with designated type
 @i<D2>, then @i<D1> shall cover @i<D2>, and the @nt{name} or @nt{expression}
 shall denote a view with an accessibility level for which the statically deeper
 relationship applies@Redundant[; in particular it shall not denote an access
-parameter nor a standalone access object].]}
+parameter nor a stand-alone access object].]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3561,13 +3573,15 @@ It is replaced with some introductory
 text explaining the basic idea
 of what sorts of rules are overloading rules.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It is not clear from RM83 what information is embodied in a @lquotes@;meaning@rquotes@;
 or an @lquotes@;interpretation.@rquotes@;
 @lquotes@;Meaning@rquotes@; and @lquotes@;interpretation@rquotes@; were intended to be synonymous;
 we now use the latter only in defining the rules about overload
 resolution.
 @lquotes@;Meaning@rquotes@; is used only informally.
-This clause attempts to clarify what is meant by @lquotes@;interpretation.@rquotes@;
+This @Chg{Version=[3],New=[subclause],Old=[clause]} attempts to clarify what
+is meant by @lquotes@;interpretation.@rquotes@;
 
 @NoPrefix@;For example,
 RM83 does not make it clear that overload resolution is required in

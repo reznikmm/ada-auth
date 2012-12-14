@@ -1,13 +1,14 @@
 @Part(impldef, Root="ada.mss")
 
-@Comment{$Date: 2005/05/07 05:18:29 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 @LabeledRevisedInformativeAnnex{Version=[2],New=[Summary of Documentation Requirements],Old=[Implementation-Defined Characteristics]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/impldef.mss,v $}
-@comment{$Revision: 1.16 $}
+@comment{$Revision: 1.17 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[@Defn{documentation requirements}
 The Ada language allows for certain target machine dependences in a controlled
 manner. Each Ada implementation must document many characteristics and
@@ -17,7 +18,8 @@ that require documentation
 are identified throughout this International Standard as being
 implementation defined. Finally, this International Standard requires
 documentation of
-whether implementation advice is followed. The following clauses provide
+whether implementation advice is followed. The following
+@Chg{Version=[3],New=[subclauses],Old=[clauses]} provide
 summaries of these documentation requirements.]}
 @end{Intro}
 

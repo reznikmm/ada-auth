@@ -1,14 +1,16 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2012/05/19 02:05:52 $ $Author: randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/05/19 02:05:52 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-This clause presents the specifications of the package Strings and
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]}
+presents the specifications of the package Strings and
 several child packages, which provide facilities for dealing with
  string data. Fixed-length,
 bounded-length, and unbounded-length strings are supported, for @Chg{Version=[2],New=[],Old=[both]}
@@ -21,8 +23,10 @@ translation (via a character-to-character mapping), and transformation
 @end{Intro}
 
 @begin{Extend83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{extensions to Ada 83}
-This clause is new to Ada 95.
+This @Chg{Version=[3],New=[subclause],Old=[clause]}
+is new to Ada 95.
 @end{Extend83}
 
 @begin{Diffword95}
@@ -3313,7 +3317,7 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings consist
 of the same sequence of characters after applying locale-independent simple case
-folding, as defined by documents referenced in the note in section 1 of ISO/IEC
+folding, as defined by documents referenced in the note in Clause 1 of ISO/IEC
 10646:2011. Otherwise, returns False. This function uses the same method as is
 used to determine whether two identifiers are the same.]}
 

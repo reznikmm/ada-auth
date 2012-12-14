@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -2080,12 +2080,12 @@ associated with the exact mathematical result given in the table.
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number (12) from original RM}>]
 
+@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 The last line of the table is meant to apply when
 @i{EF}.Float_Type'Signed_Zeros is False; the two lines just above it, when
 @i{EF}.Float_Type'Signed_Zeros is True and the parameter Y has a zero value
 with the indicated sign.
 
-@ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @Table[Columns=<5>,Alignment=<AllCenter>,FirstColWidth=[2],LastColWidth=[1],
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=<@b{@Chg{Version=[2],New=[Table G-1: ],Old=[]}Tightly Approximated Elementary Function Results}>,
@@ -2589,9 +2589,10 @@ are also provided as children of Numerics.]}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00296-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  This clause is new. It just provides an introduction to the following
-  subclauses.]}
+  This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  It just provides an introduction to the following subclauses.]}
 @end{Extend95}
 
 

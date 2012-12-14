@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.23 $ $Date: 2012/05/19 02:05:51 $ $Author: randy $ }
+@comment{ $Revision: 1.24 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -4788,14 +4788,13 @@ The graph is represented by a map from nodes to sets of edges.]}
       Reached  : @key[array] (Node) @key[of] Boolean := (@key[others] => False);
       -- @ExamCom{The set of nodes whose shortest distance to the source is known.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[      Reached_From : @key[array] (Node) @key[of] Node;
       So_Far   : @key[array] (Node) @key[of] Distance := (@key[others] => Distance'Last);
       The_Path : Paths.List := Paths.Empty_List;
       Nearest_Distance : Distance;
       Next     : Node;
    @key[begin]
-      Reached(Source) := True;
       So_Far(Source)  := 0.0;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4816,8 +4815,9 @@ The graph is represented by a map from nodes to sets of edges.]}
             @key[end if];
          @key[end loop];]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[         @key[if] Next = Source @key[then]  -- @Examcom{No next node found, graph is not connected}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[         @key[if] Nearest_Distance = Distance'Last @key[then]
+            -- @Examcom{No next node found, graph is not connected}
             @key[return] Paths.Empty_List;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4828,12 +4828,10 @@ The graph is represented by a map from nodes to sets of edges.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[         -- @ExamCom{Update minimum distance to newly reachable nodes.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[         @key[for] E @key[of] G (Next) @key[loop]
             @key[if not] Reached(E.To) @key[then]
-               Nearest_Distance :=
-                 Distance'Min (So_Far(E.To) + So_Far(Next),
-                               So_Far(E.To));]}
+               Nearest_Distance := E.Length + So_Far(Next);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[               @key[if] Nearest_Distance < So_Far(E.To) @key[then]

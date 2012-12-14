@@ -1,18 +1,19 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @LabeledClause{Type Conversions}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[Explicit type conversions, both
 value conversions and view conversions, are
 allowed between closely related
-types as defined below. This clause also
-defines rules for value and view
+types as defined below. This @Chg{Version=[3],New=[subclause],Old=[clause]}
+also defines rules for value and view
 conversions to a particular subtype of a type,
 both explicit ones and those implicit in other constructs.
 @IndexSee{Term=[subtype conversion],See=(type conversion)}
@@ -40,10 +41,11 @@ The @i(operand) of a @nt<type_conversion> is the
 @Defn2{Term=[operand type], Sec=(of a @nt<type_conversion>)}
 its type is the @i(operand type).
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{convertible}
 One type is @i(convertible) to a second type if a @nt<type_conversion>
 with the first type as operand type and the second type as target type
-is legal according to the rules of this clause.
+is legal according to the rules of this @Chg{Version=[3],New=[subclause],Old=[clause]}.
 Two types are convertible if each is convertible to the other.
 @begin{Ramification}
   Note that @lquotes@;convertible@rquotes@; is defined in terms of legality
@@ -1133,7 +1135,8 @@ Other operations that take arrays perform sliding.
 We no longer explicitly list the kinds of things that are not allowed
 as the operand of a @nt<type_conversion>, except in a NOTE.
 
-The rules in this clause subsume the rules
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} subsume the rules
 for "parameters of the form of a type conversion,"
 and have been generalized to cover the use of a type conversion
 as a @nt<name>.
@@ -1537,7 +1540,7 @@ part of an instance of a generic unit.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This applies to all of the @LegalityTitle
-  of this clause.]}
+  of this subclause.]}
 @end{Discussion}
 @end{Legality}
 
@@ -2660,7 +2663,9 @@ the right-hand side of a short-circuit control form.
 @end{Incompatible83}
 
 @begin{DiffWord83}
-This clause (and @RefSec{Multiplying Operators})
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]}
+(and @RefSec{Multiplying Operators})
 subsumes the RM83 section on Universal Expressions.
 
 The existence of static string expressions

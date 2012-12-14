@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -334,13 +334,14 @@ Wide_Text_IO.Editing@Chg{Version=[2],New=[, and Wide_Wide_Text_IO.Editing],Old=[
 
 
 @LabeledSubClause{Picture String Formation}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @begin{Intro}
 @Defn2{term=[picture String],sec=[for edited output]}
 @Defn2{term=[well-formed picture String],sec=[for edited output]}
 A @i{well-formed picture String}, or simply @i{picture String},
 is a String value that conforms to the
 syntactic rules, composition constraints, and character replication
-conventions specified in this clause.
+conventions specified in this @Chg{Version=[3],New=[subclause],Old=[clause]}.
 @end{Intro}
 
 @begin{RunTime}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/05/19 02:05:51 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1981,7 +1981,9 @@ The concept of dispatching operations is new.
 
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0010],ARef=[AI95-00127-01]}
-  @ChgAdded{Version=[2],Text=[@b<Corrigendum:>@ChgNote{This is documented as an extension in the two sections referenced below.}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[@b<Corrigendum:>@ChgNote{This is documented as an extension in
+  the two @Chg{Version=[3],New=[clauses],Old=[sections]} referenced below.}
   Allocators and access attributes of objects of class-wide types
   can be used as the controlling parameter in a dispatching calls. This
   was an oversight in the definition of Ada 95. (See @RefSecNum{Operations of Access Types} and
@@ -2059,8 +2061,10 @@ dispatches to some overriding body.]
 @end{Intro}
 
 @begin{MetaRules}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 An abstract subprogram has no body, so the
-rules in this clause are designed to ensure (at compile time)
+rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} are
+designed to ensure (at compile time)
 that the body will never be invoked.
 We do so primarily by disallowing the creation of
 values of the abstract type.
@@ -2870,8 +2874,10 @@ in the private part of an instance of a generic
 unit.@PDefn{generic contract issue}]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[This paragraph is intended to apply to all of the
-  @LegalityTitle@; in this clause. We cannot allow interface types which do not
+  @LegalityTitle@; in this @Chg{Version=[3],New=[subclause],Old=[clause]}. We
+  cannot allow interface types which do not
   obey these rules, anywhere. Luckily, deriving from a formal type (which might
   be an interface) is not allowed for any tagged types in a generic body. So
   checking in the private part of a generic covers all of the cases.]}
@@ -3055,8 +3061,10 @@ an appropriate type.
 @end{Intro}
 
 @begin{MetaRules}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Access values should always be well defined
-(barring uses of certain unchecked features of Section 13).
+(barring uses of certain unchecked features of @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Representation Issues}).
 In particular, uninitialized access variables should be prevented
 by compile-time rules.
 @end{MetaRules}
@@ -4337,11 +4345,13 @@ not at all) for different designated subtypes.
 @LabeledSubClause{Operations of Access Types}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[The attribute Access is used to create access values
 designating aliased objects and nonintrinsic subprograms.
 The @lquotes@;accessibility@rquotes@; rules prevent dangling references
 (in the absence of uses of certain unchecked features
-@em see Section 13).]
+@em see @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Representation Issues}).]
 @end{Intro}
 
 @begin{MetaRules}
@@ -4469,7 +4479,7 @@ value of anonymous access type.
 See @RefSecNum{Unchecked Access Value Creation}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[Clause @RefSecNum{Operations of Access Types},
+@ChgAdded{Version=[3],Text=[Subclause @RefSecNum{Operations of Access Types},
 home of the accessibility rules, is informally known
 as the @ldquote@;Heart of Darkness@rdquote amongst the maintainers of Ada.
 Woe unto all who enter here (well, at least unto anyone that needs to understand
@@ -6370,6 +6380,7 @@ completion, they have one by @i{fiat}.]}
 @end{Honest}
 
 @begin(Discussion)
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   The implicit declarations of predefined operators are not allowed to
   have a completion.
   Enumeration literals, although they are subprograms, are not allowed to have a
@@ -6377,7 +6388,8 @@ completion, they have one by @i{fiat}.]}
   That's because the completion rules are described in terms of constructs
   (@nt{subprogram_declaration}s) and not entities (subprograms).
   When a completion is required, it has to be explicit;
-  the implicit null @nt{package_body} that Section 7
+  the implicit null @nt{package_body} that @Chg{Version=[3],New=[Clause],Old=[Section]}
+  @RefSecNum{Packages}
   talks about cannot serve as the completion of a
   @nt{package_declaration} if a completion is required.
 @end(Discussion)

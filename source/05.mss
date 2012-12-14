@@ -1,19 +1,20 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
 its execution.]
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Redundant[This section describes the general rules applicable to all
-@nt{statement}s.
-Some @nt{statement}s are discussed in later sections:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[clause],Old=[section]} describes the
+general rules applicable to all @nt{statement}s.
+Some @nt{statement}s are discussed in later @Chg{Version=[3],New=[clauses],Old=[sections]}:
 @nt{Procedure_@!call_@!statement}s and
 @Chg{Version=[2],New=[return statements],Old=[@nt{return_@!statement}s]} are
 described in @RefSec{Subprograms}.
@@ -25,7 +26,7 @@ described in @RefSec{Subprograms}.
 and @nt{code_@!statement}s in
 @RefSecNum{Representation Issues}.
 The remaining forms of @nt{statement}s are presented in this
-section.]
+@Chg{Version=[3],New=[clause],Old=[section]}.]
 @end{Intro}
 
 @begin{DiffWord83}
@@ -150,13 +151,15 @@ or @nt<block_statement> with the given @nt<statement_identifier>.
 @key[end];
   @end{example}
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   The label in this example is hidden from itself by the loop parameter
   with the same name;
   the example is illegal.
   We considered creating a new syntactic category name, separate from
   @nt{direct_name} and @nt{selector_name}, for use in the case of statement
   labels.
-  However, that would confuse the rules in Section 8, so we didn't do it.
+  However, that would confuse the rules in @Chg{Version=[3],New=[Clause],Old=[Section]}
+  8, so we didn't do it.
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0179-1]}
@@ -453,9 +456,10 @@ nothing.
 @begin(itemize)
   The value of the target becomes the converted value.
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   If any part of the target is controlled, its value
-  is adjusted as explained in
-  clause @RefSecNum{Assignment and Finalization}.
+  is adjusted as explained in @Chg{Version=[3],New=[subclause],Old=[clause]}
+  @RefSecNum{Assignment and Finalization}.
 @PDefn2{Term=[adjustment], Sec=(as part of assignment)}
 @begin{Ramification}
     If any parts of the object are controlled,
@@ -573,16 +577,18 @@ that depends on discriminants.
 
 @begin{Incompatible95}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01]}
-@Chg{Version=[2],New=[@Defn{incompatibilities with Ada 95}
+@ChgAdded{Version=[2],Text=[@Defn{incompatibilities with Ada 95}
 The change of the limited check from a resolution rule to
-a legality rule is not quite upward compatible. For example],Old=[]}.
+a legality rule is not quite upward compatible. For example]}
 @begin{Example}
-@Chg{Version=[2],New=[@key{type} AccNonLim @key{is} @key{access} NonLim;
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgAdded{Version=[2],Text=[@key{type} AccNonLim @key{is} @key{access} NonLim;
 @key{function} Foo (Arg : in Integer) @key{return} AccNonLim;
 @key{type} AccLim @key{is} @key{access} Lim;
 @key{function} Foo (Arg : in Integer) @key{return} AccLim;
-Foo(2).@key{all} := Foo(1).@key{all};],Old=[]}.
+Foo(2).@key{all} := Foo(1).@key{all};]}
 @end{Example}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[where NonLim is a nonlimited type and Lim is a
 limited type. The assignment is legal in Ada 95 (only the first Foo would be
 considered), and is ambiguous in Ada 2005. We made the change because we want
@@ -1196,10 +1202,10 @@ The constant-ness of loop parameters is specified in
 @end{DiffWord83}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0262-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[Generalized @nt{iterator_specification}s are
   allowed in @key[for] loops; these are documented as an extension in the
-  appropriate clause.]}
+  appropriate subclause.]}
 @end{DiffWord2005}
 
 

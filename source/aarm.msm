@@ -14,6 +14,7 @@
 @NoteFormat{Ada95}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
+@SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}

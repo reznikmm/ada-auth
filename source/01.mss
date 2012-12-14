@@ -27,16 +27,16 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/04/03 20:37:01 $}
+@Comment{$Date: 2012/11/28 23:53:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
-Ada is a programming language designed to support the construction of
-long-lived, highly reliable software systems.
-The language includes facilities to define
-packages
+@Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
+@ChgDeleted{Version=[3],Text=[Ada is a programming language designed to support
+the construction of long-lived, highly reliable software systems. The language
+includes facilities to define packages
 of related types, objects, and operations.
 The packages may be parameterized
 and the types may be extended to support the construction of libraries
@@ -45,10 +45,10 @@ may be implemented as subprograms using conventional sequential
 control structures, or as entries that include synchronization
 of concurrent threads of control as part of their invocation.
 The language treats modularity in the physical
-sense as well, with a facility to support separate compilation.
+sense as well, with a facility to support separate compilation.]}
 
-@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0269-1]}
-The language includes a complete facility for
+@Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
+@ChgDeleted{Version=[3],Text=[The language includes a complete facility for
 the support of real-time, concurrent programming.
 Errors can be signaled as exceptions and handled explicitly.
 The language also
@@ -56,9 +56,8 @@ covers systems programming; this requires precise control over the
 representation of data and access to system-dependent properties. Finally,
 a predefined environment of standard packages is provided, including
 facilities for, among others, input-output, string manipulation,
-numeric elementary functions, @Chg{Version=[3],New=[],Old=[and ]}random
-number generation@Chg{Version=[3],New=[, and definition and use of
-containers],Old=[]}.
+numeric elementary functions, and random
+number generation.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
@@ -258,10 +257,36 @@ to.
 
 
 @begin{Intro}
+@Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
 This International Standard specifies the form and meaning of programs
 written in Ada.
 Its purpose is to promote the portability of Ada programs to a variety
-of data processing systems.
+of @Chg{Version=[3],New=[computing],Old=[data processing]} systems.
+
+@Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[Ada is a programming language designed to support
+the construction of long-lived, highly reliable software systems. The language
+includes facilities to define packages of related types, objects, and
+operations. The packages may be parameterized and the types may be extended to
+support the construction of libraries of reusable, adaptable software
+components. The operations may be implemented as subprograms using conventional
+sequential control structures, or as entries that include synchronization of
+concurrent threads of control as part of their invocation. Ada supports
+object-oriented programming by providing classes and interfaces, inheritance,
+polymorphism of variables and methods, and generic units. The language treats
+modularity in the physical sense as well, with a facility to support separate
+compilation.]}
+
+@Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[The language provides rich support for real-time, concurrent programming, and
+includes facilities for multicore and multiprocessor programming. Errors can be
+signaled as exceptions and handled explicitly. The language also covers systems
+programming; this requires precise control over the representation of data and
+access to system-dependent properties. Finally, a predefined environment of
+standard packages is provided, including facilities for, among others,
+input-output, string manipulation, numeric elementary functions, and random
+number generation, and definition and use of containers.]}
+
 @end{Intro}
 
 @LabeledSubClause{Extent}
@@ -316,14 +341,26 @@ of data processing systems.
 @LabeledSubClause{Structure}
 
 @begin{Intro}
-This International Standard contains thirteen sections,
-fourteen annexes,
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This International Standard contains thirteen @Chg{Version=[3],New=[clauses],Old=[sections]},
+@Chg{Version=[3],New=[fifteen],Old=[fourteen]} annexes,
 and an index.
+
+@begin{Discussion}
+@Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[What Ada 83 called a @ldquote@;chapter@rdquote and
+Ada 95 (and Ada 2005) called a @ldquote@;section@rdquote is called a @ldquote@;clause@rdquote
+in this Standard. Similarly, what Ada 83 called a @ldquote@;section@rdquote and
+Ada 95 (and Ada 2005) called a @ldquote@;clause@rdquote is called a @ldquote@;subclause@rdquote
+in this Standard. Confused yet? This terminology is out of our hands; it is
+(and was) forced by ever-changing ISO rules for drafting Standards.]}
+@end{Discussion}
 
 @Leading@Defn{core language}
 The @i{core} of the Ada language consists of:
 @begin{Itemize}
-Sections 1 through 13
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Chg{Version=[3],New=[Clauses],Old=[Sections]} 1 through 13
 
 @RefSec{Predefined Language Environment}
 
@@ -364,8 +401,9 @@ is informative:
 @begin(Itemize)
     Text under a NOTES or Examples heading.
 
-    Each clause or subclause whose title starts with the word @lquotes@;Example@rquotes@;
-    or @lquotes@;Examples@rquotes@;.
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+    Each @Chg{Version=[3],New=[],Old=[clause or ]}subclause whose title starts
+    with the word @lquotes@;Example@rquotes@; or @lquotes@;Examples@rquotes@;.
 @end(Itemize)
 
 All implementations shall conform to the core language.
@@ -459,11 +497,13 @@ to all of them.
 @end(Discussion)
 
 @begin{WideAbove}
-Each section is divided into clauses and subclauses that have a
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+Each @Chg{Version=[3],New=[section],Old=[clause]} is divided into
+@Chg{Version=[3],New=[],Old=[clauses and]} subclauses that have a
 common structure.
-Each section, clause, and subclause first introduces its subject.
-After the introductory text,
-text is labeled with the following headings:
+Each @Chg{Version=[3],New=[],Old=[section, ]}clause@Chg{Version=[3],New=[],Old=[,]}
+and subclause first introduces its subject.
+After the introductory text, text is labeled with the following headings:
 @end{WideAbove}
 @end{Intro}
 
@@ -492,6 +532,7 @@ Syntax rules (indented).
 @end{Syntax}
 
 @begin{Resolution}
+@Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{name resolution rules}
 @Defn{overloading rules}
 @Defn{resolution rules}
@@ -501,11 +542,10 @@ including overload resolution.
 These rules are observed at compile time.
 (We say @lquotes@;observed@rquotes@; rather than @lquotes@;checked,@rquotes@;
 because these rules are not individually checked.
-They are really just part of the @LegalityName@;s in Section 8
-that require exactly one interpretation of each constituent
-of a complete context.)
-The only rules used in overload resolution are the @SyntaxName@;s
-and the @ResolutionName@;s.
+They are really just part of the @LegalityName@;s in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Visibility Rules} that require exactly one interpretation of each
+constituent of a complete context.) The only rules used in overload resolution
+are the @SyntaxName@;s and the @ResolutionName@;s.
 
 When dealing with nonoverloadable declarations it sometimes makes no
 semantic difference whether a given rule is a @ResolutionName
@@ -1570,12 +1610,13 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[When this International Standard mentions the
 conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
 @Chg{Version=[3],New=[simple upper case mapping],Old=[locale-independent
-full case folding]}, as defined by documents referenced in the note in section 1
+full case folding]}, as defined by documents referenced in the note in
+@Chg{Version=[3],New=[Clause],Old=[section]} 1
 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1884,24 +1925,27 @@ run time would not be.
 @LabeledClause{Normative References}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{references}
 @Defn{bibliography}
-The following standards contain provisions which, through reference in
-this text, constitute provisions of this International Standard. At the
-time of publication, the editions indicated were valid. All standards
-are subject to revision, and parties to agreements based on this
-International Standard are encouraged to investigate the possibility
-of applying the most recent editions of the standards indicated below.
-Members of IEC and ISO maintain registers of currently valid International
-Standards.
+The following @Chg{Version=[3],New=[documents, in whole or in part, are
+normatively referenced in this document and are indispensable for its
+application. For dated references, only the edition cited applies. For undated
+references, the latest edition of the referenced document (including any
+amendments) applies.],Old=[standards contain provisions which,
+through reference in this text, constitute provisions of this International
+Standard. At the time of publication, the editions indicated were valid. All
+standards are subject to revision, and parties to agreements based on this
+International Standard are encouraged to investigate the possibility of applying
+the most recent editions of the standards indicated below. Members of IEC and
+ISO maintain registers of currently valid International Standards.]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2]}
-@ChgAdded{Version=[3],Text=[@Defn{ISO/IEC 639-3:2007}
-@Defn{639-3:2007, ISO/IEC standard}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[@Defn{ISO 639-3:2007}
+@Defn{639-3:2007, ISO standard}
 @Defn{Language code standard}
-ISO/IEC 639-3:2007, @i{Terminology and other language and content resources @em
-Codes for the representation of names of languages @em Part 3: Alpha-3 code for
-comprehensive coverage of languages}.]}
+ISO 639-3:2007, @i{Codes for the representation of names of languages @em Part
+3: Alpha-3 code for comprehensive coverage of languages}.]}
 
 @Defn{ISO/IEC 646:1991}
 @Defn{646:1991, ISO/IEC standard}
@@ -1929,13 +1973,12 @@ New=[Fortran @em Part 1: Base language],Old=[FORTRAN]}}.
 ISO@Chg{Version=[2],New=[/IEC],Old=[]} 1989:@Chg{Version=[2],New=[2002],Old=[1985]},
 @i{@Chg{Version=[2],New=[Information technology @em ],Old=[]}Programming languages @em COBOL}.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0127-2],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[@Defn{ISO/IEC 3166-1:2006}
 @Defn{3166-1:2006, ISO/IEC standard}
 @Defn{Country code standard}
-ISO/IEC 3166-1:2006, @i{Information and documentation @em
-Codes for the representation of names of countries and their subdivisions
-@em Part 1: Country Codes}.]}
+ISO/IEC 3166-1:2006, @i{Codes for the representation of names of countries and
+their subdivisions @em Part 1: Country Codes}.]}
 
 @Defn{ISO/IEC 6429:1992}
 @Defn{6429:1992, ISO/IEC standard}
@@ -1950,12 +1993,15 @@ ISO/IEC 6429:1992,
 ISO 8601:2004, @i{Data elements and interchange formats @em Information
 interchange @em Representation of dates and times}.]}
 
-@Defn{ISO/IEC 8859-1:1987}
-@Defn{8859-1:1987, ISO/IEC standard}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Chg{Version=[3],New=[@Defn{ISO/IEC 8859-1:1998}
+@Defn{8859-1:1998, ISO/IEC standard}],Old=[@Defn{ISO/IEC 8859-1:1987}
+@Defn{8859-1:1987, ISO/IEC standard}]}
 @Defn2{Term=[character set standard],Sec=(8-bit)}
-ISO/IEC 8859-1:1987,
-@i{Information processing @em 8-bit single-byte coded
-    character sets @em Part 1: Latin alphabet No. 1}.
+ISO/IEC 8859-1:@Chg{Version=[3],New=[1998],Old=[1987]},
+@i{Information @Chg{Version=[3],New=[technology],Old=[processing]} @em
+8-bit single-byte coded @Chg{Version=[3],New=[graphic ],Old=[]}character
+sets @em Part 1: Latin alphabet No. 1}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
@@ -2063,7 +2109,7 @@ POSIX,
 
 
 
-@LabeledClause{Definitions}
+@LabeledRevisedClause{Version=[3],New=[Terms and Definitions],Old=[Definitions]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
@@ -2104,6 +2150,7 @@ is marked like this.
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised]}
 @ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised]}
 Here are some AARM-only definitions:
 @Defn{Ada Rapporteur Group (ARG)}
 @Defn(ARG)
@@ -2112,7 +2159,8 @@ The Ada Rapporteur Group (ARG) interprets the @Chg{Version=[1],New=<Ada Referenc
 @Defn(AI)
 An Ada Issue (AI) is a numbered ruling from the ARG.@Chg{Version=[1],New=< Ada Issues
 created for Ada 83 are denoted as "AI83", while Ada Issues created for Ada 95
-are denoted as "AI95" in this document.>,Old=<>}
+are denoted as "AI95" in this document.@Chg{Version=[3],New=< Similarly,
+Ada Issues created for Ada 2005 are denoted as "AI05">,Old=<>}>,Old=<>}
 @Defn{Ada Commentary Integration Document (ACID)}
 @Defn(ACID)
 The Ada Commentary Integration Document (ACID)

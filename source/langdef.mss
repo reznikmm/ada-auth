@@ -1,10 +1,10 @@
 @Part(glossary, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 23:14:15 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 @LabeledAddedInformativeAnnex{Version=[2],Name=[Language-Defined Entities]}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/langdef.mss,v $}
-@comment{$Revision: 1.7 $}
+@comment{$Revision: 1.8 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
@@ -17,7 +17,9 @@ in @RefSec{Predefined Language Environment}.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined packages.@Defn{Language-defined packages}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+lists all language-defined packages.@Defn{Language-defined packages}]}
 @end{Intro}
 
 @PackageList
@@ -26,7 +28,9 @@ in @RefSec{Predefined Language Environment}.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined types and
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+lists all language-defined types and
 subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 @end{Intro}
 
@@ -38,7 +42,9 @@ subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined subprograms.@Defn{Language-defined subprograms}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+lists all language-defined subprograms.@Defn{Language-defined subprograms}]}
 @end{Intro}
 
 @SubprogramList
@@ -47,7 +53,9 @@ subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined exceptions.@Defn{Language-defined exceptions}]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+lists all language-defined exceptions.@Defn{Language-defined exceptions}]}
 @end{Intro}
 
 @ExceptionList
@@ -57,7 +65,9 @@ subtypes.@Defn{Language-defined types}@Defn{Language-defined subtypes}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00440-01]}
-@ChgAdded{Version=[2],Text=[This clause lists all language-defined constants,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+lists all language-defined constants,
 variables, named numbers, and enumeration literals.@Defn{Language-defined objects}@Defn{Language-defined constants}@Defn{Language-defined values}]}
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}

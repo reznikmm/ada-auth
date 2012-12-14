@@ -1,18 +1,19 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:01 $}
+@Comment{$Date: 2012/11/28 23:53:02 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.84 $}
+@Comment{$Revision: 1.85 $}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[The text of a program consists of the texts of one or more
 @nt<compilation>s. The text of a @nt<compilation> is a sequence of
 lexical elements, each composed of characters; the rules of
-composition are given in this section.
+composition are given in this @Chg{Version=[3],New=[clause],Old=[section]}.
 @nt{Pragma}s, which provide certain information for the compiler, are also
-described in this section.]
+described in this @Chg{Version=[3],New=[clause],Old=[section]}.]
 @end{Intro}
 
 @LabeledClause{Character Set}
@@ -113,21 +114,21 @@ characters allowed outside of comments are those in categories
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[The semantics of an Ada program whose text is not
-in Normalization Form KC (as defined by section @Chg{Version=[3],New=[21],Old=[24]}
+in Normalization Form KC (as defined by @Chg{Version=[3],New=[Clause 21],Old=[section 24]}
 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]})
 is implementation defined.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
 semantics of an Ada program whose text is not in Normalization Form KC.]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 The description of the
 language definition in this International Standard uses the @Chg{Version=[2],
 New=[character properties General Category, Simple Uppercase Mapping,
 Uppercase Mapping, and Special Case Condition of the documents referenced by
-the note in section 1 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[graphic symbols
+the note in @Chg{Version=[3],New=[Clause],Old=[section]} 1 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[graphic symbols
 defined for Row 00: Basic Latin and Row 00: Latin-1 Supplement
 of the ISO 10646 BMP; these correspond to the graphic symbols of
 ISO 8859-1 (Latin-1); no graphic symbols are used in this International Standard for
@@ -180,7 +181,7 @@ Old=[of Row 00 of ISO 10646 BMP whose name begins
 @lquotes@;Latin Small Letter@rquotes@;]}.
 @begin{Honest}
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0001],ARef=[AI95-00124-01]}
-@Comment{The change in clause 1.3 for 8652/0001 handles this problem.}
+@Comment{The change in subclause 1.3 for 8652/0001 handles this problem.}
 @ChgDeleted{Version=[1],Text=[The above rules do not include the ligatures
 @latin1(198) and @latin1(230).
 However, the intent is to include these characters as identifier letters.
@@ -637,8 +638,9 @@ as well as implementation-specified character sets.
 
 @begin{DiffWord83}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-The syntax rules in this clause are modified to remove the emphasis
-on basic characters vs. others.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The syntax rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} are
+modified to remove the emphasis on basic characters vs. others.
 (In this day and age, there is no need to point out that you can write
 programs without using (for example) lower case letters.)
 In particular, @ntf{character} (representing all characters usable outside
@@ -667,8 +669,9 @@ permitted in identifiers (in the standard mode).]}
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   Program text can use most characters defined by ISO-10646:2003. This
-  clause has been rewritten to use the categories defined in that Standard.
+  @Chg{Version=[3],New=[subclause],Old=[clause]} has been rewritten to use the categories defined in that Standard.
   This should ease programming in languages other than English.]}
 @end{Extend95}
 
@@ -833,8 +836,9 @@ From URG recommendation.
 
 @begin{Diffword95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[The wording was updated to use the new character
-  categories defined in the preceding clause.]}
+  categories defined in the preceding @Chg{Version=[3],New=[subclause],Old=[clause]}.]}
 @end{Diffword95}
 
 @begin{Extend2005}
@@ -903,14 +907,14 @@ a reserved word.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1],ARef=[AI05-0227-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1],ARef=[AI05-0227-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
 @Comment{Removed the "Type=[Leading]" along with the bullets. Don't have
 a way to make it doubly conditional (only in Version=[2]), and since it is
 mainly for spacing, we just forget it.}
 @ChgAdded{Version=[2],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
 New=[considered the same if they consist of the same sequence of characters
 after applying @Chg{Version=[3],New=[locale-independent simple case folding,
-as defined by documents referenced in the note in section 1 of
+as defined by documents referenced in the note in Clause 1 of
 ISO/IEC 10646:2011.@Defn{case insensitive}],Old=[the following transformations
 (in this order):]}],Old=[All characters of an @nt{identifier} are significant,
 including any underline character.
@@ -1351,8 +1355,9 @@ of a character type. See @RefSecNum(Character Types).
 @end{Examples}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The definitions of the values of literals are in
-Sections 3 and 4, rather than here,
+@Chg{Version=[3],New=[Clauses],Old=[Sections]} 3 and 4, rather than here,
 since it requires knowledge of types.
 @end{DiffWord83}
 
@@ -2139,8 +2144,10 @@ The following words are not reserved in Ada 83, but are reserved in Ada
 @end{Incompatible83}
 
 @begin{DiffWord83}
-The clause entitled @lquotes@;Allowed Replacements of Characters@rquotes@; has been moved
-to @RefSec(Obsolescent Features).
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The @Chg{Version=[3],New=[subclause],Old=[clause]} entitled @lquotes@;Allowed
+Replacements of Characters@rquotes@; has been moved to
+@RefSec(Obsolescent Features).
 @end{DiffWord83}
 
 @begin{Incompatible95}

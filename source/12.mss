@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/06/28 03:40:12 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -219,10 +219,11 @@ formal package.
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
 The syntax for @nt{generic_formal_parameter_declaration} and
 @nt{formal_type_definition} is split up into more named categories.
-The rules for these categories are moved to the appropriate clauses and
-subclauses.
+The rules for these categories are moved to the appropriate
+@Chg{Version=[3],New=[],Old=[clauses and ]}subclauses.
 The names of the categories are changed to be more intuitive and uniform.
 For example, we changed @ntf{generic_parameter_declaration} to
 @nt{generic_formal_parameter_declaration}, because the thing it declares
@@ -337,6 +338,7 @@ An instance of a generic unit is declared by a
 @end{Intro}
 
 @begin{MetaRules}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{generic contract model}
 @Defn{contract model of generics}
 The legality of an instance should be determinable without looking at
@@ -348,7 +350,8 @@ the instances; if each obeys the rules with respect to the
 @nt{generic_declaration}, then no legality problems will arise.
 This is really a special case of the
 @lquotes@;legality determinable via semantic dependences@rquotes@;
-@MetaRulesName (see Section 10),
+@MetaRulesName (see @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Program Structure and Compilation Issues}),
 given that a @nt{generic_instantiation} does not depend semantically
 upon the generic body, nor vice-versa.
 
@@ -617,8 +620,9 @@ the legality of a generic unit is checked even if there are no
 instantiations of the generic unit.
 @end{Ramification}
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The @LegalityName@;s are described here, and
-the overloading rules were described earlier in this clause.
+the overloading rules were described earlier in this @Chg{Version=[3],New=[subclause],Old=[clause]}.
 Presumably, every @StaticSemName is sucked in by one of those.
 Thus, we have covered all the compile-time rules of the language.
 There is no need to say anything special about the @LinkTimeName@;s
@@ -1942,9 +1946,9 @@ had to.
   acknowledge the possibility of operations that are never declared for an
   actual type but still can be used inside of a generic unit.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0213-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[Formal incomplete types are added; these
-  are documented as an extension in the next clause.]}
+  are documented as an extension in the next subclause.]}
 @end{DiffWord2005}
 
 
@@ -2991,8 +2995,9 @@ not what the language says). It doesn't seem worth the effort.]}
 The expected profile for the @nt<default_name>, if any, is that of the
 formal subprogram.
 @begin{Ramification}
-  This rule,
-  unlike others in this clause, is observed at compile
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  This rule, unlike others in this
+  @Chg{Version=[3],New=[subclause],Old=[clause]}, is observed at compile
   time of the @nt{generic_declaration}.
 
   The evaluation of the @nt{default_name} takes place during the
@@ -3011,8 +3016,9 @@ The profiles of the formal and any named default shall be
 @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]}.
 @Defn2{Term=[mode conformance],Sec=(required)}
 @begin{Ramification}
-This rule, unlike others in this clause, is checked at compile
-time of the @nt{generic_declaration}.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This rule, unlike others in this @Chg{Version=[3],New=[subclause],Old=[clause]},
+is checked at compile time of the @nt{generic_declaration}.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/06/28 03:40:12 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -73,11 +73,13 @@ be associated with the file, such as the physical organization or access
 rights. The conventions governing the interpretation of such strings
 shall be documented.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn2{Term=[file], Sec=(as file object)}
 Input and output operations are expressed as operations on objects of
 some @i{file type}, rather than directly in terms of the external files. In
-the remainder of this section, the term @i{file} is always used to refer to
-a file object; the term @i{external file} is used otherwise.
+the remainder of this @Chg{Version=[3],New=[clause],Old=[section]}, the term
+@i{file} is always used to refer to a file object; the term @i{external file} is
+used otherwise.
 
 Input-output for sequential files of values of a single element type is
 defined by means of the generic package Sequential_IO.
@@ -145,10 +147,12 @@ sequential and direct files.
 Any additional effects concerning text
 input-output are described in subclause @RefSecNum{Text File Management}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The exceptions that can be propagated by the execution of an input-output
 subprogram are defined in the package IO_Exceptions; the situations
 in which they can be propagated are described following the description of
-the subprogram (and in clause @RefSecNum{Exceptions in Input-Output}).
+the subprogram (and in @Chg{Version=[3],New=[subclause],Old=[clause]}
+@RefSecNum{Exceptions in Input-Output}).
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exceptions Storage_Error and Program_Error may be propagated.
@@ -908,13 +912,16 @@ Storage_IO is new in Ada 95.]}
 @LabeledClause{Text Input-Output}
 
 @begin{StaticSem}
-This clause describes the package Text_IO, which provides facilities
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} describes the
+package Text_IO, which provides facilities
 for input and output in human-readable form. Each file is read or
 written sequentially, as a sequence of characters grouped into lines,
 and as a sequence of lines grouped into pages. The specification of the
 package is given below in subclause
 @RefSecNum{The Package Text_IO}.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The facilities for file management given above, in subclauses
 @RefSecNum{File Management} and
 @RefSecNum{Sequential Input-Output Operations},
@@ -925,7 +932,8 @@ are provided to the Put procedures, and returned by the Get procedures,
 in a parameter Item. Several overloaded procedures of these names
 exist, for different types of Item. These Get procedures analyze the
 input sequences of characters based on
-lexical elements (see Section 2) and
+lexical elements (see
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Lexical Elements}) and
 return the corresponding values; the Put procedures output the given
 values as appropriate lexical elements. Procedures Get and Put are also
 available that input and output individual characters treated as
@@ -3893,8 +3901,9 @@ other language-defined packages and operations, see the definition of those
 entities for other reasons that these exceptions are propagated.]}
 
 @begin{Reason}
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This clause is based in Ada 95. Later versions of
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is based in Ada 95. Later versions of
   Ada (starting with Technical Corrigendum 1) have added a number of additional
   places and reasons that cause these exceptions. In particular, TC1 says that
   stream attributes need to raise End_Error in some circumstances; Amendment 1

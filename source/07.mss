@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -180,7 +180,9 @@ required.
 @end{Incompatible83}
 
 @begin{DiffWord83}
-We have moved the syntax into this clause and the next clause from
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+We have moved the syntax into this @Chg{Version=[3],New=[subclause],Old=[clause]}
+and the next @Chg{Version=[3],New=[subclause],Old=[clause]} from
 RM83-7.1, @lquotes@;Package Structure@rquotes@;, which we have removed.
 
 RM83 was unclear on the rules about when a package requires a body.
@@ -266,6 +268,7 @@ have a corresponding body anyway.
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 In any @nt{package_body} without @nt{statement}s
 there is an implicit @nt{null_@!statement}.
 For any @nt{package_@!declaration} without an explicit completion,
@@ -282,7 +285,8 @@ the order of the implicit @ntf{package_@!bodies} is unspecified.
 occurs at the place of the instantiation
 (see @RefSecNum{Generic Instantiation}).
 For a library package, the place is partially determined by the
-elaboration dependences (see Section 10).)]
+elaboration dependences (see @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Program Structure and Compilation Issues}).)]
 @begin{Discussion}
 Thus, for example, we can refer to something happening just
 after the @key{begin} of a @nt{package_body},
@@ -1778,10 +1782,10 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
     multiple types and thus multiple invariant checks may be needed.]}
   @end{Ramification}
   @begin{ImplNote}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0299-1]}
     @ChgAdded{Version=[3],Text=[For calls to inherited subprograms (including
     dispatching calls), the implied view conversions mean that a wrapper is
-    probably needed. (See the Note at the bottom of this clause for more
+    probably needed. (See the Note at the bottom of this subclause for more
     on the model of checks for inherited subprograms.)]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2135,9 +2139,10 @@ In Ada 95, the problem goes away.
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Since deferred constants can now be of a nonprivate type,
-we have made this a stand-alone clause, rather than
-a subclause of @RefSec{Private Types and Private Extensions}.
+we have made this a stand-alone @Chg{Version=[3],New=[subclause],Old=[clause]},
+rather than a subclause of @RefSec{Private Types and Private Extensions}.
 
 Deferred constant declarations used to have their own syntax, but now
 they are simply a special case of @nt<object_declaration>s.
@@ -2635,9 +2640,10 @@ cases, are removed.
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Since limitedness and privateness are orthogonal in Ada 95 (and
-to some extent in Ada 83), this is now its own clause rather
-than being a subclause of
+to some extent in Ada 83), this is now its own @Chg{Version=[3],New=[subclause],Old=[clause]}
+rather than being a subclause of
 @RefSec{Private Types and Private Extensions}.
 @end{DiffWord83}
 
@@ -2667,10 +2673,10 @@ than being a subclause of
   immutably limited types, so that the fairly complex definition does
   not need to be repeated in rules elsewhere in the Standard.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> The built-in-place rules
   are consolidated in @RefSecNum{Assignment and Finalization}, and thus
-  they are removed from this clause.]}
+  they are removed from this subclause.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0087-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Fixed an oversight: class-wide
@@ -4377,7 +4383,8 @@ freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]
 
 
 @begin{Notes}
-The rules of Section 10 imply that
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The rules of @Chg{Version=[3],New=[Clause],Old=[Section]} 10 imply that
 immediately prior to partition termination, Finalize operations
 are applied to library-level controlled objects (including those
 created by @nt{allocator}s of library-level access types, except those
@@ -4570,13 +4577,16 @@ be possible.
 @end{Notes}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Finalization depends on the concepts of completion and leaving,
 and on the concept of a master.
 Therefore, we have moved the definitions of these concepts here,
-from where they used to be in Section 9.
+from where they used to be in
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}.
 These concepts also needed to be generalized somewhat.
 Task waiting is closely related to user-defined finalization;
-the rules here refer to the task-waiting rules of Section 9.
+the rules here refer to the task-waiting rules of
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}.
 @end{DiffWord83}
 
 @begin{Inconsistent95}

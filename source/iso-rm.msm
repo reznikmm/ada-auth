@@ -8,14 +8,15 @@
 @Title{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
 @Title{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @Title{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
-@Comment{@Title{Version=[3],Text=[ISO/IEC 8652:2012(E)]}}
-@Title{Version=[3],Text=[ISO/IEC 8652:DIS]}
+@Title{Version=[3],Text=[ISO/IEC 8652:2012(E)]}
+@Comment{@Title{Version=[3],Text=[ISO/IEC 8652:DIS]}}
 @FilePrefix{8652}
 @ExampleFont{Fixed}
 @BodyFont{Roman}
 @NoteFormat{Ada95}
 @ContentsFormat{Ada95}
 @ListFormat{Ada95}
+@SubdivisionNames{Clause}@Comment{For Ada 95 and 2005, use "section" instead}
 
 @Comment{RTF properties}
 @SingleRTFOutputFile @Comment{One large file allows Word to make a TOC}

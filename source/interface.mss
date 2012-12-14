@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -26,16 +26,16 @@ Ada should have strong support for mixed-language programming.
 @end{MetaRules}
 
 @begin{ImplReq}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0262-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[Support for interfacing to any foreign language is
 optional. However, an implementation shall not provide any optional
-aspect, attribute, library unit, or pragma having the same name as an
-aspect, attribute, library unit, or pragma (respectively) specified in
-the clauses of this Annex unless the provided construct is either as specified
-in those clauses or is more limited in capability than that required by those
-clauses. A program that attempts to use an unsupported capability of this Annex
-shall either be identified by the implementation before run time or shall raise
-an exception at run time.]}
+aspect, attribute, library unit, or pragma having the same name as an aspect,
+attribute, library unit, or pragma (respectively) specified in the subclauses of
+this Annex unless the provided construct is either as specified in those
+subclauses or is more limited in capability than that required by those
+subclauses. A program that attempts to use an unsupported capability of this
+Annex shall either be identified by the implementation before run time or shall
+raise an exception at run time.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The intent is that the same rules apply for
@@ -974,9 +974,10 @@ so that it will be more convenient to pass parameters to a subprogram
 whose convention is XYZ_Pascal.]}
 @end{Ramification}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 An implementation supporting an interface to C, COBOL, or Fortran
 should provide the corresponding
-package or packages described in the following clauses.
+package or packages described in the following @Chg{Version=[3],New=[subclauses],Old=[clauses]}.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[If an interface to C, COBOL, or Fortran is provided, the corresponding
 package or packages described in @RefSec{Interface to Other Languages}
@@ -1025,12 +1026,12 @@ C@Chg{New=[@Chg{Version=[3],New=[ and],Old=[; and support for the Convention
 pragma with @SynI{convention_}@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0262-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0262-1],ARef=[AI95-0299-1]}
 The package Interfaces.C contains the basic types,
 constants@Chg{Version=[3],New=[,],Old=[]} and
 subprograms that allow an Ada program to pass scalars and strings to C
 @Chg{Version=[2],New=[and C++ ],Old=[]}functions.@Chg{Version=[2],New=[ When
-this clause mentions a C entity,
+this @Chg{Version=[3],New=[subclause],Old=[clause]} mentions a C entity,
 the reference also applies to the corresponding entity in C++.],Old=[]}
 @end{Intro}
 

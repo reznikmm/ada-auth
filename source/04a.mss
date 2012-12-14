@@ -1,14 +1,16 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/06/20 22:35:45 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[The rules applicable to the different forms of @nt<name> and
-expression, and to their evaluation, are given in this section.]
+expression, and to their evaluation, are given in this
+@Chg{Version=[3],New=[clause],Old=[section]}.]
 @end{Intro}
 
 @LabeledClause{Names}
@@ -295,10 +297,10 @@ of implicit dereference.
   the designated object is). This is just confirming the Ada 95 rules;
   Ada 2005 failed to ensure that this property was unchanged.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[Added @nt{generalized_reference} and
   @nt{generalized_indexing} as types of @nt{name}; these are documented
-  as extensions in the appropriate clauses.]}
+  as extensions in the appropriate subclauses.]}
 @end{DiffWord2005}
 
 
@@ -1185,19 +1187,18 @@ named reference object.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Barrel @key[is tagged] ...  -- @Examcom{holds objects of type Element}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
-@ChgAdded{Version=[3],Text=[B: @key[aliased] Barrel;]}
-
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[@key[type] Ref_Element(Data : @key[access] Element) @key[is]
-   @key[new] Ada.Finalization.Limited_Controlled @key[with private]
-      @key[with] Implicit_Dereference => Data;
-        -- @Examcom{This Ref_Element type is a "reference" type.}
-        -- @ExamCom{"Data" is its reference discriminant.}]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0299-2]}
+@ChgAdded{Version=[3],Text=[@key[type] Ref_Element(Data : @key[access] Element) @key[is limited private]
+   @key[with] Implicit_Dereference => Data;
+      -- @Examcom{This Ref_Element type is a "reference" type.}
+      -- @ExamCom{"Data" is its reference discriminant.}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String) @key[return] Ref_Element;
    -- @Examcom{Return a reference to an element of a barrel.}]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0299-2]}
+@ChgAdded{Version=[3],Text=[B: @key[aliased] Barrel;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[...]}
@@ -3149,6 +3150,7 @@ if the value of the object is outside the base range of its type,
 the implementation may either raise Constraint_Error
 or return the value of the object.
 @begin{Ramification}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   This means that if extra-range intermediates are used to
   hold the value of an object of an unconstrained numeric subtype,
   a Constraint_Error can be raised on a read of the object, rather than
@@ -3157,7 +3159,8 @@ or return the value of the object.
   can be deferred until the first read of the object
   (presuming no side effects other than failing an Overflow_Check
   are possible). This permission is over and above that provided
-  by clause @RefSecNum(Exceptions and Optimization), since
+  by @Chg{Version=[3],New=[subclause],Old=[clause]}
+  @RefSecNum(Exceptions and Optimization), since
   this allows the Constraint_Error to move to a different handler.
 @end{Ramification}
 @begin{Reason}

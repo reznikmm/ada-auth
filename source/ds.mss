@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.66 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.67 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -300,9 +300,9 @@ A @i{normal library unit} is one @Chg{Version=[3],New=[for],Old=[to]}
 which no categorization
 @Chg{Version=[3],New=[aspect is True],Old=[pragma applies]}.
 @begin{TheProof}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[These terms (other than @ldquote@;normal
-  library unit@rdquote) are really defined in the following clauses.]}
+  library unit@rdquote) are really defined in the following subclauses.]}
 @end{TheProof}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0078],ARef=[AI95-00048-01]}
@@ -310,9 +310,10 @@ which no categorization
 interface, but it cannot be a remote types or shared passive library unit.]}
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0206-1],ARef=[AI05-0243-1],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
 @redundant[The various categories of library units and the associated
-restrictions are described in this clause and its subclauses. The categories are
+restrictions are described in this @Chg{Version=[3],New=[and the following],
+Old=[clause and its]} subclauses. The categories are
 related hierarchically in that the library units of one category can depend
 semantically only on library units of that category or an earlier
 one@Chg{Version=[3],New=[ in the hierarchy],Old=[]}, except
@@ -416,14 +417,14 @@ Implementations are allowed to define other categorization pragmas.
 @end{DiffWord95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0206-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[We now allow private withs of preelaborated
   units in Remote Types and Remote Call Interface units; this is documented
-  as an extension in the sections where this is defined normatively.]}
+  as an extension in the subclauses where this is defined normatively.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0243-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[We have introduced categorization aspects; these
-  are documented as extensions in the clauses where they actually are defined.]}
+  are documented as extensions in the subclauses where they actually are defined.]}
 @end{DiffWord2005}
 
 
@@ -1239,9 +1240,10 @@ be supported as an alternative to RPC.]
 @LabeledClause{Consistency of a Distributed System}
 
 @begin{Intro}
-@redundant[This clause defines attributes and rules associated with verifying
-the consistency of a distributed program.
-]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} defines
+attributes and rules associated with verifying
+the consistency of a distributed program.]
 @end{Intro}
 
 @begin{MetaRules}
@@ -2222,9 +2224,11 @@ implementation.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00273-01]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[An alternative declaration is allowed for
 package System.RPC as long as it provides a set of operations that is
-substantially equivalent to the specification defined in this clause.]}
+substantially equivalent to the specification defined in this
+@Chg{Version=[3],New=[subclause],Old=[clause]}.]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Experience has proved that the definition
@@ -2247,10 +2251,13 @@ substantially equivalent to the specification defined in this clause.]}
   a good idea, why should anyone believe that the former is?]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Therefore, this clause is made optional.
-  We considered deleting the clause outright, but we still require that
-  users may replace the package (whatever its interface). Also, it still
-  provides a useful guide to the implementation of this feature.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[Therefore, this
+  @Chg{Version=[3],New=[subclause],Old=[clause]} is made optional. We considered
+  deleting the @Chg{Version=[3],New=[subclause],Old=[clause]} outright, but we
+  still require that users may replace the package (whatever its interface).
+  Also, it still provides a useful guide to the implementation of this
+  feature.]}
 @end{Reason}
 @end{ImplPerm}
 

@@ -1,14 +1,16 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:01 $}
+@Comment{$Date: 2012/11/28 23:53:02 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
-This section describes the types in the language and the rules
-for declaring constants, variables, and named numbers.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[clause],Old=[section]} describes the types
+in the language and the rules for declaring constants, variables, and
+named numbers.
 @end{Intro}
 
 @LabeledClause{Declarations}
@@ -356,13 +358,16 @@ It becomes a @nt{defining_identifier}, @nt{defining_character_literal}, or
 @nt{defining_operator_symbol} (or some syntactic category composed of these),
 to indicate a defining occurrence;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It becomes a @nt{direct_name}, in usage occurrences where
-the usage is required (in Section 8) to be directly visible;
+the usage is required (in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Visibility Rules}) to be directly visible;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 It becomes a @nt{selector_name}, in usage occurrences
 where the usage is required (in
-Section 8) to be visible but not
-necessarily directly visible;
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Visibility Rules})
+to be visible but not necessarily directly visible;
 
 It remains an @nt{identifier}, @nt{character_literal}, or @nt{operator_symbol},
 in cases where the visibility rules do not apply
@@ -387,19 +392,23 @@ The phrase @lquotes@;visible by selection@rquotes@;
 is not used in Ada 95. It is subsumed by simply @lquotes@;visible@rquotes@; and
 the Name Resolution Rules for @nt<selector_name>s.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 (Note that in Ada 95, a declaration is visible at all
 places where one could have used a @nt{selector_name},
 not just at places where a @nt{selector_name} was actually used.
 Thus, the places where a declaration is directly visible are a
 subset of the places where it is visible.
-See Section 8 for details.)
+See @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Visibility Rules} for details.)
 
 We use the term @lquotes@;declaration@rquotes@; to cover @ntf<_specification>s that declare
 (views of) objects, such as @nt<parameter_specification>s. In Ada 83,
 these are referred to as a @lquotes@;form of declaration,@rquotes@; but it is not
 entirely clear that they are considered simply @lquotes@;declarations.@rquotes@;
 
-RM83 contains an incomplete definition of "elaborated" in this clause:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+RM83 contains an incomplete definition of "elaborated" in this
+@Chg{Version=[3],New=[subclause],Old=[clause]}:
 it defines "elaborated" for declarations,
 @nt{declarative_part}s, @nt{declarative_item}s
 and @nt{compilation_unit}s,
@@ -656,8 +665,9 @@ type represents its complete definition.] An incomplete or partial view is
 considered a composite type@Redundant[, even if the full view is not].]}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[The real definitions of the views are in the
-referenced clauses.]}
+referenced @Chg{Version=[3],New=[subclauses],Old=[clauses]}.]}
 @end{TheProof}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -942,9 +952,11 @@ Old=[ and]} do not fit into the above strictly hierarchical picture.
 @end{Notes}
 
 @begin{DiffWord83}
-This clause and its subclauses now precede the clause and
-subclauses on objects and named numbers, to cut down on the number of
-forward references.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause and its subclauses]}
+now @Chg{Version=[3],New=[precedes],Old=[precede]} the
+@Chg{Version=[3],New=[],Old=[clause and ]}subclauses on objects and
+named numbers, to cut down on the number of forward references.
 
 We have dropped the term "base type" in favor of simply "type" (all
 types in Ada 83 were "base types" so it wasn't clear when it was
@@ -972,7 +984,9 @@ a type T, we call T the "type of the subtype S."
   the standard, but they were not previously defined.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00442-01]}
-  @ChgAdded{Version=[2],Text=[Reworded most of this clause to use
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[Reworded most of this
+  @Chg{Version=[3],New=[subclause],Old=[clause]} to use
   category rather than class, since so many interesting properties are
   not, strictly speaking, classes. Moreover, there was no normative
   description of exactly which properties formed classes, and which did
@@ -1166,6 +1180,7 @@ is anonymous @em it has no nameable subtypes.
 The syntactic category @nt{full_type_declaration} now includes task and
 protected type declarations.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 We have generalized the concept of first-named subtype (now
 called simply @lquotes@;first subtype@rquotes@;) to cover all kinds of types, for uniformity
 of description elsewhere.
@@ -1535,14 +1550,14 @@ The description of S'Base has been moved to
 @LabeledAddedSubClause{Version=[3],Name=[Subtype Predicates]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[The language-defined @i{predicate aspects}
 Static_Predicate and Dynamic_Predicate may be used to define properties of
 subtypes. A @i{predicate specification} is an @nt{aspect_specification}
 for one of the two predicate
 aspects.@Defn{predicate aspect}@Defn{predicate specification}@PDefn2{Term=[aspect],Sec=(predicate)}@AspectDefn{Static_Predicate}@AspectDefn{Dynamic_Predicate}
 General rules for aspects and @nt{aspect_specification}s are found in
-Section @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Representation Issues} (@RefSecNum{Operational and Representation Aspects}
 and @RefSecNum{Aspect Specifications} respectively).]}
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Static_Predicate],
   Text=[@ChgAdded{Version=[3],Text=[Condition that must hold true for objects of
@@ -2053,7 +2068,7 @@ A component cannot have an indefinite nominal subtype.]
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[A view of a composite object is
-@i<known to be constrained> if:]}
+@i<known to be constrained> if:@Defn{known to be constrained}@Defn2{Term=[constrained],Sec=[known to be]}]}
 
 @begin{Itemize}
 
@@ -2162,9 +2177,11 @@ the function again.
 @end{Extend83}
 
 @begin{DiffWord83}
-This clause and its subclauses now follow the clause and
-subclauses on types and subtypes, to cut down on the number of
-forward references.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause and its subclauses]}
+now @Chg{Version=[3],New=[follows],Old=[follow]} the
+@Chg{Version=[3],New=[],Old=[clause and ]}subclauses on types and subtypes,
+to cut down on the number of forward references.
 
 The term nominal subtype is new. It is used to distinguish
 what is known at compile time about an object's constraint, versus what
@@ -2290,7 +2307,7 @@ of a limited type.]}
 @end{Legality}
 
 @begin{StaticSem}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1],ARef=[AI05-0299-1]}
 An @nt<object_declaration> with the reserved word @key(constant)
 declares a constant object.
 @Defn{full constant declaration}
@@ -2299,7 +2316,7 @@ then it is called a @i(full constant declaration).
 @Defn{deferred constant declaration}
 Otherwise@Chg{Version=[3],New=[,],Old=[]} it is called
 a @i(deferred constant declaration).
-The rules for deferred constant declarations are given in clause
+The rules for deferred constant declarations are given in @Chg{Version=[3],New=[subclause],Old=[clause]}
 @RefSecNum(Deferred Constants). The rules for full constant declarations
 are given in this subclause.
 
@@ -2811,6 +2828,7 @@ without an initialization expression.
 @begin{Intro}
 A @nt<number_declaration> declares a named number.
 @begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{static}
 If a value or other property of a construct is required to be
 @i(static) that means it is required to be determined prior
@@ -2818,7 +2836,7 @@ to execution. A @i(static) expression is an expression
 whose value is computed
 at compile time and is usable in contexts where the actual value
 might affect the legality of the construct.
-This is fully defined in clause
+This is fully defined in @Chg{Version=[3],New=[subclause],Old=[clause]}
 @RefSecNum(Static Expressions and Static Subtypes).
 @end{Discussion}
 @end{Intro}
@@ -2836,8 +2854,9 @@ a @nt{number_declaration} is expected to be of any numeric type.
 @end{Resolution}
 
 @begin{Legality}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The @i(static_)@nt{expression} given for a number declaration
-shall be a static expression, as defined by clause
+shall be a static expression, as defined by @Chg{Version=[3],New=[subclause],Old=[clause]}
 @RefSecNum(Static Expressions and Static Subtypes).
 @end{Legality}
 
@@ -3532,8 +3551,10 @@ A @nt{derived_type_definition}, however, never defines an interface type.]}
 @nt{derived_type_definition} to be a synchronized tagged type.]}
 @begin{TheProof}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[@RefSecNum{Type extensions} prohibits record
-  extensions whose parent type is a synchronized tagged type, and this clause
+  extensions whose parent type is a synchronized tagged type, and this
+  @Chg{Version=[3],New=[subclause],Old=[clause]}
   requires tagged types to have a record extension. Thus there are no legal
   derivations. Note that a synchronized interface can be used as a progenitor
   in an @nt{interface_type_definition} as well as in task and protected types,
@@ -4023,9 +4044,10 @@ are expected to be of the type of the @nt<range>.
   like constraints that appear in type declarations are called
   something else like @nt<real_range_specification>s.
 
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   We say "the expected type is ..." or "the type is expected to be ..."
   depending on which reads better. They are fundamentally equivalent,
-  and both feed into the type resolution rules of clause
+  and both feed into the type resolution rules of @Chg{Version=[3],New=[subclause],Old=[clause]}
   @RefSecNum(The Context of Overload Resolution).
 
   In some cases, it doesn't work to use expected types.
@@ -5101,11 +5123,11 @@ An @nt<enumeration_type_definition> defines an enumeration type.]
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1],ARef=[AI05-0299-1]}
 The @nt<defining_identifier>s@Chg{Version=[3],New=[ in upper case],Old=[]}
 @Redundant[and@Chg{Version=[3],New=[ the],Old=[]}
 @nt<defining_character_literal>s] listed in an
-@nt<enumeration_type_definition> shall be distinct.]
+@nt<enumeration_type_definition> shall be distinct.
   @begin{TheProof}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0227-1]}
     @Chg{Version=[3],New=[For character literals, this],Old=[This]}
@@ -5401,10 +5423,11 @@ of the predefined type Character.
   package, and we no longer mention it here.
 @end{Honest}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 A conventional character set such as @i(EBCDIC) can be declared as
 a character type; the internal codes of the characters can be specified
 by an @nt<enumeration_representation_clause> as explained in
-clause @RefSecNum(Enumeration Representation Clauses).
+@Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Enumeration Representation Clauses).
 @end{Notes}
 
 @begin{Examples}
@@ -6181,6 +6204,7 @@ Unchecked_Conversion.)
 @begin{Notes}
 Indexing and loop iteration use values of discrete types.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @PDefn2{Term=[predefined operations],Sec=(of a discrete type)}
 The predefined operations of a discrete type include the assignment
 operation, qualification, the membership tests, and the
@@ -6192,7 +6216,8 @@ as well as the binary and unary adding operators @en@; and +, the multiplying
 operators, the unary operator @key(abs),
 and the exponentiation operator.
 The assignment operation is described in @RefSecNum(Assignment Statements).
-The other predefined operations are described in Section 4.
+The other predefined operations are described in
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Names and Expressions}.
 
 As for all types, objects of a discrete type
 have Size and Address attributes (see @RefSecNum(Operational and Representation Attributes)).
@@ -6952,9 +6977,9 @@ of Float_IO).
   an ordinary fixed point type need not include the specified bounds
   themselves
   so that the range specification can be given in a natural way, such as:
-  @begin(example)
+  @leading@begin(Example)
    @b(type) Fraction @b(is delta) 2.0**(-15) @b(range) -1.0 .. 1.0;
-  @end(example)
+  @end(Example)
 
   @NoPrefix@;With 2's complement hardware, such a type could have a
   signed 16-bit representation, using 1 bit for the sign

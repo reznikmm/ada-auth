@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -25,7 +25,8 @@ This Annex is new to Ada 95.
 @LabeledClause{Access to Machine Operations}
 
 @begin{Intro}
-@Redundant[This clause specifies rules regarding access to machine instructions
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies rules regarding access to machine instructions
 from within an Ada program.]
 @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[@Chg{Version=[2],
@@ -164,22 +165,27 @@ that provide special capabilities or efficiency not normally available.]}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-This clause specifies minimal requirements on the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies minimal requirements on the
 @Chg{Version=[2],New=[],Old=[implementation's ]}support for representation
 items and related features.
 @end{Intro}
 
 @begin{ImplReq}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @PDefn2{Term=[recommended level of support], Sec=(required in Systems
 Programming Annex)}
 The implementation shall support at least the functionality
-defined by the recommended levels of support in Section 13.
+defined by the recommended levels of support in @Chg{Version=[3],New=[Clause],
+Old=[Section]} @RefSecNum{Representation Issues}.
 @end{ImplReq}
 
 @LabeledClause{Interrupt Support}
 
 @begin{Intro}
-@Redundant[This clause specifies the language-defined model for hardware interrupts
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+the language-defined model for hardware interrupts
 in addition to mechanisms for handling interrupts.]
 @IndexSee{Term=[signal],See=(interrupt)}
 @end{Intro}
@@ -350,10 +356,11 @@ implementation.
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Other forms of handlers are allowed to be supported, in which
-case@Chg{Version=[2],New=[],Old=[,]} the
-rules of this @Chg{Version=[2],New=[clause],Old=[subclause]} should be adhered
-to.
+case@Chg{Version=[2],New=[],Old=[,]} the rules of this
+@Chg{Version=[3],New=[subclause],Old=[@Chg{Version=[2],New=[clause],Old=[subclause]}]}
+should be adhered to.
 
 The active priority of the execution of an interrupt handler is allowed to
 vary from one occurrence of the same interrupt to another.
@@ -1040,7 +1047,9 @@ Device_5_Driver : Device_Interface(5);
 @LabeledClause{Preelaboration Requirements}
 
 @begin{Intro}
-@Redundant[This clause specifies additional implementation and documentation
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+additional implementation and documentation
 requirements for the Preelaborate pragma (see @RefSecNum{Elaboration Control}).]
 @end{Intro}
 
@@ -1296,8 +1305,8 @@ functions.
 @LabeledClause{Shared Variable Control}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@Redundant[This clause @Chg{Version=[3],New=[defines],Old=[specifies]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause defines],Old=[clause specifies]}
 representation @Chg{Version=[3],New=[aspects],Old=[pragmas]} that control the
 use of shared variables.]
 @end{Intro}
@@ -1850,7 +1859,9 @@ Old=[Task Identification and Attributes]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00266-02]}
-@Redundant[This clause describes operations and attributes that can be
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes operations and attributes that can be
 used to obtain the identity of a task. In addition,
 a package that associates user-defined information with a task is
 defined.@Chg{Version=[2],New=[ Finally, a package that associates
@@ -1859,8 +1870,9 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00266-02]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[The title and text here were updated to reflect
-  the addition of task termination procedures to this clause.]}
+  the addition of task termination procedures to this @Chg{Version=[3],New=[subclause],Old=[clause]}.]}
 @end{DiffWord95}
 
 @LabeledSubClause{The Package Task_Identification}

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:03 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -35,8 +35,10 @@ returns a result and can be called as part of an expression.]}>}
 Text=<@ChgAdded{Version=[2],Text=[A procedure is a form of subprogram that
 does not return a result and can only be called by a @nt{statement}.]}>}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{callable entity}
-A @i(callable entity) is a subprogram or entry (see Section 9).
+A @i(callable entity) is a subprogram or entry (see
+@Chg{Version=[3],New=[Section 9],Old=[@RefSecNum{Entries and Accept Statements}]}).
 @Defn{call}
 A callable entity is invoked by a @i{call};
 that is, a subprogram call or entry call.
@@ -106,12 +108,13 @@ library units (see @RefSecNum{Compilation Units - Library Units}).]
 @begin{SyntaxText}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00395-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The sequence of characters in an @nt{operator_symbol} shall @Chg{Version=[2],
 New=[form a reserved
 word, a delimiter, or compound delimiter that corresponds],Old=[correspond]} to
 an operator belonging to one of the six @Chg{Version=[2],New=[categories],
 Old=[classes]} of operators
-defined in clause @RefSecNum{Operators and Expression Evaluation}@Chg{Version=[2],
+defined in @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum{Operators and Expression Evaluation}@Chg{Version=[2],
 New=[],Old=[(spaces are not allowed and the case of letters
 is not significant)]}.
 
@@ -407,9 +410,10 @@ The syntax for @nt{abstract_subprogram_declaration} is added.
 The syntax for @nt{parameter_specification} is revised to allow
 for access parameters (see @RefSecNum{Access Types})
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Program units that are library units may have
 a @nt{parent_unit_name} to indicate the parent of a child
-(see Section 10).
+(see @Chg{Version=[3],New=[@RefSecNum{Compilation Units - Library Units}],Old=[Section 10]}).
 @end{Extend83}
 
 @begin{DiffWord83}
@@ -852,18 +856,18 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Table : @key[array] (1..10) @key[of] Integer := ...
 @key[procedure] Bar (I : @key[in out] Natural)
-   @key[with] Post => I > 0 @key[and then] Tab(I)'Old = 1; -- @Examcom{Illegal}]}
+   @key[with] Post => I > 0 @key[and then] Table(I)'Old = 1; -- @Examcom{Illegal}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[In this example, the compiler
   cannot know the value of I when the subprogram returns (since the subprogram
-  execution can change it), and thus it does not know whether Tab(I)'Old will
+  execution can change it), and thus it does not know whether Table(I)'Old will
   be needed then. Thus it has to always create an implicit constant
-  and evaluate Tab(I) when Bar is called (because not having the value when
+  and evaluate Table(I) when Bar is called (because not having the value when
   it is needed is not acceptable). But if I = 0 when the subprogram is called,
   that evaluation will raise Constraint_Error, and that will happen even if I
-  is unchanged by the subprogram and the value of Tab(I)'Old is not ultimately
+  is unchanged by the subprogram and the value of Table(I)'Old is not ultimately
   needed. It's easy to see how a similar problem could occur for a dereference
   of an access type. This would be mystifying (since the point of the short
   circuit is to eliminate this possibility, but it cannot do so). Therefore, we
@@ -2444,7 +2448,8 @@ F.@key[all]               --@RI{  presuming F is of an access-to-subprogram type
                    Wait    : @key[in] Duration := 0.0;
                    Prior   : @key[in] Boolean := False);
 
-@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person);   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@key[procedure] Pair(Left, Right : @key[in] Person_Name := @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @begin{WideAbove}
@@ -2456,8 +2461,9 @@ Activate(X, After => Y);
 Activate(X, Wait => 60.0, Prior => True);
 Activate(X, Y, 10.0, False);
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Pair;
-Pair(Left => @key[new] Person, Right => @key[new] Person);
+Pair(Left => @key[new] Person@Chg{Version=[3],New=[(F)],Old=[]}, Right => @key[new] Person@Chg{Version=[3],New=[(M)],Old=[]});
 @end{Example}
 @end{Examples}
 
@@ -3173,8 +3179,9 @@ were discriminants or of an access type.)
 @end{Extend83}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 We have eliminated the subclause on Default Parameters,
-as it is subsumed by earlier clauses and subclauses.
+as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclauses.
 @end{DiffWord83}
 
 @begin{Inconsistent2005}
@@ -3260,10 +3267,10 @@ rhs="@Chg{Version=[3],New=<
     @Syn2{defining_identifier} : [@key{aliased}][@key{constant}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>,Old=[]}"}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
-@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0053-1],ARef=[AI05-0277-1],ARef=[AI05-0299-1]}
 @AddedSyn{Version=[2],lhs=<@Chg{Version=[2],New=[extended_return_statement],Old=[]}>,
 rhs="@Chg{Version=[2],New=<
-    @Chg{Version=[3],New=<@Syn2{extended_return_object_declaration}>,Old=<@key{return} @Syn2{defining_identifier} : [@Chg{Version=[3],New=<@Key{constant}>,Old=[@Key{aliased}]}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>} [@Key{do}
+    @key{return} @Chg{Version=[3],New=<@Syn2{extended_return_object_declaration}>,Old=<@Syn2{defining_identifier} : [@Chg{Version=[3],New=<@Key{constant}>,Old=[@Key{aliased}]}] @Syn2{return_subtype_indication} [:= @Syn2{expression}]>} [@Key{do}
         @Syn2{handled_sequence_of_statements}
     @key{end} @key{return}];>,Old=[]}"}
 
@@ -3892,7 +3899,7 @@ that object.]}
       Foo;
    @key[end return];
    --@Examcom{ raises Program_Error after calling Foo.}
-@key[end]} F;]}
+@key[end] F;]}
 @end{Example}
 @end{Discussion}
 @begin{Ramification}
@@ -4071,8 +4078,9 @@ which are quite rare.
 @end{Incompatible83}
 
 @begin{DiffWord83}
-This clause has been moved here from chapter 5,
-since it has mainly to do with subprograms.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} has been moved here from
+chapter 5, since it has mainly to do with subprograms.
 
 A function now creates an anonymous object.
 This is necessary so that controlled types
@@ -4467,8 +4475,10 @@ corresponding @nt{operator_symbol}, and with (respectively) one or
 two positional actual parameters being the operand(s) of the operator
 (in order).
 @begin{Honest}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 We also use the term operator
-(in Section 4 and in @RefSecNum{Subprogram Declarations})
+(in @Chg{Version=[3],New=[Clause],Old=[Section]} 4 and in
+@RefSecNum{Subprogram Declarations})
 to refer to one of the syntactic categories
 defined in @RefSec{Operators and Expression Evaluation}
 whose names end with @lquotes@;_operator:@rquotes@;

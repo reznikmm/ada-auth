@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:01 $}
+@Comment{$Date: 2012/11/28 23:53:02 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @LabeledClause{Array Types}
 
@@ -1568,10 +1568,11 @@ when the discriminant is initialized.
   types can now be access-to-subprogram types as well).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[Fixed the wording of the introduction to this
-  clause to reflect that both incomplete and partial views can have
-  unknown discriminants. That was always true, but for some reason this
-  wording specified partial views.]}
+  @Chg{Version=[3],New=[subclause],Old=[clause]} to reflect that both incomplete
+  and partial views can have unknown discriminants. That was always true,
+  but for some reason this wording specified partial views.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00419-01]}
   @ChgAdded{Version=[2],Text=[Changed the wording to use the new term
@@ -1613,8 +1614,9 @@ for a given discriminated type.
 @end{Intro}
 
 @begin{MetaRules}
-The rules in this clause are intentionally parallel
-to those given in Record Aggregates.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} are
+intentionally parallel to those given in @RefSec{Record Aggregates}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -1803,7 +1805,9 @@ in extensions that are not constrained to any particular value.
 @end{Notes}
 
 @begin{Examples}
-@Leading@keepnext@i{Examples (using types declared above in clause @RefSecNum(Discriminants)):}
+@Leading@keepnext@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@i{Examples (using types declared above in
+@Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum(Discriminants)):}
 @begin(Example)
 Large   : Buffer(200);  --@RI[  constrained, always 200 characters]
                         --@RI[   (explicit discriminant value)]
@@ -2040,10 +2044,12 @@ record type include any components declared by @nt<discriminant_specification>s
 of the record type declaration. @Redundant[The identifiers of all components of
 a record type shall be distinct.]
 @begin{TheProof}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   The identifiers of all
   components of a record type have to
   be distinct because they are all declared immediately
-  within the same declarative region. See Section 8.
+  within the same declarative region. See @Chg{Version=[3],New=[Clause],Old=[Section]}
+  @RefSecNum{Visibility Rules}.
 @end{theproof}
 
 
@@ -2681,11 +2687,12 @@ or @nt{discrete_choice} instead.
 The syntax rule for @nt{record_aggregate} now defines its own syntax
 for named associations.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 We have added the term Discrete Choice to the title
 since this is where they are talked about.
 This is analogous to the name of the subclause
 "Index Constraints and Discrete Ranges" in
-the clause on Array Types.
+the @Chg{Version=[3],New=[subclause],Old=[clause]} on Array Types.
 
 The rule requiring that the discriminant denote
 a discriminant of the type being defined seems to have been

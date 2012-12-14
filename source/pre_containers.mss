@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.94 $ $Date: 2012/05/19 02:05:52 $ $Author: randy $ }
+@comment{ $Revision: 1.95 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/05/19 02:05:52 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -78,7 +78,9 @@ values @i<z>, (@i<x> < @i<z>) or (@i<z> < @i<y>).]}
 @begin{Metarules}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[This clause provides a number of useful containers
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+provides a number of useful containers
 for Ada. Only the most useful containers are provided. Ones that are relatively
 easy to code, redundant, or rarely used are omitted from this set, even if they
 are generally included in containers libraries.]}
@@ -250,9 +252,10 @@ implementations that are unstable if given buggy hash functions, et al.]}
 
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
-  This clause is new. It just provides an introduction to the following
-  subclauses.]}
+  This @Chg{Version=[3],New=[subclause],Old=[clause]} is new. It just
+  provides an introduction to the following subclauses.]}
 @end{Extend95}
 
 @begin{DiffWord2005}
@@ -4452,7 +4455,9 @@ map orders the keys per a specified relation.
 @Defn{map container}@Defn2{Term=[container],Sec=[map]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[This section describes the declarations that are
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[section]}
+describes the declarations that are
 common to both kinds of maps. See @RefSecNum{The Generic Package Containers.Hashed_Maps}
 for a description of the semantics specific to
 Containers.Hashed_Maps and @RefSecNum{The Generic Package Containers.Ordered_Maps} for
@@ -6795,8 +6800,9 @@ element per a specified relation.@Defn{set container}
 @Defn2{Term=[container],Sec=[set]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[This section describes the declarations that are
-common to both kinds of sets.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[section]}
+describes the declarations that are common to both kinds of sets.
 See @RefSecNum{The Generic Package Containers.Hashed_Sets} for a description of the
 semantics specific to
 Containers.Hashed_Sets and @RefSecNum{The Generic Package Containers.Ordered_Sets} for

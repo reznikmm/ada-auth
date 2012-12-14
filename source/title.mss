@@ -1,20 +1,20 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.58 $ $Date: 2012/06/28 03:40:12 $}
+@comment{$Revision: 1.59 $ $Date: 2012/11/28 23:53:06 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @Comment{CD draft text}
 
-@Noparanum@Right{@Swiss{@Chg{Version=[3],New=[Date: 2012-03-30],Old=[]}}}
+@Noparanum@Right{@Swiss{@Chg{Version=[3],New=[Date: 2012-11-27],Old=[]}}}
 
-@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@B{ISO/IEC CD 8652}],Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@B{ISO/IEC 8652:2012(E)}],Old=[]}}}}
 
 @Noparanum@Right{@Swiss{@Chg{Version=[3],New=[ISO/IEC JTC 1/SC 22/WG 9],Old=[]}}}
 @end{ISOOnly}
 @begin{NotISO}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[201z],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[2012(E)],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -66,7 +66,7 @@ End comment}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[201x],Old=[1995]}(E)@Chg{Version=[3],New=< (Submission Draft [Draft 18])>,Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[2012],Old=[1995]}(E)@Chg{Version=[3],New=< (Submission Draft [Draft 18])>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}
 @end{NotISO}
@@ -90,6 +90,7 @@ End comment}
 @Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012  AXE Consultants], Old=[]}
 @end{NotISO}
 @begin{ISOOnly}
+@Comment{The following is not needed in the final Standard:
 @ThinLine
 @Noparanum@Center{@Swiss{@Grow{@b{Warning}}}}
 
@@ -101,6 +102,7 @@ may not be referred to as an International Standard.
 notification of any relevant patent rights of which they are aware and to
 provide supporting documentation.
 @ThinLine
+*End comment*}
 @end{ISOOnly}
 
 @NewPage

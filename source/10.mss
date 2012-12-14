@@ -1,15 +1,16 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[The overall structure of programs and the facilities for separate
-compilation are described in this section.
+compilation are described in this @Chg{Version=[3],New=[clause],Old=[section]}.
 A @i(program) is a set of @i(partitions), each of which
 may execute in a separate address space, possibly on a separate
 computer.
@@ -42,7 +43,9 @@ and their subunits.
 Library units may be organized into a hierarchy of
 children, grandchildren, and so on.]
 
-This section has two clauses:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[clause],Old=[section]} has two
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}:
 @RefSec{Separate Compilation}
 discusses compile-time issues related to separate compilation.
 @RefSec{Program Execution}
@@ -89,9 +92,9 @@ See also the @lquotes@;generic contract model@rquotes@; @MetaRulesName of
 @end{MetaRules}
 
 @begin{DiffWord83}
-The section organization mentioned above is different from that of
-RM83.
-@end{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The @Chg{Version=[3],New=[clause],Old=[section]} organization mentioned above is
+different from that of RM83. @end{DiffWord83}
 
 @LabeledClause{Separate Compilation}
 
@@ -1103,13 +1106,15 @@ if it is named in the @nt{with_clause} or if it is denoted by a @nt{prefix} in
 the @nt{with_clause}.],Old=[]}
 
 @begin{Discussion}
- @nt{With_clause}s control the visibility of
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@nt{With_clause}s control the visibility of
 declarations or renamings of library units.
 Mentioning a root library unit in a
 @nt{with_clause} makes its declaration
 directly visible. Mentioning a nonroot library unit
 makes its declaration visible.
-See Section 8 for details.
+See @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Visibility Rules}
+for details.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 Note that this rule implies that @lquotes@;@key{with} A.B.C;@rquotes@; is
@@ -2082,8 +2087,9 @@ The rules of the language are enforced across
 @nt{compilation} and compilation unit boundaries,
 just as they are enforced within a single compilation unit.
 @begin{Ramification}
-Note that Section 1 requires an implementation to detect illegal
-compilation units at compile time.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+Note that @Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{General}
+requires an implementation to detect illegal compilation units at compile time.
 @end{Ramification}
 
 @Defn{library}
@@ -2962,9 +2968,10 @@ consistency; see also @RefSec{Distributed Systems}.
 @end{ImplReq}
 
 @begin{ImplPerm}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{active partition}
-The kind of partition described in this clause is known as an
-@i{active} partition.
+The kind of partition described in this @Chg{Version=[3],New=[subclause],Old=[clause]}
+is known as an @i{active} partition.
 An implementation is allowed to support other kinds of partitions,
 with implementation-defined semantics.
 @ImplDef{The semantics of any nonactive partitions supported by the
@@ -3737,7 +3744,7 @@ the same as they were at the earlier call.
 produces other side effects when called.]
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0299-1]}
 A declared-pure @nt{library_item} has no variable state.
 Hence, a call on one of its (nonnested) subprograms cannot
 @Chg{Version=[2],New=[normally],Old=[@lquotes@;normally@rquotes]}
@@ -3750,7 +3757,7 @@ machine code insertions,@Chg{Version=[2],New=[ imported subprograms,
 @Chg{Version=[3],New=[ and ],Old=[]}],Old=[]}unchecked conversion to an access type declared within the
 subprogram@Chg{Version=[3],New=[; this list is not exhaustive],Old=[, and
 similar features]}.@Chg{Version=[3],New=[ Thus, the permissions described
-in this section may apply to a subprogram whose execution has
+in this subclause may apply to a subprogram whose execution has
 side effects.],Old=[]} The compiler may omit a call to such a subprogram
 even if @Chg{Version=[3],New=[],Old=[such]} side effects exist, so the
 writer of such a subprogram has to keep this in mind.

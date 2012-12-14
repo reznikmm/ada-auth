@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.58 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@Comment{ $Revision: 1.59 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -664,7 +664,8 @@ optimizations (such as unused object elimination).]}
 
 @LabeledRevisedClause{Version=[2],New=[High Integrity Restrictions],Old=[Safety and Security Restrictions]}
 @begin{Intro}
-This clause defines restrictions that can be used with pragma
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} defines restrictions that can be used with pragma
 Restrictions (see @RefSecNum(Pragma Restrictions and Pragma Profile)); these
 facilitate the demonstration of program correctness by allowing
 tailored versions of the run-time system.
@@ -1132,7 +1133,8 @@ proscribed
   No_IO restriction.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
-  @ChgAdded{Version=[2],Text=[The title of this clause was changed to match the
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[The title of this @Chg{Version=[3],New=[subclause],Old=[clause]} was changed to match the
   change to the Annex title. Pragma Profile(Ravenscar) is part of this annex.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
@@ -1231,8 +1233,9 @@ and need not be detected.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00265-01]}
-@ChgAdded{Version=[2],Text=[This clause defines a @nt{pragma}
-for user control over elaboration policy.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+defines a @nt{pragma} for user control over elaboration policy.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -1251,6 +1254,15 @@ Text=[@key{pragma} @prag<Partition_Elaboration_Policy> (@SynI<policy_>@Syn2<iden
 Sequential, Concurrent or an implementation-defined identifier.]}
 @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@Chg{Version=[2],New=[Implementation-defined
 @SynI<policy_>@nt<identifier>s allowed in a @nt{pragma} Partition_Elaboration_Policy.],Old=[]}]}
+
+@begin{Ramification}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgAdded{Version=[3],Text=[Note that the Ravenscar profile (see
+@RefSecNum{The Ravenscar Profile}) has nothing to say about which
+Partition_Elaboration_Policy is used. This was intentionally omitted from the
+profile, as there was no agreement as to whether the Sequential policy should
+be required for Ravenscar programs. As such it was defined separately.]}
+@end{Ramification}
 @end{SyntaxText}
 @end{Syntax}
 

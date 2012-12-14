@@ -1,13 +1,15 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
-@redundant[This section defines the facilities for dealing with errors or other
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@redundant[This @Chg{Version=[3],New=[clause],Old=[section]} defines
+the facilities for dealing with errors or other
 exceptional situations that arise during program execution.]
 @Defn{exception occurrence}
 @IndexSeeAlso{Term=[condition],See=(exception)}
@@ -228,8 +230,10 @@ We explicitly define elaboration for @nt{exception_declaration}s.
 @Defn{handler}
 @lquotes@;@i{Handler}@rquotes@; is an abbreviation for @lquotes@;@nt{exception_handler}.@rquotes@;
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn2{term=<choice>, Sec=<of an @nt{exception_handler}>}
-Within this section, we sometimes abbreviate
+Within this @Chg{Version=[3],New=[clause],Old=[section]}, we sometimes
+abbreviate
 @lquotes@;@nt{exception_choice}@rquotes@; to @lquotes@;@i{choice}.@rquotes@;
 @end{Honest}
 @end{Syntax}
@@ -325,7 +329,7 @@ The syntax rule for @nt{handled_sequence_of_statements} is new.
 These are now used in all the places where handlers
 are allowed.
 This obviates the need to explain
-(in Sections 5, 6, 7, and 9)
+(in @Chg{Version=[3],New=[Clauses],Old=[Sections]} 5, 6, 7, and 9)
 what portions of the program are handled by the handlers.
 Note that there are more such cases in Ada 95.
 
@@ -562,7 +566,8 @@ the @nt{sequence_of_statements}.
 The rules for exceptions raised in library units,
 main subprograms and partitions follow from the normal rules,
 plus the semantics of the environment task
-described in Section 10 (for example, the
+described in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Program Structure and Compilation Issues} (for example, the
 environment task of a partition elaborates library units and calls
 the main subprogram).
 If an exception is propagated by the main subprogram, it is
@@ -1570,7 +1575,7 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Incompatible2005}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Assertion_Policy pragmas are now allowed in more places and can specify
   behavior for invidivual kinds of assertions.]}
@@ -1663,9 +1668,11 @@ even though the exceptional situations arise from the same basic causes.
 @end{Examples}
 
 @begin{DiffWord83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The sections labeled @lquotes@;Exceptions Raised During ...@rquotes@;
-are subsumed by this clause,
-and by parts of Section 9.
+are subsumed by this @Chg{Version=[3],New=[subclause],Old=[clause]},
+and by parts of @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Tasks and Synchronization}.
 @end{DiffWord83}
 
 @LabeledClause{Suppressing Checks}
@@ -1804,7 +1811,8 @@ can renew the permission.]}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Constraint_Error is raised upon failure.]
-@begin{Description}
+
+@begin{Hang2List}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @RootDefn{Access_Check}
@@ -1872,12 +1880,12 @@ are all equal.
 Check for the correct tag on tagged type conversions,
 for an @nt{assignment_statement},
 and when returning a tagged limited object from a function.]
-@end{Description}
+@end{Hang2List}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Program_Error is raised upon failure.]
-@begin{Description}
+@begin{Hang2List}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Accessibility_Check}
 Accessibility_Check @\@Redundant[Check the accessibility level of an
@@ -1902,11 +1910,11 @@ of the corresponding unit has already been elaborated.]
 Accessibility_Check @\@Redundant[Check the accessibility level of an
 entity or view.]]}
 
-@end{Description}
+@end{Hang2List}
 
 @Leading@Redundant[The following check corresponds to situations in which the
 exception Storage_Error is raised upon failure.]
-@begin{Description}
+@begin{Hang2List}
 @RootDefn{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 Storage_Check @\@Redundant[Check that evaluation of an @nt{allocator}
@@ -1923,11 +1931,11 @@ Storage_Check would then represent the union of these three.
 However, there seems to be no compelling reason to do this,
 given that it is not feasible to split Storage_Error.
 @end{Reason}
-@end{Description}
+@end{Hang2List}
 
 @Leading@Redundant[The following check corresponds to all situations in which
 any predefined exception is raised.]
-@begin{Description}
+@begin{Hang2List}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @RootDefn{All_Checks}
 All_Checks @\Represents the union of all checks;
@@ -1957,7 +1965,7 @@ checks.
   suppression part of the above rule and then handled with an implicit Ignore
   policy.]}
 @end{Discussion}
-@end{Description}
+@end{Hang2List}
 @end{Itemize}
 @end{StaticSem}
 
@@ -2149,20 +2157,22 @@ Program_Error checks was corrected to be alphabetical.]}
 @LabeledClause{Exceptions and Optimization}
 
 @begin{Intro}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @redundant[@Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
 @Defn{optimization}
 @Defn{efficiency}
-This clause gives permission to the implementation to perform
-certain @lquotes@;optimizations@rquotes@; that do not necessarily preserve the canonical
-semantics.]
+This @Chg{Version=[3],New=[subclause],Old=[clause]} gives permission to
+the implementation to perform certain @lquotes@;optimizations@rquotes@; that
+do not necessarily preserve the canonical semantics.]
 @end{Intro}
 
 @begin{RunTime}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{canonical semantics}
-The rest of this International Standard (outside this clause)
+The rest of this International Standard (outside this @Chg{Version=[3],New=[subclause],Old=[clause]})
 defines the @i{canonical semantics} of the language.
 @Redundant[The canonical semantics of a given (legal) program determines a
 set of possible external effects that can result from the execution of
@@ -2173,8 +2183,9 @@ since some reordering, parallelism, and nondeterminism is allowed by
 the canonical semantics.
 @end{Ramification}
 @begin{Discussion}
-@Leading@;The following parts of the canonical semantics are of particular
-interest to the reader of this clause:
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The following parts of the canonical semantics are of particular
+interest to the reader of this @Chg{Version=[3],New=[subclause],Old=[clause]}:
 @begin{Itemize}
 Behavior in the presence of abnormal objects
 and objects with invalid representations
@@ -2182,12 +2193,15 @@ and objects with invalid representations
 
 Various actions that are defined to occur in an arbitrary order.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Behavior in the presence of a misuse of Unchecked_Deallocation,
 Unchecked_Access, or imported or exported entity
-(see Section 13).
+(see @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Representation Issues}).
 @end{Itemize}
 @end{Discussion}
 
+@Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[As explained in
 @RefSec{Conformity of an Implementation with the Standard},
 the external effect of a program is defined in terms of its
@@ -2196,7 +2210,7 @@ Hence, the implementation can perform any internal
 actions whatsoever, in any order or in parallel,
 so long as the external effect of the execution of the program is one
 that is allowed by the canonical semantics, or by the rules
-of this clause.]
+of this @Chg{Version=[3],New=[subclause],Old=[clause]}.]
 @begin{Ramification}
 Note that an optimization can change the external effect of the program,
 so long as the changed external effect is an external effect that is
@@ -2345,7 +2359,8 @@ rather than in terms of what the implementation can assume,
 or what transformations the implementation can perform.
 Otherwise, how can the programmer write reliable programs?
 
-This clause has two conflicting goals:
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} has two conflicting goals:
 to allow as much optimization as possible,
 and to make program execution as predictable as possible
 (to ease the writing of reliable programs).
@@ -2353,8 +2368,9 @@ The rules given above represent a compromise.
 
 Consider the two extremes:
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The extreme conservative rule would be
-to delete this clause entirely.
+to delete this @Chg{Version=[3],New=[subclause],Old=[clause]} entirely.
 The semantics of Ada would be the canonical semantics.
 This achieves the best predictability.
 It sounds like a disaster from the efficiency point of view,
@@ -2379,11 +2395,12 @@ what behaviors can be expected.
 In practice, implementations would tend to avoid going so far as to
 punish their customers too much in terms of predictability.
 
-The most important thing about this clause
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The most important thing about this @Chg{Version=[3],New=[subclause],Old=[clause]}
 is that users understand what they can expect at run time,
 and implementers understand what optimizations are allowed.
-Any solution that makes this clause contain rules that can
-interpreted in more than one way is unacceptable.
+Any solution that makes this @Chg{Version=[3],New=[subclause],Old=[clause]}
+contain rules that can interpreted in more than one way is unacceptable.
 
 We have chosen a compromise between the extreme conservative and
 extreme liberal rules.
@@ -2398,7 +2415,9 @@ broken by bugs outside the library unit.
 @end{ImplPerm}
 
 @begin{Notes}
-The permissions granted by this clause can have an effect on the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The permissions granted by this @Chg{Version=[3],New=[subclause],Old=[clause]}
+can have an effect on the
 semantics of a program only if the program fails a language-defined check.
 @end{Notes}
 
@@ -2433,7 +2452,10 @@ Paragraph 7 is reflected in the
 @lquotes@;extra permission to avoid raising exceptions@rquotes@;.
 @end{Itemize}
 
-We moved clause @RefSec{Suppressing Checks} from after 11.6 to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+We moved @Chg{Version=[3],New=[subclause],Old=[clause]}
+@RefSec{Suppressing Checks} from after 11.6 to
 before 11.6, in order to preserve the famous number @lquotes@;11.6@rquotes@;
-(given the changes to earlier clauses in Section 11).
+(given the changes to earlier @Chg{Version=[3],New=[subclauses],Old=[clauses]} in
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Exceptions}).
 @end{DiffWord83}

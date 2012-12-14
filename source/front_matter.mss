@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.78 $ $Date: 2012/05/19 02:05:52 $}
+@comment{$Revision: 1.79 $ $Date: 2012/11/28 23:53:06 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -167,14 +167,15 @@ Joint Technical Committee ISO/IEC JTC 1,
 languages, their environments and system software interfaces}],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised]}
-@ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 This @Chg{Version=[3],New=[third],Old=[@Chg{Version=[2],New=[consolidated],Old=[second]}]}
 edition @Chg{Version=[3],New=[cancels and replaces],Old=[@Chg{Version=[2],
 New=[updates],Old=[cancels and replaces]}]} the @Chg{Version=[2],New=[second],Old=[first]}
 edition (ISO@Chg{Version=[3],New=[/IEC],Old=[]} 8652:@Chg{Version=[2],New=[1995)],Old=[1987), of which it constitutes
-a technical revision]}@Chg{Version=[3],New=[, of which it constitutes
-a technical revision. This edition incorporates the contents of Technical Corrigendum 1
-(ISO/IEC 8652:1995:COR.1:2001) and Amendment 1 (ISO/IEC 8652:1995:AMD 1:2007)],Old=[]}.
+a technical revision]}@Chg{Version=[3],New=[, which has been technically revised.
+It also incorporates the Technical Corrigendum ISO/IEC 8652:1995:COR.1:2001
+and Amendment ISO/IEC 8652:1995:AMD 1:2007],Old=[]}.
+
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
@@ -188,9 +189,10 @@ section also would be replaced by the current ISO boilerplate.]}]}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00440-01]}
-Annexes A to J form an integral part of this
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
+@ChgDeleted{Version=[3],Text=[Annexes A to J form an integral part of this
 International Standard.
-Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.
+Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.]}
 
 
 @begin{Discussion}
@@ -221,6 +223,7 @@ with respect to the first (Ada 83) edition (ISO 8652:1987).
 @UnNumberedSection{Introduction}
 
 @begin{Intro}
+@begin{NotISO}
 @begin{AARMOnly}
 This is the Annotated Ada Reference Manual.
 @end{AARMOnly}
@@ -336,6 +339,7 @@ and explanations of some of the more arcane interactions among the
 rules.
 @end{Itemize}
 @end{RMOnly}
+@end{NotISO}
 @end{Intro}
 
 @SubHeading(Design Goals)
@@ -796,16 +800,18 @@ were designed to improve the portability of programs, interfacing to other
 languages, and both the object-oriented and real-time capabilities.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}
-@ChgRef{Version=[3],Kind=[RevisedAdded]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[3],New=[Significant],
 Old=[The following significant]} changes@Chg{Version=[3],New=[ originating
 in Amendment 1],Old=[with respect to the 1995 edition]} are incorporated:]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[Support for program text is extended to cover the
 entire ISO/IEC 10646:2003 repertoire. Execution support now includes the
-32-bit character set. See clauses @RefSecNum{Character Set},
+32-bit character set. See @Chg{Version=[3],New=[subclauses],Old=[clauses]}
+@RefSecNum{Character Set},
 @RefSecNum{Character Types},
 @RefSecNum{String Types},
 @RefSecNum{The Package Standard},
@@ -813,41 +819,48 @@ entire ISO/IEC 10646:2003 repertoire. Execution support now includes the
 @RefSecNum{String Handling}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 The object-oriented model has been improved by the addition of an
 interface facility which provides multiple inheritance and additional
-flexibility for type extensions. See clauses @RefSecNum{Derived Types and Classes},
+flexibility for type extensions. See @Chg{Version=[3],New=[subclauses],Old=[clauses]} @RefSecNum{Derived Types and Classes},
 @RefSecNum{Tagged Types and Type Extensions}, and
 @RefSecNum{Private Types and Private Extensions}. An
 alternative notation for calling operations more akin to that used in
-other languages has also been added. See clause @RefSecNum{Selected Components}.],Old=[]}
+other languages has also been added. See @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum{Selected Components}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 Access types have been further extended to unify properties such as
 the ability to access constants and to exclude null values. See clause
 @RefSecNum{Access Types}. Anonymous access types are now permitted more
-freely and anonymous access-to-subprogram types are introduced. See clauses
+freely and anonymous access-to-subprogram types are introduced. See
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}
 @RefSecNum{Objects and Named Numbers}, @RefSecNum{Array Types},
 @RefSecNum{Access Types}, and @RefSecNum{Object Renaming Declarations}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 The control of structure and visibility has been enhanced to
 permit mutually dependent references between units and finer control
-over access from the private part of a package. See clauses
+over access from the private part of a package. See @Chg{Version=[3],New=[subclauses],Old=[clauses]}
 @RefSecNum{Incomplete Type Declarations} and @RefSecNum{Context Clauses - With Clauses}.
 In addition, limited types have been made more useful by the
-provision of aggregates, constants, and constructor functions. See clauses
+provision of aggregates, constants, and constructor functions. See
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}
 @RefSecNum{Aggregates}, @RefSecNum{Return Statements},
 and @RefSecNum{Limited Types}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 The predefined environment has been extended to include additional time
 and calendar operations,
 improved string handling, a comprehensive container library, file and
-directory management, and access to environment variables. See clauses
+directory management, and access to environment variables. See
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}
 @RefSecNum{Formatting, Time Zones, and other operations for Time},
 @RefSecNum{String Handling},
 @RefSecNum{The Package Directories},
@@ -855,6 +868,7 @@ directory management, and access to environment variables. See clauses
 and @RefSecNum{Containers}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 Two of the Specialized Needs Annexes have been considerably enhanced:],Old=[]}
 @begin{InnerItemize}
@@ -863,25 +877,28 @@ Two of the Specialized Needs Annexes have been considerably enhanced:],Old=[]}
 The Real-Time Systems Annex now includes the Ravenscar profile for
 high-integrity systems, further dispatching policies such as Round Robin
 and Earliest Deadline First, support for timing events, and support for
-control of CPU time utilization. See clauses @RefSecNum{Priority Scheduling},
+control of CPU time utilization. See
+@Chg{Version=[3],New=[subclauses],Old=[clauses]} @RefSecNum{Priority Scheduling},
 @RefSecNum{The Ravenscar Profile},
 @RefSecNum{Execution Time}, and
 @RefSecNum{Timing Events}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 The Numerics Annex now includes support for real and complex vectors
 and matrices as previously defined in ISO/IEC 13813:1997 plus further basic
 operations for linear algebra.
-See clause @RefSecNum{Vector and Matrix Manipulation}.],Old=[]}
+See @Chg{Version=[3],New=[subclause],Old=[clause]} @RefSecNum{Vector and Matrix Manipulation}.],Old=[]}
 @end{InnerItemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded]}
 @Chg{Version=[2],New=[
 The overall reliability of the language has been enhanced by
 a number of improvements. These include new syntax which detects
 accidental overloading, as well as pragmas for making assertions and
-giving better control over the suppression of checks. See clauses
+giving better control over the suppression of checks. See @Chg{Version=[3],New=[subclauses],Old=[clauses]}
 @RefSecNum{Subprogram Declarations},
 @RefSecNum{Pragmas Assert and Assertion_Policy}, and
 @RefSecNum{Suppressing Checks}.],Old=[]}
@@ -904,7 +921,7 @@ are made to address two important issues, namely, the particular problems of
 multiprocessor architectures, and the need to further increase the capabilities
 regarding assertions for correctness.}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0245-1]}
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0245-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The following significant changes
 with respect to the 1995 edition as amended by Amendment 1 are incorporated:]}
 
@@ -912,7 +929,7 @@ with respect to the 1995 edition as amended by Amendment 1 are incorporated:]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[New syntax (the aspect specification) is introduced
 to enable properties to be specified for various entities in a more structured
-manner than through pragmas. See clause @RefSecNum{Aspect Specifications}.]}
+manner than through pragmas. See subclause @RefSecNum{Aspect Specifications}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[The concept of assertions introduced in the 2005
@@ -920,7 +937,7 @@ edition is extended with the ability to specify preconditions and postconditions
 for subprograms, and invariants for private types. The concept of constraints in
 defining subtypes is supplemented with subtype predicates that enable subsets
 to be specified other than as simple ranges. These properties are all indicated
-using aspect specifications. See clauses @RefSecNum{Subtype Predicates},
+using aspect specifications. See subclauses @RefSecNum{Subtype Predicates},
 @RefSecNum{Preconditions and Postconditions}, and @RefSecNum{Type Invariants}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -929,9 +946,9 @@ if expressions, case expressions, quantified expressions, and expression
 functions. As well as being useful for programming in general by avoiding the
 introduction of unnecessary assignments, they are especially valuable in
 conditions and invariants since they avoid the need to introduce auxiliary
-functions. See clauses @RefSecNum{Conditional Expressions},
+functions. See subclauses @RefSecNum{Conditional Expressions},
 @RefSecNum{Quantified Expressions}, and @RefSecNum{Expression Functions}.
-Membership tests are also made more flexible. See clauses
+Membership tests are also made more flexible. See subclauses
 @RefSecNum{Expressions} and @RefSecNum{Relational Operators and Membership Tests}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -940,21 +957,21 @@ Functions may now have parameters of all modes. In order to mitigate consequent
 (and indeed existing) problems of inadvertent order dependence, rules are
 introduced to reduce aliasing. A parameter may now be explicitly marked as
 aliased and the type of a parameter may be incomplete in
-certain circumstances. See clauses @RefSecNum{Incomplete Type Declarations},
+certain circumstances. See subclauses @RefSecNum{Incomplete Type Declarations},
 @RefSecNum{Subprogram Declarations}, and @RefSecNum{Parameter Associations}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[The use of access types is now more flexible. The
-rules for accessibility and certain conversions are improved. See clauses
+rules for accessibility and certain conversions are improved. See subclauses
 @RefSecNum{Operations of Access Types}, @RefSecNum{Relational Operators and Membership Tests},
 @RefSecNum{Type Conversions}, and @RefSecNum{The Context of Overload Resolution}.
 Furthermore, better control of storage pools is
-provided. See clause @RefSecNum{Storage Subpools}.]}
+provided. See subclause @RefSecNum{Storage Subpools}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[The Real-Time Systems Annex now includes facilities
 for defining domains of processors and assigning tasks to them. Improvements are
-made to scheduling and budgeting facilities. See clauses @RefSecNum{Synchronous Barriers},
+made to scheduling and budgeting facilities. See subclauses @RefSecNum{Synchronous Barriers},
 @RefSecNum{Execution Time}, and @RefSecNum{Multiprocessor Implementation}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -962,18 +979,18 @@ made to scheduling and budgeting facilities. See clauses @RefSecNum{Synchronous 
 standard library. These include packages for conversions between strings and UTF
 encodings, and classification functions for wide and wide wide characters.
 Internationalization is catered for by a package giving locale information. See
-clauses @RefSecNum{Character Handling}, @RefSecNum{String Encoding}, and
+subclauses @RefSecNum{Character Handling}, @RefSecNum{String Encoding}, and
 @RefSecNum{The Package Locales}. The container library is extended to include
 bounded forms of the existing containers and new containers for indefinite
-objects, multiway trees, and queues. See clause @RefSecNum{Containers}.]}
+objects, multiway trees, and queues. See subclause @RefSecNum{Containers}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Finally, certain features are added primarily to
 ease the use of containers, such as the ability to iterate over all elements in a
 container without having to encode the iteration. These can also be used for
 iteration over arrays, and within quantified expressions. See
-clauses @RefSecNum{User-Defined References},
-@RefSecNum{User-Defined Indexing},  @RefSecNum{User-Defined Iterator Types},
+subclauses @RefSecNum{User-Defined References},
+@RefSecNum{User-Defined Indexing}, @RefSecNum{User-Defined Iterator Types},
 and @RefSecNum{Generalized Loop Iteration}.]}
 @end{Itemize}
 @end{Intro}
@@ -1007,8 +1024,9 @@ Comments should use the following format:
 @\@i{text of discussion}
 @end(display)
 
-where @i(ss.ss) is the section, clause or subclause number,
-@i(pp) is the paragraph number where applicable,
+@ChgRef{Version=[3],Kind=[Revised]}
+where @i(ss.ss) is the @Chg{Version=[3],New=[],Old=[section, ]}clause or
+subclause number, @i(pp) is the paragraph number where applicable,
 and @i(yy-mm-dd) is the date the comment was sent.
 The date is optional, as is the @b(!keywords) line.
 
@@ -1328,12 +1346,15 @@ the International Standard is formatted for A4 paper
 thus, the page breaks are in different places.
 
 @ChgRef{Version=[1],Kind=[Added]}
-@Chg{New=[The @lquotes@;Foreword to this version of the Ada Reference Manual@rquotes
-clause is not included in the International Standard.],Old=[]}
+@ChgRef{Version=[3],Kind=[DeletedAdded]}
+@ChgDeleted{Version=[3],Text=[@Chg{New=[The @lquotes@;Foreword to this version
+of the Ada Reference Manual@rquotes clause is not included in the International Standard.],Old=[]}]}
+@Comment{This subclause is not used in this revision.}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[The @lquotes@;Using this version of the Ada
-Reference Manual@rquotes clause is not included in the International Standard.]}
+Reference Manual@rquotes @Chg{Version=[3],New=[subclause],Old=[clause]} is not included in the International Standard.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[Paragraph numbers are not included

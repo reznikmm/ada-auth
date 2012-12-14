@@ -1,15 +1,17 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.41 $ $Date: 2011/12/23 21:32:48 $ $Author: randy $ }
+@comment{ $Revision: 1.42 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2011/12/23 21:32:48 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{The Package Standard}
 
 @begin{Intro}
-This clause outlines the specification of the package Standard
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} outlines
+the specification of the package Standard
 containing all predefined identifiers in the language.
 @PDefn{unspecified}
 The corresponding package body is not specified by the language.

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.113 $ $Date: 2012/04/03 20:37:03 $ $Author: randy $ }
+@comment{ $Revision: 1.114 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:05 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -96,7 +96,9 @@ This Annex is new to Ada 95.
 
 @LabeledClause{Task Priorities}
 @begin{Intro}
-@Redundant[This clause specifies the priority model for real-time systems.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+the priority model for real-time systems.
 In addition, the methods for specifying priorities are defined.]
 @end{Intro}
 
@@ -431,7 +433,9 @@ The description of the Priority pragma has been moved to this annex.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
-@Redundant[This clause describes the rules that determine which task is
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes the rules that determine which task is
 selected for execution when more than one task is ready
 (see @Chg{Version=[2],New=[@RefSecNum{Tasks and Synchronization}],
 Old=[@RefSecNum{Task Execution - Task Activation}]}).@Chg{Version=[2],
@@ -443,8 +447,9 @@ and a specific task dispatching policy
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[2],Text=[This introduction is simplified in order to
-  reflect the rearrangement and expansion of this clause.]}
+  reflect the rearrangement and expansion of this @Chg{Version=[3],New=[subclause],Old=[clause]}.]}
 @end{DiffWord95}
 
 
@@ -639,8 +644,9 @@ corresponds to at least one task dispatching point.]}
 
 @begin{Notes}
 
-Section 9 specifies under which circumstances a task
-becomes ready.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Chg{Version=[3],New=[Clause],Old=[Section]} @RefSecNum{Tasks and Synchronization}
+specifies under which circumstances a task becomes ready.
 The ready state is affected by the rules for
 task activation and termination, delay statements, and entry calls.
 @PDefn{blocked}
@@ -708,7 +714,9 @@ Old=[The Standard Task Dispatching Policy]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00355-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause allows a single task
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+allows a single task
 dispatching policy to be defined for all priorities, or the range of priorities
 to be split into subranges that are assigned individual dispatching
 policies.]]}
@@ -1063,8 +1071,9 @@ regardless of whether the active priority of the task actually changes.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause defines a preemptive task
-dispatching policy.]]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+defines a preemptive task dispatching policy.]]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -1212,8 +1221,9 @@ regardless of whether the active priority of the task actually changes.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00298-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause defines a non-preemptive task
-dispatching policy.]]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+defines a non-preemptive task dispatching policy.]]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -1401,7 +1411,9 @@ Interrupt_Handler, or Attach_Handler]}.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00355-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause defines the task dispatching
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+defines the task dispatching
 policy Round_Robin_Within_Priorities and the package Round_Robin.]]}
 @end{Intro}
 
@@ -1583,8 +1595,9 @@ urgency of the task; it represents a point on an ideal physical time line.
 The deadline might affect how resources are allocated to the task.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[2],Text=[This clause defines a package for representing the
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+defines a package for representing the
 deadline of a task and a dispatching policy that defines Earliest Deadline
 First (EDF) dispatching. @Chg{Version=[3],New=[An aspect],Old=[A pragma]}
 is defined to assign an initial deadline to a task.]}
@@ -1604,6 +1617,7 @@ is defined to assign an initial deadline to a task.]}
 
 @begin{MetaRules}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[To predict the behavior of a multi-tasking program
 it is necessary to control access to the processor which is preemptive, and
 shared objects which are usually non-preemptive and embodied in protected
@@ -1616,7 +1630,8 @@ dispatching. T.P. Baker showed (@i<Real-Time Systems>, March 1991, vol. 3, num.
 1, @i<Stack-Based Scheduling of Realtime Processes>) that for EDF a newly
 released task should only preempt the currently running task if it has an
 earlier deadline and a higher preemption level than any currently
-@lquotes@;locked@rquotes protected object. The rules of this clause implement
+@lquotes@;locked@rquotes protected object. The rules of this
+@Chg{Version=[3],New=[subclause],Old=[clause]} implement
 this scheme including the case where the newly released task should execute
 before some existing tasks but not preempt the currently executing task.]}
 @end{MetaRules}
@@ -1970,7 +1985,9 @@ follows the existing rules for ceiling locking.]}
 @LabeledClause{Priority Ceiling Locking}
 
 @begin{Intro}
-@Redundant[This clause specifies the interactions between priority task
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+the interactions between priority task
 scheduling and protected object ceilings. This interaction is based on
 the concept of the @i{ceiling priority} of a protected object.]
 @end{Intro}
@@ -2306,8 +2323,10 @@ calls another protected operation on the same protected object).
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0074],ARef=[AI95-00068-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Redundant[@Defn{queuing policy}
-This clause specifies a mechanism for a user to choose an entry
+This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+a mechanism for a user to choose an entry
 @i{queuing policy}. It also defines @Chg{New=[two],Old=[one]}
 such polic@Chg{New=[ies],Old=[y]}. Other policies are implementation defined.]
 @ImplDef{Implementation-defined queuing policies.}
@@ -2544,22 +2563,26 @@ implementation-defined queuing policies.]}]}
 
 @begin{Intro}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-  @ChgAdded{Version=[2],Text=[@Redundant[This clause describes how the
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  describes how the
   priority of an entity can be modified or queried at run time.]]}
 @end{Intro}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-  @ChgAdded{Version=[2],Text=[This clause is turned into two subclauses.
-  This clause introduction is new.]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is turned into two subclauses. This @Chg{Version=[3],New=[subclause],Old=[clause]} introduction is new.]}
 @end{DiffWord95}
 
 
 @LabeledAddedSubClause{Version=[2],Name=[Dynamic Priorities for Tasks]}
 
 @begin{Intro}
-@Redundant[This clause describes how the base priority of a task can be
-modified or queried at run time.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} describes
+how the base priority of a task can be modified or queried at run time.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -2820,8 +2843,10 @@ affected tasks.
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-  @ChgAdded{Version=[2],Text=[This Ada 95 clause was turned into a subclause.
-  The paragraph numbers are the same as those for
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This Ada 95 @Chg{Version=[3],New=[subclause],
+  Old=[clause]} was @Chg{Version=[3],New=[moved down a level],Old=[turned
+  into a subclause]}. The paragraph numbers are the same as those for
   @RefSecNum{Dynamic Priorities} in Ada 95.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00321-01]}
@@ -2842,8 +2867,10 @@ affected tasks.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Text=[This clause specifies how the priority of a
-protected object can be modified or queried at run time.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+specifies how the priority of a protected object can be modified or
+queried at run time.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -2943,8 +2970,9 @@ completion of the protected action in which it is executed.]}
 @LabeledClause{Preemptive Abort}
 
 @begin{Intro}
-@Redundant[This clause specifies requirements on the immediacy with
-which an aborted construct is completed.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+requirements on the immediacy with which an aborted construct is completed.]
 @end{Intro}
 
 @begin{RunTime}
@@ -3047,7 +3075,9 @@ deferral of abortion during finalization and in protected actions.
 @LabeledClause{Tasking Restrictions}
 
 @begin{Intro}
-@Redundant[This clause defines restrictions that can be used with a
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} defines
+restrictions that can be used with a
 pragma Restrictions (see @RefSecNum{Pragma Restrictions and Pragma Profile}) to facilitate the
 construction of highly efficient tasking run-time systems.]
 @end{Intro}
@@ -3491,8 +3521,9 @@ The above Storage_Checks can be suppressed with pragma Suppress.
 
 @LabeledClause{Monotonic Time}
 @begin{Intro}
-@Redundant[This clause specifies a high-resolution,
-monotonic clock package.]
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+a high-resolution, monotonic clock package.]
 @end{Intro}
 
 @begin{StaticSem}
@@ -3774,10 +3805,11 @@ synchronization method applied.
 Text=[Any synchronization of package Real_Time with external time references.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The implementation shall document any aspects of the @Chg{New=[], Old=[the]}
 @chgnote{Correct typo as noted at Potsdam ARG meeting}
 external environment that could interfere with the clock behavior as defined
-in this clause.
+in this @Chg{Version=[3],New=[subclause],Old=[clause]}.
 @ChgDocReq{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Any aspects of the external environment that could interfere with
 package Real_Time.]}]}
@@ -3790,8 +3822,9 @@ This dependence has to be documented.
 @end{DocReq}
 
 @begin{Metrics}
-For the purpose of the metrics defined in this clause, real time is
-defined to be the International Atomic Time (TAI).
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+For the purpose of the metrics defined in this @Chg{Version=[3],New=[subclause],Old=[clause]},
+real time is defined to be the International Atomic Time (TAI).
 
 @Leading@;The implementation shall document the following metrics:
 @begin{Itemize}
@@ -3893,9 +3926,10 @@ Real_Time.Clock.]}]}
 
 @begin{Notes}
 
-The rules in this clause do not imply that the implementation can protect
-the user from operator or installation errors which could result in the
-clock being set incorrectly.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The rules in this @Chg{Version=[3],New=[subclause],Old=[clause]} do not imply
+that the implementation can protect the user from operator or installation
+errors which could result in the clock being set incorrectly.
 
 Time_Unit is the granularity of the Time type. In contrast,
 Tick represents the granularity of Real_Time.Clock.
@@ -3930,8 +3964,9 @@ There is no requirement that these be the same.
 @LabeledClause{Delay Accuracy}
 
 @begin{Intro}
-@Redundant[This clause specifies performance requirements for the
-@nt{delay_statement}.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
+performance requirements for the @nt{delay_statement}.
 The rules apply both to @nt{delay_@!relative_@!statement} and to
 @nt{delay_@!until_@!statement}. Similarly, they apply equally to a
 simple @nt{delay_@!statement} and to one which appears in a
@@ -4069,7 +4104,9 @@ the rendezvous is immediately possible.
 @LabeledClause{Synchronous Task Control}
 
 @begin{Intro}
-@Redundant[This clause describes a language-defined private semaphore
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} describes
+a language-defined private semaphore
 (suspension object), which can be used for @i{two-stage suspend}
 operations and as a simple building block for implementing higher-level
 queues.]
@@ -4194,8 +4231,8 @@ object.]}
 @LabeledAddedSubClause{Version=[3],Name=[Synchronous Barriers]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
-@ChgAdded{Version=[3],Text=[This clause introduces a language-defined package to
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[This subclause introduces a language-defined package to
 synchronously release a group of tasks after the number of blocked tasks reaches
 a specified count value.]}
 @end{Intro}
@@ -4289,8 +4326,9 @@ may leave a task blocked forever.]}
 @LabeledClause{Asynchronous Task Control}
 
 @begin{Intro}
-@Redundant[This clause introduces a language-defined package to do
-asynchronous suspend/resume on tasks.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} introduces
+a language-defined package to do asynchronous suspend/resume on tasks.
 It uses a conceptual @i{held priority} value to represent the task's
 @i{held} state.]
 @end{Intro}
@@ -4475,7 +4513,9 @@ whose barrier becomes open. The corresponding entry body executes.
 @LabeledClause{Other Optimizations and Determinism Rules}
 
 @begin{Intro}
-@Redundant[This clause describes various requirements for
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} describes
+various requirements for
 improving the response and determinism in a real-time system.]
 @end{Intro}
 
@@ -4577,8 +4617,8 @@ Text=[The metrics for entry-less protected objects.]}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
 @Chg{Version=[3],New=[defines the Ravenscar profile.@Defn{Ravenscar}],
 Old=[specifies a mechanism for defining run-time profiles.]}]]}
 @end{Intro}
@@ -4735,13 +4775,14 @@ restriction of Max_Task_Entries => 0.]}
   system is now defined.]}
 @end{DiffWord2005}
 
-@Comment{Moved the following to the previous clause...
+@Comment{Moved the following to the previous subclause...
 @RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
 @LabeledAddedSubClause{Version=[2],Name=[The Ravenscar Profile]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
-@ChgAdded{Version=[2],Text=[@Redundant[This clause
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
 defines the Ravenscar profile.]@Defn{Ravenscar}]}
 @end{Intro}
 
@@ -4863,8 +4904,9 @@ end commented out text...}@Comment{End of original Ravenscar}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
-@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
-measure execution time.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes a language-defined package to measure execution time.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -5135,7 +5177,9 @@ configuration mechanisms to change the value of Execution_Time.CPU_Tick.]}]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00307-01]}
-@ChgAdded{Version=[2],Text=[This clause describes a language-defined package
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes a language-defined package
 that provides a facility for calling a handler when a task has used a defined
 amount of CPU time.]}
 @end{Intro}
@@ -5369,7 +5413,9 @@ Timer objects.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00354-01]}
-@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes a language-defined package to
 assign execution time budgets to groups of tasks.]}
 @end{Intro}
 
@@ -5655,7 +5701,9 @@ implementation is not portable.]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0170-1]}
-@ChgAdded{Version=[3],Text=[This clause describes a language-defined package to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes a language-defined package to
 measure the execution time of interrupt handlers.]}
 @end{Intro}
 
@@ -5720,7 +5768,9 @@ value equal to Ada.Execution_Time.Time_Of(0).]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00297-01]}
-@ChgAdded{Version=[2],Text=[This clause describes a language-defined package to
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+describes a language-defined package to
 allow user-defined protected procedures to be executed at a specified time
 without the need for a task or a delay statement.]}
 @end{Intro}
@@ -6014,8 +6064,9 @@ Timing_Event objects.]}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
-@ChgAdded{Version=[3],Text=[This clause allows implementations on multiprocessor
-platforms to be configured.]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+allows implementations on multiprocessor platforms to be configured.]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -6118,8 +6169,9 @@ defined to have failed, and it becomes a completed task (see
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[This clause allows implementations on multiprocessor
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+allows implementations on multiprocessor
 platforms to be partitioned into distinct dispatching domains during program
 startup.]}
 

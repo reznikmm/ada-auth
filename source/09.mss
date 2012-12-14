@@ -1,13 +1,14 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:58 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @PDefn2{Term=[execution], Sec=(Ada program)}
 The execution of an Ada program consists of the execution of one
 or more @i(tasks).
@@ -17,7 +18,7 @@ Each task represents a separate thread of
 control that proceeds independently and concurrently
 between the points where it @i(interacts) with other tasks.
 The various forms of task interaction are
-described in this section, and include:
+described in this @Chg{Version=[3],New=[clause],Old=[section]}, and include:
 @IndexSee{Term=[parallel processing],See=(task)}
 @Defn{synchronization}
 @IndexSee{Term=[concurrent processing],See=(task)}
@@ -181,7 +182,7 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
-@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{task_declaration})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
@@ -210,7 +211,9 @@ is called the visible part of the task unit.
 The optional list of @nt{task_item}s after the reserved
 word @key{private} is called the private part of the task unit.]
 @begin{TheProof}
-Private part is defined in Section 8.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+Private part is defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Visibility Rules}.
 @end{theproof}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0029],ARef=[AI95-00116-01]}
@@ -257,7 +260,7 @@ Sec=[by a task entry]}@Defn2{Term=[type conformance],Sec=(required)}]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
-@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{task_declaration}})}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{task_declaration})}
 A task declaration requires a completion@redundant[,
 which shall be a @nt{task_body},]
 and every @nt{task_body} shall be the completion of some
@@ -776,7 +779,9 @@ simply competing for execution resources. "Suspended" is sometimes
 used more generally to refer to tasks that are not actually running
 on some processor, due to the lack of resources.
 
-This clause has been rewritten in an attempt to improve presentation.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} has been rewritten
+in an attempt to improve presentation.
 @end{DiffWord83}
 
 @begin{DiffWord95}
@@ -1061,7 +1066,7 @@ it shall repeat the @nt{defining_identifier}.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00345-01]}@ChgNote{This was just moved below}
-@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+@ChgDeleted{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{protected_declaration})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
 and every @nt{protected_@!body} shall be the completion of some
@@ -1093,7 +1098,9 @@ The optional list of @nt{protected_@!element_@!declaration}s after the reserved
 word @key{private} is called the private part of the protected
 unit.]
 @begin{TheProof}
-Private part is defined in Section 8.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+Private part is defined in @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Visibility Rules}.
 @end{theproof}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01],ARef=[AI95-00397-01],ARef=[AI95-00399-01],ARef=[AI95-00419-01]}
@@ -1139,7 +1146,7 @@ Sec=[by a protected entry]}
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00345-01]}@ChgNote{This was just moved, not changed}
-@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{@nt{protected_declaration}})}
+@ChgAdded{Version=[2],Text=[@PDefn2{Term=[requires a completion], Sec=(@nt{protected_declaration})}
 A protected declaration requires a completion@redundant[,
 which shall be a @nt{protected_@!body},]
 and every @nt{protected_@!body} shall be the completion of some
@@ -1567,8 +1574,9 @@ Flags    : @key(array)(1 .. 100) @key(of) Resource;
 @end{Examples}
 
 @begin{Extend83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{extensions to Ada 83}
-This entire clause is new;
+This entire @Chg{Version=[3],New=[subclause],Old=[clause]} is new;
 protected units do not exist in Ada 83.
 @end{Extend83}
 
@@ -2492,8 +2500,10 @@ that is not a per-object expression (or part of one).]}
 The elaboration of an @nt<entry_@!declaration> for a single entry
 has no effect.
 @begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 The elaboration of the declaration of a protected subprogram has
-no effect, as specified in clause @RefSecNum(Subprogram Declarations).
+no effect, as specified in @Chg{Version=[3],New=[subclause],Old=[clause]}
+@RefSecNum(Subprogram Declarations).
 The default initialization of an object of a task or protected
 type is covered in @RefSecNum(Object Declarations).
 @end{Discussion}
@@ -4642,8 +4652,10 @@ The else part is selected and its @nt<sequence_of_@!statements> is executed
 if no @nt{accept_alternative} can immediately be selected;
 in particular, if all alternatives are closed.
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 An open @nt{terminate_alternative} is selected if the conditions stated at the
-end of clause @RefSecNum{Task Dependence - Termination of Tasks}
+end of @Chg{Version=[3],New=[subclause],Old=[clause]}
+@RefSecNum{Task Dependence - Termination of Tasks}
 are satisfied.
 @begin(Ramification)
   In the absence of a @nt<requeue_statement>, the conditions stated
@@ -4837,7 +4849,9 @@ meant.]}
 @end{Examples}
 
 @begin{DiffWord83}
-This clause comes before the one for Conditional Entry Calls,
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} comes before the one
+for Conditional Entry Calls,
 so we can define conditional entry calls in terms of timed entry calls.
 @end{DiffWord83}
 
@@ -4919,9 +4933,10 @@ the entry, even if the conditional call is not selected.
 @end{Examples}
 
 @begin{DiffWord83}
-This clause comes after the one for Timed Entry Calls,
-so we can define conditional entry calls in terms of timed
-entry calls.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} comes after the
+one for Timed Entry Calls, so we can define conditional entry calls in terms of
+timed entry calls.
 We do that so that an "expiration time" is defined for both,
 thereby simplifying the definition of what happens on
 a requeue-with-abort.
@@ -5308,7 +5323,9 @@ are given in @RefSec(Preemptive Abort).
 @end{Notes}
 
 @begin{DiffWord83}
-This clause has been rewritten to accommodate the concept
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+This @Chg{Version=[3],New=[subclause],Old=[clause]} has been rewritten to
+accommodate the concept
 of aborting the execution of a construct, rather than just of a task.
 @end{DiffWord83}
 

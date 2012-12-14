@@ -1,20 +1,23 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:02 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@redundant[This section describes features for
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@redundant[This @Chg{Version=[3],New=[clause],Old=[section]} describes features for
 querying and controlling @Chg{New=[certain aspects of entities],
 Old=[aspects of representation]} and for interfacing to hardware.]
 @end{Intro}
 
 @begin{DiffWord83}
-The clauses of this section have been reorganized.
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+The @Chg{Version=[3],New=[subclauses],Old=[clauses]} of this
+@Chg{Version=[3],New=[clause],Old=[section]} have been reorganized.
 This was necessary to preserve a logical order,
 given the new Ada 95 semantics given in this section.
 @end{DiffWord83}
@@ -1034,8 +1037,9 @@ For the elaboration of @Chg{New=[an @nt{aspect_clause}],
 Old=[a @nt{representation_clause}]},
 any evaluable constructs within it are evaluated.
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Elaboration of representation pragmas is covered by the
-general rules for pragmas in Section 2.
+general rules for pragmas in @Chg{Version=[3],New=[@RefSecNum{Pragmas}],Old=[Section 2]}.
 @end{Ramification}
 @end{RunTime}
 
@@ -1818,8 +1822,12 @@ follow implementation-defined legality and semantics rules.]}
   aspects that are defined, for example, by a @nt{subtype_indication} rather
   than an @nt{expression} or a @nt{name}. We chose not to try to enumerate all
   possible @nt{aspect_definition} syntaxes, but to give implementations maximum
-  freedom.]}
+  freedom. Unrecognized aspects are illegal whether or not they use custom
+  syntax, so this freedom does not reduce portability.]}
 @end{Discussion}
+@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+Text=[Implementation-defined aspects, inluding the syntax for specifying
+such aspects and the legality rules for such aspects.]}]}
 @end{ImplPerm}
 
 @begin{Extend2005}
@@ -4024,6 +4032,7 @@ Text=[The recommended level of support for
 
 @begin{Notes}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Unchecked_Conversion may be used to query the internal codes used
 for an enumeration type.
 The attributes of the type, such as Succ, Pred, and Pos,
@@ -4031,7 +4040,7 @@ are unaffected by the @Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt
 For example, Pos always returns the position number, @i{not} the
 internal integer code that might have been specified in
 @Chg{New=[an @nt{enumeration_representation_clause}],
-Old=[a @nt{representation_clause}]}}.
+Old=[a @nt{representation_clause}]}@Chg<Version=[3],New=[],Old=[}]>.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
 @begin{Example}

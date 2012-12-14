@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2012/03/20 06:13:59 $ $Author: randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -122,6 +122,7 @@ includes the command name, whereas Argument_Count does not.
 @end{Notes}
 
 @begin{Extend83}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @Defn{extensions to Ada 83}
-This clause is new in Ada 95.
+This @Chg{Version=[3],New=[subclause],Old=[clause]} is new in Ada 95.
 @end{Extend83}

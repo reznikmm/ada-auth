@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2012/04/03 20:37:03 $}
+@Comment{$Date: 2012/11/28 23:53:06 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.57 $}
+@Comment{$Revision: 1.58 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -773,7 +773,9 @@ specific Suppress @nt{pragma}s.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00224-01]}
-  @ChgAdded{Version=[2],Text=[This clause is new. This feature was moved here
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is new. This feature was moved here
   because it is important for pragma Unsuppress that there be an unambiguous
   meaning for each checking pragma. For instance, in the example]}
 @begin{Example}
@@ -813,11 +815,13 @@ library unit as the @nt<incomplete_type_declaration>.],Old=[]}
 @end{StaticSem}
 
 @begin{DiffWord95}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-@Chg{Version=[2],New=[This clause is new. This feature was moved here
-because the tagged incomplete type provides a better way to provide this
-capability (it doesn't put requirements on the completion based on uses that
-could be anywhere). Pity we didn't think of it in 1994.],Old=[]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is new. This feature was moved here
+  because the tagged incomplete type provides a better way to provide this
+  capability (it doesn't put requirements on the completion based on uses that
+  could be anywhere). Pity we didn't think of it in 1994.]}
 @end{DiffWord95}
 
 
@@ -841,7 +845,9 @@ this pragma.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00326-01]}
-  @ChgAdded{Version=[2],Text=[This clause is new. This is necessary as @key{interface}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is new. This is necessary as @key{interface}
   is now a reserved word, which would prevent pragma Interface from being an
   implementation-defined pragma. We don't define any semantics for this
   pragma, as we expect that implementations will continue to use whatever they
@@ -890,7 +896,9 @@ not allowed.]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-  @ChgAdded{Version=[2],Text=[This clause is new. These restrictions
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is new. These restrictions
   are replaced by the more general No_Dependence
   (see @RefSecNum{Language-Defined Restrictions and Profiles}).]}
 @end{DiffWord95}
@@ -937,8 +945,9 @@ Ada.Characters.Handling:]}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00394-01]}
-  @ChgAdded{Version=[2],Text=[This clause is new. These subprograms were
-  moved to Characters.Conversions
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
+  is new. These subprograms were moved to Characters.Conversions
   (see @RefSecNum{The Package Characters.Conversions}).]}
 @end{DiffWord95}
 
@@ -949,8 +958,8 @@ Ada.Characters.Handling:]}
 aspect_specifications to specify certain aspects.]}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Many existing pragmas have
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Many existing pragmas have
   been converted into aspects; the pragmas have moved here.]}
 @end{DiffWord2005}
 
@@ -1066,8 +1075,8 @@ all of the denoted entities.]}
 @end{Extend95}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Inline was moved
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Inline was moved
   here from @RefSecNum{Inline Expansion of Subprograms}; aspect Inline lives
   there now.]}
 @end{DiffWord2005}
@@ -1107,8 +1116,8 @@ by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma No_Return was moved
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma No_Return was moved
   here from @RefSecNum{Nonreturning Procedures}; aspect No_Return lives
   there now.]}
 @end{DiffWord2005}
@@ -1146,8 +1155,8 @@ denoted by @SynI<first_subtype_>@nt{local_name} has the value True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Pack was moved
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Pack was moved
   here from @RefSecNum{Packed Types}; aspect Pack lives
   there now.]}
 @end{DiffWord2005}
@@ -1188,8 +1197,8 @@ to the value of the @nt{expression} of the @nt{pragma}.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Storage_Size was moved
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Storage_Size was moved
   here from @RefSecNum{Operational and Representation Attributes};
   aspect Storage_Size lives there now.]}
 @end{DiffWord2005}
@@ -1311,8 +1320,8 @@ various aspects of the entity denoted by the @nt{local_name} as follows:]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Import, Export, and
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragmas Import, Export, and
   Convention were moved here from @RefSecNum{Interfacing Aspects}; aspects
   Import, Export, Convention, Link_Name, and External_Name live there now.]}
 @end{DiffWord2005}
@@ -1351,8 +1360,8 @@ True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Unchecked_Union was
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Unchecked_Union was
   moved here from @RefSecNum{Unchecked Union Types}; aspect Unchecked_Union
   lives there now.]}
 @end{DiffWord2005}
@@ -1445,8 +1454,8 @@ creation time].]}
 @end{Incompatible2005}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Interrupt_Handler
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragmas Interrupt_Handler
   and Attach_Handler were moved here from @RefSecNum{Protected Procedure Handlers};
   aspects Interrupt_Handler and Attach_Handler live there now.]}
 @end{DiffWord2005}
@@ -1542,8 +1551,8 @@ shall denote a declaration that may have the similarly named aspect specified.]}
 @end{Legality}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. These pragmas
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. These pragmas
   were moved here from @RefSecNum{Shared Variable Control};
   various aspects live there now.]}
 @end{DiffWord2005}
@@ -1744,8 +1753,8 @@ Interrupt_Priority'Last.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragmas Interrupt_Priority
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragmas Interrupt_Priority
   and Priority were moved here from @RefSecNum{Task Priorities};
   aspects Interrupt_Priority and Priority live there now.]}
 @end{DiffWord2005}
@@ -1793,8 +1802,8 @@ for the subprogram that contains the @nt{pragma}.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Relative_Deadline
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Relative_Deadline
   was moved here from @RefSecNum{Earliest Deadline First Dispatching};
   aspect Relative_Deadline lives there now.]}
 @end{DiffWord2005}
@@ -1832,8 +1841,8 @@ denote a declaration that may have aspect Asynchronous specified.]}
 @end{Legality}
 
 @begin{DiffWord2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[This clause is new. Pragma Asynchronous
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
+  @ChgAdded{Version=[3],Text=[This subclause is new. Pragma Asynchronous
   was moved here from @RefSecNum{Asynchronous Remote Calls};
   aspect Asynchronous lives there now.]}
 @end{DiffWord2005}

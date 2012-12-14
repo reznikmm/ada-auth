@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/05/19 02:05:51 $}
+@Comment{$Date: 2012/11/28 23:53:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -892,9 +892,10 @@ possible. Restrictions on Unchecked_Conversions should be avoided.]}]}
 @Leading@PDefn2{Term=[recommended level of support], Sec=(unchecked conversion)}
 The recommended level of support for unchecked conversions is:
 @begin{Itemize}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Unchecked conversions should be supported and should be reversible in
-the cases where this clause defines the result.
-@PDefn{contiguous representation}
+the cases where this @Chg{Version=[3],New=[subclause],Old=[clause]} defines
+the result.@PDefn{contiguous representation}
 @PDefn{discontiguous representation}
 To enable meaningful use of unchecked conversion,
 a contiguous representation should be used for elementary subtypes,
@@ -5589,7 +5590,8 @@ class-wide types descended from S.
 @LabeledClause{Freezing Rules}
 
 @begin{Intro}
-@redundant[This clause defines
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]} defines
 a place in the program text where each declared entity becomes
 @lquotes@;frozen.@rquotes@;
 A use of an entity, such as a reference to it by name,
@@ -5786,8 +5788,8 @@ freezing point to the end of the program text
   address if a link-name is used to reference the body.
 @end{Ramification}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1]}
-@ChgAdded{Version=[3],Text=[@Defn2{Term=[freezing], Sec=(profile)}This clause
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0299-1]}
+@ChgAdded{Version=[3],Text=[@Defn2{Term=[freezing], Sec=(profile)}This subclause
 also defines a place in the program text where the profile of each declared
 callable entity becomes @i{frozen}. A use of a callable entity causes freezing
 of its profile in some contexts, as described below. At the place where the
@@ -6314,8 +6316,10 @@ before the constant is frozen
 
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[2],Text=[The above @LegalityTitle are stated
-@lquotes@;officially@rquotes@; in the referenced clauses.]}
+@lquotes@;officially@rquotes@; in the referenced
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}.]}
 @end{TheProof}
 
 @Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -6352,7 +6356,7 @@ but the rule here covers all other entities as well.]}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
 @ChgDeleted{Version=[2],Text=[The above @LegalityTitle
 are stated @lquotes@;officially@rquotes@;
-in the referenced clauses]}.
+in the referenced clauses.]}
 @end{TheProof}
 @begin{Discussion}
 @Leading@;Here's an example that illustrates when freezing occurs in the
@@ -6380,13 +6384,16 @@ D is not of type T,
 its @nt{default_expression} requires that information.
 @end{Discussion}
 @begin{Ramification}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
 Although we define freezing in terms of the program text as a whole
-(i.e. after applying the rules of Section 10),
-the freezing rules actually have no effect beyond compilation unit
-boundaries.
+(i.e. after applying the rules of @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Program Structure and Compilation Issues}),
+the freezing rules actually have no effect beyond compilation unit boundaries.
 @end{Ramification}
 @begin{Reason}
-That is important, because Section 10 allows some
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+That is important, because @Chg{Version=[3],New=[Clause],Old=[Section]}
+@RefSecNum{Program Structure and Compilation Issues} allows some
 implementation definedness in the order of things,
 and we don't want the freezing rules to be implementation defined.
 @end{Reason}
@@ -6436,7 +6443,7 @@ an entity should most certainly @i{not} be a freezing point for the entity.
 @end{Legality}
 
 @begin{RunTime}
-@ChgNote{This is the last normative paragraph in the clause}
+@ChgNote{This is the last normative paragraph in the subclause}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00279-01]}
 @ChgAdded{Version=[2],Text=[The tag (see
 @RefSecNum{Tagged Types and Type Extensions}) of a tagged type T
