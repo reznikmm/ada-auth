@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.79 $ $Date: 2012/11/28 23:53:06 $}
+@comment{$Revision: 1.80 $ $Date: 2012/12/14 04:10:49 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -253,11 +253,9 @@ Old=[]}should read this first.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0245-1]}
-  @ChgAdded{Version=[3],Text=[As of this writing (March 2012), only three
+  @ChgAdded{Version=[3],Text=[As of this writing (December 2012), only five
   chapters of the Ada 2012 Rationale have been published. Additional
-  chapters are in development and should be published during 2012.]}
-  @ChgNote{** Try to remember to update this note after the CD (Draft 18),
-  when the Ada-Europe and AdaIC versions are created.**}
+  chapters are in development and should be published during 2013.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00387-01]}

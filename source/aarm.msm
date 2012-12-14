@@ -21,7 +21,7 @@
 @RTFHeaderPrefix{Version=[0],Text=[ISO/IEC 8652:1995(E)]}
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
-@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:201z(E)]}
+@RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E)]}
 @RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Letter}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
@@ -88,14 +88,14 @@
 @Source{Name=<InfoSys.MSS>,SectionName=<F>,SectionNumber=[F],NewSection=[T]}
 @Source{Name=<Numerics.MSS>,SectionName=<G>,SectionNumber=[G],NewSection=[T]}
 @Source{Name=<Safety.MSS>,SectionName=<H>,SectionNumber=[H],NewSection=[T]}
-@Comment{We don't use Annex I, as ISO requires skipping I and O}
+@Comment{We don't use Annex I, as ISO used to require skipping I and O}
 @Source{Name=<Obsolescent.MSS>,SectionName=<J>,SectionNumber=[J],NewSection=[T]}
 @Comment{Informative annexes:}
 @Source{Name=<Attribs.MSS>,SectionName=<K>,SectionNumber=[K],NewSection=[T]}
 @Source{Name=<Pragmas.MSS>,SectionName=<L>,SectionNumber=[L],NewSection=[T]}
 @Source{Name=<Impldef.MSS>,SectionName=<M>,SectionNumber=[M],NewSection=[T]}
 @Source{Name=<Glossary.MSS>,SectionName=<N>,SectionNumber=[N],NewSection=[T]}
-@Comment{We don't use Annex O, as ISO requires skipping I and O}
+@Comment{We don't use Annex O, as ISO used to require skipping I and O}
 @Source{Name=<Syntax.MSS>,SectionName=<P>,SectionNumber=[P],NewSection=[T]}
 @Source{Name=<Langdef.MSS>,SectionName=<Q>,SectionNumber=[Q],NewSection=[T]}
 @Source{Name=<Index.MSS>,SectionName=<IDX>,SectionNumber=[0],NewSection=[T]}
