@@ -140,7 +140,7 @@ procedure ARM_Formatter is
 	end if;
 	if Ada.Command_Line.Argument_Count >= 5 then
 	    Output_Path := Ada.Strings.Unbounded.To_Unbounded_String(
-		    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(1),
+		    Ada.Strings.Fixed.Trim (Ada.Command_Line.Argument(5),
 		       Ada.Strings.Right));
 	    -- Check that the Output_Path ends with a path separator.
 	    -- Note: This is a simple Windows check; it doesn't check for and

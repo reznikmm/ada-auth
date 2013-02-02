@@ -195,6 +195,19 @@ Global properties:
      This specifies the format of numbered lists ("enumerate").
      If Ada95, they're numbered "1.";
      If ISO2004, they're lettered "a)"; inner lists are numbered "1)".
+@SubdivisionNames{Chapter|Section|Clause}
+     This specifies the names of subdivisions and the format of section headers.
+     Note: In this document, top-level subdivisions are called sections,
+     and lower-level subdivisions are called clauses, subclauses,
+     and subsubclauses. The names in the final output may be different.
+     If Chapter, top-level subdivisions are called "chapters" and this appears
+     in the titles. Lower-level subdivisions are called "sections". If Section,
+     top-level subdivisions are called "sections" and this appears in the
+     titles. Lower-level subdivisions are called "clauses". If Clause,
+     top-level subdivisions are called "clauses" and this does not appear in
+     the title of top-level subdivisions (Annex still appears). Lower-level
+     subdivisions are called "subclauses". If this is not given, "Section"
+     is used.
 
 HTML Output properties:
 
@@ -1300,7 +1313,8 @@ Use to create Ada standard documents.
 
 The master file AARM.MSM specifies the Annotated Ada Reference Manual. This
 is mainly intended for implementors and language lawyers. It includes
-annotations and (visible) index entries.
+annotations. (In the past, it also included visible index entries, but that
+has been turned off by popular demand).
 
 The master file RM.MSM specifies the Ada Reference Manual. This is the
 version used by most users.
@@ -1312,13 +1326,21 @@ paper.
 Versions:
    0-Original Ada 95 (equivalent to No-Changes)
    1-Technical Corrigendum 1
-   2-Amendment 1 [Ada 2005 (really Ada 2007)]
+   2-Amendment 1 [Ada 2005 (standard published 2007, so could be considered Ada 2007)]
    3-3rd Edition (Ada 2012)
 
-Please note that there some changes to earlier versions (mostly typographical, a
-few that are significant) that are not preserved in the Ada 2012 source code, so
-to get an exact match to one of the previous versions, you must use the source
-code appropriate for that version.
+Please note that there some changes to earlier versions (mostly typographical,
+but there are some that are significant) that are not preserved in the Ada 2012
+source code (.MSM and .MSS files), so to get an exact match to one of the
+previous versions, you must use the source code appropriate for that version.
 
+One specific change; the MSM files for Ada 2012 have @SubdivisionNames{Clause}
+(as this is required by ITTF) while the MSM files for Ada 95 and Ada 2005 have
+@SubdivisionNames{Section} (as this was required when those standards were
+current).
 
+In addition, several clauses were moved to different numbers within the
+Standard (for both Ada 2012 and Ada 2005); usually, these were done by
+by just renaming the clause (and changing the @Label command) and the
+original location is not preserved.
 

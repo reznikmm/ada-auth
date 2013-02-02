@@ -105,6 +105,7 @@ package ARM_Format is
     --			inappropriate usage.
     --		- RLB - Added more specific hanging_indent formats, along with
     --			small.
+    -- 11/26/12 - RLB - Added subdivision names.
 
     type Format_Type is tagged limited private;
 
@@ -137,7 +138,8 @@ package ARM_Format is
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Use_ISO_2004_Note_Format : in Boolean;
 		      Use_ISO_2004_Contents_Format : in Boolean;
-		      Use_ISO_2004_List_Format : in Boolean);
+		      Use_ISO_2004_List_Format : in Boolean;
+		      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind);
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -158,6 +160,8 @@ package ARM_Format is
 	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
 	-- else the Ada95 standard's numbering format will be used for
 	-- enumerated lists.
+	-- The top-level (and other) subdivision names are as specified
+	-- in Top_Level_Subdivision_Name.
 
     procedure Destroy (Format_Object : in out Format_Type);
 	-- Destroy a format object, releasing any resources.
@@ -311,6 +315,7 @@ private
 	Use_ISO_2004_Note_Format : Boolean;
 	Use_ISO_2004_Contents_Format : Boolean;
 	Use_ISO_2004_List_Format : Boolean;
+	Top_Level_Subdivision_Name : ARM_Output.Top_Level_Subdivision_Name_Kind;
 
 	-- Clause numbers:
 	Clause_Number : ARM_Contents.Clause_Number_Type;

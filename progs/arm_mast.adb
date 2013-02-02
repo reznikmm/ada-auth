@@ -70,6 +70,7 @@ package body ARM_Master is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/19/11 - RLB - Added Texinfo output (from Stephen Leake).
     --  8/31/12 - RLB - Added Output_Path.
+    -- 11/26/12 - RLB - Added Subdivision_Names.
 
     type Command_Type is (
 	-- Source commands:
@@ -90,6 +91,7 @@ package body ARM_Master is
 	Note_Format,
 	Contents_Format,
 	List_Format,
+	Subdivision_Names,
 
 	-- HTML properties:
 	Single_HTML_Output_File,
@@ -158,6 +160,8 @@ package body ARM_Master is
     Use_ISO_2004_List_Format : Boolean := True;
 	-- Should we use the ISO 2004 list format, or the one used in the
 	-- Ada 95 standard??
+    Subdivision_Name_Kind : ARM_Output.Top_Level_Subdivision_Name_Kind :=
+		ARM_Output.Section;
 
     -- HTML properties:
     Use_Large_HTML_Files : Boolean := False; -- Use small output files by default.
@@ -237,6 +241,8 @@ package body ARM_Master is
 	    return Contents_Format;
 	elsif Canonical_Name = "listformat" then
 	    return List_Format;
+	elsif Canonical_Name = "subdivisionnames" then
+	    return Subdivision_Names;
 	elsif Canonical_Name = "singlehtmloutputfile" then
 	    return Single_HTML_Output_File;
 	elsif Canonical_Name = "usemsdosfilenames" then
@@ -983,6 +989,28 @@ package body ARM_Master is
 			end if;
 		    end;
 
+		when Subdivision_Names =>
+		    -- @SubdivisionNames{Chapter|Section|Clause}
+		    declare
+			SD_Name : constant String :=
+			    Ada.Characters.Handling.To_Lower (
+				Get_Single_String);
+		    begin
+			if SD_Name = "chapter" then
+			    Subdivision_Name_Kind := ARM_Output.Chapter;
+			    Ada.Text_IO.Put_Line("Top-level subdivisions known as Chapters");
+			elsif SD_Name = "section" then
+			    Subdivision_Name_Kind := ARM_Output.Section;
+			    Ada.Text_IO.Put_Line("Top-level subdivisions known as Sections");
+			elsif SD_Name = "clause" then
+			    Subdivision_Name_Kind := ARM_Output.Clause;
+			    Ada.Text_IO.Put_Line("Top-level subdivisions known as Clauses");
+			else
+		            Ada.Text_IO.Put_Line ("** Unknown subdivision name: " & SD_Name &
+						  " on line" & ARM_Input.Line_String (Input_Object));
+			end if;
+		    end;
+
 		-- HTML properties:
 
 		when Single_HTML_Output_File =>
@@ -1192,7 +1220,8 @@ package body ARM_Master is
 		Examples_Font => Font_of_Examples,
 		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
 		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format,
-		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format);
+		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format,
+		Top_Level_Subdivision_Name => Subdivision_Name_Kind);
     end Create_Format;
 
 

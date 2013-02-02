@@ -33,6 +33,8 @@ package body ARM_Texinfo is
    --		       is dropped.
    --  8/31/12 - RLB - Added Output_Path.
    -- 10/18/12 - RLB - Added additional hanging styles.
+   -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
+   --		       Revised_Clause_Header.
 
 
    use Ada.Text_IO;
@@ -444,9 +446,11 @@ package body ARM_Texinfo is
       Header_Text   : in     String;
       Level         : in     ARM_Contents.Level_Type;
       Clause_Number : in     String;
+      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind;
       No_Page_Break : in     Boolean                 := False)
    is
       pragma Unreferenced (No_Page_Break);
+      pragma Unreferenced (Top_Level_Subdivision_Name);
       Title : constant String := Clause_Number & " " & Header_Text;
 
       use ARM_Contents;
@@ -1317,13 +1321,15 @@ package body ARM_Texinfo is
       Clause_Number   : in     String;
       Version         : in     ARM_Contents.Change_Version_Type;
       Old_Version     : in     ARM_Contents.Change_Version_Type;
+      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind;
       No_Page_Break   : in     Boolean                          := False)
    is
       pragma Unreferenced (Version);
       pragma Unreferenced (Old_Version);
       pragma Unreferenced (Old_Header_Text);
    begin
-      Clause_Header (Output_Object, New_Header_Text, Level, Clause_Number, No_Page_Break);
+      Clause_Header (Output_Object, New_Header_Text, Level, Clause_Number,
+		     Top_Level_Subdivision_Name, No_Page_Break);
    end Revised_Clause_Header;
 
    procedure Section

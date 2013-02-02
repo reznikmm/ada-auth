@@ -112,6 +112,8 @@ package body ARM_Text is
     --          - RLB - Added old insertion version to Revised_Clause_Header.
     --  8/31/12 - RLB - Added Output_Path.
     -- 10/18/12 - RLB - Added additional hanging styles.
+    -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
+    --			Revised_Clause_Header.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -554,14 +556,16 @@ package body ARM_Text is
     end Category_Header;
 
 
-    procedure Clause_Header (Output_Object : in out Text_Output_Type;
-			     Header_Text : in String;
-			     Level : in ARM_Contents.Level_Type;
-			     Clause_Number : in String;
-			     No_Page_Break : in Boolean := False) is
+    procedure Clause_Header (Output_Object     : in out Text_Output_Type;
+			     Header_Text       : in String;
+			     Level	       : in ARM_Contents.Level_Type;
+			     Clause_Number     : in String;
+			     Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind;
+			     No_Page_Break     : in Boolean := False) is
 	-- Output a Clause header. The level of the header is specified
-	-- in Level. The Clause Number is as specified.
-	-- These should appear in the table of contents.
+	-- in Level. The Clause Number is as specified; the top-level (and
+	-- other) subdivision names are as specified. These should appear in
+	-- the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
 	-- If No_Page_Break is True, suppress any page breaks.
 	-- Raises Not_Valid_Error if in a paragraph.
@@ -611,8 +615,17 @@ package body ARM_Text is
 		Put_Line_Centered (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Section =>
-	        Put_Line_Centered (Output_Object.Output_File,
-				   "Section " & Clause_Number & ": " & Header_Text);
+		case Top_Level_Subdivision_Name is
+		    when ARM_Output.Chapter =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   "Chapter " & Clause_Number & ": " & Header_Text);
+		    when ARM_Output.Section =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   "Section " & Clause_Number & ": " & Header_Text);
+		    when ARM_Output.Clause =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   Clause_Number & "   " & Header_Text);
+		end case;
 	    when ARM_Contents.Unnumbered_Section =>
 	        if Header_Text /= "" then
 		    Put_Line_Centered (Output_Object.Output_File,
@@ -632,18 +645,20 @@ package body ARM_Text is
     end Clause_Header;
 
 
-    procedure Revised_Clause_Header (Output_Object : in out Text_Output_Type;
-			     New_Header_Text : in String;
-			     Old_Header_Text : in String;
-			     Level : in ARM_Contents.Level_Type;
-			     Clause_Number : in String;
-			     Version : in ARM_Contents.Change_Version_Type;
-			     Old_Version : in ARM_Contents.Change_Version_Type;
-        		     No_Page_Break : in Boolean := False) is
+    procedure Revised_Clause_Header
+			    (Output_Object     : in out Text_Output_Type;
+			     New_Header_Text   : in String;
+			     Old_Header_Text   : in String;
+			     Level	       : in ARM_Contents.Level_Type;
+			     Clause_Number     : in String;
+			     Version	       : in ARM_Contents.Change_Version_Type;
+			     Old_Version       : in ARM_Contents.Change_Version_Type;
+			     Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind;
+        		     No_Page_Break     : in Boolean := False) is
 	-- Output a revised clause header. Both the original and new text will
 	-- be output. The level of the header is specified in Level. The Clause
-	-- Number is as specified.
-	-- These should appear in the table of contents.
+	-- Number is as specified; the top-level (and other) subdivision names
+	-- are as specified. These should appear in the table of contents.
 	-- For hyperlinked formats, this should generate a link target.
 	-- Version is the insertion version of the new text; Old_Version is
 	-- the insertion version of the old text.
@@ -700,8 +715,17 @@ package body ARM_Text is
 		Put_Line_Centered (Output_Object.Output_File,
 				   Header_Text);
 	    when ARM_Contents.Section =>
-	        Put_Line_Centered (Output_Object.Output_File,
-				   "Section " & Clause_Number & ": " & Header_Text);
+		case Top_Level_Subdivision_Name is
+		    when ARM_Output.Chapter =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   "Chapter " & Clause_Number & ": " & Header_Text);
+		    when ARM_Output.Section =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   "Section " & Clause_Number & ": " & Header_Text);
+		    when ARM_Output.Clause =>
+		        Put_Line_Centered (Output_Object.Output_File,
+					   Clause_Number & "   " & Header_Text);
+		end case;
 	    when ARM_Contents.Unnumbered_Section =>
 	        if Header_Text /= "" then
 		    Put_Line_Centered (Output_Object.Output_File,

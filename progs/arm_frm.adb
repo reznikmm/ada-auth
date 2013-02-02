@@ -277,7 +277,8 @@ package body ARM_Format is
     --			newer items than the generated version into the DB.
     --		- RLB - Added four specific indent hanging formats and
     --			"small" format.
-
+    -- 11/ 5/12 - RLB - Added stupidly missing compare for "small" format.
+    -- 11/26/12 - RLB - Added subdivision names.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -329,7 +330,8 @@ package body ARM_Format is
 		      Examples_Font : in ARM_Output.Font_Family_Type;
 		      Use_ISO_2004_Note_Format : in Boolean;
 		      Use_ISO_2004_Contents_Format : in Boolean;
-		      Use_ISO_2004_List_Format : in Boolean) is
+		      Use_ISO_2004_List_Format : in Boolean;
+		      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind) is
 	-- Initialize an input object. Changes and Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
@@ -350,6 +352,8 @@ package body ARM_Format is
 	-- If Use_ISO_2004_List_Format is true, then lists will be lettered;
 	-- else the Ada95 standard's numbering format will be used for
 	-- enumerated lists.
+        -- The top-level (and other) subdivision names are as specified
+        -- in Top_Level_Subdivision_Name.
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
@@ -362,6 +366,7 @@ package body ARM_Format is
 	Format_Object.Use_ISO_2004_Note_Format := Use_ISO_2004_Note_Format;
 	Format_Object.Use_ISO_2004_Contents_Format := Use_ISO_2004_Contents_Format;
 	Format_Object.Use_ISO_2004_List_Format := Use_ISO_2004_List_Format;
+	Format_Object.Top_Level_Subdivision_Name := Top_Level_Subdivision_Name;
 
 	Format_Object.Clause_Number := (Section => 0, Clause => 0,
 				        Subclause => 0, Subsubclause => 0);
@@ -896,7 +901,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	    ARM_Output.Clause_Header (Output_Object,
 				      Header_Text => "Contents",
 				      Level => ARM_Contents.Section,
-				      Clause_Number => "");
+				      Clause_Number => "",
+				      Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 	else
             ARM_Output.Section (Output_Object,
 			        Section_Title => "Table of Contents",
@@ -905,7 +911,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	    ARM_Output.Clause_Header (Output_Object,
 				      Header_Text => "Table of Contents",
 				      Level => ARM_Contents.Section,
-				      Clause_Number => "");
+				      Clause_Number => "",
+				      Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 	end if;
 
 	ARM_Output.TOC_Marker (Output_Object, For_Start => True);
@@ -1159,74 +1166,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		    end if;
 	    end case;
         end Is_AARM_Paragraph;
-
-
-        function Is_Small_Format_Paragraph (Kind : in Paragraph_Type) return Boolean is
-	    -- AARM annotations are in the small font, as are user notes.
-        begin
-	    case Kind is
-	        when Plain | Introduction | Syntax | Resolution | Legality |
-		     Static_Semantics | Link_Time |
-		     Run_Time | Bounded_Errors |
-		     Erroneous | Requirements | Documentation |
-		     Metrics | Permissions | Advice | Examples =>
-		    return False;
-	        when Language_Design | Ada83_Inconsistencies |
-		     Ada83_Incompatibilities | Ada83_Extensions |
-		     Ada83_Wording | Ada95_Inconsistencies |
-		     Ada95_Incompatibilities | Ada95_Extensions |
-		     Ada95_Wording | Ada2005_Inconsistencies |
-		     Ada2005_Incompatibilities | Ada2005_Extensions |
-		     Ada2005_Wording | Reason | Ramification | Proof |
-		     Imp_Note | Corr_Change | Discussion |
-		     Honest | Glossary_Marker | Bare_Annotation |
-		     Element_Ref | Child_Ref | Usage_Note |
-		     Notes | Single_Note | Small =>
-		    return True;
-	        when In_Table =>
-		    return False; -- Tables are never considered part of the
-			    -- AARM for formatting purposes, even when they are.
-	        when Wide_Above | Example_Text | Indented_Example_Text |
-		     Child_Example_Text | Code_Indented | Indent |
-		     Bulleted |
-		     Nested_Bulleted | Nested_X2_Bulleted |
-		     Display | Syntax_Display |
-		     Syntax_Indented | Syntax_Production |
-		     Enumerated | Nested_Enumerated |
-		     Hanging_Indented_1 | Hanging_Indented_2 |
-		     Hanging_Indented_3 | Hanging_Indented_4 |
-		     Title =>
-		    -- This depends on the containing paragraph kind;
-		    -- Last_Paragraph_Subhead_Type should contain that.
-		    if Format_Object.Last_Paragraph_Subhead_Type = Wide_Above or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Example_Text or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Child_Example_Text or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Indented_Example_Text or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Bulleted or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Code_Indented or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Indent or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Bulleted or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Nested_X2_Bulleted or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Display or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Display or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Indented or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Syntax_Production or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Enumerated or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Nested_Enumerated or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_1 or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_2 or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_3 or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Hanging_Indented_4 or else
-		       Format_Object.Last_Paragraph_Subhead_Type = Title or else
-		       Format_Object.Last_Paragraph_Subhead_Type = In_Table then
-Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_Input.Line_String (Input_Object));
-		        return False; -- Oops, can't tell (double nesting).
-			    -- We make this check to avoid infinite recursion.
-		    else
-		        return Is_Small_Format_Paragraph (Format_Object.Last_Paragraph_Subhead_Type);
-		    end if;
-	    end case;
-        end Is_Small_Format_Paragraph;
 
 
 	procedure Paragraph_Number_String (Update_Numbers : in Boolean) is
@@ -1569,6 +1508,55 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		begin
 		    return Nested_Indent (Format_State.Nesting_Stack_Ptr);
 		end Enclosing_Indent;
+
+	        function Is_Small_Format_Paragraph (Subhead_Kind : in Paragraph_Type) return Boolean is
+		    -- AARM annotations are in the small font, as are user notes.
+	        begin
+		    if Is_AARM_Paragraph (Subhead_Kind) then
+			return True; -- AARM paragraphs are always small.
+		    else -- Check the enclosing formatting for "small" or
+			 -- other styles that imply that.
+		        for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
+			    if Format_State.Nesting_Stack(I).Command = Text_Begin and then
+			       (Format_State.Nesting_Stack(I).Is_Formatting) then
+				case Format_State.Nesting_Stack(I).Old_Next_Paragraph_Format is
+			            when Introduction | Syntax | Resolution | Legality |
+				         Static_Semantics | Link_Time |
+				         Run_Time | Bounded_Errors |
+				         Erroneous | Requirements | Documentation |
+				         Metrics | Permissions | Advice | Examples =>
+				        return False;
+			            when Language_Design | Ada83_Inconsistencies |
+				         Ada83_Incompatibilities | Ada83_Extensions |
+				         Ada83_Wording | Ada95_Inconsistencies |
+				         Ada95_Incompatibilities | Ada95_Extensions |
+				         Ada95_Wording | Ada2005_Inconsistencies |
+				         Ada2005_Incompatibilities | Ada2005_Extensions |
+				         Ada2005_Wording | Reason | Ramification | Proof |
+				         Imp_Note | Corr_Change | Discussion |
+				         Honest | Glossary_Marker | Bare_Annotation |
+				         Element_Ref | Child_Ref | Usage_Note |
+				         Notes | Single_Note | Small =>
+				        return True;
+			            when Plain | Wide_Above | In_Table | Example_Text | Indented_Example_Text |
+				         Child_Example_Text | Code_Indented | Indent |
+				         Bulleted |
+				         Nested_Bulleted | Nested_X2_Bulleted |
+				         Display | Syntax_Display |
+				         Syntax_Indented | Syntax_Production |
+				         Enumerated | Nested_Enumerated |
+				         Hanging_Indented_1 | Hanging_Indented_2 |
+				         Hanging_Indented_3 | Hanging_Indented_4 |
+				         Title =>
+				        -- This depends on the containing paragraph kind,
+					-- keep looking.
+					null;
+				end case;
+			    end if;
+		        end loop;
+			return False; -- Don't know.
+		    end if;
+	        end Is_Small_Format_Paragraph;
 
 	    begin
 		case For_Type is
@@ -2887,6 +2875,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "description" then
 		Format_Object.Next_Paragraph_Format_Type := Hanging_Indented_3;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "small" then
+		Format_Object.Next_Paragraph_Format_Type := Small;
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
 	    	= "enumerate" then
@@ -6636,12 +6628,15 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        Title(1..Title_Length),
 					Level => ARM_Contents.Section,
 					Clause_Number => Clause_Number,
-					No_Page_Break => True);
+					No_Page_Break => True,
+					Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
+
 				else -- Other cases:
 				    ARM_Output.Clause_Header (Output_Object,
 				        Title(1..Title_Length),
 					Level => Level,
-					Clause_Number => Clause_Number);
+					Clause_Number => Clause_Number,
+					Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 			        end if;
 			        -- Check that the section numbers match the title:
 			        if Ada.Characters.Handling.To_Lower (Title) /=
@@ -6843,7 +6838,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        ARM_Output.Clause_Header (Output_Object,
 				            Old_Title(1..Old_Title_Length),
 				            Level => Level,
-				            Clause_Number => Clause_Number);
+				            Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    elsif Old_Disposition = ARM_Output.Deletion then
 			                raise Program_Error; -- A deletion inside of an insertion command!
 				    else -- an insertion of the Old. Show this like an added item:
@@ -6853,14 +6849,16 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				            Level => Level,
 				            Version => Initial_Version,
 				            Old_Version => '0',
-				            Clause_Number => Clause_Number);
+				            Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    end if;
 			        elsif New_Disposition = ARM_Output.None then
 				    -- Use the new only:
 				    ARM_Output.Clause_Header (Output_Object,
 				        New_Title(1..New_Title_Length),
 				        Level => Level,
-				        Clause_Number => Clause_Number);
+				        Clause_Number => Clause_Number,
+					Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 					-- In this case, we have no sane
 					-- way to show the old, so we hope that
 					-- isn't expected.
@@ -6875,7 +6873,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					    Level => Level,
 					    Version => Version,
 					    Old_Version => '0',
-					    Clause_Number => Clause_Number);
+					    Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    elsif Old_Disposition = ARM_Output.None then
 					-- Show old without any insertion marks:
 				        ARM_Output.Revised_Clause_Header (Output_Object,
@@ -6884,7 +6883,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					    Level => Level,
 					    Version => Version,
 					    Old_Version => '0',
-					    Clause_Number => Clause_Number);
+					    Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    elsif Old_Disposition = ARM_Output.Deletion then
 			                raise Program_Error; -- A deletion inside of an insertion command!
 				    else -- An insertion of the Old item:
@@ -6894,7 +6894,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					    Level => Level,
 					    Version => Version,
 					    Old_Version => Initial_Version,
-					    Clause_Number => Clause_Number);
+					    Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    end if;
 				end if;
 			    end;
@@ -7030,7 +7031,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        ARM_Output.Clause_Header (Output_Object,
 				            New_Title(1..New_Title_Length),
 				            Level => Level,
-				            Clause_Number => Clause_Number);
+				            Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 			            else -- Insertion.
 				        Check_End_Paragraph; -- End any paragraph that we're in.
 				        ARM_Output.Revised_Clause_Header (Output_Object,
@@ -7039,7 +7041,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				            Level => Level,
 				            Version => Version,
 				            Old_Version => '0',
-				            Clause_Number => Clause_Number);
+				            Clause_Number => Clause_Number,
+					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    end if;
 
 			            -- Check that the section numbers match the title:
@@ -7195,7 +7198,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				    ARM_Output.Clause_Header (Output_Object,
 				        Old_Title(1..Old_Title_Length),
 				        Level => Level,
-				        Clause_Number => Clause_Number);
+				        Clause_Number => Clause_Number,
+					Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				end;
 
 			        -- Check that the section numbers match the title:
@@ -7228,7 +7232,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    ARM_Output.Clause_Header (Output_Object,
 					      Header_Text => "",
 					      Level => ARM_Contents.Unnumbered_Section,
-					      Clause_Number => "0.99");
+					      Clause_Number => "0.99",
+					      Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 
 		when Subheading =>
 		    -- This is used in preface sections where no numbers or
