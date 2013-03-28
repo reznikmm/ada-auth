@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3027,7 +3027,9 @@ A @nt{pragma_argument_association}.
   and ambiguity applies to a complete context.
 @end{Reason}
 
-The @nt{expression} of a @nt{case_statement}.
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0040-1]}
+The @Chg{Version=[4],New=[@SynI[selecting_]@nt{expression}],Old=[@nt{expression}]}
+of a @nt{case_statement}@Chg{Version=[4],New=[ or @nt{case_expression}],Old=[]}.
 @begin{Ramification}
   This means that the @nt{expression} is resolved without looking
   at the choices.
@@ -3375,10 +3377,12 @@ in a class in scope.
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0102-1],ARef=[AI05-0149-1],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[3],Text=[Other than for the @nt{simple_expression} of a
-membership test, if the expected type for a @nt{name} or @nt{expression} is not
-the same as the actual type of the @nt{name} or @nt{expression}, the actual type
-shall be convertible to the expected type (see
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+@ChgAdded{Version=[3],Text=[Other than for the
+@Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
+of a membership test, if the expected type for a @nt{name} or @nt{expression}
+is not the same as the actual type of the @nt{name} or @nt{expression}, the
+actual type shall be convertible to the expected type (see
 @RefSecNum{Type Conversions});@Defn2{Term=[implicit conversion],
 Sec=[legality]}@PDefn2{Term=[convertible],Sec=(required)} further, if the
 expected type is a named access-to-object type with designated type @i<D1> and
@@ -3747,4 +3751,16 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   This rule was scattered about the Standard, we moved a single generalized
   version here.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0040-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Added wording to clarify that
+  the @SynI{selecting_}@nt{expression} of a @nt{case_expression} is a
+  complex context, just like that of a @nt{case_statement}. Clearly, everyone
+  expects these to work the same way. Moreover, since it would be a lot of extra
+  work to treat @nt{case_expression}s differently, it is quite unlikely that any
+  compiler would implement the much more complicated resolution necessary (and
+  we are not aware of any that did). Therefore, we didn't document this as a
+  potential incompatibility.]}
+@end{DiffWord2012}
 

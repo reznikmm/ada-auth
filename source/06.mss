@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -387,9 +387,12 @@ concurrently from multiple tasks.
 
 @key[function] Random @key[return] Probability;                      --@RI{  see @RefSecNum{Floating Point Types}}
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 @key[function] Min_Cell(X : Link) @key[return] Cell;                 --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @key[function] Next_Frame(K : Positive) @key[return] Frame;          --@RI{  see @RefSecNum{Access Types}}
-@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@RI{  see @RefSecNum{Array Types}}
+@key[function] Dot_Product(Left, Right : Vector) @key[return] Real;  --@RI{  see @RefSecNum{Array Types}}@Chg{Version=[4],New=[
+@key[function] Find(B : @key[aliased in out] Barrel; Key : String) @key[return] Real;
+                                                         --@RI{  see @RefSecNum{User-Defined References}}],Old=[]}
 
 @key[function] "*"(Left, Right : Matrix) @key[return] Matrix;        --@RI{  see @RefSecNum{Array Types}}
 @end{Example}
@@ -499,9 +502,22 @@ The syntax rules for @nt{defining_designator} and
 @LabeledAddedSubClause{Version=[3],Name=[Preconditions and Postconditions]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a subprogram or entry, the
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a
+@Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[4],New=[,
+a generic subprogram,],Old=[]} or entry, the
 following language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Ramification}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
+@ChgAdded{Version=[4],Text=[@ldquote@;Noninstance subprogram@rdquote excludes
+a subprogram that is an instance of a generic subprogram. In that case, the
+aspects should be specified on the generic subprogram. If preconditions or
+postconditions need to be added to an instance of a generic subprogram, it
+can be accomplished by creating a separate subprogram specification and then
+completing that specification with a renames-as-body of the instance.]}
+@end{Ramification}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1099,6 +1115,19 @@ the value.]}
   Pre and Post aspects are new.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  Precondition and postcondition aspects cannot be specified on instances of
+  generic subprograms (they should be specified on the generic subprogram
+  instead). This was (unintentionally) allowed by the Ada 2012 standard.
+  These are not be allowed on instances as there is no corresponding way to add
+  preconditions and postconditions to subprograms declared within the instance
+  of a generic package. Therefore, allowing specification on a subprogram
+  instance could present a maintenance problem in the future if the entity
+  needs to be converted to a generic package (a common conversion).]}
+@end{Incompatible2012}
+
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Formal Parameter Modes}
@@ -1157,15 +1186,19 @@ is a descendant of one of the following:
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0027-1]}
 A parameter of a by-reference type is passed by reference@Chg{Version=[3],New=[, as is an explicitly aliased parameter
 of any type],Old=[]}.
 @Defn2{Term=[associated object], Sec=(of a value of a by-reference type)}
 Each value of a by-reference type has an associated object.
 For a parenthesized expression, @nt{qualified_expression},
-or @nt{type_conversion}, this object is the one associated with the
-operand.@Chg{Version=[3],New=[ For a
-@nt{conditional_expression}, this object is the one associated
-with the evaluated @Syni{dependent_}@nt{expression}.],Old=[]}
+or @Chg{Version=[4],New=[view conversion],Old=[@nt{type_conversion}]}, this
+object is the one associated with the operand.@Chg{Version=[4],New=[ For a value
+conversion, the associated object is the anonymous result object if such an
+object is created (see @RefSecNum{Type Conversions}); otherwise it is the
+associated object of the operand.],Old=[]}@Chg{Version=[3],New=[ For a
+@nt{conditional_expression}, this object is the one associated with the
+evaluated @Syni{dependent_}@nt{expression}.],Old=[]}
 
 @begin{Ramification}
 By-reference parameter passing makes sense only if there is an
@@ -1389,6 +1422,15 @@ is changed and one of the parameters depends on the discriminant.
   @ChgAdded{Version=[3],Text=[Defined that explicitly aliased parameters
   (see @RefSecNum{Subprogram Declarations}) are always passed by reference.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0027-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected so that
+  value conversions that are copies are the @ldquote@;associated object@rdquote
+  for parameter passing of by-reference types. This can only happen if the
+  conversion is between unrelated non-limited types, and it is necessary just
+  so the correct object is defined.]}
+@end{DiffWord2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

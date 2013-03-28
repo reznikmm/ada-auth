@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -239,6 +239,10 @@ abbreviate
 @end{Syntax}
 
 @begin{Legality}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1]}
+@ChgAdded{Version=[4],Text=[An @SynI{exception_}@nt{name} of an
+@nt{exception_choice} shall denote an exception.]}
+
 @Defn2{term=<cover>, Sec=<of a choice and an exception>}
 A choice with an
 @SynI{exception_}@nt{name} @i{covers} the named exception.
@@ -348,11 +352,16 @@ The syntax rule for @nt{choice_parameter_specification} is new.
 @Syn{lhs=<raise_statement>,rhs="@Chg{Version=[2],New=<@key{raise};
       | @key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{expression}];>,
 Old=<@key{raise} [@SynI{exception_}@Syn2{name}];>}"}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1]}
+@AddedSyn{Version=[4],lhs=<@Chg{Version=[4],New=<raise_expression>,Old=<>}>,rhs="@Chg{Version=[4],New=<@key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{expression}]>,Old=<>}"}
 @end{Syntax}
 
 @begin{Legality}
-The @nt{name}, if any, in a @nt{raise_statement} shall denote
-an exception.
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1]}
+@Chg{Version=[4],New=[An @SynI<exception_>@nt{name} of],Old=[The @nt{name}, if
+any, in]} a @nt{raise_statement}
+@Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}shall denote an exception.
 @Defn{re-raise statement}
 A @nt{raise_statement} with no @SynI{exception_}@nt{name}
 (that is, a @i{re-raise statement})
@@ -362,20 +371,31 @@ but not within a body enclosed by that handler.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-@ChgAdded{Version=[2],Text=[The @nt<expression>, if any, in a
-@nt<raise_statement>, is expected to be of type String.]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[4],New=[A
+@SynI{string_}@nt{expression} of],Old=[The @nt<expression>, if any, in]} a
+@nt<raise_statement>@Chg{Version=[4],New=[ or @nt{raise_expression}],Old=[,]}
+is expected to be of type String.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1]}
+@ChgAdded{Version=[4],Text=[A @nt{raise_expression} is expected to be of
+any type.]}
 @end{Resolution}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00361-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1]}
 @Defn2{Term=[raise], Sec=(an exception)}
 To @i(raise an exception) is to
 raise a new occurrence of that exception@Redundant[,
 as explained in @RefSecNum{Exception Handling}].
 @PDefn2{Term=[execution], Sec=(raise_statement with an exception_name)}
 For the execution of a @nt{raise_statement} with an
-@SynI{exception_}@nt{name}, the named exception is raised.
-@Chg{Version=[2],New=[@redundant{If a @SynI<string_>@nt<expression> is present,
+@SynI{exception_}@nt{name}, the named exception is
+raised.@Chg{Version=[4],New=[ Similarly, for the evaluation of a @nt{raise_expression},
+the named exception is raised.],Old=[]}
+@Chg{Version=[2],New=[@redundant{@Chg{Version=[4],New=[In
+both of these cases, if],Old=[If]} a @SynI<string_>@nt<expression> is present,
 the @nt{expression} is evaluated and its value is associated with the
 exception occurrence.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
@@ -395,6 +415,40 @@ Exception_Occurrence, but instead propagates the same
 Exception_Occurrence value.
 This allows the original cause of the exception to be determined.
 @end{ImplNote}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-1]}
+@ChgAdded{Version=[4],Text=[There is one exception to the above rule: For an
+individual membership test (see @RefSecNum{Relational Operators and Membership Tests})
+of the form "X @key[in] S",
+if a @nt{raise_expression} @Redundant[statically] within the predicate of S
+is evaluated, then the exception is not raised; instead, the entire predicate
+immediately evaluates to False. This includes @nt{raise_expression}s
+@Redundant[statically] within the @nt{default_expression} for a formal
+parameter used in a call @Redundant[statically] within the predicate.]}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[But it does @i<not> include @nt{raise_expression}s
+  within the @nt{default_expression} for a component; those actually raise
+  the exception.]}
+@end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This special rule also applies to the predicate
+  check that is part of the evaluation of the Valid attribute (see @RefSecNum{The Valid Attribute}),
+  as the Valid attribute is defined in terms of a membership test.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[The purpose of @nt{raise_expression}s in a
+  predicate is to specify the exception to raise if the predicate fails.
+  The purpose of a membership test is to return False if the value is not
+  included in the subtype (including if the predicate fails). So we want
+  a predicate in this circumstance to return False, not to raise some
+  exception. We only make this apply to the text of the predicate so that
+  this special case doesn't hide bugs (and isn't expensive). This does mean
+  that @nt{raise_expression}s should stay directly in a predicate and not
+  be moved into functions.]}
+@end{Reason}
 @end{RunTime}
 
 @begin{Examples}
@@ -426,6 +480,15 @@ any force.
   (@SynI{exception_}@nt{name}'Identity, @SynI{string_}@nt{expression}), and
   should encourage the use of message strings when raising exceptions.]}
 @end{Extend95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1],ARef=[AI12-0054-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  The @nt{raise_expression} is new. This construct is necessary to
+  allow conversion of existing specifications to use preconditions and
+  predicates without changing the exceptions raised. It is considered important
+  enough to be added to Ada 2012 rather than waiting for Ada 202x.]}
+@end{Extend2012}
 
 
 @LabeledClause{Exception Handling}
@@ -694,13 +757,15 @@ Reraise_Occurrence reraises the specified exception occurrence.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0043-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1]}
 @ChgAdded{Version=[2],Text=[Exception_Message returns the message associated
 with the given Exception_Occurrence. For an occurrence raised by a call to
 Raise_Exception, the message is the Message parameter passed to Raise_Exception.
-For the occurrence raised by a @nt{raise_statement} with an
+For the occurrence raised by a @nt{raise_statement}
+@Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}with an
 @SynI{exception_}@nt{name} and a @SynI{string_}@nt{expression}, the message is
 the @Syni{string_}@nt{expression}. For the occurrence raised by a
-@nt{raise_statement} with
+@nt{raise_statement} @Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}with
 an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression},
 the message is a string giving implementation-defined information about the
 exception occurrence. @Chg{Version=[3],New=[For an occurrence originally raised

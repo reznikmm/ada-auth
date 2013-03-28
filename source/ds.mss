@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.67 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.68 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -505,19 +505,27 @@ it shall depend semantically only upon declared pure or shared passive
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
 it shall not contain a library-level declaration of an access type
 that designates a class-wide type,
-task type, or protected type with @nt{entry_declaration}s@Chg{New=[],
+task type, or protected type with
+@nt{entry_declaration}s@Chg{New=[@Chg{Version=[4],New=[; further, it shall not
+contain a library-level declaration that includes a @nt{name} that denotes a
+subtype with a part having an access type that is declared within a
+declared-pure package],Old=[]}],
 Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the
 declaration is nested within a body other than
 a @nt<package_body>]}.
 @begin{Reason}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
   These kinds of access types are disallowed because the object
-  designated by an access value of
-  such a type could contain an implicit reference back to
+  designated by an access value of such a type could
+  contain an implicit reference back to
   the active partition on whose behalf the designated object was
-  created.
+  created.@Chg{Version=[4],New=[ We don't allow using access types from
+  declared-pure packages, as the next rule is ineffective at preventing
+  the creation of references to active partitions for such types.],Old=[]}
 @end{Reason}
 
 @end{itemize}
@@ -585,6 +593,16 @@ partitions.
   so it can be specified by an @nt{aspect_specification} @em
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0038-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Uses of access types declared in declared-pure units are not allowed in
+  library-level shared passive packages. These were allowed by Ada 2005 and
+  Ada 2012, but it is unlikely that they work properly, as active partitions
+  could disappear before the shared-passive partition. As such, the new
+  error is more likely to catch bugs than to cause them.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Remote Types Library Units}

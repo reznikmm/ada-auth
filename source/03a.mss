@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:02 $}
+@Comment{$Date: 2013/02/02 01:46:58 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1677,7 +1677,9 @@ the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-sta
   @ChgAdded{Version=[3],Text=[a static expression;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[a membership test whose @nt{simple_expression}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1]}
+  @ChgAdded{Version=[3],Text=[a membership test whose
+  @Chg{Version=[4],New=[@i<tested_>@nt{simple_expression}],Old=[@nt{simple_expression}]}
   is the current instance, and whose @nt{membership_choice_list} meets the
   requirements for a static membership test
   (see @RefSecNum{Static Expressions and Static Subtypes});]}

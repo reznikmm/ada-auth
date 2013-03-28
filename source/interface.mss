@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.68 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.69 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1013,6 +1013,7 @@ Old=[Interfacing with C]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0028-1]}
 @Defn{interface to C}
 @Defn{C interface}
 The facilities relevant to interfacing with
@@ -1022,8 +1023,10 @@ the C++ language ],Old=[]}are the package Interfaces.C and its children@Chg{Vers
 @Chg{Version=[3],New=[],Old=[Import, Export, and]}
 Convention @Chg{Version=[3],New=[aspect],Old=[pragmas]}
 with @Chg{Version=[3],New=[@SynI{convention_}@nt{identifier}s],Old=[@SynI{convention_}@nt{identifier}]}
-C@Chg{New=[@Chg{Version=[3],New=[ and],Old=[; and support for the Convention
-pragma with @SynI{convention_}@nt{identifier}]} C_Pass_By_Copy],Old=[]}.
+C@Chg{New=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[,],Old=[ and]}],Old=[;
+and support for the Convention pragma with @SynI{convention_}@nt{identifier}]}
+C_Pass_By_Copy@Chg{Version=[4],New=[, and any of the C_Variadic_@i<n> conventions
+described below],Old=[]}],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00376-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI95-0262-1],ARef=[AI95-0299-1]}
@@ -1568,6 +1571,27 @@ C-compatible.]}
 C_Pass_By_Copy-compatible@Chg{Version=[3],New=[,],Old=[]}
 then it is also C-compatible.]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0028-1]}
+@ChgAdded{Version=[4],Text=[The identifiers C_Variadic_0, C_Variadic_1,
+C_Variadic_2, and so on are @SynI{convention_}@nt{identifier}s. These conventions
+are said to be @i<C_Variadic>. The convention C_Variadic_@i<n> is the calling convention
+for a variadic C function taking @i<n> fixed parameters and then a variable
+number of additional parameters. The C_Variadic_@i<n> convention shall only be
+specified as the convention aspect for a subprogram, or for an
+access-to-subprogram type, having at least @i<n> parameters. A type is
+compatible with a C_Variadic convention if and only if the type is
+C-compatible.@Defn{C_Variadic}@Defn2{Term=[variadic],Sec=[C]}]}
+
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[It is implementation defined what the largest
+  @i<n> in C_Variadic_@i<n> is supported. We don't say this because it
+  complicates the wording and it is true for almost any
+  @SynI{convention_}@nt{identifier} (only Ada is required to be supported by the
+  language, all others need to be documented in order for programmers to know
+  that they are available).]}
+@end{Honest}
+
 @end{StaticSem}
 
 @begin{ImplReq}
@@ -1715,8 +1739,10 @@ where Item_Type is the corresponding Ada type,
 Unchecked conversions can be used to obtain
 the effect of C unions.]}
 
-A C function that takes a variable number of arguments
-can correspond to several Ada subprograms, taking various
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0028-1]}
+A @Chg{Version=[4],New=[variadic ],Old=[]}C function
+@Chg{Version=[4],New=[],Old=[that takes a variable number of arguments ]}can
+correspond to several Ada subprograms, taking various
 specific numbers and types of parameters.
 @end{Notes}
 
@@ -1817,6 +1843,15 @@ specific numbers and types of parameters.
   the language definition said), so little existing code should be impacted.]}
 @end{Incompatible2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0028-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  The @SynI{convention_}@nt{identifier}s C_Variadic_0, C_Variadic_1, and so on
+  are new. These are classified as a correction as any implementation can add
+  such identifiers and it is important that special conventions be available for
+  variadic functions as typical x64 conventions are different for normal and
+  variadic C functions.]}
+@end{Extend2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

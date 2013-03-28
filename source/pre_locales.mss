@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.6 $ $Date: 2011/11/01 05:34:04 $ $Author: randy $ }
+@comment{ $Revision: 1.7 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2011/11/01 05:34:04 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -24,8 +24,22 @@ Locales has the following declaration:]}
    @key{pragma} Remote_Types(Locales);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Language_Code} @key[is array] (1 .. 3) @key[of] Character @key[range] 'a' .. 'z';
-   @key[type] @AdaTypeDefn{Country_Code} @key[is array] (1 .. 2) @key[of] Character @key[range] 'A' .. 'Z';]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0037-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Language_Code} @key[is @Chg{Version=[4],New=[new],Old=[array]}] @Chg{Version=[4],New=[String ],Old=[]}(1 .. 3)@Chg{Version=[4],New=[
+      @key[with] Dynamic_Predicate => (@key[for all] E @key[of] Language_Code => E @key[in]],Old=[ @key[of] Character @key[range]]} 'a' .. 'z'@Chg{Version=[4],New=[)],Old=[]};
+   @key[type] @AdaTypeDefn{Country_Code} @key[is @Chg{Version=[4],New=[new],Old=[array]}] @Chg{Version=[4],New=[String ],Old=[]}(1 .. 2)@Chg{Version=[4],New=[
+      @key[with] Dynamic_Predicate => (@key[for all] E @key[of] Country_Code  => E @key[in]],Old=[ @key[of] Character @key[range]]} 'A' .. 'Z'@Chg{Version=[4],New=[)],Old=[]};]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0037-1]}
+  @ChgAdded{Version=[4],Text=[These types are declared as derived from type
+  String so that they can easily be converted to or from type String. That's
+  important if one of these values needs to be input or displayed (via Text_IO,
+  perhaps). We use the predicate to ensure that only possible component values
+  are used. Ada does not allow converting between unrelated types with
+  components that don't statically match, so we cannot declare new types with
+  constrained components if we want conversions to or from type String.]}
+@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{Language_Unknown} : @key[constant] Language_Code := "und";
@@ -99,3 +113,18 @@ Country_Unknown.]}
 @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
 Package Locales is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0037-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Types Language_Code and Country_Code are defined with predicates rather than
+  constrained components so that they can be converted to/from type String.
+  This changes the exception raised from Constraint_Error to Assertion_Error
+  if an assignment is attempted with an incorrect value. This could only
+  matter if there is a handler specifically for Constraint_Error surrounding
+  this assignment; as this exception raise is certainly caused by a bug
+  (why would anyone want to use invalid language or country codes?), such a
+  handler seems very unlikely. (In addition, this is a new Ada 2012 package,
+  so there is not likely to be a lot of code using it.)]}
+@end{Inconsistent2012}
+

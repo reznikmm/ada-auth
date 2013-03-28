@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.114 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.115 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2098,11 +2098,13 @@ the corresponding protected object.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00327-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0051-1]}
 If an Interrupt_Handler or Attach_Handler @Chg{Version=[3],New=[aspect],
 Old=[pragma]} (see @RefSecNum{Protected Procedure Handlers})
 @Chg{Version=[3],New=[is specified for a protected subprogram of a
-protected type that does not have the ],Old=[appears in a
-@nt{protected_definition} without an]} Interrupt_Priority
+protected type that does not have @Chg{Version=[4],New=[either ],Old=[]}the
+],Old=[appears in a @nt{protected_definition} without an]}
+@Chg{Version=[4],New=[Priority or ],Old=[]}Interrupt_Priority
 @Chg{Version=[3],New=[aspect specified],Old=[pragma]}, the
 @Chg{Version=[2],New=[initial],Old=[ceiling]} priority of protected objects
 of that type is implementation defined,
@@ -2316,6 +2318,13 @@ calls another protected operation on the same protected object).
   Interrupt_Priority as @nt{pragma}s
   Priority and Interrupt_Priority are now obsolescent.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0051-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified that the Priority
+  aspect can be used to set the initial ceiling priority of a protected object
+  that contains an interrupt handler.]}
+@end{DiffWord2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
@@ -6361,6 +6370,40 @@ Assign_Task, Set_CPU, Get_CPU and Delay_Until_And_Set_CPU atomically with
 respect to any of these operations on the same dispatching_domain, processor or
 task.]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0048-1]}
+@ChgAdded{Version=[4],Text=[Any task that belongs to the system dispatching
+domain can execute on any CPU within that domain, unless the assignment of the
+task has been specified.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This ensures that priorities and deadlines are
+  respected within the system dispatching domain. There is no such guarentee
+  between different domains.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We only need to talk about the system dispatching
+  domain here, because Assign_Task and Set_CPU already have such wording for
+  tasks that are assigned explicitly to a dispatching domain and specify
+  Not_a_Specific_CPU.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[If no dispatching domains are created, all tasks
+  can execute on all processors. (As always, implementation-defined dispatching
+  policies may have other rules, so a partition that does not specify any
+  language-defined dispatching policy may do anything at all and in particular
+  does not need to follow this rule.]}
+@end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[A task can be assigned to a specific CPU by
+  specifying the aspect CPU for a task, or by calling a dynamic operation like
+  Set_CPU or Assign_Task.]}
+@end{Discussion}
+
 @end{ImplReq}
 
 @begin{ImplAdvice}
@@ -6372,6 +6415,14 @@ disjoint ready queues.]}
 @ChgImplAdvice{Version=[3],Kind=[AddedNormal],Text=[@ChgAdded{Version=[3],
 Text=[Each dispatching domain should have separate and
 disjoint ready queues.]}]}
+
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0048-1]}
+  @ChgAdded{Version=[4],Text=[@ldquote@;Ready queue@rdquote here doesn't mean
+  the conceptual "ready queue" as defined in @RefSecNum{The Task Dispatching Model}
+  (one per processor); this rule is talking about the ready queues used by the
+  implementation.]}
+@end{Honest}
 
 @end{ImplAdvice}
 
@@ -6406,3 +6457,9 @@ attempt is made to exceed this number.]}
   Dispatching_Domains are new.]}
 @end{Extend2005}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0048-1]}
+  @ChgAdded{Version=[4],Text=[@b{Correction:} Added wording to clarify that
+  all tasks can execute on all CPUs of the system dispatching domain by
+  default.]}
+@end{Diffword2012}

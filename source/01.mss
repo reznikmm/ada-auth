@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2012/12/14 04:10:48 $}
+@Comment{$Date: 2013/02/02 01:46:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -61,9 +61,13 @@ number generation.]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
 the @Chg{Version=[3],New=[third edition of the ],Old=[]}Ada Reference
-Manual @Chg{Version=[3],New=[ (the Ada 2012 RM],Old=[@Chg{Version=[2],New=[ with Amendment 1 (the Ada 2005 RM],Old=[(RM95]}]}),
+Manual @Chg{Version=[4],New=[ as updated
+for Ada 202x (referred to here as the Ada 202x RM)],Old=[@Chg{Version=[3],New=[ (the
+Ada 2012 RM],Old=[@Chg{Version=[2],New=[ with
+Amendment 1 (the Ada 2005 RM],Old=[(RM95]}]})]},
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
 They describe the reason for each nonobvious rule,
@@ -71,8 +75,8 @@ and point out interesting ramifications of the rules
 and interactions among the rules
 (interesting to language lawyers, that is).
 Differences between Ada 83@Chg{Version=[2],New=[, Ada 95,
-@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[, and Ada
-2012],Old=[]}],Old=[ and Ada 95]} are listed.
+@Chg{Version=[3],New=[],Old=[and ]}Ada 2005@Chg{Version=[3],New=[@Chg{Version=[4],New=[, Ada 2012, and Ada 202x],Old=[, and Ada
+2012]}],Old=[]}],Old=[ and Ada 95]} are listed.
 (The text you are reading now is an annotation.)
 
 @ChgRef{Version=[2],Kind=[Revised]}
@@ -82,7 +86,7 @@ readability and understandability.
 We're not trying to make the language @lquotes@;appear@rquotes@; simple here;
 on the contrary, we're trying to expose hidden complexities,
 so we can more easily detect language bugs.
-The @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]}, on the other hand, is intended to be a more
+The @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}, on the other hand, is intended to be a more
 readable document for programmers.
 
 @Leading@keepnext@;The annotations in the AARM are as follows:
@@ -92,12 +96,12 @@ readable document for programmers.
 Text that is logically redundant is shown
 @Redundant[in square brackets, like this].
 Technically, such text could be written as a @NotesName
-in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM
+in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM
 (and the Ada 95 @Chg{Version=[3],New=[and 2005 RMs],Old=[RM]} before it)],Old=[RM95]},
 since it is really a theorem that can
 be proven from the nonredundant rules of the language.
 We use the square brackets instead when it seems to make the
-@Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]} more readable.
+@Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} more readable.
 
 The rules of the language (and some AARM-only text) are categorized,
 and placed under certain @i{sub-headings} that indicate
@@ -144,7 +148,7 @@ The unlabeled text at the beginning of each clause or subclause,
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
 Text under the following sub-headings
-does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]}:
+does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}:
 @begin(Inneritemize)
 @MetaRulesTitle,
 
@@ -181,6 +185,18 @@ does not appear in the @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[2012],Old
 
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgAdded{Version=[3],Text=[@DiffWord2005Title.]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@Inconsistent2012Title,]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@Incompatible2012Title,]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@Extend2012Title,]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@DiffWord2012Title.]}
 @end(Inneritemize)
 
 The AARM also includes the following kinds of annotations.
@@ -232,7 +248,7 @@ in @RefSec{Glossary}.
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
-In general, @Chg{Version=[2],New=[the Ada @Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]} text appears in the normal font,
+In general, @Chg{Version=[2],New=[the Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]} text appears in the normal font,
 whereas AARM-only text appears in a smaller font.
 @NotesName@;s also appear in the smaller font,
 as recommended by ISO/IEC style guidelines.
@@ -278,14 +294,16 @@ modularity in the physical sense as well, with a facility to support separate
 compilation.]}
 
 @Chgref{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1],ARef=[AI05-0299-1]}
+@Chgref{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 @ChgAdded{Version=[3],Text=[The language provides rich support for real-time, concurrent programming, and
 includes facilities for multicore and multiprocessor programming. Errors can be
 signaled as exceptions and handled explicitly. The language also covers systems
 programming; this requires precise control over the representation of data and
 access to system-dependent properties. Finally, a predefined environment of
 standard packages is provided, including facilities for, among others,
-input-output, string manipulation, numeric elementary functions, and random
-number generation, and definition and use of containers.]}
+input-output, string manipulation, numeric elementary functions,
+@Chg{Version=[4],New=[],Old=[and ]}random number generation, and definition and
+use of containers.]}
 
 @end{Intro}
 
@@ -498,7 +516,8 @@ to all of them.
 
 @begin{WideAbove}
 @Chgref{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-Each @Chg{Version=[3],New=[section],Old=[clause]} is divided into
+@Chgref{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
+Each @Chg{Version=[4],New=[clause],Old=[section]} is divided into
 @Chg{Version=[3],New=[],Old=[clauses and]} subclauses that have a
 common structure.
 Each @Chg{Version=[3],New=[],Old=[section, ]}clause@Chg{Version=[3],New=[],Old=[,]}
@@ -517,7 +536,7 @@ such cases are explained.
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada
-@Chg{Version=[3],New=[2012],Old=[2005]} RM],Old=[RM95]}.
+@Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95]}.
 @end{MetaRules}
 
 @begin{Syntax}
@@ -785,9 +804,11 @@ we are asking whether the set of behaviors changes.)
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[@Chg{Version=[4],New=[, Ada 2012,
+or Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{Inconsistent83}
 
 @begin{Incompatible83}
@@ -801,9 +822,11 @@ into an exception, or into an illegality, to be upwardly incompatible.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[@Chg{Version=[4],New=[, Ada 2012, or
+Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{Incompatible83}
 
 @begin{Extend83}
@@ -816,9 +839,11 @@ The vast majority of language changes fall into this category.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[@Chg{Version=[4],New=[, Ada 2012, or
+Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 
 @Leading@ @* @Comment{Two blank lines: why? Because it was in the original.}
 @*
@@ -837,9 +862,11 @@ changes, but only the @lquotes@;interesting@rquotes@; ones.
 
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 This is not part of the definition of the language,
 and does not appear in the @Chg{Version=[2],New=[Ada 95@Chg{Version=[3],New=[,],Old=[ or]}
-Ada 2005@Chg{Version=[3],New=[, or Ada 2012],Old=[]} RM],Old=[RM95]}.
+Ada 2005@Chg{Version=[3],New=[@Chg{Version=[4],New=[, Ada 2012, or
+Ada 202x],Old=[, or Ada 2012]}],Old=[]} RM],Old=[RM95]}.
 @end{DiffWord83}
 
 @begin{Discussion}
@@ -879,8 +906,10 @@ document these for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 @Chg{Version=[3],New=[or Ada 2012],Old=[]} RM.]}
+and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[4],New=[,
+Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{Inconsistent95}
 
 @begin{Incompatible95}
@@ -913,8 +942,10 @@ for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 @Chg{Version=[3],New=[or Ada 2012],Old=[]} RM.]}
+and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[4],New=[,
+Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -946,8 +977,10 @@ Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 @Chg{Version=[3],New=[or Ada 2012],Old=[]} RM.]}
+and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[4],New=[,
+Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
@@ -967,8 +1000,10 @@ come from Amendment 1.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2005 @Chg{Version=[3],New=[or Ada 2012],Old=[]} RM.]}
+and does not appear in the Ada 2005 @Chg{Version=[3],New=[@Chg{Version=[4],New=[,
+Ada 2012, or Ada 202x],Old=[or Ada 2012]}],Old=[]} RM.]}
 @end{DiffWord95}
 
 
@@ -1006,8 +1041,10 @@ while usually Ada 2012 will have more clearly defined behavior. Therefore, we
 document these for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012 RM.]}
+and does not appear in the Ada 2012@Chg{Version=[4],New=[ or Ada 202x],Old=[]}
+RM.]}
 @end{Inconsistent2005}
 
 @begin{Incompatible2005}
@@ -1034,8 +1071,10 @@ Ada 2012 compilers will have consistent behavior. Therefore, we document these
 for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012 RM.]}
+and does not appear in the Ada 2012@Chg{Version=[4],New=[ or Ada 202x],Old=[]}
+RM.]}
 @end{Incompatible2005}
 
 @begin{Extend2005}
@@ -1061,8 +1100,10 @@ the examples, while others might not. In contrast, Ada 2012 compilers will alway
 support the extensions. Therefore, we document these for completeness.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012 RM.]}
+and does not appear in the Ada 2012@Chg{Version=[4],New=[ or Ada 202x],Old=[]}
+RM.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
@@ -1081,9 +1122,123 @@ as Binding Interpretations and strictly speaking belong to Ada 2005; other items
 only belong to Ada 2012.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised]}
 @ChgAdded{Version=[3],Text=[This is not part of the definition of the language,
-and does not appear in the Ada 2012 RM.]}
+and does not appear in the Ada 2012@Chg{Version=[4],New=[ or Ada 202x],Old=[]}
+RM.]}
 @end{DiffWord2005}
+
+
+@begin{Discussion}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@*
+The next three headings list all language changes between Ada 2012
+(the language defined by ISO/IEC 8652:2012(E))
+and Ada 202x (the language defined by this edition of the Standard).
+Each language change falls into one of the following three categories:]}
+@end{Discussion}
+
+@begin{Inconsistent2012}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
+This heading lists all of the upward inconsistencies between Ada 2012 and Ada
+202x. Upward inconsistencies are situations in which a legal Ada 2012 program
+is a legal Ada 202x program with different semantics.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[Inconsistencies marked with
+@b[Correction:]@Defn{Correction} are corrections to the original Ada 2012
+definition added by this edition of the Standard.
+Formally, these are
+inconsistencies caused by Ada Issues classified as Binding Interpretations;
+implementations of Ada 2012 are supposed to follow these corrections, not the
+original flawed language definition. Thus, these strictly speaking are not
+inconsistencies between Ada 2012 and Ada 202x. Practically, however, they very
+well may be, as early Ada 2012 implementations might not follow the recommendation.
+Inconsistencies so marked are not portable between Ada 2012 implementations,
+while usually Ada 202x will have more clearly defined behavior. Therefore, we
+document these for completeness.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 202x RM.]}
+@end{Inconsistent2012}
+
+@begin{Incompatible2012}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
+This heading lists all of the upward incompatibilities between Ada 2012
+and Ada 202x, except for the ones listed under @lquotes@;@Inconsistent2012Title@rquotes@;
+above. These are the situations in which a legal Ada 2012 program is
+illegal in Ada 202x.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[As with inconsistencies, incompatibilities
+marked with @b[Correction:] are corrections to the original Ada 2012 definition
+added by this edition. Formally, these are
+incompatibilities caused by Ada Issues classified as Binding Interpretations;
+implementations of Ada 2012 are supposed to follow these corrections, not the
+original flawed language definition. Thus,
+these strictly speaking are not incompatibilities between Ada 2012 and Ada 202x.
+Practically, however, they very well may be, as early Ada 2012 implementations
+might not follow the recommendation. Therefore, some Ada 2012 implementations
+may be able to compile the examples, while others might not. In
+@Chg{Version=[4],New=[contrast],Old=[constrast]},
+Ada 202x compilers will have consistent behavior. Therefore, we document these
+for completeness.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 202x RM.]}
+@end{Incompatible2012}
+
+@begin{Extend2012}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+This heading is used to list all upward compatible language changes;
+that is, language extensions.
+These are the situations in which a legal Ada 202x program is not a
+legal Ada 2012 program.
+The vast majority of language changes fall into this category.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[As with incompatibilities, extensions
+marked with @b[Correction:]
+are corrections to the original Ada 2012 definition added by this edition.
+Formally, these are extensions allowed by Ada Issues classified as Binding
+Interpretations. As corrections, implementations of Ada 2012 (and sometimes Ada 95)
+are allowed to implement these extensions. Thus, these strictly speaking are not
+extensions of Ada 2012; they're part of Ada 2012. Practically, however, they
+very well may be extensions, as early Ada 2012 implementations might not implement
+the extension. Therefore, some Ada 2012 implementations may be able to compile
+the examples, while others might not. In contrast, Ada 202x compilers will always
+support the extensions. Therefore, we document these for completeness.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 202x RM.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[@ @* @Comment{Two blank lines: why? Because it was in the Ada 95 original.}
+@*
+As explained above, the next heading does not represent any language change:]}
+@end{Extend2012}
+
+@begin{DiffWord2012}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@Defn{wording changes from Ada 2012}
+This heading lists some of the nonsemantic changes between the Ada 2012 RM and
+the Ada 202x RM. This heading lists only @lquotes@;interesting@rquotes@; changes
+(for instance, editorial corrections are not listed). Items marked
+@b[Correction:] come from Ada Issues classified
+as Binding Interpretations and strictly speaking belong to Ada 2012; other items
+only belong to Ada 202x.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[This is not part of the definition of the language,
+and does not appear in the Ada 202x RM.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Conformity of an Implementation with the Standard}

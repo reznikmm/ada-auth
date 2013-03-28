@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:58 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -508,8 +508,9 @@ Shade := Blue;
 Next_Frame(F)(M, N) := 2.5;        --@RI{  see @RefSecNum{Indexed Components}}
 U := Dot_Product(V, W);            --@RI{  see @RefSecNum{Subprogram Bodies}}
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 Writer := (Status => Open, Unit => Printer, Line_Count => 60);  --@RI{ see @RefSecNum{Variant Parts and Discrete Choices}}
-Next_Car.@key[all] := (72074, @key[null]);    --@RI{  see @RefSecNum{Incomplete Type Declarations}}
+@Chg{Version=[4],New=[Next],Old=[Next_Car]}.@key[all] := (72074, @key[null]@Chg{Version=[4],New=[, Head],Old=[]});@Chg{Version=[4],New=[],Old=[ ]}   --@RI{  see @RefSecNum{Incomplete Type Declarations}}
 @end{Example}
 
 @begin{WideAbove}
@@ -1440,6 +1441,20 @@ for the type of the @SynI<iterable_>@nt{name}.]}
 denotes a constant or the Variable_Indexing aspect is not specified for @i<T>,
 then the Constant_Indexing aspect shall be specified for @i<T>.]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0047-1]}
+@ChgAdded{Version=[4],Text=[The @SynI<iterator_>@nt{name} or
+@SynI<iterable_>@nt{name} of an @nt{iterator_specification} shall
+not denote a subcomponent that depends on discriminants of an object
+whose nominal subtype is unconstrained, unless the object is known
+to be constrained.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This is the same rule that applies to
+  renames; it serves the same purpose of preventing the object from
+  disappearing while the iterator is still using it.]}
+@end{Reason}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1568,6 +1583,16 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   of loop iteration are new.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0047-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada
+  2012}@b<Correction:> Added a rule to ensure that the object being iterated
+  cannot be a component that could disappear before the loop completes. This
+  could be incompatible by making a loop that was legal (and worked correctly,
+  so long as the enclosing object is not modified during the loop) from the
+  original Ada 2012 illegal in corrected Ada 2012. Such loops should be pretty
+  rare, especially as these iterator forms are new to Ada 2012.]}
+@end{Incompatible2012}
 
 
 

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -491,17 +491,20 @@ in the chain is not visible].@Defn2{Term=[descendant],Sec=[at run-time]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0056-1]}
 @ChgAdded{Version=[2],Text=[The function Parent_Tag returns the tag of the
 parent type of the type whose tag is T. If the type does not have a parent type
-(that is, it was not declared by a derived_type_declaration), then No_Tag is
-returned.]}
+(that is, it was not @Chg{Version=[4],New=[defined],Old=[declared]} by a
+@Chg{Version=[4],New=[@nt{derived_type_definition}],Old=[derived_type_declaration]}),
+then No_Tag is returned.]}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[2],Text=[The parent type is always the parent of the full
 type; a private extension appears to define a parent type, but it does not
 (only the various forms of derivation do that). As this is a run-time
-operation, ignoring privateness is OK.]}
+operation, ignoring @Chg{Version=[4],New=[privacy],Old=[privateness]} is OK.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00405-01]}
@@ -1511,11 +1514,13 @@ operand in a call on a dispatching operation.
 @end(Reason)
 @begin(Ramification)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01]}@ChgNote{Add info about prefix calls}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1]}
   This rule applies to all expressions
   or @nt<name>s with a specific expected type, not just those that
   are actual parameters to a dispatching call. This rule does not apply to
-  a membership test whose @nt<expression> is class-wide,
-  since any type that covers the tested type is explicitly allowed.
+  a membership test whose
+  @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt<expression>]}
+  is class-wide, since any type that covers the tested type is explicitly allowed.
   See @RefSecNum(Relational Operators and Membership Tests).@Chg{Version=[2],
   New=[ This rule also doesn't apply to a @nt{selected_component} whose
   @nt{selector_name} is a subprogram, since the rules explicitly say that
@@ -3627,7 +3632,9 @@ can be applied to access types
 @Leading@keepnext@i{Examples of access-to-object types:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
+@Chg{Version=[4],New=[@key[type] Frame @key<is access> Matrix;    --@RI[  see @RefSecNum{Array Types}]
+],Old=[]}@key[type] Peripheral_Ref @key<is @Chg{Version=[2],New=[not null ],Old=[]}access> Peripheral;  --@RI[  see @RefSecNum{Variant Parts and Discrete Choices}]
 @key[type] Binop_Ptr @key[is access all] Binary_Operation'Class;
                                            --@RI[ general access-to-class-wide, see @RefSecNum{Type Extensions}]
 @end{Example}
@@ -4591,6 +4598,7 @@ the operand.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0234-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0027-1]}
 @Chg{Version=[2],New=[The],Old=[For a function whose result type is a
 return-by-reference type,
 the accessibility level of the result object is the same as
@@ -4604,7 +4612,9 @@ object is that of the
 accessibility level of an @nt{aggregate} @Chg{Version=[3],New=[],Old=[or the
 result of a function call ]}is that of the innermost
 master that evaluates the @nt{aggregate}@Chg{Version=[3],New=[],Old=[ or
-function call]}],Old=[execution of the called function]}.
+function call]}],Old=[execution of the called
+function]}.@Chg{Version=[4],New=[ Corresponding rules apply to a value conversion
+(see @RefSecNum{Type Conversions}).],Old=[]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The accessibility level of the result
@@ -6089,6 +6099,22 @@ uses of anonymous access types.]}
   accessibility level of null values when those are passed as the actual of an
   access-to-object parameter.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0027-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Defined the accessibility of a value conversion, so that it is treated like
+  an @nt{aggregate} built at the point of the conversion. This was
+  previously unspecified, so this change might be
+  incompatible if an Ada implementation treated the accessibility of such
+  conversions as that of the operand type; in that case, previous legal
+  conversions probably will become illegal as the lifetime of the conversion
+  is very short. However, code that could tell this difference is fairly rare
+  (taking 'Access of a component of a result of a type conversion), code
+  depending on this accessibility was not portable, and such code could have
+  created an immediately dangling pointer if the conversion actually made
+  a copy (which is necessary in some instances).]}
+@end{Incompatible2012}
 
 
 

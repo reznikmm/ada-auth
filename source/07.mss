@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1756,6 +1756,13 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
   @ChgAdded{Version=[3],Text=[After successful default initialization of an
     object of type @i<T>, the check is performed on the new object;]}
 
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0049-1]}
+  @ChgAdded{Version=[4],Text=[After successful explicit initialization of the
+  completion of a deferred constant with a part of type @i<T>, if the completion
+  is inside the immediate scope of the full view of @i<T>, and the deferred
+  constant is visible outside the immediate scope of @i<T>, the check is
+  performed on the part(s) of type @i<T>;]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[After successful conversion to type @i<T>, the
     check is performed on the result of the conversion;]}
@@ -1921,6 +1928,19 @@ value.]}
   Type_Invariant aspects are new.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0049-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
+  @b<Correction:> Added an invariant check for deferred constants, so they
+  cannot be used to @ldquote@;leak@rdquote values that violate the invariant
+  from a package. This is strictly inconsistent, as the Ada 2012 definition
+  is missing this check; therefore, programs could depend on using values
+  that violate an invariant outside of the package of definition. These will
+  not raise Assertion_Error in Ada 2012 as defined in the Ada 2012 Standard,
+  but ought to do so (as noted by this change). As this is a violation of
+  the intent of invariants, we think that this change will mainly reveal bugs
+  rather than cause them.]}
+@end{Inconsistent2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -3665,8 +3685,8 @@ Leaving an execution happens immediately after its completion,
 except in the case of a @i{master}:
 the execution of
 a @Chg{Version=[2],New=[body other than a @nt{package_body};
-the execution of a @nt{statement};
-or the evaluation of an @nt{expression}, @nt{function_call}, or @nt{range} that
+the execution of a @nt{statement}; or the evaluation of an
+@nt{expression}, @nt{function_call}, or @nt{range} that
 is not part of an enclosing @nt{expression}, @nt{function_call}, @nt{range}, or
 @nt{simple_@!statement} other than a @nt{simple_@!return_@!statement}],
 Old=[@nt{task_body}, a @nt{block_@!statement},
@@ -4674,3 +4694,4 @@ the rules here refer to the task-waiting rules of
   @RefSecNum{Subprogram Declarations}) of functions. The model for these
   parameters is explained in detail in @RefSecNum{Parameter Associations}.]}
 @end{DiffWord2005}
+

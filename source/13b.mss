@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/02/02 01:46:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1315,18 +1315,23 @@ and the like.
 @end{Intro}
 
 @begin{StaticSem}
-@Leading@;For @PrefixType{a
-@nt<prefix> X that denotes a scalar object
-@Redundant[(after any implicit dereference)]},
-the following attribute is defined:
+@Leading@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-1]}
+For @ChgPrefixType{Version=[4],Kind=[Revised],Text=[a @nt<prefix> X that
+denotes a scalar object
+@Redundant[(after any implicit dereference)]@Chg{Version=[4],New=[ of
+nominal subtype @I<S>],Old=[]}]}, the following attribute is defined:
 @begin(description)
-@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
+@Comment{We ought to have a separate change for version [3] here, but
+we don't have that capability.}
+@ChgAttribute{Version=[4],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Valid>,
-  ARef=[AI05-0153-3],
+  ARef=[AI05-0153-3], ARef=[AI12-0054-1],
   Text=<Yields True if and only if
 the object denoted by X is normal@Chg{Version=[3],New=[,],Old=[ and]} has a
-valid representation@Chg{Version=[3],New=[, and the predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
-of the nominal subtype of X evaluates to True],Old=[]}.
+valid representation@Chg{Version=[3],New=[, and the @Chg{Version=[4],New=[membership
+test "X @key[in] @i<S>"@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}],
+Old=[predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
+of the nominal subtype of X]} evaluates to True],Old=[]}.
 The value of this attribute is of the predefined type Boolean.>}
 @begin{Ramification}
   Having checked that X'Valid is True, it is safe to read the
@@ -1420,6 +1425,17 @@ X'Valid is new in Ada 95.
   of the predicate aspects (see @RefSecNum{Subtype Predicates}), if any, of
   the subtype of the object.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> The validity check is now
+  partially described in terms of an equivalent membership test. This
+  automatically includes the check of the predicate aspects (see
+  @RefSecNum{Subtype Predicates}) added by AI05-0153-3. This should not make
+  any difference to the semantics of the check, other than that the special
+  semantics of @nt{raise_expression}s in predicate checks in memebership tests
+  also applies within the Valid attribute.]}
+@end{DiffWord2012}
 
 
 
@@ -1767,16 +1783,27 @@ contiguous block of memory (although each allocation returns
 a pointer to a contiguous block of memory).
 @end{Ramification}
 
-If Storage_Size is specified for an access type,
-then the Storage_Size of this pool is at least that requested,
-and the storage for the pool is reclaimed when the master containing
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0043-1]}
+If Storage_Size is specified for an access type@Chg{Version=[4],New=[ @i<T>,
+an implementation-defined pool @i<P> is used for the type. The],Old=[, then the]}
+Storage_Size of @Chg{Version=[4],New=[@i<P>],Old=[this pool]} is at least
+that requested, and the storage for @Chg{Version=[4],New=[@i<P>],Old=[the pool]}
+is reclaimed when the master containing
 the declaration of the access type is left.
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
-If the implementation cannot satisfy the request,
-Storage_Error is raised at the point of the
-@nt{attribute_@!definition_@!clause}.
-If neither Storage_Pool nor Storage_Size are specified,
-then the meaning of Storage_Size is implementation defined.
+If the implementation cannot satisfy the request, Storage_Error is raised at the
+@Chg{Version=[4],New=[freezing ],Old=[]}point of @Chg{Version=[4],New=[type
+@i<T>. The storage pool @i<P> is used only for allocators returning type @i<T>
+or other access types specified to use @i<T>'Storage_Pool. Storage_Error is
+raised by an @nt{allocator} returning such a type if the storage space of @i<P>
+is exhausted (additional memory is not allocated).],Old=[the
+@nt{attribute_@!definition_@!clause}. If neither Storage_Pool nor Storage_Size
+are specified, then the meaning of Storage_Size is implementation defined.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0043-1]}
+@ChgAdded{Version=[4],Text=[If neither Storage_Pool nor Storage_Size are
+specified, then the meaning of Storage_Size is implementation defined.]}
+
 @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The meaning of
 Storage_Size@Chg{Version=[2], New=[ when neither the
 Storage_Size nor the Storage_Pool is specified for an access type],Old=[]}.]}
@@ -2336,6 +2363,12 @@ objects incorrectly by missing various cases.
   up to Max_Alignment_For_Allocation. This eases implementation in some cases.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0043-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Tightened up the description of
+  the implementation-defined pool used when Storage_Size is specified. This
+  is not intended to change any implementation.]}
+@end{DiffWord2012}
 
 
 @LabeledRevisedSubClause{Version=[3],New=[Storage Allocation Attributes],

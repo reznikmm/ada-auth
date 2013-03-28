@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:03 $}
+@Comment{$Date: 2013/02/02 01:46:58 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @LabeledClause{Type Conversions}
 
@@ -554,18 +554,19 @@ Further, if the operand type is not @i<universal_@!access>:]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
   @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0148-1],ARef=[AI05-0248-1]}
+  @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0027-1]}
   @Chg{Version=[2],New=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
   deeper than that of the target type@Chg{Version=[3],New=[, unless the target
   type is an anonymous access type of a stand-alone object. If the target type
   is that of such a stand-alone object, the accessibility level of the operand
   type shall not be statically deeper than that of the declaration of the
-  stand-alone object],Old=[]}.
+  stand-alone object],Old=[]}.@Chg{Version=[4],New=[],Old=[
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
-  instance of a generic unit.],Old=[]}
+  instance of a generic unit.]}],Old=[]}
   @begin{Ramification}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
@@ -612,14 +613,15 @@ the operand type is not @i<universal_@!access>:]}
   @Defn2{Term=[subtype conformance],Sec=(required)}],Old=[]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+  @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0027-1]}
   @Chg{Version=[2],New=[@PDefn2{Term=[accessibility rule],Sec=(type conversion)}
   The accessibility level of the operand type shall not be statically
-  deeper than that of the target type.
+  deeper than that of the target type.@Chg{Version=[4],New=[],Old=[
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
-  instance of a generic unit.
+  instance of a generic unit.]}
   If the operand type is declared within a generic body,
   the target type shall be declared within the generic body.],Old=[]}
 
@@ -637,6 +639,24 @@ the operand type is not @i<universal_@!access>:]}
 @end(inneritemize)
 
 @end(itemize)
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an
+instance of a generic unit.]}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This applies to @i<all> of the @LegalityTitle
+  in this section. It won't matter for the majority of these rules, but
+  in any case that it does, we want to apply the same recheck in the private
+  part. (Ada got the default wrong for these, as there is only one known case
+  where we don't want to recheck in the private part,
+  see derivations without record extensions in
+  @RefSecNum{Derived Types and Classes}.)]}
+@end{Discussion}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -997,6 +1017,40 @@ to an unconstrained scalar subtype,
 can raise Constraint_Error if the value is outside the base range of the
 type.
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[Evaluation of a value conversion of a
+composite type either creates a new anonymous object@Redundant[ (similar to the
+object created by the evaluation of an @nt{aggregate} or a function call)] or
+yields a new view of the operand object without creating a new object:]}
+
+@begin{Itemize}
+   @ChgRef{Version=[4],Kind=[Added]}
+   @ChgAdded{Version=[4],Text=[If the target type is a by-reference type and
+   there is a type that is an ancestor of both the target type and the operand
+   type then no new object is created;]}
+
+   @ChgRef{Version=[4],Kind=[Added]}
+   @ChgAdded{Version=[4],Text=[If the target type is an array type having
+   aliased components and the operand type is an array type having unaliased
+   components, then a new object is created;]}
+
+   @ChgRef{Version=[4],Kind=[Added]}
+   @ChgAdded{Version=[4],Text=[Otherwise, it is unspecified whether a new object
+   is created.@PDefn{unspecified}]}
+@end{Itemize}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
+@ChgAdded{Version=[4],Text=[If a new object is created, then the initialization
+of that object is an assignment operation.]}
+
+@begin{Reason}
+   @ChgRef{Version=[4],Kind=[Added]}
+   @ChgAdded{Version=[4],Text=[This makes a difference in the case of converting
+   from an array type with unaliased components to one with aliased components
+   if the element type has a controlled part.]}
+@end{Reason}
+
 @end{RunTime}
 
 @begin{Notes}
@@ -1247,6 +1301,22 @@ as a @nt<name>.
   @ChgAdded{Version=[3],Text=[Added rules so that predicate aspects (see
   @RefSecNum{Subtype Predicates}) are enforced on subtype conversion.]}
 @end{Diffword2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0027-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Moved the generic boilerplate
+  so that it covers all @LegalityTitle in this subclause. This was always
+  intended, but it is not expected to change anything other than conversions
+  between unrelated arrays.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0027-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Added a formal definition of
+  the copy potentially created by a value conversion of a composite type,
+  so properties like finalization and accessibility are properly defined.
+  This model was always intended and expected (else
+  @RefSecNum{Change of Representation} would not work), but it was not
+  previously formally defined.]}
+@end{Diffword2012}
 
 
 @LabeledClause{Qualified Expressions}
@@ -2092,10 +2162,13 @@ for strings.
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0158-1],ARef=[AI05-0269-1]}
-a membership test
-whose @nt{simple_expression} is a static expression,
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1]}
+a membership test whose
+@Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
+is a static expression,
 and whose @Chg{Version=[3],New=[@nt{membership_choice_list} consists only of
-@nt{membership_choice}s that are either static @nt{choice_expression}s,
+@nt{membership_choice}s that are either static
+@Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}s],Old=[@nt{choice_expression}s]},
 static @nt{range}s, or @nt{subtype_mark}s that denote],Old=[@nt{range}
 is a static range or whose @nt{subtype_mark} denotes]} a
 static @Redundant[(scalar or string)] subtype;
@@ -2355,7 +2428,10 @@ reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 whose value is not covered by the corresponding @nt{discrete_choice_list}; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
-@ChgAdded{Version=[3],Text=[a @nt{choice_expression} (or a @nt{simple_expression}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+@ChgAdded{Version=[3],Text=[a
+@Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}],Old=[@nt{choice_expression}]}
+(or a @nt{simple_expression}
 of a @nt{range} that occurs as a @nt{membership_choice} of a
 @nt{membership_choice_list}) of a static membership test that is preceded in
 the enclosing @nt{membership_choice_list} by another item whose individual
