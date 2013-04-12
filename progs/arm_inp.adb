@@ -10,7 +10,7 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2011
+    -- Copyright 2000, 2002, 2004, 2005, 2011, 2013
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -49,13 +49,15 @@ package body ARM_Input is
     --			the input is empty. (Otherwise, bad comments cause
     --			an infinite loop.)
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  3/26/13 - RLB - Added %% as a bracket pairing, so the Google
+    --			Analytics snippett can be inserted.
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
 	--    ('<', '[', '{', '(', '`'), and False otherwise.
     begin
 	case Open_Char is
-	    when '<' | '[' | '{' | '(' | '`' => return True;
+	    when '<' | '[' | '{' | '(' | '`' | '%' => return True;
 	    when others => return False;
 	end case;
     end Is_Open_Char;
@@ -72,6 +74,7 @@ package body ARM_Input is
 	    when '{' => return '}';
 	    when '(' => return ')';
 	    when '`' => return ''';
+	    when '%' => return '%';
 	    when others =>
 	        Ada.Text_IO.Put_Line ("** Not an Open_Char - " & Open_Char);
 		raise ARM_Input.Not_Valid_Error;
@@ -90,6 +93,7 @@ package body ARM_Input is
 	    when '}' => return '{';
 	    when ')' => return '(';
 	    when ''' => return '`';
+	    when '%' => return '%';
 	    when others =>
 	        Ada.Text_IO.Put_Line ("** Not a Close_Char - " & Close_Char);
 		raise ARM_Input.Not_Valid_Error;
@@ -140,6 +144,12 @@ package body ARM_Input is
     begin
 	if Close_Char = '"' then
 	    Start_Ch := Character'Val(128);
+	    -- This character shouldn't occur in input text.
+	    -- Buglet: We don't have a way to tell whether this is an inner
+	    -- command or just the end; best to avoid nesting of
+	    -- quoted parameters.
+	elsif Close_Char = '%' then
+	    Start_Ch := Character'Val(129);
 	    -- This character shouldn't occur in input text.
 	    -- Buglet: We don't have a way to tell whether this is an inner
 	    -- command or just the end; best to avoid nesting of

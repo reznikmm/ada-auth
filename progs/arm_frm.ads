@@ -106,6 +106,7 @@ package ARM_Format is
     --		- RLB - Added more specific hanging_indent formats, along with
     --			small.
     -- 11/26/12 - RLB - Added subdivision names.
+    -- 12/17/12 - RLB - Added Ada 2012 AARM sections.
 
     type Format_Type is tagged limited private;
 
@@ -222,6 +223,8 @@ private
 	Ada95_Extensions, Ada95_Wording, -- AARM-only.
 	Ada2005_Inconsistencies, Ada2005_Incompatibilities, -- AARM-only.
 	Ada2005_Extensions, Ada2005_Wording, -- AARM-only.
+	Ada2012_Inconsistencies, Ada2012_Incompatibilities, -- AARM-only.
+	Ada2012_Extensions, Ada2012_Wording, -- AARM-only.
 	Element_Ref, Child_Ref, Usage_Note, -- For ASIS (AASIS-only).
 	-- AARM annotations (no headers)
 	Reason, Ramification, Proof, Imp_Note, Corr_Change, Discussion,

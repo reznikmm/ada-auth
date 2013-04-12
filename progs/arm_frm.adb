@@ -1117,7 +1117,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		     Ada95_Incompatibilities | Ada95_Extensions |
 		     Ada95_Wording | Ada2005_Inconsistencies |
 		     Ada2005_Incompatibilities | Ada2005_Extensions |
-		     Ada2005_Wording | Reason | Ramification | Proof |
+		     Ada2005_Wording | Ada2012_Inconsistencies |
+		     Ada2012_Incompatibilities | Ada2012_Extensions |
+		     Ada2012_Wording | Reason | Ramification | Proof |
 		     Imp_Note | Corr_Change | Discussion |
 		     Honest | Glossary_Marker | Bare_Annotation |
 		     Element_Ref | Child_Ref | Usage_Note =>
@@ -1444,7 +1446,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Ada2005_Inconsistencies | -- Inconsistent2005
 				         Ada2005_Incompatibilities | -- Incompatible2005
 				         Ada2005_Extensions | -- Extend2005
-				         Ada2005_Wording => -- DiffWord2005
+				         Ada2005_Wording | -- DiffWord2005
+				         Ada2012_Inconsistencies | -- Inconsistent2012
+				         Ada2012_Incompatibilities | -- Incompatible2012
+				         Ada2012_Extensions | -- Extend2012
+				         Ada2012_Wording => -- DiffWord2012
 				        return 2; -- Normal indent for annotations.
 		        	    when Reason | Ramification | Proof |
 					 Imp_Note | Corr_Change | Discussion |
@@ -1532,7 +1538,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 				         Ada95_Incompatibilities | Ada95_Extensions |
 				         Ada95_Wording | Ada2005_Inconsistencies |
 				         Ada2005_Incompatibilities | Ada2005_Extensions |
-				         Ada2005_Wording | Reason | Ramification | Proof |
+				         Ada2005_Wording | Ada2012_Inconsistencies |
+				         Ada2012_Incompatibilities | Ada2012_Extensions |
+				         Ada2012_Wording | Reason | Ramification | Proof |
 				         Imp_Note | Corr_Change | Discussion |
 				         Honest | Glossary_Marker | Bare_Annotation |
 				         Element_Ref | Child_Ref | Usage_Note |
@@ -1614,7 +1622,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada2005_Inconsistencies | -- Inconsistent2005
 		         Ada2005_Incompatibilities | -- Incompatible2005
 		         Ada2005_Extensions | -- Extend2005
-		         Ada2005_Wording => -- DiffWord2005
+		         Ada2005_Wording | -- DiffWord2005
+		         Ada2012_Inconsistencies | -- Inconsistent2012
+		         Ada2012_Incompatibilities | -- Incompatible2012
+		         Ada2012_Extensions | -- Extend2012
+		         Ada2012_Wording => -- DiffWord2012
 			Format_Object.Style  := ARM_Output.Small;
 			Format_Object.Indent := 2; -- Two units.
 			Format_Object.No_Breaks := False;
@@ -1908,7 +1920,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada2005_Inconsistencies | -- Inconsistent2005
 		         Ada2005_Incompatibilities | -- Incompatible2005
 		         Ada2005_Extensions | -- Extend2005
-		         Ada2005_Wording => -- DiffWord2005
+		         Ada2005_Wording | -- DiffWord2005
+		         Ada2012_Inconsistencies | -- Inconsistent2012
+		         Ada2012_Incompatibilities | -- Incompatible2012
+		         Ada2012_Extensions | -- Extend2012
+		         Ada2012_Wording => -- DiffWord2012
 			ARM_Output.Category_Header (Output_Object, Paragraph_Kind_Title(For_Type).Str(1..Paragraph_Kind_Title(For_Type).Length));
 			Format_Object.Last_Paragraph_Subhead_Type := For_Type;
         	    when Plain | Introduction | Element_Ref | Child_Ref | Usage_Note =>
@@ -1963,7 +1979,11 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		         Ada2005_Inconsistencies | -- Inconsistent2005
 		         Ada2005_Incompatibilities | -- Incompatible2005
 		         Ada2005_Extensions | -- Extend2005
-		         Ada2005_Wording => -- DiffWord2005
+		         Ada2005_Wording | -- DiffWord2005
+		         Ada2012_Inconsistencies | -- Inconsistent2012
+		         Ada2012_Incompatibilities | -- Incompatible2012
+		         Ada2012_Extensions | -- Extend2012
+		         Ada2012_Wording => -- DiffWord2012
 			null; -- Not an annotation.
         	    when Reason | Ramification | Proof |
 			 Imp_Note | Corr_Change | Discussion |
@@ -3166,6 +3186,42 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Format_Object.Next_Paragraph_Subhead_Type := Ada2005_Wording;
 		else -- Don't show annotations.
 		    Toss_for_RM ("diffword2005");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "inconsistent2012" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2012_Inconsistencies;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2012_Inconsistencies;
+		else -- Don't show annotations.
+		    Toss_for_RM ("inconsistent2012");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "incompatible2012" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2012_Incompatibilities;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2012_Incompatibilities;
+		else -- Don't show annotations.
+		    Toss_for_RM ("incompatible2012");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "extend2012" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2012_Extensions;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2012_Extensions;
+		else -- Don't show annotations.
+		    Toss_for_RM ("extend2012");
+		end if;
+	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
+	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
+	    	= "diffword2012" then
+		if Format_Object.Include_Annotations then
+		    Format_Object.Next_Paragraph_Format_Type := Ada2012_Wording;
+		    Format_Object.Next_Paragraph_Subhead_Type := Ada2012_Wording;
+		else -- Don't show annotations.
+		    Toss_for_RM ("diffword2012");
 		end if;
 	    -- ASIS groupings:
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
@@ -8744,6 +8800,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Incompatible95_Name | Extend95_Name | Wording95_Name |
 		     Inconsistent2005_Name |
 		     Incompatible2005_Name | Extend2005_Name | Wording2005_Name |
+		     Inconsistent2012_Name |
+		     Incompatible2012_Name | Extend2012_Name | Wording2012_Name |
 		     Syntax_Title | Resolution_Title | Legality_Title |
 		     Static_Title | Link_Title | Run_Title | Bounded_Title |
 		     Erroneous_Title | Req_Title | Doc_Title | Metrics_Title |
@@ -8755,6 +8813,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		     Incompatible95_Title | Extend95_Title | Wording95_Title |
 		     Inconsistent2005_Title |
 		     Incompatible2005_Title | Extend2005_Title | Wording2005_Title |
+		     Inconsistent2012_Title |
+		     Incompatible2012_Title | Extend2012_Title | Wording2012_Title |
 		     EM_Dash | EN_Dash | LT | LE | GT | GE | NE | PI |
 		     Times | PorM | Single_Quote | Thin_Space | Left_Quote |
 		     Right_Quote | Left_Double_Quote | Right_Double_Quote |
@@ -9118,6 +9178,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Put_Name(Ada2005_Extensions);
 		when Wording2005_Name =>
 		    Put_Name(Ada2005_Wording);
+		when Inconsistent2012_Name =>
+		    Put_Name(Ada2012_Inconsistencies);
+		when Incompatible2012_Name =>
+		    Put_Name(Ada2012_Incompatibilities);
+		when Extend2012_Name =>
+		    Put_Name(Ada2012_Extensions);
+		when Wording2012_Name =>
+		    Put_Name(Ada2012_Wording);
 
 		when Syntax_Title =>
 		    Put_Title(Syntax);
@@ -9177,6 +9245,14 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Put_Title(Ada2005_Extensions);
 		when Wording2005_Title =>
 		    Put_Title(Ada2005_Wording);
+		when Inconsistent2012_Title =>
+		    Put_Title(Ada2012_Inconsistencies);
+		when Incompatible2012_Title =>
+		    Put_Title(Ada2012_Incompatibilities);
+		when Extend2012_Title =>
+		    Put_Title(Ada2012_Extensions);
+		when Wording2012_Title =>
+		    Put_Title(Ada2012_Wording);
 
 		when EM_Dash =>
 		    Check_Paragraph;

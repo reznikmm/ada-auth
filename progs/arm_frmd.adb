@@ -44,6 +44,7 @@ package body ARM_Format.Data is
     -- 10/20/11 - RLB - Added DeletedPragmaSyn command.
     -- 10/26/11 - RLB - Added versioned break commands.
     --  3/27/12 - RLB - Added more versioned break commands.
+    -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
 
 
     function Command (Name : in ARM_Input.Command_Name_Type) return Command_Type is
@@ -417,6 +418,14 @@ package body ARM_Format.Data is
 	    return Extend2005_Name;
 	elsif Canonical_Name = "diffword2005name" then
 	    return Wording2005_Name;
+	elsif Canonical_Name = "inconsistent2012name" then
+	    return Inconsistent2012_Name;
+	elsif Canonical_Name = "incompatible2012name" then
+	    return Incompatible2012_Name;
+	elsif Canonical_Name = "extend2012name" then
+	    return Extend2012_Name;
+	elsif Canonical_Name = "diffword2012name" then
+	    return Wording2012_Name;
 	elsif Canonical_Name = "syntaxtitle" then
 	    return Syntax_Title;
 	elsif Canonical_Name = "resolutiontitle" then
@@ -475,6 +484,14 @@ package body ARM_Format.Data is
 	    return Extend2005_Title;
 	elsif Canonical_Name = "diffword2005title" then
 	    return Wording2005_Title;
+	elsif Canonical_Name = "inconsistent2012title" then
+	    return Inconsistent2012_Title;
+	elsif Canonical_Name = "incompatible2012title" then
+	    return Incompatible2012_Title;
+	elsif Canonical_Name = "extend2012title" then
+	    return Extend2012_Title;
+	elsif Canonical_Name = "diffword2012title" then
+	    return Wording2012_Title;
 	elsif Canonical_Name = "em" then
 	    return EM_Dash;
 	elsif Canonical_Name = "en" then

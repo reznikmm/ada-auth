@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012
+    --		 2008, 2009, 2011, 2012, 2013
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -181,6 +181,9 @@ package body ARM_HTML is
     -- 10/18/12 - RLB - Added additional hanging styles.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    -- 12/17/12 - RLB - Added AI12 references. Defined a change color for
+    --			"version 4" (Ada 202x).
+    --  3/26/13 - RLB - Added Script_HTML.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1284,6 +1287,13 @@ package body ARM_HTML is
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;
+	if Revision_Used ('4') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert4 {text-decoration: underline; color: rgb(153,0,0) }"); -- Dark red.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete4 {text-decoration: line-through; color: rgb(153,0,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both4 {text-decoration: underline, line-through; color: rgb(153,0,0) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
 
         -- Link styles:
 	-- We don't need these (they're given in the BODY command), but I've
@@ -1410,6 +1420,12 @@ package body ARM_HTML is
 
 	    Ada.Text_IO.Put_Line (Output_Object.Output_File, "    </STYLE>");
 	end if;
+
+ 	if Ada.Strings.Unbounded.Length(Output_Object.Script_HTML) /= 0 then
+	    Ada.Text_IO.Put_Line (Output_Object.Output_File,
+		Ada.Strings.Unbounded.To_String(Output_Object.Script_HTML));
+	end if;
+
 	Ada.Text_IO.Put_Line (Output_Object.Output_File, "</HEAD>");
         Ada.Text_IO.Put_Line (Output_Object.Output_File,
 	    "<BODY TEXT=""" & Output_Object.Text_Color &
@@ -1580,6 +1596,7 @@ package body ARM_HTML is
 	              Nav_On_Top : Boolean;
 	              Nav_On_Bottom : Boolean;
 		      Tab_Emulation : Tab_Emulation_Type;
+	              Script_HTML : String;
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "";
@@ -1625,6 +1642,10 @@ package body ARM_HTML is
 	-- of each page. If Nav_On_Bottom is true, the navigation bar will
 	-- appear in the footer of each page.
 	-- Tab_Emulation determines how tabs are emulated.
+	-- Script_HTML gives self-contained HTML that will appear immediately
+	-- before the </HEAD> of every page. This usually will contain
+	-- Javascript scripts or CSS styles. The original intent was to allow
+	-- adding the Google Analytics script to each page.
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
@@ -1656,6 +1677,7 @@ package body ARM_HTML is
 	Output_Object.Nav_on_Top := Nav_on_Top;
 	Output_Object.Nav_on_Bottom := Nav_on_Bottom;
 	Output_Object.Tab_Emulation := Tab_Emulation;
+	Output_Object.Script_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Script_HTML);
 	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
 	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
 	Output_Object.Body_Font := Body_Font;
@@ -4871,7 +4893,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	-- generate a link; for other formats, the text alone is generated.
 	--
 	-- We assume AI number is of the form:
-	-- ZZZZ-nnnn-m whre ZZZZ=AI05 or SI99, nnnn is a four digit number,
+	-- ZZZZ-nnnn-m whre ZZZZ=AI05, AI12, or SI99, nnnn is a four digit number,
 	-- and -m is an optional number (-1 is used if it is omitted); or
 	-- AIzz-nnnnn-mm where AIzz=AI95 or AI (meaning AI95);
 	-- nnnnn is a five digit number, and -mm is an optional two digit number.
@@ -4886,6 +4908,33 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		"Not in paragraph");
 	end if;
 	if AI_Number'Length > 5 and then
+	    AI_Number(AI_Number'First..AI_Number'First+4) = "AI12-" then
+	    -- AI12:
+	    if AI_Number'Length >= 9 then
+		if AI_Number(AI_Number'First+5) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+6) not in '0'..'9' or else
+		   AI_Number(AI_Number'First+7) not in '0'..'9' or else
+	           AI_Number(AI_Number'First+8) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad number in AI12 number: " & AI_Number);
+		end if;
+	    end if;
+	    if AI_Number'Length = 9 then
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/");
+                Output_Text (Output_Object, AI_Number & "-1");
+	    elsif AI_Number'Length = 11 then
+		if AI_Number(AI_Number'Last-1) /= '-' or else
+	           AI_Number(AI_Number'Last) not in '0'..'9' then
+	            Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		        "Bad sequence number in AI12 number: " & AI_Number);
+		end if;
+                Output_Text (Output_Object, "<A HREF=""http://www.ada-auth.org/cgi-bin/cvsweb.cgi/AI12s/");
+                Output_Text (Output_Object, AI_Number);
+	    else
+	        Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
+		    "Bad AI12 number: " & AI_Number);
+	    end if;
+	elsif AI_Number'Length > 5 and then
 	    AI_Number(AI_Number'First..AI_Number'First+4) = "AI05-" then
 	    -- AI05:
 	    if AI_Number'Length >= 9 then

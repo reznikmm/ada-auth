@@ -90,16 +90,16 @@ Commands are represented by @<command_name>[<args>]. The command name can be an
 identifier, or certain special characters. The command name is not
 case-sensitive: @newpage; @NewPage; @NEWPAGE; all represent the same command.
 The argument list (if any) is surrounded by one of the bracket pairs
-(), {}, [], <>, `', or "". These pairs are equivalent, however the matching end
-character must be used to close an argument list. The arguments can be
-anything. It can be another sequence of text, keywords, or other items
-(described below). In this list below, arguments are always signified by {},
-but any of the other characters can be used. (Note that there is no escape
-character for the brackets, so if one of the bracket characters appears
-in the text, a different pair of bracket characters should be used. Also
-note that there is no sane way to tell the end of a quoted parameter from a
-nested one, so parameters nested in a "" pair should never used "" as their
-brackets.)
+(), {}, [], <>, `', "", or %%. These pairs are equivalent, however the matching
+end character must be used to close an argument list. The arguments can be anything.
+It can be another sequence of text, keywords, or other items (described below).
+In this list below, arguments are always signified by {}, but any of the other
+characters can be used. (Note that there is no escape character for the
+brackets, so if one of the bracket characters appears in the text, a different
+pair of bracket characters should be used. Also note that there is no sane way
+to tell the end of a quoted parameter from the end of a nested quoted command,
+so parameters nested in a "" pair should never used "" as their brackets. A
+similar restriction applies to the %% pair.)
 
 -----------------
 
@@ -284,6 +284,11 @@ HTML Output properties:
      By default, the "References" and "Search" buttons are omitted, buttons
      are used, and navigation bars are shown on the top and bottom of every
      page.
+@HTMLScript{<Script>}
+     Specifies Script code (including the <SCRIPT> </SCRIPT> tags) that should
+     go directly before the </HEAD> on each page. By default, this is empty.
+     This command was designed to allow placing Google Analytics code on
+     each page for web sites that use that for tracking.
 @HTMLHeader{<HTML_for_Header>}
      Specifies HTML markup for the header of the the document. This will be
      repeated on every page, and needs to be a self-contained HTML fragment.
@@ -1170,6 +1175,10 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 	Incompatible2005 - Incompatibilities with Ada 2005.
 	Extend2005  - Extensions to Ada 2005.
 	DiffWord2005- Wording Changes from Ada 2005.
+	Inconsistent2012 - Inconsistencies with Ada 2012.
+	Incompatible2012 - Incompatibilities with Ada 2012.
+	Extend2012  - Extensions to Ada 2012.
+	DiffWord2012- Wording Changes from Ada 2012.
 	AARMOnly  - Text that is not included in the RM. No format is implied.
 
     AARM annotations: (not shown if HideAnnotations is used)
@@ -1328,6 +1337,7 @@ Versions:
    1-Technical Corrigendum 1
    2-Amendment 1 [Ada 2005 (standard published 2007, so could be considered Ada 2007)]
    3-3rd Edition (Ada 2012)
+   4-4th Edition (Ada 202x) - Not official yet.
 
 Please note that there some changes to earlier versions (mostly typographical,
 but there are some that are significant) that are not preserved in the Ada 2012

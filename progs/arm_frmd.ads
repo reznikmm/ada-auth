@@ -43,6 +43,7 @@ private package ARM_Format.Data is
     -- 10/26/11 - RLB - Added versioned break commands.
     --  3/27/12 - RLB - Added more versioned break commands.
     -- 10/18/12 - RLB - Added more specific hanging_indent commands.
+    -- 12/17/12 - RLB - Added Ada 2012 AARM headings.
 
 
     type LString is record
@@ -88,6 +89,13 @@ private package ARM_Format.Data is
 	 Ada2005_Extensions
 			 => (Length => 21, Str => "Extension to Ada 2005                   "), -- Extend2005Name
 	 Ada2005_Wording => (Length => 28, Str => "Wording Change from Ada 2005            "), -- DiffWord2005Name
+	 Ada2012_Inconsistencies
+			 => (Length => 27, Str => "Inconsistency with Ada 2012             "), -- Inconsistent2012Name
+	 Ada2012_Incompatibilities
+			 => (Length => 29, Str => "Incompatibility with Ada 2012           "), -- Incompatible2012Name
+	 Ada2012_Extensions
+			 => (Length => 21, Str => "Extension to Ada 2012                   "), -- Extend2012Name
+	 Ada2012_Wording => (Length => 28, Str => "Wording Change from Ada 2012            "), -- DiffWord2012Name
 	 Element_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Child_Ref	 => (Length =>  0, Str => (others => ' ')), -- Not used.
 	 Usage_Note	 => (Length =>  0, Str => (others => ' ')), -- Not used.
@@ -162,6 +170,13 @@ private package ARM_Format.Data is
 	 Ada2005_Extensions
 			 => (Length => 22, Str => "Extensions to Ada 2005                  "), -- Extend2005Title
 	 Ada2005_Wording => (Length => 29, Str => "Wording Changes from Ada 2005           "), -- DiffWord2005Title
+	 Ada2012_Inconsistencies
+			 => (Length => 29, Str => "Inconsistencies With Ada 2012           "), -- Inconsistent2012Title
+	 Ada2012_Incompatibilities
+			 => (Length => 31, Str => "Incompatibilities With Ada 2012         "), -- Incompatible2012Title
+	 Ada2012_Extensions
+			 => (Length => 22, Str => "Extensions to Ada 2012                  "), -- Extend2012Title
+	 Ada2012_Wording => (Length => 29, Str => "Wording Changes from Ada 2012           "), -- DiffWord2012Title
 	 Element_Ref	 => (Length => 19, Str => "Element Reference:                      "), -- Paragraph start.
 	 Child_Ref	 => (Length => 28, Str => "Child Elements returned by:             "), -- Paragraph start.
 	 Usage_Note	 => (Length => 12, Str => "Usage Note:                             "), -- Paragraph start.
@@ -279,6 +294,7 @@ private package ARM_Format.Data is
 	Incompatible83_Name, Extend83_Name, Wording83_Name,
 	Inconsistent95_Name, Incompatible95_Name, Extend95_Name, Wording95_Name,
 	Inconsistent2005_Name, Incompatible2005_Name, Extend2005_Name, Wording2005_Name,
+	Inconsistent2012_Name, Incompatible2012_Name, Extend2012_Name, Wording2012_Name,
 	Syntax_Title, Resolution_Title, Legality_Title, Static_Title,
 	Link_Title, Run_Title, Bounded_Title, Erroneous_Title, Req_Title,
 	Doc_Title, Metrics_Title, Permission_Title, Advice_Title, Notes_Title,
@@ -286,7 +302,8 @@ private package ARM_Format.Data is
 	Examples_Title, Meta_Title, Inconsistent83_Title, Incompatible83_Title,
 	Extend83_Title, Wording83_Title, Inconsistent95_Title, Incompatible95_Title,
 	Extend95_Title, Wording95_Title, Inconsistent2005_Title, Incompatible2005_Title,
-	Extend2005_Title, Wording2005_Title,
+	Extend2005_Title, Wording2005_Title, Inconsistent2012_Title, Incompatible2012_Title,
+	Extend2012_Title, Wording2012_Title,
 	-- Character macros:
 	EM_Dash, EN_Dash, LE, LT, GE, GT, NE, PI, Times, PorM, Single_Quote,
 	Latin_1, Unicode, Ceiling, Floor, Absolute, Log, Thin_Space,

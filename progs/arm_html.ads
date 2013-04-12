@@ -13,7 +13,7 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012
+    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2013
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -101,6 +101,8 @@ package ARM_HTML is
     --  8/31/12 - RLB - Added Output_Path.
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
+    --  3/26/13 - RLB - Added HTML_Script to allow adding Google Analytics
+    --			code as needed.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -136,6 +138,7 @@ package ARM_HTML is
 	              Nav_On_Top : Boolean;
 	              Nav_On_Bottom : Boolean;
 		      Tab_Emulation : Tab_Emulation_Type;
+	              Script_HTML : String;
 	              Header_HTML : String;
 	              Footer_HTML : String;
 		      Title : in String := "";
@@ -181,6 +184,10 @@ package ARM_HTML is
 	-- of each page. If Nav_On_Bottom is true, the navigation bar will
 	-- appear in the footer of each page.
 	-- Tab_Emulation determines how tabs are emulated.
+	-- Script_HTML gives self-contained HTML that will appear immediately
+	-- before the </HEAD> of every page. This usually will contain
+	-- Javascript scripts or CSS styles. The original intent was to allow
+	-- adding the Google Analytics script to each page.
 	-- Header_HTML gives self-contained HTML that will appear before the
 	-- navigation bar in the header. Footer_HTML gives self-contained HTML
 	-- that will appear after the navigation bar in the footer.
@@ -542,6 +549,7 @@ private
         Nav_On_Top : Boolean := True;
         Nav_On_Bottom : Boolean := True;
 	Tab_Emulation : Tab_Emulation_Type;
+        Script_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
 	Body_Font : ARM_Output.Font_Family_Type := ARM_Output.Roman;

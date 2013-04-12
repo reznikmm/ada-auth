@@ -22,7 +22,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007, 2009, 2011, 2012
+    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -71,6 +71,7 @@ package body ARM_Master is
     -- 10/19/11 - RLB - Added Texinfo output (from Stephen Leake).
     --  8/31/12 - RLB - Added Output_Path.
     -- 11/26/12 - RLB - Added Subdivision_Names.
+    --  3/26/13 - RLB - Added HTMLScript.
 
     type Command_Type is (
 	-- Source commands:
@@ -99,6 +100,7 @@ package body ARM_Master is
 	HTML_Kind_Command,
 	HTML_Nav_Bar,
 	HTML_Tabs,
+	HTML_Script,
 	HTML_Header,
 	HTML_Footer,
 	HTML_Color,
@@ -175,6 +177,7 @@ package body ARM_Master is
     HTML_Nav_On_Top : Boolean := True;
     HTML_Nav_On_Bottom : Boolean := True;
     HTML_Tab_Emulation : ARM_HTML.Tab_Emulation_Type := ARM_HTML.Emulate_Fixed_Only;
+    HTML_Script_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Header_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Footer_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Text_Color : ARM_HTML.Color_String := "#000000";
@@ -253,6 +256,8 @@ package body ARM_Master is
 	    return HTML_Nav_Bar;
 	elsif Canonical_Name = "htmltabs" then
 	    return HTML_Tabs;
+	elsif Canonical_Name = "htmlscript" then
+	    return HTML_Script;
 	elsif Canonical_Name = "htmlheader" then
 	    return HTML_Header;
 	elsif Canonical_Name = "htmlfooter" then
@@ -1055,13 +1060,26 @@ package body ARM_Master is
 			    ARM_HTML.Tab_Emulation_Type'Image(HTML_Tab_Emulation));
 		    end;
 
+		when HTML_Script =>
+		    --@HTMLHeader{<Script>}
+		    HTML_Script_Text := +Get_Single_String;
+		    if Ada.Strings.Unbounded.Length (HTML_Script_Text) /= 0 then
+			Ada.Text_IO.Put_Line("Non-empty HTML Script seen");
+		    end if;
+
 		when HTML_Header =>
 		    --@HTMLHeader{<HTML_for_Header>}
 		    HTML_Header_Text := +Get_Single_String;
+		    if Ada.Strings.Unbounded.Length (HTML_Header_Text) /= 0 then
+			Ada.Text_IO.Put_Line("Non-empty HTML Header seen");
+		    end if;
 
 		when HTML_Footer =>
 		    --@HTMLFooter{<HTML_for_Footer>}
 		    HTML_Footer_Text := +Get_Single_String;
+		    if Ada.Strings.Unbounded.Length (HTML_Footer_Text) /= 0 then
+			Ada.Text_IO.Put_Line("Non-empty HTML Footer seen");
+		    end if;
 
 		when HTML_Color =>
 		    --@HTMLColor{Text=[<Color]>,Background=[<Color>],
@@ -1324,6 +1342,7 @@ package body ARM_Master is
 			             Nav_On_Top => HTML_Nav_On_Top,
 			             Nav_On_Bottom => HTML_Nav_On_Bottom,
 				     Tab_Emulation => HTML_Tab_Emulation,
+			             Script_HTML => +HTML_Script_Text,
 			             Header_HTML => +HTML_Header_Text,
 			             Footer_HTML => +HTML_Footer_Text,
 				     Title => Get_Versioned_String(Document_Title,Change_Version),
