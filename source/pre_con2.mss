@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.24 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.25 $ $Date: 2013/04/12 02:29:38 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -198,12 +198,12 @@ package Containers.Multiway_Trees has the following declaration:]}
                   Item      : Element_Type)
       @key{return} Cursor;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Find_In_Subtree} (Position : Cursor;
                              Item     : Element_Type)
       @key{return} Cursor;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Ancestor_Find} (Position : Cursor;
                            Item     : Element_Type)
       @key{return} Cursor;]}
@@ -333,12 +333,12 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Previous_Sibling} (Position : @key{in out} Cursor);]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Iterate_Children}
      (Parent  : @key{in} Cursor;
       Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate_Children}
      (Parent  : @key{in} Cursor;
       Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
@@ -3853,8 +3853,9 @@ semantics as Containers.Multiway_Trees except:]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[Function Copy is declared as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0056-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{function} Copy (Source : Tree; Capacity : Count_Type := 0)
-     @key{return} List;]}
+     @key{return} @Chg{Version=[4],New=[Tree],Old=[List]};]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}

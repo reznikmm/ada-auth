@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/04/12 02:29:38 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 
@@ -3786,14 +3786,16 @@ environment (such as POSIX).]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[We want to be able to specify the difference
   between any two arbitrary time zones. You might think that 1440 (24 hours)
   would be enough, but there are places (like Tonga, which is UTC+13hr) which
-  are more than 12 hours than UTC. Combined with summer time (known as daylight
-  saving time in some parts of the world) @en which switches opposite in the
-  northern and souther hemispheres @en and even greater differences are
-  possible. We know of cases of a 26 hours difference, so we err on the safe
-  side by selecting 28 hours as the limit.]}
+  are more than 12 hours @Chg{Version=[4],New=[different ],Old=[]}than UTC.
+  Combined with summer time (known as daylight saving time in some parts of the
+  world) @en which switches opposite in the northern and
+  @Chg{Version=[4],New=[southern],Old=[souther]} hemispheres @en and even greater
+  differences are possible. We know of cases of a 26 hours difference, so we err
+  on the safe side by selecting 28 hours as the limit.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
