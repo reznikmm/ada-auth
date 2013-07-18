@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012
+    --           2010, 2011, 2012, 2013
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -279,6 +279,8 @@ package body ARM_Format is
     --			"small" format.
     -- 11/ 5/12 - RLB - Added stupidly missing compare for "small" format.
     -- 11/26/12 - RLB - Added subdivision names.
+    --  7/ 5/13 - RLB - Added a nasty hack so added aspect names are marked
+    --			as such in Show_Changes versions.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1904,6 +1906,8 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			    ARM_Output.Ordinary_Text (Output_Object, Data.Paragraph_Kind_Title(For_Type).Str(1..Data.Paragraph_Kind_Title(For_Type).Length));
 			    ARM_Output.End_Paragraph (Output_Object);
 			    Format_Object.Last_Paragraph_Subhead_Type := For_Type;
+--!!Debug:
+--Ada.Text_IO.Put_Line ("Write notes header");
 			else
 			    null; -- No subheader. We don't change the last
 			        -- subheader generated, either.
@@ -3059,6 +3063,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 	            Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Is_Formatting
 		        := False; -- Leave the format alone.
 		end if;
+--!!Debug:
+---Ada.Text_IO.Put_Line ("Next=" & Paragraph_Type'Image(Format_Object.Next_Paragraph_Subhead_Type));
+
 	    -- ISOOnly text:
 	    elsif Ada.Characters.Handling.To_Lower (Ada.Strings.Fixed.Trim (
 	    	Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right))
@@ -4906,6 +4913,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        Format_Object.Next_Enumerated_Num := Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Enum_Num;
 			        Format_State.Nesting_Stack_Ptr := Format_State.Nesting_Stack_Ptr - 1;
 --Ada.Text_IO.Put_Line (" &Unstack (End)");
+--!!Debug:
+--Ada.Text_IO.Put_Line ("(End) Next=" & Paragraph_Type'Image(Format_Object.Next_Paragraph_Subhead_Type));
 			    end if;
 
 			    Check_End_Paragraph; -- End any paragraph that we're in.
@@ -6700,6 +6709,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				      Level, Format_Object.Clause_Number)) then
 				    Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			        end if;
+--!!Debug:
+--Ada.Text_IO.Put_Line ("Start clause " & Clause_Number & " -- " & Title(1..Title_Length));
+
 			    end;
 			exception
 			    when ARM_Contents.Not_Found_Error =>
@@ -6918,6 +6930,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					-- In this case, we have no sane
 					-- way to show the old, so we hope that
 					-- isn't expected.
+--!!Debug:
+--Ada.Text_IO.Put_Line ("Start clause " & Clause_Number & " -- " & New_Title(1..New_Title_Length));
 			        elsif New_Disposition = ARM_Output.Deletion then
 			            raise Program_Error; -- A deletion inside of an insertion command!
 			        else -- Insertion.
@@ -6953,6 +6967,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					    Clause_Number => Clause_Number,
 					    Top_Level_Subdivision_Name => Format_Object.Top_Level_Subdivision_Name);
 				    end if;
+--!!Debug:
+--Ada.Text_IO.Put_Line ("Start clause " & Clause_Number & " -- " & New_Title(1..New_Title_Length));
 				end if;
 			    end;
 			exception
@@ -7107,6 +7123,8 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				          Level, Format_Object.Clause_Number)) then
 				        Ada.Text_IO.Put_Line ("** Unable to match title with section numbers, line " & ARM_Input.Line_String (Input_Object));
 			            end if;
+--!!Debug:
+--Ada.Text_IO.Put_Line ("Start clause " & Clause_Number & " -- " & New_Title(1..New_Title_Length));
 			        end;
 			    exception
 			        when ARM_Contents.Not_Found_Error =>
@@ -8312,7 +8330,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Change_Aspect_Description =>
 		    -- This command is of the form:
-		    -- @chgdocreq{Version=[<version>], Kind=(<kind>),
+		    -- @chgaspectdesc{Version=[<version>], Kind=(<kind>),
 		    --   Aspect=[<name>],Text=(<text>)}}
 		    -- where <version> is a single character, <Kind> is one
 		    -- of Revised, Added, or Deleted, <Name> is the aspect
@@ -8680,7 +8698,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Added_Aspect_Description_List =>
 		    -- This command is of the form:
-		    -- @AddedAspect{Version=[v]}
+		    -- @AddedAspectList{Version=[v]}
 		    declare
 			Version : ARM_Contents.Change_Version_Type;
 		    begin
@@ -9467,14 +9485,32 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		if not Format_Object.Impdef_Info.Add_to_DB then
 		    null; -- Don't add to the DB
 		elsif Format_Object.Impdef_Info.Command = Aspect then
-	            ARM_Database.Insert (DB,
-		        Sort_Key => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
-		        Hang_Item => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
-		        Text => Text_Buffer(1..Text_Buffer_Len) &
-		           See_String,
-		        Change_Kind => Format_Object.Impdef_Info.Change_Kind,
-		        Version => Format_Object.Impdef_Info.Version,
-			Initial_Version => Format_Object.Impdef_Info.Initial_Version);
+		    if Format_Object.Impdef_Info.Initial_Version >= '4' then
+		        -- ** Horrible hack: We treat the aspect as inserted
+			-- if the initial version is greater than 4 (this is
+			-- what we need in the RM and AARM). This
+			-- should depend on other parameters, and ideally
+			-- be determined inside of the DB_Report code.
+	                ARM_Database.Insert (DB,
+		            Sort_Key => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
+		            Hang_Item => "@Chg{Version=[" & Format_Object.Impdef_Info.Initial_Version &
+				"],New=[" & Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len) &
+				"],Old=[]}",
+		            Text => Text_Buffer(1..Text_Buffer_Len) &
+		               See_String,
+		            Change_Kind => Format_Object.Impdef_Info.Change_Kind,
+		            Version => Format_Object.Impdef_Info.Version,
+			    Initial_Version => Format_Object.Impdef_Info.Initial_Version);
+		    else -- Normal
+	                ARM_Database.Insert (DB,
+		            Sort_Key => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
+		            Hang_Item => Format_Object.Impdef_Info.Aspect_Name(1..Format_Object.Impdef_Info.Aspect_Name_Len),
+		            Text => Text_Buffer(1..Text_Buffer_Len) &
+		               See_String,
+		            Change_Kind => Format_Object.Impdef_Info.Change_Kind,
+		            Version => Format_Object.Impdef_Info.Version,
+			    Initial_Version => Format_Object.Impdef_Info.Initial_Version);
+		    end if;
 		else
 	            ARM_Database.Insert (DB,
 		        Sort_Key => Sort_Clause_String,
