@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.68 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
+@comment{ $Revision: 1.69 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:15 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -530,6 +530,7 @@ a @nt<package_body>]}.
 
 @end{itemize}
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
 @PDefn2{Term=[accessibility], Sec=(from shared passive library units)}
 @Defn{notwithstanding}
 Notwithstanding the definition of accessibility given in
@@ -537,7 +538,11 @@ Notwithstanding the definition of accessibility given in
 of a library unit P1 is not accessible from within the declarative
 region of a shared passive library unit P2,
 unless the shared passive library unit
-P2 depends semantically on P1.
+P2 depends semantically on P1.@Chg{Version=[4],New=[ Furthermore, for the
+purposes of accessibility checking, when an access type that is declared within
+a declared-pure package is used as part of a library-level declaration in a
+shared-passive package, it is as though the access type were declared in the
+shared-passive package.],Old=[]}
 @begin{Discussion}
   We considered a more complex rule, but dropped it. This is
   the simplest rule that recognizes that a shared passive
@@ -778,10 +783,20 @@ a primitive procedure with the Synchronization aspect specified unless the
 A value of a remote access-to-class-wide type shall be
 explicitly converted only to another remote access-to-class-wide type;
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0034-1]}
 A value of a remote access-to-class-wide type shall be dereferenced
 (or implicitly converted to an anonymous access type)
-only as part of a dispatching call where the value designates
+only as part of a dispatching call @Chg{Version=[4],New=[to a primitive
+operation of the designated type ],Old=[]}where the value designates
 a controlling operand of the call (see @RefSec{Remote Subprogram Calls});
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0034-1]}
+  @ChgAdded{Version=[4],Text=[Stream attributes of the designated type are not
+  primitive operations of the designated type, and thus remote calls to them are
+  prohibited by this rule. This is good, as the access parameter of a stream
+  attribute does not have external streaming, and thus cannot be a parameter of
+  a remote call.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0101-1]}
 @ChgAdded{Version=[3],Text=[A controlling access result value for a primitive
@@ -813,6 +828,20 @@ an @nt{attribute_definition_clause}.],Old=[]}
 @end{Itemize}
 
 @end{Legality}
+
+@begin{Erron}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0076-1]}
+  @ChgAdded{Version=[4],Text=[Execution is erroneous if some operation (other
+  than the initialization or finalization of the object) modifies the value of a
+  constant object declared in the visible part of a remote types package.]}
+
+  @begin{Discussion}
+    @ChgRef{Version=[4],Kind=[AddedNormal]}
+    @ChgAdded{Version=[4],Text=[This could be accomplished via a
+    self-referencing pointer or via squirrelling a writable pointer to a
+    controlled object.]}
+  @end{Discussion}
+@end{Erron}
 
 @begin{Notes}
 A remote types library unit
@@ -933,6 +962,22 @@ synchronized, protected, or task interface type.]}
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0034-1]}
+  @ChgAdded{Version=[4],Text=[@B<Correction:> Clarified that dispatching
+  remote stream attribute calls are prohibited. We don't document this as
+  an incompatibility, as the stream parameter cannot be marshalled for a
+  remote call (it doesn't have external streaming), so it's impossible that
+  any working program depends on this functionality.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0076-1]}
+  @ChgAdded{Version=[4],Text=[@B<Correction:> Explicitly stated that modifying
+  a visible constant in a remote types package is erroneous. We don't document
+  this as inconsistent as implementations certainly can still do whatever they
+  were previously doing (no change is required); moreover, this case (and many
+  more) were erroneous in Ada 2005 and before, so we're just restoring the
+  previous semantics.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Remote Call Interface Library Units}

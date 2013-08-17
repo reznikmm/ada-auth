@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -505,8 +505,8 @@ The syntax rules for @nt{defining_designator} and
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a
 @Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[4],New=[,
-a generic subprogram,],Old=[]} or entry, the
-following language-defined aspects may be specified with an
+a generic subprogram,],Old=[]} or @Chg{Version=[4],New=[an ],Old=[]}entry,
+the following language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Ramification}
@@ -778,6 +778,10 @@ then the respective precondition or postcondition expressions are considered
   @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
   @nt{case_expression};]}
 
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[a @nt{predicate} of a
+  @nt{quantified_expression};]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[the right operand of a short-circuit control
   form; or]}
@@ -791,16 +795,71 @@ then the respective precondition or postcondition expressions are considered
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object of a nonlimited type}, the following attribute is defined:]}
 @begin(description)
-@ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1],
-  Text=[@Chg{Version=[3],New=[For each X'Old in a postcondition expression that
-   is enabled, a constant is implicitly declared at the beginning of the subprogram
-   or entry. The constant is of the type of X and is initialized to the result
+@Comment{ Originally was  Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
+  We should use InitialVersion=[3] and Kind=[Revised] here, but the former
+  doesn't exist yet. It should.}
+@ChgAttribute{Version=[4],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1], ARef=[AI12-0032-1],
+  Text=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Each],Old=[For each]}
+   X'Old in a postcondition expression that
+   is enabled@Chg{Version=[4],New=[ denotes],Old=[,]} a constant
+   @Chg{Version=[4],New=[that ],Old=[]}is implicitly
+   declared at the beginning of the subprogram
+   @Chg{Version=[4],New=[body,],Old=[or]}
+   entry@Chg{Version=[4],New=[ body, or accept statement],Old=[]}.@Chg{Version=[4],New=[],Old=[
+   The constant is of the type of X and is initialized to the result
    of evaluating X (as an expression) at the point of the constant declaration.
    The value of X'Old in the postcondition expression is the value of this
    constant; the type of X'Old is the type of X. These implicit constant
    declarations occur in an
-   arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}],Old=[]}]}@Comment{End of Annex text here.}
+   arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}],Old=[]}]}@Comment{End of Annex text here.}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Type=[Leading],NoPrefix=[T],Text=[The implicitly declared
+  entity denoted by each occurrence of X'Old is declared as follows:]}
+
+  @begin{Itemize}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[If X is of an anonymous access
+    defined by an @nt{access_definition} @i<A> then]}
+@begin{ChildExample}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@i<X'Old> : @key[constant] @i<A> := X;]}
+@end{ChildExample}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[If X is of a specific type @i<T> then]}
+@begin{ChildExample}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@examcom<anonymous> : @key[constant] @i<T>'Class := @i<T>'Class(X);
+@i<X'Old> : @i<T> @key[renames] @i<T>(@examcom<anonymous>);]}
+@end{ChildExample}
+    @ChgAdded{Version=[4],NoPrefix=[T],Text=[where the name X'Old denotes
+      the object renaming.]}
+    @begin{Ramification}
+        @ChgRef{Version=[4],Kind=[AddedNormal]}
+        @ChgAdded{Version=[4],Text=[This means that the underlying tag associated
+          with X'Old is that of X and not that of the nominal type of X.]}
+    @end{Ramification}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[Otherwise]}
+@begin{ChildExample}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@i<X'Old> : @key[constant] @i<S> := X;]}
+@end{ChildExample}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],NoPrefix=[T],Text=[where @i<S> is the nominal subtype
+      of X. This includes the case where the type of @i<S> is an anonymous array
+      type or a universal type.]}
+  @end{Itemize}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],NoPrefix=[T],Text=[The nominal subtype of X'Old is as
+  implied by the above definitions. The expected type of the prefix of an Old
+  attribute is that of the attribute. Similarly, if an Old attribute shall
+  resolve to be of some type, then the prefix of the attribute shall resolve to
+  be of that type.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Reference to this attribute is only
@@ -836,8 +895,11 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   one wants (but it is not always legal, see below).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0032-1]}
   @ChgAdded{Version=[3],Text=[If X has controlled parts, adjustment and
-  finalization are implied by the implicit constant declaration.]}
+  finalization are implied by the implicit constant
+  declaration.@Chg{Version=[4],New=[ Similarly, the implicit constant
+  declaration defines the accessibility level of X'Old.],Old=[]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If postconditions are disabled, we want the
@@ -898,6 +960,49 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   however, nor does it work for array indexing if the index can change during
   the execution of the subprogram.)]}
 @end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[An accept statement for a task
+  entry with enabled postconditions such as]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@key[accept] E @key[do]
+   @examcom<statements>
+@key[exception]
+   @examcom<handlers>
+@key[end];]}
+@end{Example}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[behaves (at runtime) as follows:]}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@begin{Example}
+@ChgAdded{Version=[4],Text=[@key[accept] E @key[do]
+   @key[declare]
+      @examcom<declarations, if any, of 'Old constants>
+   @key[begin]
+      @key[begin]
+         @examcom<statements>
+      @key[exception]
+         @examcom<handlers>
+      @key[end];
+      @examcom<postcondition checks>
+   @key[end];
+@key[end];]}
+@end{Example}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[Preconditions are checked by the caller before the
+  rendezvous begins. Postcondition expressions might, of course, reference 'Old
+  constants.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[In the case of a protected operation with
+  enabled postconditions, 'Old constant declarations (if any) are
+  elaborated after the start of the protected action. Postcondition checks
+  (which might reference these constants) are performed before the end of
+  the protected action as described below.]}
+@end{Ramification}
 @end(description)
 @EndPrefixType{}
 
@@ -1012,6 +1117,26 @@ an arbitrary order.@Defn{postcondition check}@Defn2{Term=[check, language-define
   inside the invoked body.]}
 @end{Ramification}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+@ChgAdded{Version=[4],Text=[For a call to a task entry, the postcondition check
+is performed before the end of the rendezvous; for a call to a protected
+operation, the postcondition check is performed before the end of the protected
+action of the call. The postcondition check for any call is performed before the
+finalization of any implicitly-declared constants associated (as described
+above) with Old @nt{attribute_reference}s but after the finalization of any
+other entities whose accessibility level is that of the execution of the
+callable construct.]}
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[If a postcondition references the implicitly-declared constant associated
+   with an Old attribute, the postcondition must be evaluated before the
+   constant is finalized. One way to think of this is to imagine
+   declaring a controlled object between any implicit "'Old"
+   constant declarations and any explicit declarations, then
+   performing postcondition checks during the finalization of
+   this object.]}
+@end{Reason}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[If a precondition or postcondition check fails, the
 exception is raised at the point of the call@Redundant[; the exception cannot
@@ -1115,9 +1240,20 @@ the value.]}
   Pre and Post aspects are new.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  The Old attribute is defined more carefully. This changes the nominal subtype
+  and place of declaration of the attribute compared to the published Ada 2012
+  Standard. In extreme cases, this could change the runtime behavior of the
+  attribute (for instance, the tag might be different). The changes are most
+  likely going to prevent bugs by being more intuitive, but it is possible that
+  a program that previously worked might fail.]}
+@end{Inconsistent2012}
+
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
   Precondition and postcondition aspects cannot be specified on instances of
   generic subprograms (they should be specified on the generic subprogram
   instead). This was (unintentionally) allowed by the Ada 2012 standard.
@@ -1390,9 +1526,19 @@ do not overlap (unless, of course, it can prove otherwise).
 @end{Bounded}
 
 @begin{Notes}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0056-1]}
+@ChgAdded{Version=[4],Text=[The mode of a formal parameter describes the
+direction of information transfer to or from the @nt{subprogram_body} (see
+@RefSecNum{Subprogram Declarations}).]}
+
 A formal parameter of mode @key(in) is a constant
 view (see @RefSecNum{Objects and Named Numbers});
 it cannot be updated within the @nt{subprogram_body}.
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0056-1]}
+@ChgAdded{Version=[4],Text=[A formal parameter of mode @key(out)
+might be uninitialized at the start of the @nt{subprogram_body} (see
+@RefSecNum{Parameter Associations}).]}
 @end{Notes}
 
 @begin{Extend83}
@@ -1908,11 +2054,17 @@ to a @nt{direct_name}
 (or @nt{character_literal})
 or to a different expanded name in the other; and
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0050-1]}
+@ChgAdded{Version=[4],Text=[corresponding @nt{defining_identifier}s occurring
+within the two expressions are the same; and]}
+
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0050-1]}
 each @nt{direct_name}, @nt{character_literal}, and @nt{selector_name}
 that is not part of the @nt{prefix} of an expanded name in one
 denotes the same declaration as the corresponding
 @nt{direct_name}, @nt{character_literal},
-or @nt{selector_name} in the other; and
+or @nt{selector_name} in the other@Chg{Version=[4],New=[, or they denote
+corresponding declarations occurring within the two expressions],Old=[]}; and
 @begin{Ramification}
 Note that it doesn't say @lquotes@;respectively@rquotes@;
 because a @nt{direct_name} can correspond to a @nt{selector_name},
@@ -1950,6 +2102,15 @@ However, @lquotes@;F@rquotes@; and @lquotes@;F_View@rquotes@; are not fully conf
 If they were, it would be bad news, since the two denoted views have
 different @nt{default_expression}s.
 @end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0050-1]}
+  @ChgAdded{Version=[4],Text=[We talk about @nt{defining_identifier}s and
+  "corresponding declarations" because of the possibility of
+  @nt{iterator_specification}s occurring within the expressions; each
+  @nt{iterator_specification} is a separate declaration, which we need to
+  allow, but we do want to require that the @nt{defining_identifier}s are
+  the same.]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0018],ARef=[AI95-00175-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0092-1]}
@@ -2100,6 +2261,14 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   as part of mode conformance (since it affects the parameter passing
   mechanism).]}
 @end{Diffword2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0050-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> We now define how two
+  expressions containing quantified expressions can fully conform. This
+  isn't incompatible, as the original Ada 2012 never allowed such expressions
+  to conform (the declarations in each formally being different).]}
+@end{Diffword2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -3423,8 +3592,14 @@ shall be an @nt{expression}.]}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined
 by an @nt{access_definition}, the @nt{return_@!subtype_@!indication} shall be an
 @nt{access_definition}. The subtype defined by the @nt{access_definition} shall
-statically match the result subtype of the function. The accessibility level of
-this anonymous access subtype is that of the result subtype.]}
+statically match the result subtype of the function. @Redundant[The accessibility
+level of this anonymous access subtype is that of the result subtype.]]}
+@begin{TheProof}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0070-1]}
+  @ChgAdded{Version=[4],Text=[The accessibility of such anonymous access
+  types is defined in the Heart of Darkness (aka
+  @RefSecnum{Operations of Access Types}).]}
+@end{TheProof}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0032-1]}
 @ChgAdded{Version=[3],Text=[If the result subtype of the function is class-wide,

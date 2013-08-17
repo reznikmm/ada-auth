@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.95 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.96 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2013/07/18 04:58:15 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -250,6 +250,68 @@ implementers are unlikely to increase their support costs by fielding
 implementations that are unstable if given buggy hash functions, et al.]}
 @end{ImplNote}
 
+@begin{StaticSem}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[Certain subprograms declared within instances of
+some of the generic packages presented in this clause are said to @i<perform
+indefinite insertion>. These subprograms are those corresponding (in the sense
+of the copying described in subclause @RefSecNum{Generic Instantiation}) to
+subprograms that have formal parameters of a generic formal indefinite type and
+that are identified as performing indefinite insertion in the subclause defining
+the generic package.@Defn{perform indefinite insertion}]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[If a subprogram performs indefinite
+insertion, then certain run-time checks are performed as part of a call to the
+subprogram; if any of these checks fail, then the resulting exception is
+propagated to the caller and the container is not modified by the call. These
+checks are performed for each parameter corresponding (in the sense of the
+copying described in @RefSecNum{Generic Instantiation}) to a parameter in the
+corresponding generic whose type is a generic formal indefinite type. The checks
+performed for a given parameter are those checks explicitly specified in
+subclause @RefSecNum{Allocators} that would be performed as part of the
+evaluation of an initialized allocator whose access type is declared immediately
+within the instance, where:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[the value of the @nt{qualified_expression} is
+  that of the parameter; and]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[the designated subtype of the access type is the
+  subtype of the parameter; and]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[finalization of the collection of the access type
+  has started if and only if the finalization of the instance has started.]}
+@end{Itemize}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[The phrase "explicitly specified" means those
+  checks for which subclause @RefSecNum{Allocators} includes the phrase "<some
+  exception> is raised if ...". It does not refer, for example, to any checks
+  performed as part of any subtype conversion. In particular, this wording
+  includes the checks described in subclause @RefSecNum{Allocators} to be
+  performed in the case of a class-wide designated type, and of a designated
+  subtype that has access discriminant parts. These checks are needed to prevent
+  containers from outliving their contained (Element_Type or Key_Type) values.]}
+@end{Discussion}
+@begin{ImplNote}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[These rules have a dual purpose. Mainly, we are
+  @i{requiring} checks needed to prevent dangling references. As a side effect, we
+  are also @i{allowing} checks needed to permit an implementation of a container
+  generic to make use of access types in a straightforward way. As an example of
+  the second purpose, suppose that an implementation does declare such an access
+  type and suppose further that the access type's collection's finalization has
+  started. These rules to allow Program_Error to be propagated in this case (as
+  specified in @RefSecNum{Allocators}); this is necessary to allow an all-Ada
+  implementation of these packages.]}
+@end{ImplNote}
+@end{StaticSem}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -263,6 +325,14 @@ implementations that are unstable if given buggy hash functions, et al.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition of
   strict weak ordering.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0035-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Added a definition of
+  @ldquote@;performs indefinite insertion@rdquote. This is used in
+  other subclauses and any resulting inconsistencies are documented
+  there.]}
+@end{DiffWord2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Package Containers]}

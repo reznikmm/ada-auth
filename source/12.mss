@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2293,7 +2293,13 @@ by those of the primitive subprograms of the specified
 ancestor type@Chg{Version=[2],New=[ (or progenitor type, for subprograms
 inherited from an interface type)],Old=[]}.
 @end{Ramification}
-
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0030-1]}
+  @ChgAdded{Version=[4],Text=[The availability of stream attributes is not
+  formally a characteristic of a type, but it is still determined by the
+  ancestor type for a formal derived type in the same way as the characteristics
+  are. Availability is rechecked in the instance specification.]}
+@end{Honest}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
 @Leading@;For @ChgPrefixType{Version=[1],Kind=[Revised],Text=[a
 @Chg{New=[@nt{prefix}],Old=[prefix]} S that denotes a formal indefinite subtype]},

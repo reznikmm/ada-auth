@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.115 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
+@comment{ $Revision: 1.116 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:15 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -705,6 +705,14 @@ deferred while the affected task performs a protected action.]}
   defined in a package that is also referenced in a @nt{use_clause}, the entity
   @i<E> may no longer be use-visible, resulting in errors. This should be rare
   and is easily fixed if it does occur.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0166-1],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[Package Dispatching was a Pure package, but
+  now is Preelaborated with the addition of Yield. This is incompatible as
+  Dispatching can no longer be depended upon from a Pure package. This
+  should happen rarely in practice as the only contents was the exception
+  Dispatching_Policy_Error and none of the child packages that could raise
+  that exception are pure.]}
 @end{Incompatible2005}
 
 
@@ -4675,6 +4683,7 @@ pragmas that is defined for each run-time profile.]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01],ARef=[AI95-00394-01],ARef=[AI05-0171-1],ARef=[AI05-0246-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0073-1]}
 @ChgAdded{Version=[3],Text=[
 @key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
 @key{pragma} Locking_Policy (Ceiling_Locking);
@@ -4701,7 +4710,8 @@ pragmas that is defined for each run-time profile.]}]}
               No_Dependence => Ada.Asynchronous_Task_Control,
               No_Dependence => Ada.Calendar,
               No_Dependence => Ada.Execution_Time.Group_Budgets,
-              No_Dependence => Ada.Execution_Time.Timers,
+              No_Dependence => Ada.Execution_Time.Timers@Chg{Version=[4],New=[,
+              No_Dependence => Ada.Synchronous_Barriers,],Old=[]}
               No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
               No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
 @end{Example}
@@ -4783,6 +4793,17 @@ restriction of Max_Task_Entries => 0.]}
   @ChgAdded{Version=[3],Text=[How Ravenscar behaves on a multiprocessor
   system is now defined.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0073-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  The Ravenscar profile no longer allows the use of package Synchronous_Barriers,
+  as this package violates the fundamental Ravenscar requirement that each
+  waiting point can only block (and release) a single task. This is incompatible
+  with the published Ada 2012 standard, but it is unlikely that any existing
+  Ravenscar runtime ever usefully supported barriers.]}
+@end{Incompatible2012}
+
 
 @Comment{Moved the following to the previous subclause...
 @RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
@@ -6205,13 +6226,24 @@ language-defined library package exists:]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{System_Dispatching_Domain} : @key[constant] Dispatching_Domain;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create} (First, Last : CPU) @key[return] Dispatching_Domain;]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Create} (First@Chg{Version=[4],New=[],Old=[, Last]} : CPU@Chg{Version=[4],New=[; Last : CPU_Range],Old=[]}) @key[return] Dispatching_Domain;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_First_CPU} (Domain : Dispatching_Domain) @key[return] CPU;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Last_CPU}  (Domain : Dispatching_Domain) @key[return] CPU;]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Last_CPU}  (Domain : Dispatching_Domain) @key[return] @Chg{Version=[4],New=[CPU_Range],Old=[CPU]};]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[4],Text=[   @key[type] @AdaTypeDefn{CPU_Set} @key[is array](CPU @key[range] <>) @key[of] Boolean;]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[4],Text=[   @key[function] @AdaSubDefn{Create} (Set : CPU_Set) @key[return] Dispatching_Domain;]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[4],Text=[   @key[function] @AdaSubDefn{Get_CPU_Set} (Domain : Dispatching_Domain) @key[return] CPU_Set;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Get_Dispatching_Domain}
@@ -6286,10 +6318,16 @@ for a task interface.]}
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[3],Text=[The expression specified for the Dispatching_Domain
-aspect of a task is evaluated for each task object (see
-@RefSecNum{Task Units and Task Objects}). The Dispatching_Domain value is then
-associated with the task object whose task declaration specifies the aspect.]}
+aspect of a task @Chg{Version=[4],New=[type ],Old=[]}is evaluated
+@Chg{Version=[4],New=[each time an object of the task type is created],Old=[for
+each task object]} (see @RefSecNum{Task Units and Task Objects}).
+@Chg{Version=[4],New=[If the identified Dispatching_Domain is empty, then
+Dispatching_Domain_Error is raised; otherwise the newly created task is assigned
+to the domain identified by the value of the expression],Old=[The
+Dispatching_Domain value is then associated with the task object whose task
+declaration specifies the aspect]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[If a task is not explicitly assigned to any domain,
@@ -6304,37 +6342,52 @@ defined to have failed, and it becomes a completed task (see
 @RefSecNum{Task Execution - Task Activation}).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[The function Create creates and returns a
-Dispatching_Domain containing all the processors in the range First .. Last.
-These processors are removed from System_Dispatching_Domain. A call of Create
-will raise Dispatching_Domain_Error if any designated processor is not currently
-in System_Dispatching_Domain, or if the system cannot support a distinct domain
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[3],Text=[The function Create @Chg{Version=[4],New=[with First
+and Last parameters ],Old=[]}creates and returns a Dispatching_Domain containing
+all the processors in the range First .. Last. @Chg{Version=[4],New=[The
+function Create with a Set parameter creates and returns a Dispatching_Domain
+containing the processors for which Set(I) is True.],Old=[]} These processors
+are removed from System_Dispatching_Domain. A call of Create will raise
+Dispatching_Domain_Error if any designated processor is not currently in
+System_Dispatching_Domain, or if the system cannot support a distinct domain
 over the processors identified, or if a processor has a task assigned to it, or
 if the allocation would leave System_Dispatching_Domain empty. A call of Create
 will raise Dispatching_Domain_Error if the calling task is not the environment
 task, or if Create is called after the call to the main subprogram.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[3],Text=[The function Get_First_CPU returns the first CPU in
-Domain; Get_Last_CPU returns the last one.]}
+Domain@Chg{Version=[4],New=[, or CPU'First if Domain is empty],Old=[]};
+Get_Last_CPU returns the last @Chg{Version=[4],New=[CPU in Domain, or
+CPU_Range'First if Domain is empty. The function Get_CPU_Set(D) returns an array
+whose low bound is Get_First_CPU(D), whose high bound is Get_Last_CPU(D), with
+True values in the Set corresponding to the CPUs that are in the given
+Domain],Old=[one]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[The function Get_Dispatching_Domain returns the
 Dispatching_Domain on which the task is assigned.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[3],Text=[A call of the procedure Assign_Task assigns task T
-to the CPU within Dispatching_Domain Domain. Task T can now execute only on CPU
-unless CPU designates Not_A_Specific_CPU, in which case it can execute on any
-processor within Domain. The exception Dispatching_Domain_Error is propagated if
-T is already assigned to a Dispatching_Domain other than
-System_Dispatching_Domain, or if CPU is not one of the processors of Domain (and
+to the CPU within Dispatching_Domain Domain. Task T can now execute only on
+CPU@Chg{Version=[4],New=[,],Old=[]} unless CPU designates
+Not_A_Specific_CPU@Chg{Version=[4],New=[],Old=[,]} in which case it can
+execute on any processor within Domain. The exception Dispatching_Domain_Error
+is propagated if@Chg{Version=[4],New=[ Domain is empty,],Old=[]}
+T is already assigned to
+a @Chg{Version=[4],New=[dispatching domain],Old=[Dispatching_Domain]} other
+than System_Dispatching_Domain, or if CPU is not one of the processors of Domain (and
 is not Not_A_Specific_CPU). A call of Assign_Task is a task dispatching point
 for task T unless T is inside of a protected action, in which case the effect on
 task T is delayed until its next task dispatching point. If T is the
 Current_Task the effect is immediate if T is not inside a protected action,
-otherwise the effect is as soon as practical. Assigning a task to
-System_Dispatching_Domain that is already assigned to that domain has no
+otherwise the effect is as soon as practical. Assigning a task
+@Chg{Version=[4],New=[already assigned ],Old=[]}to System_Dispatching_Domain
+@Chg{Version=[4],New=[],Old=[that is already assigned ]}to that domain has no
 effect.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
@@ -6378,7 +6431,7 @@ task has been specified.]}
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
   @ChgAdded{Version=[4],Text=[This ensures that priorities and deadlines are
-  respected within the system dispatching domain. There is no such guarentee
+  respected within the system dispatching domain. There is no such guarantee
   between different domains.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -6456,6 +6509,36 @@ attempt is made to exceed this number.]}
   The package System.Multiprocessors.Dispatching_Domains and the aspect
   Dispatching_Domains are new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0033-1]}
+@ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
+We now explicitly allow empty dispatching domains, as it would
+be difficult to avoid declaring them when a system is configured
+at runtime. Therefore, assigning a task to an empty domain now
+raises Dispatching_Domain_Error; creating such a domain should
+not raise Dispatching_Domain_Error. If an implementation does
+something different in these cases, and a program depends on
+that difference, the program could malfunction. This seems
+very unlikely (if no exception is ever raised, the task assigned
+to the empty could never run; if the exception is raised earlier,
+the program can't do anything useful).]}
+@end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0033-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  The subtypes of the parameter or result of several routines were changed
+  to support empty domains. These changes will cause rules requiring
+  subtype conformance to fail on these routines (such as 'Access). We
+  believe such uses are unlikely. In addition, type CPU_Set and function
+  Get_CPU_Set, along with an overloaded Create are newly added to this package.
+  If Multiprocessors.Dispatching_Domains is referenced in a @nt{use_clause},
+  and an entity @i<E> with the same @nt{defining_identifier} as a new entity
+  in this package is defined in a package that is also referenced in a
+  @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting
+  in errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0048-1]}

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2013/04/12 02:29:38 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 
@@ -813,8 +813,9 @@ Each task (other than an environment task @em see @RefSecNum(Program Execution))
 @i(depends) on one or more masters
 (see @RefSecNum(Completion and Finalization)), as follows:
 @begin(itemize)
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0070-1]}
 If the task is created by the evaluation of an @nt<allocator>
-for a given access type,
+for a given @Chg{Version=[4],New=[named ],Old=[]}access type,
 it depends on each master that includes the
 elaboration of the declaration of the ultimate ancestor of the given
 access type.
@@ -971,9 +972,17 @@ selecting the @nt<terminate_alternative>, but before termination.
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgAdded{Version=[2],Text=[Added missing wording that explained the
-  master of tasks that are neither object declarations nor allocators,
+  master of tasks that are neither @nt{object_declaration}s nor @nt{allocator}s,
   such as function returns.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
+  @ChgAdded{Version=[4],Text=[@B<Correction:> Ensured that the master of
+  tasks that are not @nt{allocator}s of named access types is correctly
+  determined. (Ignoring the accessibility rules of
+  @RefSecNum{Operations of Access Types} could not be intended.)]}
+@end{DiffWord2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
@@ -1615,11 +1624,11 @@ protected units do not exist in Ada 83.
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0291-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  When an inherited subprogram is implemented by a protected function, the
-  first parameter has to be an @key[in] parameter, but not
-  an access-to-variable type. Ada 2005 allowed access-to-variable parameters
-  in this case; the parameter will need to be changed to access-to-constant
-  with the addition of the @key[constant] keyword.]}
+  @b<Correction:> When an inherited subprogram is implemented by a protected
+  function, the first parameter has to be an @key[in] parameter, but not
+  an access-to-variable type. Original Ada 2005 allowed access-to-variable
+  parameters in this case; the parameter will need to be changed to
+  access-to-constant with the addition of the @key[constant] keyword.]}
 @end{Incompatible2005}
 
 @begin{Extend2005}
@@ -5461,12 +5470,14 @@ independently if the hardware efficiently supports it.
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0009-1],ARef=[AI05-0201-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
 @ChgAdded{Version=[3],Text=[An atomic object (including atomic
 components) is always independently addressable from any other nonoverlapping
-object. Any @nt{aspect_specification} or representation item which would prevent
-this from being true should be rejected, notwithstanding what this Standard says
-elsewhere. Note, however, that the components of an atomic object are not
-necessarily atomic.]}
+object. @Chg{Version=[4],New=[@nt{Aspect_specification}s and representation
+items cannot change that fact],Old=[Any @nt{aspect_specification} or
+representation item which would prevent this from being true should be rejected,
+notwithstanding what this Standard says elsewhere]}. Note, however, that the
+components of an atomic object are not necessarily atomic.]}
 @end{Ramification}
 @end{StaticSem}
 

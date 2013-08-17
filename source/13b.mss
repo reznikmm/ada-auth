@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1315,23 +1315,20 @@ and the like.
 @end{Intro}
 
 @begin{StaticSem}
-@Leading@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-1]}
-For @ChgPrefixType{Version=[4],Kind=[Revised],Text=[a @nt<prefix> X that
-denotes a scalar object
-@Redundant[(after any implicit dereference)]@Chg{Version=[4],New=[ of
-nominal subtype @I<S>],Old=[]}]}, the following attribute is defined:
+@Leading@;For @PrefixType{a @nt<prefix> X that
+denotes a scalar object @Redundant[(after any implicit dereference)]},
+the following attribute is defined:
 @begin(description)
 @Comment{We ought to have a separate change for version [3] here, but
 we don't have that capability.}
-@ChgAttribute{Version=[4],Kind=[Revised],ChginAnnex=[T],
+@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Valid>,
-  ARef=[AI05-0153-3], ARef=[AI12-0054-1],
+  ARef=[AI05-0153-3],
   Text=<Yields True if and only if
 the object denoted by X is normal@Chg{Version=[3],New=[,],Old=[ and]} has a
-valid representation@Chg{Version=[3],New=[, and the @Chg{Version=[4],New=[membership
-test "X @key[in] @i<S>"@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}],
-Old=[predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
-of the nominal subtype of X]} evaluates to True],Old=[]}.
+valid representation@Chg{Version=[3],New=[, and the
+predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
+of the nominal subtype of X evaluates to True],Old=[]}.
 The value of this attribute is of the predefined type Boolean.>}
 @begin{Ramification}
   Having checked that X'Valid is True, it is safe to read the
@@ -1425,18 +1422,6 @@ X'Valid is new in Ada 95.
   of the predicate aspects (see @RefSecNum{Subtype Predicates}), if any, of
   the subtype of the object.]}
 @end{DiffWord2005}
-
-@begin{DiffWord2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> The validity check is now
-  partially described in terms of an equivalent membership test. This
-  automatically includes the check of the predicate aspects (see
-  @RefSecNum{Subtype Predicates}) added by AI05-0153-3. This should not make
-  any difference to the semantics of the check, other than that the special
-  semantics of @nt{raise_expression}s in predicate checks in memebership tests
-  also applies within the Valid attribute.]}
-@end{DiffWord2012}
-
 
 
 @LabeledClause{Unchecked Access Value Creation}
@@ -4474,7 +4459,8 @@ an elementary type @i(T)}, the following representation attribute is defined:]}
 @begin{Description}
 
 @Comment{Originally Version=[2],Kind=[Added], but we don't have a way to do both;
-  also, Kind should be RevisedAdded, but that changes the attribute name to not inserted.}
+  also, Kind should be RevisedAdded, but that changes the attribute name to not inserted.
+  Should have InitialVersion=[2] as a possible parameter.}
 @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Stream_Size>, ARef=[AI95-00270-01], ARef=[AI05-0194-1],
   Text=[@Chg{Version=[2],New=[Denotes the number of bits
@@ -5224,11 +5210,15 @@ declared.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0030-1]}
 @ChgAdded{Version=[2],Text=[An @nt{attribute_reference} for one of the
 stream-oriented attributes is illegal unless the attribute is available at
 the place of the @nt{attribute_reference}. Furthermore, an
 @nt{attribute_reference} for @i<T>'Input is illegal if @i<T> is an abstract
-type.]}
+type.@Chg{Version=[4],New=[@PDefn{generic contract issue} In addition to the
+places where @LegalityTitle normally apply (see
+@RefSecNum{Generic Instantiation}), these rules also apply in the private
+part of an instance of a generic unit.],Old=[]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5245,6 +5235,35 @@ type.]}
   it. We don't have to discuss whether the attribute is specified, as it cannot
   be: any function returning the type would have to be abstract, and we do not
   allow specifying an attribute with an abstract subprogram.]}
+@end{Discussion}
+
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal],Aref=[AI12-0030-1]}
+  @ChgAdded{Version=[4],Text=[@ldquote@;These rules apply@rdquote refers to
+  just this paragraph and not to the rest of the rules in this section.
+  This rule probably should have been a @LegalityName, but the word
+  @ldquote@;illegal@rdquote should key the reader that this is a @LegalityName,
+  no matter under what text heading it occurs.]}
+@end{Honest}
+
+@ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0030-1]}
+@ChgAdded{Version=[4],Text=[For an untagged nonderived type having a task,
+protected, or explicitly limited record part, the default implementation of each
+of the Read, Write, Input, and Output attributes raises Program_Error and
+performs no other action.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],Aref=[AI12-0030-1]}
+  @ChgAdded{Version=[4],Text=[It might seem that there is no need to specify the
+  behavior of the default implementation of a streaming attribute of, for
+  example, a task type because there is no way that it can be invoked. It is
+  possible, however, to construct an example where such a stream attribute can
+  be invoked. This involves using a formal untagged limited derived type for
+  which some streaming attribute is available (because it was explicitly
+  specified for the ancestor type) and a corresponding actual type for which the
+  attribute is unspecified (because the derivation occurred before the aspect
+  was specified for the ancestor type and the specification was therefore not
+  inherited).]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00195-01]}
@@ -5617,6 +5636,15 @@ class-wide types descended from S.
   has no effect on and is not effected by user-defined stream attributes.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0030-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Defined the runtime
+  effect of stream attributes for untagged limited types, as there
+  is a weird corner case where they can be called. We don't specify this
+  as an inconsistency, as it doesn't make semantic sense to stream a task
+  and nothing useful could have been done with that, so it should not
+  exist in any programs.]}
+@end{DiffWord2012}
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}

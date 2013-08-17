@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2013/07/18 04:58:15 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1034,7 +1034,7 @@ Device_5_Driver : Device_Interface(5);
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}
-  Functions Get_CPU is added to Interrupts. If Interrupts is referenced in
+  Function Get_CPU is added to Interrupts. If Interrupts is referenced in
   a @nt{use_clause}, and an entity @i<E> with a @nt{defining_identifier} of
   Get_CPU is defined in a package that is also referenced in a @nt{use_clause},
   the entity @i<E> may no longer be use-visible, resulting in errors. This
@@ -1174,12 +1174,40 @@ code is executed at run time for the elaboration of entities.]}]}
 @end{DiffWord95}
 
 
-@LabeledClause{Pragma Discard_Names}
+@LabeledRevisedClause{Version=[4],New=[Aspect Discard_Names],
+Old=[Pragma Discard_Names]}
 
 @begin{Intro}
-@Redundant[A @nt{pragma} Discard_Names may be used to request a
-reduction in storage used for the names of certain entities.]
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0072-1]}
+@Redundant[@Chg{Version=[4],New=[Specifying the aspect],Old=[A @nt{pragma}]}
+Discard_Names @Chg{Version=[4],New=[can],Old=[may]} be used to request a
+reduction in storage used for the names of
+@Chg{Version=[4],New=[],Old=[certain ]}entities@Chg{Version=[4],New=[ with
+runtime name text],Old=[]}.]
 @end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0072-1]}
+@ChgAdded{Version=[4],Text=[An entity with @i{runtime name text} is a
+nonderived enumeration first subtype, a tagged first subtype, or an
+exception.@Defn{entity with runtime name text}@Defn2{Term=[runtime name text],Sec=[entity with]}]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0072-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[For an entity with runtime name
+text, the following language-defined representation aspect may be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Discard_Names@\The type of aspect Discard_Names
+is Boolean. If directly specified, the @nt{aspect_definition} shall be
+a static expression. If not specified (including by inheritance), the
+aspect is False.@AspectDefn{Discard_Names}]}
+
+  @ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Discard_Names],
+    Text=[@ChgAdded{Version=[4],Text=[Requests a reduction in storage for names associated
+          with an entity.]}]}
+@end{Description}
+@end{StaticSem}
 
 @begin{Syntax}
 @begin{SyntaxText}
@@ -1198,15 +1226,36 @@ or as a configuration pragma.
 @end{Syntax}
 
 @begin{Legality}
-The @nt{local_name} (if present) shall denote a nonderived
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0072-1]}
+The @nt{local_name} (if present) shall denote
+@Chg{Version=[4],New=[an entity with runtime name text],Old=[a nonderived
 enumeration @Redundant[first] subtype,
-a tagged @Redundant[first] subtype, or an exception.
-The pragma applies to the type or exception.
-Without a @nt{local_name}, the pragma applies to all such entities
-declared after the pragma, within the same declarative region.
+a tagged @Redundant[first] subtype, or an exception]}.
+The pragma @Chg{Version=[4],New=[specifies that the aspect Discard_Names
+for],Old=[applies to]} the type or
+exception@Chg{Version=[4],New=[ has the value True],Old=[]}.
+Without a @nt{local_name}, the pragma @Chg{Version=[4],New=[specifies that],
+Old=[applies to]} all
+@Chg{Version=[4],New=[],Old=[such ]}entities@Chg{Version=[4],New=[ with
+runtime name text],Old=[]}
+declared after the pragma, within the same declarative
+region@Chg{Version=[4],New=[ have the value True for aspect
+Discard_Names],Old=[]}.
 Alternatively, the pragma can be used as a configuration pragma.
-If the pragma applies to a type,
-then it applies also to all descendants of the type.
+@Chg{Version=[4],New=[If the configuration pragma Discard_Names applies to a
+compilation unit, all entities with runtime name text declared in the
+compilation unit have the value True for the aspect Discard_Names.],Old=[If the
+pragma applies to a type, then it applies also to all descendants of the type]}.
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0072-1]}
+  @ChgAdded{Version=[4],Text=[If the aspect is specified for a type, then
+  it is inherited by all descendants of the type. The aspect cannot be
+  specified as False on a derived type (because specifying the aspect is
+  not allowed on derived enumeration types, and by rule applying to all
+  aspects for other types (see @RefSecNum{Aspect Specifications})).]}
+@end{Ramification}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1217,15 +1266,18 @@ a @nt{pragma} Discard_Names is a representation pragma.
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[3],Text=[Representation pragmas automatically
-  specify aspects of the same name,
+  @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0072-1]}@ChgNote{Explicit now.}
+  @ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[Representation
+  pragmas automatically specify aspects of the same name,
   so Discard_Names can be used as an @nt{aspect_mark} in an
   @nt{aspect_specification} instead of using the pragma on individual
-  entities.]}
+  entities.],Old=[]}]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00400-01]}
-If the pragma applies to an enumeration type,
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0072-1]}
+If the @Chg{Version=[4],New=[aspect Discard_Names is True
+for],Old=[pragma applies to]} an enumeration type,
 then the semantics of the @Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
 and @Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} attributes
 are implementation defined for that type@Redundant[; the
@@ -1235,48 +1287,62 @@ terms of @Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
 and @Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]}].
 In addition, the semantics of Text_IO.Enumeration_IO are implementation
 defined.
-If the pragma applies to a tagged type,
+If the @Chg{Version=[4],New=[aspect Discard_Names is True
+for],Old=[pragma applies to]} a tagged type,
 then the semantics of the Tags.@!@Chg{Version=[2],New=[Wide_Wide_@!Expanded_@!Name],
 Old=[Expanded_@!Name]} function
 are implementation defined for that type@Chg{Version=[2],New=[@Redundant[; the
 semantics of Tags.@!Expanded_@!Name and Tags.@!Wide_@!Expanded_@!Name are still
 defined in terms of Tags.@!Wide_Wide_@!Expanded_@!Name]], Old=[]}.
-If the pragma applies to an exception,
+If the @Chg{Version=[4],New=[aspect Discard_Names is True
+for],Old=[pragma applies to]} an exception,
 then the semantics of the Exceptions.@!@Chg{Version=[2],New=[Wide_Wide_@!Exception_@!Name],
 Old=[Exception_@!Name]} function
 are implementation defined for that exception@Chg{Version=[2],New=[@Redundant[; the
 semantics of Exceptions.@!Exception_@!Name and Exceptions.@!Wide_@!Exception_@!Name
 are still defined in terms of Exceptions.@!Wide_Wide_@!Exception_@!Name]], Old=[]}.
 
-@ImplDef{The semantics of pragma Discard_Names.}
+@ChgImplDef{Version=[4],Kind=[Revised],InitialVersion=[0],
+Text=[The semantics of @Chg{Version=[4],New=[an entity for which aspect],Old=[pragma]}
+Discard_Names@Chg{Version=[4],New=[ is True],Old=[]}.]}
 @begin{Ramification}
   The Width attribute is still defined in terms of Image.
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0072-1]}
   The semantics of S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]}
   and S'@Chg{Version=[2],New=[Wide_Wide_Value],Old=[Wide_Value]} are
-  implementation defined for any subtype of an enumeration type to which
-  the pragma applies. (The pragma actually names the first subtype,
-  of course.)
+  implementation defined for any subtype of an enumeration type
+  @Chg{Version=[4],New=[for],Old=[to]} which
+  the @Chg{Version=[4],New=[aspect is True],Old=[pragma applies]}.
+  (The pragma@Chg{Version=[4],New=[, if used,],Old=[]} actually names
+  the first subtype, of course.)
 @end{Ramification}
 @end{StaticSem}
 
 @begin{ImplAdvice}
-If the pragma applies to an entity, then the implementation should
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0072-1]}
+If the @Chg{Version=[4],New=[aspect Discard_Names is True
+for],Old=[pragma applies to]} an entity, then the implementation should
 reduce the amount of storage used for storing names associated with that
 entity.
-@ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-Text=[If @nt{pragma} Discard_Names applies to an entity, then the amount of
-storage used for storing names associated with that entity should be reduced.]}]}
+@ChgImplAdvice{Version=[4],Kind=[Revised],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
+Text=[If @Chg{Version=[4],New=[aspect],Old=[@nt{pragma}]} Discard_Names
+@Chg{Version=[4],New=[is True for],Old=[applies to]} an entity, then
+the amount of storage used for storing names associated with that entity
+should be reduced.]}]}
 @begin{Reason}
 A typical implementation of the Image attribute for enumeration types is
 to store a table containing the names of all the enumeration literals.
-Pragma Discard_Names allows the implementation to avoid storing such a
+@Chg{Version=[4],New=[Aspect],Old=[Pragma]} Discard_Names allows the
+implementation to avoid storing such a
 table without having to prove that the Image attribute is never used
 (which can be difficult in the presence of separate compilation).
 
-We did not specify the semantics of the Image attribute in the presence
-of this pragma because different semantics might be desirable in
+We did not specify the semantics of the Image attribute
+@Chg{Version=[4],New=[when aspect Discard_Names is True],Old=[in the presence
+of this pragma]} because different semantics might be desirable in
 different situations.
 In some cases, it might make sense to use the Image attribute to print
 out a useful value that can be used to identify the entity given
@@ -1284,10 +1350,10 @@ information in compiler-generated listings.
 In other cases, it might make sense to get an error at compile time or
 at run time.
 In cases where memory is plentiful, the simplest implementation makes
-sense: ignore the pragma.
+sense: ignore the @Chg{Version=[4],New=[aspect],Old=[pragma]}.
 Implementations that are capable of avoiding the extra storage in cases
 where the Image attribute is never used might also wish to ignore the
-pragma.
+@Chg{Version=[4],New=[aspect],Old=[pragma]}.
 
 The same applies to the Tags.Expanded_Name and Exceptions.Exception_Name
 functions.
@@ -1300,6 +1366,16 @@ functions.
   wide image and value functions are now the master versions that the others
   are defined from.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0072-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Defined the pragma in terms of
+  the aspect Discard_Names, and added a missing definition of the meaning of
+  the configuration pragma. This is not intended to make any semantic change
+  (Ada 2012 has an aspect Discard_Names defined via blanket rules for
+  representation pragmas in @RefSecNum{Operational and Representation Aspects}
+  and @RefSecNum{Aspect Specifications}), just to clarify the meaning.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Shared Variable Control}
@@ -1463,10 +1539,12 @@ Finally, if an object is volatile, then so
 are all of its subcomponents @Redundant[(the same does not apply to atomic)].
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0001-1]}
 @ChgAdded{Version=[3],Text=[When True, the aspects Independent and
 Independent_Components @i<specify as independently addressable> the named object
 or component(s), or in the case of a type, all objects or components
-of that type. All atomic objects are considered to be specified as independently
+of that type. All atomic objects @Chg{Version=[4],New=[and aliased
+objects ],Old=[]}are considered to be specified as independently
 addressable.@Defn{specified as independently addressable}@Defn2{Term=[independently addressable],Sec=[specified]}]}
 
 @begin{Ramification}
@@ -1514,20 +1592,23 @@ type or an array object of an anonymous type.]}
 type.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
 @Defn{indivisible}
 It is illegal to @Chg{Version=[3],New=[specify],Old=[apply]}
 either @Chg{Version=[3],New=[of the aspects],Old=[an]} Atomic or
 Atomic_Components @Chg{Version=[3],New=[],Old=[pragma ]}to
 @Chg{Version=[3],New=[have the value True for ],Old=[]}an
-object or type if the implementation cannot support the indivisible reads
+object or type if the implementation cannot support the indivisible
+@Chg{Version=[4],New=[and independent ],Old=[]}reads
 and updates required by the @Chg{Version=[3],New=[aspect],Old=[pragma]}
 (see below).
 
-It is illegal to specify the Size attribute of an atomic object,
-the Component_Size attribute for an array type with atomic
-components, or the layout attributes of an atomic component,
-in a way that prevents the implementation from performing the
-required indivisible reads and updates.
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
+It is illegal to specify the Size attribute of an atomic object, the
+Component_Size attribute for an array type with atomic components, or the layout
+attributes of an atomic component, in a way that prevents the implementation
+from performing the required indivisible
+@Chg{Version=[4],New=[and independent ],Old=[]}reads and updates.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0218-1]}
 If an atomic object is passed as a parameter, then
@@ -1734,17 +1815,19 @@ translate to V2:=X; V1:= X;
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-If @Chg{Version=[3],New=[the],Old=[a pragma]} Pack
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0001-1]}
+@ChgDeleted{Version=[4],Text=[If @Chg{Version=[3],New=[the],Old=[a pragma]} Pack
 @Chg{Version=[3],New=[aspect is True for],Old=[applies to]} a type any of whose
 subcomponents are atomic,
 the implementation shall not pack the atomic subcomponents more tightly
-than that for which it can support indivisible reads and updates.
+than that for which it can support indivisible reads and updates.]}
 @begin{ImplNote}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-@Chg{Version=[3],New=[Usually, specifying aspect Pack for such a type
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0001-1]}
+@ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[Usually, specifying aspect Pack for such a type
 will be illegal as the Recommended Level of Support cannot be achieved;
 otherwise, a],Old=[A]} warning might be appropriate if
-no packing whatsoever can be achieved.
+no packing whatsoever can be achieved.]}
 @end{ImplNote}
 @end{ImplReq}
 
@@ -1791,6 +1874,10 @@ load or store instruction.]}]}
 An imported volatile or atomic constant behaves as a constant (i.e.
 read-only) with respect to other parts of the Ada program, but can
 still be modified by an @lquotes@;external source.@rquotes@;
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
+@ChgAdded{Version=[4],Text=[Specifying the Pack aspect cannot override the
+effect of specifying an Atomic or Atomic_Components aspect.]}
 
 @end{Notes}
 
@@ -1852,6 +1939,12 @@ because the pragma was not used to mark variables as shared.
   atomic objects.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified that aliased objects
+  are considered to be specified as independently addressable, and also
+  eliminated an unnecessary rule.]}
+@end{DiffWord2012}
 
 
 @LabeledRevisedClause{Version=[2],New=[Task Information],

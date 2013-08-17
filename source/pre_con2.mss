@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.25 $ $Date: 2013/04/12 02:29:38 $ $Author: randy $ }
+@comment{ $Revision: 1.26 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -21,8 +21,13 @@ nested structures.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0078-1]}
 @ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
-internal @i<nodes>, each of which contains an element and pointers to the parent,
+@Chg{Version=[4],New=[],Old=[internal ]}@i<nodes>,
+@Chg{Version=[4],New=[comprising a @i<root node>,@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}
+and a set of@Defn2{Term=[internal node],Sec=[of a tree]}
+@i<internal nodes>],Old=[]} each
+of which contains an element and pointers to the parent,
 first child, last child, next (successor) sibling, and previous (predecessor)
 sibling internal nodes.@Defn2{Term=[node],Sec=[of a tree]} A cursor designates a
 particular node within a tree (and by extension the element contained in that
@@ -31,13 +36,17 @@ the node is part of the container, even if the node is moved within
 the container.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0078-1]}
 @ChgAdded{Version=[3],Text=[A @i<subtree> is a particular node (which @i<roots the subtree>) and all of its child
 nodes (including all of the children of the child nodes, recursively).
-@Defn2{Term=[subtree],Sec=[of a tree]}@Defn{roots the subtree}@Defn2{Term=[subtree],Sec=[node which roots]} There is
-a special node, the @i<root>, which is always present and has neither an
-associated element value nor any parent node. The root node provides a place
-to add nodes to an otherwise empty tree and
-represents the base of the tree.@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}]}
+@Defn2{Term=[subtree],Sec=[of a tree]}@Defn{roots the subtree}@Defn2{Term=[subtree],Sec=[node which roots]}
+@Chg{Version=[4],New=[The root node],Old=[There is
+a special node, the @i<root>, which]} is always present and has neither an
+associated element value nor any parent node@Chg{Version=[4],New=[; it has
+pointers to its first child and its last child, if any],Old=[]}. The root node
+provides a place to add nodes to an otherwise empty tree and
+represents the base of the
+tree.@Chg{Version=[4],New=[],Old=[@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[A node that has no children is called a
@@ -1063,8 +1072,10 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate calls Process.@key{all}
-  with a cursor that designates each element in Container, starting with the
+  with a cursor that designates each element in Container, starting
+  @Chg{Version=[4],New=[from],Old=[with]} the
   root node and proceeding in a depth-first order. Tampering with the cursors
   of Container is prohibited during the execution of a call on Process.@key{all}.
   Any exception raised by Process.@key{all} is propagated.]}
@@ -1099,11 +1110,13 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated. Otherwise, Iterate_Subtree calls
   Process.@key{all}
   with a cursor that designates each element in the subtree rooted by the node
-  designated by Position, starting with the node designated by Position and
+  designated by Position, starting
+  @Chg{Version=[4],New=[from],Old=[with]} the node designated by Position and
   proceeding in a depth-first order.
   Tampering with the cursors of the tree that contains the element
   designated by Position
@@ -1124,11 +1137,12 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an iterator object
   (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
-  designating each node in
-  Container, starting with the root node and proceeding in a depth-first order.
+  designating each @Chg{Version=[4],New=[element],Old=[node]} in Container, starting
+  @Chg{Version=[4],New=[from],Old=[with]} the root node and proceeding in a depth-first order.
   Tampering with the cursors of Container is prohibited while the iterator
   object exists (in particular, in the
   @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -1157,12 +1171,14 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated. Otherwise, Iterate_Subtree returns an
   iterator object (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
   designating each element in the subtree rooted by the node designated by Position,
-  starting with the node designated by Position and proceeding in a depth-first
+  starting @Chg{Version=[4],New=[from],Old=[with]} the
+  node designated by Position and proceeding in a depth-first
   order. If Position equals No_Element, then Constraint_Error is propagated.
   Tampering with the cursors of the container that contains the node
   designated by Position is prohibited while the iterator object exists
@@ -1903,6 +1919,16 @@ unless specified by the operation.]}]}
   The generic package Containers.Multiway_Trees is new.]}
 @end{Extend2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0069-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed the function Iterate
+  so it is clear that the root node is never visited.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0078-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> The definition of @i<node> is
+  clarified so that it it doesn't appear to say all nodes have an element.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Vectors]}
 
@@ -1959,6 +1985,11 @@ the profiles:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations "&", Append, Insert, Prepend,
+Replace_Element, and To_Vector that have a formal parameter of type
+Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
 @end{Itemize}
 @end{StaticSem}
 
@@ -1967,6 +1998,21 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   The generic package Containers.Indefinite_Vectors is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Doubly_Linked_Lists]}
@@ -2023,6 +2069,11 @@ the profile:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Append, Insert, Prepend, and
+Replace_Element that have a formal parameter of type Element_Type perform
+indefinite insertion (see @RefSecNum{Containers}).]}
 @end{Itemize}
 @end{StaticSem}
 
@@ -2031,6 +2082,21 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Hashed_Maps]}
@@ -2089,6 +2155,19 @@ the profile:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Include, Insert, Replace, and
+Replace_Element that have a formal parameter of type Element_Type perform
+indefinite insertion (see @RefSecNum{Containers}).]}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Some of the named operations also have a formal
+  of the indefinite formal type Key_Type and perform indefinite insertion using
+  that value, but it is sufficient to mention the formal of type Element_Type
+  to cover those.]}
+@end{Discussion}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2097,6 +2176,21 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Containers.Indefinite_Hashed_Maps is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Ordered_Maps]}
@@ -2155,6 +2249,18 @@ the profile:]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_Element may be constrained even if Element_Type is unconstrained.]}
 
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Include, Insert, Replace, and
+Replace_Element that have a formal parameter of type Element_Type perform
+indefinite insertion (see @RefSecNum{Containers}).]}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Some of the named operations also have a formal
+  of the indefinite formal type Key_Type and perform indefinite insertion using
+  that value, but it is sufficient to mention the formal of type Element_Type
+  to cover those.]}
+@end{Discussion}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2163,6 +2269,21 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Containers.Indefinite_Ordered_Maps is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Hashed_Sets]}
@@ -2194,6 +2315,17 @@ Containers.Hashed_Sets except:]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Include, Insert, Replace,
+Replace_Element, and To_Set that have a formal parameter of type Element_Type
+perform indefinite insertion (see @RefSecNum{Containers}).]}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This includes the procedure Replace declared in
+  the nested generic package Generic_Keys, as well as the routines declared
+  directly in the Containers.Indefinite_Hashed_Sets package.]}
+@end{Ramification}
 @end{Itemize}
 @end{StaticSem}
 
@@ -2202,6 +2334,21 @@ unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Containers.Indefinite_Hashed_Sets is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Indefinite_Ordered_Sets]}
@@ -2233,6 +2380,17 @@ Containers.Ordered_Sets except:]}
 @ChgAdded{Version=[2],Text=[The actual Element parameter of access subprogram Process
 of Update_@!Element_@!Preserving_Key may be constrained even if Element_Type is
 unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Include, Insert, Replace,
+Replace_Element, and To_Set that have a formal parameter of type Element_Type
+perform indefinite insertion (see @RefSecNum{Containers}).]}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This includes the procedure Replace declared in
+  the nested generic package Generic_Keys, as well as the routines declared
+  directly in the Containers.Indefinite_Ordered_Sets package.]}
+@end{Ramification}
 @end{Itemize}
 @end{StaticSem}
 
@@ -2241,6 +2399,21 @@ unconstrained.]}
 @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
 The generic package Containers.Indefinite_Ordered_Sets is new.]}
 @end{Extend95}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Indefinite_Multiway_Trees]}
@@ -2296,6 +2469,12 @@ completely, any problems will be diagnosed by the compiler.]}
 @ChgAdded{Version=[3],Text=[The actual Element parameter of access subprogram
 Process of Update_Element may be constrained even if Element_Type is
 unconstrained.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+@ChgAdded{Version=[4],Text=[The operations Append_Child, Insert_Child,
+Prepend_Child, and Replace_Element that have a formal parameter of type
+Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2304,6 +2483,21 @@ unconstrained.]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The generic package Containers.Indefinite_Multiway_Trees is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Indefinite_Holders]}
@@ -2514,8 +2708,10 @@ exception raised during the evaluation of element equality is propagated.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0035-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a nonempty holder
-containing an element initialized to New_Item.]}
+containing an element initialized to New_Item.@Chg{Version=[4],New=[
+To_Holder performs indefinite insertion (see @RefSecNum{Containers}).],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2552,8 +2748,11 @@ Container.]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0035-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Replace_Element assigns the value
-New_Item into Container, replacing any preexisting content of Container.
+New_Item into Container, replacing any preexisting content of
+Container@Chg{Version=[4],New=[; Replace_Element performs indefinite insertion
+(see @RefSecNum{Containers})],Old=[]}.
 Container is not empty after a successful call to Replace_Element.]}
 
 @begin{Example}
@@ -2749,8 +2948,6 @@ Constant_Reference is finalized.@PDefn2{Term=(erroneous execution),Sec=(cause)}]
 @end{Reason}
 @end{Erron}
 
-
-
 @begin{ImplReq}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -2812,6 +3009,21 @@ holder container unless specified by the operation.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Indefinite_Holders is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
+  This could mean that some calls to those routines would now raise
+  Program_Error where they previously worked. However, this is extremely
+  unlikely, as it would require that the package was not implemented in Ada
+  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
+  that a program inserted a more nested tagged type (or access discriminant)
+  into a container, and then used that object before its type or discrimant went
+  out of scope. All known implementations are implemented in Ada, so we
+  believe there is no practical incompatibility. As such, we
+  mention this only for completeness.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Vectors]}
@@ -4074,10 +4286,11 @@ unspecified.@PDefn{unspecified}]}
 procedure Containers.@!Generic_@!Sort has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0056-1]}
 @ChgAdded{Version=[3],Text=[@key{generic}
    @key{type} Index_Type @key{is} (<>);
    @key{with function} Before (Left, Right : Index_Type) @key{return} Boolean;
-   @key{with procedure} Swap (Left, Right : Index_Type);
+   @key{with procedure} Swap (Left, Right : @Chg{Version=[4],New=[@key[in] ],Old=[]}Index_Type);
 @key{procedure} Ada.Containers.Generic_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Sort]}
       (First, Last : Index_Type'Base);
 @key{pragma} Pure(Ada.Containers.Generic_Sort);]}

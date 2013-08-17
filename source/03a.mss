@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2013/07/18 04:58:13 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1663,8 +1663,30 @@ follows:@Defn2{Term=[enabled],Sec=[predicate checks]}@Defn2{Term=[disabled],Sec=
 
 @end{Itemize}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[For a subtype with a directly-specified predicate
+aspect, the following additional language-defined aspect may be specified with
+an @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Predicate_Failure@\
+   This aspect shall be specified by an @nt{expression}, which
+   determines the action to be performed when a predicate check fails because a
+   directly-specified predicate aspect of the subtype evaluates to
+   False, as explained below.]}
+@end{Description}
+@ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Predicate_Failure],
+  InitialVersion=[4],
+  Text=[@ChgAdded{Version=[4],Text=[Action to be performed when a predicate
+  check fails.]}]}
 @end{StaticSem}
 
+@begin{Resolution}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[The expected type for the Predicate_Failure
+@nt{expression} is String.]}
+@end{Resolution}
 
 @begin{Legality}
 
@@ -1797,6 +1819,7 @@ unit.@PDefn{generic contract issue}]}
 given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2]}
   @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion, the
   predicate of the target subtype is evaluated, and a check is performed that the
   predicate is True. This includes all parameter passing, except for certain
@@ -1809,13 +1832,26 @@ given subtype, then:]}
   or by an uninitialized @nt{allocator}, if any subcomponents have
   @nt{default_expression}s, the predicate of the
   nominal subtype of the created object is evaluated, and a check is performed
-  that the predicate is True. Assertions.Assertion_Error is raised if any
-  of these checks fail.@Defn2{Term=[predicate check],
+  that the predicate is True.@Chg{Version=[4],New=[],Old=[ Assertions.Assertion_Error
+  is raised if any of these checks fail.]}@Defn2{Term=[predicate check],
   Sec=[@key[in out] parameters]}@Defn2{Term=[predicate check],
   Sec=[@nt{object_declaration}]}@Defn2{Term=[predicate check],
   Sec=[@nt{allocator}]}@Defn2{Term=[check, language-defined],
-  Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
-  Sec=(raised by failure of run-time check)}]}
+  Sec=[controlled by assertion policy]}@Chg{Version=[4],New=[],
+  Old=[@Defn2{Term=(Assertion_Error), Sec=(raised by failure of run-time check)}]}]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-2]}
+  @ChgAdded{Version=[4],Text=[If any of the predicate checks fail,
+  Assertion_Error is raised, unless the subtype whose directly-specified predicate
+  aspect evaluated to False also has a directly-specified Predicate_Failure
+  aspect. In that case, the specified Predicate_Failure @nt{expression} is
+  evaluated; if the evaluation of the Predicate_Failure @nt{expression}
+  propagates an exception occurrence, then this occurrence is propagated for the
+  failure of the predicate check; otherwise, Assertion_Error is raised, with an
+  associated message string defined by the value of the Predicate_Failure
+  @nt{expression}. In the absence of such a Predicate_Failure aspect, an
+  implementation-defined message string is associated with the Assertion_Error
+  exception.@Defn2{Term=(Assertion_Error), Sec=(raised by failure of run-time check)}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1829,6 +1865,15 @@ given subtype, then:]}
   presence of potentially invalid values, just as constraint checks can be
   removed.]}
 @end{ImplNote}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[The above wording doesn't quite reflect the
+  required ordering of checks; improved wording will be available in a future
+  draft. The basic requirement is that all constraint and null exclusion checks
+  are made first, then each predicate expression is evaluated in the order of
+  declaration (except that progenitors arre evaluated in an unspecified order).]}
+@end{Discussion}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
@@ -1861,14 +1906,105 @@ variables and other invalid values. A Dynamic_Predicate, on the other hand, is
 checked as specified above, but can become False at other times. For example,
 the predicate of a record subtype is not checked when a subcomponent is
 modified.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[Predicate_Failure @nt{expression}s are never
+evaluated during the evaluation of a membership test (see
+@RefSecNum{Relational Operators and Membership Tests}) or Valid attribute
+(see @RefSecNum{The Valid Attribute}).]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[A Predicate_Failure @nt{expression} can be a
+@nt{raise_expression} (see @RefSecNum{Raise Statements}).]}
 @end{Notes}
 
+@begin{Examples}
+@begin(Example)
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[@key[subtype] Basic_Letter @key[is] Character -- @examcom[See @RefSecNum{The Package Characters.Handling} for "basic letter".]
+   @key[with] Static_Predicate => Basic_Letter @key[in] 'A'..'Z' | 'a'..'z' | '@latin1(198)' | '@latin1(230)' | '@latin1(208)' | '@latin1(240)' | '@latin1(222)' | '@latin1(254)' | '@latin1(223)';]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Text=[@key[subtype] Even_Integer @key[is] Integer
+   @key[with] Dynamic_Predicate => Even_Integer @key[mod] 2 = 0,
+       Predicate_Failure => "Even_Integer must be a multiple of 2";]}
+@end(Example)
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[@i{Text_IO (see
+@RefSecNum{The Package Text_IO}) could have used predicates to describe some
+common exceptional conditions as follows:}]}
+
+@begin(Example)
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@key[with] Ada.IO_Exceptions;
+@key[package] Ada.Text_IO @key[is]]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   @key[type] File_Type @key[is limited private];]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   @key[subtype] Open_File_Type @key[is] File_Type
+      @key[with] Dynamic_Predicate => Is_Open (Open_File_Type),
+           Predicate_Failure => @key[raise] Status_Error @key[with] "File not open";
+   @key[subtype] Input_File_Type @key[is] Open_File_Type
+      @key[with] Dynamic_Predicate => Mode (Input_File_Type) = In_File,
+           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot read file: " &
+              Name (Input_File_Type);
+   @key[subtype] Output_File_Type @key[is] Open_File_Type
+      @key[with] Dynamic_Predicate => Mode (Output_File_Type) /= In_File,
+           Predicate_Failure => @key[raise] Mode_Error @key[with] "Cannot write file: " &
+              Name (Output_File_Type);]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   ...]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   @key[function] Mode (File : @key[in] Open_File_Type) @key[return] File_Mode;
+   @key[function] Name (File : @key[in] Open_File_Type) @key[return] String;
+   @key[function] Form (File : @key[in] Open_File_Type) @key[return] String;]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   ...]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] Get (File : @key[in] Input_File_Type; Item : @key[out] Character);]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] Put (File : @key[in] Output_File_Type; Item : @key[in] Character);]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   ...]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[   -- @examcom[Similarly for all of the other input and output subprograms.]]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We didn't do this for Ada 202x as it would be
+  incompatible in marginal cases: these subprogram specifications would not
+  be subtype conformant with existing access-to-subprogram types, so
+  Put_Line'Access (for instance) would become illegal in existing code. The
+  gain would not be worth the disruption.]}
+@end{Discussion}
+
+@end(Example)
+@end{Examples}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0262-1],ARef=[AI05-0276-1],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Predicate aspects are new in Ada 2012.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b<Correction:> The Predicate_Failure aspect is new. We can consider this
+  a correction as it is always possible for implementers to add
+  implementation-defined aspects, so the same is true for language-defined
+  aspects.]}
+@end{Extend2012}
 
 
 

@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3721,6 +3721,20 @@ model.]}
 
 @end{Legality}
 
+@begin{Erron}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0076-1]}
+  @ChgAdded{Version=[4],Text=[Execution is erroneous if some operation (other
+  than the initialization or finalization of the object) modifies the value of a
+  constant object declared at library-level in a pure package.]}
+
+  @begin{Discussion}
+    @ChgRef{Version=[4],Kind=[AddedNormal]}
+    @ChgAdded{Version=[4],Text=[This could be accomplished via a
+    self-referencing pointer or via squirrelling a writable pointer to a
+    controlled object.]}
+  @end{Discussion}
+@end{Erron}
+
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0219-1]}
@@ -4053,4 +4067,14 @@ required to appear last.
   The old wording just said "limited type", which can change via visibility
   and thus isn't appropriate for dynamic semantics permissions.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0076-1]}
+  @ChgAdded{Version=[4],Text=[@B<Correction:> Explicitly stated that modifying
+  a library-level constant in a pure package is erroneous. We don't document
+  this as inconsistent as implementations certainly can still do whatever they
+  were previously doing (no change is required); moreover, this case (and many
+  more) were erroneous in Ada 2005 and before, so we're just restoring the
+  previous semantics.]}
+@end{DiffWord2012}
 

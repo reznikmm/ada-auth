@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:04 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1852,6 +1852,31 @@ through 4 were moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
+@begin{MetaRules}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
+  @ChgAdded{Version=[4],Text=[If the default representation is already uses
+  minimal storage for a particular type, aspect Pack may not cause any
+  representation change. It follows that aspect Pack should always be allowed,
+  even when it has no effect on representation.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[As a consequence, the chosen representation for a
+  packed type may change during program maintenance even if the type is
+  unchanged (in particular, if other representation aspects change on a part of
+  the type). This is different than the behavior of most other representation
+  aspects, whose properties remain guaranteed no matter what changes are made to
+  other aspects.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Therefore, aspect Pack should not be used to
+  achieve a representation required by external criteria. For instance, setting
+  Component_Size to 1 should be preferred over using aspect Pack to ensure an
+  array of bits. If future maintenance would make the array components aliased,
+  independent, or atomic, the program would become illegal if Component_Size is
+  used (immediately identifying a problem) while the aspect Pack version would
+  simply change representations (probably causing a hard-to-find bug).]}
+@end{MetaRules}
+
 @begin{Syntax}
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0229-1]}
@@ -1935,12 +1960,13 @@ Pack@Chg{Version=[3],New=[ aspect],Old=[]}.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00291-02]}
-@ChgAdded{Version=[2],Text=[If a packed type has a component that is not of a
-by-reference type and has no aliased part, then such a component need not be
-aligned according to the Alignment of its subtype; in particular it
-need not be allocated on a storage element boundary.]}
-@Comment{No "should" here; thus no ImplAdvice entry. This really qualifies the
-item above}
+@ChgRef{Version=[4],Kind=[DeletedAdded],ARef=[AI12-0001-1]}
+@ChgDeleted{Version=[4],Text=[@Chg{Version=[2],New=[If a packed type has a
+component that is not of a by-reference type and has no aliased part, then such
+a component need not be aligned according to the Alignment of its subtype; in
+particular it need not be allocated on a storage element
+boundary.@Comment{No "should" here; thus no ImplAdvice entry. This really
+qualifies the item above}],Old=[]}]}
 
 @Leading@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[@PDefn2{Term=[recommended level of support], Sec=(aspect Pack)}],
@@ -1949,37 +1975,59 @@ The recommended level of support for
 @Chg{Version=[3],New=[the],Old=[@nt{pragma}]}
 Pack@Chg{Version=[3],New=[ aspect],Old=[]} is:
 @begin{Itemize}
-For a packed record type,
-the components should be packed as tightly as possible
-subject to the Sizes of the component subtypes,
-and subject to any @nt{record_representation_clause} that applies to
-the type; the implementation may, but need not, reorder components
-or cross aligned word boundaries to improve the packing.
-A component whose Size is greater than the word size
-may be allocated an integral number of words.
-@begin{Ramification}
-The implementation can always allocate an integral number of
-words for a component that will not fit in a word.
-The rule also allows small component sizes to be rounded up if such
-rounding does not waste space.
-For example, if Storage_Unit = 8, then a component of size 8 is
-probably more efficient than a component of size 7 plus a 1-bit gap
-(assuming the gap is needed anyway).
-@end{Ramification}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0001-1]}
+  @ChgAdded{Version=[4],Text=[Any component of a packed type that is of a
+  by-reference type, that is specified as independently addressable, or that
+  contains an aliased part, shall be aligned according to the alignment of its
+  subtype.]}
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
-For a packed array type, if the @Chg{Version=[3],New=[],
-Old=[component subtype's ]}Size@Chg{Version=[3],New=[ of the
-component subtype],Old=[]} is less
-than or equal to the word size@Chg{Version=[3],New=[],Old=[, and
-Component_Size is not specified for the type]}, Component_Size should be less than or
-equal to the Size of the component subtype, rounded up to the nearest
-factor of the word size.
-@begin{Ramification}
-If a component subtype is aliased,
-its Size will generally be a multiple of Storage_Unit,
-so it probably won't get packed very tightly.
-@end{Ramification}
+  @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This also applies to atomic components. "Atomic"
+  implies "specified as independently addressable", so we don't need to mention
+  atomic here.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Other components do not have to respect the
+  alignment of the subtype when packed; in many cases, the Recommended Level of
+  Support will require the alignment to be ignored.]}
+  @end{Ramification}
+
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
+  For a packed record type, the components should be packed as tightly as
+  possible subject to @Chg{Version=[4],New=[the above alignment
+  requirements, ],Old=[]}the Sizes of the component subtypes, and
+  @Chg{Version=[4],New=[],Old=[subject to ]}any
+  @nt{record_representation_clause} that applies to the type; the implementation
+  may, but need not, reorder components or cross aligned word boundaries to
+  improve the packing. A component whose Size is greater than the word size may
+  be allocated an integral number of words.
+
+  @begin{Ramification}
+    The implementation can always allocate an integral number of words for a
+    component that will not fit in a word. The rule also allows small component
+    sizes to be rounded up if such rounding does not waste space. For example,
+    if Storage_Unit = 8, then a component of size 8 is probably more efficient
+    than a component of size 7 plus a 1-bit gap (assuming the gap is needed
+    anyway).
+  @end{Ramification}
+
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0001-1]}
+  For a packed array type, if the @Chg{Version=[3],New=[], Old=[component
+  subtype's ]}Size@Chg{Version=[3],New=[ of the component subtype],Old=[]} is
+  less than or equal to the word size@Chg{Version=[3],New=[],Old=[, and
+  Component_Size is not specified for the type]}, Component_Size should be less
+  than or equal to the Size of the component subtype, rounded up to the nearest
+  factor of the word size@Chg{Version=[4],New=[, unless this would violate
+  the above alignment requirements],Old=[]}.
+
+  @begin{Ramification}
+    @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0001-1]}
+    @ChgDeleted{Version=[4],Text=[If a component subtype is aliased,
+    its Size will generally be a multiple of Storage_Unit,
+    so it probably won't get packed very tightly.]}
+  @end{Ramification}
 @end{Itemize}
 @ChgImplAdvice{Version=[3],Kind=[Revised],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
@@ -2010,6 +2058,18 @@ followed.]}]}
   presence or absence of a confirming Component_Size representation
   clause does not change the meaning of the Pack aspect.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed so that the
+  Recommended Level of Support does not require packing of
+  components for which such packing would violate other representation
+  items or aspects. This is not incompatible as either such Pack
+  aspects were treated as illegal or the Recommended Level of Support
+  was ignored as impractical, neither of which would change the
+  behavior of any working programs. (Other behavor cannot be justifed
+  from the Standard.)]}
+@end{DiffWord2012}
 
 
 
@@ -3534,7 +3594,8 @@ be followed.]}]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object}:]}
 @begin(description)
-@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+@ChgNote{ Original: @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],}}
+@ChgAttribute{Version=[4],Kind=[RevisedAdded],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Has_Same_Storage>, ARef=[AI05-0191-1],
   Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes a function with the
   following specification:],Old=[]}
@@ -3546,12 +3607,15 @@ denotes an object}:]}
 @end(Descexample)
 
    @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1],ARef=[AI05-0264-1]}
+   @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0077-1]}
    @ChgAdded{Version=[3],NoPrefix=[T],Text=[The actual parameter shall be a name
    that denotes an object. The object denoted by the actual parameter can be of
-   any type. This function evaluates the names of the objects involved and
+   any type. This function evaluates the names of the objects
+   involved@Chg{Version=[4],New=[. It],Old=[ and]}
    returns True if the representation of the object denoted by the actual
    parameter occupies exactly the same bits as the representation of the object
-   denoted by X; otherwise, it returns False.]}]}@Comment{End of Annex text here.}
+   denoted by X@Chg{Version=[4],New=[ and the objects occupy at least
+   one bit],Old=[]}; otherwise, it returns False.]}]}@Comment{End of Annex text here.}
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3908,6 +3972,13 @@ except for certain explicit exceptions.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added @ImplAdviceTitle for
   the alignment of class-wide types.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified the behavior of
+  Has_Same_Storage when 'Size = 0.]}
+@end{DiffWord2012}
+
 
 
 @LabeledClause{Enumeration Representation Clauses}

@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1826,10 +1826,29 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
       scope of @i<T>, and]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0044-1]}
     @ChgAdded{Version=[3],Text=[has a result with a part of type @i<T>, or one
-      or more parameters with a part of type @i<T>, or
-      an access to variable parameter whose designated type has a part of type
-      @i<T>.]}
+      or more @Chg{Version=[4],New=[@key[out] or @key[in out] ],Old=[]}parameters
+      with a part of type @i<T>, or an
+      @Chg{Version=[4],New=[access-to-object],Old=[access to variable]}
+      parameter whose designated type has a part of
+      type @i<T>@Chg{Version=[4],New=[;],Old=[.]}]}
+
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
+    @ChgAdded{Version=[4],Text=[is a procedure or entry and has an @key[in]
+      parameter with a part of type @i<T>.]}
+
+@begin{Discussion}
+      @ChgRef{Version=[4],Kind=[AddedNormal]}
+      @ChgAdded{Version=[4],Text=[We don't check @key[in] parameters for
+        functions to avoid infinite recursion for calls to public functions
+        appearing in invariant expressions. Such function calls are unavoidable
+        for class-wide invariants and likely for other invariants. This is the
+        simplest rule that avoids trouble, and functions are much more likely to
+        be queries that don't modify their parameters than other callable
+        entities.]}
+@end{Discussion}
+
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
@@ -1929,9 +1948,19 @@ value.]}
 @end{Extend2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0049-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0044-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
-  @b<Correction:> Added an invariant check for deferred constants, so they
+  @b<Correction:> Removed the invariant check for @key[in] parameters of
+  functions, so that typical invariants don't cause infinite recursion.
+  This is strictly inconsistent, as the Ada 2012 definition has this check;
+  therefore, programs could depend on Assertion_Error being raised upon the
+  return from some call on a public function. However, as the intent of
+  assertion checking is to uncover bugs, a program that depends on a bug
+  occurring seems very unlikely.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0049-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Added an invariant check for
+  deferred constants, so they
   cannot be used to @ldquote@;leak@rdquote values that violate the invariant
   from a package. This is strictly inconsistent, as the Ada 2012 definition
   is missing this check; therefore, programs could depend on using values

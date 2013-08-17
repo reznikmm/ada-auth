@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -415,41 +415,15 @@ Exception_Occurrence, but instead propagates the same
 Exception_Occurrence value.
 This allows the original cause of the exception to be determined.
 @end{ImplNote}
-
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-1]}
-@ChgAdded{Version=[4],Text=[There is one exception to the above rule: For an
-individual membership test (see @RefSecNum{Relational Operators and Membership Tests})
-of the form "X @key[in] S",
-if a @nt{raise_expression} @Redundant[statically] within the predicate of S
-is evaluated, then the exception is not raised; instead, the entire predicate
-immediately evaluates to False. This includes @nt{raise_expression}s
-@Redundant[statically] within the @nt{default_expression} for a formal
-parameter used in a call @Redundant[statically] within the predicate.]}
-@begin{Discussion}
-  @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[But it does @i<not> include @nt{raise_expression}s
-  within the @nt{default_expression} for a component; those actually raise
-  the exception.]}
-@end{Discussion}
-@begin{Ramification}
-  @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[This special rule also applies to the predicate
-  check that is part of the evaluation of the Valid attribute (see @RefSecNum{The Valid Attribute}),
-  as the Valid attribute is defined in terms of a membership test.]}
-@end{Ramification}
-@begin{Reason}
-  @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[The purpose of @nt{raise_expression}s in a
-  predicate is to specify the exception to raise if the predicate fails.
-  The purpose of a membership test is to return False if the value is not
-  included in the subtype (including if the predicate fails). So we want
-  a predicate in this circumstance to return False, not to raise some
-  exception. We only make this apply to the text of the predicate so that
-  this special case doesn't hide bugs (and isn't expensive). This does mean
-  that @nt{raise_expression}s should stay directly in a predicate and not
-  be moved into functions.]}
-@end{Reason}
 @end{RunTime}
+
+@begin{Notes}
+  @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0062-1]}
+  @ChgAdded{Version=[4],Text=[If the evaluation of a
+  @SynI<string_>@nt{expression} raises an exception, that exception is
+  propagated rather than the one denoted by the @SynI<exception_>@nt{name}
+  of the @nt{raise_statement} or @nt{raise_expression}.]}
+@end{Notes}
 
 @begin{Examples}
 @leading@keepnext@i{Examples of raise statements:}
@@ -482,7 +456,7 @@ any force.
 @end{Extend95}
 
 @begin{Extend2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1],ARef=[AI12-0054-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
   The @nt{raise_expression} is new. This construct is necessary to
   allow conversion of existing specifications to use preconditions and
@@ -1607,7 +1581,18 @@ would if the first expression had not been evaluated.]}
   subprogram does @i<not> trigger these rules unless it also changes
   the value of a reevaluation of the precondition expression.]}
 @end{Discussion}
-
+@begin{Metarules}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[Our intent is that any assertion expression that
+  violates this ImplPerm is considered pathological. We definitely want
+  compilers to be able to assume that if you evaluate an assertion expression
+  once and it is True, you don't need to evaluate it again if all you are
+  doing in the mean time is evaluating assertion expressions. We were unable
+  to find wording that had this effect that didn't throw out important other
+  cases (logging, memo functions), so we settled for a strong warning that
+  compilers can reject such pathologies. Perhaps in a future version of
+  Ada we'll be able to tighten this up.]}
+@end{Metarules}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -2206,13 +2191,15 @@ Program_Error checks was corrected to be alphabetical.]}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[The effect of a checking pragma no longer
   applies inside an inlined subprogram body. While this could change the
   behavior of a program that depends on a check being suppressed in an
   inlined body, such a program is erroneous and thus no behavior can be
   depended upon anyway. It's also likely to be very rare. We make this
   change so that inlining has no effect on the meaning of the subprogram
-  body (since inlining is never requiring, this is necessary in order to be
+  body (since inlining is never @Chg{Version=[4],New=[required],Old=[requiring]},
+  this is necessary in order to be
   able to reason about the body), and so that assertion policies and
   suppress work the same way for inlining.]}
 @end{DiffWord2005}

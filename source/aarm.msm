@@ -30,7 +30,7 @@
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
 @RTFVersionName{Version=[3],Text=[Ada 2012]}
-@RTFVersionName{Version=[3],Text=[Ada 202x]}
+@RTFVersionName{Version=[4],Text=[Ada 202x]}
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}

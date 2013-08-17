@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2013/07/18 04:58:14 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -889,10 +889,12 @@ or @nt{range_attribute_designator} shall be static.
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0006-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0032-1]}
 An @nt{attribute_reference} denotes a
 value, an object, a subprogram, or some
-other kind of program entity.@Chg{Version=[3],New=[ For an
-@nt{attribute_reference} that denotes a value or an object, if
+other kind of program entity.@Chg{Version=[3],New=[
+@Chg{Version=[4],New=[Unless explicitly specified otherwise, for],Old=[For]}
+an @nt{attribute_reference} that denotes a value or an object, if
 its type is scalar, then its nominal subtype is the base subtype of
 the type; if its type is tagged, its nominal subtype is the first
 subtype of the type; otherwise, its nominal subtype is a subtype of the type
@@ -1092,6 +1094,13 @@ The Ada 83 rule said that the
   subtype of an @nt{attribute_reference} to close a minor language hole.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Allowed overriding the
+  nominal subtype of an @nt{attribute_reference} for an object elsewhere
+  in this standard.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined References]}
 
@@ -1187,7 +1196,7 @@ named reference object.]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Barrel @key[is tagged] ...  -- @Examcom{holds objects of type Element}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0299-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Ref_Element(Data : @key[access] Element) @key[is limited private]
    @key[with] Implicit_Dereference => Data;
       -- @Examcom{This Ref_Element type is a "reference" type.}
@@ -1197,7 +1206,7 @@ named reference object.]}
 @ChgAdded{Version=[3],Text=[@key[function] Find (B : @key[aliased in out] Barrel; Key : String) @key[return] Ref_Element;
    -- @Examcom{Return a reference to an element of a barrel.}]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0299-2]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0268-1],ARef=[AI05-0299-1]}
 @ChgAdded{Version=[3],Text=[B: @key[aliased] Barrel;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
@@ -3291,7 +3300,7 @@ still have to be parenthesized when used in a bound of a range.
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0039-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
   Revised membership syntax to eliminate ambiguities. In some cases,
-  previously ambiguous membership expressions will now have an unabmiguous
+  previously ambiguous membership expressions will now have an unambiguous
   meaning. If an Ada 2012 implementation chose the "wrong" meaning, the
   expression could silently change meaning. Virtually all such expressions
   will become illegal because of type mismatches (and thus be incompatible,

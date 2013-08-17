@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2013/07/18 04:58:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4516,13 +4516,15 @@ given master directly depends
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0235-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0067-1]}
 An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
 as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
 @Chg{Version=[2],New=[of the declaration ],Old=[]}except in the
 cases of renaming and derived access types described below.
-@Chg{Version=[3],New=[Other than for an explicitly aliased parameter, a
+@Chg{Version=[3],New=[Other than for an explicitly aliased
+parameter@Chg{Version=[4],New=[ of a function],Old=[]}, a
 formal],Old=[A]} parameter of a
 @Chg{Version=[3],New=[callable entity],Old=[master]} has the same
 accessibility level as the master@Chg{Version=[3],New=[ representing the
@@ -4535,11 +4537,15 @@ invocation of the entity],Old=[]}.
 @end{Reason}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[This rule defines the accessibility of all
-  named access types, as well as the accessibility level of all anonymous
-  access types other than those for access parameters and access discriminants.
-  Special rules exist for the accessibility level of such anonymous types.
-  Components, stand-alone objects, and function results whose
+  named access types, as well as the accessibility level of
+  @Chg{Version=[4],New=[],Old=[all ]}anonymous
+  access types @Chg{Version=[4],New=[in a @nt{component_definition}],Old=[other
+  than those for access parameters and access discriminants.]} Special rules
+  exist for the accessibility level of @Chg{Version=[4],New=[other],Old=[such]}
+  anonymous types. Components@Chg{Version=[4],New=[],Old=[,
+  stand-alone objects, and function results]} whose
   (anonymous) type is defined by an @nt{access_definition} have
   accessibility levels corresponding to named access types defined at
   the same point.]}
@@ -4897,7 +4903,14 @@ types with @lquotes@;normal@rquotes@; accessibility, as those typically don't
 include the extra information needed to make a call.]}
 @end{Reason}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0070-1]}
+@ChgAdded{Version=[4],Text=[The accessibility level of the anonymous access
+subtype defined by a @nt{return_subtype_indication} that is
+an @nt{access_definition} (see @RefSecNum{Return Statements})
+is that of the result subtype of the enclosing function.]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0148-1],ARef=[AI05-0240-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0070-1]}@ChgNote{Just to reflect the paragraph number change}
 @ChgAdded{Version=[3],Text=[The accessibility level of the type of a stand-alone
 object of an anonymous access-to-object type is the same as the accessibility
 level of the type of the access value most recently assigned to the
@@ -4905,6 +4918,7 @@ object@Redundant[; accessibility checks ensure that this
 is never deeper than that of the declaration of the stand-alone object].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0240-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0070-1]}@ChgNote{Just to reflect the paragraph number change}
 @ChgAdded{Version=[3],Text=[The accessibility level of an explicitly aliased
 (see @RefSecNum{Subprogram Declarations}) formal parameter in a function body is
 determined by the point of call; it is the same level that the return object
@@ -6116,6 +6130,19 @@ uses of anonymous access types.]}
   a copy (which is necessary in some instances).]}
 @end{Incompatible2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0067-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected so that it is clear
+  that explicitly aliased parameters in procedures have the same accessibility
+  as other parameters. Only explicitly aliased parameters in functions are
+  special.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> The accessibility of
+  an anonymous access type of an @nt{extended_return_statement} is defined
+  here rather than in @RefSecNum{Return Statements} so that all accessibility
+  rules are here.]}
+@end{DiffWord2012}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
