@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2013/08/17 02:17:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -5247,10 +5247,10 @@ part of an instance of a generic unit.],Old=[]}]}
 @end{Honest}
 
 @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0030-1]}
-@ChgAdded{Version=[4],Text=[For an untagged nonderived type having a task,
-protected, or explicitly limited record part, the default implementation of each
-of the Read, Write, Input, and Output attributes raises Program_Error and
-performs no other action.]}
+@ChgAdded{Version=[4],Text=[Unless inherited from a parent type, if any, for an
+untagged type having a task, protected, or explicitly limited record part, the
+default implementation of each of the Read, Write, Input, and Output attributes
+raises Program_Error and performs no other action.]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal],Aref=[AI12-0030-1]}

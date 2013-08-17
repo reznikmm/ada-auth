@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.26 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
+@comment{ $Revision: 1.27 $ $Date: 2013/08/17 02:17:38 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -24,7 +24,7 @@ nested structures.]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0078-1]}
 @ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
 @Chg{Version=[4],New=[],Old=[internal ]}@i<nodes>,
-@Chg{Version=[4],New=[comprising a @i<root node>,@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}
+@Chg{Version=[4],New=[comprising of a @i<root node>,@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}
 and a set of@Defn2{Term=[internal node],Sec=[of a tree]}
 @i<internal nodes>],Old=[]} each
 of which contains an element and pointers to the parent,
