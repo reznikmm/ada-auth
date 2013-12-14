@@ -18,7 +18,8 @@ package body ARM_RTF is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012,
+    --	    2013
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -144,6 +145,7 @@ package body ARM_RTF is
     -- 11/26/12 - RLB - Added subdivision names to Clause_Header and
     --			Revised_Clause_Header.
     -- 12/13/12 - RLB - Added style needed by AARM (only in deleted text).
+    --  8/16/13 - RLB - Added missing style needed by recent RM change.
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -1498,6 +1500,28 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s83\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\sl-140\ql \snext83 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 5), -- Child Indented examples
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 16,
+		       Style_Indent => INDENT_UNIT*5,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s84\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-160 \snext84 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 7), -- Child Indented annotation examples.
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 14,
+		       Style_Indent => INDENT_UNIT*7,
+		       Style_Before => 0,
+		       Style_After => 70,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s85\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-140 \snext85 ");
 
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
@@ -1509,7 +1533,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s84\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s86\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1522,7 +1546,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s85\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1533,7 +1557,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s86\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1544,7 +1568,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -1555,7 +1579,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2630,6 +2654,28 @@ package body ARM_RTF is
 		       Style_String_Prefix =>
 			 "\s83\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext83 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Examples, 5), -- Child Indented examples
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 18,
+		       Style_Indent => INDENT_UNIT*5,
+		       Style_Before => 0,
+		       Style_After => 100,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s84\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-190\slmult0 \snext84 ");
+	    Set_Style (Paragraph_Info(ARM_Output.Small_Examples, 7), -- Child Indented examples in annotations.
+		       Font => ARM_Output.Fixed,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 16,
+		       Style_Indent => INDENT_UNIT*7,
+		       Style_Before => 0,
+		       Style_After => 80,
+		       Style_Justified => FALSE,
+		       Style_String_Prefix =>
+			 "\s85\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext85 ");
 
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
@@ -2641,7 +2687,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s84\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s86\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -2654,7 +2700,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s85\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -2665,7 +2711,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s86\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -2676,7 +2722,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -2687,7 +2733,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2904,6 +2950,10 @@ package body ARM_RTF is
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Swiss Indented Basic Examples;}");
 	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Examples, 1));
         Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Basic Examples;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Examples, 5));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Child Indented Examples;}");
+	Write_Style (Output_Object.Output_File, Paragraph_Info(ARM_Output.Small_Examples, 6));
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "Small Child Indented Examples;}");
         if Output_Object.Big_Files then
 	    Write_Style (Output_Object.Output_File, Heading_4_Info);
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "Heading 4;}");
