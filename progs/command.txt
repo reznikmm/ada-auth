@@ -993,12 +993,15 @@ italized in curly brackets. RootDefn adds "[distributed]", PDefn adds
 
 @ChgAttribute{Version=[<version>],Kind=(<kind>),ChginAnnex=[T|F],
 	Leading=[T|F],Prefix=<Prefix>,AttrName=<Name>,
-	{[Ref={<DR_Number>}|ARef={<AI_Number>}]},Text=<Text>}
+	{[Ref={<DR_Number>}|ARef={<AI_Number>}]},
+        [InitialVersion=[<version>],]Text=<Text>}
 	Marks a changed attribute entry. (Essentially a combination of
 	ChgRef and Attribute.) ChginAnnex controls whether the change
 	is reflected in the Annex. (Set this to F when the change is in
 	text "glued" onto the annex paragraph.) Leading controls whether the
-	first paragraph is leading or not. See ChgRef and Attribute
+	first paragraph is leading or not. The optional InitialVersion parameter
+        specifies the version number for the originally inserted text; if not
+        specified, the Version number is used. See ChgRef and Attribute
 	for the meaning of the other parameters.
 @ChgPrefixType{Version=[<version>],Kind=(<kind>),Text=[<text>]}
 	Marks a changed prefix type text. Also, saves the indicated text to

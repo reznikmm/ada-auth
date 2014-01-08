@@ -281,6 +281,7 @@ package body ARM_Format is
     -- 11/26/12 - RLB - Added subdivision names.
     --  7/ 5/13 - RLB - Added a nasty hack so added aspect names are marked
     --			as such in Show_Changes versions.
+    -- 12/13/13 - RLB - Added InitialVersion parameter to ChgAttrib.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6383,7 +6384,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Reset_Prefix_Type =>
 		    -- Set Format_Object.Prefix_Text string to the default.
-		    Format_Object.Prefix_Text := "@b{NONE!}" & (10..160 => ' ');
+		    Format_Object.Prefix_Text := "@b{NONE!}" & (10..200 => ' ');
 		    Format_Object.Prefix_Text_Len := 9;
 
 		when Attribute | Attribute_Leading =>
@@ -6404,6 +6405,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			-- No changes in this version (use ChgAttribute if you need that).
 		        Format_Object.Attr_Change_Kind := ARM_Database.None;
 		        Format_Object.Attr_Version := '0';
+		        Format_Object.Attr_Initial_Version := '0';
 
 			ARM_Input.Check_Parameter_Name (Input_Object,
 			    Param_Name => "Prefix" & (7..ARM_Input.Command_Name_Type'Last => ' '),
@@ -8353,6 +8355,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Is_Leading : Boolean;
 			Kind : ARM_Database.Paragraph_Change_Kind_Type;
 			Version : ARM_Contents.Change_Version_Type;
+			InitialVersion : ARM_Contents.Change_Version_Type;
 			Display_Ref : Boolean;
 			Which_Param : ARM_Input.Param_Num;
 			References : Reference_Ptr := null;
@@ -8426,6 +8429,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			else -- don't save the change info.; it only applies here.
 			    Format_Object.Attr_Change_Kind := ARM_Database.None;
 			    Format_Object.Attr_Version := '0';
+			    Format_Object.Attr_Initial_Version := '0';
 			end if;
 
 			Get_Boolean ("Leading" & (8..ARM_Input.Command_Name_Type'Last => ' '),
@@ -8468,169 +8472,176 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			-- else no parameter. Weird.
 			end if;
 
-			-- Handle the Ref and ARef parameters, until
-			-- the Text parameter shows up.
-			loop
-		            ARM_Input.Check_One_of_Parameter_Names (Input_Object,
-			        Param_Name_1 => "Ref" & (4..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_2 => "ARef" & (5..ARM_Input.Command_Name_Type'Last => ' '),
-			        Param_Name_3 => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
-			        Is_First => False,
-			        Param_Found => Which_Param,
-			        Param_Close_Bracket => Close_Ch);
-		            if (Which_Param = 1 or else Which_Param = 2) and then
-				Close_Ch /= ' ' then
-				declare
-				    Ref_Name : ARM_Input.Command_Name_Type;
-				    Len : Natural := 0;
-				    New_Ref, Cursor : Reference_Ptr;
-				    Ch : Character;
-				begin
-				    -- Get the reference:
-				    loop
-				        ARM_Input.Get_Char (Input_Object, Ch);
-				        if Ch /= Close_Ch then
-					    Len := Len + 1;
-					    if Len > Ref_Name'Last then
-					        Ada.Text_IO.Put_Line ("  ** Reference too long on line " & ARM_Input.Line_String (Input_Object));
-					    else
-						Ref_Name(Len) := Ch;
-					    end if;
-				        else -- End of the reference.
-					    if Len = 0 then
-					        Ada.Text_IO.Put_Line ("  ** Failed to find reference on line " & ARM_Input.Line_String (Input_Object));
-					    end if;
-					    exit;
-				        end if;
-				    end loop;
+			-- Handle the Ref, ARef, and InitialVersion parameters,
+			-- until the Text parameter shows up.
 
-				    if Display_Ref then
-				        -- Save a reference for outputting
-					-- later.
-				        New_Ref := Allocate_Reference;
-				        New_Ref.all := (Ref_Name => Ref_Name,
-							Ref_Len => Len,
-							Is_DR_Ref => (Which_Param = 1),
-							   -- DR reference if Param = 1;
-							   -- AI reference otherwise.
-							Next => null);
-					-- Attach this to the *end* of the list.
-					if References = null then
-					    References := New_Ref;
-					else
-					    Cursor := References;
-					    while Cursor.Next /= null loop
-						Cursor := Cursor.next;
-					    end loop;
-					    Cursor.Next := New_Ref;
-					end if;
-			            -- else don't display it.
-				    end if;
-				end;
-			    else
-				exit; -- We found "Text" (or an error)
-			    end if;
-		        end loop;
-
-			case Format_Object.Attr_Change_Kind is
-			    when ARM_Database.None | ARM_Database.Revised |
-				 ARM_Database.Revised_Inserted_Number =>
-				-- The prefix is unchanged.
-				Make_Attribute_Text;
-			        if Close_Ch /= ' ' then
-			            -- Now, handle the parameter:
-			            -- The text goes to the file *and* is recorded.
-			            Arm_Input.Start_Recording (Input_Object);
-			            -- Stack the parameter so we can process the end:
-			            Set_Nesting_for_Parameter
-			                (Command => Attribute_Text_Param,
-				         Close_Ch => Close_Ch);
-			        end if;
-
-			    when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-				-- The insertion has to be both here and in the
-				-- Annex.
-				if not Chg_in_Annex then
-				    Ada.Text_IO.Put_Line ("  ** Attribute adding in text, but not in Annex??? on line " & ARM_Input.Line_String (Input_Object));
-				end if;
-
-			        if Close_Ch /= ' ' then
-
-				    -- Stack the parameter so we can process the end:
-				    Set_Nesting_for_Parameter
-				        (Command => Attribute_Text_Param,
-					 Close_Ch => Close_Ch);
-
+		        -- Note: If there is no InitialVersion command, use the
+			-- value of Version.
+			InitialVersion := Version;
+			declare
+			    Which_Param : ARM_Input.Param_Num;
+			    Ch		: Character;
+			begin
+			    loop
+		                ARM_Input.Check_One_of_Parameter_Names (Input_Object,
+			            Param_Name_1 => "Ref" & (4..ARM_Input.Command_Name_Type'Last => ' '),
+			            Param_Name_2 => "ARef" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			            Param_Name_3 => "InitialVersion" & (15..ARM_Input.Command_Name_Type'Last => ' '),
+			            Param_Name_4 => "Text" & (5..ARM_Input.Command_Name_Type'Last => ' '),
+			            Is_First => False,
+			            Param_Found => Which_Param,
+			            Param_Close_Bracket => Close_Ch);
+		                if (Which_Param = 1 or else Which_Param = 2) and then
+				    Close_Ch /= ' ' then
 				    declare
-					Disposition : ARM_Output.Change_Type;
-					use type ARM_Output.Change_Type;
+				        Ref_Name : ARM_Input.Command_Name_Type;
+				        Len : Natural := 0;
+				        New_Ref, Cursor : Reference_Ptr;
+				        Ch : Character;
 				    begin
+				        -- Get the reference:
+				        loop
+				            ARM_Input.Get_Char (Input_Object, Ch);
+				            if Ch /= Close_Ch then
+					        Len := Len + 1;
+					        if Len > Ref_Name'Last then
+					            Ada.Text_IO.Put_Line ("  ** Reference too long on line " & ARM_Input.Line_String (Input_Object));
+					        else
+						    Ref_Name(Len) := Ch;
+					        end if;
+				            else -- End of the reference.
+					        if Len = 0 then
+					            Ada.Text_IO.Put_Line ("  ** Failed to find reference on line " & ARM_Input.Line_String (Input_Object));
+					        end if;
+					        exit;
+				            end if;
+				        end loop;
 
-				        Calc_Change_Disposition (
-					    Format_Object => Format_Object,
-					    Version => Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version,
-					    Operation => ARM_Output.Insertion,
-					    Text_Kind => Disposition);
-
-				        if Disposition = Do_Not_Display_Text then
-				            -- Skip the text:
-				            ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
-				            ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-
-				        elsif Disposition = ARM_Output.None then
-					    -- Display the text normally.
-					    Make_Attribute_Text;
-					    -- Nothing special to do (normal text).
-
-				        elsif Disposition = ARM_Output.Deletion then
-				            raise Program_Error; -- A deletion inside of an insertion command!
-				        else -- Insertion.
-					    -- We assume non-empty text and no outer changes;
-					    -- set new change state:
-					    Format_Object.Text_Format.Change := ARM_Output.Insertion;
-					    Format_Object.Text_Format.Version := Version;
-					    Format_Object.Text_Format.Added_Version := '0';
-				            Check_Paragraph; -- Change the state *before* outputting the
-							     -- paragraph header, so the AARM prefix is included.
-			                    ARM_Output.Text_Format (Output_Object,
-						                    Format_Object.Text_Format);
-					    Make_Attribute_Text;
-
-					    -- Reset the state to normal:
-					    Format_Object.Text_Format.Change := ARM_Output.None;
-					    Format_Object.Text_Format.Version := '0';
-					    Format_Object.Text_Format.Added_Version := '0';
-			                    ARM_Output.Text_Format (Output_Object,
-						                    Format_Object.Text_Format);
-					end if;
+				        if Display_Ref then
+				            -- Save a reference for outputting
+					    -- later.
+				            New_Ref := Allocate_Reference;
+				            New_Ref.all := (Ref_Name => Ref_Name,
+							    Ref_Len => Len,
+							    Is_DR_Ref => (Which_Param = 1),
+							       -- DR reference if Param = 1;
+							       -- AI reference otherwise.
+							    Next => null);
+					    -- Attach this to the *end* of the list.
+					    if References = null then
+					        References := New_Ref;
+					    else
+					        Cursor := References;
+					        while Cursor.Next /= null loop
+						    Cursor := Cursor.next;
+					        end loop;
+					        Cursor.Next := New_Ref;
+					    end if;
+			                -- else don't display it.
+				        end if;
 				    end;
-
-			            -- The text goes to the file *and* is recorded.
-			            Arm_Input.Start_Recording (Input_Object);
-			        -- else no parameter. Do nothing.
-				end if;
-
-			    when ARM_Database.Deleted | ARM_Database.Deleted_Inserted_Number |
-			         ARM_Database.Deleted_No_Delete_Message |
-				 ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-
-				Ada.Text_IO.Put_Line ("  ** Attribute deleting not implemented on line " & ARM_Input.Line_String (Input_Object));
-				-- This should work very similarly to the above.
-				-- If disposition is do not display text,
-				-- do not generate or store attribute in DB.
-				-- That would require changes to Attribute_Text_Param.
-
-			        Make_Attribute_Text;
-			        if Close_Ch /= ' ' then
-			            -- Now, handle the parameter:
-			            -- The text goes to the file *and* is recorded.
-			            Arm_Input.Start_Recording (Input_Object);
-			            -- Stack the parameter so we can process the end:
-			            Set_Nesting_for_Parameter
-			                (Command => Attribute_Text_Param,
-				         Close_Ch => Close_Ch);
+			        elsif Which_Param = 3 and then Close_Ch /= ' ' then
+			            -- Found InitialVersion
+			            ARM_Input.Get_Char (Input_Object, Ch);
+			            InitialVersion := Ch;
+			            ARM_Input.Get_Char (Input_Object, Ch);
+			            if Ch /= Close_Ch then
+				        Ada.Text_IO.Put_Line ("  ** Bad close for InitialVersion parameter on line " &
+				            ARM_Input.Line_String (Input_Object));
+				        ARM_Input.Replace_Char (Input_Object);
+			            end if;
+			        else
+				    exit; -- We found "Text" (or an error)
 			        end if;
-			end case;
+		            end loop;
+			end;
+
+--**Debug:
+--Ada.Text_IO.Put_Line ("ChgAttr on line " & ARM_Input.Line_String (Input_Object) &
+--   "; Vers=" & Version & "; InitVer=" & InitialVersion & "; Kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind));
+			if ARM_Database."/=" (Format_Object.Attr_Change_Kind, ARM_Database.None) then
+			    Format_Object.Attr_Initial_Version := InitialVersion;
+			-- else ChginAnnex is False, don't care about this.
+			end if;
+
+			-- How the prefix (attribute name) is handled depends
+			-- only on the InitialVersion and its relationship
+			-- to the version we're generating. It does *not*
+			-- depend on the (current) change kind.
+
+			if InitialVersion = '0' then
+			    -- Original version, never an insertion.
+			    Make_Attribute_Text;
+			    if Close_Ch /= ' ' then
+			        -- Now, handle the parameter:
+			        -- The text goes to the file *and* is recorded.
+			        Arm_Input.Start_Recording (Input_Object);
+			        -- Stack the parameter so we can process the end:
+			        Set_Nesting_for_Parameter
+			            (Command => Attribute_Text_Param,
+				     Close_Ch => Close_Ch);
+			    end if;
+
+		        elsif Close_Ch /= ' ' then -- All other cases.
+
+			    -- Stack the parameter so we can process the end:
+			    Set_Nesting_for_Parameter
+			        (Command => Attribute_Text_Param,
+				 Close_Ch => Close_Ch);
+
+			    declare
+				Disposition : ARM_Output.Change_Type;
+				use type ARM_Output.Change_Type;
+			    begin
+
+			        Calc_Change_Disposition (
+				    Format_Object => Format_Object,
+				    Version   => InitialVersion,
+				    Operation => ARM_Output.Insertion,
+				    Text_Kind => Disposition);
+
+			        if Disposition = Do_Not_Display_Text then
+			            -- Skip the text:
+			            ARM_Input.Skip_until_Close_Char (Input_Object, Close_Ch);
+			            ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+--Ada.Text_IO.Put_Line("--Skip text");
+
+			        elsif Disposition = ARM_Output.None then
+				    -- Display the text normally.
+				    Make_Attribute_Text;
+				    -- Nothing special to do (normal text).
+--Ada.Text_IO.Put_Line("--Normal text");
+
+			        elsif Disposition = ARM_Output.Deletion then
+			            raise Program_Error; -- A deletion inside of an insertion command!
+
+			        else -- Insertion.
+--Ada.Text_IO.Put_Line("--Insertion");
+				    -- We assume non-empty text and no outer changes;
+				    -- set new change state:
+				    Format_Object.Text_Format.Change := ARM_Output.Insertion;
+				    Format_Object.Text_Format.Version := InitialVersion;
+				    Format_Object.Text_Format.Added_Version := '0';
+			            Check_Paragraph; -- Change the state *before* outputting the
+						     -- paragraph header, so the AARM prefix is included.
+		                    ARM_Output.Text_Format (Output_Object,
+					                    Format_Object.Text_Format);
+				    Make_Attribute_Text;
+
+				    -- Reset the state to normal:
+				    Format_Object.Text_Format.Change := ARM_Output.None;
+				    Format_Object.Text_Format.Version := '0';
+				    Format_Object.Text_Format.Added_Version := '0';
+		                    ARM_Output.Text_Format (Output_Object,
+					                    Format_Object.Text_Format);
+				end if;
+			    end;
+
+		            -- The text goes to the file *and* is recorded.
+		            Arm_Input.Start_Recording (Input_Object);
+
+		        -- else no parameter. Do nothing.
+			end if;
 		    end;
 
 		when Change_Prefix_Type =>
@@ -9914,72 +9925,77 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Text_Buffer : String (1..ARM_Input.MAX_RECORDING_SIZE);
 			Text_Buffer_Len : Natural;
 
-			function Chg_Command (Kind : in ARM_Database.Paragraph_Change_Kind_Type;
-					      Version : in Character) return String is
+		        function Sort_Key return String is
+			    -- Generate a Sort Key so that these sort
+			    -- as they did in Ada 95.
+		        begin
+			    if Format_Object.Attr_Prefix_Len > 2 and then
+				    Format_Object.Attr_Prefix(2) = ''' then
+			        -- Class-wide prefix. For some reason, this
+			        -- sorts before the main item in the Ada 95 RM.
+			        -- (And this continues in later RMs.)
+			        return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
+				    ''' & Character'Pred(Format_Object.Attr_Prefix(1)) &
+				    "'Class";
+				        -- Sort by name, then by prefix.
+			    else
+			        return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
+				    ''' & Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len);
+				        -- Sort by name, then by prefix.
+			    end if;
+			    -- Note: Ada 2005 sorted E'Identity and T'Identity
+			    -- backwards from Ada 95. This will fix that.
+		        end Sort_Key;
+
+			function ChgRef_Command (Kind : in ARM_Database.Paragraph_Change_Kind_Type;
+					         Version : in Character;
+					         Initial_Version : in Character) return String is
+			    -- Careful: This assumes this is being used for
+			    -- the attribute index, which has always existed.
+			    -- Use the annex initial version rather than '0'
+			    -- to determine whether it is inserted or not for
+			    -- other listings.
 			begin
 			    case Kind is
 				when ARM_Database.None =>
 				    return "";
 				when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-				    return "@Chgref{Version=[" & Version &
-					"],Kind=[Added]}";
+				    if Initial_Version > '0' then -- Not original.
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[Added]}";
+				    else
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[AddedNormal]}";
+				    end if;
 				when ARM_Database.Deleted |
 				     ARM_Database.Deleted_Inserted_Number |
 				     ARM_Database.Deleted_No_Delete_Message |
 				     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-				    return "@Chgref{Version=[" & Version &
-					"],Kind=[Deleted]}";
+				    if Initial_Version > '0' then -- Not original.
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[DeletedAdded]}";
+				    else
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[Deleted]}";
+				    end if;
 				when ARM_Database.Revised | ARM_Database.Revised_Inserted_Number =>
-				    return "@Chgref{Version=[" & Version &
-					"],Kind=[Revised]}";
+				    if Initial_Version > '0' then -- Not original.
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[RevisedAdded]}";
+				    else
+				        return "@Chgref{Version=[" & Version &
+					    "],Kind=[Revised]}";
+				    end if;
 			    end case;
-			end Chg_Command;
+			end ChgRef_Command;
 
 			procedure Write_to_DB (Prefix_Kind, Text_Kind :
 				in ARM_Database.Paragraph_Change_Kind_Type;
-				Prefix_Version, Text_Version : in Character) is
+				Prefix_Version, Text_Version,
+				Initial_Version : in Character) is
 			    -- Write the item to the DB; use Prefix_Kind and
 			    -- Text_Kind for the change kind.
-			    Init_Version : Character;
-			    function Sort_Key return String is
-				-- Generate a Sort Key so that these sort
-				-- as they did in Ada 95.
-			    begin
-				if Format_Object.Attr_Prefix_Len > 2 and then
-					Format_Object.Attr_Prefix(2) = ''' then
-				    -- Class-wide prefix. For some reason, this
-				    -- sorts before the main item in the Ada 95 RM.
-				    -- (And this continues in later RMs.)
-				    return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
-					''' & Character'Pred(Format_Object.Attr_Prefix(1)) &
-					"'Class";
-					    -- Sort by name, then by prefix.
-				else
-				    return Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
-					''' & Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len);
-					    -- Sort by name, then by prefix.
-				end if;
-				-- Note: Ada 2005 sorted E'Identity and T'Identity
-				-- backwards from Ada 95. This will fix that.
-			    end Sort_Key;
-
 			begin
-			    -- Guess the Initial_Version (eventually, we'll
-			    -- add this as an optional parameter):
-			    case Prefix_Kind is
-				when ARM_Database.Revised_Inserted_Number |
-				     ARM_Database.Inserted                |
-				     ARM_Database.Deleted_Inserted_Number |
-				     ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-				    Init_Version := Prefix_Version;
---Ada.Text_IO.Put_Line ("-- Inserted.");
-			        when ARM_Database.None | ARM_Database.Revised |
-			             ARM_Database.Inserted_Normal_Number |
-			             ARM_Database.Deleted |
-				     ARM_Database.Deleted_No_Delete_Message =>
---Ada.Text_IO.Put_Line ("-- Normal.");
-				    Init_Version := '0';
-			    end case;
 			    if Format_Object.Attr_Leading then
 			        ARM_Database.Insert (Format_Object.Attr_DB,
 				    Sort_Key => Sort_Key,
@@ -9988,12 +10004,12 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
 				    Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
 				        ":" & Ascii.LF & Ascii.LF &
-				        Chg_Command (Text_Kind, Text_Version) &
+				        ChgRef_Command (Text_Kind, Text_Version, Initial_Version) &
 				        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version,
-				    Initial_Version => Init_Version);
+				    Initial_Version => Initial_Version);
 			    else -- not leading:
 			        ARM_Database.Insert (Format_Object.Attr_DB,
 				    Sort_Key => Sort_Key,
@@ -10002,12 +10018,12 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 					   ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
 				    Text => "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
 				        ":" & Ascii.LF & Ascii.LF &
-				        Chg_Command (Text_Kind, Text_Version) &
+				        ChgRef_Command (Text_Kind, Text_Version, Initial_Version) &
 				        "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
 				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version,
-				    Initial_Version => Init_Version);
+				    Initial_Version => Initial_Version);
 			    end if;
 			end Write_to_DB;
 
@@ -10018,102 +10034,111 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    (Input_Object, Text_Buffer, Text_Buffer_Len);
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
 --Ada.Text_IO.Put_Line ("&& Attr: " & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
---   " Prefix kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Prefix_Change_Kind) &
---   " Attr chg kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind));
-			case Format_Object.Attr_Change_Kind is
-			    when ARM_Database.None | ARM_Database.Revised |
-				 ARM_Database.Revised_Inserted_Number =>
-				-- Ordinary text processing is fine for the local text.
-				Write_to_DB (Prefix_Kind => Format_Object.Attr_Prefix_Change_Kind,
- 					     Text_Kind => Format_Object.Attr_Change_Kind,
-					     Prefix_Version => Format_Object.Attr_Prefix_Version,
-					     Text_Version => Format_Object.Attr_Version);
-			    when ARM_Database.Inserted | ARM_Database.Inserted_Normal_Number =>
-				declare
-				    Disposition : ARM_Output.Change_Type;
-				    use type ARM_Output.Change_Type;
-			        begin
-			            Calc_Change_Disposition (
-					Format_Object => Format_Object,
-				        Version => Format_Object.Attr_Version,
-				        Operation => ARM_Output.Insertion,
-				        Text_Kind => Disposition);
+--   "; Prefix kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Prefix_Change_Kind) &
+--   "; Attr chg kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind) &
+--   "; Attr Prefix Vers=" & Format_Object.Attr_Prefix_Version & "; Attr Text Vers=" & Format_Object.Attr_Version &
+--   "; Attr Init Vers=" & Format_Object.Attr_Initial_Version);
 
-			            if Disposition = Do_Not_Display_Text then
-				        null; -- Do *not* put this into the DB.
---Ada.Text_IO.Put_Line ("   Inserted: Ignore");
-			            elsif Disposition = ARM_Output.None then
---Ada.Text_IO.Put_Line ("   Inserted: Normal");
-					-- Normal reference:
-				        Write_to_DB (Prefix_Kind => ARM_Database.Inserted,
-		 				     Text_Kind => ARM_Database.Inserted,
-						     Prefix_Version => Format_Object.Attr_Version,
-						     Text_Version => Format_Object.Attr_Version);
-				        -- We could get away without any
-					-- insert, except that then the paragraph
-					-- numbers would be wrong. Note (as below),
-					-- the whole thing is an insertion, so
-					-- we ignore the prefix kind and version and force this
-					-- to have an inserted kind.
-			            elsif Disposition = ARM_Output.Deletion then
-			                raise Program_Error; -- A deletion inside of an insertion command!
-			            else -- Insertion.
-					-- Write inserted text:
-					-- We need to mark everything with
-					-- the kind and version of the *entire* insertion,
-					-- because the entire thing is an
-					-- insertion. (So we ignore the prefix kind and version).
---Ada.Text_IO.Put_Line ("   Inserted: Inserted version:" & Format_Object.Attr_Version);
-				        if Format_Object.Attr_Leading then
-				            ARM_Database.Insert (Format_Object.Attr_DB,
-					        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-					        Hang_Item =>
-						    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
-					            Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-						       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
-					        Text =>
-						    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
-						    "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
-					            ":]}" & Ascii.LF & Ascii.LF &
-					            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
-						    "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
-					        Change_Kind => Format_Object.Attr_Change_Kind,
-					        Version => Format_Object.Attr_Version,
-					        Initial_Version => Format_Object.Attr_Version);
-				        else -- not leading:
-				            ARM_Database.Insert (Format_Object.Attr_DB,
-					        Sort_Key => Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len),
-					        Hang_Item =>
-						    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
-					            Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-						       ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
-					        Text =>
-						    "@ChgAdded{Version=[" & Format_Object.Attr_Version & "],Text=[" &
-						    "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
-					            ":]}" & Ascii.LF & Ascii.LF &
-					            Chg_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version) &
-					            "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-					            " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
-					        Change_Kind => Format_Object.Attr_Change_Kind,
-					        Version => Format_Object.Attr_Version,
-					        Initial_Version => Format_Object.Attr_Version);
-				        end if;
-				    end if;
-				end;
+			-- How the prefix text is handled depends only on
+			-- the Initial_Version and what version we're generating.
+			-- The Kind and Version of the prefix or item is
+			-- irrelevant (it's needed mainly for the paragraph
+			-- revision number). We assume that all attributes
+			-- are inserted for their Initial_Version (since it's
+			-- unlikely that we'd delete an attribute).
 
-			    when ARM_Database.Deleted |
-				 ARM_Database.Deleted_Inserted_Number |
-				 ARM_Database.Deleted_No_Delete_Message |
-				 ARM_Database.Deleted_Inserted_Number_No_Delete_Message =>
-				-- *** We don't support this yet. (It doesn't make much sense;
-				-- *** it would be unlikely that we'd stop defining
-				-- *** an attribute).
-				Write_to_DB (Prefix_Kind => Format_Object.Attr_Prefix_Change_Kind,
- 					     Text_Kind => Format_Object.Attr_Change_Kind,
-					     Prefix_Version => Format_Object.Attr_Prefix_Version,
-					     Text_Version => Format_Object.Attr_Version);
-			end case;
+			if Format_Object.Attr_Initial_Version = '0' then
+			    -- Initial version, not inserted.
+--Ada.Text_IO.Put_Line ("   Attr: Normal initial version");
+				-- Normal reference:
+			    Write_to_DB (Prefix_Kind     => Format_Object.Attr_Prefix_Change_Kind,
+ 					 Text_Kind       => Format_Object.Attr_Change_Kind,
+					 Prefix_Version  => Format_Object.Attr_Prefix_Version,
+					 Text_Version    => Format_Object.Attr_Version,
+					 Initial_Version => '0');
+			else
+			    declare
+			        Disposition : ARM_Output.Change_Type;
+			        use type ARM_Output.Change_Type;
+			        PVersion : Character := Format_Object.Attr_Prefix_Version;
+			        PKind    : ARM_Database.Paragraph_Change_Kind_Type :=
+						Format_Object.Attr_Prefix_Change_Kind;
+		            begin
+			        if PVersion < Format_Object.Attr_Initial_Version then
+				    -- This usually happens when the prefix used
+				    -- @PrefixType; in that case, the
+				    -- Initial_Version is really want we want.
+				    -- And in that case, the prefix paragraph number
+				    -- is always inserted (since we can't get here
+				    -- if the Initial_Version is '0').
+				    PVersion := Format_Object.Attr_Initial_Version;
+				    PKind    := ARM_Database.Inserted;
+			        end if;
+
+		                Calc_Change_Disposition (
+				    Format_Object => Format_Object,
+			            Version => Format_Object.Attr_Initial_Version,
+			            Operation => ARM_Output.Insertion,
+			            Text_Kind => Disposition);
+
+		                if Disposition = Do_Not_Display_Text then
+			            null; -- Do *not* put this into the DB.
+--Ada.Text_IO.Put_Line ("   Attr: Ignore");
+		                elsif Disposition = ARM_Output.None then
+--Ada.Text_IO.Put_Line ("   Attr: Normal");
+				    -- Normal reference:
+				    Write_to_DB (Prefix_Kind     => PKind,
+ 					         Text_Kind       => Format_Object.Attr_Change_Kind,
+					         Prefix_Version  => PVersion,
+					         Text_Version    => Format_Object.Attr_Version,
+					         Initial_Version => Format_Object.Attr_Initial_Version);
+		                elsif Disposition = ARM_Output.Deletion then
+		                    raise Program_Error; -- A deletion inside of an insertion command!
+		                else -- Insertion.
+				    -- Write inserted text:
+				    -- We need to mark everything with
+				    -- the kind and version of the *entire* insertion,
+				    -- because the entire thing is an
+				    -- insertion. (So we ignore the prefix kind and version).
+--Ada.Text_IO.Put_Line ("   Attr: Inserted version:" & Format_Object.Attr_Initial_Version);
+			            if Format_Object.Attr_Leading then
+			                ARM_Database.Insert (Format_Object.Attr_DB,
+				            Sort_Key => Sort_Key,
+				            Hang_Item =>
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+				                Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+				            Text =>
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+					        "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+				                ":]}" & Ascii.LF & Ascii.LF &
+				                ChgRef_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version) &
+					        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+				                " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+				            Change_Kind => PKind,
+				            Version => PVersion,
+				            Initial_Version => Format_Object.Attr_Initial_Version);
+			            else -- not leading:
+			                ARM_Database.Insert (Format_Object.Attr_DB,
+				            Sort_Key => Sort_Key,
+				            Hang_Item =>
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+				                Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
+					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+				            Text =>
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+					        "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
+				                ":]}" & Ascii.LF & Ascii.LF &
+				                ChgRef_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version) &
+				                "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
+				                " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+				            Change_Kind => PKind,
+				            Version => PVersion,
+				            Initial_Version => Format_Object.Attr_Initial_Version);
+			            end if;
+			        end if;
+			    end;
+			end if;
         	    end;
 
 		when Pragma_Syntax | Added_Pragma_Syntax | Deleted_Pragma_Syntax =>

@@ -260,6 +260,7 @@ package body ARM_Database is
 		Format_Text ("@begin(description)" & Ascii.LF, "Prefix");
 		Temp := Database_Object.List;
 		while Temp /= null loop
+--** Debug:
 --Ada.Text_IO.Put_Line ("^^ " & Paragraph_Change_Kind_Type'Image(Temp.Change_Kind) &
 --   " for " & Temp.Hang(1..Temp.Hang_Len) & " ref=" & Change_if_Needed (Temp));
 --Ada.Text_IO.Put_Line ("   " & Change_if_Needed (Temp) &

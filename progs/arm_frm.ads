@@ -408,7 +408,7 @@ private
 	Syntax_Tab_Len : Natural := 0;
 
 	-- Attributes:
-	Prefix_Text : String (1..160) := "@b{NONE!}" & (10..160 => ' ');
+	Prefix_Text : String (1..200) := "@b{NONE!}" & (10..200 => ' ');
 	    -- This text is used as part of the attribute list text.
 	    -- It is shared between multiple attributes, which is why it is
 	    -- handled this way.
@@ -424,6 +424,7 @@ private
 	Attr_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 	Attr_Prefix_Text_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 	Attr_Version : ARM_Contents.Change_Version_Type;
+	Attr_Initial_Version : ARM_Contents.Change_Version_Type;
 	    -- The above ten items are used only when processing Attribute
 	    -- and Attribute_Leading commands.
 
