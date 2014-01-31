@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2012/03/20 06:13:59 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.50 $}
+@comment{$Revision: 1.51 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -288,13 +288,24 @@ nonportable under System.
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1]}
 The implementation shall ensure that each
 language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
-the sense that concurrent calls on the same subprogram perform as specified,
+the sense that concurrent calls on @Chg{Version=[4],New=[any language-defined],
+Old=[the same]} subprogram perform as specified,
 so long as all parameters that could be passed by reference
 denote nonoverlapping objects.
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+  @ChgAdded{Version=[4],Text=[So long as the parameters are disjoint, concurrent
+  calls on the same language-defined subprogram, and concurrent calls on two
+  different language-defined subprograms are required to work. But concurrent
+  calls operating on overlapping objects (be they of the same or different
+  language-defined subprograms) are @i<not> required to work (being erroneous
+  use of shared variables) unless both subprograms are required to pass the
+  associated parameter by-copy.]}
+
   For example, simultaneous calls to Text_IO.Put will work properly,
   so long as they are going to two different files.
   On the other hand, simultaneous output to the same file constitutes
@@ -309,10 +320,26 @@ denote nonoverlapping objects.
   of an instance of a language defined generic library package.
 @end{Honest}
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+  @ChgAdded{Version=[4],Text=[This rule applies to all language-defined
+  subprograms, including those defined in packages that manage some global state
+  (like environment variables or the current directory). Unless specified above,
+  such subprograms need to work when the explicit parameters are not
+  overlapping; in particular, the existence of the global state is not
+  considered.]}
+
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1]}
   The rule implies that any data local to the private part or
-  body of the package has to be somehow protected against
-  simultaneous access.
+  body of the package @Chg{Version=[4],New=[(including global state as described
+  above) ],Old=[]}has to be somehow protected against simultaneous access.
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+@ChgAdded{Version=[4],Text=[For the purpose of determining whether concurrent
+calls on text input-output subprograms are required to perform as specified
+above, when calling a subprogram within Text_IO or its children that implicitly
+operates on one of the default input/output files, the subprogram is considered
+to have a parameter of Current_Input or Current_Output (as appropriate).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
 @ChgAdded{Version=[3],Text=[If a descendant of a language-defined tagged
@@ -385,3 +412,13 @@ The order and lettering of the annexes has been changed.
   @ChgAdded{Version=[3],Text=[Added various new units to the
   list of predefined units.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> The rules requiring concurrent
+  access of language-defined subprograms were expanded to include implicit
+  Text_IO objects and simultaneous calls on different language-defined
+  subprograms. While this might change behavior of some programs, it would
+  do so by eliminating erroneous execution, so we don't consider this an
+  inconsistency.]}
+@end{DiffWord2012}

@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2061,10 +2061,13 @@ are synchronized.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01],ARef=[AI95-00401-01],ARef=[AI95-00443-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0087-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0036-1]}
 @ChgAdded{Version=[2],Text=[The actual type for a formal derived type
 shall be a descendant of @Redundant[the ancestor type and] every progenitor of
 the formal type. @Chg{Version=[3],New=[If the formal type is nonlimited,
-the actual type shall be nonlimited. ],Old=[]}If the reserved word
+the actual type shall be nonlimited. @Chg{Version=[4],New=[The actual type for
+a formal derived type shall be tagged if and only if the formal derived type
+is a private extension. ],Old=[]}],Old=[]}If the reserved word
 @key[synchronized] appears
 in the declaration of the formal derived type, the actual
 type shall be a synchronized tagged type.]}
@@ -2100,6 +2103,15 @@ type shall be a synchronized tagged type.]}
   from such an interface to match a nonlimited formal derived type.
   Otherwise, we could assign limited objects. Thus, we have to explicitly
   ban this case.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0036-1]}
+  @ChgAdded{Version=[4],Text=[If we allowed actual types that differ from
+  the kind of formal derived type, we could allow type conversions that would
+  not be allowed outside of the generic. That would be particularly
+  problematical if the actual is a tagged type with extension components;
+  we could have created an object of the type that is missing those components
+  by converting from the ancestor type to a formal derived type that
+  is not an extension.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0213-1]}
@@ -2306,7 +2318,7 @@ inherited from an interface type)],Old=[]}.
 the following attribute is defined:
 @begin{Description}
 @ChgAttribute{Version=[3],Kind=(Revised),ChginAnnex=[T],Leading=[F],
-Prefix=<S>, AttrName=<Definite>,ARef=[AI05-0264-1],
+Prefix=<S>, AttrName=<Definite>,ARef=[AI05-0264-1],InitialVersion=[0],
   Text=[S'Definite yields True if the actual subtype corresponding
     to S is definite; otherwise@Chg{Version=[3],New=[,],Old=[]} it yields False. The value of this
     attribute is of the predefined type Boolean.]}
@@ -2531,6 +2543,17 @@ run-time check to a compile-time check.
   generic, this cannot happen outside of test suites and thus is not
   documented as an incompatibility.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0036-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Added a requirement that a tagged type only match a formal derived type
+  that is a private extension. This is necessary to prevent type conversions
+  that would not be allowed outside of the generic. We expect that this will
+  be rare, as it only can happen if the formal derived type does not
+  accurately describe the actual type; in most such cases, extension will be
+  desired and a private extension used so that is allowed.]}
+@end{Incompatible2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @LabeledClause{Type Conversions}
 
@@ -99,9 +99,19 @@ is interpreted only as a @nt<name>;
 the operand of a value conversion
 is interpreted as an @nt<expression>.
 @begin{Reason}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   This formally resolves the syntactic ambiguity between
-  the two forms of @nt<type_conversion>, not that it really matters.
+  the two forms of @nt<type_conversion>@Chg{Version=[4],New=[.
+  This matters as an @nt{expression} that is a @nt{name} is evaluated and
+  represents a value while a @nt{name} by itself can be an object; we want
+  a view conversion to be an object],Old=[, not that it really matters]}.
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[This wording uses "interpreted as" rather than
+  "shall be" so that this rule is not used to resolve overloading; it is
+  solely about evaluation as described above.]}
+@end{Ramification}
 
 @end{Resolution}
 
@@ -918,6 +928,7 @@ Access Type Conversion
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
 @IndexCheck{Index_Check}
@@ -929,8 +940,10 @@ New=[ If the target subtype excludes null,
 then a check is made that the value is not null.],Old=[]}@Chg{Version=[3],
 New=[ If predicate checks are enabled
 for the target subtype (see @RefSecNum{Subtype Predicates}), a check
-is performed that the predicate of the target subtype is satisfied for the
-value.@Defn2{Term=[predicate check],
+is performed that the @Chg{Version=[4],New=[value satisfies the
+predicates],Old=[predicate]} of the target
+subtype@Chg{Version=[4],New=[],Old=[ is satisfied for the
+value]}.@Defn2{Term=[predicate check],
 Sec=[subtype conversion]}@Defn2{Term=[check, language-defined],
 Sec=[controlled by assertion policy]}],Old=[]}
 @begin{Ramification}
@@ -1316,6 +1329,11 @@ as a @nt<name>.
   This model was always intended and expected (else
   @RefSecNum{Change of Representation} would not work), but it was not
   previously formally defined.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  type conversions to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
 @end{Diffword2012}
 
 
@@ -2944,11 +2962,13 @@ compatible with a subtype @i<S2> if:]}
     @ChgAdded{Version=[3],Text=[all predicate specifications that apply to
     @i<S2> apply also to @i<S1>, or]}
 
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
     @ChgAdded{Version=[3],Text=[both subtypes are static, every value that
-    satisfies the predicate of @i<S1> also satisfies the predicate of @i<S2>,
-    and it is not the case that both types each have at least one applicable
-    predicate specification, predicate checks are enabled (see
+    satisfies the @Chg{Version=[4],New=[predicates],Old=[predicate]} of @i<S1>
+    also satisfies the @Chg{Version=[4],New=[predicates],Old=[predicate]} of
+    @i<S2>, and it is not the case that both types each have at least one
+    applicable predicate specification, predicate checks are enabled (see
     @RefSecNum{Pragmas Assert and Assertion_Policy}) for @i<S2>, and
     predicate checks are not enabled for @i<S1>.]}
   @end{InnerItemize}
@@ -2984,3 +3004,10 @@ This subclause is new to Ada 95.
   @ChgAdded{Version=[3],Text=[Modified static matching and static compatibility
   to take predicate aspects (see @RefSecNum{Subtype Predicates}) into account.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  static compatibility to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
+@end{Diffword2012}

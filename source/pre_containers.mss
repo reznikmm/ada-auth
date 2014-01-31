@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.96 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
+@comment{ $Revision: 1.97 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:15 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -305,10 +305,10 @@ within the instance, where:]}
   are also @i{allowing} checks needed to permit an implementation of a container
   generic to make use of access types in a straightforward way. As an example of
   the second purpose, suppose that an implementation does declare such an access
-  type and suppose further that the access type's collection's finalization has
-  started. These rules to allow Program_Error to be propagated in this case (as
-  specified in @RefSecNum{Allocators}); this is necessary to allow an all-Ada
-  implementation of these packages.]}
+  type and suppose further that the finalization of the collection of the
+  access type has started. These rules to allow Program_Error to be propagated
+  in this case (as specified in @RefSecNum{Allocators}); this is necessary to
+  allow an all-Ada implementation of these packages.]}
 @end{ImplNote}
 @end{StaticSem}
 

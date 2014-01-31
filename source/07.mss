@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1272,23 +1272,27 @@ whether the type is considered to be a descendant of a record type, or a
 descendant only through record extensions of a more distant ancestor].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[It is possible for there to be places
-where a derived type is visibly a descendant of an ancestor type, but not a
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0065-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[@Chg{Version=[4],New=[Furthermore,
+it],Old=[It]} is possible for there to be places
+where a derived type is @Chg{Version=[4],New=[known to be derived
+indirectly from],Old=[visibly a descendant of]} an ancestor type, but
+@Chg{Version=[4],New=[is ],Old=[]}not a
 descendant of even a partial view of the ancestor type, because the parent
 of the derived type is not visibly a descendant of the ancestor.  In
 this case, the derived type inherits no characteristics from that
 ancestor, but nevertheless is within the derivation class of the
 ancestor for the purposes of type conversion, the "covers"
 relationship, and matching against a formal derived type. In this
-case the derived type is considered to be a @i<descendant> of an
-incomplete view of the ancestor.@Defn2{Term=[descendant],
-Sec=[of an incomplete view]}]]}
+case the derived type is @Chg{Version=[4],New=[effectively],Old=[considered
+to be]} a @i<descendant> of an incomplete view of the ancestor.@Chg{Version=[4],New=[],Old=[@Defn2{Term=[descendant],
+Sec=[of an incomplete view]}]}]]}
 
 @begin{Discussion}
-  @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[Here is an example of this situation:]}
 @begin{Example}
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[package] P @key[is]
    @key[type] T @key[is] @key[private];
    C : @key[constant] T;
@@ -1297,18 +1301,25 @@ Sec=[of an incomplete view]}]]}
    C : @key[constant] T := 42;
 @key[end] P;]}
 
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0065-1]}
 @ChgAdded{Version=[3],Text=[@key[with] P;
 @key[package] Q @key[is]
-    @key[type] T2 @key[is new] P.T;
+    @key[type] T2 @key[is new] P.T;@Chg{Version=[4],New=[  -- @Examcom{T2 is @b<not> a descendant of Integer}],Old=[]}
 @key[end] Q;]}
 
-@ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0065-1]}
 @ChgAdded{Version=[3],Text=[@key[with] Q;
 @key[package] P.Child @key[is]
     @key[type] T3 @key[is new] Q.T2;
 @key[private]
-    Int : Integer := 52;
+    @Chg{Version=[4],New=[-- @Examcom{Here T3 is known to be indirectly derived from Integer, but inherits}
+    -- @Examcom{@b<no> characteristics from Integer, since T2 inherits no characteristics}
+    -- @Examcom{from Integer.}
+    -- @Examcom{However, we allow an explicit conversion of T3 to/from Integer.}
+    -- @Examcom{Hence, T3 is effectively a descendant of an "incomplete" view of Integer.}
+    ],Old=[]}Int : Integer := 52;
     V : T3 := T3(P.C);  -- @Examcom{Legal: conversion allowed}
     W : T3 := T3(Int);  -- @Examcom{Legal: conversion allowed}
     X : T3 := T3(42);   -- @Examcom{Error: T3 is not a numeric type}
@@ -1646,6 +1657,13 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   violated), but it wasn't spelled out in earlier versions of Ada.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0065-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified the clarification added
+  by AI05-0115-1, as it turned out to not be that clear. Hopefully this version
+  is better.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[Type Invariants]}
 
@@ -1724,6 +1742,12 @@ for an abstract type.]}
   @ChgAdded{Version=[3],Text=[The first sentence is given formally in
   @RefSecNum{Aspect Specifications}.]}
 @end{TheProof}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
+@ChgAdded{Version=[4],Text=[If a private extension occurs at a point where a
+private operation of some ancestor is visible and inherited, and a
+Type_Invariant'Class expression applies to that ancestor, then the inherited
+operation shall be abstract or shall be overridden.]}
 @end{Legality}
 
 @begin{StaticSem}
@@ -1816,27 +1840,40 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
   on any subprogram or entry that:]}
   @begin{Itemize}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0042-1]}
     @ChgAdded{Version=[3],Text=[is declared within the immediate
       scope of type @i<T> (or by an instance of a generic unit, and the generic
-      is declared within the immediate scope of type @i<T>), and]}
+      is declared within the immediate scope of type @i<T>),@Chg{Version=[4],New=[],Old=[ and]}]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[is visible outside the immediate scope of type
-      @i<T> or overrides an operation that is visible outside the immediate
-      scope of @i<T>, and]}
+    @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0042-1]}
+    @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[is visible outside the
+      immediate scope of type @i<T> or overrides an operation that is visible outside
+      the immediate scope of @i<T>, and]}]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
-    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0044-1]}
-    @ChgAdded{Version=[3],Text=[has a result with a part of type @i<T>, or one
-      or more @Chg{Version=[4],New=[@key[out] or @key[in out] ],Old=[]}parameters
-      with a part of type @i<T>, or an
-      @Chg{Version=[4],New=[access-to-object],Old=[access to variable]}
-      parameter whose designated type has a part of
-      type @i<T>@Chg{Version=[4],New=[;],Old=[.]}]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0042-1],ARef=[AI12-0044-1]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
+    @Chg{Version=[3],New=[@Chg{Version=[4],New=[and either:],
+      Old=[has a result with a part of type @i<T>, or one or more parameters
+      with a part of type @i<T>, or an access to variable
+      parameter whose designated type has a part of type @i<T>.]}],Old=[]}
 
-    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
-    @ChgAdded{Version=[4],Text=[is a procedure or entry and has an @key[in]
-      parameter with a part of type @i<T>.]}
+@begin{Itemize}
+      @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
+      @ChgAdded{Version=[4],Text=[has a result with a part of type @i<T>, or]}
+
+      @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
+      @ChgAdded{Version=[4],Text=[has one or more @key[out] or @key[in out]
+        parameters with a part of type @i<T>, or]}
+
+      @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
+      @ChgAdded{Version=[4],Text=[has an access-to-object parameter whose
+        designated type has a part of type @i<T>, or]}
+
+      @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1],ARef=[AI12-0044-1]}
+      @ChgAdded{Version=[4],Text=[is a procedure or entry that has an @key[in]
+        parameter with a part of type @i<T>,]}
 
 @begin{Discussion}
       @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1848,6 +1885,30 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
         be queries that don't modify their parameters than other callable
         entities.]}
 @end{Discussion}
+@end{Itemize}
+
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[and either:]}
+
+    @begin{Itemize}
+      @ChgRef{Version=[4],Kind=[Added]}
+      @ChgAdded{Version=[4],Text=[@i<T> is a private type or a private extension
+        and the subprogram or entry is visible outside the immediate scope of
+        type @i<T> or overrides an inherited operation that is visible outside
+        the immediate scope of @i<T>, or]}
+
+      @ChgRef{Version=[4],Kind=[Added]}
+      @ChgAdded{Version=[4],Text=[@i<T> is a record extension and the subprogram
+        or entry is a primitive operation that corresponds to a visible
+        operation of a private or private extension ancestor to which the same
+        (class-wide) invariant applies.]}
+    @end{Itemize}
+
+    @begin{Discussion}
+      @ChgRef{Version=[4],Kind=[AddedNormal]}
+      @ChgAdded{Version=[4],Text=[Problems have been identified with this last
+        part, so it should be expected to change in the near future.]}
+    @end{Discussion}
 
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
@@ -1948,9 +2009,19 @@ value.]}
 @end{Extend2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0044-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
-  @b<Correction:> Removed the invariant check for @key[in] parameters of
+  @b<Correction:> Clarified the definition of when invariant checks occur
+  for inherited subprograms. This might cause checks to be added or removed
+  in some cases. These are all rare cases involving class-wide type
+  invariants and either record extensions or multiple levels of derivation.
+  Additionally, implementations probably make the checks as the intent seems
+  clear, even though the formal language did not include them. So we do not
+  expect this to be a problem in practice.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0044-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Removed the invariant check
+  for @key[in] parameters of
   functions, so that typical invariants don't cause infinite recursion.
   This is strictly inconsistent, as the Ada 2012 definition has this check;
   therefore, programs could depend on Assertion_Error being raised upon the
@@ -1970,6 +2041,16 @@ value.]}
   the intent of invariants, we think that this change will mainly reveal bugs
   rather than cause them.]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatiblities with Ada 2012}
+  @b<Correction:> A private operation that is inherited in the visible
+  part of a package to which a class-wide invariant applies now requires
+  overriding. This is a very unlikely situation, and will prevent problems
+  with invariant checks being added to routines that assume that they don't
+  need them.]}
+@end{Incompatible2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

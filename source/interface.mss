@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -735,7 +735,9 @@ that violates Ada semantics.]}
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of interfacing pragmas:}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
+@leading@keepnext@i{Example of interfacing
+@Chg{Version=[4],New=[aspects],Old=[pragmas]}:}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0269-1]}
 @key[package] Fortran_Library @key[is]

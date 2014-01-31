@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:13 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -2259,12 +2259,13 @@ R had been a private child of Q, it would have been legal.]}
   @end{Ramification}
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00391-01]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
   Otherwise, the subprogram shall be overridden with a nonabstract
   subprogram@Chg{Version=[2],New=[ or, in the case of a private extension
-  inheriting a function with a controlling result, have a full type that is
-  a null extension],Old=[]}@Redundant[;
-  for a type declared in the visible part of a package,
-  the overriding may be either in the visible or the private part].
+  inheriting a @Chg{Version=[4],New=[nonabstract ],Old=[]}function with a
+  controlling result, have a full type that is a null
+  extension],Old=[]}@Redundant[; for a type declared in the visible part of
+  a package, the overriding may be either in the visible or the private part].
   @Chg{Version=[2],New=[Such a subprogram is said to
   @i{require overriding}.@Defn{require overriding} ],Old=[]}However,
   if the type is a generic formal type,
@@ -4516,7 +4517,7 @@ given master directly depends
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0235-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0067-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0067-1],ARef=[AI12-0089-1]}
 An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
@@ -4524,7 +4525,7 @@ as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
 @Chg{Version=[2],New=[of the declaration ],Old=[]}except in the
 cases of renaming and derived access types described below.
 @Chg{Version=[3],New=[Other than for an explicitly aliased
-parameter@Chg{Version=[4],New=[ of a function],Old=[]}, a
+parameter@Chg{Version=[4],New=[ of a function or generic function],Old=[]}, a
 formal],Old=[A]} parameter of a
 @Chg{Version=[3],New=[callable entity],Old=[master]} has the same
 accessibility level as the master@Chg{Version=[3],New=[ representing the
@@ -5090,8 +5091,10 @@ checks.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
-@i<F>, when determining whether the accessibility level of an explicitly aliased
+@Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>, when determining
+whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
 @i<F>, the level of the return object is considered to be the same as that of
 the level of the explicitly aliased parameter; for statically comparing with the
@@ -5099,11 +5102,15 @@ level of other entities, an explicitly aliased parameter of @i<F> is considered 
 have the accessibility level of the body of @i<F>.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1]}
 @ChgAdded{Version=[3],Text=[For determining whether a level is statically deeper
-than the level of the anonymous access type of an access result of a function,
-when within a return statement that applies to the function, the level
+than the level of the anonymous access type of an access result of a
+function@Chg{Version=[4],New=[ or generic function @i<F>],Old=[]},
+when within a return statement that applies to
+@Chg{Version=[4],New=[@i<F>],Old=[the function]}, the level
 of the master of the call is presumed to be the same as that of the level
-of the master that elaborated the function body.]}
+of the master that elaborated the@Chg{Version=[4],New=[],Old=[ function]}
+body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
@@ -6142,6 +6149,11 @@ uses of anonymous access types.]}
   an anonymous access type of an @nt{extended_return_statement} is defined
   here rather than in @RefSecNum{Return Statements} so that all accessibility
   rules are here.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0089-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected a number of rules so
+  that they clearly apply to generic functions as well as functions. (Remember,
+  a generic function is not a function.)]}
 @end{DiffWord2012}
 
 

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -795,12 +795,10 @@ then the respective precondition or postcondition expressions are considered
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object of a nonlimited type}, the following attribute is defined:]}
 @begin(description)
-@Comment{ Originally was  Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  We should use InitialVersion=[3] and Kind=[Revised] here, but the former
-  doesn't exist yet. It should.}
-@ChgAttribute{Version=[4],Kind=[AddedNormal],ChginAnnex=[T],
+@ChgNote{For Version=[3], Kind=[AddedNormal].}
+@ChgAttribute{Version=[4],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1], ARef=[AI12-0032-1],
-  Text=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Each],Old=[For each]}
+  InitialVersion=[3],Text=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Each],Old=[For each]}
    X'Old in a postcondition expression that
    is enabled@Chg{Version=[4],New=[ denotes],Old=[,]} a constant
    @Chg{Version=[4],New=[that ],Old=[]}is implicitly
@@ -1012,6 +1010,7 @@ denotes a function declaration}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2], ARef=[AI05-0262-1],
+  InitialVersion=[3],
   Text=[@Chg{Version=[3],New=[Within a postcondition expression for function F,
   denotes the result object of the function. The type of this attribute is that
   of the function result except within a Post'Class postcondition expression for
@@ -1031,9 +1030,9 @@ denotes a function declaration}, the following attribute is defined:]}
 
 @begin{Runtime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0290-1]}
-@ChgAdded{Version=[3],Text=[Upon a call of the subprogram or entry, after
-evaluating any actual parameters, precondition checks are performed as
-follows:]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[Upon a call of the subprogram or
+entry, after evaluating any actual parameters, precondition checks are performed
+as follows:]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2814,10 +2813,23 @@ If the mode is @key(in),
 the actual is interpreted as an @nt{expression};
 otherwise, the actual is interpreted only as a @nt{name}, if possible.
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   This formally resolves the ambiguity present in the syntax rule
-  for @nt<explicit_actual_parameter>. Note that we don't actually require
+  for @nt<explicit_actual_parameter>.
+  @Chg{Version=[4],New=[This matters as an @nt{expression} that is a
+  @nt{name} is evaluated and represents a value while a @nt{name} by itself
+  can be an object; if the mode is not @key[in], we want the parameter to
+  interpreted as an object.],Old=[]} Note that we don't actually require
   that the actual be a @nt<name> if the mode is not @key(in);
   we do that below.
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[This wording uses "interpreted as" rather than
+  "shall be" so that this rule is not used to resolve overloading; it is
+  solely about evaluation as described above. We definitely do not want
+  to allow oddities like the presence of parentheses requiring the selection of
+  an @key[in] formal parameter as opposed to an otherwise matching @key[in out]
+  parameter.]}
 @end{Ramification}
 @end{Resolution}
 
@@ -3529,6 +3541,13 @@ A @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} shall
 not be within a body that is within the construct to which the
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} applies.
 
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0089-1]}
+  @ChgAdded{Version=[4],Text=[The above also applies to generic subprograms,
+  even though they are not callable constructs. (An instance of a generic
+  subprogram is a callable construct, but not a generic subprogram itself.)]}
+@end{Honest}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
 A function body shall contain at least one
@@ -3544,6 +3563,7 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1]}
   The requirement that a function body has to have at least one
   @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}
   is a @lquotes@;helpful@rquotes@; restriction.
@@ -3551,7 +3571,11 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
   this restriction, or allowing a raise statement to substitute for the
   @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]}.
   However, there was enough interest in leaving it as is
-  that we decided not to change it.
+  that we decided not to change it.@Chg{Version=[4],New=[ Note that for
+  Ada 2012, Corrigendum 1, a return statement whose expression is a
+  @nt{raise_expression} can be given in @i<any> function body (the
+  @nt{raise_expression} will match any type), so there is
+  much less need to eliminate this rule.],Old=[]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
@@ -3562,6 +3586,12 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
   @nt{extended_return_statement} can be given inside an
   @nt{extended_return_statement}, as they must apply (directly) to a
   function body.]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0089-1]}
+  @ChgAdded{Version=[4],Text=[Since a "function body" includes a generic
+  function body, this rule and all of the following @LegalityTitle apply
+  to generic function bodies as well as non-generic function bodies. This is
+  true even though a generic function is not a function.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
@@ -3655,8 +3685,10 @@ statically deeper than that of the master that elaborated the function body.]}]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0032-1],ARef=[AI05-0051-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[If],Old=[We know that if]}
-  the result type is class wide, then there must be an @nt{expression} of the
+  the result type is @Chg{Version=[4],New=[class-wide],Old=[class wide]},
+  then there must be an @nt{expression} of the
   return statement@Chg{Version=[3],New=[ unless this is
   an @nt{extended_return_statement} whose @nt{return_subtype_indication} is
   a specific type. We have a separate rule to cover that case. Note that
@@ -4947,11 +4979,13 @@ the @nt{expression_@!function_@!declaration}.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[We don't need to repeat any of the other
   @LegalityTitle for return statements since none of them can fail here: the
   implicit return statement has to apply to this function (and isn't nested in
   something), there clearly is a return statement in this function, and the
-  static classwide accessibility check cannot fail as a tagged type cannot be
+  static @Chg{Version=[4],New=[class-wide],Old=[classwide]} accessibility check
+  cannot fail as a tagged type cannot be
   declared locally in an expression function.]}
 @end{Discussion}
 @end{Legality}

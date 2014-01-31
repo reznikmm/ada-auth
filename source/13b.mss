@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2013/08/17 02:17:38 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1321,19 +1321,20 @@ the following attribute is defined:
 @begin(description)
 @Comment{We ought to have a separate change for version [3] here, but
 we don't have that capability.}
-@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
+@ChgAttribute{Version=[4],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Valid>,
-  ARef=[AI05-0153-3],
+  ARef=[AI05-0153-3], ARef=[AI12-0071-1], InitialVersion=[0],
   Text=<Yields True if and only if
 the object denoted by X is normal@Chg{Version=[3],New=[,],Old=[ and]} has a
-valid representation@Chg{Version=[3],New=[, and the
-predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}
-of the nominal subtype of X evaluates to True],Old=[]}.
-The value of this attribute is of the predefined type Boolean.>}
+valid representation@Chg{Version=[3],New=[, and @Chg{Version=[4],New=[then,
+if the preceding conditions hold, the value of X also satisfies the
+predicates@Defn2{Term=[predicates satisfied required],Sec=[Valid attribute]}], Old=[the
+predicate@Defn2{Term=[predicate evaluated],Sec=[Valid attribute]}]}
+of the nominal subtype of X@Chg{Version=[4],New=[],Old=[ evaluates to
+True]}],Old=[]}. The value of this attribute is of the predefined type Boolean.>}
 @begin{Ramification}
   Having checked that X'Valid is True, it is safe to read the
-  value of X without fear of erroneous execution
-  caused by abnormality,
+  value of X without fear of erroneous execution caused by abnormality,
   or a bounded error caused by an invalid representation.
   Such a read will produce a value in the subtype of X.
 @end{Ramification}
@@ -1362,9 +1363,27 @@ of a language-defined check
 use of an object whose Address has been specified.
 @end{Itemize}
 
-X'Valid is not considered to be a read of X;
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+@Chg{Version=[4],New=[Determining whether X is normal and has a valid
+representation as part of the evaluation of ],Old=[]}X'Valid is not considered
+to @Chg{Version=[4],New=[include an evaluation],Old=[be a read]} of X;
 hence, it is not an error to check the validity
-of invalid data.
+of @Chg{Version=[4],New=[an object that is invalid or abnormal.
+Determining whether X satisfies the predicates of its nominal
+subtype may include an evaluation of X, but only after
+it has been determined that X has a valid representation],Old=[invalid data]}.
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+@ChgAdded{Version=[4],NoPrefix=[T],Text=[If X is volatile, the evaluation of
+X'Valid is considered a read of X.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Since an implementation is not allowed to add,
+  remove, or reorder accesses to volatile objects, we have to define X'Valid
+  as a read so that it is implementable for most subtypes as the value
+  of the object is required.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00426-01]}
 @ChgAdded{Version=[2],Text=[The Valid attribute may be used to check the
@@ -1422,6 +1441,15 @@ X'Valid is new in Ada 95.
   of the predicate aspects (see @RefSecNum{Subtype Predicates}), if any, of
   the subtype of the object.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  attributes X'Valid to use the new term
+  "satisfies the predicates" (see @RefSecNum{Subtype Predicates}).
+  Also updated the notes to make sense when evaluating predicates and
+  testing validity of volatile objects.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Unchecked Access Value Creation}
@@ -2374,7 +2402,8 @@ the following @Chg{Version=[3],New=[attributes are],Old=[attribute is]} defined:
 @ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Max_Size_In_Storage_Elements>,
   ARef=[AI95-00256-01],ARef=[AI95-00416-01],ARef=[AI05-0193-1],
-  Text=<Denotes the maximum value for Size_In_Storage_Elements
+  InitialVersion=[0], Text=<Denotes the maximum value for
+Size_In_Storage_Elements
 that @Chg{Version=[2],New=[could],Old=[will]} be requested @Chg{Version=[2],
 New=[by the implementation ],Old=[]}via Allocate for an access type whose
 designated subtype is S.@Chg{Version=[2],New=[@Chg{Version=[3],New=[],Old=[ For a type with access
@@ -2391,10 +2420,10 @@ S'Max_Size_In_Storage_Elements might be very large.
 
 @ChgAttribute{Version=[3], Kind=[AddedNormal], ChginAnnex=[T], Leading=[F],
   Prefix=<S>, AttrName=<Max_Alignment_For_Allocation>, ARef=[AI05-0193-1],
-  Text=<@Chg{Version=[3],New=[Denotes the maximum value for Alignment that
-  could be requested by the implementation via Allocate for an access type
-  whose designated subtype is S. The value of this attribute is of type
-  @i{universal_integer}.],Old=[]}>}
+  InitialVersion=[3], Text=<@Chg{Version=[3],New=[Denotes the maximum value for
+  Alignment that could be requested by the implementation via Allocate for
+  an access type whose designated subtype is S. The value of this attribute
+  is of type @i{universal_integer}.],Old=[]}>}
 @EndPrefixType{}
 @end{Description}
 @end{StaticSem}
@@ -4458,12 +4487,10 @@ stream of elements and reconstruct values from a stream.
 an elementary type @i(T)}, the following representation attribute is defined:]}
 @begin{Description}
 
-@Comment{Originally Version=[2],Kind=[Added], but we don't have a way to do both;
-  also, Kind should be RevisedAdded, but that changes the attribute name to not inserted.
-  Should have InitialVersion=[2] as a possible parameter.}
-@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+@Comment{Originally Version=[2],Kind=[Added]}
+@ChgAttribute{Version=[3],Kind=[RevisedAdded],ChginAnnex=[T],
   Leading=<T>, Prefix=<S>, AttrName=<Stream_Size>, ARef=[AI95-00270-01], ARef=[AI05-0194-1],
-  Text=[@Chg{Version=[2],New=[Denotes the number of bits
+  InitialVersion=[2], Text=[@Chg{Version=[2],New=[Denotes the number of bits
   @Chg{Version=[3],New=[read from or written to a stream by the
   default implementations of S'Read and S'Write],Old=[occupied
   in a stream by items of subtype S]}. Hence, the number of stream elements

@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1638,6 +1638,19 @@ The effect of Flush is the same as the corresponding subprogram
 in Streams.Stream_IO (see @RefSecNum[The Package Streams.Stream_IO]).
 If File is not explicitly specified, Current_Output is used.
 @end{DescribeCode}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0052-1]}
+  @ChgAdded{Version=[4],Text=[For the purpose of determining whether concurrent
+  calls on text input-output subprograms are required to perform as specified,
+  subprograms that implicitly operate on one of the default input/output files
+  are considered to have a parameter of Current_Input or Current_Output (as
+  appropriate). The result of Current_Output is considered to be overlapping
+  with the file given to the latest call of Set_Output (or Standard_Output if
+  Set_Output hasn't been called); a corresponding consideration applies to the
+  result of Current_Input. See the introduction of
+  @RefSecNum{Predefined Language Environment} for details.]}
+@end{Discussion}
 @end{StaticSem}
 
 @begin{Erron}

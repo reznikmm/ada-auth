@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2013/07/18 04:58:15 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2057,9 +2057,9 @@ the following attribute is defined:
 @begin{Description}
 @ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[T],
     Leading=<F>, Prefix=<E>, AttrName=<Caller>, ARef=[AI05-0262-1],
-    Text=[Yields a value of the type Task_Id that identifies the task
-       whose call is now being serviced. Use of this attribute is
-       allowed only inside an
+    InitialVersion=[0], Text=[Yields a value of the type Task_Id that
+       identifies the task whose call is now being serviced. Use of this
+       attribute is allowed only inside an
        @Chg{Version=[3],New=[],Old=[@nt{entry_body}
        or ]}@nt{accept_statement}@Chg{Version=[3],New=[,
        or @nt{entry_body} after the

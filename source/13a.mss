@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1854,7 +1854,7 @@ should be deleted if the paragraphs are ever renumbered.}
 
 @begin{MetaRules}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
-  @ChgAdded{Version=[4],Text=[If the default representation is already uses
+  @ChgAdded{Version=[4],Text=[If the default representation already uses
   minimal storage for a particular type, aspect Pack may not cause any
   representation change. It follows that aspect Pack should always be allowed,
   even when it has no effect on representation.]}
@@ -2531,8 +2531,8 @@ than that.
 @Chg{New=[@nt{prefix}],Old=[prefix]} X that denotes @Chg{Version=[2],New=[an],
 Old=[a subtype or]} object]}:
 @begin{Description}
-@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<X>, AttrName=<Alignment>, ARef=[AI95-00291-02],
+@ChgAttribute{Version=[2], Kind=[Revised], ChginAnnex=[T], Leading=[F],
+  Prefix=<X>, AttrName=<Alignment>, ARef=[AI95-00291-02], InitialVersion=[0],
   Text=[@Chg{Version=[2],New=[The value of this attribute is of type
     @i{universal_integer}, and nonnegative; zero means that the object is not
     necessarily aligned on a storage element boundary. If X'Alignment is not
@@ -2604,7 +2604,7 @@ multiple thereof.]}
 Text=[For @PrefixType{every subtype S}:]}
 @begin{Description}
 @ChgAttribute{Version=[2], Kind=[Added], ChginAnnex=[T], Leading=[F],
-  Prefix=<S>, AttrName=<Alignment>, ARef=[AI95-00291-02],
+  Prefix=<S>, AttrName=<Alignment>, ARef=[AI95-00291-02], InitialVersion=[2],
   Text=[@Chg{Version=[2],New=[The value of this attribute is of type
   @i{universal_integer}, and nonnegative.],Old=[]}
 
@@ -3591,14 +3591,15 @@ be followed.]}]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0191-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
-denotes an object}:]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For
+@ChgPrefixType{Version=[3],Kind=[Added],Text=[a @nt{prefix} X that denotes
+an object]}:]}
 @begin(description)
-@ChgNote{ Original: @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],}}
+@ChgNote{ Original Version=[3],Kind=[Added]}
 @ChgAttribute{Version=[4],Kind=[RevisedAdded],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Has_Same_Storage>, ARef=[AI05-0191-1],
-  Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes a function with the
-  following specification:],Old=[]}
+  InitialVersion=[3], Text=[@Chg{Version=[3],New=[X'Has_Same_Storage denotes
+  a function with the following specification:],Old=[]}
 
 @begin(Descexample)
 @ChgRef{Version=[3],Kind=[Added]}
@@ -3631,8 +3632,8 @@ denotes an object}:]}
 @begin(description)
 @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Overlaps_Storage>, ARef=[AI05-0191-1],
-  Text=[@Chg{Version=[3],New=[X'Overlaps_Storage denotes a function with the
-  following specification:],Old=[]}
+  InitialVersion=[3], Text=[@Chg{Version=[3],New=[X'Overlaps_Storage denotes
+  a function with the following specification:],Old=[]}
 
 @begin(Descexample)
 @ChgRef{Version=[3],Kind=[Added]}
@@ -3678,7 +3679,7 @@ attribute is defined]}:
   We don't have a way to change multiple versions for attributes.}
 @ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[F], Leading=[F],
   Prefix=<S>, AttrName=<External_Tag>, Ref=[8652/0040], ARef=[AI95-00108-01], ARef=[AI05-0092-1],
-  Text=[@Defn{External_Tag clause}
+  InitialVersion=[0], Text=[@Defn{External_Tag clause}
   @PDefn2{Term=(specifiable), Sec=(of External_Tag for a tagged type)}
   S'External_Tag denotes an external string representation
   for S'Tag; it is of the predefined type String.
@@ -4653,7 +4654,7 @@ but the user may control their values by giving a
 @begin{Description}
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<R.C>, AttrName=<Position>,
-  ARef=[AI95-00133-01],
+  ARef=[AI95-00133-01], InitialVersion=[0],
   Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
   composite type, and if a @nt{component_clause} specifies the placement of C,
   denotes the value given for the @nt{position} of the @nt{component_clause};
@@ -4678,7 +4679,7 @@ that takes two Addresses and returns a Storage_Offset.
 
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<R.C>, AttrName=<First_Bit>,
-  ARef=[AI95-00133-01],
+  ARef=[AI95-00133-01], InitialVersion=[0],
   Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
   composite type, and if a @nt{component_clause} specifies the placement of C,
   denotes the value given for the @nt{first_bit} of the @nt{component_clause};
@@ -4691,7 +4692,7 @@ that takes two Addresses and returns a Storage_Offset.
 
 @ChgAttribute{Version=[2],Kind=[Revised],ChginAnnex=[T],
   Leading=<F>, Prefix=<R.C>, AttrName=<Last_Bit>,
-  ARef=[AI95-00133-01],
+  ARef=[AI95-00133-01], InitialVersion=[0],
   Text=<@Chg{Version=[2],New=[If the nondefault bit ordering applies to the
   composite type, and if a @nt{component_clause} specifies the placement of C,
   denotes the value given for the @nt{last_bit} of the @nt{component_clause};

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.116 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
+@comment{ $Revision: 1.117 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2013/07/18 04:58:15 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -278,20 +278,24 @@ in a @nt{protected_definition}]}
 is discussed in @RefSecNum{Priority Ceiling Locking}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0081-1]}
 @Defn2{Term=[creation], Sec=(of a task object)}
 The @nt{expression} @Chg{Version=[3],New=[specified for the],Old=[in a]}
-Priority or Interrupt_Priority @Chg{Version=[3],New=[aspect of a task],
-Old=[pragma that
-appears in a @nt{task_definition}]} is evaluated for each task object
+Priority or Interrupt_Priority @Chg{Version=[3],New=[aspect of a
+task@Chg{Version=[4],New=[ type],Old=[]}],Old=[pragma that
+appears in a @nt{task_definition}]} is evaluated
+@Chg{Version=[4],New=[],Old=[for ]}each
+@Chg{Version=[4],New=[time an],Old=[task]}
+object@Chg{Version=[4],New=[ of the task type is created],Old=[]}
 (see @RefSecNum{Task Units and Task Objects}).
 For @Chg{Version=[3],New=[the],Old=[a]} Priority @Chg{Version=[3],New=[aspect],Old=[pragma]},
 the value of the @nt{expression} is converted to the subtype Priority;
 for @Chg{Version=[3],New=[the],Old=[an]}
 Interrupt_Priority @Chg{Version=[3],New=[aspect],Old=[pragma]}, this value
 is converted to the subtype Any_Priority.
-The priority value is then associated with the task object whose
-@Chg{Version=[3],New=[task declaration specifies the
-aspect],Old=[@nt{task_definition} contains the pragma]}.
+The priority value is then associated with the task
+object@Chg{Version=[4],New=[],Old=[whose @Chg{Version=[3],New=[task declaration
+specifies the aspect],Old=[@nt{task_definition} contains the pragma]}]}.
 @Chg{Version=[3],New=[@PDefn2{Term=[implicit subtype conversion],Sec=(Priority aspect)}
 @PDefn2{Term=[implicit subtype conversion],Sec=(Interrupt_Priority aspect)}],
 Old=[@PDefn2{Term=[implicit subtype conversion],Sec=(pragma Priority)}
@@ -427,6 +431,12 @@ The description of the Priority pragma has been moved to this annex.
   Aspects Priority and Interrupt_Priority are new; @nt{pragma}s
   Priority and Interrupt_Priority are now obsolescent.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified when the Priority
+  and Interrupt_Priority aspect expressions are evaluated.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Priority Scheduling}
@@ -6158,10 +6168,15 @@ interface type.]}
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0081-1]}
 @ChgAdded{Version=[3],Text=[The @nt{expression} specified for the CPU aspect
-of a task is evaluated for each task object (see
+of a task@Chg{Version=[4],New=[ type],Old=[]} is evaluated
+@Chg{Version=[4],New=[],Old=[for ]}each
+@Chg{Version=[4],New=[time an],Old=[task]} object
+@Chg{Version=[4],New=[of the task type is created ],Old=[]}(see
 @RefSecNum{Task Units and Task Objects}). The CPU value is then associated with
-the task object whose task declaration specifies the aspect.]}
+the task object@Chg{Version=[4],New=[],Old=[ whose task declaration specifies
+the aspect]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The CPU aspect has no effect if it is specified for
@@ -6195,6 +6210,13 @@ defined to have failed, and it becomes a completed task (see
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The package System.Multiprocessors and the CPU aspect are new.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified when the CPU
+  aspect expression is evaluated.]}
+@end{DiffWord2012}
+
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledAddedSubClause{Version=[3],Name=[Multiprocessor Dispatching Domains]}
@@ -6281,11 +6303,19 @@ language-defined library package exists:]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[The type Dispatching_Domain represents a series of
-processors on which a task may execute. Each processor is contained within
-exactly one Dispatching_Domain. System_Dispatching_Domain contains the processor
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[A @i{dispatching
+domain}@Defn{dispatching domain}],Old=[The type Dispatching_Domain]}
+represents a @Chg{Version=[4],New=[set],Old=[series]}
+of processors on which a task may execute. Each processor
+is contained within exactly one @Chg{Version=[4],New=[dispatching
+domain],Old=[Dispatching_Domain]}.
+@Chg{Version=[4],New=[An object of type Dispatching_Domain identifies a
+dispatching domain. ],Old=[]}System_Dispatching_Domain
+@Chg{Version=[4],New=[identifies a domain that ],Old=[]}contains the processor
 or processors on which the environment task executes. At program start-up all
-processors are contained within System_Dispatching_Domain.]}
+processors are contained within
+@Chg{Version=[4],New=[this domain],Old=[System_Dispatching_Domain]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
@@ -6323,7 +6353,7 @@ for a task interface.]}
 aspect of a task @Chg{Version=[4],New=[type ],Old=[]}is evaluated
 @Chg{Version=[4],New=[each time an object of the task type is created],Old=[for
 each task object]} (see @RefSecNum{Task Units and Task Objects}).
-@Chg{Version=[4],New=[If the identified Dispatching_Domain is empty, then
+@Chg{Version=[4],New=[If the identified dispatching domain is empty, then
 Dispatching_Domain_Error is raised; otherwise the newly created task is assigned
 to the domain identified by the value of the expression],Old=[The
 Dispatching_Domain value is then associated with the task object whose task
@@ -6335,7 +6365,9 @@ it is assigned to that of the activating task. A task always executes on some
 CPU in its domain.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
-@ChgAdded{Version=[3],Text=[If both Dispatching_Domain and CPU are specified for
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
+@ChgAdded{Version=[3],Text=[If both @Chg{Version=[4],New=[the dispatching
+domain],Old=[Dispatching_Domain]} and CPU are specified for
 a task, and the CPU value is not contained within the range of processors for
 the domain (and is not Not_A_Specific_CPU), the activation of the task is
 defined to have failed, and it becomes a completed task (see
@@ -6344,9 +6376,10 @@ defined to have failed, and it becomes a completed task (see
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[3],Text=[The function Create @Chg{Version=[4],New=[with First
-and Last parameters ],Old=[]}creates and returns a Dispatching_Domain containing
+and Last parameters ],Old=[]}creates and returns a @Chg{Version=[4],New=[dispatching
+domain],Old=[Dispatching_Domain]} containing
 all the processors in the range First .. Last. @Chg{Version=[4],New=[The
-function Create with a Set parameter creates and returns a Dispatching_Domain
+function Create with a Set parameter creates and returns a dispatching domain
 containing the processors for which Set(I) is True.],Old=[]} These processors
 are removed from System_Dispatching_Domain. A call of Create will raise
 Dispatching_Domain_Error if any designated processor is not currently in
@@ -6367,13 +6400,16 @@ True values in the Set corresponding to the CPUs that are in the given
 Domain],Old=[one]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
 @ChgAdded{Version=[3],Text=[The function Get_Dispatching_Domain returns the
-Dispatching_Domain on which the task is assigned.]}
+@Chg{Version=[4],New=[dispatching domain],Old=[Dispatching_Domain]} on
+which the task is assigned.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[3],Text=[A call of the procedure Assign_Task assigns task T
-to the CPU within Dispatching_Domain Domain. Task T can now execute only on
+to the CPU within @Chg{Version=[4],New=[the dispatching domain],Old=[Dispatching_Domain]}
+Domain. Task T can now execute only on
 CPU@Chg{Version=[4],New=[,],Old=[]} unless CPU designates
 Not_A_Specific_CPU@Chg{Version=[4],New=[],Old=[,]} in which case it can
 execute on any processor within Domain. The exception Dispatching_Domain_Error
@@ -6391,27 +6427,32 @@ otherwise the effect is as soon as practical. Assigning a task
 effect.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1],ARef=[AI05-0278-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
 @ChgAdded{Version=[3],Text=[A call of procedure Set_CPU assigns task T to the
 CPU. Task T can now execute only on CPU, unless CPU designates
 Not_A_Specific_CPU, in which case it can execute on any processor within its
-Dispatching_Domain. The exception Dispatching_Domain_Error is propagated if CPU
-is not one of the processors of the Dispatching_Domain on which T is assigned
-(and is not Not_A_Specific_CPU). A call of Set_CPU is a task dispatching point
-for task T unless T is inside of a protected action, in which case the effect on
-task T is delayed until its next task dispatching point. If T is the
-Current_Task the effect is immediate if T is not inside a protected action,
-otherwise the effect is as soon as practical.]}
+@Chg{Version=[4],New=[dispatching domain],Old=[Dispatching_Domain]}. The
+exception Dispatching_Domain_Error is propagated if CPU is not one of the
+processors of the @Chg{Version=[4],New=[dispatching
+domain],Old=[Dispatching_Domain]} on which T is assigned (and is not
+Not_A_Specific_CPU). A call of Set_CPU is a task dispatching point for task T
+unless T is inside of a protected action, in which case the effect on task T is
+delayed until its next task dispatching point. If T is the Current_Task the
+effect is immediate if T is not inside a protected action, otherwise the effect
+is as soon as practical.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
 @ChgAdded{Version=[3],Text=[The function Get_CPU returns the processor assigned
 to task T, or Not_A_Specific_CPU if the task is not assigned to a processor.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0167-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
 @ChgAdded{Version=[3],Text=[A call of Delay_Until_And_Set_CPU delays the calling
 task for the designated time and then assigns the task to the specified
 processor when the delay expires. The exception Dispatching_Domain_Error is
 propagated if P is not one of the processors of the calling task's
-Dispatching_Domain (and is not Not_A_Specific_CPU).]}
+@Chg{Version=[4],New=[dispatching domain],Old=[Dispatching_Domain]} (and is
+not Not_A_Specific_CPU).]}
 
 @end{Runtime}
 
@@ -6545,4 +6586,12 @@ the program can't do anything useful).]}
   @ChgAdded{Version=[4],Text=[@b{Correction:} Added wording to clarify that
   all tasks can execute on all CPUs of the system dispatching domain by
   default.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0082-1]}
+  @ChgAdded{Version=[4],Text=[@b{Correction:} Added a definition to clarify
+  that a "dispatching domain" is a concept which is identified by an
+  object of type Dispatching_Domain; more than one object might identify
+  the same dispatching domain (for instance, the result of function
+  Get_Dispatching_Domain is a different object but identifies the same
+  dispatching domain).]}
 @end{Diffword2012}

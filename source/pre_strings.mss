@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3721,11 +3721,24 @@ and a different initial BOM causes Encoding_Error to be propagated.]}
 situations:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[By a Decode function when a UTF encoded
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0088-1]}
+  @ChgAdded{Version=[3],Text=[By a @Chg{Version=[4],New=[Convert or
+    ],Old=[]}Decode function when a UTF encoded
     string contains an invalid encoding sequence.]}
 
+  @begin{Honest}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0088-1]}
+  @ChgAdded{Version=[4],Text=[An overlong encoding is not invalid for the
+    purposes of this check, and this does not depend on the character set
+    version in use. Some recent character set standards declare overlong
+    encodings invalid; it would be unnecessary and unfriendly to users for
+    Convert or Decode to raise an exception for an overlong encoding.]}
+  @end{Honest}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[By a Decode function when the expected encoding is
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0088-1]}
+  @ChgAdded{Version=[3],Text=[By a @Chg{Version=[4],New=[Convert or
+    ],Old=[]}Decode function when the expected encoding is
     UTF-16BE or UTF-16LE and the input string has an odd length.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
@@ -4029,5 +4042,11 @@ Decode to convert all of the lines to an internal format.]}
   Strings.UTF_Encoding.Strings, Strings.UTF_Encoding.Wide_Strings,
   and Strings.UTF_Encoding.Wide_Wide_Strings are new.]}
 @end{Extend2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0088-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed the omission that Convert
+  routines make the same checks on input as Decode routines.]}
+@end{Diffword2012}
 
 

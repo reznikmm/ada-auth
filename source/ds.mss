@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.69 $ $Date: 2013/07/18 04:58:15 $ $Author: randy $ }
+@comment{ $Revision: 1.70 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2013/07/18 04:58:15 $}
+@Comment{$Date: 2014/01/08 01:15:34 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -807,6 +807,7 @@ call;]}
 
 @ChgRef{Version=[1],Kind=[Revised]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00366-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0085-1]}
 The Storage_Pool @Chg{Version=[2],New=[attribute is],Old=[and
 Storage_Size attributes are]} not defined for@Chg{Version=[2],New=[ a],Old=[]}
 remote access-to-class-wide @Chg{Version=[2],New=[type],Old=[types]};
@@ -814,8 +815,10 @@ the expected type for an @nt{allocator} shall not be a remote
 access-to-class-wide type@Chg{Version=[2],New=[. A],Old=[; a]} remote
 access-to-class-wide type shall not be an actual parameter for a generic
 formal access type@Chg{New=[.],Old=[;]}@Chg{Version=[2],New=[ The Storage_Size
-attribute of a remote access-to-class-wide type yields 0; it is not allowed in
-an @nt{attribute_definition_clause}.],Old=[]}
+attribute of a remote access-to-class-wide type yields 0@Chg{Version=[4],
+New=[],Old=[; it is not allowed in an @nt{attribute_definition_clause}]}.],
+Old=[]}@Chg{Version=[4],New=[  The Storage_Pool and Storage_Size aspects
+shall not be specified for a remote access-to-class-wide type.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
@@ -825,12 +828,19 @@ an @nt{attribute_definition_clause}.],Old=[]}
   access-to-class-wide type.@Chg{Version=[2],New=[ The Storage_Size is defined
   to be 0 so that there is no conflict with the rules for pure units.],Old=[]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0085-1]}
+  @ChgAdded{Version=[4],Text=[The prohibition against specifying the
+  Storage_Size aspect for an access-to-class-wide type applies to any
+  method of doing that, including via either a @nt{aspect_specification} or
+  an @nt{attribute_definition_clause}.]}
+@end{Ramification}
 @end{Itemize}
 
 @end{Legality}
 
 @begin{Erron}
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0076-1]}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0076-1]}
   @ChgAdded{Version=[4],Text=[Execution is erroneous if some operation (other
   than the initialization or finalization of the object) modifies the value of a
   constant object declared in the visible part of a remote types package.]}
@@ -963,20 +973,27 @@ synchronized, protected, or task interface type.]}
 @end{Extend2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0034-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0034-1]}
   @ChgAdded{Version=[4],Text=[@B<Correction:> Clarified that dispatching
   remote stream attribute calls are prohibited. We don't document this as
   an incompatibility, as the stream parameter cannot be marshalled for a
   remote call (it doesn't have external streaming), so it's impossible that
   any working program depends on this functionality.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0076-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0076-1]}
   @ChgAdded{Version=[4],Text=[@B<Correction:> Explicitly stated that modifying
   a visible constant in a remote types package is erroneous. We don't document
   this as inconsistent as implementations certainly can still do whatever they
   were previously doing (no change is required); moreover, this case (and many
   more) were erroneous in Ada 2005 and before, so we're just restoring the
   previous semantics.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0085-1]}
+  @ChgAdded{Version=[4],Text=[@B<Correction:> Clarified that specifying
+  the Storage_Pool or Storage_Size aspect for an access-to-class-wide type is
+  not allowed. The intent is clear, and no implementation has ever allowed
+  specifying the aspects (the attributes already cannot be specified),
+  so we don't document this as an incompatibility.]}
 @end{DiffWord2012}
 
 
@@ -1153,9 +1170,12 @@ be a remote call interface library unit.
 applies to the value True. If the All_Calls_Remote aspect of a library unit is True],
 Old=[]}, the library unit shall be a remote call interface.
 
-  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[All_Calls_Remote],
-    Text=[@ChgAdded{Version=[3],Text=[All remote procedure calls should use the
-      Partition Communication Subsystem, even if they are local.]}]}
+  @ChgAspectDesc{Version=[4],Kind=[Revised],InitialVersion=[3],Aspect=[All_Calls_Remote],
+    Text=[@ChgAdded{Version=[3],Text=[All @Chg{Version=[4],New=[indirect or
+      dispatching remote subprogram calls and all direct],Old=[]}
+      remote @Chg{Version=[4],New=[subprogram],Old=[procedure]} calls
+      should use the Partition Communication
+      Subsystem@Chg{Version=[4],New=[],Old=[, even if they are local]}.]}]}
 
 @end{Legality}
 
@@ -1194,34 +1214,57 @@ explicitly assigned.]
 @begin{ImplReq}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-If @Chg{Version=[3],New=[aspect],Old=[a pragma]} All_Calls_Remote
-@Chg{Version=[3],New=[is True for],Old=[applies to]} a
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0031-1]}
+@ChgNote{Use ChgAdded to get conditional Leading}@ChgAdded{Version=[4],
+Type=[Leading],Text=[]}If @Chg{Version=[3],New=[aspect],Old=[a pragma]}
+All_Calls_Remote @Chg{Version=[3],New=[is True for],Old=[applies to]} a
 given RCI library @Chg{New=[unit],Old=[package]}, then the
-implementation shall route any call to a subprogram of the RCI
-@Chg{New=[unit],Old=[package]} from outside the declarative region of the
-@Chg{New=[unit],Old=[package]} through the Partition Communication Subsystem
-(PCS); see @RefSecNum{Partition Communication Subsystem}.
+implementation shall route any @Chg{Version=[4],New=[of the following calls],
+Old=[call to a subprogram of the RCI @Chg{New=[unit],Old=[package]} from
+outside the declarative region of the @Chg{New=[unit],Old=[package]}]} through
+the Partition Communication Subsystem (PCS); see
+@RefSecNum{Partition Communication Subsystem}@Chg{Version=[4],New=[:],Old=[.
 Calls to such subprograms from within the declarative region of
 the @Chg{New=[unit],Old=[package]} are defined to be local and shall
-not go through the PCS.
+not go through the PCS.]}
+@begin{Itemize}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0031-1]}
+  @ChgAdded{Version=[4],Text=[A direct call to a subprogram of the RCI unit from
+    outside the declarative region of the unit;]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0031-1]}
+  @ChgAdded{Version=[4],Text=[An indirect call through a remote
+    access-to-subprogram value that designates a subprogram of the RCI unit;]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0031-1]}
+  @ChgAdded{Version=[4],Text=[A dispatching call with a controlling operand
+    designated by a remote access-to-class-wide value whose tag identifies a
+    type declared in the RCI unit.]}
+@end{Itemize}
 @begin{Discussion}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0031-1]}
 @Chg{Version=[3],New=[When this aspect is False (or not used)],Old=[Without
 this pragma]}, it is presumed
-that most implementations will
-make direct calls if the call originates in the same partition
+that most implementations will@Chg{Version=[4],New=[ not],Old=[]}
+make@Chg{Version=[4],New=[],Old=[ direct]} calls@Chg{Version=[4],New=[ through
+the PCS],Old=[]} if the call originates in the same partition
 as that of the RCI @Chg{New=[unit],Old=[package]}. @Chg{Version=[3],New=[When
-this aspect is True],Old=[With this pragma]}, all calls
+this aspect is True],Old=[With this pragma]}, all @Chg{Version=[4],New=[indirect
+or dispatching remote subprogram calls to the RCI unit and all
+direct ],Old=[]}calls
 from outside the subsystem rooted at the RCI @Chg{New=[unit],Old=[package]} are
 treated like calls from outside the
 partition, ensuring that the PCS is involved in all such calls
 (for debugging, redundancy, etc.).
 @end{Discussion}
 @begin{Reason}
-There is no point to force local calls (or calls from children) to go through
-the PCS, since on the target system, these calls are always local,
-and all the units are in the same active partition.
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0031-1]}
+There is no point to force local @Chg{Version=[4],New=[direct ],Old=[]}calls
+(@Chg{Version=[4],New=[including],Old=[or]} calls from children) to go through
+the PCS, since on the target system@Chg{Version=[4],New=[],Old=[,]} these calls
+are always local, and all the units are in the same active partition.
 @end{Reason}
 @end{ImplReq}
 
@@ -1298,6 +1341,18 @@ be supported as an alternative to RPC.]
   although the pragma is still preferred by the Standard.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0031-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Redefined when indirect and dispatching remote calls have to be remote
+  for a unit for which the aspect All_Calls_Remote is True. With the new rules,
+  a local target called indirectly or via dispatching will be routed through
+  the PCS, while that was not necessarily true in earlier Ada. If a program
+  depended on local targets not being routed through the PCS even when
+  All_Calls_Remote is used, then it might behave differently or fail in
+  Ada 202x. This is highly unlikely as PCS is going to be able to communicate
+  with any partition of the program, including the local partition.]}
+@end{Inconsistent2012}
 
 
 @LabeledClause{Consistency of a Distributed System}

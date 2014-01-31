@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:02 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @LabeledClause{Array Types}
 
@@ -1886,6 +1886,7 @@ the following attribute is defined:
 @begin(description)
 @ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[T],
   Leading=[F], Prefix=<A>, AttrName=<Constrained>, ARef=[AI05-0214-1],
+  InitialVersion=[0],
   Text=[Yields the value True if A denotes a constant, a value,
   @Chg{Version=[3],New=[a tagged object, ],Old=[]}or a constrained variable,
   and False otherwise.]}
@@ -2479,10 +2480,11 @@ following cases:
   converted to the expected type.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0071-1]}
   @ChgAdded{Version=[3],Text=[A @nt{discrete_choice} that is a
   @nt{subtype_indication} covers all values (possibly none) that belong to the
-  subtype and that satisfy the static predicate of the subtype
-  (see @RefSecnum{Subtype Predicates}).]}
+  subtype and that satisfy the static @Chg{Version=[4],New=[predicates],
+  Old=[predicate]} of the subtype (see @RefSecnum{Subtype Predicates}).]}
 
   @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
@@ -2521,14 +2523,15 @@ its @nt{discrete_choice}s covers the value.
 shall be covered as follows:
 @begin{itemize}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
   If the discriminant is of a static constrained scalar
   subtype@Chg{Version=[3],New=[],Old=[,]}
   then@Chg{Version=[3],New=[, except within an instance of a generic
   unit,],Old=[]} each non-@key{others} @nt{discrete_@!choice} shall cover
   only values in that subtype@Chg{Version=[3],New=[ that satisfy its
-  predicate],Old=[]}, and each value
-  of that subtype @Chg{Version=[3],New=[that
-  satisfies its predicate ],Old=[]}shall be covered
+  @Chg{Version=[4],New=[predicates],Old=[predicate]}],Old=[]}, and each value
+  of that subtype @Chg{Version=[3],New=[that satisfies its
+  @Chg{Version=[4],New=[predicates],Old=[predicate]} ],Old=[]}shall be covered
   by some @nt{discrete_@!choice} @Redundant[(either explicitly or
   by @key<others>)];
 
@@ -2730,3 +2733,11 @@ left implicit in RM83.
   change the behavior of any nonerroneous Ada 2005 program, so it is not
   an inconsistency.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  coverage rules to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
+@end{DiffWord2012}
+

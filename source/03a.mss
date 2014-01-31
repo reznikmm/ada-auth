@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:13 $}
+@Comment{$Date: 2014/01/08 01:15:32 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1585,8 +1585,10 @@ to the declared subtype. In addition, predicate specifications apply to
 certain other subtypes:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a derived
-  type declaration, the predicates of the parent subtype and the progenitor
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a
+  @Chg{Version=[4],New=[@nt{type_declaration}],Old=[derived
+  type declaration]}, the predicates of the parent subtype and the progenitor
   subtypes apply.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1595,10 +1597,12 @@ certain other subtypes:]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3]}
-@ChgAdded{Version=[3],Text=[The @i<predicate> of a subtype consists of all
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[The @i<predicate>
+of a subtype consists of all
 predicate specifications that apply, and-ed together; if no predicate
 specifications apply, the predicate is True @Redundant[(in particular, the
-predicate of a base subtype is True)].@Defn2{Term=[Predicate],Sec=(of a subtype)}]}
+predicate of a base subtype is True)].@Defn2{Term=[Predicate],Sec=(of a subtype)}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[Predicate checks are defined to be
@@ -1655,8 +1659,10 @@ follows:@Defn2{Term=[enabled],Sec=[predicate checks]}@Defn2{Term=[disabled],Sec=
     wording above.]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
     @ChgAdded{Version=[3],Text=[Even when predicate checks are disabled,
-    a predicate cam affect various @LegalityTitle, the results of membership
+    a predicate @Chg{Version=[4],New=[can],Old=[cam]} affect various
+    @LegalityTitle, the results of membership
     tests, the items in a @key[for] loop, and the result of the Valid
     attribute.]}
 @end{Discussion}
@@ -1813,26 +1819,97 @@ unit.@PDefn{generic contract issue}]}
 @end{Legality}
 
 @begin{Runtime}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI125-0071]}
+@ChgAdded{Version=[4],Text=[If any of the above @LegalityTitle is violated in an
+instance of a generic unit, Program_Error is raised at the point of the
+violation.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This is the usual way around the contract model;
+  this applies even in instance bodies. Note that errors in instance
+  specifications will be detected at compile-time by the "re-check" of the
+  specification, only errors in the body should raise Program_Error.]}
+@end{Discussion}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0071-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[To determine whether a value
+@i<satisfies the predicates> of a subtype @i<S>,
+the following tests are performed in the following order, until one of
+the tests fails, in which case the predicates are not satisfied and no further
+tests are performed, or all of the tests succeed, in which case the
+predicates are
+satisfied:@Defn2{Term=[satisfies the predicates],Sec=(of a subtype)}@Defn{predicates satisfied}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[the value is first tested to determine whether it
+  satisfies any constraints or any null exclusion of @i<S>;]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[then:]}
+
+@begin{Itemize}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[if @i<S> is a first subtype, the value is
+      tested to determine whether it satisfies the predicates of the parent
+      and progenitor subtypes (if any) of @i<S> (in an arbitrary order);]}
+
+@begin{Ramification}
+    @ChgRef{Version=[4],Kind=[AddedNormal]}
+    @ChgAdded{Version=[4],Text=[This rule has an effect for derived types
+      (which have a parent subtype and may have progenitors) and for
+      task and protected types (which may have progentitors). Other kinds
+      of type declarations can have neither, and no test is required for
+      other first subtypes.]}
+@end{Ramification}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[if @i<S> is defined by a
+      @nt{subtype_indication}, the value is tested to determine whether it
+      satisfies the predicates of the subtype denoted by the @nt{subtype_mark}
+      of the @nt{subtype_indication};]}
+@end{Itemize}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[finally, if @i<S> is defined by a declaration to
+    which one or more predicate specifications apply, the predicates are
+    evaluated (in an arbitrary order) to test that all of them yield True for
+    the given value.]}
+@end{Itemize}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[It is important to stop on the first of the above
+    steps that fails, as later steps might presume that the earlier steps had
+    succeeded.]}
+@end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If predicate checks are enabled for a
 given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2]}
-  @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion, the
-  predicate of the target subtype is evaluated, and a check is performed that the
-  predicate is True. This includes all parameter passing, except for certain
-  parameters passed by reference, which are covered by the following rule: ] After
-  normal completion and leaving of a subprogram, for each @key[in out] or
-  @key[out] parameter
-  that is passed by reference, the predicate of the subtype of the actual is
-  evaluated, and a check is performed that the predicate is True. For an object created
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion,
+  @Chg{Version=[4],New=[],Old=[the predicate of the target subtype
+  is evaluated, and ]}a check is performed that
+  the @Chg{Version=[4],New=[operand satisfies the predicates of the target
+  subtype], Old=[predicate is True]}. This includes all parameter passing,
+  except for certain parameters passed by reference, which are covered by the
+  following rule: ] After normal completion and leaving of a subprogram,
+  for each @key[in out] or @key[out] parameter that is passed by reference,
+  @Chg{Version=[4],New=[],Old=[the predicate of the subtype of the actual is
+  evaluated, and ]}a check is performed that the @Chg{Version=[4],New=[value of
+  the parameter satisfies the predicates of the subtype of the
+  actual],Old=[predicate is True]}. For an object created
   by an @nt{object_declaration} with no explicit initialization @nt{expression},
   or by an uninitialized @nt{allocator}, if any subcomponents have
-  @nt{default_expression}s, the predicate of the
-  nominal subtype of the created object is evaluated, and a check is performed
-  that the predicate is True.@Chg{Version=[4],New=[],Old=[ Assertions.Assertion_Error
+  @nt{default_expression}s, @Chg{Version=[4],New=[],Old=[the predicate of the
+  nominal subtype of the created object is evaluated, and ]}a check is performed
+  that the @Chg{Version=[4],New=[value of
+  the created object satisfies the predicates of the nominal subtype],
+  Old=[predicate is True]}.@Chg{Version=[4],New=[],Old=[ Assertions.Assertion_Error
   is raised if any of these checks fail.]}@Defn2{Term=[predicate check],
   Sec=[@key[in out] parameters]}@Defn2{Term=[predicate check],
   Sec=[@nt{object_declaration}]}@Defn2{Term=[predicate check],
@@ -1865,15 +1942,6 @@ given subtype, then:]}
   presence of potentially invalid values, just as constraint checks can be
   removed.]}
 @end{ImplNote}
-
-@begin{Discussion}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[The above wording doesn't quite reflect the
-  required ordering of checks; improved wording will be available in a future
-  draft. The basic requirement is that all constraint and null exclusion checks
-  are made first, then each predicate expression is evaluated in the order of
-  declaration (except that progenitors arre evaluated in an unspecified order).]}
-@end{Discussion}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
@@ -1881,17 +1949,21 @@ given subtype, then:]}
 predicate is True for that value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0276-1]}
-@ChgAdded{Version=[3],Text=[If any of the above @LegalityTitle is violated in an
-instance of a generic unit, Program_Error is raised at the point of the
-violation.]}
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI125-0071]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[If any of the above
+@LegalityTitle is violated in an instance of a generic unit, Program_Error is
+raised at the point of the violation.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[This is the usual way around the contract model;
-  this applies even in instance bodies. Note that errors in instance
-  specifications will be detected at compile-time by the "re-check" of the
-  specification, only errors in the body should raise Program_Error.]}
+  @ChgRef{Version=[4],Kind=[Deleted]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[This is the usual
+  way around the contract model; this applies even in instance bodies. Note
+  that errors in instance specifications will be detected at compile-time
+  by the "re-check" of the specification, only errors in the body should
+  raise Program_Error.]}]}
 @end{Discussion}
+
 @end{Runtime}
 
 @begin{Notes}
@@ -1906,6 +1978,11 @@ variables and other invalid values. A Dynamic_Predicate, on the other hand, is
 checked as specified above, but can become False at other times. For example,
 the predicate of a record subtype is not checked when a subcomponent is
 modified.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+@ChgAdded{Version=[4],Text=[No predicates apply to the base subtype of a
+scalar type; every value of a scalar type @i<T> is considered to satisfy
+the predicates of @i<T>'Base.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[Predicate_Failure @nt{expression}s are never
@@ -1981,11 +2058,11 @@ common exceptional conditions as follows:}]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[We didn't do this for Ada 202x as it would be
-  incompatible in marginal cases: these subprogram specifications would not
-  be subtype conformant with existing access-to-subprogram types, so
-  Put_Line'Access (for instance) would become illegal in existing code. The
-  gain would not be worth the disruption.]}
+  @ChgAdded{Version=[4],Text=[We didn't change the language-defined Text_IO
+  this way for Ada 202x as it would be incompatible in marginal cases: these
+  subprogram specifications would not be subtype conformant with existing
+  access-to-subprogram types, so Put_Line'Access (for instance) would become
+  illegal in existing code. The gain would not be worth the disruption.]}
 @end{Discussion}
 
 @end(Example)
@@ -2005,6 +2082,17 @@ common exceptional conditions as follows:}]}
   implementation-defined aspects, so the same is true for language-defined
   aspects.]}
 @end{Extend2012}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Specified the order of
+  evaluation of most predicates, by defining the new term "satisfies the
+  predicates of the subtype". This is not inconsistent, as the order
+  previously was unspecified, so any code depending on the order was
+  incorrect. The change is necessary so that the Predicate_Failure
+  aspect has consistent results in cases where multiple predicates and
+  aspects apply; see the Ada.Text_IO example above for such a case.]}
+@end{Diffword2012}
 
 
 
@@ -6268,22 +6356,34 @@ We considered allowing
 @EndPrefixType{}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0297-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{every static
-discrete subtype S for which there exists at least one value belonging to S
-that satisfies any predicate of S},
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0071-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For @ChgPrefixType{Version=[4],
+Kind=[Revised],Text=[every static discrete subtype S for which there exists
+at least one value belonging to S that satisfies
+@Chg<Version=[4],New=[the predicates],Old=[any predicate]> of S]},
 the following attributes are defined:]}
 
 @begin(Description)
-@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+@ChgNote{Original: @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<First_Valid>, ARef=[AI05-0297-1],
+  We don't have a way to change multiple versions for attributes.}}
+@ChgAttribute{Version=[4],Kind=[RevisedAdded],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<First_Valid>,
+  InitialVersion=[3], ARef=[AI05-0297-1], ARef=[AI12-0071-1],
   Text=[@Chg{Version=[3],New=[S'First_Valid denotes the smallest value
-        that belongs to S and satisfies the predicate of S.
+        that belongs to S and satisfies the
+        @Chg{Version=[4],New=[predicates],Old=[predicate]} of S.
         The value of this attribute is of the type of S.],Old=[]}]}
 
-@ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
+@ChgNote{Original: @ChgAttribute{Version=[3],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Last_Valid>, ARef=[AI05-0297-1],
+  We don't have a way to change multiple versions for attributes.}}
+@ChgAttribute{Version=[4],Kind=[RevisedAdded],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Last_Valid>,
+  InitialVersion=[3], ARef=[AI05-0297-1], ARef=[AI12-0071-1],
   Text=[@Chg{Version=[3],New=[S'Last_Valid denotes the largest value
-        that belongs to S and satisfies the predicate of S. The value of
+        that belongs to S and satisfies the
+        @Chg{Version=[4],New=[predicates],Old=[predicate]} of S. The value of
         this attribute is of the type of S.],Old=[]}]}
 @end(Description)
 @EndPrefixType{}
@@ -6396,6 +6496,13 @@ been generalized to apply to real types as well
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The attributes S'First_Valid and S'Last_Valid are new.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  attributes S'First_Valid and S'Last_Valid to use the new term
+  "satisfies the predicates" (see @RefSecNum{Subtype Predicates}).]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Real Types}

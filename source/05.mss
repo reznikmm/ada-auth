@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -744,6 +744,7 @@ Old=[]}as follows:
   @end{Discussion}
 @begin{itemize}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0153-3],ARef=[AI05-0188-1],ARef=[AI05-0262-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
   If the @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression} is a @nt{name}
   @Redundant[(including a
   @nt<type_conversion>@Chg{Version=[3],New=[, @nt{qualified_expression},],Old=[]}
@@ -754,9 +755,11 @@ Old=[]}as follows:
   scalar subtype,]}
   then each non-@key{others} @nt{discrete_choice} shall cover only values in
   that subtype@Chg{Version=[3],New=[ that satisfy its
-  predicate (see @RefSecNum{Subtype Predicates})],Old=[]},
+  @Chg{Version=[4],New=[predicates],Old=[predicate]} (see
+  @RefSecNum{Subtype Predicates})],Old=[]},
   and each value of that subtype@Chg{Version=[3],New=[ that satisfies its
-  predicate],Old=[]} shall be covered by some @nt{discrete_choice}
+  @Chg{Version=[4],New=[predicates],Old=[predicate]}],Old=[]} shall be
+  covered by some @nt{discrete_choice}
   @Redundant[(either explicitly or by @key(others))].
   @begin{Ramification}
     Although not official @nt<name>s of objects, a value conversion
@@ -997,6 +1000,13 @@ for @nt<name>s, rather than being separated out along with
   which @nt{expression} is being talked about in the wording.]}
 @end{Diffword2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  case coverage to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
+@end{Diffword2012}
+
 
 @LabeledClause{Loop Statements}
 
@@ -1056,6 +1066,7 @@ execution of the @nt{sequence_of_@!statements}; if the value of the
 if False, the execution of the @nt{loop_@!statement} is complete.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
@@ -1073,7 +1084,8 @@ the execution of the
 @nt{sequence_of_@!statements} is executed once for each value of the
 discrete subtype defined by the
 @nt{discrete_@!subtype_@!definition}
-@Chg{Version=[3],New=[that satisfies the predicate of the subtype ],Old=[]}(or
+@Chg{Version=[3],New=[that satisfies the
+@Chg{Version=[4],New=[predicates],Old=[predicate]} of the subtype ],Old=[]}(or
 until the loop is left as a consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
@@ -1208,6 +1220,13 @@ The constant-ness of loop parameters is specified in
   allowed in @key[for] loops; these are documented as an extension in the
   appropriate subclause.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  loop execution to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
+@end{Diffword2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined Iterator Types]}
@@ -1482,6 +1501,17 @@ is a constant if the @SynI{iterable_}@nt{name} denotes a constant, or if
 the Variable_Indexing aspect is not specified for the type of the
 @SynI{iterable_}@nt{name}; otherwise it is a variable.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
+  @ChgAdded{Version=[4],Text=[The loop parameter of a generalized iterator has
+  the same accessibility as the loop statement. This means that the loop
+  parameter object is finalized when the loop statement is left. (It also may be
+  finalized as part of assigning a new value to the loop parameter.) For array
+  component iterators and container element iterators, the loop parameter
+  directly denotes an element of the array or container and has the
+  accessibility of the associated array or container.]}
+@end{Ramification}
+
 @end{StaticSem}
 
 @begin{Runtime}
@@ -1508,6 +1538,26 @@ or the loop is left as a consequence of a transfer of control. For a reverse
 generalized iterator, the operations Last and Previous are called rather than
 First and Next.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
+  @ChgAdded{Version=[4],Text=[The loop parameter of a generalized iterator is a
+  variable of which the user only has a constant view. It follows the normal
+  rules for a variable of its nominal subtype. In particular, if the nominal
+  subtype is indefinite, the variable is constrained by its initial value.
+  Similarly, if the nominal subtype is class-wide, the variable (like all
+  variables) has the tag of the initial value. Constraint_Error may be raised by
+  a subsequent iteration if Next or Previous return an object with a different
+  tag or constraint.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
+  @ChgAdded{Version=[4],Text=[Note that the cursor type of a generalized
+  iterator can be a limited type. The instantiation and subsequent use of the
+  interfaces in an instance of Ada.Iterator_Interfaces is still legal in that
+  case because a limited type matches the formal incomplete type of the generic.
+  But any use of an iterator type descended from such an interface in a loop
+  will be illegal, because the implicit assignment to the loop parameter implied
+  by such an interface is illegal.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Text=[For an array component iterator, the

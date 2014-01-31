@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/01/08 01:15:33 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2809,10 +2809,14 @@ proceeds in two steps:
 @end(Ramification)
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0084-1]}
 @ChgAdded{Version=[2],Text=[Each @nt<expression> in an
 @nt<array_component_association> defines the value for the associated
 component(s). For an @nt<array_component_association> with <>, the associated
-component(s) are initialized by default as for a stand-alone object of the
+component(s) are initialized @Chg{Version=[4],New=[to the Default_Component_Value
+of the array type if this aspect has been specified for the array type;
+otherwise, they are initialized ],Old=[]}by default
+as for a stand-alone object of the
 component subtype (see @RefSecNum{Object Declarations}).]}
 
 @Leading@Defn2{Term=[bounds],
@@ -3049,6 +3053,16 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   @ChgAdded{Version=[3],Text=[Added a definition of the applicable index
   constraint for @nt{conditional_expression}s (which are new).]}
 @end{DiffWord2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0084-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Fixed so that the Default_Component_Value (if any) is used to initialize
+  components specified with <>. This is what users would expect, and all
+  Ada 2012 implementation known at the time of this writing initialize with
+  the Default_Component_Value, so it is unlikely that anyone will be affected
+  by this inconsistency.]}
+@end{Inconsistent2012}
 
 
 
@@ -4225,15 +4239,17 @@ membership test using @key(in)]} yields the result True if:
   belongs to the given @nt<range>.]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1],ARef=[AI12-0071-1]}
   @Chg{Version=[3],New=[The @nt{membership_choice} is a @nt{subtype_mark},
   the],Old=[The]} tested type is scalar, @Chg{Version=[3],New=[],Old=[and ]}the
   value of the
   @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
   belongs to the
   @Chg{Version=[3],New=[],Old=[given @nt<range>, or the ]}range of the
-  named subtype@Chg{Version=[3],New=[, and the predicate of the
-  named subtype evaluates to True.@Defn2{Term=[predicate evaluated],Sec=[membership]}],Old=[; or]}
+  named subtype@Chg{Version=[3],New=[, and the @Chg{Version=[4],New=[value
+  satisfies the predicates],Old=[predicate]} of the named
+  subtype@Chg{Version=[4],New=[],Old=[ evaluates to True]}.@Chg{Version=[4],
+  New=[@Defn2{Term=[predicates satisfied required],Sec=[membership]}],Old=[@Defn2{Term=[predicate evaluated],Sec=[membership]}]}],Old=[; or]}
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
     The scalar membership test only does a range check@Chg{Version=[3],New=[
@@ -4250,18 +4266,19 @@ membership test using @key(in)]} yields the result True if:
 
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0039-1],ARef=[AI12-0071-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
   @Chg{Version=[3],New=[The @nt<membership_choice> is a
   @nt<subtype_mark>, the],Old=[The]} tested type is not scalar, @Chg{Version=[3],New=[],Old=[and ]}
   the value of the
   @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
   satisfies any constraints
-  of the named subtype, @Chg{Version=[3],New=[the predicate of the named subtype
-  evaluates to True, ],Old=[]}and@Chg{Version=[2],New=[:],Old=[, if the type of
-  the @nt{simple_expression}
-  is class-wide, the value has a tag that identifies a type covered by
-  the tested type.]}
+  of the named subtype, @Chg{Version=[3],New=[the @Chg{Version=[4],New=[value
+  satisfies the predicates],Old=[predicate]} of the named
+  subtype@Chg{Version=[4],New=[],Old=[ evaluates to
+  True]}, ],Old=[]}and@Chg{Version=[2],New=[:],Old=[, if the type of
+  the @nt{simple_expression} is class-wide, the value has a tag that
+  identifies a type covered by the tested type.]}
   @begin{Inneritemize}
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01]}
     @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
@@ -4475,6 +4492,11 @@ conversions.],Old=[]}
   wording ambiguities introduced when the grammar was corrected to eliminate
   syntax ambiguities. (Both of the above are now @nt{simple_expression}s, so
   merely talking about a @nt{simple_expression} is insufficient.)]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  membership tests to use the new term "satisfies the predicates"
+  (see @RefSecNum{Subtype Predicates}).]}
 @end{DiffWord2012}
 
 
