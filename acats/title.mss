@@ -1,17 +1,17 @@
 @Part(title, Root="acats.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/title.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2007/12/20 07:43:55 $}
+@comment{$Revision: 1.4 $ $Date: 2014/01/31 06:00:07 $}
 
 @Noparanum@Comment{The following pushes the title down somewhat}
 @ @*@*@*
 
-@Noparanum@Heading{THE@*ADA CONFORMITY ASSESSMENT TEST SUITE@*(ACATS)@*VERSION 3.0@*USER'S GUIDE}
+@Noparanum@Heading{THE@*ADA CONFORMITY ASSESSMENT TEST SUITE@*(ACATS)@*VERSION 3.1@*USER'S GUIDE}
 
 @Noparanum@Comment{The following pushes the date down somewhat}
 @ @*@*@*@*@*
 
-@Noparanum@Center{December 21, 2007}
+@Noparanum@Center{January 30, 2014}
 
 @Noparanum@Comment{The following pushes the address down somewhat}
 @ @*@*@*@*@*

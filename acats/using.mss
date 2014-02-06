@@ -1,7 +1,7 @@
 @Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
+@comment{$Revision: 1.6 $ $Date: 2014/01/31 06:00:07 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -47,7 +47,7 @@ possible, the test will be withdrawn. Withdrawn tests are not used in
 conformity assessments. For a period after the issuance of a corrected test,
 either the original or the corrected test can be used for conformity
 assessment. See the ACAA's procedures
-@LocalLink{Target=[Pro01],Sec=[References],Text={[Pro01]}} for details.
+@LocalLink{Target=[Pro13],Sec=[References],Text={[Pro13]}} for details.
 
 The ACAA also will issue new tests periodically. As with modified tests, new
 tests must be available for a period of time before they are required in
@@ -59,7 +59,7 @@ new tests, all modified tests, and all withdrawn tests, and an indication as to
 when each will be (or is) required for conformity assessments. Each version of
 the modification list is given a suffix letter. A ZIP archive and tar file
 containing the new and/or modified tests is available. The files are named
-MOD_3_0x, where 'x' represents the suffix letter for the AML version.
+MOD_3_1x, where 'x' represents the suffix letter for the AML version.
 
 @leading@;These files can be found on the ACAA's web site:
 @begin{Indent}
@@ -91,56 +91,56 @@ procedures.
 have been created and populated with test files after all decompression:
 
 @begin{FourCol}
-@exam{@shrink{./acats3_0/a}}@*
-@exam{@shrink{./acats3_0/b2}}@*
-@exam{@shrink{./acats3_0/b3}}@*
-@exam{@shrink{./acats3_0/b4}}@*
-@exam{@shrink{./acats3_0/b5}}@*
-@exam{@shrink{./acats3_0/b6}}@*
-@exam{@shrink{./acats3_0/b7}}@*
-@exam{@shrink{./acats3_0/b8}}@*
-@exam{@shrink{./acats3_0/b9}}@*
-@exam{@shrink{./acats3_0/ba}}@*
-@exam{@shrink{./acats3_0/bb}}@*
-@exam{@shrink{./acats3_0/bc}}@*
-@exam{@shrink{./acats3_0/bd}}@*
-@exam{@shrink{./acats3_0/be}}@*
-@exam{@shrink{./acats3_0/bxa}}@*
-@exam{@shrink{./acats3_0/c2}}@*
-@exam{@shrink{./acats3_0/c3}}@*
-@exam{@shrink{./acats3_0/c4}}@*
-@exam{@shrink{./acats3_0/c5}}@*
-@exam{@shrink{./acats3_0/c6}}@*
-@exam{@shrink{./acats3_0/c7}}@*
-@exam{@shrink{./acats3_0/c8}}@*
-@exam{@shrink{./acats3_0/c9}}@*
-@exam{@shrink{./acats3_0/ca}}@*
-@exam{@shrink{./acats3_0/cb}}@*
-@exam{@shrink{./acats3_0/cc}}@*
-@exam{@shrink{./acats3_0/cd}}@*
-@exam{@shrink{./acats3_0/ce}}@*
-@exam{@shrink{./acats3_0/cxa}}@*
-@exam{@shrink{./acats3_0/cxb}}@*
-@exam{@shrink{./acats3_0/cz}}@*
-@exam{@shrink{./acats3_0/d}}@*
-@exam{@shrink{./acats3_0/e}}@*
-@exam{@shrink{./acats3_0/l}}@*
-@exam{@shrink{./acats3_0/bxc}}@*
-@exam{@shrink{./acats3_0/bxd}}@*
-@exam{@shrink{./acats3_0/bxe}}@*
-@exam{@shrink{./acats3_0/bxf}}@*
-@exam{@shrink{./acats3_0/bxh}}@*
-@exam{@shrink{./acats3_0/cxc}}@*
-@exam{@shrink{./acats3_0/cxd}}@*
-@exam{@shrink{./acats3_0/cxe}}@*
-@exam{@shrink{./acats3_0/cxf}}@*
-@exam{@shrink{./acats3_0/cxg}}@*
-@exam{@shrink{./acats3_0/cxh}}@*
-@exam{@shrink{./acats3_0/lxd}}@*
-@exam{@shrink{./acats3_0/lxe}}@*
-@exam{@shrink{./acats3_0/lxh}}@*
-@exam{@shrink{./acats3_0/docs}}@*
-@exam{@shrink{./acats3_0/support}}@Comment{This one is too long for RTF otherwise}
+@exam{@shrink{./acats3_1/a}}@*
+@exam{@shrink{./acats3_1/b2}}@*
+@exam{@shrink{./acats3_1/b3}}@*
+@exam{@shrink{./acats3_1/b4}}@*
+@exam{@shrink{./acats3_1/b5}}@*
+@exam{@shrink{./acats3_1/b6}}@*
+@exam{@shrink{./acats3_1/b7}}@*
+@exam{@shrink{./acats3_1/b8}}@*
+@exam{@shrink{./acats3_1/b9}}@*
+@exam{@shrink{./acats3_1/ba}}@*
+@exam{@shrink{./acats3_1/bb}}@*
+@exam{@shrink{./acats3_1/bc}}@*
+@exam{@shrink{./acats3_1/bd}}@*
+@exam{@shrink{./acats3_1/be}}@*
+@exam{@shrink{./acats3_1/bxa}}@*
+@exam{@shrink{./acats3_1/c2}}@*
+@exam{@shrink{./acats3_1/c3}}@*
+@exam{@shrink{./acats3_1/c4}}@*
+@exam{@shrink{./acats3_1/c5}}@*
+@exam{@shrink{./acats3_1/c6}}@*
+@exam{@shrink{./acats3_1/c7}}@*
+@exam{@shrink{./acats3_1/c8}}@*
+@exam{@shrink{./acats3_1/c9}}@*
+@exam{@shrink{./acats3_1/ca}}@*
+@exam{@shrink{./acats3_1/cb}}@*
+@exam{@shrink{./acats3_1/cc}}@*
+@exam{@shrink{./acats3_1/cd}}@*
+@exam{@shrink{./acats3_1/ce}}@*
+@exam{@shrink{./acats3_1/cxa}}@*
+@exam{@shrink{./acats3_1/cxb}}@*
+@exam{@shrink{./acats3_1/cz}}@*
+@exam{@shrink{./acats3_1/d}}@*
+@exam{@shrink{./acats3_1/e}}@*
+@exam{@shrink{./acats3_1/l}}@*
+@exam{@shrink{./acats3_1/bxc}}@*
+@exam{@shrink{./acats3_1/bxd}}@*
+@exam{@shrink{./acats3_1/bxe}}@*
+@exam{@shrink{./acats3_1/bxf}}@*
+@exam{@shrink{./acats3_1/bxh}}@*
+@exam{@shrink{./acats3_1/cxc}}@*
+@exam{@shrink{./acats3_1/cxd}}@*
+@exam{@shrink{./acats3_1/cxe}}@*
+@exam{@shrink{./acats3_1/cxf}}@*
+@exam{@shrink{./acats3_1/cxg}}@*
+@exam{@shrink{./acats3_1/cxh}}@*
+@exam{@shrink{./acats3_1/lxd}}@*
+@exam{@shrink{./acats3_1/lxe}}@*
+@exam{@shrink{./acats3_1/lxh}}@*
+@exam{@shrink{./acats3_1/docs}}@*
+@exam{@shrink{./acats3_1/support}}@Comment{This one is too long for RTF otherwise}
 @end{Fourcol}
 
 @begin{Wideabove}
@@ -156,29 +156,29 @@ All ACATS files have been compressed (zipped) into compressed archives
 utility was used
 to compress them. They must be decompressed before they can be further
 processed. A decompression utility is available from the source of the ACATS
-distribution. All ACATS 3.0 files may be decompressed using the following
+distribution. All ACATS 3.1 files may be decompressed using the following
 steps. Approximately 32 MB of free space on a Windows machine hard drive will
 be required to accomplish the decompression using this technique.
 
 Create a directory on the hard disk to contain ACATS. In these examples, we
-assume the name is @Exam{acats3_0}, but any name can be used. Copy the archive
+assume the name is @Exam{acats3_1}, but any name can be used. Copy the archive
 (file with .zip extension) to the hard disk in the new directory. Decompress it
 insuring that directories are used. For the @Exam{unzip} program, this is the
 default setting. For the @exam{pkunzip} program, this is the -d option. For the
 @exam{winzip} program, ensure that "Use Directory Names" is checked. Also,
 ensure that the files are decompressed into the proper directory. For command
 line decompressors, this means ensuring that the current subdirectory is
-acats3_0. For @exam{winzip}, this simply means selecting acats3_0 as the extract
+acats3_1. For @exam{winzip}, this simply means selecting acats3_1 as the extract
 path.
 
-@leading@;For example, using unzip, and assuming that the archive name is ACATS30.zip,
+@leading@;For example, using unzip, and assuming that the archive name is ACATS31.zip,
 type
 @begin{Example}
-cd acats3_0
+cd acats3_1
 @end{Example}
 @leading@;to set the proper directory, and
 @begin{Example}
-unzip ACATS30
+unzip ACATS31
 @end{Example}
 to extract the files.
 
@@ -209,17 +209,17 @@ subdirectory (e.g., mkdir \ACATS) and unzip all archives there.
 
 @leading@;All ACATS files have been included in 1 Unix tar format file and then
 compressed using the Unix compress utility. To create a set of ACATS files,
-first copy the compressed files acats_30.tar.Z from the distribution source to
+first copy the compressed files acats_31.tar.Z from the distribution source to
 a hard drive. Uncompress the file with the Unix command
 @begin{example}
-uncompress acats_30.tar.Z
+uncompress acats_31.tar.Z
 @end{example}
 @leading@;(Note that particular Unix implementations may have different formats
 or require specific qualifiers.)  After the ACATS file has been uncompressed,
-it must be untarred. Move to the directory where you want the acats3_0
+it must be untarred. Move to the directory where you want the acats3_1
 directory to be created and then untar the ACATS files
 @begin{example}
-tar -xvf <path>/acats_30.tar
+tar -xvf <path>/acats_31.tar
 @end{example}
 where <path> is the location of the uncompressed tar file.
 
@@ -300,7 +300,7 @@ mnemonic.
 @LabeledClause{Tailoring the ACATS Test Suite}
 
 
-There are some files in the delivery that require modification before ACATS 3.0
+There are some files in the delivery that require modification before ACATS 3.1
 is ready for processing by an Ada implementation. Package ImpDef (impdef.a)
 must be edited to include values suitable for proper testing of an
 implementation if the defaults are not acceptable. The
@@ -313,19 +313,21 @@ FcnDecl (fcndecl.ada) must be provided if necessary. Finally, Package Report
 The required customization is described in the following sections.
 
 Customizations of these files from previous versions of the ACATS suite
-generally can be used with ACATS 3.0, but users should ensure that neither
+generally can be used with ACATS 3.1, but users should ensure that neither
 their requirements nor the underlying files have changed since the
 customizations were made.
 
 
 @LabeledSubClause{ImpDef Customization}
 
-@begin{Itemize}
-@Noprefix@red{@i{There was no change to Impdef or any of its children from
-ACATS 2.6 to ACATS 3.0. A version of any of these packages that was tailored
-for ACATS 2.6 should be valid for ACATS 3.0 unless some implementation
-characteristics have changed.}}
-@end{Itemize}
+@begin{Indent}
+@red{@i{For ACATS 3.1, there is one new parameter in each of Impdef and
+Impdef.Annex_C. Other than those parameters, there was no change to Impdef or
+any of its children from ACATS 3.0 to ACATS 3.1. A version of any of these
+packages that was tailored for ACATS 3.0 should be valid for ACATS 3.1 once the
+new parameters are defined unless some implementation characteristics have
+changed.}}
+@end{Indent}
 
 ACATS tests use the entities in ImpDef to control test execution. Much of the
 information in ImpDef relates to the timing of running code; for example, the
@@ -365,24 +367,24 @@ included in @exam{impdef.a}, @exam{impdefc.a}, @exam{impdefd.a},
 (Note that @exam{impdefc}, for example, refers to Annex C.) An excerpt from
 ImpDef is included in @RefSec{Parameterization Files}.
 
-@begin{Itemize}
-@Noprefix@red{@i{All implementations must customize @exam{impdef.a} unless they
+@begin{Indent}
+@red{@i{All implementations must customize @exam{impdef.a} unless they
 wish to rely on the defaults provided. ImpDef must be part of the environment
 whenever a test that depends on it is processed. Similarly, the child of
 Impdef corresponding to each Specialized Needs Annex that the implementer
 intends to test during a conformity assessment must be customized and be
 part of the environment when the Annex tests are processed.}}
-@end{Itemize}
+@end{Indent}
 
 
 @LabeledSubClause{Macro Defs Customization}
 
-@begin{Itemize}
-@Noprefix@red{@i{
-There was no change to the @exam{macro.dfs} file from ACATS 2.6 to ACATS 3.0. A
-version of @exam{macro.dfs} that was tailored for ACATS 2.6 should be valid for ACATS
-3.0 unless some implementation characteristics have changed.}}
-@end{Itemize}
+@begin{Indent}
+@red{@i{
+There was no change to the @exam{macro.dfs} file from ACATS 3.0 to ACATS 3.1. A
+version of @exam{macro.dfs} that was tailored for ACATS 3.0 should be valid for ACATS
+3.1 unless some implementation characteristics have changed.}}
+@end{Indent}
 
 Tests in files with the extension @exam{.tst} contain symbols that represent
 implementation dependent values. The symbols are identifiers with a initial
@@ -429,12 +431,12 @@ in the preceding section. If appropriate literals, constants, or predefined
 function calls can be used to initialize these constants, they should be
 supplied in @exam{macro.dfs}. Otherwise, the package FCNDECL must be modified.
 
-@begin{Itemize}
-@Noprefix@red{@i{All implementations should verify that package SPPRT13 can be
+@begin{Indent}
+@red{@i{All implementations should verify that package SPPRT13 can be
 properly customized using the macro substitution technique. Note that a body
 for SPPRT13 is illegal, nor is it allowed to add declarations to
 package SPPRT13.}}
-@end{Itemize}
+@end{Indent}
 
 The specification for package FCNDECL is in the file @exam{fcndecl.ada}. SPPRT13
 depends on FCNDECL (in a context clause that both @key[with]s it and @key[use]s
@@ -690,7 +692,9 @@ cases, executable tests may be bundled into aggregates of multiple tests. A set
 of bundled tests will have a driver that calls each test in turn; ACATS tests
 will then be called procedures rather than main procedures. No source changes
 in the tests are allowed when bundling; that is, the only allowed change is the
-method of calling the test.
+method of calling the test. Note that not all tests are designed to allow
+bundling; it is the responsibility of the ACATS user to ensure that bundled
+tests execute properly when bundled.
 
 All bundles must be approved by the ACAL (and, if necessary, the ACAA) to
 qualify for a conformity assessment. It is the responsibility of the user to
@@ -1197,7 +1201,7 @@ Further, note that the general style and approach of the newer tests creates
 user-oriented test situations by including a variety of features and
 interactions. Only the primary test focus can be indicated in the test name.
 
-ACATS 3.0 tests are divided into core tests and Specialized Needs Annex tests.
+ACATS 3.1 tests are divided into core tests and Specialized Needs Annex tests.
 Recall that annexes A and B are part of the core language. All annex tests
 (including those for annexes A and B) have an 'X' as the second character of
 their name; Specialized Needs Annex tests have a letter between 'C' and 'H'
@@ -1287,8 +1291,10 @@ means of specifying the location of an error, but they are not required to be
 in direct proximity with the @Exam{-- ERROR:} marking of the errors.
 
 Some B-tests also include the notation @Exam{-- OK} to indicate constructs that
-@i{must not} be identified as errors. This is especially important since some
-constructs that were errors
+@i{must not} be identified as errors. Such constructs are typically similar to
+illegal constructs and serve to ensure that implementations do not reject too
+much. Not identifying @Exam{-- OK} constructs as errors is especially
+important since some constructs that were errors
 in @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}
 are now legal in later versions of Ada.
 
@@ -1451,7 +1457,7 @@ the result is explicitly allowed by the grading criteria for the test.
 A user may challenge an ACATS test on the grounds of applicability or
 correctness. A challenger should submit a petition against the test program to
 an ACAL or to the ACAA, following the procedure and the format presented in
-@LocalLink{Target=[Pro01],Sec=[References],Text={[Pro01]}}. A petition must
+@LocalLink{Target=[Pro13],Sec=[References],Text={[Pro13]}}. A petition must
 clearly state whether it is a claim that the test does not apply to the
 implementation or that the test is incorrect. The petition must indicate the
 specific section of code that is disputed and provide a full explanation of the

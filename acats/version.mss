@@ -1,18 +1,17 @@
 @Part(version, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/version.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2007/12/28 07:00:42 $}
+@comment{$Revision: 1.5 $ $Date: 2014/01/31 06:00:07 $}
 
 @LabeledAnnex{Version Description}
 
-ACATS 3.0 includes 3771 tests in 4387 files, not including foundation and other
-support units. From Version 2.6 to 3.0, 79 tests were added, comprising 162
-files (including five foundation files). 73 tests (78 files) were modified. Two
-support files also were modified, and one was removed.
-17 tests (19 files) were removed. 15 documentation files were replaced by
-167 new documentation files.
+ACATS 3.1 includes 3798 tests in 4417 files, not including foundation and other
+support units. From Version 3.0 to 3.1, 47 tests were added, comprising 52
+files (including two foundation files). 25 tests (33 files) were modified. Four
+support files also were modified.
+20 tests (20 files) were removed. 157 documentation files were modified.
 
-The following sections present a detailed description of ACATS 3.0, as follows:
+The following sections present a detailed description of ACATS 3.1, as follows:
 
 @RefSec{Core Test Files}
 
@@ -26,17 +25,17 @@ The following sections present a detailed description of ACATS 3.0, as follows:
 
 @RefSec{Tests With Special Requirements}
 
-@RefSec{Test Files Added Since ACATS 2.6}
+@RefSec{Test Files Added Since ACATS 3.0}
 
-@RefSec{Documentation Files Added Since ACATS 2.6}
+@RefSec{Documentation Files Added Since ACATS 3.0}
 
-@RefSec{Test Files Modified Since ACATS 2.6}
+@RefSec{Test Files Modified Since ACATS 3.0}
 
-@RefSec{Support Files Modified Since ACATS 2.6}
+@RefSec{Documentation Files Modified Since ACATS 3.0}
 
-@RefSec{Test Files Deleted Since ACATS 2.6}
+@RefSec{Support Files Modified Since ACATS 3.0}
 
-@RefSec{Other Files Deleted Since ACATS 2.6}
+@RefSec{Test Files Deleted Since ACATS 3.0}
 
 
 @LabeledClause{Core Test Files}
@@ -338,9 +337,6 @@ b38008a.ada@*
 b38008b.ada@*
 b38009a.ada@*
 b38009d.ada@*
-b38101a.ada@*
-b38101b.ada@*
-b38101c.ada@*
 b38103a.ada@*
 b38103b.ada@*
 b38103c0.ada@*
@@ -389,6 +385,22 @@ b3a0001.a@*
 b3a0002.a@*
 b3a0003.a@*
 b3a0004.a@*
+b3a0005.a@*
+b3a0006.a@*
+b3a0007.a@*
+b3a0008.a@*
+b3a1001.a@*
+b3a1002.a@*
+b3a1003.a@*
+b3a10040.a@*
+b3a10041.a@*
+b3a10042.a@*
+b3a1005.a@*
+b3a1a01.a@*
+b3a1a02.a@*
+b3a1a030.a@*
+b3a1a031.a@*
+b3a1a04.a@*
 b3a2002.a@*
 b3a2003.a@*
 b3a2004.a@*
@@ -638,7 +650,6 @@ b57001a.ada@*
 b57001b.ada@*
 b57001c.ada@*
 b57001d.ada@*
-b58001a.ada@*
 b58003a.ada@*
 b58003b.ada@*
 b59001a.ada@*
@@ -685,6 +696,7 @@ b64101a.ada@*
 b650001.a@*
 b650002.a@*
 b650003.a@*
+b650004.a@*
 b65001a.ada@*
 b65002a.ada@*
 b65002b.ada@*
@@ -741,6 +753,7 @@ b7300060.a@*
 b7300061.a@*
 b7300062.a@*
 b7300063.am@*
+b730007.a@*
 b73001a.ada@*
 b73001b.ada@*
 b73001c.ada@*
@@ -927,6 +940,9 @@ b85015a.ada@*
 b8510010.a@*
 b8510011.a@*
 b8510012.am@*
+b851002.a@*
+b851003.a@*
+b851004.a@*
 b854001.a@*
 b86001a0.ada@*
 b86001a1.ada@*
@@ -967,6 +983,7 @@ b940004.a@*
 b940005.a@*
 b940006.a@*
 b940007.a@*
+b950001.a@*
 b95001a.ada@*
 b95001b.ada@*
 b95001d.ada@*
@@ -1013,6 +1030,7 @@ b95094a.ada@*
 b95094b.ada@*
 b95094c.ada@*
 b951001.a@*
+b951002.a@*
 b952001.a@*
 b952002.a@*
 b952003.a@*
@@ -1020,6 +1038,7 @@ b952004.a@*
 b954001.a@*
 b954003.a@*
 b954004.a@*
+b954005.a@*
 b960001.a@*
 b96002a.ada@*
 b97102b.ada@*
@@ -2000,7 +2019,6 @@ c38002b.ada@*
 c38005a.ada@*
 c38005b.ada@*
 c38005c.ada@*
-c38006a.ada@*
 c38102a.ada@*
 c38102b.ada@*
 c38102c.ada@*
@@ -2080,6 +2098,7 @@ c393009.a@*
 c393010.a@*
 c393011.a@*
 c393012.a@*
+c393013.a@*
 c393a02.a@*
 c393a03.a@*
 c393a05.a@*
@@ -2107,6 +2126,20 @@ c3a00122.am@*
 c3a0013.a@*
 c3a0014.a@*
 c3a0015.a@*
+c3a0016.a@*
+c3a0017.a@*
+c3a0018.a@*
+c3a0019.a@*
+c3a0020.a@*
+c3a0021.a@*
+c3a0022.a@*
+c3a0023.a@*
+c3a0024.a@*
+c3a0025.a@*
+c3a0026.a@*
+c3a0027.a@*
+c3a0028.a@*
+c3a0029.a@*
 c3a1001.a@*
 c3a1002.a@*
 c3a2001.a@*
@@ -2133,6 +2166,7 @@ c413002.a@*
 c413003.a@*
 c413004.a@*
 c413005.a@*
+c413006.a@*
 c41301a.ada@*
 c41303a.ada@*
 c41303b.ada@*
@@ -2154,7 +2188,6 @@ c41303v.ada@*
 c41303w.ada@*
 c41304a.ada@*
 c41304b.ada@*
-c41306a.ada@*
 c41306b.ada@*
 c41306c.ada@*
 c41307d.ada@*
@@ -2626,8 +2659,11 @@ c64109l.ada@*
 c64201b.ada@*
 c64201c.ada@*
 c64202a.ada@*
+c650002.a@*
+c650003.a@*
 c65003a.ada@*
 c65003b.ada@*
+c650a01.a@*
 c66002a.ada@*
 c66002c.ada@*
 c66002d.ada@*
@@ -2773,6 +2809,8 @@ c85017a.ada@*
 c85018a.ada@*
 c85018b.ada@*
 c85019a.ada@*
+c851001.a@*
+c851002.a@*
 c854001.a@*
 c854002.a@*
 c854003.a@*
@@ -3351,6 +3389,7 @@ cc1311b.ada@*
 cc2002a.ada@*
 cc30001.a@*
 cc30002.a@*
+cc30003.a@*
 cc3004a.ada@*
 cc3007a.ada@*
 cc3007b.ada@*
@@ -3506,12 +3545,10 @@ cd2a53a.ada@*
 cd2a53e.ada@*
 cd2a83c.tst@*
 cd2a91c.tst@*
-cd2b11a.ada@*
 cd2b11b.ada@*
 cd2b11d.ada@*
 cd2b11e.ada@*
 cd2b11f.ada@*
-cd2b15c.ada@*
 cd2b16a.ada@*
 cd2c11a.tst@*
 cd2c11d.tst@*
@@ -3610,6 +3647,8 @@ cda201a.ada@*
 cda201b.ada@*
 cda201c.ada@*
 cda201e.ada@*
+cdb0001.a@*
+cdb0002.a@*
 cdb0a01.a@*
 cdb0a02.a@*
 cdd1001.a@*
@@ -3959,6 +3998,7 @@ cxaa016.a@*
 cxaa017.a@*
 cxaa018.a@*
 cxaa019.a@*
+cxaa020.a@*
 cxab001.a@*
 cxac001.a@*
 cxac002.a@*
@@ -4252,6 +4292,7 @@ cxc7002.a@*
 cxc7003.a@*
 cxc7004.a@*
 cxc7005.a@*
+cxc7006.a@*
 cxd1001.a@*
 cxd1002.a@*
 cxd1003.a@*
@@ -4462,10 +4503,12 @@ f392d00.a@*
 f393a00.a@*
 f393b00.a@*
 f394a00.a@*
+f3a1a00.a@*
 f3a2a00.a@*
 f431a00.a@*
 f433a00.a@*
 f460a00.a@*
+f650a00.a@*
 f730a000.a@*
 f730a001.a@*
 f731a00.a@*
@@ -4507,7 +4550,7 @@ fxf3a00.a
 
 @LabeledClause{Documentation Files}
 
-This section lists all the files containing ACATS 3.0 documentation. Files
+This section lists all the files containing ACATS 3.1 documentation. Files
 with the @exam{.pdf} extension are in Adobe Acrobat format. Files
 with the @exam{.htm} extension are in HTML; files with the extensions
 @exam{.gif} and @exam{.png} are associated graphics files.
@@ -4692,10 +4735,10 @@ This section lists the files falling into the @b{others} category in
 the table found in Section @RefSecNum{Structure}.
 They are listed in the categories described there.
 
-@LabeledSubClause{List of ACATS 3.0 Files}
+@LabeledSubClause{List of ACATS 3.1 Files}
 
 @begin{Fourcol}
-acats30.lst
+acats31.lst
 @end{Fourcol}
 
 @LabeledSubClause{Support Units Referenced by Many Tests}
@@ -4881,185 +4924,133 @@ lxh4014
 @end{FourCol}
 
 
-@LabeledClause{Test Files Added Since ACATS 2.6}
+@LabeledClause{Test Files Added Since ACATS 3.0}
 
-@leading@;The following test files are new in ACATS 3.0:
+@leading@;The following test files are new in ACATS 3.1:
 
 @begin{FourCol}
-b393008.a@*
-b393009.a@*
-b393010.a@*
-b394001.a@*
-b394a01.a@*
+b3a0005.a@*
+b3a0006.a@*
+b3a0007.a@*
+b3a0008.a@*
+b3a1001.a@*
+b3a1002.a@*
+b3a1003.a@*
+b3a10040.a@*
+b3a10041.a@*
+b3a10042.a@*
+b3a1005.a@*
+b3a1a01.a@*
+b3a1a02.a@*
+b3a1a030.a@*
+b3a1a031.a@*
+b3a1a04.a@*
+b650004.a@*
+b730007.a@*
+b851002.a@*
+b851003.a@*
+b851004.a@*
+b950001.a@*
+b951002.a@*
+b954005.a@*
+c393013.a@*
+c3a0016.a@*
+c3a0017.a@*
+c3a0018.a@*
+c3a0019.a@*
+c3a0020.a@*
+c3a0021.a@*
+c3a0022.a@*
+c3a0023.a@*
+c3a0024.a@*
+c3a0025.a@*
+c3a0026.a@*
+c3a0027.a@*
+c3a0028.a@*
+c3a0029.a@*
+c413006.a@*
+c650002.a@*
+c650003.a@*
+c650a01.a@*
+c851001.a@*
+c851002.a@*
+cc30003.a@*
+cdb0001.a@*
+cdb0002.a@*
+cxaa020.a@*
+cxc7006.a@*
+f3a1a00.a@*
+f650a00.a
+@end{FourCol}
+
+
+@LabeledClause{Documentation Files Added Since ACATS 3.0}
+
+@leading@;The following documentation files are new in ACATS 3.1:
+
+@begin{FourCol}
+None this version.
+@end{FourCol}
+
+
+@LabeledClause{Test Files Modified Since ACATS 3.0}
+
+@leading@;The following test files have been modified from their ACATS 3.0 versions:
+
+@begin{FourCol}
 b394a02.a@*
 b394a03.a@*
 b394a04.a@*
 b394a05.a@*
-b413001.a@*
-b413002.a@*
-b413003.a@*
-b413004.a@*
-b431001.a@*
-b431002.a@*
 b431003.a@*
-b431004.a@*
-b432001.a@*
 b433001.a@*
-b610002.a@*
-b650001.a@*
-b650002.a@*
-b650003.a@*
-b6700010.a@*
-b6700011.am@*
-b6700012.a@*
-b6700013.a@*
-b740002.a@*
 b7400030.a@*
 b7400031.a@*
-b7400032.am@*
-b750a01.a@*
-b750a02.a@*
-b750a03.a@*
 b8310010.a@*
 b8310011.a@*
 b8310012.a@*
 b831002.a@*
-b8310030.a@*
-b8310031.a@*
-b8310032.a@*
-b8310033.a@*
-ba110130.a@*
-ba110131.a@*
-ba110132.a@*
-ba110133.a@*
-ba110134.am@*
-ba110140.a@*
-ba110141.a@*
-ba110142.a@*
-ba120090.a@*
-ba120091.a@*
-ba120092.a@*
-ba120093.a@*
-ba120094.a@*
-ba120095.a@*
-ba120096.a@*
-ba120097.a@*
-ba120098.a@*
+b954003.a@*
+b960001.a@*
 ba120100.a@*
 ba120101.a@*
 ba120102.a@*
 ba120103.a@*
 ba120104.a@*
 ba120105.a@*
-ba120110.a@*
-ba120111.a@*
-ba120112.a@*
-ba120113.a@*
-ba120114.a@*
-ba120115.a@*
-ba120120.a@*
-ba120121.a@*
-ba120122.a@*
-ba120123.a@*
-ba120124.a@*
-ba120125.a@*
-ba120126.a@*
-ba120127.a@*
-ba120128.a@*
-ba120129.a@*
-ba12012a.a@*
-ba120130.a@*
-ba120131.a@*
-ba120132.a@*
-ba120133.a@*
-ba120134.a@*
-ba120135.a@*
-ba120136.a@*
-ba120137.a@*
-ba120138.a@*
-ba120139.a@*
-ba12013a.a@*
-ba120140.a@*
-ba120141.a@*
-ba120142.a@*
-ba120143.a@*
-ba120144.a@*
-ba120145.a@*
-ba120146.a@*
-ba120147.a@*
-ba120150.a@*
-ba120151.a@*
-ba120152.a@*
-ba120153.a@*
-ba120154.a@*
-ba120160.a@*
-ba120161.a@*
-ba120162.a@*
-ba120163.a@*
-ba120164.a@*
-ba120165.a@*
-ba120166.a@*
-ba16001.a@*
-ba16002.a@*
-ba21a03.a@*
-bdd2003.a@*
-c250001.au@*
-c250002.au@*
-c392015.a@*
-c394001.a@*
-c394002.a@*
-c394003.a@*
-c413001.a@*
-c413002.a@*
-c413003.a@*
-c413004.a@*
-c413005.a@*
-c431a01.a@*
-c431a02.a@*
-c431a03.a@*
-c432005.a@*
-c433a01.a@*
-c433a02.a@*
-c433a03.a@*
-c433a04.a@*
-c460013.a@*
-c750b01.a@*
-c761013.a@*
+bc54002.a@*
+bc54003.a@*
+bxc3002.a@*
+bxe2009.a@*
+bxe2012.a@*
+c34008a.ada@*
+c433001.a@*
 c990001.a@*
-ca110230.a@*
-ca110231.a@*
 ca110232.am@*
-ca120010.a@*
-ca120011.a@*
 ca120012.am@*
-ca12002.a@*
-ca200030.a@*
-ca200031.am@*
-cxac006.a@*
-cxc7005.a@*
-f394a00.a@*
-f431a00.a@*
-f433a00.a@*
-f750a00.a@*
-f750b00.a@*
-la200020.a@*
-la200021.a@*
-la200022.a@*
-la200023.am@*
-la200030.a@*
-la200031.a@*
-la200032.a@*
-la200033.am
+cd10001.a@*
+cxb30061.am@*
+cxc6003.a
 @end{FourCol}
 
 
-@LabeledClause{Documentation Files Added Since ACATS 2.6}
+@LabeledClause{Support Files Modified Since ACATS 3.0}
 
-@leading@;The following documentation files are new in ACATS 3.0:
+@leading@;The following support files have been modified from their ACATS 3.0 versions:
+
+@begin{FourCol}
+impdef.a@*
+impdefc.a@*
+repbody.ada@*
+tctouch.a
+@end{FourCol}
+
+@LabeledClause{Documentation Files Modified Since ACATS 3.0}
+
+@leading@;The following documentation files have been modified from their ACATS 3.0 versions:
 
 @begin{FourCol}
 acats-ug.pdf@*
-cont.gif@*
 cover-03.pdf@*
 cover-04.pdf@*
 cover-06.pdf@*
@@ -5069,13 +5060,6 @@ cover-10.pdf@*
 coverkey.pdf@*
 coversum.pdf@*
 dirs.png@*
-find.gif@*
-index.gif@*
-leg-name.png@*
-lib.gif@*
-mod-name.png@*
-next.gif@*
-prev.gif@*
 ug-01.htm@*
 ug-02.htm@*
 ug-1.htm@*
@@ -5222,157 +5206,36 @@ ug-d2i.htm@*
 ug-e.htm@*
 ug-f.htm@*
 ug-toc.htm@*
-ug-ttl.htm@*
-usage-1.png@*
-usage-2.png
+ug-ttl.htm
 @end{FourCol}
 
 
-@LabeledClause{Test Files Modified Since ACATS 2.6}
+@LabeledClause{Test Files Deleted Since ACATS 3.0}
 
-@leading@;The following test files have been modified from their ACATS 2.6 versions:
+The following test files were present in ACATS 3.0 but do not appear in ACATS
+3.1:
 
 @begin{FourCol}
-b34005q.ada@*
-b34005t.ada@*
-b34006h.ada@*
-b34006k.ada@*
-b34008b.ada@*
-b370001.a@*
-b3710010.a@*
-b3710011.a@*
-b3710012.a@*
-b3710013.a@*
-b3710014.am@*
-b38105a.ada@*
-b391001.a@*
-b391002.a@*
-b392001.a@*
-b392009.a@*
-b392010.a@*
-b393005.a@*
-b393006.a@*
-b393007.a@*
-b3a0001.a@*
-b3a2009.a@*
-b3a2015.a@*
-b3a2016.a@*
-b460005.a@*
-b46002a.ada@*
-b7310014.a@*
-b74205a.ada@*
-b74404a.ada@*
-b74404b.ada@*
-b85012a.ada@*
-b85015a.ada@*
-b87b26a.ada@*
-b92001b.ada@*
-ba21002.a@*
-ba210030.a@*
-ba21a01.a@*
-ba21a02.a@*
-bc1226a.ada@*
-bc51019.a@*
-bc51c02.a@*
-bdd2001.a@*
-bxe2009.a@*
-c34005p.ada@*
-c34005r.ada@*
-c34005s.ada@*
-c34005u.ada@*
-c34005v.ada@*
-c34006g.ada@*
-c34006j.ada@*
-c34006l.ada@*
-c352001.a@*
-c392010.a@*
-c3a0014.a@*
-c41103b.ada@*
-c41203b.ada@*
+b28001f.ada@*
+b28001g.ada@*
+b28001h.ada@*
+b28001i.ada@*
+b28001j.ada@*
+b28001k.ada@*
+b28001l.ada@*
+b28001m.ada@*
+b28001n.ada@*
+b28001o.ada@*
+b28001p.ada@*
+b28001q.ada@*
+b38101a.ada@*
+b38101b.ada@*
+b38101c.ada@*
+b58001a.ada@*
+c38006a.ada@*
 c41306a.ada@*
-c43208b.ada@*
-c74302b.ada@*
-c74306a.ada@*
-c85014a.ada@*
-c85014b.ada@*
-c85014c.ada@*
-c87b26b.ada@*
-c87b41a.ada@*
-c96004a.ada@*
-cb40005.a@*
-cb41004.a@*
-cc3019c1.ada@*
-cd10002.a@*
-cdd2a03.a@*
-cxac005.a@*
-cxb3012.a@*
-cxc7001.a@*
-cxe5001.a@*
-cxe5002.a@*
-cxe5003.a@*
-fa21a00.a
+cd2b11a.ada@*
+cd2b15c.ada
 @end{FourCol}
 
-
-@LabeledClause{Support Files Modified Since ACATS 2.6}
-
-@leading@;The following support files have been modified from their ACATS 2.6 versions:
-
-@begin{FourCol}
-repbody.ada@*
-tctouch.ada
-@end{FourCol}
-
-
-@LabeledClause{Test Files Deleted Since ACATS 2.6}
-
-The following test files were present in ACATS 2.6 but do not appear in ACATS
-3.0:
-
-@begin{FourCol}
-b32101a.ada@*
-b360001.a@*
-b37004b.ada@*
-b43001m.ada@*
-b48003c.ada@*
-b58002a.ada@*
-b58002b.ada@*
-b58002c.ada@*
-b64201a.ada@*
-b97206a.ada@*
-b97306a.ada@*
-ba21001.a@*
-bc40001.a@*
-bxac004.a@*
-c250001.aw@*
-c250002.aw@*
-c38202a.ada@*
-c650001.a@*
-c99004a.ada
-@end{FourCol}
-
-
-@LabeledClause{Other Files Deleted Since ACATS 2.6}
-
-@leading@;The following support and documentation files were present in ACATS
-2.6 but do not appear in ACATS 3.0:
-
-@begin{FourCol}
-ug-apxa.doc@*
-ug-apxa.pdf@*
-ug-apxa.txt@*
-ug-apxb.doc@*
-ug-apxb.pdf@*
-ug-apxb.txt@*
-ug-apxc.doc@*
-ug-apxc.pdf@*
-ug-apxc.txt@*
-ug-apxd.doc@*
-ug-apxd.pdf@*
-ug-apxd.txt@*
-ug-body.doc@*
-ug-body.pdf@*
-ug-body.txt@*
-widechr.a
-@end{FourCol}
 

@@ -1,7 +1,7 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
+@comment{$Revision: 1.6 $ $Date: 2014/01/31 06:00:07 $}
 
 @LabeledSection{Introduction}
 
@@ -42,21 +42,28 @@ the already developed but unreleased ACVC 2.2 was released and used as ACATS
 2.2. The ACAA later released ACATS 2.3, ACATS 2.4, ACATS 2.5, and then ACATS
 2.6 to include maintenance changes and a few new tests.
 
-This version of the ACATS is version 3.0. As with ACATS 2.3 and later, this
-version was completely developed under the auspices of the ACAA. ACATS 3.0
-contains test programs to check for conformity to new language features defined
-in ISO/IEC 8652:1995/AMD 1:2007 (@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}), as well
-as test programs to check for conformity to language
-features defined in earlier versions of Ada, including @LocalLink{Target=[Ada95],
+In 2007, the ACAA developed ACATS version 3.0 to check for conformity to new
+language features defined in ISO/IEC 8652:1995/AMD 1:2007
+(@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}), as well as test
+programs to check for conformity to language features defined in earlier
+versions of Ada, including @LocalLink{Target=[Ada95],
 Sec=[References],Text={[Ada95]}} and @LocalLink{Target=[Ada83],
 Sec=[References],Text={[Ada83]}}.
-Subsequent maintenance or enhancement versions of the suite, if they are
-required, will be numbered 3.1, etc.
+
+This version of the ACATS is version 3.1. It improves the coverage and
+correctness of ACATS 3.0 for features defined in
+@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
+
+A future version of the ACATS (to have version 4.0) will be developed to
+test the enhancements and changes of the third edition of the Ada Standard,
+ISO/IEC 8652:2012 (@LocalLink{Target=[Ada2012],
+Sec=[References],Text={[Ada2012]}}). Subsequent maintenance or enhancement
+versions of the suite, if they are required, will be numbered 4.1, etc.
 
 The ACATS User's Guide describes the set of ACATS tests and how they are to be
 used in preparation for conformity assessment. The formal procedures for
-conformity assessment are described in @LocalLink{Target=[Pro01],
-Sec=[References],Text={[Pro01]}}, and the rules in that document
+conformity assessment are described in @LocalLink{Target=[Pro13],
+Sec=[References],Text={[Pro13]}}, and the rules in that document
 govern all conformity assessments, notwithstanding anything in this document
 that may be interpreted differently. Moreover, this guide does not discuss
 specific requirements on processing of the ACATS test suite, or submission and
@@ -68,9 +75,9 @@ developers who maintain a version of the ACATS as a quality control or software
 acceptance tool, and third-party testers (e.g., Ada Conformity Assessment
 Laboratories).
 
-Section @RefSecNum{Changes for ACATS 3.0} of the User's Guide for ACATS 3.0
+Section @RefSecNum{Changes for ACATS 3.1} of the User's Guide for ACATS 3.1
 summarizes the changes between
-ACATS 2.6 and ACATS 3.0. Section @RefSecNum{Test Objectives and Coverage}
+ACATS 3.0 and ACATS 3.1. Section @RefSecNum{Test Objectives and Coverage}
 describes test objectives and their relationship to ACATS tests and
 to the rules of the
 Ada Standards documents. Section @RefSecNum{Configuration Information}
@@ -79,19 +86,19 @@ including a description of the ACATS software and delivery files. Section
 @RefSecNum{Using the ACATS}
 provides step-by-step instructions for installing and using the test programs
 and test support packages, and for grading test results. The appendices include
-other information that characterizes the ACATS 3.0 release, along with
+other information that characterizes the ACATS 3.1 release, along with
 information on test construction.
 
 Refer to @RefSecNum{Definitions} and Section @RefSecNum{Grading Test Results}
-for the definition of an acceptable result and the rules for grading ACATS 3.0
+for the definition of an acceptable result and the rules for grading ACATS 3.1
 test program results. Section @RefSecNum{Deviation from Expected Results - Petition & Review}
 provides instructions for submitting a
 petition against a test program if a user believes that a deviation from the
 acceptable results for a given test program is in fact conforming behavior.
 
-The ACATS test suite is available from any ACAL and from the Ada Information
-Clearinghouse (sponsored by the ARA). See
-@URLLink{URL=[http://www.adaic.org/compilers/testing.html],Text=[http://www.adaic.org/compilers/testing.html]}.
+The ACATS test suite is available from any ACAL and from the ACAA web site.
+See @URLLink{URL=[http://www.ada-auth.org/acats.html],
+Text=[http://www.ada-auth.org/acats.html]}.
 
 
 @LabeledClause{ACATS Purpose}

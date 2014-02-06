@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2008/01/04 05:29:12 $}
+@comment{$Revision: 1.7 $ $Date: 2014/01/31 06:00:07 $}
 
 @LabeledSection{Configuration Information}
 
@@ -9,10 +9,9 @@ This section describes the physical and logical structure of the ACATS
 delivery, and it describes the test classes, naming conventions used, test
 program format, test structure, delivery structure, and file format.
 
-ACATS 3.0 is a revision of ACATS 2.6, and has a similar delivery
+ACATS 3.1 is a revision of ACATS 3.0, and has a similar delivery
 structure. The support tools are unchanged, except for updating
-header comments and version identification, and the removal of an
-obsolete character-set processing tool.
+header comments and version identification.
 
 The test suite does not provide tools or scripts that can be used to manage
 complete test processing, since such tools are normally specific to
@@ -20,7 +19,7 @@ particular implementations and host systems.
 
 @LabeledClause{Structure}
 
-The ACATS 3.0 test software includes test code that exercises specific Ada
+The ACATS 3.1 test software includes test code that exercises specific Ada
 features, foundation code (used by multiple tests), support code (used to
 generate test results), and tool code (used to build tools necessary to
 customize ACATS tests). The suite includes tests for the core language and
@@ -31,8 +30,8 @@ number of tests and files in the ACATS suite.
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=[],
 Headers=[@\Total@\Core Tests@\SNA Tests@\Found@!ations@\Docs@\Other],
-Body=[Number of Files@\4660@\4139@\248@\50@\169@\22
-Number of Tests@\3771@\3581@\190@\0@\0@\0]}
+Body=[Number of Files@\4660@\4168@\249@\52@\169@\22
+Number of Tests@\3798@\3607@\191@\0@\0@\0]}
 
 @leading@;Others consists of:
 @table{Columns=[2],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[4],
@@ -50,8 +49,8 @@ Section @RefSecNum{Delivery Directory Structure}.
 
 @LabeledSubClause{Physical Organization}
 
-The preceeding table summarizes the number of files that compose ACATS 3.0.
-In addition to files containing test code proper, the ACATS 3.0 test suite
+The preceeding table summarizes the number of files that compose ACATS 3.1.
+In addition to files containing test code proper, the ACATS 3.1 test suite
 includes various support files.
 
 Note that the number of files containing test code is larger than the number of
@@ -198,11 +197,11 @@ implementations not claiming support of certain Specialized Needs Annexes.
 @i{Annex C Requirements}
 
 Section 13 of the Ada Standard
-includes implementation advice paragraphs. The ACATS does not require
-implementations to conform to those paragraphs unless they claim support for
-Annex C, Systems Programming (because of C.2(2): "The implementation shall
-support at least the functionality defined by the recommended levels of support
-in Section 13.")
+includes implementation advice paragraphs include the words "recommended level
+of support". The ACATS does not require implementations to conform to those
+paragraphs unless they claim support for Annex C, Systems Programming (because
+of C.2(2): "The implementation shall support at least the functionality defined
+by the recommended levels of support in Section 13.")
 
 @leading@;Tests that check conformance to the implementation advice are listed
 below:
@@ -413,7 +412,7 @@ Class L SNA tests.@SeeOther{Primary=[SNA],Other=[specialized needs annex]}
 
 @LabeledClause{Naming Convention}
 
-This section describes the naming conventions used in ACATS 3.0, specifically
+This section describes the naming conventions used in ACATS 3.1, specifically
 as they apply to files. All file names are of the form <name>.<type>, where
 <type> is a one, two, or three character extension. File names indicate test
 class, compilation order (if applicable), and whether the test is
@@ -424,7 +423,7 @@ are normally the same as the name of the test, however in some cases, the
 structure of the test requires that the file name be different from the Ada
 unit. The application of the conventions to tests is straightforward.
 
-There are two different but similar naming conventions used in ACATS 3.0.
+There are two different but similar naming conventions used in ACATS 3.1.
 Legacy tests use the naming conventions of early ACVC versions. Tests new since
 ACVC 1.12 use the modern convention. The conventions are consistently
 distinguishable at the 7th character of the name: legacy names have a letter in
@@ -607,7 +606,7 @@ Modern tests use different file name extensions (see @RefSecNum{Modern Naming}).
 
 
 @begin{Itemize}
-@Noprefix@red{@i{Note that legacy tests have not been renamed for ACATS 3.0.
+@Noprefix@red{@i{Note that legacy tests have not been renamed for ACATS 3.1.
 Since @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} includes some
 organizational differences from
 @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}, this means that the
@@ -663,9 +662,12 @@ Special Requirements section of the test prologue.
 
 .au@\A file that contains only Ada code that contains characters outside of
 the 7-bit ASCII character set. These files are provided in UTF-8 format with
-a starting byte-order mark. These tests can be converted to another format
-acceptable to the compiler if necessary; then the test must be compiled
-and run as all other tests of its test class.
+a starting byte-order mark. For ACATS 3.1, these tests can be converted to
+another format acceptable to the compiler if necessary; then the test must
+be compiled and run as all other tests of its test class. (Note that
+@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} requires
+compilers to be able to process UTF-8 files, so future ACATS versions will
+eliminate this permission to convert UTF-8 source code.)
 
 .ftn@\A file that contains Fortran language code and must be compiled by a
 Fortran compiler. These files are used by tests that check a foreign language
@@ -899,6 +901,7 @@ coded that invoke specific legality rules. The source code includes comments
 that document expected compiler results. Legal constructs may also be included
 in B class tests. Constructs that are allowed by the legality rules are marked
 @Exam{-- OK}; constructs that are disallowed are marked @Exam{-- ERROR:}.
+(Some additional markings can also be used, see @RefSecNum{Class B}.)
 There is usually a brief indication of the nature of an intentional error on
 the same line or the line following a comment. The indications of expected
 results are approximately right justified to the code file margin, about column
@@ -942,7 +945,7 @@ Descr=[Delivery Directory Structure]}
 
 @LabeledClause{File Format}
 
-To conserve space and ease downloading, all files in the delivered ACATS 3.0
+To conserve space and ease downloading, all files in the delivered ACATS 3.1
 (including test files, foundation files, and support files) have been
 compressed. Except as noted below, decompressed files
 (see Section @RefSecNum{Guide to Decompressing Files}) use only

@@ -1,7 +1,7 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2008/01/04 05:29:12 $}
+@comment{$Revision: 1.6 $ $Date: 2014/01/31 06:00:07 $}
 
 @LabeledAnnex{Test Applicability Criteria}
 
@@ -432,6 +432,7 @@ CXAA016.A@*
 CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
+CXAA020.A@*
 CXF3A06.A@*
 CXG1003.A@*
 EE3203A.ADA@*
@@ -685,6 +686,7 @@ CXAA016.A@*
 CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
+CXAA020.A@*
 CXF3A06.A@*
 CXG1003.A@*
 EE3203A.ADA@*
@@ -717,7 +719,8 @@ tests should report NOT_APPLICABLE:
 
 @begin{FourCol}
 CE3104C.ADA@*
-CE3115A.ADA
+CE3115A.ADA@*
+CXAA020.A
 @end{FourCol}
 
 @begin{WideAbove}
@@ -1617,6 +1620,7 @@ CXAA016.A@*
 CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
+CXAA020.A@*
 CXAB001.A@*
 CXAC001.A@*
 CXAC002.A@*
