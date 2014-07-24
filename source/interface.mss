@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2014/02/06 02:27:09 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/02/06 02:27:09 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -832,7 +832,7 @@ and its language-defined descendants.}
       @key[return] Unsigned_@RI{n};
    @key[function] Rotate_Right (Value : Unsigned_@RI{n}; Amount : Natural)
       @key[return] Unsigned_@RI{n};
-   ...
+   ...@Defn{Shift_Left}@Defn{Shift_Right}@Defn{Shift_Right_Arithmetic}@Defn{Rotate_Left}@Defn{Rotate_Right}
 @key[end] Interfaces;
 @end{Example}
 @end{StaticSem}
@@ -846,7 +846,7 @@ if supported by the target architecture,
 for each @i{n} that is at least the size
 of a storage element and that is a factor of the word size.
 The names of these types are of the form Integer_@i{n} for the
-signed types, and Unsigned_@i{n} for the modular types;
+signed types, and Unsigned_@i{n} for the modular types;@Defn{Unsigned_N}@Defn{Integer_N}
 @begin{Ramification}
 For example, for a typical 32-bit machine the corresponding
 types might be Integer_8, Unsigned_8,
@@ -899,7 +899,7 @@ The names for these floating point types are not specified.
 @Defn{IEEE floating point arithmetic}
 However, if IEEE arithmetic is supported, then the names
 should be IEEE_Float_32 and IEEE_Float_64 for single and double
-precision, respectively.
+precision, respectively.@Defn{IEEE_Float_32}@Defn{IEEE_Float_64}
 
 @end{ImplNote}
 @end{Itemize}
