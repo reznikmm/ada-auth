@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -5648,13 +5648,15 @@ denotes an aliased view of an object}:
 
     @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00363-01]}
     @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0041-1]}
+    @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0095-1]}
     @ChgAdded{Version=[2],Text=[@i{D} shall be discriminated in its full view
     and unconstrained in any partial view, and the designated subtype of
-    @i{A} shall be unconstrained.@Chg{Version=[3],New=[ For the purposes
+    @i{A} shall be unconstrained.@Chg{Version=[3],New=[@Chg{Version=[4],New=[],
+    Old=[ For the purposes
     of determining within a generic body whether @i{D} is unconstrained
     in any partial view, a discriminated subtype is
     considered to have a constrained partial view if it is a descendant
-    of an untagged generic formal private or derived type.],Old=[]}]}
+    of an untagged generic formal private or derived type.]}],Old=[]}]}
   @end{InnerItemize}
   @begin{ImplNote}
     This ensures
@@ -5672,6 +5674,16 @@ denotes an aliased view of an object}:
   in order to allow an access attribute of an unconstrained discriminated
   object, only that any partial view that does exist is unconstrained.],Old=[]}
   @end{Ramification}
+
+  @begin{Discussion}
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
+    @ChgAdded{Version=[4],Text=[We assume the worst in a generic body whether
+    or not a formal subtype has a constrained partial view; specifically, in a
+    generic body a discriminated subtype is considered to have a constrained
+    partial view if it is a descendant of an untagged generic formal private
+    or derived type (see @RefSecNum{Formal Private and Derived Types} for the
+    formal definition of this rule).]}
+  @end{Discussion}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0041-1]}
   The accessibility level of the view shall not be statically deeper
@@ -6123,7 +6135,7 @@ uses of anonymous access types.]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0027-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Defined the accessibility of a value conversion, so that it is treated like
   an @nt{aggregate} built at the point of the conversion. This was
   previously unspecified, so this change might be
@@ -6139,7 +6151,7 @@ uses of anonymous access types.]}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0067-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected so that it is clear
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Corrected so that it is clear
   that explicitly aliased parameters in procedures have the same accessibility
   as other parameters. Only explicitly aliased parameters in functions are
   special.]}
@@ -6154,6 +6166,12 @@ uses of anonymous access types.]}
   @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected a number of rules so
   that they clearly apply to generic functions as well as functions. (Remember,
   a generic function is not a function.)]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Moved the assume the worst rule
+  about constrainedness of the prefix of attribute Access to
+  @RefSecNum{Formal Private and Derived Types}, as a number of places in the
+  Standard need this rule.]}
 @end{DiffWord2012}
 
 

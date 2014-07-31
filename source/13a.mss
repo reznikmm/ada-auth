@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -526,15 +526,17 @@ type-related:]}
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0116-1]}
 A representation item that directly specifies an aspect of a subtype or
 type shall appear after the type is completely defined
 (see @RefSecNum{Completions of Declarations}),
-and before the subtype or type is frozen (see @RefSecNum{Freezing Rules}).
-If a representation item @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}is
+and before the subtype or type is frozen (see
+@RefSecNum{Freezing Rules}).@Chg{Version=[4],New=[],Old=[ If a
+representation item @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}is
 given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item
 @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}that
-directly specifies the same aspect of the entity.
+directly specifies the same aspect of the entity.]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 The fact that a representation item @Chg{New=[(or operational item,
@@ -545,26 +547,30 @@ after using the entity in ways that require the representation to be known.
 @end{Ramification}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-  @ChgAdded{Version=[3],Text=[The rule preventing multiple specification
+  @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0116-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[The rule preventing
+  multiple specification
   is also intended to cover other ways to specify representation aspects,
   such as obsolescent @nt{pragma} Priority. Priority is not a representation
   pragma, and as such is neither a representation item nor an
   @nt{aspect_specification}. Regardless, giving both a @nt{pragma} Priority
   and an @nt{aspect_specification} for Priority is illegal. We didn't want
-  to complicate the wording solely to support obsolescent features.]}
+  to complicate the wording solely to support obsolescent features.]}]}
 @end{Honest}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0116-1]}
 @ChgAdded{Version=[1],Text=[An operational item that directly specifies an
 aspect of @Chg{Version=[3],New=[an entity],Old=[a type]} shall appear before the
 @Chg{Version=[3],New=[entity],Old=[type]} is frozen (see
-@RefSecNum{Freezing Rules}). If an operational item @Chg{Version=[3],New=[or
+@RefSecNum{Freezing Rules}).@Chg{Version=[4],New=[],Old=[ If an operational
+item @Chg{Version=[3],New=[or
 @nt{aspect_specification} ],Old=[]}is given that directly specifies an aspect of
 @Chg{Version=[3],New=[an entity],Old=[a type]}, then it is illegal to give
 another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
 ],Old=[]}that directly specifies the same aspect of the
-@Chg{Version=[3],New=[entity],Old=[type]}.]}
+@Chg{Version=[3],New=[entity],Old=[type]}.]}]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[AddedNormal]}
   @ChgAdded{Version=[1],Text=[Unlike representation items, operational
@@ -573,7 +579,32 @@ another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
   declaration need not be known to determine their legality.]}
 @end{Ramification}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
+@ChgAdded{Version=[4],Text=[If a representation item, operational item, or
+@nt{aspect_specification} is given that directly specifies an aspect of an
+entity, then it is illegal to give another representation item, operational
+item, or @nt{aspect_specification} that directly specifies the same aspect of
+the entity.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
+  @ChgAdded{Version=[4],Text=[This rule applies to all aspects, not just
+  those that are operational aspects or representation aspects. For instance,
+  it applies to subtype predicates and type invariants.]}
+@end{Ramification}
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
+  @ChgAdded{Version=[4],Text=[This rule is also intended to cover other ways
+  to specify representation aspects,
+  such as obsolescent @nt{pragma} Priority. Priority is not a representation
+  pragma, and as such is neither a representation item nor an
+  @nt{aspect_specification}. Regardless, giving both a @nt{pragma} Priority
+  and an @nt{aspect_specification} for Priority is illegal. We didn't want
+  to complicate the wording solely to support obsolescent features.]}
+@end{Honest}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1],ARef=[AI05-0295-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0116-1]}@Comment{Just a paragraph number change}
 @ChgAdded{Version=[3],Text=[Unless otherwise specified, it is illegal to
 specify an operational or representation aspect of a generic formal
 parameter.]}
@@ -1432,6 +1463,16 @@ Some of the more stringent requirements are moved to
   specified from @i<what> rules apply to the value of the aspect.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that an aspect
+  (any aspect) can be specified only once for an entity, no matter what
+  means of specifying it are used. We did not document this as an
+  incompatibility as only aspects that are neither operational nor
+  representation could change behavior and there is no known implementation
+  of these new aspects which allow multiple definition.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[Aspect Specifications]}
 
@@ -1630,6 +1671,17 @@ allowed within a single @nt{aspect_specification}. The aspect identified by the
 @nt{aspect_mark} shall be an aspect that can be specified for the associated
 entity (or view of the entity defined by the associated declaration).]}
 
+@begin{Ramification}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
+@ChgAdded{Version=[4],Text=[This rule prevents multiple specifications in the same
+  @nt{aspect_specification}. Rules in @RefSecNum{Operational and Representation Aspects} prevent multiple specifications in
+  different @nt{aspect_specification}s (on different views of the same type,
+  for instance) or between operational or representation items and
+  an @nt{aspect_specification}, even for aspects that are neither operational
+  nor representation aspects.]}
+
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[The @nt{aspect_definition} associated with a given
 @nt{aspect_mark} may be omitted only when the @nt{aspect_mark} identifies an
@@ -1657,9 +1709,12 @@ a @nt{task_body}, a @nt{protected_body}, or a @nt{body_stub} other than a
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0105-1]}
 @ChgAdded{Version=[3],Text=[A language-defined aspect shall not be specified in
-an @nt{aspect_specification} given on a @nt{subprogram_body} or
-@nt{subprogram_body_stub} that is a completion of another declaration.]}
+an @nt{aspect_specification} given on a
+@Chg{Version=[4],New=[],Old=[@nt{subprogram_body} or
+@nt{subprogram_body_stub} that is a ]}completion of @Chg{Version=[4],New=[a
+subprogram or generic subprogram],Old=[another declaration]}.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1835,6 +1890,13 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect specifications are new.]}
 @end{Extend2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0105-1]}
+  @ChgAdded{Version=[4],Text=[Clarified the wording so that the restriction
+  against language-defined aspects on subprogram completions includes
+  completions that are expressions functions and null procedures.]}
+@end{Diffword2012}
 
 
 @LabeledRevisedClause{Version=[3],New=[Packed Types],Old=[Pragma Pack]}
@@ -2061,7 +2123,7 @@ followed.]}]}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed so that the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Fixed so that the
   Recommended Level of Support does not require packing of
   components for which such packing would violate other representation
   items or aspects. This is not incompatible as either such Pack
@@ -3976,7 +4038,7 @@ except for certain explicit exceptions.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified the behavior of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the behavior of
   Has_Same_Storage when 'Size = 0.]}
 @end{DiffWord2012}
 

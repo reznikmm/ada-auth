@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:40 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1369,7 +1369,7 @@ functions.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0072-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Defined the pragma in terms of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined the pragma in terms of
   the aspect Discard_Names, and added a missing definition of the meaning of
   the configuration pragma. This is not intended to make any semantic change
   (Ada 2012 has an aspect Discard_Names defined via blanket rules for
@@ -1941,7 +1941,7 @@ because the pragma was not used to mark variables as shared.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified that aliased objects
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that aliased objects
   are considered to be specified as independently addressable, and also
   eliminated an unnecessary rule.]}
 @end{DiffWord2012}

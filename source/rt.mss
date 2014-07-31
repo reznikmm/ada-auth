@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.117 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.118 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:40 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -434,7 +434,7 @@ The description of the Priority pragma has been moved to this annex.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified when the Priority
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified when the Priority
   and Interrupt_Priority aspect expressions are evaluated.]}
 @end{DiffWord2012}
 
@@ -2339,7 +2339,7 @@ calls another protected operation on the same protected object).
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0051-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified that the Priority
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that the Priority
   aspect can be used to set the initial ceiling priority of a protected object
   that contains an interrupt handler.]}
 @end{DiffWord2012}
@@ -3223,18 +3223,50 @@ Old=[@Defn2{Term=[restrictions],Sec=(No_Asynchronous_Control)}No_Asynchronous_Co
 @end{Ramification}
 
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0055-1]}
+@ChgAdded{Version=[4],Text=[@Defn2{Term=[restrictions],Sec=(No_Dynamic_CPU_Assignment)}@Defn{No_Dynamic_CPU_Assigmment restriction}
+   No_Dynamic_CPU_Assignment @\No task has the CPU aspect specified to be
+    a non-static expression.
+    Each task (including the environment task) that has the CPU aspect
+    specified as Not_A_Specific_CPU will be assigned to a particular
+    implementation-defined CPU. The same is true for the environment task
+    when the CPU aspect is not specified. @Redundant[Any other task without
+    a CPU aspect will activate and execute on the same processor as its
+    activating task.]]}
+@begin{TheProof}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[The processor of a task without a CPU aspect is
+   defined in @RefSecNum{Multiprocessor Implementation}, and this restriction
+   guarantees that the activator always has a CPU assigned.]}
+@end{TheProof}
+@begin{Reason}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[This restriction prevents any migration of tasks.]}
+@end{Reason}
+@begin{Ramification}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[If no CPU aspects are specified, then the program
+   will run on a single CPU, as all of the tasks will be activated directly or
+   indirectly by the environment task, and the rules require the same CPU to be
+   used as the activating task. ]}
+@end{Ramification}
+@ChgImplDef{Version=[4],Kind=[Added],Text=[@ChgAdded{Version=[4],
+Text=[When restriction No_Dynamic_CPU_Assignment applies to a partition,
+   the processor on which a task with a CPU value of a Not_A_Specific_CPU
+   will execute.]}]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Protected_Objects)}@Chg{Version=[3],New=[@Defn{No_Local_Protected_Objects restriction}],
    Old=[]}No_Local_Protected_Objects @\Protected
-   objects @Chg{Version=[2],New=[are],Old=[shall be]} declared only at
+   objects @Chg{Version=[3],New=[are],Old=[shall be]} declared only at
    library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00297-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Local_Timing_Events)}@Chg{Version=[3],New=[@Defn{No_Local_Timing_Events restriction}],
    Old=[]}No_Local_Timing_Events @\Timing_Events
-   @Chg{Version=[2],New=[are],Old=[shall be]} declared only at library level.]}
+   @Chg{Version=[3],New=[are],Old=[shall be]} declared only at library level.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(No_Protected_Type_Allocators)}@Chg{Version=[3],New=[@Defn{No_Protected_Type_Allocators restriction}],
@@ -3543,6 +3575,14 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   for class-wide types. This might be an extension if the compiler
   assumed the worst in the past (it is now a runtime check).]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b{Corrigendum:} Restriction No_Dynamic_CPU_Assignment is newly
+  added to Ada, for use as part of the Ravenscar profile
+  (see @RefSecNum{The Ravenscar Profile}).]}
+@end{Extend2012}
 
 
 
@@ -4693,14 +4733,15 @@ pragmas that is defined for each run-time profile.]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI95-00297-01],ARef=[AI95-00394-01],ARef=[AI05-0171-1],ARef=[AI05-0246-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0073-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0055-1],ARef=[AI12-0073-1]}
 @ChgAdded{Version=[3],Text=[
 @key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
 @key{pragma} Locking_Policy (Ceiling_Locking);
 @key{pragma} Detect_Blocking;
 @key{pragma} Restrictions (
               No_Abort_Statements,
-              No_Dynamic_Attachment,
+              No_Dynamic_Attachment@Chg{Version=[4],New=[,
+              No_Dynamic_CPU_Assignment],Old=[]},
               No_Dynamic_Priorities,
               No_Implicit_Heap_Allocations,
               No_Local_Protected_Objects,
@@ -4754,22 +4795,24 @@ are ever renumbered.}
 
 @begin{ImplReq}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[A task shall only be on the ready queues of one
-processor, and the
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0055-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[A task shall only be
+on the ready queues of one processor, and the
 processor to which a task belongs shall be defined statically.
 Whenever a task running on a processor reaches a task dispatching point,
 it goes back to the ready queues of the same processor. A task with
 a CPU value of Not_A_Specific_CPU will execute on an implementation
 defined processor. @Redundant[A task without a CPU aspect will activate and
-execute on the same processor as its activating task.]]}
+execute on the same processor as its activating task.]]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The processor of a task without a CPU aspect is
-  defined in @RefSecNum{Multiprocessor Implementation}.]}
+  @ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[The processor of a
+  task without a CPU aspect is defined in @RefSecNum{Multiprocessor Implementation}.]}]}
 @end{TheProof}
-@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
+@Comment{@ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
 Text=[The processor on which a task with a CPU value of a Not_A_Specific_CPU
-will execute when the Ravenscar profile is in effect.]}]}
+will execute when the Ravenscar profile is in effect.]}]}}
 @end{ImplReq}
 
 @begin{ImplAdvice}
@@ -4788,6 +4831,18 @@ and disjoint ready queue.]}]}
 @ChgAdded{Version=[3],Text=[The effect of the Max_Entry_Queue_Length => 1
 restriction applies only to protected entry queues due to the accompanying
 restriction of Max_Task_Entries => 0.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
+@ChgAdded{Version=[4],Text=[When the Ravenscar profile is in effect (via the
+effect of the No_Dynamic_CPU_Assignment restriction), all of the tasks in the
+partition will execute on a single CPU unless the programmer explicitly uses
+aspect CPU to specify the CPU assignments for tasks. The use of multiple CPUs
+requires care, as many guarantees of single CPU scheduling no longer apply.]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
+@ChgAdded{Version=[4],Text=[It is not recommended to specify the CPU of a task
+to be Not_A_Specific_CPU when the Ravenscar profile is in effect. How a
+partition executes strongly depends on the assignment of tasks to CPUs.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -4806,12 +4861,21 @@ restriction of Max_Task_Entries => 0.]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0073-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   The Ravenscar profile no longer allows the use of package Synchronous_Barriers,
   as this package violates the fundamental Ravenscar requirement that each
   waiting point can only block (and release) a single task. This is incompatible
   with the published Ada 2012 standard, but it is unlikely that any existing
   Ravenscar runtime ever usefully supported barriers.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0055-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:>The Ravenscar profile (via the
+  effect of the new restriction No_Dynamic_CPU_Assignment) no longer allows
+  setting the CPU aspect of a task to a non-static value. While this was
+  allowed, an implementation would have had to come up with a creative
+  interpretation of the Ada 2012 requirement to define the association of
+  tasks to processors statically. As such, the new check is more likely to
+  catch bugs than break a working program.]}
 @end{Incompatible2012}
 
 
@@ -6213,7 +6277,7 @@ defined to have failed, and it becomes a completed task (see
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified when the CPU
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified when the CPU
   aspect expression is evaluated.]}
 @end{DiffWord2012}
 
@@ -6368,7 +6432,8 @@ CPU in its domain.]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0082-1]}
 @ChgAdded{Version=[3],Text=[If both @Chg{Version=[4],New=[the dispatching
 domain],Old=[Dispatching_Domain]} and CPU are specified for
-a task, and the CPU value is not contained within the range of processors for
+a task, and the CPU value is not contained within the
+@Chg{Version=[4],New=[set],Old=[range]} of processors for
 the domain (and is not Not_A_Specific_CPU), the activation of the task is
 defined to have failed, and it becomes a completed task (see
 @RefSecNum{Task Execution - Task Activation}).]}
@@ -6554,21 +6619,21 @@ attempt is made to exceed this number.]}
 @begin{Inconsistent2012}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0033-1]}
 @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
-We now explicitly allow empty dispatching domains, as it would
-be difficult to avoid declaring them when a system is configured
+@b{Corrigendum:} We now explicitly allow empty dispatching domains, as it
+would be difficult to avoid declaring them when a system is configured
 at runtime. Therefore, assigning a task to an empty domain now
 raises Dispatching_Domain_Error; creating such a domain should
 not raise Dispatching_Domain_Error. If an implementation does
 something different in these cases, and a program depends on
 that difference, the program could malfunction. This seems
 very unlikely (if no exception is ever raised, the task assigned
-to the empty could never run; if the exception is raised earlier,
+to the empty domain could never run; if the exception is raised earlier,
 the program can't do anything useful).]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0033-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   The subtypes of the parameter or result of several routines were changed
   to support empty domains. These changes will cause rules requiring
   subtype conformance to fail on these routines (such as 'Access). We
@@ -6583,7 +6648,7 @@ the program can't do anything useful).]}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0048-1]}
-  @ChgAdded{Version=[4],Text=[@b{Correction:} Added wording to clarify that
+  @ChgAdded{Version=[4],Text=[@b{Corrigendum:} Added wording to clarify that
   all tasks can execute on all CPUs of the system dispatching domain by
   default.]}
 

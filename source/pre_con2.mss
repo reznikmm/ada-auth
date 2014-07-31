@@ -1,6 +1,6 @@
  @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.27 $ $Date: 2013/08/17 02:17:38 $ $Author: randy $ }
+@comment{ $Revision: 1.28 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -504,6 +504,7 @@ A subprogram is said to
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a tree]}
 @Defn2{Term=[tampering],Sec=[prohibited for a tree]}
 When tampering with cursors is @i<prohibited> for a particular tree object
@@ -512,7 +513,9 @@ that is defined to tamper with the cursors of @i<T>, leaving @i<T> unmodified.
 Similarly, when tampering with elements is @i<prohibited> for a particular tree
 object @i<T>, Program_Error is propagated by a call of any language-defined
 subprogram that is defined to tamper with the elements of @i<T> @Redundant[(or
-tamper with the cursors of @i<T>)], leaving @i<T> unmodified.]}
+tamper with the cursors of @i<T>)], leaving @i<T>
+unmodified.@Chg{Version=[4],New=[ These checks are made before any other
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
@@ -1921,12 +1924,17 @@ unless specified by the operation.]}]}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0069-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed the function Iterate
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Fixed the function Iterate
   so it is clear that the root node is never visited.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0078-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> The definition of @i<node> is
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> The definition of @i<node> is
   clarified so that it it doesn't appear to say all nodes have an element.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
+  precede all other checks made by a subprogram (but after those associated
+  with the call).]}
 @end{DiffWord2012}
 
 
@@ -2001,7 +2009,7 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2085,7 +2093,7 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2179,7 +2187,7 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2272,7 +2280,7 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2337,7 +2345,7 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2402,7 +2410,7 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2486,7 +2494,7 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -2674,11 +2682,14 @@ it calls the Replace_Element procedure with @i<H> as a parameter;]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
 @Defn2{Term=[tampering],Sec=[prohibited for a holder]}
 When tampering with the element is @i<prohibited> for a particular holder object
 @i<H>, Program_Error is propagated by a call of any language-defined subprogram
-that is defined to tamper with the element of @i<H>, leaving @i<H> unmodified.]}
+that is defined to tamper with the element of @i<H>, leaving @i<H>
+unmodified.@Chg{Version=[4],New=[ These checks are made before any other
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}
 
 @begin{DescribeCode}
 
@@ -3012,7 +3023,7 @@ holder container unless specified by the operation.]}]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0035-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
@@ -3025,6 +3036,12 @@ holder container unless specified by the operation.]}]}
   mention this only for completeness.]}
 @end{Inconsistent2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
+  precede all other checks made by a subprogram (but after those associated
+  with the call).]}
+@end{DiffWord2012}
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Vectors]}
 
@@ -5117,9 +5134,10 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @begin{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
 @ChgAdded{Version=[3],Text=[@key[for] C @key[in] G (Next).Iterate @key[loop]
    @key[declare]
-      E : Edge @key[renames] G (Next)(C).@key[all];
+      E : Edge @key[renames] G (Next)(C)@Chg{Version=[4],New=[],Old=[.@key[all]]};
    @key[begin]
       @key[if not] Reached(E.To) @key[then]
          ...
@@ -5135,13 +5153,14 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
 @begin{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
 @ChgAdded{Version=[3],Text=[@key[declare]
    L : Adjacency_Lists.List @key[renames] G (Next);
    C : Adjacency_Lists.Cursor := L.First;
 @key[begin]
    @key[while] Has_Element (C) @key[loop]
       @key[declare]
-         E : Edge @key[renames] L(C).@key[all];
+         E : Edge @key[renames] L(C)@Chg{Version=[4],New=[],Old=[.@key[all]]};
       @key[begin]
          @key[if not] Reached(E.To) @key[then]
             ...

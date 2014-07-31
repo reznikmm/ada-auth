@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2013/02/02 01:46:59 $ $Author: randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2014/07/24 04:20:40 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -116,7 +116,7 @@ Package Locales is new.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0037-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Types Language_Code and Country_Code are defined with predicates rather than
   constrained components so that they can be converted to/from type String.
   This changes the exception raised from Constraint_Error to Assertion_Error

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.70 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.71 $ $Date: 2014/07/24 04:20:39 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -507,25 +507,20 @@ it shall depend semantically only upon declared pure or shared passive
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
 it shall not contain a library-level declaration of an access type
-that designates a class-wide type,
+that designates a class-wide type,@Chg{Version=[4],New=[ or a type
+with a part that is of a],Old=[]}
 task type, or protected type with
-@nt{entry_declaration}s@Chg{New=[@Chg{Version=[4],New=[; further, it shall not
-contain a library-level declaration that includes a @nt{name} that denotes a
-subtype with a part having an access type that is declared within a
-declared-pure package],Old=[]}],
+@nt{entry_declaration}s@Chg{New=[],
 Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the
 declaration is nested within a body other than
 a @nt<package_body>]}.
 @begin{Reason}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
   These kinds of access types are disallowed because the object
   designated by an access value of such a type could
   contain an implicit reference back to
   the active partition on whose behalf the designated object was
-  created.@Chg{Version=[4],New=[ We don't allow using access types from
-  declared-pure packages, as the next rule is ineffective at preventing
-  the creation of references to active partitions for such types.],Old=[]}
+  created.
 @end{Reason}
 
 @end{itemize}
@@ -601,7 +596,7 @@ partitions.
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0038-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Uses of access types declared in declared-pure units are not allowed in
   library-level shared passive packages. These were allowed by Ada 2005 and
   Ada 2012, but it is unlikely that they work properly, as active partitions
@@ -943,9 +938,12 @@ synchronized, protected, or task interface type.]}
 
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
-  Added rules for returning of remote access-to-classwide types; this had been
-  missed in the past. While programs that returned unstreamable types from RCI
+  Added rules for returning of remote
+  @Chg{Version=[4],New=[access-to-class-wide],Old=[access-to-classwide]} types;
+  this had been missed in the past. While programs that returned unstreamable
+  types from RCI
   functions were legal, it is not clear what they could have done (as the
   results could not be marshalled). Similarly, RCI functions that return remote
   controlling access types could try to save those values, but it is unlikely
@@ -974,14 +972,14 @@ synchronized, protected, or task interface type.]}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0034-1]}
-  @ChgAdded{Version=[4],Text=[@B<Correction:> Clarified that dispatching
+  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Clarified that dispatching
   remote stream attribute calls are prohibited. We don't document this as
   an incompatibility, as the stream parameter cannot be marshalled for a
   remote call (it doesn't have external streaming), so it's impossible that
   any working program depends on this functionality.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0076-1]}
-  @ChgAdded{Version=[4],Text=[@B<Correction:> Explicitly stated that modifying
+  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Explicitly stated that modifying
   a visible constant in a remote types package is erroneous. We don't document
   this as inconsistent as implementations certainly can still do whatever they
   were previously doing (no change is required); moreover, this case (and many
@@ -989,7 +987,7 @@ synchronized, protected, or task interface type.]}
   previous semantics.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0085-1]}
-  @ChgAdded{Version=[4],Text=[@B<Correction:> Clarified that specifying
+  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Clarified that specifying
   the Storage_Pool or Storage_Size aspect for an access-to-class-wide type is
   not allowed. The intent is clear, and no implementation has ever allowed
   specifying the aspects (the attributes already cannot be specified),
@@ -1343,7 +1341,7 @@ be supported as an alternative to RPC.]
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0031-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Redefined when indirect and dispatching remote calls have to be remote
   for a unit for which the aspect All_Calls_Remote is True. With the new rules,
   a local target called indirectly or via dispatching will be routed through

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2013/02/02 01:46:59 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3180,6 +3180,24 @@ and all of the views declared by those declarations.
   T: here T denotes the type, not the current instance.]}
   @end{Discussion}
 
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0068-1]}
+  @ChgAdded{Version=[4],NoPrefix=[T],Text=[Within an @nt{aspect_specification}
+  for a type or subtype, the current instance represents a value of the type;
+  it is not an object. The nominal subtype of this value is given by the
+  subtype itself (the first subtype in the case of a @nt{type_declaration}),
+  prior to applying any predicate specified directly on the type or subtype. If
+  the type or subtype is by-reference, the associated object with the value
+  is the object associated (see @RefSecNum{Formal Parameter Modes}) with the
+  execution of the usage name.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[4],Kind=[AddedNormal]}
+    @ChgAdded{Version=[4],Text=[For the purposes of @LegalityTitle, the current
+    instance acts as a value within an @nt{aspect_specification}. It might
+    really be an object (and has to be for a by-reference type), but
+    that isn't discoverable by direct use of the name of the current instance.]}
+  @end{Ramification}
+
   @Defn2{Term=[current instance], Sec=(of a generic unit)}
   If a usage name appears within the declarative region of a
   @nt{generic_declaration} (but not within its @nt{generic_formal_part})
@@ -3752,9 +3770,25 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   version here.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0068-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Added a rule to specify that the current instance of a type or subtype is
+  a value within an @nt{aspect_specification}. This could be inconsistent if
+  a predicate or invariant uses the Constrained attribute on the current
+  instance (it will always be False now, while it might have returned True
+  in original Ada 2012). More likely, a usage of a current instance as a prefix
+  of an attribute will become illegal (such as Size or Alignment). Any such
+  code is very tricky. Moreover, as this is a new feature of Ada 2012, there
+  are not that many predicates and invariants, and the ones that exist are
+  very unlikely to be this tricky. Thus we do not believe that there will be
+  any practical effect to this change, other than to explicitly allow
+  common implementation strategies.]}
+@end{Inconsistent2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0040-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Added wording to clarify that
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added wording to clarify that
   the @SynI{selecting_}@nt{expression} of a @nt{case_expression} is a
   complex context, just like that of a @nt{case_statement}. Clearly, everyone
   expects these to work the same way. Moreover, since it would be a lot of extra

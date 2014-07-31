@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 
@@ -978,7 +978,7 @@ selecting the @nt<terminate_alternative>, but before termination.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
-  @ChgAdded{Version=[4],Text=[@B<Correction:> Ensured that the master of
+  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Ensured that the master of
   tasks that are not @nt{allocator}s of named access types is correctly
   determined. (Ignoring the accessibility rules of
   @RefSecNum{Operations of Access Types} could not be intended.)]}
@@ -5098,6 +5098,9 @@ executed after the @nt<abortable_part> is left.
 @key(end) @key(select);
 @end(Example)
 
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0098-1]}
+@ChgAdded{Version=[4],Text=[Note that these examples presume that there are
+abort completion points within the execution of the @nt{abortable_part}.]}
 @end{Examples}
 
 @begin{Extend83}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -457,7 +457,7 @@ any force.
 
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   The @nt{raise_expression} is new. This construct is necessary to
   allow conversion of existing specifications to use preconditions and
   predicates without changing the exceptions raised. It is considered important
@@ -1285,10 +1285,15 @@ Text=<@ChgAdded{Version=[3],Text=[A postcondition is an assertion
 that is expected to be True when a given subprogram returns
 normally.]}>}
 
-@ChgToGlossary{Version=[3],Kind=[Added],Term=<Invariant>,
-Text=<@ChgAdded{Version=[3],Text=[A invariant is an assertion that is expected
+@Comment{Really [RevisedAdded],InitialVersion=[3], below, but we don't have that implemented yet.}
+@ChgToGlossary{Version=[4],Kind=[Added],Term=<Invariant>,
+Text=<@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[An],Old=[A]} invariant
+is an assertion that is expected
 to be True for all objects of a given private type when viewed from outside the
 defining package.]}>}
+
+@ChgToGlossary{Version=[4],Kind=[Added],Term=<Type Invariant>,
+Text=<@ChgAdded{Version=[4],Text=[See Invariant.]}>}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Assertion>,
 Text=<@ChgAdded{Version=[3],Text=[An assertion is a boolean expression that
@@ -1628,7 +1633,7 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Assertion_Policy pragmas are now allowed in more places and can specify
-  behavior for invidivual kinds of assertions.]}
+  behavior for individual kinds of assertions.]}
 @end{Extend2005}
 
 

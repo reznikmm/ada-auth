@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:38 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1096,7 +1096,7 @@ The Ada 83 rule said that the
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Allowed overriding the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Allowed overriding the
   nominal subtype of an @nt{attribute_reference} for an object elsewhere
   in this standard.]}
 @end{DiffWord2012}
@@ -1275,9 +1275,11 @@ is of an access-to-variable type.@AspectDefn{Variable_Indexing}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0104-1]}
 @ChgAdded{Version=[3],Text=[These aspects are inherited by descendants of @i<T>
-(including the class-wide type @i<T>'Class). @Redundant[The aspects shall not
-be overridden, but the functions they denote may be.]]}
+(including the class-wide type @i<T>'Class).@Chg{Version=[4],New=[],Old=[
+@Redundant[The aspects shall not be overridden, but the functions they denote
+may be.]]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1313,6 +1315,20 @@ Variable_Indexing aspect shall not be specified:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[on a derived type if the parent type has the
 corresponding aspect specified or inherited; or]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
+  @ChgAdded{Version=[4],Text=[This rule allows the replacement of the
+    implementation of an indexing function and the addition of a new indexing
+    function for a derived type, but not the removal of an indexing function.
+    This is necessary so that indexing can be used on objects of T'Class. So
+    long as the tag of O is that of its nominal subtype, we do not want
+    T'Class(O)(I) to mean something different than O(I). Thus we cannot allow a
+    change in the function identified. As T'Class(O)(I) expands into a
+    dispatching call, we need to ensure that there is a body for each such
+    function -- but it is OK for that body to be changed from the original body
+    (that's just normal dispatching).]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[on a @nt{full_type_declaration} if the type has
@@ -1418,6 +1434,13 @@ the @nt{prefix} of the prefixed view.]}
 
 @end{Resolution}
 
+@begin{Notes}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
+  @ChgAdded{Version=[4],Text=[The Constant_Indexing and Variable_Indexing
+    aspects cannot be redefined when inherited for a derived type, but the
+    functions that they denote can be modified by overriding or overloading.]}
+@end{Notes}
+
 @begin{Examples}
 @begin{Example}
 
@@ -1451,6 +1474,12 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   Constant_Indexing and Variable_Indexing, and the @nt{generalized_indexing}
   syntax are new.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Converted confusing and
+    unnecessary normative wording about "overriding an aspect" into a note.]}
+@end{DiffWord2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -2246,7 +2275,7 @@ a record aggregate. Now we do.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0046-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> We explicitly say that the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> We explicitly say that the
   @LegalityTitle have to be rechecked for each component individually.
   This @i<seems> obvious, but as the AARM note @RefSecNum{Record Aggregates}
   (16.c) appeared to say that this was not necessary, and since we explicitly
@@ -3056,7 +3085,7 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0084-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Fixed so that the Default_Component_Value (if any) is used to initialize
   components specified with <>. This is what users would expect, and all
   Ada 2012 implementation known at the time of this writing initialize with
@@ -3312,7 +3341,7 @@ still have to be parenthesized when used in a bound of a range.
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0039-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Revised membership syntax to eliminate ambiguities. In some cases,
   previously ambiguous membership expressions will now have an unambiguous
   meaning. If an Ada 2012 implementation chose the "wrong" meaning, the
@@ -3331,7 +3360,7 @@ still have to be parenthesized when used in a bound of a range.
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0039-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   The revised membership syntax will require
   parentheses in @nt{membership_choice_list}s in some cases where the
   Ada 2012 grammar did not require them. For instance,
@@ -3921,12 +3950,13 @@ the designated profiles shall be subtype conformant.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0101-1]}
 @ChgAdded{Version=[3],Text=[If the profile of an explicitly declared primitive
 equality operator of an untagged record type is type conformant with that of the
 corresponding predefined equality operator, the declaration shall occur before
-the type is frozen. In addition, if the untagged record type has a nonlimited
-partial view, then the declaration shall occur in the visible part
-of the enclosing package.
+the type is frozen.@Chg{Version=[4],New=[],Old=[ In addition, if the untagged
+record type has a nonlimited partial view, then the declaration shall occur
+in the visible part of the enclosing package.]}
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -4484,9 +4514,24 @@ conversions.],Old=[]}
   ambiguous.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0101-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b{Corrigendum:}
+  Removed the incompatible rule preventing the declaration of "=" in the
+  private part of a package specification for an untagged record type that
+  completes a private type. Any code that calls the
+  predefined "=" on the private type will now execute the body for the
+  redefined "=" instead for the predefined "=". Eliminating the rule eliminates
+  an unnecessary incompatibility (especially for programs that never call the
+  predefined "="). Moreover, (like the composition of untagged record "=" in
+  Ada 2012) this is more likely to fix bugs than cause
+  them (who defines an "=" with a presumably different result and does not want
+  clients to us it?).]}
+@end{Inconsistent2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0039-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Reworded membership tests to use
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Reworded membership tests to use
   the syntax items @SynI{tested_}@nt{simple_expression} and
   @SynI{choice_}@nt{simple_expression}. This was necessary to eliminate
   wording ambiguities introduced when the grammar was corrected to eliminate
@@ -4494,7 +4539,7 @@ conversions.],Old=[]}
   merely talking about a @nt{simple_expression} is insufficient.)]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of the
   membership tests to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
 @end{DiffWord2012}

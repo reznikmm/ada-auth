@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1002,7 +1002,7 @@ for @nt<name>s, rather than being separated out along with
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of
   case coverage to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
 @end{Diffword2012}
@@ -1223,7 +1223,7 @@ The constant-ness of loop parameters is specified in
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of
   loop execution to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
 @end{Diffword2012}
@@ -1474,6 +1474,35 @@ to be constrained.]}
   disappearing while the iterator is still using it.]}
 @end{Reason}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0120-1]}
+@ChgAdded{Version=[4],Text=[A container element iterator is illegal if the
+call of the default iterator function that creates the loop iterator
+(see below) is illegal.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This can happen if the parameter to the default
+  iterator function is @key[in out] and the @SynI<iterable_>@nt{name} is a
+  constant. The wording applies to any reason that the call would be illegal,
+  as it's possible that one of the default parameters would be illegal, or
+  that some accessibility check would fail.]}
+@end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0120-1]}
+@ChgAdded{Version=[4],Text=[A generalized iterator is illegal if the iteration
+cursor subtype of the @SynI<iterator_>@nt{name} is a limited type at the point
+of the generalized iterator. A container element iterator is illegal if the
+default cursor subtype of the type of the @SynI<iterable_>@nt{name} is a limited
+type at the point of the container element iterator.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[If the cursor type is limited, the assignment to
+  the loop parameter for a generalized iterator would be illegal. The same is
+  true for a container element iterator. We have to say "at the point of the
+  iterator" as the limitedness of a type can change due to visibility.]}
+@end{Reason}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1548,15 +1577,6 @@ First and Next.]}
   variables) has the tag of the initial value. Constraint_Error may be raised by
   a subsequent iteration if Next or Previous return an object with a different
   tag or constraint.]}
-
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
-  @ChgAdded{Version=[4],Text=[Note that the cursor type of a generalized
-  iterator can be a limited type. The instantiation and subsequent use of the
-  interfaces in an instance of Ada.Iterator_Interfaces is still legal in that
-  case because a limited type matches the formal incomplete type of the generic.
-  But any use of an iterator type descended from such an interface in a loop
-  will be illegal, because the implicit assignment to the loop parameter implied
-  by such an interface is illegal.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
@@ -1608,6 +1628,17 @@ loop parameter is a constant (see above), then the indexing uses the default
 constant indexing function for the type of the iterable container object for the
 loop; otherwise it uses the default variable indexing function.]}
 
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0120-1]}
+@ChgAdded{Version=[4],Text=[Any exception propagated by the execution of a
+generalized iterator or container element iterator is propagated by the
+immediately enclosing loop statement.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This text covers exceptions raised by called
+  functions that make up the execution of the iterator as well as
+  exceptions raised by the assignment to the loop parameter or cursor]}
+@end{Ramification}
 @end{Runtime}
 
 @begin{Examples}
@@ -1636,15 +1667,32 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0047-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada
-  2012}@b<Correction:> Added a rule to ensure that the object being iterated
+  2012}@b<Corrigendum:> Added a rule to ensure that the object being iterated
   cannot be a component that could disappear before the loop completes. This
   could be incompatible by making a loop that was legal (and worked correctly,
   so long as the enclosing object is not modified during the loop) from the
   original Ada 2012 illegal in corrected Ada 2012. Such loops should be pretty
   rare, especially as these iterator forms are new to Ada 2012.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0120-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added rules to reject loops
+  if the call to the default iterator function for a container element
+  iterator is illegal, or if the cursor type of an iterator is limited.
+  These are formally incompatible with original Ada 2012, but as it's unlikely
+  that any Ada 2012 compiler ever allowed the illegal usages in an expansion
+  of a loop (it's much more likely that they would have just caused an internal
+  error in the compiler), this should have no effect in practice.]}
 @end{Incompatible2012}
 
-
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0120-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added wording to specify that
+  a loop propagates any exceptions propagated by the execution of an iterator.
+  Since that's what naturally would happen from a macro-style expansion of the
+  parts of an iterator, and no other interpretation makes sense given the way
+  the rest of Ada works, we consider it so unlikely that any Ada 2012 ever did
+  anything else that we don't document this as a possible inconsistency.]}
+@end{DiffWord2012}
 
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}

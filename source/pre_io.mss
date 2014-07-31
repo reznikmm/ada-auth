@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3422,7 +3422,9 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
 
     @key[type] @AdaTypeDefn{Stream_Access} @key[is] @key[access] @key[all] Root_Stream_Type'Class;
 
-    @key(type) @AdaTypeDefn{File_Type} @key(is) @key(limited) @key(private;)
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0102-1]}
+    @key(type) @AdaTypeDefn{File_Type} @key(is) @key(limited) @key(private);@Chg{Version=[4],New=[
+    @key(pragma) Preelaborable_Initialization(File_Type);],Old=[]}
 
     @key(type) @AdaTypeDefn{File_Mode} @key(is) (In_File, Out_File, Append_File);
 
@@ -3477,7 +3479,7 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
                      To   : @key(in) Positive_Count);
 
     @key(procedure) @AdaSubDefn{Write} (File : @key(in) File_Type;
-                           Item : @key(in) Stream_Element_Array);
+                     Item : @key(in) Stream_Element_Array);
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @ChgDeleted[Version=[1],Text=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
@@ -3741,6 +3743,15 @@ closed file.]}
   is @i<not> a remote types package; File_Type objects cannot be
   passed between partitions.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0102-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b{Corrigendum:} Type Ada.Streams.Stream_IO.File_Type now has
+  preelaborable initialization. This allows declaring library-level
+  file objects in preelaborable packages (an oversight from the
+  change above).]}
+@end{Extend2012}
 
 
 @LabeledSubClause{The Package Text_IO.Text_Streams}

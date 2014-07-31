@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2014/01/08 01:15:34 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2014/07/24 04:20:41 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:41 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -4045,7 +4045,7 @@ Decode to convert all of the lines to an internal format.]}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0088-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Fixed the omission that Convert
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Fixed the omission that Convert
   routines make the same checks on input as Decode routines.]}
 @end{Diffword2012}
 

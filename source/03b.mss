@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @LabeledClause{Array Types}
 
@@ -1911,15 +1911,17 @@ the following attribute is defined:
 
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0214-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[3],Text=[All tagged objects are known to be constrained (as
  nonlimited tagged types cannot have discriminant defaults, and limited tagged
  objects are immutably limited), and are always considered constrained by this
- attribute to avoid distributed overhead for parameters of limited classwide
+ attribute to avoid distributed overhead for parameters of limited
+ @Chg{Version=[4],New=[class-wide],Old=[classwide]}
  types, as limited tagged objects may technically be unconstrained if they use
  defaulted discriminants. Such objects still cannot have their discriminants
  changed, as assignment is not supported for them, so there is no use for this
- attribute that would justify the overhead of passing it with all classwide
- parameters.]}
+ attribute that would justify the overhead of passing it with all
+ @Chg{Version=[4],New=[class-wide],Old=[classwide]} parameters.]}
 @end{Reason}
 
 @begin{Discussion}
@@ -2736,7 +2738,7 @@ left implicit in RM83.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of the
   coverage rules to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
 @end{DiffWord2012}

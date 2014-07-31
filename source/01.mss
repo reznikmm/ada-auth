@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2013/02/02 01:46:58 $}
+@Comment{$Date: 2014/07/24 04:20:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1148,6 +1148,8 @@ is a legal Ada 202x program with different semantics.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[Inconsistencies marked with
+@b[Corrigendum:]@Defn{Corrigendum} are corrections to the original Ada 2012
+definition added by Corrigendum 1 to Ada 2012. Inconsistencies marked with
 @b[Correction:]@Defn{Correction} are corrections to the original Ada 2012
 definition added by this edition of the Standard.
 Formally, these are
@@ -1175,6 +1177,9 @@ illegal in Ada 202x.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[As with inconsistencies, incompatibilities
+marked with
+@b[Corrigendum:]@Defn{Corrigendum} are corrections to the original Ada 2012
+definition added by Corrigendum 1 to Ada 2012, and incompatibilities
 marked with @b[Correction:] are corrections to the original Ada 2012 definition
 added by this edition. Formally, these are
 incompatibilities caused by Ada Issues classified as Binding Interpretations;
@@ -1204,8 +1209,11 @@ The vast majority of language changes fall into this category.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal]}
 @ChgAdded{Version=[4],Text=[As with incompatibilities, extensions
-marked with @b[Correction:]
-are corrections to the original Ada 2012 definition added by this edition.
+marked with
+@b[Corrigendum:]@Defn{Corrigendum} are corrections to the original Ada 2012
+definition added by Corrigendum 1 to Ada 2012, and extensions
+marked with @b[Correction:] are corrections to the original Ada 2012 definition
+added by this edition.
 Formally, these are extensions allowed by Ada Issues classified as Binding
 Interpretations. As corrections, implementations of Ada 2012 (and sometimes Ada 95)
 are allowed to implement these extensions. Thus, these strictly speaking are not
@@ -1231,7 +1239,9 @@ As explained above, the next heading does not represent any language change:]}
 This heading lists some of the nonsemantic changes between the Ada 2012 RM and
 the Ada 202x RM. This heading lists only @lquotes@;interesting@rquotes@; changes
 (for instance, editorial corrections are not listed). Items marked
-@b[Correction:] come from Ada Issues classified
+@b[Corrigendum:]@Defn{Corrigendum} are included in Corrigendum 1 to Ada 2012,
+and items marked with @b[Correction:] are added by this edition. In both cases,
+the items come from Ada Issues classified
 as Binding Interpretations and strictly speaking belong to Ada 2012; other items
 only belong to Ada 202x.]}
 

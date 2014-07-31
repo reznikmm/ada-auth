@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.81 $ $Date: 2013/02/02 01:46:59 $}
+@comment{$Revision: 1.82 $ $Date: 2014/07/24 04:20:40 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -1386,7 +1386,8 @@ will take.}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}
 @ChgRef{Version=[4],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with @Chg{Version=[4],New=[
-with changes specifically for Ada 202x],
+the corrections specified in Technical Corrigendum 1
+(ISO/IEC 8652:2012/COR.1:TBD) and other changes specifically for Ada 202x],
 Old=[the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[, along with
@@ -1399,7 +1400,8 @@ In addition, a variety of editorial errors have been corrected.],Old=[]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}
 @ChgRef{Version=[4],Kind=[RevisedAdded]}
 @Chg{New=[This document has been revised with @Chg{Version=[4],New=[
-with changes specifically for Ada 202x],
+the corrections specified in Technical Corrigendum 1
+(ISO/IEC 8652:2012/COR.1:TBD) and other changes specifically for Ada 202x],
 Old=[the corrections specified in Technical Corrigendum 1
 (ISO/IEC 8652:1995/COR.1:2001)@Chg{Version=[2],New=[ and
 Amendment 1 (ISO/IEC 8652/AMD 1:2007)@Chg{Version=[3],New=[, along with
@@ -1416,13 +1418,16 @@ have been added and a variety of editorial errors have been corrected.],Old=[]}
 @Chg{New=[Changes to the original 8652:1995 can be identified by the version
 number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
 number.@Chg{Version=[2],New=[ Paragraphs with a version number of /1 were
-changed by Technical Corrigendum 1 or were editorial corrections at that time,
+changed by Technical Corrigendum 1 @Chg{Version=[4],New=[for Ada 95 ],Old=[]}or
+were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were
 more recent editorial corrections@Chg{Version=[3],New=[, and paragraphs with a
 version number of /3 were changed by the third (2012) edition of the Standard
 or were still
 more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
-with a version number of /4 are changes or
+with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
+or were editorial corrections at that time.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
+with a version number of /5 are changes or
 editorial corrections for Ada 202x.],Old=[]}
 Paragraphs not so marked are
 unchanged by @Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Ada 202x],Old=[the third edition]},
@@ -1448,13 +1453,15 @@ Ada Reference Manual.],Old=[]}
 @Chg{New=[Changes to the original 8652:1995 can be identified by the version
 number @Chg{Version=[2],New=[],Old=[/1 ]}following the paragraph
 number.@Chg{Version=[2],New=[ Paragraphs with a version number of /1 were
-changed by Technical Corrigendum 1 or were editorial corrections at that time,
+changed by Technical Corrigendum 1 @Chg{Version=[4],New=[for Ada 95 ],Old=[]}or were editorial corrections at that time,
 while paragraphs with a version number of /2 were changed by Amendment 1 or were
 more recent editorial corrections@Chg{Version=[3],New=[, and paragraphs with a
 version number of /3 were changed by the third (2012) edition of the Standard
 or were still
 more recent editorial corrections],Old=[]}.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
-with a version number of /4 are changes or
+with a version number of /4 are changed by Technical Corrigendum 1 for Ada 2012
+or were editorial corrections at that time.],Old=[]}@Chg{Version=[4],New=[ Paragraphs
+with a version number of /5 are changes or
 editorial corrections for Ada 202x.],Old=[]}
 Paragraphs not so marked are
 unchanged by @Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Ada 202x],Old=[the third edition]},

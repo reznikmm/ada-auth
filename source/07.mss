@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1659,7 +1659,7 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0065-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Clarified the clarification added
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the clarification added
   by AI05-0115-1, as it turned out to not be that clear. Hopefully this version
   is better.]}
 @end{DiffWord2012}
@@ -1744,7 +1744,7 @@ for an abstract type.]}
 @end{TheProof}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
-@ChgAdded{Version=[4],Text=[If a private extension occurs at a point where a
+@ChgAdded{Version=[4],Text=[If a type extension occurs at a point where a
 private operation of some ancestor is visible and inherited, and a
 Type_Invariant'Class expression applies to that ancestor, then the inherited
 operation shall be abstract or shall be overridden.]}
@@ -1898,27 +1898,37 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
         the immediate scope of @i<T>, or]}
 
       @ChgRef{Version=[4],Kind=[Added]}
-      @ChgAdded{Version=[4],Text=[@i<T> is a record extension and the subprogram
-        or entry is a primitive operation that corresponds to a visible
-        operation of a private or private extension ancestor to which the same
-        (class-wide) invariant applies.]}
+      @ChgAdded{Version=[4],Text=[@i<T> is a record extension, and the
+        subprogram or entry is a primitive operation visible outside the
+        immediate scope of type @i<T> or overrides an inherited operation that
+        is visible outside the immediate scope of @i<T>.]}
     @end{Itemize}
-
-    @begin{Discussion}
-      @ChgRef{Version=[4],Kind=[AddedNormal]}
-      @ChgAdded{Version=[4],Text=[Problems have been identified with this last
-        part, so it should be expected to change in the near future.]}
-    @end{Discussion}
-
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
   part of type @i<T>.]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
+  @ChgAdded{Version=[4],Text=[For a view conversion to a class-wide type
+  occurring within the immediate scope of @i<T>, from a specific type that is
+  a descendant of @i<T> (including @i<T> itself), a check is performed
+  on the part of the object that is of type @i<T>.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Class-wide objects are treated as though they
+    exist outside the scope of every type, and may be passed across package
+    "boundaries" freely without further invariant checks.]}
+@end{Reason}
+
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
-@ChgAdded{Version=[3],Text=[If performing checks is required by the Invariant or
-Invariant'Class assertion policies (see
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
+@ChgAdded{Version=[3],Text=[If performing checks is required by the
+@Chg{Version=[4],New=[Type_Invariant],Old=[Invariant]} or
+@Chg{Version=[4],New=[Type_Invariant'Class],Old=[Invariant'Class]} assertion
+policies (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of
 corresponding aspect specification applicable to a given type, then the
 respective invariant expression is considered
@@ -2011,7 +2021,7 @@ value.]}
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
-  @b<Correction:> Clarified the definition of when invariant checks occur
+  @b<Corrigendum:> Clarified the definition of when invariant checks occur
   for inherited subprograms. This might cause checks to be added or removed
   in some cases. These are all rare cases involving class-wide type
   invariants and either record extensions or multiple levels of derivation.
@@ -2019,8 +2029,16 @@ value.]}
   clear, even though the formal language did not include them. So we do not
   expect this to be a problem in practice.]}
 
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added invariant checks for
+  conversions to class-wide types. This might cause an invariant check to
+  fail in some cases where they would not be made in the original definition
+  of Ada 2012. Such cases represent a hole where a value that fails an
+  invariant could "leak out" of a package, and as such will detect far more
+  bugs than it cases.]}
+
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0044-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Removed the invariant check
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Removed the invariant check
   for @key[in] parameters of
   functions, so that typical invariants don't cause infinite recursion.
   This is strictly inconsistent, as the Ada 2012 definition has this check;
@@ -2030,7 +2048,7 @@ value.]}
   occurring seems very unlikely.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0049-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Added an invariant check for
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added an invariant check for
   deferred constants, so they
   cannot be used to @ldquote@;leak@rdquote values that violate the invariant
   from a package. This is strictly inconsistent, as the Ada 2012 definition
@@ -2045,7 +2063,7 @@ value.]}
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0042-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatiblities with Ada 2012}
-  @b<Correction:> A private operation that is inherited in the visible
+  @b<Corrigendum:> A private operation that is inherited in the visible
   part of a package to which a class-wide invariant applies now requires
   overriding. This is a very unlikely situation, and will prevent problems
   with invariant checks being added to routines that assume that they don't
@@ -2819,7 +2837,7 @@ rather than being a subclause of
   constructor contexts @em we want to treat these as closely to parentheses as
   possible.]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0178-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
   @ChgAdded{Version=[3],Text=[Added wording so that expression functions can
   return limited entities.]}
 
@@ -3943,10 +3961,11 @@ For the @i{finalization} of an object:
   @end{Reason}
   @begin{Honest}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
+    @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
     @ChgAdded{Version=[3],Text=[The components discussed here are all of the
     components that the object actually has, not just those components that are
     statically identified by the type of the object. These can be different if
-    the object has a classwide type.]}
+    the object has a @Chg{Version=[4],New=[class-wide],Old=[classwide]} type.]}
   @end{Honest}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
@@ -4783,10 +4802,11 @@ the rules here refer to the task-waiting rules of
   which is now covered by the additional places where masters are defined.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0099-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the finalization
   rules so that there is no doubt that privacy is ignored, and to ensure
-  that objects of classwide interface types are finalized based on their
-  specific concrete type.]}
+  that objects of @Chg{Version=[4],New=[class-wide],Old=[classwide]} interface
+  types are finalized based on their specific concrete type.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0107-1]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Allowed premature finalization
@@ -4795,7 +4815,7 @@ the rules here refer to the task-waiting rules of
   implementations take advantage of the permission.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-  @ChgAdded{Version=[3],Text=[Added a permission to finalize object allocated
+  @ChgAdded{Version=[3],Text=[Added a permission to finalize an object allocated
   from a subpool later than usual.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}

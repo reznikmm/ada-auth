@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2209,6 +2209,12 @@ We rejected that idea, because it would require implicit (inherited)
 the actual may, but need not, have discriminants,
 and may be definite or indefinite.]
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
+@ChgAdded{Version=[4],Text=[When enforcing @LegalityTitle@;, for the purposes of
+determining within a generic body whether a type is unconstrained in any partial
+view, a discriminated subtype is considered to have a constrained partial view
+if it is a descendant of an untagged generic formal private or derived type.]}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -2546,7 +2552,7 @@ run-time check to a compile-time check.
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0036-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Added a requirement that a tagged type only match a formal derived type
   that is a private extension. This is necessary to prevent type conversions
   that would not be allowed outside of the generic. We expect that this will
@@ -2555,6 +2561,15 @@ run-time check to a compile-time check.
   desired and a private extension used so that is allowed.]}
 @end{Incompatible2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> The assume the worst rule
+  for determining within a generic body whether a type is unconstrained in any
+  partial view was moved here. While AI05-0041-1 added it to
+  @RefSecNum{Operations of Access Types}, it's also needed (at least) in
+  @RefSecNum{Type Conversions} and @RefSecNum{Parameter Associations}. Thus,
+  it was moved here so that it applies generally.]}
+@end{DiffWord2012}
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Formal Scalar Types}

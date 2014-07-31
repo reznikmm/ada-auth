@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -832,6 +832,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @ChgAdded{Version=[4],Text=[@examcom<anonymous> : @key[constant] @i<T>'Class := @i<T>'Class(X);
 @i<X'Old> : @i<T> @key[renames] @i<T>(@examcom<anonymous>);]}
 @end{ChildExample}
+    @ChgRef{Version=[4],Kind=[Added]}
     @ChgAdded{Version=[4],NoPrefix=[T],Text=[where the name X'Old denotes
       the object renaming.]}
     @begin{Ramification}
@@ -1241,7 +1242,7 @@ the value.]}
 
 @begin{Inconsistent2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   The Old attribute is defined more carefully. This changes the nominal subtype
   and place of declaration of the attribute compared to the published Ada 2012
   Standard. In extreme cases, this could change the runtime behavior of the
@@ -1252,7 +1253,7 @@ the value.]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Precondition and postcondition aspects cannot be specified on instances of
   generic subprograms (they should be specified on the generic subprogram
   instead). This was (unintentionally) allowed by the Ada 2012 standard.
@@ -1570,7 +1571,7 @@ is changed and one of the parameters depends on the discriminant.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0027-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected so that
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Corrected so that
   value conversions that are copies are the @ldquote@;associated object@rdquote
   for parameter passing of by-reference types. This can only happen if the
   conversion is between unrelated non-limited types, and it is necessary just
@@ -1815,8 +1816,11 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
   within a @nt{protected_body}@Chg{Version=[2],New=[;],Old=[.]}
 
   @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
+  @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0107-1]}
   @ChgAdded{Version=[2],Text=[any prefixed view of a subprogram (see
-  @RefSecNum{Selected Components}).]}
+  @RefSecNum{Selected Components})@Chg{Version=[4],New=[ without
+    synchronization kind (see @RefSecNum{Intertask Communication}) By_Entry or
+    By_Protected_Procedure],Old=[]}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[The profile of a prefixed view is
@@ -1824,6 +1828,14 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
     (it doesn't have the first parameter), so we don't want to be able
     to take 'Access of it, as that would require generating a wrapper of
     some sort.]}
+
+    @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0107-1]}
+    @ChgAdded{Version=[4],Text=[We except prefixed views that have
+    synchronization kind By_Protected_Procedure so that they can be used
+    with an access-to-protected-procedure type. These don't require special
+    wrappers (this is the normal form for a protected subprogram call). The
+    By_Entry part is just for consistency (there is no access-to-entry type
+    in Ada).]}
   @end{Reason}
 
 @end{InnerItemize}
@@ -1868,16 +1880,22 @@ for Intrinsic subprograms.]
   untagged types.
 @end{Ramification}
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1]}
 @Defn{protected calling convention}
 @Defn2{Term=[calling convention], Sec=(protected)}
 The default calling convention is @i{protected}
-for a protected subprogram,
+for a protected subprogram,@Chg{Version=[4],New=[ a
+prefixed view of a subprogram with a synchronization kind of
+By_Protected_Procedure,],Old=[]}
 and for an access-to-subprogram type with
 the reserved word @key(protected) in its definition.
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1]}
 @Defn{entry calling convention}
 @Defn2{Term=[calling convention], Sec=(entry)}
-The default calling convention is @i{entry} for an entry.
+The default calling convention is @i{entry} for an
+entry@Chg{Version=[4],New=[ and a prefixed view
+of a subprogram with a synchronization kind of By_Entry],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
@@ -2261,12 +2279,23 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   mechanism).]}
 @end{Diffword2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0107-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
+  We now define that a prefixed view of a subprogram with synchronization
+  kind By_Protected_Procedure can be used as the prefix of 'Access for an
+  access-to-protected type. We consider this a correction as it certainly
+  appears that it ought to work, but in original Ada 2012 it would have had
+  a convention mismatch.]}
+@end{Extend2012}
+
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0050-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> We now define how two
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> We now define how two
   expressions containing quantified expressions can fully conform. This
   isn't incompatible, as the original Ada 2012 never allowed such expressions
-  to conform (the declarations in each formally being different).]}
+  to conform (the declarations in each formally being different). Neither is
+  it an extension as one would expect these to conform.]}
 @end{Diffword2012}
 
 
@@ -2902,6 +2931,22 @@ in its full view, and unconstrained in any partial view.]}
   implementation burden.]}
 @end{Reason}
 
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
+  @ChgAdded{Version=[4],Text=[We assume the worst in a generic body whether
+  or not a formal subtype has a constrained partial view; specifically, in a
+  generic body a discriminated subtype is considered to have a constrained
+  partial view if it is a descendant of an untagged generic formal private
+  or derived type (see @RefSecNum{Formal Private and Derived Types} for the
+  formal definition of this rule).]}
+@end{Discussion}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-4]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance of a generic unit.]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[In a function call, the accessibility level of the
 actual object for each explicitly aliased parameter shall not be statically
@@ -2920,11 +2965,18 @@ deeper than the accessibility level of the master of the call
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0095-1]}
   @ChgAdded{Version=[3],Text=[This accessibility check (and its dynamic cousin
-  as well) can only fail if the function call is used to directly initialize a
-  built-in-place object with a master different than that enclosing the call.
-  The only place all of those conditions exist is in the initializer of an
-  @nt{allocator}; in all other cases this check will always pass.]}
+  as well) can only fail if the @Chg{Version=[4],New=[master of the function
+  call (which is defined in the Heart of Darkness, or
+  @RefSecNum{Operations of Access Types} if you prefer) is different than
+  the master directly enclosing the call],Old=[function call is used to directly initialize a
+  built-in-place object with a master different than that enclosing the call]}.
+  The @Chg{Version=[4],New=[most likely],Old=[only]} place
+  @Chg{Version=[4],New=[where this will occur],Old=[all of those conditions
+  exist]} is in the initializer of an @nt{allocator}; in
+  @Chg{Version=[4],New=[almost ],Old=[]}all other cases this check will always
+  pass.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0144-2]}
@@ -3035,7 +3087,6 @@ nor calls on nonstatic functions.]}
   on very tricky code (modifying the value of a constant); the code is likely
   to confuse future maintainers as well and thus we do not mind rejecting it.]}
 @end{Honest}
-
 
 @end{Itemize}
 
@@ -3212,6 +3263,34 @@ part of the call is considered part of the call.]}
   @ChgAdded{Version=[3],Text=[We do not check expressions that are evaluated only because
   of a component initialized by default in an aggregate (via <>).]}
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
+@ChgAdded{Version=[4],Text=[If the mode is @key[out], the actual parameter is a
+view conversion, and the type of the formal parameter is an access type or
+a scalar type that has the Default_Value aspect specified, then]}
+  @begin{Itemize}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[there shall exist a type (other than a root
+      numeric type) that is an ancestor of both the target type and the operand
+      type; and]}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[in the case of a scalar type, the type of the
+      operand of the conversion shall have the Default_Value aspect specified.]}
+  @end{Itemize}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules apply also in the private part of an instance of a generic unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[These rules are needed in order to ensure that a
+    well-defined parameter value is passed.]}
+@end{Reason}
+
 @end{Legality}
 
 @begin{RunTime}
@@ -3262,9 +3341,28 @@ the formal parameter object is created, and:
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0228-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0074-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[]}@Comment{To add conditional leading}
 @ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
 specified, the formal parameter is initialized from the value of the actual,
-without checking that the value satisfies any constraint or any predicate;]}
+without checking that the value satisfies any constraint or any
+predicate@Chg{Version=[4],New=[, except in the following case: if the actual
+parameter is a view conversion and either],Old=[;]}]}
+
+  @begin{Itemize}
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
+    @ChgAdded{Version=[4],Text=[there exists no type (other than a root
+    numeric type) that is an ancestor of both the target type and the type
+    of the operand of the conversion; or]}
+
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
+    @ChgAdded{Version=[4],Text=[the Default_Value aspect is unspecified for
+    the type of the operand of the conversion]}
+  @end{Itemize}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
+@ChgAdded{Version=[4],NoPrefix=[T],Text=[then Program_Error
+is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3282,6 +3380,14 @@ without checking that the value satisfies any constraint or any predicate;]}
   does not have a Default_Value only need support the size of the subtype (since
   no values are passed in).]}
 @end{ImplNote}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[The Program_Error case can only occur in the
+  body of an instance of a generic unit. @LegalityTitle will catch all other
+  cases. Implementations that macro-expand generics
+  can always detect this case when the enclosing instance body is expanded.]}
+@end{Discussion}
 
   For a composite type with discriminants or
   that has implicit initial values for any subcomponents
@@ -3465,6 +3571,30 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   the results could even vary because of optimization settings and the like.
   Thus they've been banned.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0074-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Corrigendum:>
+  Added rules to ensure that the value passed into a @key[out] parameter
+  for elementary types is well-defined in the case of a view conversion.
+  The new rules can be incompatible. For a view conversion to an unrelated type
+  with the Default_Value aspect specified, the aspect is new in Ada 2012 so it
+  should be unlikely to occur in existing code. For a view conversion to an
+  unrelated access type, as this could be written in Ada 95, but such a
+  view conversion is thought to be rare. In both cases, declaring and passing
+  a temporary rather than a view conversion will eliminate the problem.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Because of a rule added in
+  @RefSecNum{Formal Private and Derived Types}, the checks for the
+  passing of an object to an explicitly aliased parameter in a generic body
+  were strengthened to use an assume the worst rule. This case is rather
+  unlikely as a formal private or derived type with discriminants is required
+  along with an explicitly aliased parameter whose type doesn't statically
+  match the formal type. Such a program is very unlikely, especially as
+  explicitly aliased parameters are a new Ada 2012 feature.]}
+@end{Incompatible2012}
+
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -3821,14 +3951,20 @@ of the @nt<expression>.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1],ARef=[AI05-0032-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0097-1]}
 @ChgDeleted{Version=[2],Type=[Leading],Keepnext=[T],Text=[]}@ChgNote{A dummy
 ChgDeleted to get conditional "Leading".}If
 the result type @Chg{Version=[2],New=[of a function ],Old=[]}is a specific
 tagged type@Chg{Version=[2],New=[, the tag of the return object is that
 of the result type. If the result type is class-wide, the tag of the
-return object is that of @Chg{Version=[3],New=[the type of the
-@nt{subtype_indication} if it is specific, or otherwise that of ],Old=[]}the
-value of the @Chg{Version=[3],New=[@nt{expression}],Old=[expression]}.
+return object is that of @Chg{Version=[4],New=[the value of the @nt{expression},
+unless the return object is defined by
+an @nt{extended_return_object_declaration} with a @nt{subtype_indication} that
+is specific, in which case it is that of ],Old=[]}@Chg{Version=[3],New=[the
+type of the @nt{subtype_indication}],Old=[]}@Chg{Version=[4],New=[],
+Old=[@Chg{Version=[3],New=[ if it is
+specific, or otherwise that of ],Old=[]}the
+value of the @Chg{Version=[3],New=[@nt{expression}],Old=[expression]}]}.
 A check is made that
 the @Chg{Version=[3],New=[master],Old=[accessibility level]} of the type
 identified by the tag of the result @Chg{Version=[3],New=[includes the
@@ -3873,8 +4009,17 @@ Sec=(raised by failure of run-time check)}
     accept statement calls a function declared in the enclosing task body, and
     the function returns an object passed to it from the accept statement, and
     this object was itself a parameter to the accept statement.]}
-
 @end{Reason}
+@begin{Honest}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0097-1]}
+  @ChgAdded{Version=[4],Text=[The @nt{expression} here is the return expression
+    if the return statement is a @nt{simple_return_statement}, and the
+    initializing expression of the @nt{extended_return_object_declaration} if the
+    return statement is an @nt{extended_return_statement} (ignoring any inner
+    @nt{simple_return_statement}s, which necessarily cannot have an
+    @nt{expression}, and any other @nt{expression}s inside of the
+    @nt{extended_return_statement}).]}
+@end{Honest}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
 @ChgAdded{Version=[3],Text=[@IndexCheck{Tag_Check}If the result subtype
@@ -4505,6 +4650,19 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @nt{extended_return_object_declaration} to make other rules easier to write
   and eliminate the problem described in AI05-0205-1.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0097-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the wording so that
+  it is clear where the tag of the return object comes from. While a literal
+  reading of the original Ada 2012 rule could have caused some weird results
+  (by using some nearby @nt{subtype_indication} to provide the tag in the
+  case of a @nt{simple_return_statement}, such a reading would be so unlike
+  the rest of the language that we do not believe anyone would ever have
+  thought it was intended. As such, we do not believe any implementation
+  ever did this wrong (at least because of the old wording), and thus do not
+  document this as a possible inconsistency.]}
+@end{DiffWord2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

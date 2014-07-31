@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:33 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1444,7 +1444,7 @@ X'Valid is new in Ada 95.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of the
   attributes X'Valid to use the new term
   "satisfies the predicates" (see @RefSecNum{Subtype Predicates}).
   Also updated the notes to make sense when evaluating predicates and
@@ -2378,7 +2378,7 @@ objects incorrectly by missing various cases.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0043-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Tightened up the description of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Tightened up the description of
   the implementation-defined pool used when Storage_Size is specified. This
   is not intended to change any implementation.]}
 @end{DiffWord2012}
@@ -3681,7 +3681,12 @@ complete implementation of the classic Mark/Release pool using subpools:]}
       @key[end if];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[      -- @Examcom{Correct the alignment if necessary:}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[      -- @Examcom{Check for the maximum supported alignment, which is the alignment of the storage area:}
+      @key[if] Alignment > Pool.Storage'Alignment @key[then]
+         @key[raise] Program_Error;
+      @key[end if];
+],Old=[]}      -- @Examcom{Correct the alignment if necessary:}
       Pool.Next_Allocation := Pool.Next_Allocation +
          ((-Pool.Next_Allocation) @key[mod] Alignment);
       @key[if] Pool.Next_Allocation + Size_In_Storage_Elements >
@@ -5665,7 +5670,7 @@ class-wide types descended from S.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0030-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Defined the runtime
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined the runtime
   effect of stream attributes for untagged limited types, as there
   is a weird corner case where they can be called. We don't specify this
   as an inconsistency, as it doesn't make semantic sense to stream a task
@@ -6194,7 +6199,8 @@ unfrozen expressions. Consider:]}
       (A + Flub'Size); -- @Examcom[The expression is not frozen here.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] Bar @key[is access function] Foo (A : @key[in] Natural) @key[return] Natural;]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] Bar @key[is access function] @Chg{Version=[4],New=[],Old=[Foo ]}(A : @key[in] Natural) @key[return] Natural;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   P : Bar := Foo'Access; -- @Examcom[(A)]]}

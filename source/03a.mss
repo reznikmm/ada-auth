@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:32 $}
+@Comment{$Date: 2014/07/24 04:20:38 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1585,11 +1585,12 @@ to the declared subtype. In addition, predicate specifications apply to
 certain other subtypes:]}
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1],ARef=[AI12-0099-1]}
   @ChgAdded{Version=[3],Text=[For a (first) subtype defined by a
-  @Chg{Version=[4],New=[@nt{type_declaration}],Old=[derived
-  type declaration]}, the predicates of the parent subtype and the progenitor
-  subtypes apply.]}
+  @Chg{Version=[4],New=[],Old=[derived ]}type declaration,
+  @Chg{Version=[4],New=[any],Old=[the]}
+  predicates of @Chg{Version=[4],New=[],Old=[the ]}parent
+  @Chg{Version=[4],New=[or],Old=[subtype and the]} progenitor subtypes apply.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[For a subtype created by a @nt{subtype_indication},
@@ -1634,10 +1635,14 @@ follows:@Defn2{Term=[enabled],Sec=[predicate checks]}@Defn2{Term=[disabled],Sec=
   @end{Itemize}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If a subtype is defined by a derived type
-  declaration that does not include a predicate specification, then predicate
-  checks are enabled for the subtype if and only if predicate checks are enabled
-  for at least one of the parent subtype and the progenitor subtypes;]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0099-1]}
+  @ChgAdded{Version=[3],Text=[If a subtype is defined by a
+  @Chg{Version=[4],New=[],Old=[derived ]}type declaration
+  that does not include a predicate specification, then predicate
+  checks are enabled for the subtype if and only if
+  @Chg{Version=[4],New=[any ],Old=[]}predicate checks are enabled
+  for @Chg{Version=[4],New=[],Old=[at least one of the ]}parent
+  @Chg{Version=[4],New=[or],Old=[subtype and the]} progenitor subtypes;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[If a subtype is created by a
@@ -1723,7 +1728,10 @@ the following:@Defn{predicate-static}@Defn2{Term=[expression],Sec=[predicate-sta
   static expression;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-  @ChgAdded{Version=[3],Text=[a call to a predefined boolean logical operator,
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0099-1]}
+  @ChgAdded{Version=[3],Text=[a call to a predefined boolean
+  @Chg{Version=[4],New=[],Old=[logical ]}operator@Chg{Version=[4],New=[
+  @key[and], @key[or], @key[xor], or @key[not]],Old=[]},
   where each operand is predicate-static;]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
@@ -1942,11 +1950,18 @@ given subtype, then:]}
   presence of potentially invalid values, just as constraint checks can be
   removed.]}
 @end{ImplNote}
+
+@ChgImplDef{Version=[4],Kind=[AddedNormal],Text=[@ChgAdded{Version=[4],
+  Text=[The message string associated with the Assertion_Error exception
+  raised by the failure of a predicate check if there is no applicable
+  Predicate_Failure aspect.]}]}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[A value @i<satisfies> a predicate if the
-predicate is True for that value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI125-0071]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[A value @i<satisfies> a
+predicate if the predicate is True for that
+value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0276-1]}
 @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI125-0071]}
@@ -2077,7 +2092,7 @@ common exceptional conditions as follows:}]}
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
-  @b<Correction:> The Predicate_Failure aspect is new. We can consider this
+  @b<Corrigendum:> The Predicate_Failure aspect is new. We can consider this
   a correction as it is always possible for implementers to add
   implementation-defined aspects, so the same is true for language-defined
   aspects.]}
@@ -2085,13 +2100,23 @@ common exceptional conditions as follows:}]}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Specified the order of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Specified the order of
   evaluation of most predicates, by defining the new term "satisfies the
   predicates of the subtype". This is not inconsistent, as the order
   previously was unspecified, so any code depending on the order was
   incorrect. The change is necessary so that the Predicate_Failure
   aspect has consistent results in cases where multiple predicates and
   aspects apply; see the Ada.Text_IO example above for such a case.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0099-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Revised wording to ensure all
+  kinds of types are covered, including the anonymous task associated with
+  a @nt{single_task_declaration}, and generalized it.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0099-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Revised wording to list the
+  boolean operators that can be predicate-static, to eliminate confusion
+  about whether @key[not] is included.]}
 @end{Diffword2012}
 
 
@@ -6499,7 +6524,7 @@ been generalized to apply to real types as well
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Updated wording of the
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of the
   attributes S'First_Valid and S'Last_Valid to use the new term
   "satisfies the predicates" (see @RefSecNum{Subtype Predicates}).]}
 @end{DiffWord2012}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2014/02/06 02:27:09 $ $Author: randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2014/07/24 04:20:41 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2014/02/06 02:27:09 $}
+@Comment{$Date: 2014/07/24 04:20:41 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1847,7 +1847,7 @@ specific numbers and types of parameters.
 
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0028-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   The @SynI{convention_}@nt{identifier}s C_Variadic_0, C_Variadic_1, and so on
   are new. These are classified as a correction as any implementation can add
   such identifiers and it is important that special conventions be available for

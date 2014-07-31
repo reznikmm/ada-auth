@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2013/07/18 04:58:14 $}
+@Comment{$Date: 2014/07/24 04:20:39 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -4070,7 +4070,7 @@ required to appear last.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0076-1]}
-  @ChgAdded{Version=[4],Text=[@B<Correction:> Explicitly stated that modifying
+  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Explicitly stated that modifying
   a library-level constant in a pure package is erroneous. We don't document
   this as inconsistent as implementations certainly can still do whatever they
   were previously doing (no change is required); moreover, this case (and many

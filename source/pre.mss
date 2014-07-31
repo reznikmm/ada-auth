@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2014/01/08 01:15:34 $}
+@Comment{$Date: 2014/07/24 04:20:41 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.51 $}
+@comment{$Revision: 1.52 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -288,23 +288,25 @@ nonportable under System.
 
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
 The implementation shall ensure that each
 language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
 the sense that concurrent calls on @Chg{Version=[4],New=[any language-defined],
 Old=[the same]} subprogram perform as specified,
-so long as all parameters that could be passed by reference
-denote nonoverlapping objects.
+so long as all@Chg{Version=[4],New=[ objects that are denoted by],Old=[]}
+parameters that could be passed by reference @Chg{Version=[4],New=[or
+designated by parameters of an access type are],Old=[denote]}
+nonoverlapping@Chg{Version=[4],New=[],Old=[ objects]}.
 @begin{Ramification}
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
   @ChgAdded{Version=[4],Text=[So long as the parameters are disjoint, concurrent
   calls on the same language-defined subprogram, and concurrent calls on two
   different language-defined subprograms are required to work. But concurrent
   calls operating on overlapping objects (be they of the same or different
-  language-defined subprograms) are @i<not> required to work (being erroneous
-  use of shared variables) unless both subprograms are required to pass the
-  associated parameter by-copy.]}
+  language-defined subprograms) are @i<not> required to work (being an
+  erroneous use of shared variables) unless both subprograms are required to
+  pass the associated parameter by-copy.]}
 
   For example, simultaneous calls to Text_IO.Put will work properly,
   so long as they are going to two different files.
@@ -414,11 +416,11 @@ The order and lettering of the annexes has been changed.
 @end{DiffWord2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> The rules requiring concurrent
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> The rules requiring concurrent
   access of language-defined subprograms were expanded to include implicit
-  Text_IO objects and simultaneous calls on different language-defined
-  subprograms. While this might change behavior of some programs, it would
-  do so by eliminating erroneous execution, so we don't consider this an
-  inconsistency.]}
+  Text_IO objects, overlapping objects designated by parameters of an access
+  type, and simultaneous calls on different language-defined subprograms. While
+  this might change behavior of some programs, it would do so by eliminating
+  erroneous execution, so we don't consider this an inconsistency.]}
 @end{DiffWord2012}
