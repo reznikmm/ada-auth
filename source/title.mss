@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.64 $ $Date: 2014/01/08 01:15:34 $}
+@comment{$Revision: 1.65 $ $Date: 2014/07/31 04:43:10 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -66,7 +66,7 @@ End comment}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[4],New=<, Draft 3>,Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[4],New=<, Draft 4>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}
 @end{NotISO}
@@ -87,7 +87,7 @@ End comment}
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012@Chg{Version=[4], New=[, 2013],Old=[]}  AXE Consultants], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012@Chg{Version=[4], New=[, 2013, 2014],Old=[]}  AXE Consultants], Old=[]}
 @end{NotISO}
 @begin{ISOOnly}
 @Comment{The following is not needed in the final Standard:
@@ -200,7 +200,7 @@ EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@Chg{Version=[4], New=[@b{Fourth Edition}], Old=[]}
 
-@Noparanum@;@Chg{Version=[4], New=[Copyright @Latin1(169) 2013 AXE Consultants.  All Rights Reserved.], Old=[]}
+@Noparanum@;@Chg{Version=[4], New=[Copyright @Latin1(169) 2013, 2014 AXE Consultants.  All Rights Reserved.], Old=[]}
 
 @Noparanum@;@Chg{Version=[4], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as

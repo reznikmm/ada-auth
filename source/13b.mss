@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/07/31 04:43:10 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -6209,7 +6209,7 @@ unfrozen expressions. Consider:]}
 @ChgAdded{Version=[3],Text=[   Val : Natural := P.@key[all](5); -- @Examcom[(B)]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[end Pack;]}
+@ChgAdded{Version=[3],Text=[@key[end] Pack;]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}

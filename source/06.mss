@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/07/31 04:43:10 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -2945,7 +2945,7 @@ in its full view, and unconstrained in any partial view.]}
 @ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
-these rules apply also in the private part of an instance of a generic unit.]}
+these rules also apply in the private part of an instance of a generic unit.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[3],Text=[In a function call, the accessibility level of the
@@ -3283,7 +3283,7 @@ a scalar type that has the Default_Value aspect specified, then]}
 @ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
-these rules apply also in the private part of an instance of a generic unit.]}
+these rules also apply in the private part of an instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
