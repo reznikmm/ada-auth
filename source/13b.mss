@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/07/31 04:43:10 $}
+@Comment{$Date: 2014/10/11 04:53:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3071,8 +3071,10 @@ to ensure that all @nt{allocator}s use the default pool.]}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
+  @ChgRef{Version=[4],Kind=[Modified],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
-  pragma Default_Storage_Pool is new.]}
+  pragma Default_Storage_Pool @Chg{Version=[4],New=[and aspect
+  Default_Storage_Pool ],Old=[]}is new.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -3562,9 +3564,10 @@ complete implementation of the classic Mark/Release pool using subpools:]}
    @key[type] Subpool_Array @key[is array] (Subpool_Indexes) @key[of aliased] MR_Subpool;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
+@ChgRef{Version=[4],Kind=[Modified],ARef=[AI12-0134-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] Mark_Release_Pool_Type (Pool_Size : Storage_Count) @key[is new]
       Subpools.Root_Storage_Pool_With_Subpools @key[with record]
-      Storage         : Storage_Array (0 .. Pool_Size-1);
+      Storage         : Storage_Array (0 .. Pool_Size@Chg{Version=[4],New=[],Old=[-1]});
       Next_Allocation : Storage_Count := 0;
       Markers         : Subpool_Array;
       Current_Pool    : Subpool_Indexes := 1;
