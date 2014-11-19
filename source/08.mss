@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -61,6 +61,9 @@ called its @i{declarative region},
 @begin(itemize)
   any declaration, other than that of an enumeration type,
   that is not a completion @Redundant[of a previous declaration];
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0094-1]}
+  @ChgAdded{Version=[4],Text=[an @nt{access_definition};]}
 
   a @nt{block_statement};
 
@@ -287,6 +290,28 @@ region, but not within either the declaration or the body.
 (see @RefSecNum{Return Statements}) is added to the list
 of constructs that have a declarative region.]}
 @end{DiffWord95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0094-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
+  @nt{access_definition} is added to the list of constructs that have
+  a declarative region. This allows parameter names declared in anonymous
+  access type subprogram types to be the same as other names declared
+  outside. For instance:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@key[type] Foo @key[is record]
+   A : Natural;
+   B : @key[access] procedure (A : Boolean);
+@key[end record];]}
+@end{Example}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This is now legal; it was illegal in previous
+  versions of Ada as the parameter A and the component A were homographs
+  in the same declarative region (see @RefSecNum{Visibility}). Note that
+  some implementations already allow this, so this extension may in fact
+  be used in existing code.]}
+@end{Extend2012}
 
 
 @LabeledClause{Scope of Declarations}

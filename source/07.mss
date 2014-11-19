@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/11/15 05:22:27 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1777,8 +1777,25 @@ following places, on the specified object(s):@Defn{invariant check}@Defn2{Term=[
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[After successful default initialization of an
-    object of type @i<T>, the check is performed on the new object;]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0133-1]}
+  @ChgAdded{Version=[3],Text=[After successful
+    @Chg{Version=[4],New=[],Old=[default ]}initialization of an
+    object of type @i<T>@Chg{Version=[4],New=[ by default (see
+    @RefSecNum{Object Declarations})],Old=[]}, the check is performed on the
+    new object@Chg{Version=[4],New=[ unless the partial
+    view of @i<T> has unknown discriminants],Old=[]};]}
+
+  @begin{Reason}
+    @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0133-1]}
+    @ChgAdded{Version=[4],Text=[The check applies everywhere, even in the
+    package body, because default initialization has to work the same for
+    clients as it does within the package. As such, checks within the package
+    are either harmless or will uncover a bug that could also happen to a
+    client. However, if the partial view of the type has unknown discriminants,
+    no client of the package can declare a default-initialized object.
+    Therefore, no invariant check is needed, as all default initialized objects
+    are necessarily inside the package.]}
+  @end{Reason}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0049-1]}
   @ChgAdded{Version=[4],Text=[After successful explicit initialization of the
@@ -2069,6 +2086,19 @@ value.]}
   with invariant checks being added to routines that assume that they don't
   need them.]}
 @end{Incompatible2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0133-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that all objects
+  that are initialized by default should have an invariant check, and
+  added an exception for types with unknown discriminants, as in that
+  case the client cannot declare a default-initialized object. This
+  exception to the check is formally inconsistent, but since it is only
+  removing an assertion failure that occurs where no assertion should be
+  checked anyway (meaning it's more likely to fix a bug than cause one),
+  and programs depending on assertion failure should be very rare outside of
+  test cases, we don't document this as inconsistent.]}
+@end{DiffWord2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

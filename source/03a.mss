@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2014/11/15 05:22:27 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5108,8 +5108,38 @@ paragraphs are ever renumbered.}
        the same result given the same sequence of characters]}.
     @end(Reason)
 
-@end(description)
 @EndPrefixType{}
+@end(description)
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0124-1]}
+@ChgAdded{Version=[4],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
+@nt{prefix} X that denotes an object of a scalar type}, the following
+attributes are defined:]}
+
+@begin(description)
+@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Wide_Wide_Image>,
+  InitialVersion=[4], ARef=[AI12-0124-1],
+  Text=[@Chg{Version=[4],New=[X'Wide_Wide_Image denotes the result of
+  calling function S'Wide_Wide_Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+
+@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Wide_Image>,
+  InitialVersion=[4], ARef=[AI12-0124-1],
+  Text=[@Chg{Version=[4],New=[X'Wide_Image denotes the result of
+  calling function S'Wide_Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+
+@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Image>,
+  InitialVersion=[4], ARef=[AI12-0124-1],
+  Text=[@Chg{Version=[4],New=[X'Image denotes the result of
+  calling function S'Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+
+@EndPrefixType{}
+@end(description)
 @end{RunTime}
 
 @begin{ImplPerm}
@@ -5352,6 +5382,14 @@ More explicit rules are provided for nongraphic characters.
   The new aspect Default_Value allows defining implicit initial values (see
   @RefSecNum{Object Declarations}) for scalar types.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0124-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b<Corrigendum:> An object can be now used as the prefix of the Image
+  attribute (as well as Wide_Image and Wide_Wide_Image), a
+  convinience feature already present in some implementations.]}
+@end{Extend2012}
 
 
 

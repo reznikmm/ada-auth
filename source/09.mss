@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 
@@ -3142,7 +3142,50 @@ shall be subtype conformant with
 the profile of the innermost enclosing callable construct.
 @Defn2{Term=[subtype conformance],Sec=(required)}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0090-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[Given a requeue_statement where the
+innermost enclosing callable construct is for an entry @i<E1>, for every
+@Redundant[specific or class-wide ]postcondition expression @i<P1> that
+applies to @i<E1>, there shall exist a postcondition expression @i<P2> that
+applies to the requeue target @i<E2> such that]}
+@begin{Itemize}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[@i<P1> is fully conformant with
+  the expression produced by replacing each reference in @i<P2> to a formal
+  parameter of @i<E2> with a reference to the corresponding formal paramter
+  of @i<E1>; and]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[if @i<P1> is enabled, then @i<P2> is also enabled.]}
+@end{Itemize}
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Roughly speaking, the postcondition of the requeue
+  target is required to imply that of the enclosing callable construct.]}
+@end{Discussion}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0090-1]}
+@ChgAdded{Version=[4],Text=[The requeue target shall not have an applicable
+specific or class-wide postcondition which includes an Old
+attribute_reference.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0090-1]}
+@ChgAdded{Version=[4],Text=[If the requeue target is declared immediately
+within the @nt{task_definition} of a named task type or the
+@nt{protected_definition} of a named protected type, and if the requeue
+statement occurs within the body of that type, and if the requeue is an external
+requeue, then the requeue target shall not have a specific or class-wide
+postcondition which includes a name denoting either the current instance of that
+type or any entity declared within the declaration of that type.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[The above pair of rules always apply; they
+  don't depend on whether or not any of the postconditions are enabled.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0030-2],ARef=[AI05-0215-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0090-1]}@Comment{Just a number change}
 @ChgAdded{Version=[3],Text=[If the target is a procedure, the name shall
 denote a renaming of an entry, or shall denote a view or a prefixed view of a
 primitive subprogram of a synchronized interface, where the first parameter
@@ -3205,17 +3248,17 @@ of the @nt<entry_declaration>@Chg{Version=[3],New=[ for the @nt{entry_body}],Old
 @begin{RunTime}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0090-1]}
 @PDefn2{Term=[execution], Sec=(requeue_statement)}
 The execution of a @nt{requeue_statement} proceeds by first evaluating the
 @Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt<name>@Redundant[,
 including the @nt<prefix> identifying the target task
-or protected object and the @nt<expression>
-identifying the entry
-within an entry family, if any].
-The @nt{entry_body} or @nt{accept_statement}
-enclosing the @nt{requeue_statement} is then
-completed@Redundant[, finalized, and left
-(see @RefSecNum(Completion and Finalization))].
+or protected object and the @nt<expression> identifying the entry within an
+entry family, if any]. @Chg{Version=[4],New=[Precondition checks are then
+performed as for a call to the requeue target entry or subprogram. ],Old=[]}The
+@nt{entry_body} or @nt{accept_statement} enclosing the @nt{requeue_statement} is
+then completed@Redundant[, finalized, and
+left (see @RefSecNum(Completion and Finalization))].
 
 @PDefn2{Term=[execution], Sec=(requeue task entry)}
 For the execution of a requeue on an entry of a target task,
@@ -3250,10 +3293,13 @@ object, after leaving the enclosing callable construct:
 @end(Itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI05-0090-1]}
 If the @Chg{Version=[3],New=[requeue target],Old=[new entry]}
 named in the @nt<requeue_statement>
 has formal parameters, then during the execution of the
-@nt<accept_statement> or @nt<entry_body> corresponding to the new entry,
+@nt<accept_statement> or @nt<entry_body> corresponding to the new
+entry@Chg{Version=[4],New=[ and during the checking of
+any preconditions of the new entry],Old=[]},
 the formal parameters denote the same objects as
 did the corresponding formal parameters
 of the callable construct completed by the requeue.
@@ -3327,6 +3373,29 @@ The @nt<requeue_statement> is new.
   to requeue on operations of synchronized interfaces that are
   declared to be an entry.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  We now define that any preconditions of the requeue target are evaluated
+  as part of a @nt<requeue_statement>. Original Ada 2012 did not specify this,
+  so a program that requeues when the preconditions fail will raise an
+  exception when none would happen in original Ada 2012. We don't expect this
+  to be a problem, as in that case, the entry body would be called with some
+  of its preconditions evaluating as False; the body is likely to assume that
+  they are true and probably will have failed in some other way anyway.]}
+@end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  If a requeue target has a different postcondition than the original
+  entry, the requeue is now illegal. In such a case, the original postcondition
+  would never have been evaluated, and assumptions that the caller relied upon
+  might not be true. A requeue should be invisible to the caller with respect
+  to any postconditions; thus we only allow it when the original entry has no
+  postconditions or the requeue target has (at least) the same postconditions.]}
+@end{Incompatible2012}
 
 
 @LabeledClause{Delay Statements, Duration, and Time}

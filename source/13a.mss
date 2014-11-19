@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -498,7 +498,7 @@ names a subtype is type-related]}.
 @Defn2{Term=[directly specified],
   Sec=(of an operational aspect of an entity)}
 @RootDefn2{Term=[type-related], Sec=(operational item)}
-@PDefn2{Term=[type-related], Sec=(aspect)}]}
+@Defn2{Term=[type-related], Sec=(aspect)}]}
 
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -623,10 +623,15 @@ parameter.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
 For an untagged derived type, @Chg{Version=[3],New=[it is illegal to
 specify a],Old=[no]} type-related representation
 @Chg{Version=[3],New=[aspect],Old=[items are allowed]} if the parent type is a
-by-reference type, or has any user-defined primitive subprograms.
+by-reference type, or has any user-defined primitive
+subprograms.@Chg{Version=[4],New=[ Similarly, it is illegal to specify a
+non-confirming
+type-related representation aspect for an untagged by-reference type
+after one or more types have been derived from it.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
@@ -638,11 +643,14 @@ by-reference type, or has any user-defined primitive subprograms.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0295-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
   untagged by-reference types is because a change of representation
-  is impossible when passing by reference (to an inherited subprogram).
+  is impossible when passing by reference (to an inherited
+  subprogram).@Chg{Version=[4],New=[ (A by-reference object cannot be copied
+  to change its representation.)],Old=[]}
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
@@ -664,6 +672,16 @@ by-reference type, or has any user-defined primitive subprograms.
   For example, @Chg{Version=[3],New=[specifying aspect],Old=[a @nt{pragma}]}
   Pack will cause packing of the extension part, but not of the parent part.
 @end{Reason}
+@begin{Discussion}
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0109-1]}
+   @ChgAdded{Version=[4],Text=[@Ldquote@;By-reference type@rdquote usually
+   cannot be used in @LegalityTitle, as it is privacy breaking. Our use here
+   is privacy breaking, but we're stuck with it for compatibility reasons.
+   Since representation aspects cannot be specified on partial views, privacy
+   violations only can happen when a type includes a component of a private type.
+   In that case, whether these rules are triggered depends on the full type of
+   the private type @em which is clearly privacy breaking.]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01],Ref=[8652/0011],ARef=[AI95-00117-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00326-01]}
@@ -911,18 +929,24 @@ if the layout was specified for the parent type,
 it is inherited by the record extension.
 @end{Honest}
 @begin{Ramification}
-If a representation item for the parent appears after the
-@nt{derived_@!type_@!definition},
-then inheritance does not happen for that representation item.
+  If a representation item for the parent appears after the
+  @nt{derived_@!type_@!definition},
+  then inheritance does not happen for that representation item.
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
-@ChgAdded{Version=[3],Text=[If an inherited aspect is confirmed by
-an @nt{aspect_specification} or a later representation item for a derived type,
-the confirming specification does
-not override the inherited one. Thus the derived type has both a specified
-confirming value and an inherited nonconfirming representation value @em this
-means that rules that apply only to nonconfirming representation values still
-apply to this type.]}
+  @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
+  @ChgAdded{Version=[3],Text=[If an inherited aspect is confirmed by
+  an @nt{aspect_specification} or a later representation item for a derived type,
+  the confirming specification does
+  not override the inherited one. Thus the derived type has both a specified
+  confirming value and an inherited nonconfirming representation value @em this
+  means that rules that apply only to nonconfirming representation values still
+  apply to this type.]}
+
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0109-1]}
+  @ChgAdded{Version=[4],Text=[If an aspect was specified by an
+  @nt{aspect_specification} and the parent type has not yet been frozen, then
+  the inherited aspect will not yet have been resolved and evaluated. The
+  implementation will need to have a mechanism to handle such an aspect.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0040],ARef=[AI95-00108-01]}
@@ -1463,6 +1487,18 @@ Some of the more stringent requirements are moved to
   specified from @i<what> rules apply to the value of the aspect.]}
 @end{DiffWord2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0109-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Corrigendum:>
+  Added a rule that makes it illegal to specify a representation value after
+  a type is derived from an untagged by-reference type. This restriction is
+  incompatible, but since the implementation would have had to copy an object
+  that does not allow copying in order to change the representation for any
+  implicit or explicit conversion between the original and the derived type,
+  it is unlikely that any program could exist without running into internal
+  compiler errors or bogus results.]}
+@end{Incompatible2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that an aspect
@@ -1689,9 +1725,9 @@ aspect of a boolean type, in which case it is equivalent to the
 @nt{aspect_definition} being specified as True.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[If the @nt{aspect_mark} includes 'Class, then the
-associated entity shall be a tagged type or a primitive subprogram of a tagged
-type.]}
+@ChgAdded{Version=[3],Text=[If the @nt{aspect_mark} includes
+'Class, then the associated entity shall be a tagged type or a primitive
+subprogram of a tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
 @ChgAdded{Version=[3],Text=[There are no language-defined aspects that
@@ -1777,8 +1813,12 @@ with the entity, and @i<apply> to all views of the entity, unless otherwise
 specified in this International Standard.@PDefn2{Term=[applies],Sec=[aspect]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If the @nt{aspect_mark} includes 'Class,
-then:]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0106-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[If the @nt{aspect_mark} includes
+'Class@Chg{Version=[4],New=[ (a @i<class-wide
+aspect>)@Defn{class-wide aspect}@Defn2{Term=[aspect],Sec=[class-wide]}],Old=[]},
+then@Chg{Version=[4],New=[, unless specified otherwise for a particular
+class-wide aspect],Old=[]}:]}
 @begin{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1893,9 +1933,13 @@ such aspects and the legality rules for such aspects.]}]}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0105-1]}
-  @ChgAdded{Version=[4],Text=[Clarified the wording so that the restriction
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the wording so that the restriction
   against language-defined aspects on subprogram completions includes
   completions that are expressions functions and null procedures.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0106-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined class-wide aspect
+  for use in rules in @RefSecNum{Stream-oriented attributes}.]}
 @end{Diffword2012}
 
 

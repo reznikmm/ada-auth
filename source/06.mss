@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2014/07/31 04:43:10 $}
+@Comment{$Date: 2014/11/15 05:22:27 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -740,14 +740,55 @@ class-wide precondition expression that applies to @i<S1>.]}
   @ChgAdded{Version=[3],Text=[This only applies to primitives of tagged types;
     other routines cannot have class-wide preconditions.]}
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0131-1]}
+@ChgAdded{Version=[4],Text=[Pre'Class shall not be specified for an overriding
+primitive subprogram of a tagged type @i<T> unless Pre'Class is specified for
+the corresponding primitive subprogram of some ancestor of @i<T>.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[Any such Pre'Class will have no effect, as it
+  will be @key[or]ed with True. As such, it is highly misleading for readers,
+  especially for those who are determining the assumptions that can
+  be made in the body of the primitive subprogram. Note that in this
+  case there is nothing explicit that might indicate that the
+  class-wide precondition is ineffective. This rule does not prevent
+  explicitly writing an ineffective class-wide precondition (for
+  instance, if the parent subprogram has explicitly specified a
+  precondition of True).]}
+@end{Reason}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0131-1]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0131-1]}
 @ChgAdded{Version=[3],Text=[If a Pre'Class or Post'Class aspect is specified for
-a primitive subprogram of a tagged type @i<T>, then the associated expression
+a primitive subprogram of a tagged type @i<T>, @Chg{Version=[4],New=[or
+such an aspect defaults to True, ],Old=[]}then the associated expression
 also applies to the corresponding primitive subprogram of each descendant of
 @i<T>.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[A Pre'Class defaults to True only if no class-wide
+  preconditions are inherited for the subprogram. The same is true for
+  Post'Class.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We have to inherit precondition expressions that
+  default to True, so that later overridings don't strengthen the
+  precondition (a violation of LSP). We do the same for postconditions
+  for consistency.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
 @ChgAdded{Version=[3],Text=[If performing checks is required by the Pre,
@@ -1262,6 +1303,23 @@ the value.]}
   of a generic package. Therefore, allowing specification on a subprogram
   instance could present a maintenance problem in the future if the entity
   needs to be converted to a generic package (a common conversion).]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0131-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Pre'Class is no longer allowed
+  to be specified for an overriding primitive subprogram unless there are
+  also inherited class-wide precondittions. This incompatibility prevents
+  cases where the explicit Pre'Class is counterfeited by an implicit
+  class-wide precondition of True. This rule should catch more bugs than it
+  creates; the programmer should have written Pre rather than Pre'Class in
+  this case (or written Pre'Class on the original subprogram, not
+  an overriding). Note that this incompatibility eliminates what otherwise
+  would be an inconsistency with original Ada 2012, where precondition checks
+  that would have previously been made for a statically bound call would no
+  longer be made. That dynamic change was necessary to eliminate cases where
+  the evaluated class-wide precondition on a dispatching call would have been
+  weaker than the class-wide precondition of a statically bound call. (The
+  original Ada 2012 violated the LSP semantics that class-wide preconditions
+  were intended to model.]}
 @end{Incompatible2012}
 
 
@@ -2941,7 +2999,7 @@ in its full view, and unconstrained in any partial view.]}
   formal definition of this rule).]}
 @end{Discussion}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-4]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0095-1]}
 @ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),

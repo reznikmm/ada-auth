@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:40 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -302,6 +302,9 @@ a property of a file object, not of an external file.
 
    @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type);]}
+
    --@RI{ Input and output operations}
 
    @key[procedure] @AdaSubDefn{Read}  (File : @key[in] File_Type; Item : @key[out] Element_Type);
@@ -363,6 +366,16 @@ any nesting depth, so this note is obsolete.}
   may have a controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
+  @b<Corrigendum:> The Flush procedure is newly added to Ada.Sequential_IO.
+  If an instance of Ada.Sequential_IO is referenced in a @nt{use_clause}, and
+  a procedure Flush is defined in some other package that is also referenced
+  in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
+  resulting in errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
+
 
 @LabeledSubClause{File Management}
 
@@ -393,6 +406,11 @@ additional effects described in subclause
     the mode Inout_File for direct input-output. For direct
     access, the size of the created file is implementation defined.
 
+@begin{Ramification}
+  @ChgAdded{Version=[4],Text=[For a direct file, the initial value of current
+  index is 1 (see @RefSecNum{Sequential and Direct Files}).]}
+@end{Ramification}
+
     A null string for Name specifies an
     external file that is not accessible after the completion of
     the main program (a temporary file). A null string for Form
@@ -416,6 +434,11 @@ additional effects described in subclause
     Associates the given file with an existing external file
     having the given name and form, and sets the current mode of
     the given file to the given mode. The given file is left open.
+
+@begin{Ramification}
+  @ChgAdded{Version=[4],Text=[For a direct file, the initial value of current
+  index is 1 (see @RefSecNum{Sequential and Direct Files}).]}
+@end{Ramification}
 
     @Trailing@;The exception Status_Error is propagated if the given file is
     already open. The exception Name_Error is propagated if the
@@ -538,6 +561,23 @@ additional effects described in subclause
     Returns True if the file is open (that is, if it is associated
     with an external file)@Chg{Version=[3],New=[;],Old=[,]}
     otherwise@Chg{Version=[3],New=[,],Old=[]} returns False.
+
+@begin{Example}@Keepnext
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[@key[procedure] Flush(File : @key[in] File_Type);]}
+@end{Example}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[The Flush procedure synchronizes the external
+    file with the internal file (by flushing any internal buffers) without
+    closing the file. For a direct file, the current index is unchanged; for a
+    stream file (see @RefSecNum{The Package Streams.Stream_IO}), the current
+    position is unchanged.]}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Type=[Trailing],Text=[The exception Status_Error is
+    propagated if the file is not open. The exception Mode_Error is propagated
+    if the mode of the file is In_File.]}
+
 @end{DescribeCode}
 @end{StaticSem}
 
@@ -566,6 +606,12 @@ Any such restriction should be documented.
   @ChgAdded{Version=[2],Text=[Added text to specify the default mode for
   a stream file.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgAdded{Version=[4],Text=[Procedure Flush is now defined here, so it
+  can be used for all of the I/O packages.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Sequential Input-Output Operations}
@@ -674,6 +720,9 @@ The exception Mode_Error is propagated if the mode is not In_File.
 
    @key[function] @AdaSubDefn{Is_Open}(File : @key[in] File_Type) @key[return] Boolean;
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0130-1]}
+@ChgAdded{Version=[4],Text=[   @key[procedure] @AdaSubDefn{Flush} (File : @key[in] File_Type);]}
+
    --@RI{ Input and output operations}
 
    @key[procedure] @AdaSubDefn{Read} (File : @key[in] File_Type; Item : @key[out] Element_Type;
@@ -741,6 +790,16 @@ declared in some other (nongeneric) package.],Old=[]}]}
   in original Ada 95. Such code is not portable, as another Ada compiler
   may have a controlled part in File_Type, and thus would be illegal.]}
 @end{Incompatible95}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}
+  @b<Corrigendum:> The Flush procedure is newly added to Ada.Direct_IO.
+  If an instance of Ada.Direct_IO is referenced in a @nt{use_clause}, and
+  a procedure Flush is defined in some other package that is also referenced
+  in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
+  resulting in errors. This should be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Direct Input-Output Operations}
@@ -1634,9 +1693,14 @@ Standard_Error at the start of program execution are implementation defined.
 @key[procedure] Flush (File : @key[in] @Chg{New=[],Old=[@key[out] ]}File_Type);
 @key[procedure] Flush;
 @end{Example}
-The effect of Flush is the same as the corresponding subprogram
-in Streams.Stream_IO (see @RefSecNum[The Package Streams.Stream_IO]).
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+@Redundant[The effect of Flush is the same as the corresponding subprogram
+in @Chg{Version=[4],New=[Sequential_IO (see @RefSecNum{File Management})],
+Old=[Streams.Stream_IO (see @RefSecNum[The Package Streams.Stream_IO])]}.]
 If File is not explicitly specified, Current_Output is used.
+@Comment{The first sentence is redundant for version 4 and later only, but
+I didn't want to delete the entire sentence and replace it (the only way to
+make that conditional).}
 @end{DescribeCode}
 
 @begin{Discussion}
@@ -1694,6 +1758,12 @@ file objects, but not necessarily different external files.
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that execution
   is erroneous only when a closed default file is accessed.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Moved the definition of
+  Flush to @RefSecNum{File Management}, as all I/O packages now have it.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Specification of Line and Page Lengths}
@@ -3517,10 +3587,13 @@ needs finalization@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}
 (see @RefSecNum{Assignment and Finalization}).]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00283-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0130-1]}
 The subprograms @Chg{Version=[2],New=[given in subclause
 @RefSecNum(File Management) for the control of external files (],Old=[]}Create,
-Open, Close, Delete, Reset, Mode, Name, Form,@Chg{Version=[2],New=[ and],Old=[]}
-Is_Open@Chg{Version=[2],New=[) are available for stream files],
+Open, Close, Delete, Reset, Mode, Name,
+Form,@Chg{Version=[2],New=[@Chg{Version=[4],New=[],Old=[ and]}],Old=[]}
+Is_Open@Chg{Version=[2],New=[@Chg{Version=[4],New=[, and Flush],Old=[]})
+are available for stream files],
 Old=[, and End_of_File have the same effect as the corresponding
 subprograms in Sequential_IO (see @RefSecNum(File Management))]}.
 
@@ -3554,10 +3627,11 @@ file. If the new mode is Append_File, the file is positioned to its end;
 otherwise, the position in the file is unchanged.]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0055],ARef=[AI95-00026-01]}
-@ChgAdded{Version=[1],Text=[The Flush procedure synchronizes the external file
-with the internal file (by flushing any internal buffers) without closing the
-file or changing the position. Mode_Error is propagated if the mode of the file
-is In_File.]}
+@ChgRef{Version=[4],Kind=[DeletedAdded],ARef=[AI12-0130-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[4],New=[],Old=[The Flush procedure
+synchronizes the external file with the internal file (by flushing any internal
+buffers) without closing the file or changing the position. Mode_Error is
+propagated if the mode of the file is In_File.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0056],ARef=[AI95-00001-01]}
 The Stream function returns a Stream_Access result from a File_Type
@@ -3739,7 +3813,7 @@ closed file.]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0283-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Package Ada.Streams.Stream_IO is now preelaborated, allowing it to be
-  used in more contexts (including in distributed systems). Note that
+  used in more contexts (including in distributed systems). Note that it
   is @i<not> a remote types package; File_Type objects cannot be
   passed between partitions.]}
 @end{Extend2005}
@@ -3752,6 +3826,13 @@ closed file.]}
   file objects in preelaborable packages (an oversight from the
   change above).]}
 @end{Extend2012}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
+  @ChgAdded{Version=[4],Text=[@b{Corrigendum:} The definition of the Flush
+  procedure was moved to @RefSecNum{File Management}, so that it could be
+  shared by all of the I/O packages.]}
+@end{Diffword2012}
 
 
 @LabeledSubClause{The Package Text_IO.Text_Streams}

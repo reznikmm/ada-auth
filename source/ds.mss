@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2014/07/24 04:20:39 $ $Author: randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2014/11/15 05:22:28 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -507,9 +507,9 @@ it shall depend semantically only upon declared pure or shared passive
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
 it shall not contain a library-level declaration of an access type
-that designates a class-wide type,@Chg{Version=[4],New=[ or a type
+that designates a class-wide type,@Chg{Version=[4],New=[ nor a type
 with a part that is of a],Old=[]}
-task type, or protected type with
+task type@Chg{Version=[4],New=[],Old=[,]} or protected type with
 @nt{entry_declaration}s@Chg{New=[],
 Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the

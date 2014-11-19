@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/10/11 04:53:33 $}
+@Comment{$Date: 2014/11/15 05:22:28 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3071,7 +3071,7 @@ to ensure that all @nt{allocator}s use the default pool.]}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0190-1]}
-  @ChgRef{Version=[4],Kind=[Modified],ARef=[AI12-0005-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
   pragma Default_Storage_Pool @Chg{Version=[4],New=[and aspect
   Default_Storage_Pool ],Old=[]}is new.]}
@@ -3564,7 +3564,7 @@ complete implementation of the classic Mark/Release pool using subpools:]}
    @key[type] Subpool_Array @key[is array] (Subpool_Indexes) @key[of aliased] MR_Subpool;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0298-1]}
-@ChgRef{Version=[4],Kind=[Modified],ARef=[AI12-0134-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0134-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] Mark_Release_Pool_Type (Pool_Size : Storage_Count) @key[is new]
       Subpools.Root_Storage_Pool_With_Subpools @key[with record]
       Storage         : Storage_Array (0 .. Pool_Size@Chg{Version=[4],New=[],Old=[-1]});
@@ -4485,7 +4485,8 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
 The @Chg{Version=[3],New=[type-related ],Old=[]}@Chg{New=[operational
 attributes ],Old=[]}Write, Read, Output, and
 Input @Chg{New=[],Old=[attributes ]}convert values to a
-stream of elements and reconstruct values from a stream.
+stream of elements and reconstruct values from a
+stream.@Defn{stream-oriented attributes}@Defn2{Term=[attribute],Sec=[stream-oriented]}
 @end{Intro}
 
 @begin{StaticSem}
@@ -5044,6 +5045,7 @@ the type is completed.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0039-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0106-1],ARef=[AI12-0121-1]}
 @PDefn2{Term=[specifiable], Sec=(of Read for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Write for a type)}
 @PDefn2{Term=[specifiable], Sec=(of Input for a type)}
@@ -5054,7 +5056,15 @@ the type is completed.]}
 @Defn{Output clause}
 The stream-oriented attributes may be specified
 for any type via an @nt{attribute_definition_clause}.
-@Chg{Version=[2],New=[The subprogram name given in such a
+@Chg{Version=[4],New=[@Redundant[Alternatively, each of the
+specific stream-oriented attributes may be specified using an
+@nt{aspect_specification} on any @nt{type_declaration}, with the aspect name
+being the corresponding attribute name.] Each of the class-wide stream-oriented
+attributes may be specified using an @nt{aspect_specification} for a
+tagged type @i<T> using the name of the stream-oriented attribute followed
+by 'Class; such class-wide aspects do not
+apply to other descendants of @i<T>.],Old=[@Chg{Version=[2],New=[The
+subprogram name given in such a
 clause shall @Chg{Version=[3],New=[statically denote a subprogram that
 is not],Old=[not denote]} an abstract subprogram. Furthermore, if a
 stream-oriented attribute is specified for an interface type by an
@@ -5069,13 +5079,18 @@ the attribute has been specified for an ancestor type],Old=[]}.
 For an @nt{attribute_@!definition_@!clause} specifying one of these
 attributes, the subtype of the Item parameter shall be the base subtype
 if scalar, and the first subtype otherwise.
-The same rule applies to the result of the Input function.]}
+The same rule applies to the result of the Input function.]}]}
 @ChgNote{Most of the old text is moved down}
 @Chg{Version=[3],New=[@AspectDefn{Read}@AspectDefn{Write}@AspectDefn{Input}@AspectDefn{Output}],Old=[]}
+@Chg{Version=[4],New=[@AspectDefn{Read'Class}@AspectDefn{Write'Class}@AspectDefn{Input'Class}@AspectDefn{Output'Class}],Old=[]}
 
-@begin{Reason}@ChgNote{This belongs below}
-  @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00195-01]}
-  @ChgDeleted{Version=[2],Text=[This is to simplify implementation.]}
+@begin{Reason}
+  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0106-1]}
+  @Chg{Version=[4],New=[We need the last sentence to override the blanket rule
+    given in @RefSecNum{Aspect Specifications} that aspect'Class applies to the
+    type and all descendants.],Old=[@Chg{Version=[2],New=[],Old=[This is to simplify
+    implementation.]}]}
 @end{Reason}
 
 @begin{Discussion}@ChgNote{This is junk}
@@ -5089,6 +5104,38 @@ The same rule applies to the result of the Input function.]}
   for the attributes can be called when those are constructed from a directly
   specified ancestor.],Old=[]}]}
 @end{Discussion}
+
+@begin{TheProof}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0121-1]}
+  @ChgAdded{Version=[4],Text=[@RefSecNum{Aspect Specifications} says that all
+  operational attributes can be specified with an aspect_specification.]}
+@end{TheProof}
+
+@ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Read'Class],
+  Text=[@ChgAdded{Version=[4],Text=[Procedure to read a value from a stream for
+    the class-wide type associated with a given type.]}]}
+
+@ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Write'Class],
+  Text=[@ChgAdded{Version=[4],Text=[Procedure to write a value to a stream for a
+    the class-wide type associated with a given type.]}]}
+
+@ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Input'Class],
+  Text=[@ChgAdded{Version=[4],Text=[Function to read a value from a stream for a
+    the class-wide type associated with a given type, including
+    any bounds and discriminants.]}]}
+
+@ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Output'Class],
+  Text=[@ChgAdded{Version=[4],Text=[Procedure to write a value to a stream for a
+    the class-wide type associated with a given type, including
+    any bounds and discriminants.]}]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0121-1]}
+@ChgAdded{Version=[4],Text=[The subprogram name given in such an
+@nt{attribute_@!definition_@!clause} or @nt{aspect_@!specification} shall
+statically denote a subprogram that is not an abstract subprogram. Furthermore,
+if a specific stream-oriented attribute is specified for an interface type, the
+subprogram name given in the @nt{attribute_definition_clause} or
+@nt{aspect_specification} shall statically denote a null procedure.]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00251-01]}
@@ -5671,6 +5718,15 @@ class-wide types descended from S.
   has no effect on and is not effected by user-defined stream attributes.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0106-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
+  Defined how to specify a class-wide stream-oriented attribute using an
+  @nt{aspect_specification}. It was always intended that this was possible,
+  but the method was not clear as a class-wide type never has an explicit
+  declaration.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0030-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined the runtime
@@ -5679,6 +5735,12 @@ class-wide types descended from S.
   as an inconsistency, as it doesn't make semantic sense to stream a task
   and nothing useful could have been done with that, so it should not
   exist in any programs.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0106-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that the same
+  @LegalityTitle apply when a stream-oriented attribute is specified
+  via an @nt{aspect_specification} as applied when it is specified via
+  an @nt{attribute_definition_clause}.]}
 @end{DiffWord2012}
 
 
@@ -5894,6 +5956,7 @@ frozen.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1],ARef=[AI05-0019-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
 The end of a @nt{declarative_part}, @nt{protected_body},
@@ -5902,8 +5965,9 @@ causes @i(freezing) of each
 entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it,
 except for incomplete types.
 @Defn2{Term=[freezing], Sec=(entity caused by a body)}
-A noninstance body@Chg{New=[ other than a renames-as-body],Old=[]} causes
-freezing of each entity @Chg{Version=[3],New=[and profile ],Old=[]}declared
+A @Chg{Version=[4],New=[@nt{proper_body}, @nt{body_stub}, or
+@nt{entry_body}],Old=[noninstance body@Chg{New=[ other than a renames-as-body],Old=[]}]}
+causes freezing of each entity @Chg{Version=[3],New=[and profile ],Old=[]}declared
 before it within the same @nt{declarative_part}@Chg{Version=[3],
 New=[ that is not an incomplete type; it only causes
 freezing of an incomplete type if the body is within the immediate scope of the
@@ -5956,13 +6020,26 @@ incomplete type],Old=[]}.
   at the containing @nt{declarative_part}.
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
-  @ChgAdded{Version=[3],Text=[Note that @ldquote@;body@rdquote includes
-  @nt{null_procedure_declaration}s and @nt{expression_function_declaration}s
-  when those are used as completions, as well as @nt{entry_body}s (see
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
+  @ChgAdded{Version=[3],Text=[Note that
+  @Chg{Version=[4],New=[],Old=[@ldquote@;body@rdquote
+  includes ]}@nt{null_procedure_declaration}s and
+  @nt{expression_function_declaration}s@Chg{Version=[4],New=[ (even],Old=[]}
+  when those are used as completions@Chg{Version=[4],New=[)],Old=[]},
+  as well as @Chg{Version=[4],New=[@nt{generic_instantiation}s and
+  renames-as-bodies do not necessarily cause freezing; each has their
+  own specific rules],Old=[@nt{entry_body}s (see
   @RefSecNum{Completions of Declarations}). These all cause freezing,
-  along with @nt{proper_body}s and @nt{body_stub}s.]}
-
+  along with @nt{proper_body}s and @nt{body_stub}s]}.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0103-1]}
+  @ChgAdded{Version=[4],Text=[Note that the rule about proper bodies being
+  freezing only applies in @nt{declarative_part}s. All of the kinds of bodies
+  (see @RefSecNum{Completions of Declarations} @en keep in mind the
+  difference from @nt{body}s) that are allowed in a package specification have
+  their own freezing rules, so they don't need to covered by the above rule.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @Leading@RootDefn2{Term=[freezing], Sec=(entity caused by a construct)}
@@ -5999,6 +6076,25 @@ causes freezing.
   formal incomplete type parameter may denote an incomplete or private type
   which is not completely defined at the point of the @nt{generic_instantiation}.]}
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0103-1]}
+@ChgAdded{Version=[4],Text=[At the occurrence of an
+@nt{expression_function_declaration} that is
+completion, the @nt{expression} of the expression function causes freezing.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0103-1]}
+  @ChgAdded{Version=[4],Text=[This rule prevents calls through access values to an expression
+that might have unfrozen parts. Typically, elaboration checks and other
+freezing rules prevent this, but in this case the completion is elaborated
+but since this is not a @nt{body} it does not by itself freeze
+anything that precedes it.]}
+@end{Reason}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0132-1]}
+@ChgAdded{Version=[4],Text=[At the occurrence of a renames-as-body whose
+@SynI<callable_entity_>@nt{name} denotes an expression function, the
+@nt{expression} of the expression function causes freezing.]}
 
 @PDefn2{Term=[freezing], Sec=(object_declaration)}
 The occurrence of an @nt<object_declaration> that has no corresponding
@@ -6154,11 +6250,14 @@ causes freezing.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
   @ChgAdded{Version=[3],Text=[Freezing of the @nt{expression} of an expression
   function only needs to be considered when the expression function is in the
-  same compilation unit and there are no intervening bodies; the end of a
-  declarative_part or library package freezes everything in it, and a body
-  freezes everything declared before it.]}
+  same compilation unit and there are no intervening
+  @Chg{Version=[4],New=[@nt{body}s],Old=[bodies]}; the end of a
+  @nt{declarative_part} or library package freezes everything in it, and
+  a @Chg{Version=[4],New=[@nt{body}],Old=[body]} freezes everything
+  declared before it.]}
 @end{Ramification}
 
 
@@ -6714,4 +6813,14 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @ChgAdded{Version=[3],Text=[Added freezing rules for formal incomplete types;
   the corresponding actual is not frozen.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0103-1],ARef=[AI12-0132-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified when and what an
+  @nt{expression_function_declaration} that is a completion or that is the
+  target of a renames-as-body freezes. This is formally an incompatibility,
+  but as all known implementations freeze expression functions more
+  aggressively than allowed by either the old or new wording, practically this
+  will be an extension.]}
+@end{DiffWord2012}
 
