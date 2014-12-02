@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:27 $}
+@Comment{$Date: 2014/11/19 20:57:00 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -603,12 +603,23 @@ Sec=(precondition expression)}@PDefn2{Term=[expected type],
 Sec=(postcondition expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI125-0113-1]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
-subprogram of a tagged type @i<T>, a name that denotes a formal parameter of type
-@i<T> is interpreted as having type @i<T>'Class. Similarly, a name that denotes a
-formal access parameter of type access-to-@i<T> is interpreted as having type
-access-to-@i<T>'Class. @Redundant[This ensures that the expression is
-well-defined for a primitive subprogram of a type descended from @i<T>.]]}
+subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type @i<T>, a
+@Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a formal parameter
+@Chg{Version=[4],New=[(or @i<S>'Result) ],Old=[]}of type
+@i<T> is interpreted as @Chg{Version=[4],New=[though it had a (notional) type
+@i<NT> that is a formal derived type whose ancestor type is @i<T>, with directly
+visible primitive operations],Old=[having type @i<T>'Class]}. Similarly, a
+@Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a
+formal access parameter @Chg{Version=[4],New=[(or @i<S>'Result) ],Old=[]}of
+type access-to-@i<T> is interpreted as having type
+@Chg{Version=[4],New=[access-to-@i<NT>],Old=[access-to-@i<T>'Class]}.
+@Redundant[@Chg{Version=[4],New=[The result of this interpretation
+is that the only operations that can be applied to such @nt{name}s are those
+defined for such a formal derived type. ],Old=[]}This ensures that the
+expression is well-defined for @Chg{Version=[4],New=[any],Old=[a]} primitive
+subprogram of a type descended from @i<T>.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
@@ -768,12 +779,17 @@ these rules also apply in the private part of an instance of a generic unit.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0131-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0131-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[]}@Comment{Conditional Leading}
 @ChgAdded{Version=[3],Text=[If a Pre'Class or Post'Class aspect is specified for
-a primitive subprogram of a tagged type @i<T>, @Chg{Version=[4],New=[or
-such an aspect defaults to True, ],Old=[]}then the associated expression
-also applies to the corresponding primitive subprogram of each descendant of
-@i<T>.]}
+a primitive subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type
+@i<T>, @Chg{Version=[4],New=[or such an aspect defaults to True, ],Old=[]}then
+@Chg{Version=[4],New=[a corresponding],Old=[the associated]} expression
+also applies to the corresponding primitive subprogram
+@Chg{Version=[4],New=[@i<S> ],Old=[]}of each descendant of
+@i<T>.@Chg{Version=[4],New=[ The @i<corresponding expression> is constructed
+from the associated expression as follows:@Defn2{Term=[corresponding expresssion],Sec=[class-wide precondition]}
+@Defn2{Term=[corresponding expresssion],Sec=[class-wide postcondition]}],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -788,6 +804,42 @@ also applies to the corresponding primitive subprogram of each descendant of
   default to True, so that later overridings don't strengthen the
   precondition (a violation of LSP). We do the same for postconditions
   for consistency.]}
+@end{Reason}
+
+@begin{Itemize}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0113-1]}
+  @ChgAdded{Version=[4],Text=[References to formal parameters of @i<S> (or to
+  @i<S> itself) are replaced with references to the corresponding formal
+  parameters of the corresponding inherited or overriding subprogram
+  @i<S> (or to the corresponding subprogram @i<S> itself).]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We have to define the corresponding expression
+  this way as overriding routines are only required to be subtype conformant; in
+  particular, the parameter names can be different. So we have to talk about
+  corresponding parameters without mentioning any names.]}
+@end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0113-1]}
+@ChgAdded{Version=[4],Text=[The primitive subprogram @i<S> is illegal if it is
+not abstract and the corresponding expression for a Pre'Class or Post'Class
+aspect would be illegal.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This can happen, for instance, if one of the
+  subprograms called in the corresponding expression is abstract. We made the
+  rule general so that we don't have to worry about exactly which cases
+  can cause this to happen, both now and in the future.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We allow illegal corresponding expressions
+  on abstract subprograms as they could never be evaluated, and we need to
+  allow such expressions to contain calls to abstract subprograms.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
@@ -1186,7 +1238,9 @@ raised by the evaluation of a precondition or postcondition expression is
 raised at the point of call.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[For any subprogram or entry call (including dispatching calls), the checks
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1]}
+@ChgAdded{Version=[3],Text=[For any subprogram or entry call
+@Chg{Version=[4],New=[@i<S> ],Old=[]}(including dispatching calls), the checks
 that are performed to verify specific precondition expressions and specific
 and class-wide postcondition expressions are determined by those for the subprogram
 or entry actually invoked. Note that the class-wide postcondition expressions
@@ -1194,7 +1248,13 @@ verified by the postcondition check that is part of a call on a primitive
 subprogram of type @i<T> includes all class-wide postcondition expressions
 originating in any progenitor of @i<T>@Redundant[, even if the primitive
 subprogram called is inherited from a type @i<T1> and some of the postcondition
-expressions do not apply to the corresponding primitive subprogram of @i<T1>].]}
+expressions do not apply to the corresponding primitive subprogram of
+@i<T1>].@Chg{Version=[4],New=[ Any operations within a class-wide
+postcondition expression that were resolved as primitive operations of the
+(notional) formal derived type @i<NT>, are in the evaluation of the
+postcondition bound to the corresponding operations of the type identified
+by the controlling tag of the call on @i<S>.@Redundant[ This applies to both
+dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1216,10 +1276,17 @@ expressions do not apply to the corresponding primitive subprogram of @i<T1>].]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1]}
 @ChgAdded{Version=[3],Text=[The class-wide precondition check for a call to a
-subprogram or entry consists solely of checking the class-wide precondition
-expressions that apply to the denoted callable entity (not necessarily the one
-that is invoked).]}
+subprogram or entry @Chg{Version=[4],New=[@i<S> ],Old=[]}consists solely of
+checking the class-wide precondition expressions that apply to the denoted
+callable entity (not necessarily @Chg{Version=[4],New=[to ],Old=[]}the one
+that is invoked).@Chg{Version=[4],New=[ Any operations within
+such an expression that were resolved as primitive operations of the
+(notional) formal derived type @i<NT>, are in the evaluation of the
+precondition bound to the corresponding operations of the type
+identified by the controlling tag of the call on @i<S>.@Redundant[ This
+applies to both dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1251,9 +1318,10 @@ that is invoked).]}
     to generate special code for routines that are imported from outside of
     the Ada program. That's because there is a requirement on the programmer
     that the use of interfacing aspects do not violate Ada semantics (see
-    B.1). That includes making pre- and postcondition checks. For instance,
-    if the implementation expects routines to make their own postcondition
-    checks in the body before returning, C code can be assumed to do this
+    @RefSecNum{Interfacing Aspects}). That includes making pre- and
+    postcondition checks. For instance, if the implementation expects routines
+    to make their own postcondition checks in the body before returning,
+    C code can be assumed to do this
     (even though that is highly unlikely). That's even though the formal
     definition of those checks is that they are evaluated at the call site.
     Note that pre- and postconditions can be very useful for verification
@@ -1290,6 +1358,19 @@ the value.]}
   attribute (for instance, the tag might be different). The changes are most
   likely going to prevent bugs by being more intuitive, but it is possible that
   a program that previously worked might fail.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0113-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Eliminated unintentional
+  redispatching from class-wide preconditions and postconditions. This means
+  that a different body might be evaluated for a statically bound call to a
+  routine that has a class-wide precondition or postcondition. The change means
+  that the behavior of Pre and Pre'Class will be the same for a particular
+  subprogram, and that the known behavior of the operations can be assumed
+  within the body of that subprogram for Pre'Class. We expect that this change
+  will primarily fix bugs, as it will make Pre'Class and Post'Class work more
+  like expected. In the case where redispatching is desired, an explicit
+  conversion to a class-wide type can be used.]}
+
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2014/11/19 20:56:59 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3792,6 +3792,7 @@ rhs="@key{type} @Syn2{defining_identifier} [@Syn2{discriminant_part}]@Chg{Versio
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0137-1]}
 @ChgAdded{Version=[2],Text=[@Defn{incomplete type}@Defn{incomplete view}
 An @nt{incomplete_type_declaration} declares
 an @i{incomplete view} of a
@@ -3799,11 +3800,14 @@ type and its first subtype; the first subtype is unconstrained if
 a @nt<discriminant_part> appears. If the
 @nt{incomplete_@!type_@!declaration} includes the reserved word @key{tagged}, it
 declares a @i{tagged incomplete view}.@Defn2{Term=[incomplete view],Sec=[tagged]}@Defn{tagged incomplete view}
-@Redundant[An incomplete view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]]}
+@Chg{Version=[4],New=[If @i{T} denotes a tagged incomplete view, then
+@i{T}'Class denotes a tagged incomplete view. ],Old=[]}@Redundant[An incomplete
+view of a type is a limited view of the type (see @RefSecNum{Limited Types}).]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00326-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose designated
-type @i{T} is an incomplete view, a dereference of a value of type @i{A} also
+@ChgAdded{Version=[2],Type=[Leading],Text=[Given an access type @i{A} whose
+designated type @i{T} is
+an incomplete view, a dereference of a value of type @i{A} also
 has this incomplete view except when:]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0208-1]}
@@ -3833,7 +3837,8 @@ of @i{T} and @i{T} is an incomplete view declared by an
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0162-1]}
 @ChgAdded{Version=[2],Text=[In these cases, the dereference has the
 @Chg{Version=[3],New=[],Old=[full ]}view
-of @i{T}@Chg{Version=[3],New=[ visible at the point of the dereference],Old=[]}.]}
+of @i{T}@Chg{Version=[3],New=[
+visible at the point of the dereference],Old=[]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[We need the @lquotes@;in
@@ -4348,6 +4353,17 @@ not at all) for different designated subtypes.
   @ChgAdded{Version=[3],Text=[Incomplete types now can be used as actuals to
   formal incomplete types (see @RefSecNum{Formal Private and Derived Types}).]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0137-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigndum:> Changed the wording to clarify
+  that the class-wide type associated with a specific tagged type that has
+  an incomplete view is also an incomplete view.
+  While this was previously undefined, an interpretation where it is not
+  an incomplete view is leads to semantic nonsense, and thus we don't consider
+  this a potential incompatibility, as compilers most likely are doing the
+  right thing.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Operations of Access Types}

@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2014/11/19 20:57:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2819,7 +2819,7 @@ specified for a generic instance; it defines the default pool for
 access types within an instance.@AspectDefn{Default_Storage_Pool}
 The expected type for the
 Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
-must be a name that denotes a variable. This aspect overrides any
+must be a @nt{name} that denotes a variable. This aspect overrides any
 Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
 is not specified, the default pool of the instance is that defined for the
 generic unit],
@@ -2832,6 +2832,14 @@ that specifies the @i{controlled} aspect of representation]}.
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Default storage pool for a generic instance.]}]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0136-1]}
+@ChgAdded{Version=[4],Text=[The effect of specifying aspect Default_Storage_Pool
+on an instance of a language-defined generic unit is implementation-defined.]}
+
+  @ChgImplDef{Version=[4],Kind=[Added],
+    Text=[@ChgAdded{Version=[4],Text=[The effect of specifying aspect
+    Default_Storage_Pool on an instance of a language-defined generic unit.]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[]}@Comment{Conditional leading}
@@ -3088,6 +3096,14 @@ to ensure that all @nt{allocator}s use the default pool.]}
   Unchecked_Deallocation or Unchecked_Deallocate_Subpool), so that garbage
   collection of such objects would be ineffective in the standard mode anyway.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0136-1]}
+  @ChgAdded{Version=[4],Text=[@b{Corrigendum:} We now explicitly say that
+  the behavior of language-defined generic units when given the
+  Default_Storage_Pool aspect is implementation-defined. Portable code
+  cannot rely on such a package using a particular pool implementation.]}
+@end{DiffWord2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Storage Subpools]}

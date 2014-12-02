@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:27 $}
+@Comment{$Date: 2014/11/19 20:57:00 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1668,8 +1668,10 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
 @LabeledAddedSubClause{Version=[3],Name=[Type Invariants]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a private type or private
-extension, the following language-defined aspects may be specified with an
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a private type@Chg{Version=[4],New=[,],Old=[ or]} private
+extension@Chg{Version=[4],New=[, or interface],Old=[]}, the following
+language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
@@ -1687,11 +1689,14 @@ extension, the following language-defined aspects may be specified with an
       objects of a type.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0041-1]}
 @ChgAdded{Version=[3],Text=[Type_Invariant'Class@\This aspect
    shall be specified by an @nt{expression}, called an @i<invariant
    expression>.
-   Type_Invariant'Class may be specified on a @nt{private_@!type_@!declaration} or a
-   @nt{private_@!extension_@!declaration}.@AspectDefn{Type_Invariant'Class}]}
+   Type_Invariant'Class may be specified on a
+   @nt{private_@!type_@!declaration}@Chg{Version=[4],New=[,],Old=[ or]} a
+   @nt{private_@!extension_@!declaration}@Chg{Version=[4],New=[, or a
+   @nt{full_@!type_@!declaration} for an interface type],Old=[]}.@AspectDefn{Type_Invariant'Class}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0254-1]}
@@ -2086,6 +2091,13 @@ value.]}
   with invariant checks being added to routines that assume that they don't
   need them.]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI12-0041-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2012}
+  @b<Corrigendum:> Class-wide type invariants can now be specified on
+  interfaces as well as private types.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0133-1]}

@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:27 $}
+@Comment{$Date: 2014/11/19 20:56:59 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5113,8 +5113,8 @@ paragraphs are ever renumbered.}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0124-1]}
 @ChgAdded{Version=[4],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
-@nt{prefix} X that denotes an object of a scalar type}, the following
-attributes are defined:]}
+@nt{prefix} X that denotes an object of a scalar type@Redundant[ (after
+any implicit dereference)]}, the following attributes are defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],

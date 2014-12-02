@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.118 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
+@comment{ $Revision: 1.119 $ $Date: 2014/11/19 20:57:00 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2014/07/24 04:20:40 $}
+@Comment{$Date: 2014/11/19 20:57:00 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -3310,6 +3310,21 @@ Text=[When restriction No_Dynamic_CPU_Assignment applies to a partition,
   the Set_Specific_Handler and Specific_Handler subprograms
   in Task_Termination.]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0117-1]}
+@ChgAdded{Version=[4],Text=[@Defn2{Term=[restrictions],Sec=(No_Tasks_Unassigned_To_CPU)}@Defn{No_Tasks_Unassigned_To_CPU restriction}
+   No_Tasks_Unassigned_To_CPU @\The CPU aspect is specified for the environment
+   task. No CPU aspect is specified to be statically equal to
+   Not_A_Specific_CPU. If aspect CPU is specified (dynamically) to the value
+   Not_A_Specific_CPU, then Program_Error is raised. If Set_CPU or
+   Delay_Until_And_Set_CPU are called with the CPU parameter equal to
+   Not_A_Specific_CPU, then Program_Error is raised.]}
+@begin{Ramification}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[If this restriction is used in a context for which
+restriction No_Dynamic_CPU_Assignment is in effect, then no runtime check
+is needed when specifying the CPU aspect. If the restriction is used with
+the Ravenscar profile, no runtime checks are needed.]}
+@end{Ramification}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(Simple_Barriers)}@Chg{Version=[3],New=[@Defn{Simple_Barriers restriction}],
@@ -3582,6 +3597,12 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @b{Corrigendum:} Restriction No_Dynamic_CPU_Assignment is newly
   added to Ada, for use as part of the Ravenscar profile
   (see @RefSecNum{The Ravenscar Profile}).]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0117-1]}
+  @ChgAdded{Version=[4],Text=[@b{Corrigendum:} Restriction
+  No_Tasks_Unassigned_To_CPU is newly added to Ada; it ensures that no
+  task is running on an implementation-defined CPU so that task scheduling
+  can be analyzed.]}
 @end{Extend2012}
 
 
