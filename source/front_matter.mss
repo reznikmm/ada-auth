@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.82 $ $Date: 2014/07/24 04:20:40 $}
+@comment{$Revision: 1.83 $ $Date: 2014/12/02 04:32:37 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -1025,8 +1025,7 @@ Comments should use the following format:
 @ChgRef{Version=[2],Kind=[Revised]}
 @ChgRef{Version=[3],Kind=[Revised]}
 @TabSet(L6)@\@b(!topic) @i[Title summarizing comment]
-@\@b(!reference) @Chg{Version=[2],New=[Ada
-@Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95-]}@i{ss.ss(pp)}
+@\@b(!reference) @Chg{Version=[2],New=[Ada @Chg{Version=[3],New=[@Chg{Version=[4],New=[202x],Old=[2012]}],Old=[2005]} RM],Old=[RM95-]}@i{ss.ss(pp)}
 @\@b(!from) @i{Author Name yy-mm-dd}
 @\@b(!keywords) @i{keywords related to topic}
 @\@b(!discussion)
