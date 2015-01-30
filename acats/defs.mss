@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2010/08/23 18:51:28 $}
+@comment{$Revision: 1.8 $ $Date: 2015/01/15 02:30:35 $}
 
 @LabeledAnnex{Definitions}
 
@@ -70,14 +70,17 @@ The trade association
 that sponsors the Ada conformity assessment
 system.@SeeOther{Primary=[ARA],Other=[Ada Resource Association]}]}
 
-@ToGlossary{Term=[Ada Standard documents],Text=[The documents that
-define the Ada programming language:
-reference @LocalLink{Target=[Ada95],
+@ToGlossary{Term=[Ada Standard documents],Text=[The document(s) that
+define the Ada programming language, currently the Ada Standard
+@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}.
+Future corrigendum documents are also included (corrigenda fix bugs
+in a Standard).
+@Comment{reference @LocalLink{Target=[Ada95],
 Sec=[References],Text={[Ada95]}}, its corrigiendum @LocalLink{Target=[TC1],
 Sec=[References],Text={[TC1]}}, and its Amendment @LocalLink{Target=[Amend1],
 Sec=[References],Text={[Amend1]}}. An unofficial document
 informally known as the @ldquote@;Ada 2005 Reference Manual@rdquote
-merges all three documents and is what is usually used by Ada practitioners.]}
+merges all three documents and is what is usually used by Ada practitioners.}]}
 
 @ToGlossary{Term=[Ada Validation Facility],Text=[(Abbreviated @b{AVF})
 Former designation of an

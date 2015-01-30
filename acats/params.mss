@@ -1,11 +1,11 @@
 @Part(params, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/params.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.6 $ $Date: 2015/01/15 02:30:35 $}
 
 @LabeledAnnex{Parameterization Files}
 
-In ACATS 3.1, two methods are used to account for the use of
+In ACATS 4.0, two methods are used to account for the use of
 implementation-dependent values in the tests.@Defn{implementation-dependent values}
 
 For legacy tests, a "macro" substitution technique is used. Legacy tests
@@ -17,9 +17,7 @@ with the appropriate values. A data file, @Exam{MACRO.DFS}, and an Ada
 program, @Exam{Macrosub}, are provided to facilitate this
 substitution.@Defn{macro substitition}
 
-For tests written since the standardization of
-@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
-a hierearchy of packages is
+For modern tests, a hierearchy of packages is
 provided that contain constants and functions that provide the desired
 implementation-specific values. These packages ("ImpDef" and its children)
 should be modified for each implementation to provide the needed values.
@@ -33,7 +31,7 @@ package hierarchy.
 @LabeledClause{Macro Substitution File}
 
 The support file @Exam{MACRO.DFS} provides substitutions for special symbols
-that appear in certain ACATS 3.1 tests (indicated by the three-letter file
+that appear in certain ACATS 4.0 tests (indicated by the three-letter file
 type (extension) ".TST" and listed in
 Section @RefSecNum{Macro Substitution Tests}). The support program
 @Exam{Macrosub} may be used to insert these implementation-specific values
@@ -93,7 +91,7 @@ MAX_IN_LEN                60
 The following test files contain the special symbols used for substituting
 implementation-specific values, as described in
 Section @RefSecNum{Macro Substitution File}. This list also
-appears in the ACATS 3.1 "support" directory as @Exam{TSTTESTS.DAT}.
+appears in the ACATS 4.0 "support" directory as @Exam{TSTTESTS.DAT}.
 
 @begin{FourCol}
 A26007A.TST@*

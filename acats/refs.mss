@@ -1,7 +1,7 @@
 @Part(refs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/refs.mss,v $}
-@comment{$Revision: 1.3 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.4 $ $Date: 2015/01/15 02:30:35 $}
 
 
 @UnnumberedSection{References}
@@ -43,7 +43,7 @@ Text=[http://www.adaic.org/ada-resources/standards/ada05/]}.)}}
 @LocalTarget{Target=[ISO99],Text={[ISO99]}}@\ISO/IEC 18009:1999,
 Information technology @em Programming languages @em Ada: Conformity Assessment of a Language Processor, December 1999
 
-@LocalTarget{Target=[Pro13],Text={[Pro13]}}@\Ada Resource Association: Operating Procedures for Ada Conformity Assessments Version 3.1, December 2013
+@LocalTarget{Target=[Pro31],Text={[Pro31]}}@\Ada Resource Association: Operating Procedures for Ada Conformity Assessments Version 3.1, December 2013
 @Shrink{@i{(This can
 be found online in various formats at @URLLink{URL=[http://www.ada-auth.org/info.html],
 Text=[http://www.ada-auth.org/info.html]}.)}}

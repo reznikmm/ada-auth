@@ -1,7 +1,7 @@
 @Part(crules, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/tobj.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.5 $ $Date: 2015/01/15 02:30:36 $}
 
 @LabeledSection{Test Objectives and Coverage}
 
@@ -9,9 +9,7 @@ Each ACATS test tests one or more @i{test objectives}.@Defn{test objective}
 @ToGlossary{Term=[Test Objective],Text=[The intended purpose of an ACATS
 test. A test objective ought to be relatable to rules given in the Standards
 that define Ada.]} Test objectives ought to be relatable to rules given
-in the Ada Standard documents (@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
-@LocalLink{Target=[TC1],Sec=[References],Text={[TC1]}}, and
-@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}).
+in the Ada Standard documents (@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}).
 
 The test objectives of modern ACATS tests are gathered into a
 @i{Test Objectives Document}. Each modern test is listed along with the
@@ -37,7 +35,7 @@ as a single line, or spread across multiple paragraphs of
 the standards.@Defn2{Term=[rule],Sec=[Ada language]}
 
 For instance,
-@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}} contains the
+@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} contains the
 rule
 @begin{Indent}
 The implicit declaration of the limited view of a library package forms an
@@ -61,10 +59,8 @@ to study the ACATS coverage documents (see @RefSecNum{Coverage Documents}).
 
 @LabeledClause{Coverage of the Ada Standard}
 
-The Ada Standard documents (@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
-@LocalLink{Target=[TC1],Sec=[References],Text={[TC1]}}, and
-@LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}) include many
-hundreds of rules. The ACATS Coverage
+The Ada Standard documents @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} include many
+thousands of rules. The ACATS Coverage
 Documents (see @RefSecNum{Coverage Documents}) record the mapping of
 test objectives and tests to Ada rules, making it possible to determine if
 individual rules are adequately tested. The following clauses discuss these
@@ -93,6 +89,12 @@ were not considered. However, sometimes additional test objectives are needed
 for existing rules because of other changes to the language. Moreover, there
 is no determination of whether the legacy tests adequately tested the original
 rule.
+
+The plaintext coverage document is not easily processed by tools. In particular,
+paragraphs that are covered are indicated only by the test name(s) that cover
+the paragraph; there is no common string for a tool to count. As such, it
+is difficult to get metrics about coverage from the document, and in
+particular to quantify progress between versions.
 @end{Itemize}
 
 For these reasons, the development of new and much more
@@ -109,27 +111,38 @@ any untested cases), and any additional notes needed.
 There is also a summary document that summarizes totals for important metrics
 for the coverage documents as a whole.
 
-These documents are provided in Adobe Portable Document Format (PDF).
+The documents are maintained as spreadsheets (in order to make calculation
+and extraction of metrics easy). Because spreadsheet programs may be unfamilar
+to many readers, and compatibility of spreadsheet programs is incomplete,
+these documents are provided in Adobe Portable Document Format (PDF).
+(The spreadsheets are available on request from the ACAA Technical Agent,
+@URLLink{URL=[mailto:agent@ada-auth.org],Text=[agent@ada-auth.org]}.)
 
-@leading@;For ACATS 3.1, the following clauses of the Ada Standards are
+@leading@;For ACATS 4.0, the following clauses of the Ada Standard documents are
 included in the new coverage documents:
 @begin{Example}
+3.2.4
 3.9.3 through 3.10.1
 4.1.3 through 4.4
-6.5 through 6.7
+4.5.7 through 4.5.8
+5.4 through 5.5.2
+6.5 through 6.8
 7.4 through 7.6.1
 8.3.1 through 8.5.3
 Section 10 (10 through 10.2.1)
+13.1.1
 @end{Example}
 These clauses were selected because of their importance in rule changes
-in @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
+in either @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}
+or @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
 
 The original coverage document is also included with the ACATS for those
-portions of the Ada Standards that have not yet had new coverage documents
+portions of the Ada Standard documents that have not yet had new coverage documents
 constructed. This document is of primary use for features
 of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}},
 as it does not cover Legacy tests nor any features
-added or modified by @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
+added or modified by either @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}
+or @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
 As noted above, it is being replaced, so it will disappear completely in a
 future version of the ACATS.
 
@@ -190,7 +203,7 @@ tests for illegal syntax have a very low value. Most compilers use a syntax
 that is similar to
 that of the standard, and many use parsers generated by tools, and thus the
 likelihood of errors is low. Moreover, the number of possible bugs is
-essentially unlimited. There are two cases where testing is warranted:
+essentially unlimited. There are three cases where testing is warranted:
 First, rules that
 are given in text form rather than BNF are treated as legality rules (see below).
 Second,
@@ -198,6 +211,12 @@ the Ada syntax grammar is not directly usable by either of the common technologi
 for parsers (LL/recursive descent, and LR/LALR). In cases where the grammar
 used by a compiler must necessarily be more general than that given in the
 standard, the additional requirements are treated as legality rules.
+Finally, an irregularity in the syntax rules can suggest an obvious (but
+incorrecct) syntax extension. It can warrant a test that such an extension is
+not implemented. For instance, most places in Ada that declare
+an object allow the use of subtype_indications, but subprogram profiles only
+allow subtype_marks. It should be tested that subtype_indications are not
+allowed when declaring parameters, even though this is a syntax rule.
 
 Name Resolution Rules:@\Name resolution rules should usually have a B-Test that
 checks that too much information is not used for resolution. (For instance,
@@ -206,7 +225,12 @@ Another example is whether an access type is pool-specific or general
 access usually should not be used.) It also may have a C-Test to
 check that legal cases are allowed; but this objective is often handled by
 tests for other test objectives (if that's the case, a note should point out
-where they are tested).
+where they are tested). One common case where a C-Test is needed occurs when
+a name resolution rule uses some property for resolution. In this case, a
+C-Test that the property can be used to resolve an overloaded function call
+is needed. (For instance, an if statement condition must be of a Boolean type;
+it should be tested that a function returning some other type is ignored when
+resolving a condition.)
 
 Legality Rules:@\Legality rules should almost always have an associated B-Test
 that checks that illegal cases are detected. They may also have a C-Test to
@@ -221,6 +245,9 @@ can be handled as described in @RefSec{General Coverage Guidelines}.
 instance, most of the library packages are defined as static semantics, even
 though most of the rules are really dynamic. These should be tested as
 appropriate for the correct category.
+
+@\Remaining rules should be tested as legality rules (arguably, these too are
+miscategorized).
 
 Post-Compilation Rules:@\A post-compilation rule should always have L-Tests to
 check that the check is made in illegal cases. These checks are especially

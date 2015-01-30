@@ -1,16 +1,16 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.7 $ $Date: 2015/01/15 02:30:35 $}
 
 @LabeledSection{Introduction}
 
 The Ada Conformity Assessment Test Suite (ACATS) provides the official
 tests used to check conformity of an Ada implementation with the
 Ada programming
-language standard (@LocalLink{Target=[Ada95],Sec=[References],
-Text=[ANSI/ISO/IEC 8652:1995]} and later corrigenda and
-amendments). The ACATS User's Guide is part of the ACATS and is distributed
+language standard (@LocalLink{Target=[Ada2012],Sec=[References],
+Text=[ANSI/ISO/IEC 8652:1995]} and later corrigenda). The ACATS User's
+Guide is part of the ACATS and is distributed
 with the test programs and testing support packages. It explains the contents
 and use of the
 test suite.@Defn{Ada Conformity Assessment Test Suite}@SeeOther{Primary=[ACATS],Other=[Ada Conformity Assessment Test Suite]}@Defn{Ada implementation}@Defn{Ada}@Defn{Ada programming language}
@@ -48,13 +48,11 @@ language features defined in ISO/IEC 8652:1995/AMD 1:2007
 programs to check for conformity to language features defined in earlier
 versions of Ada, including @LocalLink{Target=[Ada95],
 Sec=[References],Text={[Ada95]}} and @LocalLink{Target=[Ada83],
-Sec=[References],Text={[Ada83]}}.
-
-This version of the ACATS is version 3.1. It improves the coverage and
-correctness of ACATS 3.0 for features defined in
+Sec=[References],Text={[Ada83]}}. The ACAA later released ACATS 3.1 to improve
+the coverage and correctness of the ACATS for features defined in
 @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
 
-A future version of the ACATS (to have version 4.0) will be developed to
+This version of the ACATS is 4.0. It was developed in 2014 to
 test the enhancements and changes of the third edition of the Ada Standard,
 ISO/IEC 8652:2012 (@LocalLink{Target=[Ada2012],
 Sec=[References],Text={[Ada2012]}}). Subsequent maintenance or enhancement
@@ -62,8 +60,8 @@ versions of the suite, if they are required, will be numbered 4.1, etc.
 
 The ACATS User's Guide describes the set of ACATS tests and how they are to be
 used in preparation for conformity assessment. The formal procedures for
-conformity assessment are described in @LocalLink{Target=[Pro13],
-Sec=[References],Text={[Pro13]}}, and the rules in that document
+conformity assessment are described in @LocalLink{Target=[Pro31],
+Sec=[References],Text={[Pro31]}}, and the rules in that document
 govern all conformity assessments, notwithstanding anything in this document
 that may be interpreted differently. Moreover, this guide does not discuss
 specific requirements on processing of the ACATS test suite, or submission and
@@ -75,9 +73,9 @@ developers who maintain a version of the ACATS as a quality control or software
 acceptance tool, and third-party testers (e.g., Ada Conformity Assessment
 Laboratories).
 
-Section @RefSecNum{Changes for ACATS 3.1} of the User's Guide for ACATS 3.1
+Section @RefSecNum{Changes for ACATS 4.0} of the User's Guide for ACATS 4.0
 summarizes the changes between
-ACATS 3.0 and ACATS 3.1. Section @RefSecNum{Test Objectives and Coverage}
+ACATS 3.1 and ACATS 4.0. Section @RefSecNum{Test Objectives and Coverage}
 describes test objectives and their relationship to ACATS tests and
 to the rules of the
 Ada Standards documents. Section @RefSecNum{Configuration Information}
@@ -86,11 +84,11 @@ including a description of the ACATS software and delivery files. Section
 @RefSecNum{Using the ACATS}
 provides step-by-step instructions for installing and using the test programs
 and test support packages, and for grading test results. The appendices include
-other information that characterizes the ACATS 3.1 release, along with
+other information that characterizes the ACATS 4.0 release, along with
 information on test construction.
 
 Refer to @RefSecNum{Definitions} and Section @RefSecNum{Grading Test Results}
-for the definition of an acceptable result and the rules for grading ACATS 3.1
+for the definition of an acceptable result and the rules for grading ACATS 4.0
 test program results. Section @RefSecNum{Deviation from Expected Results - Petition & Review}
 provides instructions for submitting a
 petition against a test program if a user believes that a deviation from the
@@ -109,10 +107,9 @@ every applicable test.
 
 A fundamental goal of conformity assessment (validation) is to promote Ada
 software portability by ensuring consistent processing of Ada language features
-as prescribed by the Ada Standard documents (@LocalLink{Target=[Ada95],
-Sec=[References],Text={[Ada95]}}, @LocalLink{Target=[TC1],
-Sec=[References],Text={[TC1]}}, and @LocalLink{Target=[Amend1],
-Sec=[References],Text={[Amend1]}}@Defn{Ada Standard documents}). ACATS
+as prescribed by the Ada Standard documents (@LocalLink{Target=[Ada2012],
+Sec=[References],Text={[Ada2012]}} and any future corrigendum
+documents@Defn{Ada Standard documents}). ACATS
 tests use language features in contexts and idioms expected in production
 software. While they exercise a wide range of language feature uses, they do
 not and cannot include examples of all possible feature uses and interactions.
@@ -123,7 +120,7 @@ not thereby deemed error-free, nor is it thereby deemed capable of correctly
 processing all software that is submitted to it.
 
 The ACATS tests do not test the quality of an Ada implementation. In
-particular, ACATS test do not check or report performance parameters (e.g.,
+particular, ACATS tests do not check or report performance parameters (e.g.,
 compile-time capacities or run-time speed). They do not check or report for
 characteristics such as the presence and effectiveness of compiler
 optimization. They do not investigate or report compiler or implementation
@@ -132,34 +129,57 @@ choices in cases where the standard allows options.
 
 @LabeledClause{ACATS Coverage of Ada}
 
-The ACATS needs to test as many rules as possible in order to meet the goal of
-enhancing Ada software portability. After all, a rule that is not tested is far
-more likely to be incorrectly implemented than one that is tested.
+The ACATS needs to test as many Ada language rules as possible in order to meet
+the goal of enhancing Ada software portability. After all, a rule that is not
+tested is far more likely to be incorrectly implemented than one that is tested.
 
 Therefore the ACATS strives for complete coverage of the standard. @i{Complete
 coverage}@Defn{complete coverage} means that every rule in the Ada standard has
-one or more associated
-tests that ensure that the rule is implemented properly.
+one or more associated tests that ensure that the rule is implemented properly.
 
 Complete coverage is especially important for legality rules and runtime
 checks. It is easy for implementers to miss these rules, as their compiler may
 do something useful in the absence of the checks. But allowing such incorrect
 code can be a major portability problem when a program is moved to a compiler
 (including a later version of the same compiler) that properly implements the
-checks.
+rules and checks.
 
 Of course, complete coverage does not mean that every sentence in the Ada
 standard has an associated test. There are many lines in the standard that are
 not rules at all, such as notes and examples. There are also many lines in the
 standard that are not testable; documentation requirements are but one example.
-Finally, there are rules in the standard that could be tested, but such tests
-are unlikely to find errors; for instance, most tests for illegal syntax are in
-this category as the test would need to guess what error might be made.
+There are also rules in the standard which could be tested, but such tests
+would be outside of the purpose of the ACATS. Rules which express options
+for Ada implementations (such as permissions or advice) are in this category
+(as the ACATS does not test implementation quality).
 
-Complete coverage is a goal for the ACATS; it is not expected to be achieved in
-near future. Thus the test coverage analysis of the ACATS is a set of living
-documents, which will be updated with new information and tests with each new
-ACATS version.
+It should be obvious that the importance of testing particular rules in the Ada
+standard vary widely. In part, that's because the various Ada features
+themselves have widely varying importance. (For example, looking at three
+features that ACATS 4.0 could have tested, proper operation of
+if expressions is more important than correct functioning of record equality,
+which in turn is more important than run-time accessibility checks for
+coextensions.) But it's also because of the differing nature of the rules.
+For instance, testing of syntax rules is not very important in most cases,
+as correct syntax will be checked by tests for other rules, and tests for
+incorrect syntax require guessing what error a compiler might make in
+interpreting syntax. Unless an error seems particularly likely (as might
+happen from some irregularity in the syntax), such guessing is unlikely to
+find actual errors. This makes it impossible for there to be a definitive
+set of rules that need to be tested to accomplish complete coverage,
+as the decision as to whether a particular rule is usefully testable
+can be a judgement call.
+
+In any case, complete coverage is a goal for the ACATS. However, it is not
+expected to be ever be achieved. As the ACATS gets nearer to the goal, the
+value of additional tests will drop (since higher value tests get created
+earlier), and at some point, the cost of creating and processing new tests
+would outweigh their value.
+
+Since exactly which rules need to be tested to accomplish complete coverage will
+always be a judgement call, the test coverage analysis of the
+ACATS is a set of living documents, which will be updated with new information
+and tests with each new ACATS version.
 
 Coverage testing will generally not test combinations of features, so problems
 that only manifest themselves in such combinations will not be detected. Tests

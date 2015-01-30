@@ -1,7 +1,7 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.7 $ $Date: 2015/01/15 02:30:35 $}
 
 @LabeledAnnex{Test Applicability Criteria}
 
@@ -1347,6 +1347,7 @@ CXAC003.A@*
 CXAC004.A@*
 CXAC005.A@*
 CXAC006.A@*
+CXAC007.A@*
 CXACA01.A@*
 CXACA02.A@*
 CXACB01.A@*
@@ -1628,6 +1629,7 @@ CXAC003.A@*
 CXAC004.A@*
 CXAC005.A@*
 CXAC006.A@*
+CXAC007.A@*
 CXACA01.A@*
 CXACA02.A@*
 CXACB01.A@*

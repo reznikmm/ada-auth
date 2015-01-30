@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2014/01/31 06:00:07 $}
+@comment{$Revision: 1.8 $ $Date: 2015/01/15 02:30:35 $}
 
 @LabeledSection{Configuration Information}
 
@@ -9,7 +9,7 @@ This section describes the physical and logical structure of the ACATS
 delivery, and it describes the test classes, naming conventions used, test
 program format, test structure, delivery structure, and file format.
 
-ACATS 3.1 is a revision of ACATS 3.0, and has a similar delivery
+ACATS 4.0 is an update of ACATS 3.1, and has a similar delivery
 structure. The support tools are unchanged, except for updating
 header comments and version identification.
 
@@ -19,7 +19,7 @@ particular implementations and host systems.
 
 @LabeledClause{Structure}
 
-The ACATS 3.1 test software includes test code that exercises specific Ada
+The ACATS 4.0 test software includes test code that exercises specific Ada
 features, foundation code (used by multiple tests), support code (used to
 generate test results), and tool code (used to build tools necessary to
 customize ACATS tests). The suite includes tests for the core language and
@@ -30,8 +30,8 @@ number of tests and files in the ACATS suite.
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=[],
 Headers=[@\Total@\Core Tests@\SNA Tests@\Found@!ations@\Docs@\Other],
-Body=[Number of Files@\4660@\4168@\249@\52@\169@\22
-Number of Tests@\3798@\3607@\191@\0@\0@\0]}
+Body=[Number of Files@\4787@\4287@\250@\54@\174@\22
+Number of Tests@\3910@\3718@\192@\0@\0@\0]}
 
 @leading@;Others consists of:
 @table{Columns=[2],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[4],
@@ -49,8 +49,8 @@ Section @RefSecNum{Delivery Directory Structure}.
 
 @LabeledSubClause{Physical Organization}
 
-The preceeding table summarizes the number of files that compose ACATS 3.1.
-In addition to files containing test code proper, the ACATS 3.1 test suite
+The preceeding table summarizes the number of files that compose ACATS 4.0.
+In addition to files containing test code proper, the ACATS 4.0 test suite
 includes various support files.
 
 Note that the number of files containing test code is larger than the number of
@@ -200,7 +200,9 @@ Section 13 of the Ada Standard
 includes implementation advice paragraphs include the words "recommended level
 of support". The ACATS does not require implementations to conform to those
 paragraphs unless they claim support for Annex C, Systems Programming (because
-of C.2(2): "The implementation shall support at least the functionality defined
+of
+@URLLink{URL=[http://www.adaic.org/resources/add_content/standards/12rm/html/RM-C-2.html#p2],Text=[C.2(2)]}:
+"The implementation shall support at least the functionality defined
 by the recommended levels of support in Section 13.")
 
 @leading@;Tests that check conformance to the implementation advice are listed
@@ -212,14 +214,16 @@ CD20001@*
 CD30001@*
 CD30002@*
 CD30003@*
-CD30005@*
+CD30004@*
+CD30006@*
+CD30007@*
 CD33001@*
 CD33002@*
-CD30004@*
 CD40001@*
 CD72A01@*
 CD72A02@*
-CD90001
+CD90001@*
+CDE0002
 @end{FourCol}
 
 Implementations that claim support for Annex C are required to process and pass
@@ -249,7 +253,8 @@ Section @RefSecNum{Modern Naming}.
 
 The tests that include Fortran code are: CXB5004 and CXB5005
 
-The tests that include C code are: CXB3004, CXB3006, CXB3013 and CD30005
+The tests that include C code are: CD30005, CXB3004, CXB3006, CXB3013, CXB3017,
+and CXB3018
 
 The test that includes Cobol code is: CXB4009
 
@@ -412,7 +417,7 @@ Class L SNA tests.@SeeOther{Primary=[SNA],Other=[specialized needs annex]}
 
 @LabeledClause{Naming Convention}
 
-This section describes the naming conventions used in ACATS 3.1, specifically
+This section describes the naming conventions used in ACATS 4.0, specifically
 as they apply to files. All file names are of the form <name>.<type>, where
 <type> is a one, two, or three character extension. File names indicate test
 class, compilation order (if applicable), and whether the test is
@@ -423,7 +428,7 @@ are normally the same as the name of the test, however in some cases, the
 structure of the test requires that the file name be different from the Ada
 unit. The application of the conventions to tests is straightforward.
 
-There are two different but similar naming conventions used in ACATS 3.1.
+There are two different but similar naming conventions used in ACATS 4.0.
 Legacy tests use the naming conventions of early ACVC versions. Tests new since
 ACVC 1.12 use the modern convention. The conventions are consistently
 distinguishable at the 7th character of the name: legacy names have a letter in
@@ -555,7 +560,7 @@ CA2009F0.ADA@*
 CA3011A4.ADA@*
 CA5003A6.ADA@*
 CA5003B5.ADA@*
-CA5004B1.ADA@*
+CA5004B2.ADA@*
 CC3019B2.ADA@*
 CC3019C2.ADA@*
 LA5001A7.ADA@*
@@ -606,13 +611,13 @@ Modern tests use different file name extensions (see @RefSecNum{Modern Naming}).
 
 
 @begin{Itemize}
-@Noprefix@red{@i{Note that legacy tests have not been renamed for ACATS 3.1.
-Since @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} includes some
+@Noprefix@red{@i{Note that legacy tests have not been renamed for ACATS 4.0.
+Since @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} includes some
 organizational differences from
 @LocalLink{Target=[Ada83],Sec=[References],Text={[Ada83]}}, this means that the
 name of a legacy test sometimes will not correspond to the clause of
-@LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}} in which the tested
-feature is described.}}
+@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} in which the
+tested feature is described.}}
 @end{Itemize}
 
 
@@ -662,12 +667,12 @@ Special Requirements section of the test prologue.
 
 .au@\A file that contains only Ada code that contains characters outside of
 the 7-bit ASCII character set. These files are provided in UTF-8 format with
-a starting byte-order mark. For ACATS 3.1, these tests can be converted to
-another format acceptable to the compiler if necessary; then the test must
-be compiled and run as all other tests of its test class. (Note that
-@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}} requires
-compilers to be able to process UTF-8 files, so future ACATS versions will
-eliminate this permission to convert UTF-8 source code.)
+a starting byte-order mark. For ACATS 4.0, these tests must
+be compiled and run as all other tests of its test class, although
+usage of a different workflow (which must be documented if it is necessary)
+is allowed. (Note that @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}
+requires compilers to be able to process UTF-8 files, although the details
+[such as compiler options] might be different than ASCII source files.)
 
 .ftn@\A file that contains Fortran language code and must be compiled by a
 Fortran compiler. These files are used by tests that check a foreign language
@@ -774,8 +779,9 @@ replacement(s) represent. Appears only in legacy tests.
 All tests have the line immediately after the disclaimer marked @exam{--*}.
 Modern tests have the line after the last prologue line (before the first
 line of executable code) marked @exam{--!}  No other comment lines are marked
-with those conventions, so the next line after the disclaimer and the
-first line of code may be found quickly with an editor search.
+with those conventions, so the start of the objective (which is the next line
+after the disclaimer) and the first line of code may be found
+quickly with an editor search.
 
 Some tests are composed of multiple files (other than foundation code). Rather
 than repeating the complete prologue in each file, an alternate approach has
@@ -808,19 +814,19 @@ use both upper and lower case letters and may use larger numeric values (but
 within the range (-65536..65535) except in rare cases).
 
 Legacy tests tend to use as few Ada features as necessary to write a
-self-checking executable test that can be read and maintained. Newer tests tend
+self-checking executable test that can be read and maintained. Modern tests tend
 to exhibit a usage-oriented style, employing a rich assortment and interaction
 of features and exemplifying the kind of code styles and idioms that compilers
 may encounter in practice.
 
-In the newer tests, Ada reserved words are entirely in lower case. Identifiers
+In modern tests, Ada reserved words are entirely in lower case. Identifiers
 normally have their initial letter capitalized. Every attempt has been made to
 choose meaningful identifiers. In B class tests, identifier names often provide
 a clue to the specific case or situation under test. In C class tests,
 identifiers are normally chosen to help document the test design or the intent
 of the code.
 
-The newer executable tests generally provide some visual separation of those
+Modern executable tests generally provide some visual separation of those
 test elements that focus on conformance issues from those that govern the flow
 of a test. For example, there is frequently a need to establish preconditions
 for a test and examine post-conditions after a section of test code has
@@ -945,7 +951,7 @@ Descr=[Delivery Directory Structure]}
 
 @LabeledClause{File Format}
 
-To conserve space and ease downloading, all files in the delivered ACATS 3.1
+To conserve space and ease downloading, all files in the delivered ACATS 4.0
 (including test files, foundation files, and support files) have been
 compressed. Except as noted below, decompressed files
 (see Section @RefSecNum{Guide to Decompressing Files}) use only
