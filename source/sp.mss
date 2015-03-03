@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2015/01/30 05:22:23 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2014/07/24 04:20:40 $}
+@Comment{$Date: 2015/01/30 05:22:23 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1058,6 +1058,7 @@ requirements for the Preelaborate pragma (see @RefSecNum{Elaboration Control}).]
 The implementation shall not incur any run-time overhead for the elaboration
 checks of subprograms and @ntf{protected_bodies} declared in preelaborated
 library units.
+@Defn2{Term=[preelaborated],Sec=[implementation requirements]}
 
 The implementation shall not execute any memory write operations after
 load time for the elaboration of constant objects

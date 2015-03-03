@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2015/01/30 05:22:22 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -565,6 +565,13 @@ Therefore, the scope of a declaration that occurs immediately within
 the body might include some children.
 @end{Itemize}
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0003-1]}@Comment{As usual,
+    we let the paragraph numbers of non-normative text change}
+@ChgAdded{Version=[4],Text=[The immediate scope of a pragma which is not used
+as a configuration pragma is defined to be the@Defn2{Term=[immediate scope], Sec=(of a pragma)}
+region extending from immediately after the pragma
+to end of the declarative region immediately enclosing the pragma.]}
 @end{StaticSem}
 
 @begin{Notes}
@@ -659,6 +666,12 @@ because R does not mention Q in a @nt{with_clause}.
   is defined for similar reasons that it was defined for
   @nt{attribute_definition_clause}s.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0003-1]}
+  @ChgAdded{Version=[4],Text=[The immediate scope of a @nt{pragma} is
+  defined as it is used in other rules in the Standard.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Visibility}

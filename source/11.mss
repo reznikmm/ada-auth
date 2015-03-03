@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2015/01/30 05:22:23 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -341,7 +341,7 @@ The syntax rule for @nt{choice_parameter_specification} is new.
 @end{DiffWord83}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@LabeledClause{Raise Statements}
+@LabeledRevisedClause{Version=[4],New=[Raise Statements and Raise Expressions],Old=[Raise Statements]}
 
 @begin{Intro}
 @redundant[A @nt{raise_statement} raises an exception.]
@@ -488,7 +488,7 @@ the exception is propagated to an enclosing execution
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00023}
 Propagation involves re-raising the same exception occurrence@Chg{New=[],
 Old=[(assuming the implementation has not taken advantage of the
-@ImplPermName of @RefSecNum{Raise Statements})]}.
+@ImplPermName of @RefSecNum{Raise Statements and Raise Expressions})]}.
 For example, calling an entry of an uncallable task raises
 Tasking_Error; this is not propagation.
 @end{Ramification}

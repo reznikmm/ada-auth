@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/11/19 20:57:00 $}
+@Comment{$Date: 2015/01/30 05:22:23 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2572,12 +2572,14 @@ or it might deallocate @i{y} and then @i{x}.]}
 @end{Enumerate}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0148-1]}
 @IndexSee{Term=[freed],See=(nonexistent)}
 @Defn{nonexistent}
 @PDefn2{Term=[exist],Sec=[cease to]}
 @PDefn2{Term=[cease to exist],Sec=[object]}
-After Free(X), the object designated by X, and any
-subcomponents @Chg{Version=[2],New=[(and coextensions) ],Old=[]}thereof, no
+After @Chg{Version=[4],New=[the finalization step of ],Old=[]}Free(X), the
+object designated by X, and any subcomponents
+@Chg{Version=[2],New=[(and coextensions) ],Old=[]}thereof, no
 longer exist; their storage can be reused for other purposes.
 @end{RunTime}
 
@@ -2616,6 +2618,74 @@ is not reclaimed prior to task termination.
 @begin{Ramification}
   The storage might never be reclaimed.
 @end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0148-1]}
+@ChgAdded{Version=[4],Text=[An access value that designates a nonexistent object is called a
+@i<dangling reference>.@Defn{dangling reference}@Defn2{Term=[reference],Sec=[dangling]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[These can result from use of
+    Unchecked_Deallocation, Unchecked_Deallocate_Subpool, and attribute
+    Unchecked_Access. Bad results from Unchecked_Conversion and from
+    stream-oriented attributes are abnormal by @RefSecNum{Data Validity},
+    which is stronger and thus takes precedence.]}
+@end{Discussion}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0148-1]}
+@ChgAdded{Version=[4],Text=[@Redundant[If a dangling reference is dereferenced
+(implicitly or explicitly), execution is erroneous (see below).] If there is
+no explicit or implicit dereference, then it is a bounded error
+@Leading@PDefn2{Term=(bounded error),Sec=(cause)}to evaluate an
+expression whose result is a dangling reference. If the error is detected,
+either Constraint_Error or Program_Error is raised.
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+Otherwise, execution
+proceeds normally, but with the possibility that the access value designates
+some other existing object.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[If a dangling reference is compared with another
+    access value, a result of either True or False is allowed. We need to allow
+    this so that simple implementations of access values (for instance, as a
+    bare address) can work if the memory in question is reused. (The formal
+    definition of access equality is that it returns True if both access values
+    designate the same object; that can never be True if one of the values is a
+    dangling reference, and the other is not, but both values could refer to the
+    same memory.) Membership tests that do not involve an implicit dereference
+    generally do not depend on the access value at all.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We allow Constraint_Error to be raised here so
+    that dangling reference and null pointer checks can be combined into a
+    single check. If different exceptions are required, then the checks have to
+    be made separately - but there's little semantic difference (neither
+    designate a usable object).]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[If a dangling reference is assigned into an
+    object, including being passed to a formal parameter, that object also
+    contains a dangling reference afterwards.]}
+@end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[For equality and membership operations on
+    composite types, this applies to any parts that are access types, as these
+    operations are created based on the operations of the components (which
+    triggers the bounded error). For other operations on composite types, the
+    bounded error is not triggered. For instance, an assignment of a composite
+    object with a subcomponent that is a dangling reference has to work
+    normally; no exception can be raised, but the target object will have a
+    subcomponent that is a dangling references, and a (direct) use of that
+    subcomponents is again a bounded error. This is similar to the way that
+    assignments of invalid subcomponents are handled (see
+    @RefSecNum{Data Validity}).]}
+@end{Discussion}
 @end{Bounded}
 
 @begin{Erron}
@@ -2716,13 +2786,53 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   for access types where @nt{allocator}s would be banned.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
+  @b<Corrigendum:> Defined a "dangling reference", and specified that
+  a dangling access value might designate some other existing object.
+  This allows simple implementations of access values and reuse of
+  object memory after deallocation. In prior versions of Ada, "="
+  betweeen a dangling reference and an existing object has to return
+  False, even if the existing object and the dangling reference are
+  allocated in the same memory. A program that depended upon that could break
+  with this revised rule. However, as a practical matter, almost all Ada
+  implementations use simple implementations of access types that do not meet
+  that requirement. So such a program would not work (consistently) on
+  most Ada implementations; thus the change shouldn't break any existing
+  programs - it just aligns the Standard with actual practice.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
+  @ChgAdded{Version=[4],Text=[A side-effect of this change is to allow an
+  Ada implementation to detect dangling references in more places. This
+  does not require any Ada implementation to change, and if the implementation
+  does change, it just means that errors will be detected earlier.]}
+@end{Inconsistent2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that deallocated
+  objects cease to exist after finalization but before Deallocate is called.
+  This is necessary to prevent erroneous execution from being triggered by
+  the rules in @RefSecNum{Storage Management} in the time between the end
+  of finalization and the end of the call to the instance of
+  Unchecked_Deallocation.]}
+@end{DiffWord2012}
+
+
+
 
 @LabeledRevisedSubClause{Version=[3],New=[Default Storage Pools],
 Old=[Pragma Controlled]}
 
 @begin{Intro}
-@ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[@Redundant[Pragma Controlled is used to prevent
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0003-1]}
+@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Redundant[Pragma and aspect
+Default_Storage_Pool specify the storage pool that
+will be used in the absence of an explicit specification of a storage pool or
+size for an access type.]],Old=[]}],Old=[@Redundant[Pragma Controlled is used
+to prevent
 any automatic reclamation of storage (garbage collection) for the objects
 created by @nt<allocator>s of a given access type.]]}
 @end{Intro}
@@ -2747,8 +2857,9 @@ Finalization.Controlled.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0003-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<storage_pool_indicator>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@SynI{storage_pool_}@Syn2{name} | @key[null]>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@SynI{storage_pool_}@Syn2{name} | @key[null]@Chg{Version=[4],New=< | Standard>,Old=<>}>,Old=<>}"}
 
 @begin{SyntaxText}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
@@ -2770,20 +2881,55 @@ of type Root_Storage_Pool'Class.]}
 Old=[The @SynI{first_subtype_}@nt<local_name> of a @nt{pragma} Controlled
 shall denote a nonderived access subtype.]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0003-1]}
+@ChgAdded{Version=[4],Text=[The Standard @nt{storage_pool_indicator} is an
+identifier specific to a pragma (see @RefSecNum{Pragmas}) and does not denote
+any declaration. If the @nt{storage_pool_indicator} is Standard, then there
+shall not be a declaration with defining identifier Standard that is
+immediately visible at the point of the pragma, other than package Standard
+itself.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[We considering having the Standard
+  @nt{storage_pool_indicator} resolve to package Standard rather than
+  being an identifier specific to a pragma. That would eliminate the need for a
+  special check. But it would be bizarre to have something that could resolve to
+  either an object or a (single) package, and resolving to package Standard
+  would imply that the standard pool is an object declared in that package. A
+  storage pool object must be a variable (see @RefSecNum{Storage Management}),
+  yet preelaborable packages depend on package Standard, which would require
+  implementers to implement the standard storage pool with
+  Preelaborable_Initialization, which is an unnecessary restriction.]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[No declaration of Standard can ever be
+    use-visible, as the language-defined non-overloadable definition of
+    Standard will hide any use-visible declarations. Thus we need only concern
+    ourselves with immediately visible declarations with the defining
+    @nt{identifier} Standard; that eliminates any possible confusion.]}
+@end{Reason}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0003-1]}
 @ChgAdded{Version=[3],Text=[If the @nt{pragma} is used as a configuration pragma,
-the @nt{storage_pool_indicator} shall be @key[null], and it defines the
-@i<default pool>@Defn{default pool}@Defn2{Term=[storage pool],Sec=[default]}@Defn2{Term=[pool],Sec=[default]} to be @b<null> within all
+the @nt{storage_pool_indicator} shall be@Chg{Version=[4],New=[ either],Old=[]}
+@key[null]@Chg{Version=[4],New=[ or Standard],Old=[]}, and it defines the
+@i<default pool>@Defn{default pool}@Defn2{Term=[storage pool],Sec=[default]}@Defn2{Term=[pool],Sec=[default]} to
+be @Chg{Version=[4],New=[that @nt{storage_pool_indicator}],Old=[@b<null>]}
+within all
 applicable compilation units (see @RefSecNum{Pragmas and Program Units}),
 except within the immediate scope of
 another @nt{pragma} Default_Storage_Pool. Otherwise, @Redundant[the pragma
 occurs immediately within a sequence of declarations, and] it defines the
-default pool within the immediate scope of the pragma to be either @key[null] or
-the pool denoted by the @SynI{storage_pool_}@nt{name}, except within the
+default pool within the immediate scope of the pragma to be
+@Chg{Version=[4],New=[that @nt{storage_pool_indicator}],Old=[either @key[null] or
+the pool denoted by the @SynI{storage_pool_}@nt{name}]}, except within the
 immediate scope of a later pragma Default_Storage_Pool. @Redundant[Thus, an
 inner pragma overrides an outer one.]]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded]}@Comment{Just to mark the fact that the paragraph number changed}
 @ChgAdded{Version=[3],Text=[A @nt{pragma} Default_Storage_Pool shall not be used
 as a configuration pragma that applies to a compilation unit that is within the
 immediate scope of another @nt{pragma} Default_Storage_Pool.]}
@@ -2814,15 +2960,22 @@ immediate scope of another @nt{pragma} Default_Storage_Pool.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0003-1]}
 @Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
 specified for a generic instance; it defines the default pool for
 access types within an instance.@AspectDefn{Default_Storage_Pool}
-The expected type for the
+@Chg{Version=[4],New=[The Default_Storage_Pool aspect may be specified as
+Standard, which is an identifier specific to an aspect (see
+@RefSecNum{Aspect Specifications}) and defines
+the default pool to be Standard. When the Default_Storage_Pool aspect is
+specified as Standard, then there shall not be a declaration with defining
+identifier Standard that is immediately visible at the point of the aspect,
+other than package Standard itself.],Old=[The expected type for the
 Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
 must be a @nt{name} that denotes a variable. This aspect overrides any
 Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
 is not specified, the default pool of the instance is that defined for the
-generic unit],
+generic unit]}],
 Old=[@PDefn2{Term=[representation pragma], Sec=(Controlled)}
 @PDefn2{Term=[pragma, representation], Sec=(Controlled)}
 A @nt{pragma} Controlled is a representation pragma
@@ -2830,12 +2983,21 @@ A @nt{pragma} Controlled is a representation pragma
 @Defn2{Term=[controlled], Sec=(aspect of representation)}
 that specifies the @i{controlled} aspect of representation]}.
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0003-1]}
+@ChgAdded{Version=[4],Text=[Otherwise, the expected type for the
+Default_Storage_Pool aspect is Root_Storage_Pool'Class and the @nt{aspect_definition}
+shall be a @nt{name} that denotes a variable. This aspect overrides any
+Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
+is not specified, the default pool of the instance is that defined for the
+generic unit.]}
+
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Default storage pool for a generic instance.]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0136-1]}
-@ChgAdded{Version=[4],Text=[The effect of specifying aspect Default_Storage_Pool
-on an instance of a language-defined generic unit is implementation-defined.]}
+@ChgAdded{Version=[4],Text=[The effect of specifying the aspect
+Default_Storage_Pool on an instance of a language-defined generic unit is
+implementation-defined.]}
 
   @ChgImplDef{Version=[4],Kind=[Added],
     Text=[@ChgAdded{Version=[4],Text=[The effect of specifying aspect
@@ -2859,14 +3021,19 @@ while the objects still exist.]}
   @Redundant[Therefore, an @nt{allocator} for such a type is illegal.]]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-  @ChgAdded{Version=[3],Text=[If the default pool is nonnull, the Storage_Pool
+  @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0003-1]}
+  @ChgAdded{Version=[3],Text=[If the default pool is @Chg{Version=[4],New=[neither
+  @key[null] nor Standard],Old=[nonnull]}, the Storage_Pool
   attribute is that pool.]}
 
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Otherwise, there is no default pool; the standard storage
-pool is used for the type as described in @RefSecNum{Storage Management}.]]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0003-1]}
+@ChgAdded{Version=[3],Text=[Otherwise@Chg{Version=[4],New=[ (including when
+the default pool is specified as Standard),],Old=[, there is no
+default pool;]} the standard storage
+pool is used for the type as described in @RefSecNum{Storage Management}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
@@ -3032,7 +3199,7 @@ then garbage collection is not performed for objects in that pool.]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[An object created by an @nt{allocator} that is passed as
 the actual parameter to an access parameter may be allocated on the stack, and
-automatically reclaimed, regardless of the default pool.],
+automatically reclaimed, regardless of the default pool],
 Old=[An implementation need not support garbage collection, in
 which case, a pragma Controlled has no effect]}.
 @begin{Discussion}
@@ -3096,6 +3263,12 @@ to ensure that all @nt{allocator}s use the default pool.]}
   Unchecked_Deallocation or Unchecked_Deallocate_Subpool), so that garbage
   collection of such objects would be ineffective in the standard mode anyway.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0003-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
+  The @nt{storage_pool_indicator} Standard is new.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0136-1]}
@@ -3228,6 +3401,7 @@ and are the run-time representation of a subpool.]]}
 @end{TheProof}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI05-0145-1]}
 @ChgAdded{Version=[3],Text=[Each subpool @i<belongs>@Defn2{Term=[belongs],Sec=[subpool to a pool]}
 to a single storage pool @Redundant[(which will always be a pool
 that supports subpools)]. An access to the pool that a subpool belongs to can
@@ -3235,7 +3409,9 @@ be obtained by calling Pool_of_Subpool with the subpool handle.
 Set_Pool_of_Subpool causes the subpool of the subpool handle to belong to the
 given pool@Redundant[; this is intended to be called from subpool constructors
 like Create_Subpool.] Set_Pool_of_Subpool propagates Program_Error if the
-subpool already belongs to a pool.]}
+subpool already belongs to a pool.@Chg{Version=[4],New=[ If Set_Pool_of_Subpool
+has not yet been called for a subpool, Pool_of_Subpool returns
+@Key[null].],Old=[]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3363,6 +3539,15 @@ propagates Program_Error.]}
 
 @end{Runtime}
 
+@begin{Erron}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0142-1]}
+@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@ChgAdded{Version=[4],Text=[If Allocate_From_Subpool does not meet one or more
+of the requirements on the Allocate procedure as given in the Erroneous
+Execution rules of @RefSecNum{Storage Management}, then the program execution
+is erroneous.]}
+@end{Erron}
+
 @begin{ImplPerm}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
@@ -3436,6 +3621,22 @@ additional information with each subpool provided by Create_Subpool.]}
   package System.Storage_Pools.Subpools are new.]}
 @end{Extend2005}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0142-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum>: Clarified that an incorrect
+  implementation of Allocate_From_Subpool causes execution to become erroneous.
+  The wording already said that the requirements of Allocate apply to
+  Allocate_From_Subpool, so we're just confirming the consequences of violating
+  those requirements also apply.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0145-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum>: Clarified that Pool_of_Subpool
+  returns @key[null] if Set_Pool_of_Subpool has not been called. As that can
+  be inferred from the definition, and all known existing implementations
+  return @key[null] in this case, we document this as a wording change rather
+  than a possible inconsistency.]}
+@end{Diffword2012}
+
 
 @LabeledAddedSubClause{Version=[3],Name=[Subpool Reclamation]}
 
@@ -3473,6 +3674,10 @@ following effects:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Any of the objects allocated from the subpool that
 still exist are finalized in an arbitrary order;@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0148-1]}
+@ChgAdded{Version=[3],Text=[All of the objects allocated from the subpool
+cease to exist;@PDefn2{Term=[exist],Sec=[cease to]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The following @Redundant[dispatching] call is then made:]}
@@ -3524,6 +3729,16 @@ happen when the collection of the access type is finalized).]}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Unchecked_Deallocate_Subpool is new.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added missing wording to state
+  that the objects cease to exist after the completion of finalization.
+  This is formally an inconsistency (it would be possible to depend on the
+  fact that objects finalized by Unchecked_Deallocate_Subpool still exist),
+  but that violates every sane expectation for a procedure called
+  "Deallocate" something.]}
+@end{DiffWord2012}
 
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}

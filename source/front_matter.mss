@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.83 $ $Date: 2014/12/02 04:32:37 $}
+@comment{$Revision: 1.84 $ $Date: 2015/01/30 05:22:23 $}
 
 @comment{@begin{Comment} (*Removed the below for Ada 2012, which is supposely going
 to be processed as a revision*)
@@ -941,22 +941,29 @@ to enable properties to be specified for various entities in a more structured
 manner than through pragmas. See subclause @RefSecNum{Aspect Specifications}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0141-1]}
 @ChgAdded{Version=[3],Text=[The concept of assertions introduced in the 2005
 edition is extended with the ability to specify preconditions and postconditions
-for subprograms, and invariants for private types. The concept of constraints in
+for subprograms, and invariants for private types@Chg{Version=[4],New=[ and
+interfaces],Old=[]}. The concept of constraints in
 defining subtypes is supplemented with subtype predicates that enable subsets
 to be specified other than as simple ranges. These properties are all indicated
 using aspect specifications. See subclauses @RefSecNum{Subtype Predicates},
 @RefSecNum{Preconditions and Postconditions}, and @RefSecNum{Type Invariants}.]}
 
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0141-1]}
 @ChgAdded{Version=[3],Text=[New forms of expressions are introduced. These are
-if expressions, case expressions, quantified expressions, and expression
-functions. As well as being useful for programming in general by avoiding the
+if expressions, case expressions, quantified expressions,
+@Chg{Version=[4],New=[],Old=[and ]}expression
+functions@Chg{Version=[4],New=[, and raise expressions],Old=[]}. As well as
+being useful for programming in general by avoiding the
 introduction of unnecessary assignments, they are especially valuable in
 conditions and invariants since they avoid the need to introduce auxiliary
 functions. See subclauses @RefSecNum{Conditional Expressions},
-@RefSecNum{Quantified Expressions}, and @RefSecNum{Expression Functions}.
+@RefSecNum{Quantified Expressions},
+@Chg{Version=[4],New=[],Old=[and ]}@RefSecNum{Expression Functions}@Chg{Version=[4],New=[,
+and @RefSecNum{Raise Statements and Raise Expressions}],Old=[]}.
 Membership tests are also made more flexible. See subclauses
 @RefSecNum{Expressions} and @RefSecNum{Relational Operators and Membership Tests}.]}
 

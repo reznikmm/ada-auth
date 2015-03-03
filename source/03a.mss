@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/11/19 20:56:59 $}
+@Comment{$Date: 2015/01/30 05:22:22 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -713,7 +713,7 @@ type.@Defn2{Term=[part], Sec=(of a type)}@Defn2{Term=[component], Sec=(of a type
 @PDefn{constraint}
 The set of possible values for an object of a given type can be
 subjected to a condition that is called a @i(constraint)
-@Defn{null constraint}
+@Defn{null constraint}@Defn2{Term=[constraint],Sec=[null]}
 (the case
 of a @i(null constraint) that specifies no restriction is also
 included)@Redundant[;
@@ -2007,7 +2007,7 @@ evaluated during the evaluation of a membership test (see
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
 @ChgAdded{Version=[4],Text=[A Predicate_Failure @nt{expression} can be a
-@nt{raise_expression} (see @RefSecNum{Raise Statements}).]}
+@nt{raise_expression} (see @RefSecNum{Raise Statements and Raise Expressions}).]}
 @end{Notes}
 
 @begin{Examples}

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/11/19 20:56:59 $}
+@Comment{$Date: 2015/01/30 05:22:22 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1149,7 +1149,7 @@ Furthermore, a formal tagged limited private type can be extended with
 limited components,
 but the actual might not be limited,
 which would allow assignment of limited types,
-which is bad. ]}Hence, we have to disallow this
+which is bad.]} Hence, we have to disallow this
 case@Chg{Version=[2],New=[],Old=[ as well]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -5810,7 +5810,7 @@ denotes a subprogram}:
     invisible to this part of the
     rule.@Chg{Version=[2],New=[ @lquotes@;Declared within the declarative region of
     the generic@rquotes@; is referring to child and nested generic
-    units.],Old=[]}This rule is partly to prevent contract model problems
+    units.],Old=[]} This rule is partly to prevent contract model problems
     with respect to the accessibility rules,
     and partly to ease shared-generic-body implementations,
     in which a subprogram declared in an instance needs to have a

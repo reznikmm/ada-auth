@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2015/01/30 05:22:23 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 
@@ -1060,10 +1060,13 @@ a named protected object of that type.
   @key{end} [@SynI{protected_}@Syn2{identifier}];"}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0147-1]}
 @Syn{lhs=<protected_operation_item>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{subprogram_body}
-     | @Syn2{entry_body}
+     | @Chg{New=[@Syn2{null_procedure_declaration}
+     | @Syn2{expression_function_declaration}
+     | ],Old=[]}@Syn2{entry_body}
      | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
 
 @begin{SyntaxText}
@@ -1649,6 +1652,15 @@ protected units do not exist in Ada 83.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added the missing
   defining name in the no conflicting primitive operation rule.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0147-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b<Corrigendum:> Null procedures and expression functions are allowed
+  in protected bodies. We consider this an omission, as there is no
+  reason why the convinient shorthand notations should not be allowed
+  in this context.]}
+@end{Extend2012}
 
 
 @LabeledClause{Intertask Communication}
@@ -5817,7 +5829,7 @@ objects of a type covered by Queue'Class.]}
 @ChgAdded{Version=[2],Text=[   @key(procedure) Append(Person : @key(in) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = Pool'Length @key(then)
-         @key(raise) Queue_Error @key(with) "Buffer Full";  --@RI[ see @RefSecNum{Raise Statements}]
+         @key(raise) Queue_Error @key(with) "Buffer Full";  --@RI[ see @RefSecNum{Raise Statements and Raise Expressions}]
       @key(end if);
       Pool(In_Index) := Person;
       In_Index       := (In_Index @key(mod) Pool'Length) + 1;
@@ -5838,7 +5850,7 @@ objects of a type covered by Queue'Class.]}
 @ChgAdded{Version=[2],Text=[   @key(procedure) Remove_First(Person : @key(out) Person_Name) @key(is)
    @key(begin)
       @key(if) Count = 0 @key(then)
-         @key(raise) Queue_Error @key(with) "Buffer Empty"; --@RI[ see @RefSecNum{Raise Statements}]
+         @key(raise) Queue_Error @key(with) "Buffer Empty"; --@RI[ see @RefSecNum{Raise Statements and Raise Expressions}]
       @key(end if);
       Person    := Pool(Out_Index);
       Out_Index := (Out_Index @key(mod) Pool'Length) + 1;
