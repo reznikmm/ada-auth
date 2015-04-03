@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:23 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -353,8 +353,133 @@ The syntax rule for @nt{choice_parameter_specification} is new.
       | @key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{expression}];>,
 Old=<@key{raise} [@SynI{exception_}@Syn2{name}];>}"}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1]}
-@AddedSyn{Version=[4],lhs=<@Chg{Version=[4],New=<raise_expression>,Old=<>}>,rhs="@Chg{Version=[4],New=<@key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{expression}]>,Old=<>}"}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
+@AddedSyn{Version=[4],lhs=<@Chg{Version=[4],New=<raise_expression>,Old=<>}>,rhs="@Chg{Version=[4],New=<@key{raise} @SynI{exception_}@Syn2{name} [@key{with} @SynI{string_}@Syn2{simple_expression}]>,Old=<>}"}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0152-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[If a @nt{raise_expression} appears
+within the @nt{expression} of one of the following
+contexts, the @nt{raise_expression} shall appear within a pair of parentheses
+within the @nt{expression}:]}
+@begin{itemize}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{object_declaration};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{modular_type_definition};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{floating_point_definition};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{ordinary_fixed_point_definition};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{decimal_fixed_point_definition};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{default_expression};]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[@nt{ancestor_part}.]}
+@end{itemize}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[Unlike conditional expressions, this doesn't
+  say "immediately surrounded"; the only requirement is that it is somehow
+  within a pair of parentheses that is part of the @nt{expression}. We need
+  this restriction in order that @nt{raise_expression}s cannot be syntactically
+  confused with immediately following constructs (such as
+  @nt{aspect_specification}s).]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[We only need to require that a right parenthesis
+  appear somewhere between the @nt{raise_expression} and the surrounding
+  context; that's all we need to specify in order to eliminate the ambiguities.
+  Moreover, we don't care at all where the left parenthesis is (so long as it
+  is legal, of course).]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[For instance, the following is
+  illegal by this rule:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Obj : Boolean := Func_Call @key[or else raise] TBD_Error @key[with] Atomic;]}
+@end{Example}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[as the "@key[with] Atomic" could
+  be part of the @key[raise_expression] or part of the object declaration.
+  Both of the following are legal:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Obj : Boolean := Func_Call @key[or else] (@key[raise] TBD_Error) @key[with] Atomic;
+Obj : Boolean := (Func_Call @key[or else raise] TBD_Error) @key[with] Atomic;]}
+@end{Example}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[and if the @key[with] belongs to
+  the @nt{raise_expression}, then both of the following are legal:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Obj : Boolean := Func_Call @key[or else] (@key[raise] TBD_Error @key[with] Atomic);
+Obj : Boolean := (Func_Call @key[or else raise] TBD_Error @key[with] Atomic);]}
+@end{Example}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[This rule only requires
+  parenthesis for @nt{raise_expression}s that are
+  part of the "top-level" of an @nt{expression} in one of the named contexts;
+  the @nt{raise_expression} is either the entire @nt{expression}, or part of a
+  chain of logical operations. In practice, the @nt{raise_expression} will
+  almost always be last in interesting top-level @nt{expression}s; anything
+  that follows it could never be executed, so that should be rare.
+  Other contexts such as conditional
+  expressions, qualified expressions, aggregates, and even function calls,
+  provide the needed parentheses. All of the following are legal, no
+  additional parens are needed:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Pre : Boolean  := (@key[if not] Is_Valid(Param) @key[then raise] Not_Valid_Error);
+A : A_Tagged   := (Some_Tagged'(@key[raise] TBD_Error) @key[with] Comp => 'A');
+B : Some_Array := (1, 2, 3, @key[others] => @key[raise] No_Valid_Error);
+C : Natural    := Func (Val => @key[raise] TBD_Error);]}
+@end{Example}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[Parentheses that are part of
+  the context of the @nt{expression} don't count.
+  For instance, the parentheses around the @nt{raise_expression} are required
+  in the following:]}
+@begin{Example}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[D : A_Tagged   := ((@key[raise] TBD_Error) @key[with] Comp => 'A');]}
+@end{Example}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[as @nt{ancestor_part} is one of the contexts
+  that triggers the rule.]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[This English-language rule could have been
+  implemented instead by adding nonterminals @ntf{initial_expression} and
+  @ntf{initial_relation}, which are the same as @nt{choice_expression} and
+  @nt{choice_relation} except for the inclusion of membership in
+  @ntf{initial_relation}. Then, @ntf{initial_expresion} could be used in
+  place of @nt{expression} in all of the contexts noted. We did not do that
+  because of the large amount of change required, both to the grammar and
+  to language rules that refer to the grammar. A complete grammar is given
+  in @AILink{AI=[AI12-0152-1],Text=[AI12-0152-1]}.]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[The use of a @nt{raise_expression} is illegal
+  in each of @nt{modular_type_definition}, @nt{floating_point_definition},
+  @nt{ordinary_fixed_point_definition}, and @nt{decimal_fixed_point_definition}
+  as these uses are required to be static and a @nt{raise_expression} is never
+  static. We include these in this rule so that Ada text has an unambiguous
+  syntax in these cases.]}
+@end{Discussion}
+
 @end{Syntax}
 
 @begin{Legality}
@@ -384,7 +509,7 @@ any type.]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00361-01]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
 @Defn2{Term=[raise], Sec=(an exception)}
 To @i(raise an exception) is to
 raise a new occurrence of that exception@Redundant[,
@@ -395,9 +520,10 @@ For the execution of a @nt{raise_statement} with an
 raised.@Chg{Version=[4],New=[ Similarly, for the evaluation of a @nt{raise_expression},
 the named exception is raised.],Old=[]}
 @Chg{Version=[2],New=[@redundant{@Chg{Version=[4],New=[In
-both of these cases, if],Old=[If]} a @SynI<string_>@nt<expression> is present,
-the @nt{expression} is evaluated and its value is associated with the
-exception occurrence.}],Old=[]}
+both of these cases, if],Old=[If]} a @SynI<string_>@nt<expression>
+@Chg{Version=[4],New=[or @SynI<string_>@nt<simple_expression> ],Old=[]}is present,
+the @Chg{Version=[4],New=[expression],Old=[@nt{expression}]}
+is evaluated and its value is associated with the exception occurrence.}],Old=[]}
 @PDefn2{Term=[execution], Sec=(re-raise statement)}
 For the execution of a re-raise statement,
 the exception occurrence that caused transfer of control to the
@@ -418,9 +544,10 @@ This allows the original cause of the exception to be determined.
 @end{RunTime}
 
 @begin{Notes}
-  @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0062-1]}
+  @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0062-1],Aref=[AI12-0152-1]}
   @ChgAdded{Version=[4],Text=[If the evaluation of a
-  @SynI<string_>@nt{expression} raises an exception, that exception is
+  @SynI<string_>@nt{expression} or @SynI<string_>@nt{simple_expression} raises
+  an exception, that exception is
   propagated rather than the one denoted by the @SynI<exception_>@nt{name}
   of the @nt{raise_statement} or @nt{raise_expression}.]}
 @end{Notes}
@@ -456,7 +583,7 @@ any force.
 @end{Extend95}
 
 @begin{Extend2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   The @nt{raise_expression} is new. This construct is necessary to
   allow conversion of existing specifications to use preconditions and
@@ -731,16 +858,19 @@ Reraise_Occurrence reraises the specified exception occurrence.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01],ARef=[AI95-00378-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0043-1],ARef=[AI05-0248-1]}
-@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
 @ChgAdded{Version=[2],Text=[Exception_Message returns the message associated
 with the given Exception_Occurrence. For an occurrence raised by a call to
 Raise_Exception, the message is the Message parameter passed to Raise_Exception.
 For the occurrence raised by a @nt{raise_statement}
 @Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}with an
-@SynI{exception_}@nt{name} and a @SynI{string_}@nt{expression}, the message is
-the @Syni{string_}@nt{expression}. For the occurrence raised by a
+@SynI{exception_}@nt{name} and a @SynI{string_}@nt{expression}@Chg{Version=[4],New=[
+or @SynI{string_}@nt{simple_expression}],Old=[]}, the message is
+the @Syni{string_}@nt{expression}@Chg{Version=[4],New=[
+or @SynI{string_}@nt{simple_expression}],Old=[]}. For the occurrence raised by a
 @nt{raise_statement} @Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}with
-an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression},
+an @Syni{exception_}@nt{name} but without a @Syni{string_}@nt{expression}@Chg{Version=[4],New=[
+or @SynI{string_}@nt{simple_expression}],Old=[]},
 the message is a string giving implementation-defined information about the
 exception occurrence. @Chg{Version=[3],New=[For an occurrence originally raised
 in some other manner (including by the failure of a language-defined check),

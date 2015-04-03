@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1489,7 +1489,7 @@ Some of the more stringent requirements are moved to
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0109-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Corrigendum:>
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Added a rule that makes it illegal to specify a representation value after
   a type is derived from an untagged by-reference type. This restriction is
   incompatible, but since the implementation would have had to copy an object
@@ -1551,6 +1551,7 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 
 @begin{Display}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[3],Text=[@nt{basic_declaration}
   @nt{type_declaration}
     @nt{full_type_declaration}
@@ -1570,7 +1571,8 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
   @nt{number_declaration}  --  NO
   @nt{subprogram_declaration}*
   @nt{abstract_subprogram_declaration}*
-  @nt{null_procedure_declaration}*
+  @nt{null_procedure_declaration}*@Chg{Version=[4],New=[
+  @nt{expression_function_declaration}*],Old=[]}
   @nt{package_declaration}*  -- @Examcom{via} @nt{package_specification}
   @nt{renaming_declaration}*
     -- @Examcom{There are no language-defined aspects that may be specified}
@@ -1845,11 +1847,17 @@ attributes may be specified with an @nt{aspect_specification} instead of an
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0154-1]}
 @ChgAdded{Version=[3],Text=[Any aspect specified by a representation pragma
 or library unit pragma that has a @nt{local_name} as its single argument
 may be specified by an @nt{aspect_specification}, with the entity being the
 @nt{local_name}. The @nt{aspect_definition} is expected to be of type Boolean.
-The expression shall be static.]}
+The expression shall be static.@Chg{Version=[4],New=[ Notwithstanding what
+this International Standard says elsewhere, the expression of an aspect that
+can be specified by a library unit pragma is resolved and evaluated at the
+point where it occurs in the @nt{aspect_specification}@Redundant[, rather
+than the first freezing point of the associated
+package].@Defn{Notwithstanding}],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1930,6 +1938,18 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect specifications are new.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0154-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  Added a clarification that aspects that correspond to library unit pragmas
+  are resolved and evaluated immediately. This is incompatible as a value
+  defined after the aspect will now be illegal. However, this would have
+  require retroactive enforcement of such aspects, which is a new
+  capability not available from the associated pragma, and moreover
+  no known Ada 2012 implementation has ever allowed late evaluation of
+  such pragmas. As such, there should be no practical incompatibility.]}
+@end{Incompatible2012}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0105-1]}

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.58 $}
+@Comment{$Revision: 1.59 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -199,18 +199,22 @@ attribute.
 @end{Intro}
 
 @begin{Syntax}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @Syn{lhs=<delta_constraint>,
-  rhs="@key{delta} @SynI{static_}@Syn2{expression} [@Syn2{range_constraint}]"}
+  rhs="@key{delta} @SynI{static_}@Chg{Version=[4],New=[@Syn2{simple_expression}],Old=[@Syn2{expression}]} [@Syn2{range_constraint}]"}
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @PDefn2{Term=[expected type], Sec=(delta_constraint expression)}
-The @nt<expression> of a @nt<delta_constraint> is expected to be of
-any real type.
+The @Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]}
+of a @nt<delta_constraint> is expected to be of any real type.
 @end{Resolution}
 
 @begin{Legality}
-The @nt<expression> of a @nt<delta_constraint> shall be static.
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
+The @Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]} of a
+@nt<delta_constraint> shall be static.
 
 For a @nt<subtype_indication> with a @nt<delta_constraint>, the
 @nt<subtype_mark> shall denote an ordinary fixed point subtype.
@@ -230,35 +234,41 @@ that only allows a decimal fixed point subtype).
 @end{Legality}
 
 @begin{StaticSem}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 A @nt<subtype_indication> with a @nt<subtype_mark> that
 denotes an ordinary fixed point subtype and a @nt<delta_constraint>
 defines an ordinary fixed point subtype with a @i(delta)
-given by the value of the @nt<expression> of the
+given by the value of the @Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]} of the
 @nt<delta_constraint>.
 If the @nt<delta_constraint> includes a @nt<range_@!constraint>, then
 the ordinary fixed point subtype is constrained by the @nt<range_@!constraint>.
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 A @nt<subtype_indication> with a @nt<subtype_mark> that
 denotes a floating point subtype and a @nt<digits_constraint>
 defines a floating point subtype with a requested decimal precision
 (as reflected by its Digits attribute)
-given by the value of the @nt<expression> of the @nt<digits_constraint>.
+given by the value of the @Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]} of the @nt<digits_constraint>.
 If the @nt<digits_constraint> includes a @nt<range_@!constraint>, then
 the floating point subtype is constrained by the @nt<range_@!constraint>.
 @end{StaticSem}
 
 @begin{RunTime}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @PDefn2{Term=[compatibility],
   Sec=(delta_constraint with an ordinary fixed point subtype)}
 A @nt<delta_constraint> is @i(compatible) with an ordinary
-fixed point subtype if the value of the @nt<expression> is no less
+fixed point subtype if the value of the
+@Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]} is no less
 than the @i(delta) of the subtype, and the @nt<range_constraint>, if any,
 is compatible with the subtype.
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @PDefn2{Term=[compatibility],
   Sec=(digits_constraint with a floating point subtype)}
 A @nt<digits_constraint> is @i(compatible) with a
-floating point subtype if the value of the @nt<expression> is no greater
+floating point subtype if the value of the
+@Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]} is no greater
 than the requested decimal precision of the subtype, and
 the @nt<range_constraint>, if any,
 is compatible with the subtype.
@@ -283,6 +293,19 @@ We have adopted other terms because @nt<digits_constraint>s apply
 primarily to decimal fixed point types now (they apply to
 floating point types only as an obsolescent feature).
 @end{DiffWord83}
+
+
+@begin{Diffword2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0152-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:>
+  Changed the syntax so that the value following @key[delta] in a
+  @nt<delta_constraint> is a @nt<simple_expression>. This is compatible
+  as any expressions that would require extra parentheses are already
+  illegal. The change is necessary to eliminate
+  syntax ambguities in @nt<derived_type_definition>s. The similar change
+  for @nt<digits_constraint> is documented in @RefSecNum{Fixed Point Types}.]}
+@end{Diffword2012}
+
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

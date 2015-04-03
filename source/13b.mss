@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:23 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2831,8 +2831,8 @@ Old=[Pragma Controlled]}
 @Chg{Version=[3],New=[@Chg{Version=[4],New=[@Redundant[Pragma and aspect
 Default_Storage_Pool specify the storage pool that
 will be used in the absence of an explicit specification of a storage pool or
-size for an access type.]],Old=[]}],Old=[@Redundant[Pragma Controlled is used
-to prevent
+storage size for an access type.]],Old=[]}],Old=[@Redundant[Pragma Controlled
+is used to prevent
 any automatic reclamation of storage (garbage collection) for the objects
 created by @nt<allocator>s of a given access type.]]}
 @end{Intro}
@@ -2885,13 +2885,13 @@ shall denote a nonderived access subtype.]}
 @ChgAdded{Version=[4],Text=[The Standard @nt{storage_pool_indicator} is an
 identifier specific to a pragma (see @RefSecNum{Pragmas}) and does not denote
 any declaration. If the @nt{storage_pool_indicator} is Standard, then there
-shall not be a declaration with defining identifier Standard that is
+shall not be a declaration with @nt{defining_identifier} Standard that is
 immediately visible at the point of the pragma, other than package Standard
 itself.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[Added]}
-  @ChgAdded{Version=[4],Text=[We considering having the Standard
+  @ChgAdded{Version=[4],Text=[We considered having the Standard
   @nt{storage_pool_indicator} resolve to package Standard rather than
   being an identifier specific to a pragma. That would eliminate the need for a
   special check. But it would be bizarre to have something that could resolve to
@@ -2906,8 +2906,8 @@ itself.]}
   @ChgAdded{Version=[4],Text=[No declaration of Standard can ever be
     use-visible, as the language-defined non-overloadable definition of
     Standard will hide any use-visible declarations. Thus we need only concern
-    ourselves with immediately visible declarations with the defining
-    @nt{identifier} Standard; that eliminates any possible confusion.]}
+    ourselves with eliminating any possible confusion with regard to
+    immediately visible declarations with the @nt{defining_identifier} Standard.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1]}
@@ -2964,13 +2964,7 @@ immediate scope of another @nt{pragma} Default_Storage_Pool.]}
 @Chg{Version=[3],New=[The language-defined aspect Default_Storage_Pool may be
 specified for a generic instance; it defines the default pool for
 access types within an instance.@AspectDefn{Default_Storage_Pool}
-@Chg{Version=[4],New=[The Default_Storage_Pool aspect may be specified as
-Standard, which is an identifier specific to an aspect (see
-@RefSecNum{Aspect Specifications}) and defines
-the default pool to be Standard. When the Default_Storage_Pool aspect is
-specified as Standard, then there shall not be a declaration with defining
-identifier Standard that is immediately visible at the point of the aspect,
-other than package Standard itself.],Old=[The expected type for the
+@Chg{Version=[4],New=[],Old=[The expected type for the
 Default_Storage_Pool aspect is Root_Storage_Pool'Class. The @nt{aspect_definition}
 must be a @nt{name} that denotes a variable. This aspect overrides any
 Default_Storage_Pool pragma that might apply to the generic unit; if the aspect
@@ -2982,6 +2976,14 @@ A @nt{pragma} Controlled is a representation pragma
 @PDefn2{Term=[aspect of representation], Sec=(controlled)}
 @Defn2{Term=[controlled], Sec=(aspect of representation)}
 that specifies the @i{controlled} aspect of representation]}.
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0003-1]}
+@ChgAdded{Version=[4],Text=[The Default_Storage_Pool aspect may be specified as
+Standard, which is an identifier specific to an aspect (see
+@RefSecNum{Aspect Specifications}) and defines the default pool to be
+Standard. In this case, then there shall not be a declaration with
+@nt{defining_identifier} Standard that is immediately visible at the point
+of the aspect specification, other than package Standard itself.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0003-1]}
 @ChgAdded{Version=[4],Text=[Otherwise, the expected type for the

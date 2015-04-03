@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1650,16 +1650,19 @@ that is disallowed by @RefSec{Compilation Units - Library Units}.
 @end{Discussion}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<package_body_stub>,rhs="@Chg{Version=[3],New=<
    >,Old=[]}@key{package} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
       [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<task_body_stub>,rhs="@Chg{Version=[3],New=<
    >,Old=[]}@key{task} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
       [@Syn2{aspect_specification}]>,Old=[]};"}
 
 
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0267-1]}
 @Syn{lhs=<protected_body_stub>,rhs="@Chg{Version=[3],New=<
    >,Old=[]}@key{protected} @key{body} @Syn2{defining_identifier} @key{is} @key{separate}@Chg{Version=[3],New=<
       [@Syn2{aspect_specification}]>,Old=[]};"}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2014/11/15 05:22:28 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2015/03/03 05:38:25 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -510,11 +510,11 @@ it shall not contain a library-level declaration of an access type
 that designates a class-wide type,@Chg{Version=[4],New=[ nor a type
 with a part that is of a],Old=[]}
 task type@Chg{Version=[4],New=[],Old=[,]} or protected type with
-@nt{entry_declaration}s@Chg{New=[],
+@nt{entry_declaration}s@Chg{Version=[4],New=[;],Old=[@Chg{New=[],
 Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the
 declaration is nested within a body other than
-a @nt<package_body>]}.
+a @nt<package_body>]}.]}
 @begin{Reason}
   These kinds of access types are disallowed because the object
   designated by an access value of such a type could
@@ -523,9 +523,24 @@ a @nt<package_body>]}.
   created.
 @end{Reason}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0038-1]}
+@ChgAdded{Version=[4],Text=[it shall not contain a library-level declaration
+that contains a name that denotes a type declared within a declared-pure
+package, if that type has a part that is of an access type; for the purposes of
+this rule, the parts considered include those of the full views of any private
+types or private extensions.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This rule breaks privacy by looking into the full
+  views of private types. Avoiding privacy breakage here would have required
+  disallowing the use in a shared passive package of any private type
+  declared in a declared-pure package, which would have been severely
+  incompatible.]}
+@end{Reason}
+
 @end{itemize}
 
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
 @PDefn2{Term=[accessibility], Sec=(from shared passive library units)}
 @Defn{notwithstanding}
 Notwithstanding the definition of accessibility given in
@@ -533,11 +548,7 @@ Notwithstanding the definition of accessibility given in
 of a library unit P1 is not accessible from within the declarative
 region of a shared passive library unit P2,
 unless the shared passive library unit
-P2 depends semantically on P1.@Chg{Version=[4],New=[ Furthermore, for the
-purposes of accessibility checking, when an access type that is declared within
-a declared-pure package is used as part of a library-level declaration in a
-shared-passive package, it is as though the access type were declared in the
-shared-passive package.],Old=[]}
+P2 depends semantically on P1.
 @begin{Discussion}
   We considered a more complex rule, but dropped it. This is
   the simplest rule that recognizes that a shared passive
@@ -601,7 +612,7 @@ partitions.
   library-level shared passive packages. These were allowed by Ada 2005 and
   Ada 2012, but it is unlikely that they work properly, as active partitions
   could disappear before the shared-passive partition. As such, the new
-  error is more likely to catch bugs than to cause them.]}
+  errors are more likely to catch bugs than to cause them.]}
 @end{Incompatible2012}
 
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2014/07/24 04:20:41 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2015/03/03 05:38:25 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:41 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -274,6 +274,12 @@ Convention @i[L] has been specified for T@Chg{Version=[3],New=[],Old=[ in
 a @nt[pragma] Convention]}, and T is @i{eligible for
 convention @i[L]}; that is:
 @begin[inneritemize]
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0135-1]}
+@ChgAdded{Version=[4],Text=[T is an enumeration type such that all
+internal codes (whether assigned by default or explicitly) are within
+an implementation-defined range that includes at least the range of
+values 0 .. 2**15-1;]}
+
 T is an array type with either an
 unconstrained or statically-constrained first subtype, and
 its component type is @i[L]-compatible,
@@ -603,6 +609,7 @@ when @Chg{Version=[3],New=[specifying the],Old=[@nt[pragma]]} Export
 @Chg{Version=[3],New=[aspect as True ],Old=[]}is supported.]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0135-1]}
 For each supported convention @i[L] other than Intrinsic,
 an implementation should support @Chg{Version=[3],New=[specifying
 the ],Old=[]}Import and Export @Chg{Version=[3],New=[aspects],Old=[@nt{pragma}s]}
@@ -611,7 +618,9 @@ subprograms, and @Chg{Version=[3],New=[the],Old=[@nt(pragma)]}
 Convention @Chg{Version=[3],New=[aspect ],Old=[]}for @i[L]-eligible types and for subprograms,
 presuming the other language has corresponding features.
 @Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
-@Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar types.
+@Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar
+types@Chg{Version=[4],New=[, other than enumeration types whose internal codes
+fall within the range 0 .. 2**15-1],Old=[]}.
 @ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,
@@ -796,6 +805,14 @@ upward compatibility.
   Aspects Convention, Import, Export, Link_Name, and External_Name
   are new; @nt{pragma}s Convention, Import, and Export are now obsolescent.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0135-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
+  Added a suggestion that convention be supported for enumeration types.
+  This will make the use of enumeration types portable for implementations
+  that support interfacing to a particular language.]}
+@end{Extend2012}
 
 
 @LabeledClause{The Package Interfaces}
@@ -1665,6 +1682,12 @@ the C function returns an int that is to be discarded.@end{discussion}
 
 An Ada function corresponds to a non-void C function.
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0135-1]}
+@ChgAdded{Version=[4],Text=[An Ada enumeration type corresponds to a C
+enumeration type with corresponding enumeration literals having the same
+internal codes, provided the internal codes fall within the range of the C int
+type.]}
+
 An Ada @key[in] scalar parameter is passed as a scalar argument to a C function.
 
 An Ada @key[in] parameter of an access-to-object type with designated
@@ -1853,6 +1876,11 @@ specific numbers and types of parameters.
   such identifiers and it is important that special conventions be available for
   variadic functions as typical x64 conventions are different for normal and
   variadic C functions.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0135-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined the correspondence
+  between an Ada enumeration type and a C enumeration type; implementations
+  should support convention C for enumeration types.]}
 @end{Extend2012}
 
 

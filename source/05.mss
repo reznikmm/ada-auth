@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.62 $}
+@Comment{$Revision: 1.63 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1448,11 +1448,16 @@ In a reverse container element iterator, the default iterator type for the type
 of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[The type of the @nt{subtype_indication}, if any,
-of an array component iterator shall cover the component type of the type
-of the @SynI<iterable_>@nt{name}. The type of the @nt{subtype_indication},
-if any, of a container element iterator shall cover the default element type
-for the type of the @SynI<iterable_>@nt{name}.]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0151-1]}
+@ChgAdded{Version=[3],Text=[The @Chg{Version=[4],New=[subtype defined
+by],Old=[type of]} the @nt{subtype_indication}, if any, of an array component
+iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the
+component @Chg{Version=[4],New=[subtype],Old=[type]} of the type of the
+@SynI<iterable_>@nt{name}. The @Chg{Version=[4],New=[subtype defined
+by],Old=[type of]} the @nt{subtype_indication}, if any, of a container element
+iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the default
+element @Chg{Version=[4],New=[subtype],Old=[type]} for the type of the
+@SynI<iterable_>@nt{name}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[In a container element iterator whose
@@ -1637,7 +1642,7 @@ immediately enclosing loop statement.]}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
   @ChgAdded{Version=[4],Text=[This text covers exceptions raised by called
   functions that make up the execution of the iterator as well as
-  exceptions raised by the assignment to the loop parameter or cursor]}
+  exceptions raised by the assignment to the loop parameter or cursor.]}
 @end{Ramification}
 @end{Runtime}
 
@@ -1682,6 +1687,20 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   that any Ada 2012 compiler ever allowed the illegal usages in an expansion
   of a loop (it's much more likely that they would have just caused an internal
   error in the compiler), this should have no effect in practice.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0151-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added a requirement that the
+  given subtype statically match the subtype of the element or component for
+  a component element iterator or array component iterator. Original Ada 2012
+  text allowed any type that covered the subtype of the element or component,
+  but that led to questions of what the meaning was if they are different.
+  In this case, the element is essentially a renaming of the container element,
+  and it doesn't make sense for the constraints to be different. Ignoring
+  explicitly defined constraints in renames is a mistake that we don't want
+  to continue, thus we require static matching. This means that some programs
+  might be illegal, but those programs were misleading at best, and
+  potentially would raise unexpected exceptions because the element values
+  might have been invalid or abnormal with respect to the declared constraint.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}
@@ -1690,9 +1709,11 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   a loop propagates any exceptions propagated by the execution of an iterator.
   Since that's what naturally would happen from a macro-style expansion of the
   parts of an iterator, and no other interpretation makes sense given the way
-  the rest of Ada works, we consider it so unlikely that any Ada 2012 ever did
-  anything else that we don't document this as a possible inconsistency.]}
+  the rest of Ada works, we consider it so unlikely that any Ada 2012
+  implementation ever did anything else that we don't document this as a
+  possible inconsistency.]}
 @end{DiffWord2012}
+
 
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}

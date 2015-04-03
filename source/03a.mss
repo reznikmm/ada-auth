@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:22 $}
+@Comment{$Date: 2015/03/03 05:38:24 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.129 $}
+@Comment{$Revision: 1.130 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -7050,8 +7050,9 @@ absolute value, called the @i(delta) of the fixed point type.
 @Syn{lhs=<decimal_fixed_point_definition>,rhs="
    @key{delta} @SynI{static_}@Syn2{expression} @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{real_range_specification}]"}
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @Syn{lhs=<digits_constraint>,rhs="
-   @key{digits} @SynI{static_}@Syn2{expression} [@Syn2{range_constraint}]"}
+   @key{digits} @SynI{static_}@Chg{Version=[4],New=[@Syn2{simple_expression}],Old=[@Syn2{expression}]} [@Syn2{range_constraint}]"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -7188,15 +7189,18 @@ Otherwise, the range of the first subtype is
 The elaboration of a @nt<fixed_point_definition>
 creates the fixed point type and its first subtype.
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 For a @nt<digits_constraint> on a decimal fixed point subtype with
 a given @i(delta), if it does not have a @nt<range_constraint>,
 then it specifies an implicit range
 @en@;(10**@i(D)@en@;1)*@i(delta) .. +(10**@i(D)@en@;1)*@i(delta),
-where @i(D) is the value of the @nt<expression>.
+where @i(D) is the value of the
+@Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]}.
 @Defn2{Term=[compatibility],
   Sec=(digits_constraint with a decimal fixed point subtype)}
 A @nt<digits_constraint> is @i(compatible) with a decimal
-fixed point subtype if the value of the @nt<expression>
+fixed point subtype if the value of the
+@Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]}
 is no greater than the @i(digits) of the subtype,
 and if it specifies (explicitly
 or implicitly) a range that is compatible with the subtype.
@@ -7237,6 +7241,7 @@ or implicitly) a range that is compatible with the subtype.
   the subtype being defined, either explicit or implicit.
 @end(Discussion)
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0152-1]}
 @PDefn2{Term=[elaboration], Sec=(digits_constraint)}
 The elaboration of a @nt<digits_constraint> consists of the
 elaboration of the @nt<range_constraint>, if any.
@@ -7244,7 +7249,8 @@ elaboration of the @nt<range_constraint>, if any.
 If a @nt<range_constraint> is given, a check is made that
 the bounds of the range are both in the range
 @en@;(10**@i(D)@en@;1)*@i(delta) .. +(10**@i(D)@en@;1)*@i(delta),
-where @i(D) is the value of the (static) @nt<expression>
+where @i(D) is the value of the (static)
+@Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]}
 given after the reserved word @key(digits).
 @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
 If this check fails, Constraint_Error is raised.
@@ -7346,6 +7352,18 @@ Obsolescent features (to be compatible with Ada 83's
 machine numbers of fixed point types; this is needed by the static
 evaluation rules.]}
 @end{DiffWord95}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0152-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  Changed the syntax so that the value following @key[digits] in a
+  @nt<digits_constraint> is a @nt<simple_expression>. This is compatible
+  with one very unlikely exception: if the @key[digits] expression is
+  a static expression of a modular type using a unparenthesized logical
+  operator (like @key[and] or @key[or]). Parenthesizing the expression
+  will make it legal in that case. The change is necessary to eliminate
+  syntax ambguities in @nt<derived_type_definition>s.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Operations of Fixed Point Types}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:22 $}
+@Comment{$Date: 2015/03/03 05:38:25 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -571,7 +571,7 @@ the body might include some children.
 @ChgAdded{Version=[4],Text=[The immediate scope of a pragma which is not used
 as a configuration pragma is defined to be the@Defn2{Term=[immediate scope], Sec=(of a pragma)}
 region extending from immediately after the pragma
-to end of the declarative region immediately enclosing the pragma.]}
+to the end of the declarative region immediately enclosing the pragma.]}
 @end{StaticSem}
 
 @begin{Notes}

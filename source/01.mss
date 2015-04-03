@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2015/03/03 05:38:24 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -64,9 +64,9 @@ number generation.]}
 @ChgRef{Version=[4],Kind=[Revised]}
 This Annotated Ada Reference Manual (AARM) contains the entire text of
 the @Chg{Version=[3],New=[third edition of the ],Old=[]}Ada Reference
-Manual @Chg{Version=[4],New=[ as updated
+Manual @Chg{Version=[4],New=[as updated
 for Ada 202x (referred to here as the Ada 202x RM)],Old=[@Chg{Version=[3],New=[ (the
-Ada 2012 RM],Old=[@Chg{Version=[2],New=[ with
+Ada 2012 RM],Old=[@Chg{Version=[2],New=[with
 Amendment 1 (the Ada 2005 RM],Old=[(RM95]}]})]},
 plus certain annotations.
 The annotations give a more in-depth analysis of the language.
