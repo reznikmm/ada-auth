@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.98 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
+@comment{ $Revision: 1.99 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:40 $}
+@Comment{$Date: 2015/04/03 04:12:43 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -306,7 +306,7 @@ within the instance, where:]}
   generic to make use of access types in a straightforward way. As an example of
   the second purpose, suppose that an implementation does declare such an access
   type and suppose further that the finalization of the collection of the
-  access type has started. These rules to allow Program_Error to be propagated
+  access type has started. These rules allow Program_Error to be propagated
   in this case (as specified in @RefSecNum{Allocators}); this is necessary to
   allow an all-Ada implementation of these packages.]}
 @end{ImplNote}
@@ -1056,7 +1056,7 @@ parameter.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a vector]}
 @Defn2{Term=[tampering],Sec=[prohibited for a vector]}
 When tampering with cursors is @i<prohibited> for a particular vector object
@@ -2891,7 +2891,7 @@ value of Last_Index.]}
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 
@@ -3344,7 +3344,7 @@ a parameter.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a list]}
 @Defn2{Term=[tampering],Sec=[prohibited for a list]}
 When tampering with cursors is @i<prohibited> for a particular list object
@@ -4528,7 +4528,7 @@ probably not a stable sort.]}
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 
@@ -4689,7 +4689,7 @@ as a parameter.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a map]}
 @Defn2{Term=[tampering],Sec=[prohibited for a map]}
 When tampering with cursors is @i<prohibited> for a particular map object
@@ -5537,7 +5537,7 @@ unless specified by the operation.]}]}
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 
@@ -7047,7 +7047,7 @@ object @i<S> if:]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a set]}
 @Defn2{Term=[tampering],Sec=[prohibited for a set]}
 When tampering with cursors is @i<prohibited> for a particular set object
@@ -8064,7 +8064,7 @@ unless specified by the operation.]}]}
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 

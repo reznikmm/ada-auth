@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.63 $}
+@Comment{$Revision: 1.64 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1324,6 +1324,16 @@ Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
 user-defined behavior for iteration, via the Default_Iterator and
 Iterator_Element aspects.]}>}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[The Default_Iterator and Iterator_Element aspects
+are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This ensures that all descendants of an
+  iterable container type have aspects with the same properties. This prevents
+  generic contract problems with formal derived types.]}
+@end{Reason}
 @end{StaticSem}
 
 @begin{Legality}
@@ -1392,12 +1402,22 @@ properties:]}
 
 @end{Legality}
 
-
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}User-defined
   iterator types are new in Ada 2012.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0138-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  Defined Default_Iterator and Iterator_Element to be nonoveridable, which
+  makes redefinitions and hiding of these aspects illegal. It's possible that
+  some program could violate one of these new restrictions, but in most cases
+  this can easily be worked around by using overriding rather than
+  redefinition.]}
+@end{Incompatible2012}
+
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Generalized Loop Iteration]}

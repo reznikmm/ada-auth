@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3725,7 +3725,7 @@ model.]}
 @end{Legality}
 
 @begin{Erron}
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0076-1]}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0076-1]}
   @ChgAdded{Version=[4],Text=[Execution is erroneous if some operation (other
   than the initialization or finalization of the object) modifies the value of a
   constant object declared at library-level in a pure package.]}
@@ -4072,7 +4072,7 @@ required to appear last.
 @end{DiffWord2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0076-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0076-1]}
   @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Explicitly stated that modifying
   a library-level constant in a pure package is erroneous. We don't document
   this as inconsistent as implementations certainly can still do whatever they

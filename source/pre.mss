@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:41 $}
+@Comment{$Date: 2015/04/03 04:12:43 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.52 $}
+@comment{$Revision: 1.53 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -336,11 +336,11 @@ nonoverlapping@Chg{Version=[4],New=[],Old=[ objects]}.
   above) ],Old=[]}has to be somehow protected against simultaneous access.
 @end{Ramification}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[4],Text=[For the purpose of determining whether concurrent
 calls on text input-output subprograms are required to perform as specified
 above, when calling a subprogram within Text_IO or its children that implicitly
-operates on one of the default input/output files, the subprogram is considered
+operates on one of the default input-output files, the subprogram is considered
 to have a parameter of Current_Input or Current_Output (as appropriate).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0048-1]}
@@ -416,7 +416,7 @@ The order and lettering of the annexes has been changed.
 @end{DiffWord2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0114-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> The rules requiring concurrent
   access of language-defined subprograms were expanded to include implicit
   Text_IO objects, overlapping objects designated by parameters of an access

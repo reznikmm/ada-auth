@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_locales.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:40 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 
 @LabeledAddedClause{Version=[3],Name=[The Package Locales]}
 
@@ -26,13 +26,15 @@ Locales has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0037-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Language_Code} @key[is @Chg{Version=[4],New=[new],Old=[array]}] @Chg{Version=[4],New=[String ],Old=[]}(1 .. 3)@Chg{Version=[4],New=[
-      @key[with] Dynamic_Predicate => (@key[for all] E @key[of] Language_Code => E @key[in]],Old=[ @key[of] Character @key[range]]} 'a' .. 'z'@Chg{Version=[4],New=[)],Old=[]};
+      @key[with] Dynamic_Predicate =>
+         (@key[for all] E @key[of] Language_Code => E @key[in]],Old=[ @key[of] Character @key[range]]} 'a' .. 'z'@Chg{Version=[4],New=[)],Old=[]};
    @key[type] @AdaTypeDefn{Country_Code} @key[is @Chg{Version=[4],New=[new],Old=[array]}] @Chg{Version=[4],New=[String ],Old=[]}(1 .. 2)@Chg{Version=[4],New=[
-      @key[with] Dynamic_Predicate => (@key[for all] E @key[of] Country_Code  => E @key[in]],Old=[ @key[of] Character @key[range]]} 'A' .. 'Z'@Chg{Version=[4],New=[)],Old=[]};]}
+      @key[with] Dynamic_Predicate =>
+         (@key[for all] E @key[of] Country_Code  => E @key[in]],Old=[ @key[of] Character @key[range]]} 'A' .. 'Z'@Chg{Version=[4],New=[)],Old=[]};]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0037-1]}
-  @ChgAdded{Version=[4],Text=[These types are declared as derived from type
+  @ChgAdded{Version=[4],Text=[These types are derived from type
   String so that they can easily be converted to or from type String. That's
   important if one of these values needs to be input or displayed (via Text_IO,
   perhaps). We use the predicate to ensure that only possible component values

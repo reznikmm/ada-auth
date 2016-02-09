@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2015/03/03 05:38:25 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -828,7 +828,7 @@ shall not be specified for a remote access-to-class-wide type.],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
-  All @Chg{Version=[3],New=[three ],Old=[]}@ChgNote{There are more than three!}of
+  All @Chg{Version=[3],New=[],Old=[three ]}@ChgNote{There are more than three!}of
   these restrictions are because
   there is no storage pool associated with a remote
   access-to-class-wide type.@Chg{Version=[2],New=[ The Storage_Size is defined

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -889,7 +889,7 @@ or @nt{range_attribute_designator} shall be static.
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0006-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0032-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0032-1],ARef=[AI12-0159-1]}
 An @nt{attribute_reference} denotes a
 value, an object, a subprogram, or some
 other kind of program entity.@Chg{Version=[3],New=[
@@ -898,14 +898,16 @@ an @nt{attribute_reference} that denotes a value or an object, if
 its type is scalar, then its nominal subtype is the base subtype of
 the type; if its type is tagged, its nominal subtype is the first
 subtype of the type; otherwise, its nominal subtype is a subtype of the type
-without any constraint or @nt{null_exclusion}.
+without any constraint@Chg{Version=[4],New=[,],Old=[ or]}
+@nt{null_exclusion}@Chg{Version=[4],New=[, or predicate],Old=[]}.
 Similarly, unless explicitly specified otherwise, for an
 @nt{attribute_reference} that denotes a function, when its result
 type is scalar, its result subtype is the base subtype of the type,
 when its result type is tagged, the result subtype is the first
 subtype of the type, and when the result type is some other type,
-the result subtype is a subtype of the type without any constraint or
-@nt{null_exclusion}.],Old=[]}
+the result subtype is a subtype of the type without any
+constraint@Chg{Version=[4],New=[,],Old=[ or]}
+@nt{null_exclusion}@Chg{Version=[4],New=[, or predicate],Old=[]}.],Old=[]}
 @begin{Ramification}
   The attributes defined by the language are summarized in
   @RefSecNum{Language-Defined Attributes}.
@@ -1097,8 +1099,12 @@ The Ada 83 rule said that the
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0032-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Allowed overriding the
-  nominal subtype of an @nt{attribute_reference} for an object elsewhere
-  in this standard.]}
+  nominal subtype of an @nt{attribute_reference} for an object; that is used
+  elsewhere in this standard.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0159-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added wording so it is clear that
+  predicates don't apply to the result of an attribute.]}
 @end{DiffWord2012}
 
 
@@ -1153,6 +1159,19 @@ in a @nt{generalized_reference} is any reference type.@PDefn2{Term=[expected typ
 @end{Resolution}
 
 @begin{StaticSem}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[The Implicit_Dereference aspect
+is nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This ensures that all descendants of a
+  reference type have the same reference discriminant. This prevents
+  generic contract problems with formal derived types.]}
+@end{Reason}
+
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[A @nt{generalized_reference} denotes a view
 equivalent to that of a dereference of the reference discriminant of the
@@ -1227,6 +1246,15 @@ Find (B, "grape").Data.@key[all] := Element'(...);]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The aspect
   Implicit_Dereference and the @nt{generalized_reference} are new.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0138-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
+  Defined Implicit_Dereference to be nonoveridable, which makes redefinitions
+  and hiding of the aspect illegal. It's possible that some program could
+  violate one of these new restrictions, but this is not very likely as
+  reference types are not likely to be used in a hierarchy.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[User-Defined Indexing]}
@@ -1304,52 +1332,80 @@ Text=<@ChgAdded{Version=[3],Text=[An indexable container type is one that has
 user-defined behavior for indexing, via the Constant_Indexing or
 Variable_Indexing aspects.]}>}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[The Constant_Indexing and Variable_Indexing aspects
+are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[This ensures that all descendants of an
+  indexable container type have aspects with the same properties. This prevents
+  generic contract problems with formal derived types.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1],ARef=[AI12-0138-1]}
+  @ChgAdded{Version=[4],Text=[A nonoverridable aspect allows the replacement
+    of the implementation of an indexing function and the addition of a
+    new indexing function for a derived type, but not the removal of an
+    indexing function. This is necessary so that indexing can be used on
+    objects of T'Class. So long as the tag of O is that of its nominal
+    subtype, we do not want T'Class(O)(I) to mean something different
+    than O(I). Thus we cannot allow a change in the function identified.
+    As T'Class(O)(I) expands into a dispatching call, we need to ensure that
+    there is a body for each such function -- but it is OK for that body to be
+    changed from the original body (that's just normal dispatching).]}
+@end{Reason}
+
+@begin{NotIso}
+@ChgAdded{Version=[4],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 6 through 9
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered. Note that this is under the
+wrong heading, so that the heading can also be eliminated.}
+@end{NotIso}
+
 @end{StaticSem}
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[The Constant_Indexing or
-Variable_Indexing aspect shall not be specified:]}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg],ARef=[AI12-0138-1]}
+@ChgDeleted{Version=[4],Type=[Leading],Text=[@Chg{Version=[3],New=[The
+Constant_Indexing or Variable_Indexing aspect shall not be specified:],Old=[]}]}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[on a derived type if the parent type has the
-corresponding aspect specified or inherited; or]}
-
-@begin{Reason}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
-  @ChgAdded{Version=[4],Text=[This rule allows the replacement of the
-    implementation of an indexing function and the addition of a new indexing
-    function for a derived type, but not the removal of an indexing function.
-    This is necessary so that indexing can be used on objects of T'Class. So
-    long as the tag of O is that of its nominal subtype, we do not want
-    T'Class(O)(I) to mean something different than O(I). Thus we cannot allow a
-    change in the function identified. As T'Class(O)(I) expands into a
-    dispatching call, we need to ensure that there is a body for each such
-    function -- but it is OK for that body to be changed from the original body
-    (that's just normal dispatching).]}
-@end{Reason}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[on a derived type
+if the parent type has the
+corresponding aspect specified or inherited; or],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[on a @nt{full_type_declaration} if the type has
-a tagged partial view.]}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[on a
+@nt{full_type_declaration} if the type has
+a tagged partial view.],Old=[]}]}
 @end{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@PDefn{generic contract issue}
+@ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[@PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
-these rules apply also in the private part of an instance of a generic unit.]}
+these rules apply also in the private part of an instance of a generic unit.],Old=[]}}]}
 
 @begin{Ramification}
+  @ChgNote{The following notes were moved to @RefSecNum{Aspect Specifications}
+  along with the rules (now part of the definition of "nonoverridable aspect").}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In order to enforce these rules without breaking
-  privacy, we cannot allow a tagged private type to have hidden indexing
-  aspects. There is no problem if the private type is not tagged (as the
-  indexing aspects cannot be specified on descendants in that case).]}
+  @ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[In order to enforce
+  these rules without breaking privacy, we cannot allow a tagged private type
+  to have hidden indexing aspects. There is no problem if the private type
+  is not tagged (as the indexing aspects cannot be specified on
+  descendants in that case).],Old=[]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[We don't need an assume-the-worst rule as deriving
-  from formal tagged type is not allowed in generic bodies.]}
+  @ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+  @ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[We don't need
+  an assume-the-worst rule as deriving from formal tagged types is not
+  allowed in generic bodies.],Old=[]}]}
 @end{Ramification}
 
 @end{Legality}
@@ -1428,8 +1484,12 @@ the @nt{prefix} of the prefixed view.]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Type=[Trailing],Text=[where Indexing is the name
-    specified for the Constant_Indexing or Variable_Indexing aspect.]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[where Indexing is the @nt{name}
+    specified for the Constant_Indexing or Variable_Indexing
+    aspect.@Chg{Version=[4],New=[ This equivalence is then resolved in the
+    normal way; the aspect specifies a @nt{name}, it does not denote
+    declarations.],Old=[]}]}
 @end{Ramification}
 
 @end{Resolution}
@@ -1479,6 +1539,12 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Converted confusing and
     unnecessary normative wording about "overriding an aspect" into a note.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0138-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:>
+  Defined Constant_Indexing and Variable_Indexing to be nonoveridable.
+  This is merely a new description for @LegalityTitle which already applied
+  to these aspects.]}
 @end{DiffWord2012}
 
 
@@ -2342,7 +2408,7 @@ something is an extension aggregate rather than another kind of aggregate.
 Specifically, that means that an extension aggregate is ambiguous if the
 context is overloaded on array and/or untagged record types, even though
 those are never legal contexts for an extension aggregate. Thus, this rule
-acts more like a @LegalityTitle than a @ResolutionTitle.]}
+acts more like a @LegalityName than a @ResolutionName.]}
 @end{Ramification}
 @end{Resolution}
 
@@ -2687,16 +2753,19 @@ Each of the following contexts (and none other)
 defines an applicable index constraint:
 @begin(itemize)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
   For an @nt{explicit_actual_parameter},
   an @nt{explicit_generic_actual_parameter},
   the @nt{expression} of a
-  @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]}, the
-  initialization expression
+  @Chg{Version=[2],New=[return statement],Old=[@nt{return_statement}]},
+  @Chg{Version=[4],New=[the return expression of an expression
+  function, ],Old=[]}the initialization expression
   in an @nt{object_@!declaration}, or a @nt{default_@!expression}
   @Redundant[(for a parameter or a component)],
   when the nominal subtype
   of the corresponding formal parameter, generic formal parameter,
-  function @Chg{Version=[2],New=[return object],Old=[result]}, object, or
+  function @Chg{Version=[2],New=[return object],Old=[result]},
+  @Chg{Version=[4],New=[expression function return object, ],Old=[]}object, or
   component is a constrained array subtype, the
   applicable index constraint is the constraint of the subtype;
 
@@ -3093,6 +3162,13 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   by this inconsistency.]}
 @end{Inconsistent2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0157-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:>
+  Added expression functions to the contexts that provide an applicable
+  index constraint, because expression functions are handled separately in
+  static semantics and legality rules.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Expressions}
@@ -5531,6 +5607,11 @@ Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 
 @LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0158-1]}
+@ChgAdded{Version=[4],Text=[Quantified expressions provide a way to write
+universally and existentially quantified predicates over containers and
+arrays.]}
+
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<quantified_expression>,Old=<>}>,
@@ -5572,10 +5653,13 @@ expected to be of the same type.@Defn{quantified expressions}]}
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0158-1]}
 @ChgAdded{Version=[3],Text=[For the evaluation of a @nt{quantified_expression},
 the @nt{loop_parameter_specification} or @nt{iterator_specification} is first elaborated. The evaluation of a
-@nt{quantified_expression} then evaluates the @nt{predicate} for each value of
-the loop parameter. These values are examined in the order specified by the
+@nt{quantified_expression} then evaluates the @nt{predicate} for
+@Chg{Version=[4],New=[the values],Old=[each value]} of the loop
+parameter@Chg{Version=[4],New=[],Old=[. These values are examined]} in the
+order specified by the
 @nt{loop_parameter_specification} (see @RefSecNum{Loop Statements}) or
 @nt{iterator_specification} (see @RefSecNum{Generalized Loop Iteration}).@PDefn2{Term=[evaluation],Sec=[quantified_expression]}]}
 
@@ -5585,29 +5669,43 @@ the loop parameter. These values are examined in the order specified by the
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0158-1]}
   @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @key[all], the
-  expression is True if the evaluation of the @nt{predicate} yields True for
+  expression is @Chg{Version=[4],New=[False],Old=[True]} if the evaluation
+  of @Chg{Version=[4],New=[any],Old=[the]} @nt{predicate} yields
+  @Chg{Version=[4],New=[False; evaluation of the
+  @nt{quantified_expression} stops at that point. Otherwise (every
+  predicate has been evaluated and yielded True), the expression is
+  True],Old=[True for
   each value of the loop parameter. It is False otherwise. Evaluation of
   the @nt{quantified_expression} stops when all values of the domain have been
-  examined, or when the @nt{predicate} yields False for a given value. Any
+  examined, or when the @nt{predicate} yields False for a given value]}. Any
   exception raised by evaluation of the @nt{predicate} is propagated.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{expression} is True if the domain contains no values.]}
+  @ChgAdded{Version=[3],Text=[The @nt{expression} is True if the domain
+  contains no values.]}
 @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0158-1]}
   @ChgAdded{Version=[3],Text=[If the @nt{quantifier} is @key[some], the
-  expression is True if the evaluation of the @nt{predicate} yields True for
+  expression is True if the evaluation of
+  @Chg{Version=[4],New=[any],Old=[the]} @nt{predicate} yields
+  True@Chg{Version=[4],New=[; evaluation of the
+  @nt{quantified_expression} stops at that point. Otherwise (every
+  predicate has been evaluated and yielded False), the expression is
+  False],Old=[ for
   some value of the loop parameter. It is False otherwise. Evaluation of
   the @nt{quantified_expression} stops when all values of the domain have been
-  examined, or when the @nt{predicate} yields True for a given value. Any
+  examined, or when the @nt{predicate} yields True for a given value]}. Any
   exception raised by evaluation of the @nt{predicate} is propagated.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{expression} is False if the domain contains no values.]}
+  @ChgAdded{Version=[3],Text=[The @nt{expression} is False if the domain
+  contains no values.]}
 @end{Ramification}
 @end{Itemize}
 @end{Runtime}
@@ -5641,3 +5739,9 @@ is composite (as opposed to prime) can be written:]}
   expressions are new.]}
 @end{Extend2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0158-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Revised the wording to make it
+  clear that the semantics is short-circuited, and what the result is when
+  there are no values for the loop parameter.]}
+@end{DiffWord2012}

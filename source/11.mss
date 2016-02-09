@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -429,7 +429,7 @@ Obj : Boolean := (Func_Call @key[or else raise] TBD_Error @key[with] Atomic);]}
 
   @ChgRef{Version=[4],Kind=[Added]}
   @ChgAdded{Version=[4],Type=[Leading],Text=[This rule only requires
-  parenthesis for @nt{raise_expression}s that are
+  parentheses for @nt{raise_expression}s that are
   part of the "top-level" of an @nt{expression} in one of the named contexts;
   the @nt{raise_expression} is either the entire @nt{expression}, or part of a
   chain of logical operations. In practice, the @nt{raise_expression} will
@@ -443,7 +443,7 @@ Obj : Boolean := (Func_Call @key[or else raise] TBD_Error @key[with] Atomic);]}
 @ChgRef{Version=[4],Kind=[Added]}
 @ChgAdded{Version=[4],Text=[Pre : Boolean  := (@key[if not] Is_Valid(Param) @key[then raise] Not_Valid_Error);
 A : A_Tagged   := (Some_Tagged'(@key[raise] TBD_Error) @key[with] Comp => 'A');
-B : Some_Array := (1, 2, 3, @key[others] => @key[raise] No_Valid_Error);
+B : Some_Array := (1, 2, 3, @key[others] => @key[raise] Not_Valid_Error);
 C : Natural    := Func (Val => @key[raise] TBD_Error);]}
 @end{Example}
 
@@ -483,9 +483,9 @@ C : Natural    := Func (Val => @key[raise] TBD_Error);]}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1]}
-@Chg{Version=[4],New=[An @SynI<exception_>@nt{name} of],Old=[The @nt{name}, if
-any, in]} a @nt{raise_statement}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0022-1],ARef=[AI12-0159-1]}
+The @Chg{Version=[4],New=[@SynI<exception_>@nt{name}],Old=[@nt{name}]}, if
+any, @Chg{Version=[4],New=[of],Old=[in]} a @nt{raise_statement}
 @Chg{Version=[4],New=[or @nt{raise_expression} ],Old=[]}shall denote an exception.
 @Defn{re-raise statement}
 A @nt{raise_statement} with no @SynI{exception_}@nt{name}
@@ -496,15 +496,17 @@ but not within a body enclosed by that handler.
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00361-01]}
-@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[4],New=[A
-@SynI{string_}@nt{expression} of],Old=[The @nt<expression>, if any, in]} a
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
+@ChgAdded{Version=[2],Text=[The
+@Chg{Version=[4],New=[@SynI{string_}@nt{expression} or
+@SynI{string_}@nt{simple_expression}],Old=[@nt<expression>]}, if any,
+@Chg{Version=[4],New=[of],Old=[in]} a
 @nt<raise_statement>@Chg{Version=[4],New=[ or @nt{raise_expression}],Old=[,]}
 is expected to be of type String.]}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1]}
-@ChgAdded{Version=[4],Text=[A @nt{raise_expression} is expected to be of
-any type.]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0022-1],ARef=[AI12-0159-1]}
+@ChgAdded{Version=[4],Text=[The expected type for a @nt{raise_expression}
+shall be any single type.]}
 @end{Resolution}
 
 @begin{RunTime}
@@ -544,11 +546,11 @@ This allows the original cause of the exception to be determined.
 @end{RunTime}
 
 @begin{Notes}
-  @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0062-1],Aref=[AI12-0152-1]}
+  @ChgRef{Version=[4],Kind=[Added],Aref=[AI12-0062-1],Aref=[AI12-0152-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[If the evaluation of a
   @SynI<string_>@nt{expression} or @SynI<string_>@nt{simple_expression} raises
   an exception, that exception is
-  propagated rather than the one denoted by the @SynI<exception_>@nt{name}
+  propagated instead of the one denoted by the @SynI<exception_>@nt{name}
   of the @nt{raise_statement} or @nt{raise_expression}.]}
 @end{Notes}
 
@@ -583,7 +585,7 @@ any force.
 @end{Extend95}
 
 @begin{Extend2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1],ARef=[AI12-0152-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0022-1],ARef=[AI12-0152-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   The @nt{raise_expression} is new. This construct is necessary to
   allow conversion of existing specifications to use preconditions and

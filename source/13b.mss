@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2682,7 +2682,7 @@ some other existing object.]}
     object with a subcomponent that is a dangling reference has to work
     normally; no exception can be raised, but the target object will have a
     subcomponent that is a dangling references, and a (direct) use of that
-    subcomponents is again a bounded error. This is similar to the way that
+    subcomponent is again a bounded error. This is similar to the way that
     assignments of invalid subcomponents are handled (see
     @RefSecNum{Data Validity}).]}
 @end{Discussion}
@@ -2790,11 +2790,12 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}
   @b<Corrigendum:> Defined a "dangling reference", and specified that
-  a dangling access value might designate some other existing object.
+  a dangling reference might designate some other existing object.
   This allows simple implementations of access values and reuse of
-  object memory after deallocation. In prior versions of Ada, "="
-  betweeen a dangling reference and an existing object has to return
-  False, even if the existing object and the dangling reference are
+  object memory after deallocation. In prior versions of Ada, "=" between
+  a dangling reference and an access to an existing object has to return
+  False, even if the existing object and the object designated by the
+  dangling reference are
   allocated in the same memory. A program that depended upon that could break
   with this revised rule. However, as a practical matter, almost all Ada
   implementations use simple implementations of access types that do not meet
@@ -2803,7 +2804,7 @@ This is implied by the rules of @RefSecNum{Formal Access Types}.
   programs - it just aligns the Standard with actual practice.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0148-1]}
-  @ChgAdded{Version=[4],Text=[A side-effect of this change is to allow an
+  @ChgAdded{Version=[4],Text=[A side effect of this change is to allow an
   Ada implementation to detect dangling references in more places. This
   does not require any Ada implementation to change, and if the implementation
   does change, it just means that errors will be detected earlier.]}
@@ -2904,7 +2905,7 @@ itself.]}
 
   @ChgRef{Version=[4],Kind=[Added]}
   @ChgAdded{Version=[4],Text=[No declaration of Standard can ever be
-    use-visible, as the language-defined non-overloadable definition of
+    use-visible, as the language-defined nonoverloadable definition of
     Standard will hide any use-visible declarations. Thus we need only concern
     ourselves with eliminating any possible confusion with regard to
     immediately visible declarations with the @nt{defining_identifier} Standard.]}
@@ -2916,17 +2917,17 @@ itself.]}
 the @nt{storage_pool_indicator} shall be@Chg{Version=[4],New=[ either],Old=[]}
 @key[null]@Chg{Version=[4],New=[ or Standard],Old=[]}, and it defines the
 @i<default pool>@Defn{default pool}@Defn2{Term=[storage pool],Sec=[default]}@Defn2{Term=[pool],Sec=[default]} to
-be @Chg{Version=[4],New=[that @nt{storage_pool_indicator}],Old=[@b<null>]}
+be @Chg{Version=[4],New=[the given @nt{storage_pool_indicator}],Old=[@b<null>]}
 within all
 applicable compilation units (see @RefSecNum{Pragmas and Program Units}),
 except within the immediate scope of
 another @nt{pragma} Default_Storage_Pool. Otherwise, @Redundant[the pragma
 occurs immediately within a sequence of declarations, and] it defines the
 default pool within the immediate scope of the pragma to be
-@Chg{Version=[4],New=[that @nt{storage_pool_indicator}],Old=[either @key[null] or
-the pool denoted by the @SynI{storage_pool_}@nt{name}]}, except within the
-immediate scope of a later pragma Default_Storage_Pool. @Redundant[Thus, an
-inner pragma overrides an outer one.]]}
+@Chg{Version=[4],New=[the given @nt{storage_pool_indicator}],Old=[either
+@key[null] or the pool denoted by the @SynI{storage_pool_}@nt{name}]}, except
+within the immediate scope of a later pragma Default_Storage_Pool.
+@Redundant[Thus, an inner pragma overrides an outer one.]]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0190-1],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded]}@Comment{Just to mark the fact that the paragraph number changed}
@@ -2981,7 +2982,7 @@ that specifies the @i{controlled} aspect of representation]}.
 @ChgAdded{Version=[4],Text=[The Default_Storage_Pool aspect may be specified as
 Standard, which is an identifier specific to an aspect (see
 @RefSecNum{Aspect Specifications}) and defines the default pool to be
-Standard. In this case, then there shall not be a declaration with
+Standard. In this case, there shall not be a declaration with
 @nt{defining_identifier} Standard that is immediately visible at the point
 of the aspect specification, other than package Standard itself.]}
 
@@ -3251,7 +3252,7 @@ to ensure that all @nt{allocator}s use the default pool.]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}The
   pragma Default_Storage_Pool @Chg{Version=[4],New=[and aspect
-  Default_Storage_Pool ],Old=[]}is new.]}
+  Default_Storage_Pool are],Old=[is]} new.]}
 @end{Extend2005}
 
 @begin{DiffWord2005}
@@ -3678,7 +3679,7 @@ following effects:]}
 still exist are finalized in an arbitrary order;@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0148-1]}
-@ChgAdded{Version=[3],Text=[All of the objects allocated from the subpool
+@ChgAdded{Version=[4],Text=[All of the objects allocated from the subpool
 cease to exist;@PDefn2{Term=[exist],Sec=[cease to]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5956,7 +5957,7 @@ class-wide types descended from S.
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   Defined how to specify a class-wide stream-oriented attribute using an
   @nt{aspect_specification}. It was always intended that this was possible,
-  but the method was not clear as a class-wide type never has an explicit
+  but the method was not clear, as a class-wide type never has an explicit
   declaration.]}
 @end{Extend2012}
 
@@ -5965,7 +5966,7 @@ class-wide types descended from S.
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined the runtime
   effect of stream attributes for untagged limited types, as there
   is a weird corner case where they can be called. We don't specify this
-  as an inconsistency, as it doesn't make semantic sense to stream a task
+  as an inconsistency, as it doesn't make semantic sense to stream a task,
   and nothing useful could have been done with that, so it should not
   exist in any programs.]}
 
@@ -6260,7 +6261,7 @@ incomplete type],Old=[]}.
   @nt{expression_function_declaration}s@Chg{Version=[4],New=[ (even],Old=[]}
   when those are used as completions@Chg{Version=[4],New=[)],Old=[]},
   as well as @Chg{Version=[4],New=[@nt{generic_instantiation}s and
-  renames-as-bodies do not necessarily cause freezing; each has their
+  renames-as-bodies do not necessarily cause freezing; each have their
   own specific rules],Old=[@nt{entry_body}s (see
   @RefSecNum{Completions of Declarations}). These all cause freezing,
   along with @nt{proper_body}s and @nt{body_stub}s]}.]}
@@ -6271,7 +6272,7 @@ incomplete type],Old=[]}.
   freezing only applies in @nt{declarative_part}s. All of the kinds of bodies
   (see @RefSecNum{Completions of Declarations} @en keep in mind the
   difference from @nt{body}s) that are allowed in a package specification have
-  their own freezing rules, so they don't need to covered by the above rule.]}
+  their own freezing rules, so they don't need to be covered by the above rule.]}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
@@ -6310,24 +6311,24 @@ causes freezing.
   which is not completely defined at the point of the @nt{generic_instantiation}.]}
 @end{Ramification}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0103-1]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0103-1],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[4],Text=[At the occurrence of an
-@nt{expression_function_declaration} that is
-completion, the @nt{expression} of the expression function causes freezing.]}
+@nt{expression_function_declaration} that is a
+completion, the return expression of the expression function causes freezing.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0103-1]}
   @ChgAdded{Version=[4],Text=[This rule prevents calls through access values to an expression
 that might have unfrozen parts. Typically, elaboration checks and other
 freezing rules prevent this, but in this case the completion is elaborated
-but since this is not a @nt{body} it does not by itself freeze
+and since this is not a @nt{body} it does not by itself freeze
 anything that precedes it.]}
 @end{Reason}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0132-1]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0132-1],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[4],Text=[At the occurrence of a renames-as-body whose
 @SynI<callable_entity_>@nt{name} denotes an expression function, the
-@nt{expression} of the expression function causes freezing.]}
+return expression of the expression function causes freezing.]}
 
 @PDefn2{Term=[freezing], Sec=(object_declaration)}
 The occurrence of an @nt<object_declaration> that has no corresponding
@@ -6383,6 +6384,7 @@ at the end of the immediately enclosing declaration list.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0046],ARef=[AI95-00106-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0177-1],ARef=[AI05-0183-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI05-0157-1]}
 @PDefn2{Term=[freezing], Sec=(by an expression)}
 A static expression @Chg{Version=[3],New=[(other than within an
 @nt{aspect_specification}) ],Old=[]}causes freezing where it occurs.
@@ -6390,7 +6392,8 @@ A static expression @Chg{Version=[3],New=[(other than within an
 An object name or],Old=[A]} nonstatic expression causes freezing where it
 occurs, unless the @Chg{New=[name or ],Old=[]}expression is part of a
 @nt<default_expression>, a @nt<default_name>, @Chg{Version=[3],New=[the
-@nt{expression} of an expression function, an @nt{aspect_specification},
+@Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
+of an expression function, an @nt{aspect_specification},
 ],Old=[]}or a per-object expression of a component's @nt{constraint}, in which
 case, the freezing occurs later as part of another construct@Chg{Version=[3],New=[
 or at the freezing point of an associated entity],Old=[]}.
@@ -6459,12 +6462,15 @@ hence no forcing occurrence of T.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(profile of a function call)}
 @PDefn2{Term=[freezing], Sec=(expression of an expression function by a call)}
 At the place where a function call causes freezing, the profile of the function is
 frozen. Furthermore, if a parameter of the call is defaulted, the
 @nt{default_expression} for that parameter causes freezing. If the function call
-is to an expression function, the @nt{expression} of the expression function
+is to an expression function, the
+@Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
+of the expression function
 causes freezing.]}
 
 @begin{Reason}
@@ -6483,8 +6489,10 @@ causes freezing.]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
-  @ChgAdded{Version=[3],Text=[Freezing of the @nt{expression} of an expression
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1],ARef=[AI12-0157-1]}
+  @ChgAdded{Version=[3],Text=[Freezing of the
+  @Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
+  of an expression
   function only needs to be considered when the expression function is in the
   same compilation unit and there are no intervening
   @Chg{Version=[4],New=[@nt{body}s],Old=[bodies]}; the end of a
@@ -6495,6 +6503,7 @@ causes freezing.]}
 
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0019-1],ARef=[AI05-0177-1],ARef=[AI05-0296-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(profile of a callable entity by an instantiation)}
 @PDefn2{Term=[freezing], Sec=(expression of an expression function by an instantiation)}
 At the place where a @nt{generic_instantiation} causes freezing of a callable
@@ -6502,8 +6511,9 @@ entity, the profile of that entity is frozen
 unless the formal subprogram corresponding to the callable entity has a
 parameter or result of a formal untagged incomplete type;
 if the callable entity is
-an expression function, the @nt{expression} of the expression function causes
-freezing.]}
+an expression function, the
+@Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
+of the expression function causes freezing.]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6513,9 +6523,11 @@ freezing.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[freezing], Sec=(expression of an expression function by Access attribute)}
 At the place where a use of the Access or Unchecked_Access attribute whose
-@nt{prefix} denotes an expression function causes freezing, the @nt{expression}
+@nt{prefix} denotes an expression function causes freezing, the
+@Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
 of the expression function causes freezing.]}
 
 @begin{Reason}

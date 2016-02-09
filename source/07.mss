@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:22 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1725,7 +1725,7 @@ is any boolean type.@PDefn2{Term=[expected type],
 Sec=(invariant expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0150-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0150-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[Within an invariant expression, the
 identifier of the first subtype of the associated type denotes the current
 instance of the type.] Within an invariant expression
@@ -1738,15 +1738,20 @@ type @i<T>, the type of this current instance is interpreted as though it
 had a (notional) type @i<NT> that is a visible formal derived type whose
 ancestor type is @i<T>.@Redundant[ The effect of this
 interpretation is that the only operations that can be applied to this
-current instance are those defined for such a formal derived type.
-This ensures that the invariant expression is well-defined for any
-type descended from @i<T>.]],Old=[.]}]}
+current instance are those defined for such a formal derived type.]],Old=[.]}]}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[The first sentence is given formally in
   @RefSecNum{Aspect Specifications}.]}
 @end{TheProof}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0159-1]}
+  @ChgAdded{Version=[4],Text=[The rules for Type_Invariant'Class ensure
+  that the invariant expression is well-defined for any type descended
+  from @i<T>.]}
+@end{Reason}
 
 @end{Resolution}
 
@@ -1965,15 +1970,15 @@ on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-de
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0290-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0080-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[3],Text=[If performing checks is required by the
 @Chg{Version=[4],New=[Type_Invariant],Old=[Invariant]} or
 @Chg{Version=[4],New=[Type_Invariant'Class],Old=[Invariant'Class]} assertion
 policies (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of
-corresponding aspect specification applicable to a given type, then the
-respective invariant expression is considered
-@i(enabled).@Defn2{Term=[enabled],Sec=[invariant expression]}]}
+@Chg{Version=[4],New=[the ],Old=[]}corresponding aspect specification
+applicable to a given type, then the respective invariant expression is
+considered @i(enabled).@Defn2{Term=[enabled],Sec=[invariant expression]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1998,13 +2003,13 @@ any postcondition check, and any
 constraint or predicate checks associated with @key[in out] or @key[out]
 parameters are performed in an arbitrary order.]}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0150-1]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0150-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[4],Text=[For an invariant check on a value of type @i<T1>
 based on a class-wide invariant expression inherited from an ancestor type
 @i<T>, any operations within the invariant expression that were resolved as
-primitive operations of the (notional) formal derived type @i<NT>, are in the
-evaluation of the invariant expression for the check on @i<T1> bound to the
-corresponding operations of type @i<T1>.]}
+primitive operations of the (notional) formal derived type @i<NT> are
+bound to the corresponding operations of type @i<T1> in the
+evaluation of the invariant expression for the check on @i<T1>.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1]}
 @ChgAdded{Version=[3],Text=[The invariant checks performed on a call are
@@ -2025,7 +2030,7 @@ value.]}
   represent "holes" in the protection provided by invariant checks; but note
   that these holes cannot be caused by clients of the type @i<T> with the
   invariant@Chg{Version=[4],New=[. The designer of the package has to declare
-  a visible type with an access to @i<T> subcomponent and use it as a parameter
+  a visible type with an access-to-@i<T> subcomponent and use it as a parameter
   or result to subprograms in the package, or pass the client an
   access-to-subprogram value representing a private operation of the package.
   In the absence of such things, all values that the client can see will be
@@ -2092,7 +2097,7 @@ value.]}
   fail in some cases where they would not be made in the original definition
   of Ada 2012. Such cases represent a hole where a value that fails an
   invariant could "leak out" of a package, and as such will detect far more
-  bugs than it cases.]}
+  bugs than it causes.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0044-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Removed the invariant check
@@ -2116,7 +2121,7 @@ value.]}
   the intent of invariants, we think that this change will mainly reveal bugs
   rather than cause them.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0150-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0150-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Eliminated unintentional
   redispatching from class-wide type invariants. This means that a different
   body might be evaluated for a type invariant check where the value
@@ -2542,8 +2547,11 @@ or the @nt{expression} of an @nt{array_component_association} (see
 @RefSecNum{Return Statements})],Old=[]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
-@Chg{Version=[3],New=[the @nt{expression} of an
-@nt{expression_function_declaration} (see @RefSecNum{Expression Functions})],Old=[]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
+@Chg{Version=[3],New=[the
+@Chg{Version=[4],New=[return expression],Old=[@nt{expression}]} of an
+@Chg{Version=[4],New=[expression function],Old=[@nt{expression_function_declaration}]}
+(see @RefSecNum{Expression Functions})],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Only because the paragraph number has changed}

@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.85 $ $Date: 2015/03/03 05:38:25 $}
+@comment{$Revision: 1.86 $ $Date: 2015/04/03 04:12:43 $}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
@@ -88,7 +88,7 @@ on demand.],Old=[]}
 provide to ISO in response to such a request. It incorporates the changes
 specified in the Technical Corrigendum @Chg{Version=[4],New=[],Old=[@Chg{Version=[2],New=[and
 @Chg{Version=[3],New=[Amendments 1 and 2],Old=[Amendment]} ],Old=[]}]}into
-the text of ISO/IEC 8652:1995(E).
+the text of @Chg{Version=[4],New=[ISO/IEC 8652:2012(E)],Old=[ISO/IEC 8652:1995(E)]}.
 It should be understood that the publication of any ISO document involves
 changes in general format, boilerplate, headers, etc., as well as a review by professional
 editors that may introduce editorial changes to the text. This version of the
@@ -112,8 +112,9 @@ not changed by @Chg{Version=[4],New=[],Old=[@Chg{Version=[2],
 New=[either Amendment@Chg{Version=[3],New=[],Old=[ 1]} or ],
 Old=[]}]}Technical Corrigendum 1), the other documents contain the official
 text of the
-International Standard ISO/IEC 8652:1995(E)@Chg{Version=[2],New=[ and
-its @Chg{Version=[3],New=[Amendments],Old=[Amendment]}],Old=[]}.],Old=[]}
+International Standard @Chg{Version=[4],New=[ISO/IEC 8652:2012(E)],Old=[
+ISO/IEC 8652:1995(E)@Chg{Version=[2],New=[ and
+its @Chg{Version=[3],New=[Amendments],Old=[Amendment]}],Old=[]}]}.],Old=[]}
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[2],Kind=[RevisedAdded]}
@@ -1350,6 +1351,33 @@ M. Heaney (USA) also deserves a mention for his efforts to improve the
 containers packages. Finally, special thanks go to the convenor of ISO/IEC JTC
 1/SC 22/WG 9, J. Tokar (USA), who guided the document through the
 standardization process.],Old=[]} @Comment{The other financial contributors
+wanted to remain anonymous, so they are not mentioned here.}
+
+@AddedSubHeading{Version=[4],Acknowledgements for the Ada 2012 Corrigendum 1 version}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=<The editor [R. Brukardt (USA)] would like to thank the many
+people whose hard work and assistance has made this update possible.>}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[4],Text=[Thanks go out to all of the members of the
+ISO/IEC JTC 1/SC 22/WG 9
+Ada Rapporteur Group, whose work on creating and editing the wording
+changes was critical to the entire process. Especially valuable
+contributions came from the chairman of the ARG, J. Cousins (UK), who
+guided the work; T. Taft (USA), who seems to have the ability to cut any
+Gordian knot we encounter in wording; ; J. Barnes (UK) who continues to be
+able to find editorial errors invisible to most; S. Baird (USA), who
+so frequently find obscure interactions that we now have named such things
+for him. Other ARG members who substantially contributed were:
+A. Burns (UK), R. Dewar (USA), G. Dismukes (USA), R. Duff (USA),
+B. Moore (Canada), E. Ploedereder (Germany), J.P. Rosen (France),
+E. Schonberg (USA), and T. Vardanega (Italy).]}
+
+@ChgRef{Version=[4],Kind=[Added]}
+@Chg{Version=[4],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
+1/SC 22/WG 9, J. Tokar (USA), who guided the document through the
+standardization process.],Old=[]} @Comment{The financial contributors
 wanted to remain anonymous, so they are not mentioned here.}
 
 @NewPage

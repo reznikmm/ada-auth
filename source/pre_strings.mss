@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2014/07/24 04:20:41 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2014/07/24 04:20:41 $}
+@Comment{$Date: 2015/04/03 04:12:43 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3731,8 +3731,8 @@ situations:]}
   @ChgAdded{Version=[4],Text=[An overlong encoding is not invalid for the
     purposes of this check, and this does not depend on the character set
     version in use. Some recent character set standards declare overlong
-    encodings invalid; it would be unnecessary and unfriendly to users for
-    Convert or Decode to raise an exception for an overlong encoding.]}
+    encodings to be invalid; it would be unnecessary and unfriendly to users
+    for Convert or Decode to raise an exception for an overlong encoding.]}
   @end{Honest}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}

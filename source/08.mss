@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -306,11 +306,12 @@ of constructs that have a declarative region.]}
 @key[end record];]}
 @end{Example}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[This is now legal; it was illegal in previous
-  versions of Ada as the parameter A and the component A were homographs
-  in the same declarative region (see @RefSecNum{Visibility}). Note that
-  some implementations already allow this, so this extension may in fact
-  be used in existing code.]}
+  @ChgAdded{Version=[4],Text=[This is now legal, as one would expect; it
+  was illegal in previous versions of Ada as the parameter A and the
+  component A were homographs in the same declarative region
+  (see @RefSecNum{Visibility}). Note that some implementations already allow
+  this common sense interpretation, so this extension may in fact be used
+  in existing code.]}
 @end{Extend2012}
 
 
@@ -568,7 +569,7 @@ the body might include some children.
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0003-1]}@Comment{As usual,
     we let the paragraph numbers of non-normative text change}
-@ChgAdded{Version=[4],Text=[The immediate scope of a pragma which is not used
+@ChgAdded{Version=[4],Text=[The immediate scope of a pragma that is not used
 as a configuration pragma is defined to be the@Defn2{Term=[immediate scope], Sec=(of a pragma)}
 region extending from immediately after the pragma
 to the end of the declarative region immediately enclosing the pragma.]}
@@ -1521,8 +1522,10 @@ complex than they already are.]}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
   @ChgAdded{Version=[3],Text=[Added wording so that the parameters of an
-  @nt{expression_@!function_@!declaration} are visible in the @nt{expression}
+  @nt{expression_@!function_@!declaration} are visible in the
+  @Chg{Version=[4],New=[return expression],Old=[@nt{expression}]}
   of the function. (It would be pretty useless without such a rule.)]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
@@ -3828,7 +3831,7 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0040-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added wording to clarify that
   the @SynI{selecting_}@nt{expression} of a @nt{case_expression} is a
-  complex context, just like that of a @nt{case_statement}. Clearly, everyone
+  complete context, just like that of a @nt{case_statement}. Clearly, everyone
   expects these to work the same way. Moreover, since it would be a lot of extra
   work to treat @nt{case_expression}s differently, it is quite unlikely that any
   compiler would implement the much more complicated resolution necessary (and

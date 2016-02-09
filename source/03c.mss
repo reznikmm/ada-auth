@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:22 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -5107,9 +5107,11 @@ checks.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
-@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
-@Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>, when determining
+@Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>,
+@Chg{Version=[4],New=[or the return expression of an expression function
+@i<F>, ],Old=[]}when determining
 whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
 @i<F>, the level of the return object is considered to be the same as that of
@@ -5118,17 +5120,18 @@ level of other entities, an explicitly aliased parameter of @i<F> is considered 
 have the accessibility level of the body of @i<F>.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
-@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[For determining whether a level is statically deeper
 than the level of the anonymous access type of an access result of a
 function@Chg{Version=[4],New=[ or generic function @i<F>],Old=[]},
 when within a return statement that applies to
-@Chg{Version=[4],New=[@i<F>],Old=[the function]}, the level
+@Chg{Version=[4],New=[@i<F> or the return expression of expression
+function @i<F>],Old=[the function]}, the level
 of the master of the call is presumed to be the same as that of the level
 of the master that elaborated the@Chg{Version=[4],New=[],Old=[ function]}
 body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
 
-@begin{Honest}
+@Chg{Version=[4],New=[ or generic function @i<F>],Old=[]}@begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
   also applies (that is, the @ldquote@;a level@rdquote is of
@@ -6188,6 +6191,12 @@ uses of anonymous access types.]}
   about constrainedness of the prefix of attribute Access to
   @RefSecNum{Formal Private and Derived Types}, as a number of places in the
   Standard need this rule.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0157-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Ensured that the statically deeper
+  relationship applies within the return expression of an expression function.
+  (Dynamic properties apply by equivalence, but static properties are handled
+  separately.)]}
 @end{DiffWord2012}
 
 

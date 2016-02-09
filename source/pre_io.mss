@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2014/11/15 05:22:28 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -407,6 +407,7 @@ additional effects described in subclause
     access, the size of the created file is implementation defined.
 
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[For a direct file, the initial value of current
   index is 1 (see @RefSecNum{Sequential and Direct Files}).]}
 @end{Ramification}
@@ -436,6 +437,7 @@ additional effects described in subclause
     the given file to the given mode. The given file is left open.
 
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[For a direct file, the initial value of current
   index is 1 (see @RefSecNum{Sequential and Direct Files}).]}
 @end{Ramification}
@@ -1707,7 +1709,7 @@ make that conditional).}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0052-1]}
   @ChgAdded{Version=[4],Text=[For the purpose of determining whether concurrent
   calls on text input-output subprograms are required to perform as specified,
-  subprograms that implicitly operate on one of the default input/output files
+  subprograms that implicitly operate on one of the default input-output files
   are considered to have a parameter of Current_Input or Current_Output (as
   appropriate). The result of Current_Output is considered to be overlapping
   with the file given to the latest call of Set_Output (or Standard_Output if
@@ -1762,7 +1764,8 @@ file objects, but not necessarily different external files.
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Moved the definition of
-  Flush to @RefSecNum{File Management}, as all I/O packages now have it.]}
+  Flush to @RefSecNum{File Management}, as all input-output packages now
+  have it.]}
 @end{DiffWord2012}
 
 

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2015/01/30 05:22:23 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 
@@ -1064,7 +1064,7 @@ a named protected object of that type.
 @Syn{lhs=<protected_operation_item>,
   rhs="@Syn2{subprogram_declaration}
      | @Syn2{subprogram_body}
-     | @Chg{New=[@Syn2{null_procedure_declaration}
+     | @Chg{Version=[4],New=[@Syn2{null_procedure_declaration}
      | @Syn2{expression_function_declaration}
      | ],Old=[]}@Syn2{entry_body}
      | @Chg{New=[@Syn2{aspect_clause}],Old=[@Syn2{representation_clause}]}"}
@@ -1983,6 +1983,35 @@ the current instance is defined to be a variable
   for a protected procedure (or protected entry).
 @end(Ramification)
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0129-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[For a type declared by a
+@nt{protected_type_declaration} or for the
+anonymous type of an object declared by a @nt{single_protected_declaration},
+the following language-defined type-related representation aspect
+may be specified:]}
+
+@begin{Description}
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[Exclusive_Functions@\The type of aspect
+  Exclusive_Functions is Boolean. If not specified (including by inheritance),
+  the aspect is False.@AspectDefn{Exclusive_Functions}]}
+
+  @ChgRef{Version=[4],Kind=[Added]}
+  @ChgAdded{Version=[4],Text=[@\A value of True for this aspect indicates that
+  protected functions behave in the same way as protected procedures
+  with respect to mutual exclusion and queue servicing (see below).]}
+
+  @ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Exclusive_Functions],
+    Text=[@ChgAdded{Version=[4],Text=[Specifies mutual exclusion behavior of
+      protected functions in a protected type.]}]}
+@end{Description}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0129-1]}
+@ChgAdded{Version=[4],Text=[A protected procedure or entry is an @i<exclusive>
+protected operation.@Defn2{Term=[exclusive],Sec=[protected operation]} A
+protected function of a protected type @i<P> is an exclusive protected
+operation if the Exclusive_Functions aspect of @i<P> is True.]}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2004,20 +2033,26 @@ subprogram is executed.
 @Redundant[A protected action can also be started by an entry call
 (see @RefSecNum{Entry Calls}).]
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
 @leading@Defn{protected action}
 A new protected action is not started on a protected object
 while another protected action on the same protected object is underway,
-unless both actions are the result of a call on a protected function.
+unless both actions are the result of a call on a
+@Chg{Version=[4],New=[nonexclusive ],Old=[]}protected function.
 This rule is expressible in terms of the execution resource
 associated with the protected object:
 @begin(Itemize)
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
 @Defn2{Term=[protected action], Sec=(start)}
 @Defn2{Term=[acquire], Sec=(execution resource associated with protected object)}
 @i(Starting) a protected action on a protected object
 corresponds to @i(acquiring) the execution resource associated
-with the protected object, either for concurrent read-only access
-if the protected action is for a call on a protected function,
-or for exclusive read-write access otherwise;
+with the protected object, either
+for @Chg{Version=[4],New=[exclusive read-write],Old=[concurrent read-only]}
+access if the protected action is for a call on @Chg{Version=[4],New=[an
+exclusive protected operation],Old=[a protected function]}, or
+for @Chg{Version=[4],New=[concurrent read-only],Old=[exclusive read-write]}
+access otherwise;
 
 @Defn2{Term=[protected action], Sec=(complete)}
 @Defn2{Term=[release], Sec=(execution resource associated with protected object)}
@@ -2025,8 +2060,10 @@ or for exclusive read-write access otherwise;
 corresponds to @i(releasing) the associated execution resource.
 @end(Itemize)
 
-@Redundant[After performing an operation on a protected object other than
-a call on a protected function, but prior
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
+@Redundant[After performing an @Chg{Version=[4],New=[exclusive
+protected ],Old=[]}operation on a protected object@Chg{Version=[4],New=[],Old=[
+other than a call on a protected function]}, but prior
 to completing the associated protected action,
 the entry queues (if any)
 of the protected object are
@@ -2178,6 +2215,14 @@ Control.Release;
   (somewhat pessimistic) behavior of protected actions by converting the
   Bounded Error into a required check.]}
 @end{DiffWord95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0129-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @b<Corrigendum:> Aspect Exclusive_Functions is new. The term
+  @ldquote@;exclusive protected operations@rdquote is new.]}
+@end{Extend2012}
+
 
 
 @LabeledSubClause{Entries and Accept Statements}
@@ -2839,9 +2884,12 @@ the following circumstances:
   a @nt<selective_accept> with a corresponding
   open @nt<accept_alternative>;
 
+  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
   If after performing, as part of a protected action on the
-  associated protected object, an operation on the object other than
-  a call on a protected function,
+  associated protected object, an
+  @Chg{Version=[4],New=[exclusive protected ],Old=[]}operation
+  on the object@Chg{Version=[4],New=[],Old=[ other than
+  a call on a protected function]},
   the entry is checked and found to be open.
 @end(Itemize)
 
@@ -2953,17 +3001,22 @@ without waiting for the entire protected action to complete.
   Old=[@RefSecNum(Task Information)]}).
 @end(Reason)
 
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0129-1]}
 When the entry of a protected object is checked to see whether it
 is open, the implementation need not reevaluate
 the @nt<condition> of the corresponding @nt<entry_barrier>
 if no variable or attribute referenced by
 the @nt<condition> (directly or indirectly)
-has been altered
-by the execution (or cancellation) of a protected procedure or entry call
-on the object since the @nt<condition> was last evaluated.
+has been altered by the execution (or cancellation) of a
+@Chg{Version=[4],New=[],Old=[protected procedure or entry ]}call
+@Chg{Version=[4],New=[to an exclusive protected operation of],Old=[on]} the
+object since the @nt<condition> was last evaluated.
 @begin(Ramification)
+  @ChgRef{Version=[4],Kind=[Revised]}
   Changes to variables referenced by an entry barrier that
-  result from actions outside of a protected procedure or entry call on the
+  result from actions outside of a
+  @Chg{Version=[4],New=[],Old=[protected procedure or entry ]}call
+  @Chg{Version=[4],New=[to an exclusive protected operation of],Old=[on]} the
   protected object need not be "noticed." For example, if
   a global variable is referenced by an entry barrier, it should not
   be altered (except as part of a protected action on the object) any
@@ -3099,6 +3152,14 @@ Controller.Request(Low)(Some_Item);   --@RI[  see @RefSecNum(Task Units and Task
 Flags(3).Seize;                       --@RI[  see @RefSecNum(Protected Units and Protected Objects)]
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0129-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Revised wording to talk
+  about @ldquote@;exclusive protected operations@rdquote
+  (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+@end{DiffWord2012}
+
 
 @LabeledSubClause{Requeue Statements}
 

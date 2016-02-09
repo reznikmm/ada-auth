@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2015/01/30 05:22:23 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2015/01/30 05:22:23 $}
+@Comment{$Date: 2015/04/03 04:12:43 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1304,7 +1304,8 @@ semantics of Exceptions.@!Exception_@!Name and Exceptions.@!Wide_@!Exception_@!N
 are still defined in terms of Exceptions.@!Wide_Wide_@!Exception_@!Name]], Old=[]}.
 
 @ChgImplDef{Version=[4],Kind=[Revised],InitialVersion=[0],
-Text=[The semantics of @Chg{Version=[4],New=[an entity for which aspect],Old=[pragma]}
+Text=[The semantics of @Chg{Version=[4],New=[some attributes and functions of
+an entity for which aspect],Old=[pragma]}
 Discard_Names@Chg{Version=[4],New=[ is True],Old=[]}.]}
 @begin{Ramification}
   The Width attribute is still defined in terms of Image.

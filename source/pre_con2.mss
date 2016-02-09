@@ -1,6 +1,6 @@
- @Part(precontainers-2, Root="ada.mss")
+@Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.28 $ $Date: 2014/07/24 04:20:40 $ $Author: randy $ }
+@comment{ $Revision: 1.29 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -21,13 +21,13 @@ nested structures.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0078-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0078-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[3],Text=[A multiway tree container object manages a tree of
 @Chg{Version=[4],New=[],Old=[internal ]}@i<nodes>,
-@Chg{Version=[4],New=[comprising of a @i<root node>,@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}
+@Chg{Version=[4],New=[consisting of a @i<root node>@Defn2{Term=[root],Sec=[of a tree]}@Defn2{Term=[root node],Sec=[of a tree]}
 and a set of@Defn2{Term=[internal node],Sec=[of a tree]}
-@i<internal nodes>],Old=[]} each
-of which contains an element and pointers to the parent,
+@i<internal nodes>;],Old=[]} each @Chg{Version=[4],New=[internal node],Old=[of
+which]} contains an element and pointers to the parent,
 first child, last child, next (successor) sibling, and previous (predecessor)
 sibling internal nodes.@Defn2{Term=[node],Sec=[of a tree]} A cursor designates a
 particular node within a tree (and by extension the element contained in that
@@ -1933,7 +1933,7 @@ unless specified by the operation.]}]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 
@@ -2016,8 +2016,8 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
   unlikely, as it would require that the package was not implemented in Ada
   (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
   that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
+  into a container, and then used that object before its type or discriminant
+  went out of scope. All known implementations are implemented in Ada, so we
   believe there is no practical incompatibility. As such, we
   mention this only for completeness.]}
 @end{Inconsistent2012}
@@ -2097,13 +2097,8 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2191,13 +2186,8 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2284,13 +2274,8 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2349,13 +2334,8 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2414,13 +2394,8 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2498,13 +2473,8 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -3027,19 +2997,14 @@ holder container unless specified by the operation.]}]}
   Defined some routines to @ldquote@;perform indefinite insertion@rdquote.
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
-  unlikely, as it would require that the package was not implemented in Ada
-  (an Ada @nt{allocator} would raise Program_Error in these circumstances), and
-  that a program inserted a more nested tagged type (or access discriminant)
-  into a container, and then used that object before its type or discrimant went
-  out of scope. All known implementations are implemented in Ada, so we
-  believe there is no practical incompatibility. As such, we
-  mention this only for completeness.]}
+  unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
-  precede all other checks made by a subprogram (but after those associated
+  precede all other checks made by a subprogram (but come after those associated
   with the call).]}
 @end{DiffWord2012}
 

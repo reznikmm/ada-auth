@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2015/03/03 05:38:25 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:43 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -278,7 +278,7 @@ convention @i[L]}; that is:
 @ChgAdded{Version=[4],Text=[T is an enumeration type such that all
 internal codes (whether assigned by default or explicitly) are within
 an implementation-defined range that includes at least the range of
-values 0 .. 2**15-1;]}
+values 0 .. 2**15@en@;1;]}
 
 T is an array type with either an
 unconstrained or statically-constrained first subtype, and
@@ -620,7 +620,7 @@ presuming the other language has corresponding features.
 @Chg{Version=[3],New=[Specifying the ],Old=[@nt{Pragma}]} Convention
 @Chg{Version=[3],New=[aspect ],Old=[]}need not be supported for scalar
 types@Chg{Version=[4],New=[, other than enumeration types whose internal codes
-fall within the range 0 .. 2**15-1],Old=[]}.
+fall within the range 0 .. 2**15@en@;1],Old=[]}.
 @ChgImplAdvice{Version=[3],Kind=[RevisedAdded],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],
 Text=[For each supported convention @i[L] other than Intrinsic,

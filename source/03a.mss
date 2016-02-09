@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:24 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5388,7 +5388,7 @@ More explicit rules are provided for nongraphic characters.
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
   @b<Corrigendum:> An object can be now used as the prefix of the Image
   attribute (as well as Wide_Image and Wide_Wide_Image), a
-  convinience feature already present in some implementations.]}
+  convenience feature already present in some implementations.]}
 @end{Extend2012}
 
 
@@ -7072,6 +7072,10 @@ for its first subtype (the @i(digits) of the first subtype)
 is specified by the @nt<expression> given
 after the reserved word @key(digits); this @nt<expression>
 is expected to be of any integer type.
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0159-1]}
+@ChgAdded{Version=[4],Text=[The @nt{simple_expression} of a
+@nt{digits_constraint} is expected to be of any integer type.]}
 @end{Resolution}
 
 @begin{Legality}
@@ -7359,11 +7363,20 @@ evaluation rules.]}
   Changed the syntax so that the value following @key[digits] in a
   @nt<digits_constraint> is a @nt<simple_expression>. This is compatible
   with one very unlikely exception: if the @key[digits] expression is
-  a static expression of a modular type using a unparenthesized logical
+  a static expression of a modular type using an unparenthesized logical
   operator (like @key[and] or @key[or]). Parenthesizing the expression
   will make it legal in that case. The change is necessary to eliminate
   syntax ambguities in @nt<derived_type_definition>s.]}
 @end{Incompatible2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0159-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum>:Added wording to define the
+  expected type for a @nt{digits_constraint}. This was missing since Ada 95,
+  but as it is obvious and unchanged from Ada 83, we don't consider it an
+  incompatibility.]}
+@end{DiffWord2012}
+
 
 
 @LabeledSubClause{Operations of Fixed Point Types}

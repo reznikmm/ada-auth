@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -629,8 +629,8 @@ specify a],Old=[no]} type-related representation
 @Chg{Version=[3],New=[aspect],Old=[items are allowed]} if the parent type is a
 by-reference type, or has any user-defined primitive
 subprograms.@Chg{Version=[4],New=[ Similarly, it is illegal to specify a
-non-confirming
-type-related representation aspect for an untagged by-reference type
+nonconfirming type-related representation aspect for
+an untagged by-reference type
 after one or more types have been derived from it.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -945,7 +945,7 @@ it is inherited by the record extension.
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0109-1]}
   @ChgAdded{Version=[4],Text=[If an aspect was specified by an
   @nt{aspect_specification} and the parent type has not yet been frozen, then
-  the inherited aspect will not yet have been resolved and evaluated. The
+  the inherited aspect might not yet have been resolved and evaluated. The
   implementation will need to have a mechanism to handle such an aspect.]}
 @end{Ramification}
 
@@ -1506,7 +1506,7 @@ Some of the more stringent requirements are moved to
   means of specifying it are used. We did not document this as an
   incompatibility as only aspects that are neither operational nor
   representation could change behavior and there is no known implementation
-  of these new aspects which allow multiple definition.]}
+  of these new aspects that allows multiple definitions.]}
 @end{DiffWord2012}
 
 
@@ -1766,6 +1766,64 @@ subprogram or generic subprogram],Old=[another declaration]}.]}
     whether such aspects can be applied to bodies and stubs, and what happens
     if they are specified on both the declaration and body of a unit.]}
 @end{Reason}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[If an aspect of a derived type is inherited from an
+ancestor type and has the boolean value True, the inherited value shall not be
+overridden to have the value False for the derived type, unless otherwise
+specified in this International Standard.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[Certain type-related aspects are defined to be
+@i<nonoverridable>; all such aspects are specified using
+an @nt{aspect_definition} that is a @nt{name}.@Defn2{Term=[nonoverridable],Sec=[aspect]}]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[If a nonoverridable aspect is directly specified
+for a type @i<T>, then any explicit specification of that aspect for any
+other descendant of @i<T> shall be @i<confirming>;@PDefn2{Term=[confirming],Sec=[nonoverridable aspect]}
+that is, the specified @nt{name} shall @i<match>@Defn2{Term=[match],Sec=[value of nonoverridable aspect]}
+the inherited aspect, meaning that the specified @nt{name} shall denote the
+same declarations as would the inherited @nt{name}.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[If a full type has a partial view, and a given
+nonoverridable aspect is allowed for both the full view and the partial view,
+then the given aspect for the partial view and the full view shall be the same:
+the aspect shall be directly specified only on the partial view; if the full
+type inherits the aspect, then a matching definition shall be specified
+(directly or by inheritance) for the partial view.]}
+
+@begin{Ramification}
+  @ChgAdded{Version=[4],Text=[In order to enforce these rules without breaking
+  privacy, we cannot allow a private type that could have a particular
+  overridable aspect to have a hidden definition of that aspect. There is no
+  problem if the private type does not allow the aspect (as the
+  aspect could not be specified on descendants in that case).]}
+@end{Ramification}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules about nonoverridable aspects also apply in the private part
+of an instance of a generic unit.]}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[4],Text=[@Redundant[The Default_Iterator, Iterator_Element,
+Implicit_Dereference, Constant_Indexing, and Variable_Indexing aspects
+are nonoverridable.]]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[We don't need an assume-the-worst rule for most
+  nonoverridable aspects as they only work on tagged types and deriving from
+  formal tagged types is not allowed in generic bodies. In the case of
+  Implicit_Dereference, a derivation in a generic body does not cause problems
+  (the ancestor necessarily cannot have the aspect, else specifying the aspect
+  would be illegal), as there could be no place with visibility on both aspects.]}
+@end{Discussion}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -1873,10 +1931,11 @@ attributes or representation pragmas may be specified, as specified elsewhere
 in this International Standard.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgAdded{Version=[3],Text=[If an aspect of a derived type is inherited from an
-ancestor type and has the boolean value True, the inherited value shall not be
-overridden to have the value False for the derived type, unless otherwise
-specified in this International Standard.]}
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0138-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[If an aspect of a
+derived type is inherited from an ancestor type and has the boolean value True,
+the inherited value shall not be overridden to have the value False for the
+derived type, unless otherwise specified in this International Standard.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgAdded{Version=[3],Text=[If a @LegalityName or @StaticSemTitle rule only
@@ -1943,12 +2002,13 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0154-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Added a clarification that aspects that correspond to library unit pragmas
-  are resolved and evaluated immediately. This is incompatible as a value
-  defined after the aspect will now be illegal. However, this would have
+  are resolved and evaluated immediately. This is incompatible, as a
+  reference to an entity defined after the aspect will now be illegal.
+  However, this would have
   require retroactive enforcement of such aspects, which is a new
   capability not available from the associated pragma, and moreover
   no known Ada 2012 implementation has ever allowed late evaluation of
-  such pragmas. As such, there should be no practical incompatibility.]}
+  such aspects. As such, there should be no practical incompatibility.]}
 @end{Incompatible2012}
 
 @begin{Diffword2012}
@@ -1960,6 +2020,11 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0106-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined class-wide aspect
   for use in rules in @RefSecNum{Stream-oriented attributes}.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0138-1]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added a definition of
+  nonoverridable aspects. This is necessary to prevent generic contract
+  problems with formal derived types.]}
 @end{Diffword2012}
 
 
@@ -1981,7 +2046,7 @@ should be deleted if the paragraphs are ever renumbered.}
 @begin{MetaRules}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
   @ChgAdded{Version=[4],Text=[If the default representation already uses
-  minimal storage for a particular type, aspect Pack may not cause any
+  minimal storage for a particular type, aspect Pack might not cause any
   representation change. It follows that aspect Pack should always be allowed,
   even when it has no effect on representation.]}
 
@@ -2190,10 +2255,10 @@ followed.]}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Fixed so that the
   Recommended Level of Support does not require packing of
   components for which such packing would violate other representation
-  items or aspects. This is not incompatible as either such Pack
+  items or aspects. This is not incompatible, as either such Pack
   aspects were treated as illegal or the Recommended Level of Support
   was ignored as impractical, neither of which would change the
-  behavior of any working programs. (Other behavor cannot be justifed
+  behavior of any working programs. (Other behavior cannot be justifed
   from the Standard.)]}
 @end{DiffWord2012}
 

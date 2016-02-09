@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:39 $}
+@Comment{$Date: 2015/04/03 04:12:42 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2106,8 +2106,8 @@ type shall be a synchronized tagged type.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0036-1]}
   @ChgAdded{Version=[4],Text=[If we allowed actual types that differ from
-  the kind of formal derived type, we could allow type conversions that would
-  not be allowed outside of the generic. That would be particularly
+  the kind of the formal derived type, we could allow type conversions that
+  would not be allowed outside of the generic. That would be particularly
   problematical if the actual is a tagged type with extension components;
   we could have created an object of the type that is missing those components
   by converting from the ancestor type to a formal derived type that

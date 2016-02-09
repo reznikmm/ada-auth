@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2014/11/19 20:57:00 $}
+@Comment{$Date: 2015/04/03 04:12:41 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -603,7 +603,7 @@ Sec=(precondition expression)}@PDefn2{Term=[expected type],
 Sec=(postcondition expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI125-0113-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI125-0113-1],ARef=[AI125-0159-1]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
 subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type @i<T>, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a formal parameter
@@ -617,9 +617,16 @@ type access-to-@i<T> is interpreted as having type
 @Chg{Version=[4],New=[access-to-@i<NT>],Old=[access-to-@i<T>'Class]}.
 @Redundant[@Chg{Version=[4],New=[The result of this interpretation
 is that the only operations that can be applied to such @nt{name}s are those
-defined for such a formal derived type. ],Old=[]}This ensures that the
-expression is well-defined for @Chg{Version=[4],New=[any],Old=[a]} primitive
-subprogram of a type descended from @i<T>.]]}
+defined for such a formal derived type.],Old=[This ensures that the
+expression is well-defined for a primitive subprogram of a type descended
+from @i<T>.]}]]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0159-1]}
+  @ChgAdded{Version=[4],Text=[This ensures that the
+  expression is well-defined for any primitive
+  subprogram of a type descended from @i<T>.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
@@ -754,8 +761,8 @@ class-wide precondition expression that applies to @i<S1>.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0131-1]}
 @ChgAdded{Version=[4],Text=[Pre'Class shall not be specified for an overriding
-primitive subprogram of a tagged type @i<T> unless Pre'Class is specified for
-the corresponding primitive subprogram of some ancestor of @i<T>.]}
+primitive subprogram of a tagged type @i<T> unless the Pre'Class aspect is
+specified for the corresponding primitive subprogram of some ancestor of @i<T>.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -905,14 +912,14 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
    declarations occur in an
    arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}],Old=[]}]}@Comment{End of Annex text here.}
 
-  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
+  @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Type=[Leading],NoPrefix=[T],Text=[The implicitly declared
   entity denoted by each occurrence of X'Old is declared as follows:]}
 
   @begin{Itemize}
     @ChgRef{Version=[4],Kind=[Added]}
     @ChgAdded{Version=[4],Type=[Leading],Text=[If X is of an anonymous access
-    defined by an @nt{access_definition} @i<A> then]}
+    type defined by an @nt{access_definition} @i<A> then]}
 @begin{ChildExample}
 @ChgRef{Version=[4],Kind=[Added]}
 @ChgAdded{Version=[4],Text=[@i<X'Old> : @key[constant] @i<A> := X;]}
@@ -1238,9 +1245,10 @@ raised by the evaluation of a precondition or postcondition expression is
 raised at the point of call.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1]}
-@ChgAdded{Version=[3],Text=[For any subprogram or entry call
-@Chg{Version=[4],New=[@i<S> ],Old=[]}(including dispatching calls), the checks
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0159-1]}
+@ChgAdded{Version=[3],Text=[For any@Chg{Version=[4],New=[ call to a],Old=[]}
+subprogram or entry @Chg{Version=[4],New=[@i<S>],Old=[call]} (including
+dispatching calls), the checks
 that are performed to verify specific precondition expressions and specific
 and class-wide postcondition expressions are determined by those for the subprogram
 or entry actually invoked. Note that the class-wide postcondition expressions
@@ -1276,14 +1284,14 @@ dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[3],Text=[The class-wide precondition check for a call to a
 subprogram or entry @Chg{Version=[4],New=[@i<S> ],Old=[]}consists solely of
 checking the class-wide precondition expressions that apply to the denoted
 callable entity (not necessarily @Chg{Version=[4],New=[to ],Old=[]}the one
 that is invoked).@Chg{Version=[4],New=[ Any operations within
 such an expression that were resolved as primitive operations of the
-(notional) formal derived type @i<NT>, are in the evaluation of the
+(notional) formal derived type @i<NT> are in the evaluation of the
 precondition bound to the corresponding operations of the type
 identified by the controlling tag of the call on @i<S>.@Redundant[ This
 applies to both dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
@@ -1359,7 +1367,7 @@ the value.]}
   likely going to prevent bugs by being more intuitive, but it is possible that
   a program that previously worked might fail.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0113-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0113-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Eliminated unintentional
   redispatching from class-wide preconditions and postconditions. This means
   that a different body might be evaluated for a statically bound call to a
@@ -2019,21 +2027,21 @@ for Intrinsic subprograms.]
   untagged types.
 @end{Ramification}
 
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1],ARef=[AI12-0159-1]}
 @Defn{protected calling convention}
 @Defn2{Term=[calling convention], Sec=(protected)}
 The default calling convention is @i{protected}
-for a protected subprogram,@Chg{Version=[4],New=[ a
+for a protected subprogram,@Chg{Version=[4],New=[ for a
 prefixed view of a subprogram with a synchronization kind of
 By_Protected_Procedure,],Old=[]}
 and for an access-to-subprogram type with
 the reserved word @key(protected) in its definition.
 
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0107-1],ARef=[AI12-0159-1]}
 @Defn{entry calling convention}
 @Defn2{Term=[calling convention], Sec=(entry)}
 The default calling convention is @i{entry} for an
-entry@Chg{Version=[4],New=[ and a prefixed view
+entry@Chg{Version=[4],New=[ and for a prefixed view
 of a subprogram with a synchronization kind of By_Entry],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
@@ -2419,7 +2427,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Diffword2005}
 
 @begin{Extend2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0107-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0107-1],ARef=[AI05-0159-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   We now define that a prefixed view of a subprogram with synchronization
   kind By_Protected_Procedure can be used as the prefix of 'Access for an
@@ -3031,6 +3039,35 @@ Print(3); --@RI{ Ambiguous!}
   is ambiguous.
 @end{Reason}
 
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
+@ChgAdded{Version=[4],Text=[If the mode is @key[out], the actual parameter is a
+view conversion, and the type of the formal parameter is an access type or
+a scalar type that has the Default_Value aspect specified, then]}
+  @begin{Itemize}
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[there shall exist a type (other than a root
+      numeric type) that is an ancestor of both the target type and the operand
+      type; and]}
+
+    @ChgRef{Version=[4],Kind=[Added]}
+    @ChgAdded{Version=[4],Text=[in the case of a scalar type, the type of the
+      operand of the conversion shall have the Default_Value aspect specified.]}
+  @end{Itemize}
+
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
+@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
+In addition to the places where
+@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
+
+@begin{Reason}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[These rules are needed in order to ensure that a
+    well-defined parameter value is passed.]}
+@end{Reason}
+
+
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0102-1],ARef=[AI05-0142-4]}
 @leading@;@Chg{Version=[3],New=[If the formal parameter is an explicitly aliased
 parameter, the type of the actual parameter shall be tagged or the actual
@@ -3402,34 +3439,6 @@ part of the call is considered part of the call.]}
   @ChgAdded{Version=[3],Text=[We do not check expressions that are evaluated only because
   of a component initialized by default in an aggregate (via <>).]}
 @end{Ramification}
-
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-@ChgAdded{Version=[4],Text=[If the mode is @key[out], the actual parameter is a
-view conversion, and the type of the formal parameter is an access type or
-a scalar type that has the Default_Value aspect specified, then]}
-  @begin{Itemize}
-    @ChgRef{Version=[4],Kind=[Added]}
-    @ChgAdded{Version=[4],Text=[there shall exist a type (other than a root
-      numeric type) that is an ancestor of both the target type and the operand
-      type; and]}
-
-    @ChgRef{Version=[4],Kind=[Added]}
-    @ChgAdded{Version=[4],Text=[in the case of a scalar type, the type of the
-      operand of the conversion shall have the Default_Value aspect specified.]}
-  @end{Itemize}
-
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-@ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
-In addition to the places where
-@LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
-these rules also apply in the private part of an instance of a generic unit.]}
-
-@begin{Reason}
-  @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[These rules are needed in order to ensure that a
-    well-defined parameter value is passed.]}
-@end{Reason}
-
 @end{Legality}
 
 @begin{RunTime}
@@ -3480,12 +3489,12 @@ the formal parameter object is created, and:
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0228-1]}
-@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0074-1]}
+@ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[4],Type=[Leading],Text=[]}@Comment{To add conditional leading}
 @ChgAdded{Version=[3],Text=[For a scalar type that has the Default_Value aspect
 specified, the formal parameter is initialized from the value of the actual,
 without checking that the value satisfies any constraint or any
-predicate@Chg{Version=[4],New=[, except in the following case: if the actual
+predicate@Chg{Version=[4],New=[. Furthermore, if the actual
 parameter is a view conversion and either],Old=[;]}]}
 
   @begin{Itemize}
@@ -3712,16 +3721,17 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
 @end{DiffWord2005}
 
 @begin{Incompatible2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0074-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0074-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2005}@b<Corrigendum:>
   Added rules to ensure that the value passed into a @key[out] parameter
   for elementary types is well-defined in the case of a view conversion.
   The new rules can be incompatible. For a view conversion to an unrelated type
   with the Default_Value aspect specified, the aspect is new in Ada 2012 so it
   should be unlikely to occur in existing code. For a view conversion to an
-  unrelated access type, as this could be written in Ada 95, but such a
-  view conversion is thought to be rare. In both cases, declaring and passing
-  a temporary rather than a view conversion will eliminate the problem.]}
+  unrelated access type, the incompatibility is possible as this could be
+  written in Ada 95, but such a view conversion is thought to be rare. In both
+  cases, declaring and passing a temporary rather than a view conversion
+  will eliminate the problem.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Because of a rule added in
@@ -5236,17 +5246,24 @@ statement.]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0177-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<expression_function_declaration>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
    [@Syn2{overriding_indicator}]
    @Syn2{function_specification} @key{is}
        (@Syn2{expression})
-       [@Syn2{aspect_specification}];>,Old=<>}"}
+       [@Syn2{aspect_specification}];@Chg{Version=[4],New=<
+ | [@Syn2{overriding_indicator}]
+   @Syn2{function_specification} @key{is}
+       @Syn2{aggregate}
+       [@Syn2{aspect_specification}];>,Old=<>}>,Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
-@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression} of an
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
+@ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
+@Chg{Version=[4],New=[or @nt{aggregate} ],Old=[]}of an
 @nt{expression_@!function_@!declaration} is the result type (see
 @RefSecNum{Return Statements}) of the function.@PDefn2{Term=[expected type],
 Sec=(expression of expression function)}]}
@@ -5261,11 +5278,14 @@ completion, it shall be the completion of a @nt{subprogram_declaration} or
 shall conform fully to that of the declaration.@Defn2{Term=[full conformance],Sec=(required)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
 @ChgAdded{Version=[3],Text=[If the result subtype has one or more unconstrained
 access discriminants, the accessibility level of the anonymous access type of
-each access discriminant, as determined by the @nt{expression} of the expression
-function, shall not be statically deeper than that of the master that elaborated
-the @nt{expression_@!function_@!declaration}.]}
+each access discriminant, as determined by the @nt{expression}
+@Chg{Version=[4],New=[or @nt{aggregate} ],Old=[]}of the
+@Chg{Version=[4],New=[@nt{expression_@!function_@!declaration}],Old=[expression
+function]}, shall not be statically deeper than that of the master that
+elaborated the @nt{expression_@!function_@!declaration}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5289,20 +5309,25 @@ the @nt{expression_@!function_@!declaration}.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0264-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
 @ChgAdded{Version=[3],Text=[An @nt{expression_@!function_@!declaration} declares
-an @i{expression function}.@Defn{exception function}@Defn2{Term=[function],Sec=[expression]}
-A completion
+an @i{expression function}.@Defn{expression function}@Defn2{Term=[function],Sec=[expression]}
+@Chg{Version=[4],New=[The @i<return expression>@Defn2{Term=[return expression],Sec=[of expression function]}
+of an expression function is the @nt{expression} or @nt{aggregate} of the
+@nt{expression_function_declaration}. ],Old=[]}A completion
 is not allowed for an @nt{expression_@!function_@!declaration}; however, an
 @nt{expression_@!function_@!declaration} can complete a previous declaration.]}
 @end{StaticSem}
 
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0262-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
 @ChgAdded{Version=[3],Text=[ The execution of an expression function is invoked
 by a subprogram call. For the execution of a subprogram call on an expression
 function, the execution of the @nt{subprogram_body} executes an implicit
 function body containing only a @nt{simple_return_statement} whose
-@nt{expression} is that of the expression function.]}
+@nt{expression} is @Chg{Version=[4],New=[the return expression],Old=[that]}
+of the expression function.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5332,4 +5357,12 @@ Elaboration_Check.]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Expression functions are new in Ada 2012.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0157-1]}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  A @nt{aggregate} can directly be the return expression of an expression
+  function. This eliminates the double parentheses that otherwise would be
+  necessary.]}
+@end{Extend2012}
 
