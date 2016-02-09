@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/02/09 04:55:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -633,8 +633,14 @@ create dispatching constructors for streams; in particular, this can be used to
 construct overridings for T'Class'Input.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Note that any tagged type will match T (see
-@RefSecNum{Formal Private and Derived Types}).]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[2],Text=[Note that @Chg{Version=[5],New=[almost ],Old=[]}any
+tagged type @Chg{Version=[5],New=[can be used in an instance of
+Generic_Dispatching_Constructor. Using a tagged incomplete view or a tagged
+partial view before the completion of the type in such an instance would be
+illegal; all other tagged types can be used in an instance of
+Generic_Dispatching_Constructor],Old=[will match T (see
+@RefSecNum{Formal Private and Derived Types})]}.]}
 @end{Discussion}
 
 @end{StaticSem}
@@ -6176,27 +6182,27 @@ uses of anonymous access types.]}
   special.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> The accessibility of
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> The accessibility of
   an anonymous access type of an @nt{extended_return_statement} is defined
   here rather than in @RefSecNum{Return Statements} so that all accessibility
   rules are here.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0089-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Corrected a number of rules so
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Corrected a number of rules so
   that they clearly apply to generic functions as well as functions. (Remember,
   a generic function is not a function.)]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Moved the assume the worst rule
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Moved the assume the worst rule
   about constrainedness of the prefix of attribute Access to
   @RefSecNum{Formal Private and Derived Types}, as a number of places in the
   Standard need this rule.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0157-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Ensured that the statically deeper
-  relationship applies within the return expression of an expression function.
-  (Dynamic properties apply by equivalence, but static properties are handled
-  separately.)]}
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Ensured that the statically
+  deeper relationship applies within the return expression of an expression
+  function. (Dynamic properties apply by equivalence, but static properties
+  are handled separately.)]}
 @end{DiffWord2012}
 
 

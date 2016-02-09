@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/02/09 04:55:40 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -603,7 +603,7 @@ Sec=(precondition expression)}@PDefn2{Term=[expected type],
 Sec=(postcondition expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI125-0113-1],ARef=[AI125-0159-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0159-1]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
 subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type @i<T>, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a formal parameter
@@ -622,7 +622,7 @@ expression is well-defined for a primitive subprogram of a type descended
 from @i<T>.]}]]}
 
 @begin{Reason}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0159-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[This ensures that the
   expression is well-defined for any primitive
   subprogram of a type descended from @i<T>.]}
@@ -926,7 +926,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @end{ChildExample}
 
     @ChgRef{Version=[4],Kind=[Added]}
-    @ChgAdded{Version=[4],Type=[Leading],Text=[If X is of a specific type @i<T> then]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[If X is of a specific tagged type @i<T> then]}
 @begin{ChildExample}
 @ChgRef{Version=[4],Kind=[Added]}
 @ChgAdded{Version=[4],Text=[@examcom<anonymous> : @key[constant] @i<T>'Class := @i<T>'Class(X);

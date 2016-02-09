@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/02/09 04:55:40 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1388,7 +1388,8 @@ a tagged partial view.],Old=[]}]}
 @ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[@PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
-these rules apply also in the private part of an instance of a generic unit.],Old=[]}}]}
+these rules apply also in the private part of an instance of a
+generic unit.],Old=[]}]}
 
 @begin{Ramification}
   @ChgNote{The following notes were moved to @RefSecNum{Aspect Specifications}

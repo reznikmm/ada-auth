@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/02/09 04:55:40 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.64 $}
+@Comment{$Revision: 1.65 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -863,8 +863,11 @@ perhaps due to being outside the base range),
 Constraint_Error is raised.
 @begin{Ramification}
 
-In this case, the value is outside the base range of its type,
-or is an invalid representation.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+  In this case, the value @Chg{Version=[5],New=[fails to satisfy its
+  (static) predicate (possible when the predicate is disabled),],Old=[]}
+  is outside the base range of its type,
+  or is an invalid representation.
 
 @end{Ramification}
 @end{RunTime}
