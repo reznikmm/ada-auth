@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012, 2013
+    --		 2008, 2009, 2011, 2012, 2013, 2016
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -184,6 +184,11 @@ package body ARM_HTML is
     -- 12/17/12 - RLB - Added AI12 references. Defined a change color for
     --			"version 4" (Ada 202x).
     --  3/26/13 - RLB - Added Script_HTML.
+    --  2/ 8/16 - RLB - Added styles for the Ada-Auth.org header.
+    --		      - Defined change colors for versions 5 and 6. (Actually
+    --			"borrowed" the color for version 2, so the new colors
+    --			are for version 2 and 6. Can't use dark blue, as links
+    --			are that color.)
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1267,16 +1272,16 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('1') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }"); -- Dark turquoise.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert1 {text-decoration: underline; color: rgb(0,51,51) }"); -- (Very) dark turquoise.
             Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete1 {text-decoration: line-through; color: rgb(0,51,51) }");
             --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both1 {text-decoration: underline, line-through; color: rgb(0,51,51) }");
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('2') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }"); -- Dark green.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }");
-            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,102,0) }");
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }"); -- Violet.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(102,0,153) }");
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;
@@ -1294,12 +1299,31 @@ package body ARM_HTML is
 		-- Both doesn't seem to work, so forget it.
 	-- else not used, don't generate it.
 	end if;
+	if Revision_Used ('5') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert5 {text-decoration: underline; color: rgb(0,102,0) }"); -- Dark green.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete5 {text-decoration: line-through; color: rgb(0,102,0) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both5 {text-decoration: underline, line-through; color: rgb(0,102,0) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
+	if Revision_Used ('6') then
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert6 {text-decoration: underline; color: rgb(0,102,153) }"); -- Turquiose.
+            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete6 {text-decoration: line-through; color: rgb(0,102,153) }");
+            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both6 {text-decoration: underline, line-through; color: rgb(0,102,153) }");
+		-- Both doesn't seem to work, so forget it.
+	-- else not used, don't generate it.
+	end if;
 
         -- Link styles:
 	-- We don't need these (they're given in the BODY command), but I've
 	-- kept them in case we want to change these in the future.
         --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:link {color: rgb(0,0,255)}");
         --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A:visited {color: rgb(128,0,128)}");
+	-- The following styles are for the Ada-Auth.Org header. It would be nice
+	-- if we could skip them if they're not needed, but we don't have the
+	-- information needed to do that.
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.Bar:link {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}");
+        Ada.Text_IO.Put_Line (Output_Object.Output_File, "    A.Bar:visited {font-family: Arial, Helvetica, sans-serif; font-style: normal; text-decoration: none; color: rgb(204,204,51)}");
 
 	-- Paragraph styles:
 	for S in ARM_Output.Unprefixed_Style_Subtype loop
