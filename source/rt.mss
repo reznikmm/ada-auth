@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.119 $ $Date: 2014/11/19 20:57:00 $ $Author: randy $ }
+@comment{ $Revision: 1.120 $ $Date: 2016/02/12 05:25:38 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2014/11/19 20:57:00 $}
+@Comment{$Date: 2016/02/12 05:25:38 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -6674,7 +6674,7 @@ the program can't do anything useful).]}
   default.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0082-1]}
-  @ChgAdded{Version=[4],Text=[@b{Correction:} Added a definition to clarify
+  @ChgAdded{Version=[4],Text=[@b{Corrigndum:} Added a definition to clarify
   that a "dispatching domain" is a concept which is identified by an
   object of type Dispatching_Domain; more than one object might identify
   the same dispatching domain (for instance, the result of function

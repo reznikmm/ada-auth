@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2016/02/12 05:25:38 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/02/12 05:25:38 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1359,8 +1359,8 @@ be supported as an alternative to RPC.]
   the PCS, while that was not necessarily true in earlier Ada. If a program
   depended on local targets not being routed through the PCS even when
   All_Calls_Remote is used, then it might behave differently or fail in
-  Ada 202x. This is highly unlikely as PCS is going to be able to communicate
-  with any partition of the program, including the local partition.]}
+  corrected Ada 2012. This is highly unlikely as PCS is going to be able to
+  communicate with any partition of the program, including the local partition.]}
 @end{Inconsistent2012}
 
 

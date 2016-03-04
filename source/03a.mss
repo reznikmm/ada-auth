@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/02/12 05:25:37 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2072,8 +2072,8 @@ common exceptional conditions as follows:}]}
 @ChgAdded{Version=[4],Text=[   -- @examcom[Similarly for all of the other input and output subprograms.]]}
 
 @begin{Discussion}
-  @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[We didn't change the language-defined Text_IO
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We didn't change the language-defined Text_IO
   this way for Ada 202x as it would be incompatible in marginal cases: these
   subprogram specifications would not be subtype conformant with existing
   access-to-subprogram types, so Put_Line'Access (for instance) would become

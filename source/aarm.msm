@@ -22,7 +22,8 @@
 @RTFHeaderPrefix{Version=[1],Text=[ISO/IEC 8652:1995(E) with COR.1:2001]}
 @RTFHeaderPrefix{Version=[2],Text=[ISO/IEC 8652:2007(E) Ed. 3]}
 @RTFHeaderPrefix{Version=[3],Text=[ISO/IEC 8652:2012(E)]}
-@RTFHeaderPrefix{Version=[4],Text=[ISO/IEC 8652:202x(E)]}
+@RTFHeaderPrefix{Version=[4],Text=[ISO/IEC 8652:2012(E) with COR.1:2016]}
+@RTFHeaderPrefix{Version=[5],Text=[ISO/IEC 8652:202x(E)]}
 @RTFFooter{UseDate=[T],UseClauseName=[T],UseISOFormat=[F]}@Comment{RM style footers}
 @RTFPageSize{Letter}
 @RTFFonts{Serif=[Times],SansSerif=[Arial]}
@@ -30,7 +31,8 @@
 @RTFVersionName{Version=[1],Text=[Technical Corrigendum 1]}
 @RTFVersionName{Version=[2],Text=[Amendment 1]}
 @RTFVersionName{Version=[3],Text=[Ada 2012]}
-@RTFVersionName{Version=[4],Text=[Ada 202x]}
+@RTFVersionName{Version=[4],Text=[Ada 2012 Corrigendum 1]}
+@RTFVersionName{Version=[5],Text=[Ada 202x]}
 
 @Comment{HTML properties}
 @Comment{Many small files are used, thus no @SingleHTMLOutputFile command}
