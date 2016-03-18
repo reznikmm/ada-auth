@@ -189,6 +189,8 @@ package body ARM_HTML is
     --			"borrowed" the color for version 2, so the new colors
     --			are for version 2 and 6. Can't use dark blue, as links
     --			are that color.)
+    --  3/ 3/16 - RLB - The color change is hell on the RR manuals. Redid
+    --			it to switch the colors only if version 5 is in use.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1279,10 +1281,17 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('2') then
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }"); -- Violet.
-            Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }");
-            --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(102,0,153) }");
-		-- Both doesn't seem to work, so forget it.
+	    if Revision_Used ('5') then -- Ugly color here, nice color for #5
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }"); -- Violet.
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }");
+                --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(102,0,153) }");
+		    -- Both doesn't seem to work, so forget it.
+	    else -- Use the nice green here.
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(0,102,0) }"); -- Dark green.
+                Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(0,102,0) }");
+                --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(0,102,0) }");
+		    -- Both doesn't seem to work, so forget it.
+	    end if;
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('3') then
