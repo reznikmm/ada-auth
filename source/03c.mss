@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/02/09 04:55:40 $}
+@Comment{$Date: 2016/03/18 06:59:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4124,6 +4124,37 @@ nor a return type that is an incomplete view.],Old=[]}
     is not known as it is for tagged types) and disallow returning any
     sort of incomplete objects (since we don't know how big they are).]}
   @end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0155-1]}
+@ChgAdded{Version=[5],Text=[The controlling operand or controlling result of
+a dispatching call shall not be of an incomplete view if the operand or result
+is dynamically tagged.]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[This rule is needed to prevent
+    the following case:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[package] Pack @key[is]
+   @key[type] T @key[is tagged];
+   @key[function] F @key[return access] T'Class;
+   @key[function] G (X : @key[access] T) @key[return] Integer;
+   I : Integer := G (F);                 -- @RI{Illegal by above rule.}
+   @key[type] T @key[is tagged null record];
+@key[end] Pack;]}
+@end{Example}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[If this was not illegal, the compiler would
+    have to generate a dispatching call on G without necessarily knowing where
+    the tag of type T is stored (the completion of T might not be until the
+    body of Pack). The fact that any such call will raise Program_Error does
+    not absolve us of detecting the problem; see the @MetaRulesTitle
+    in @RefSecNum{Freezing Rules}.]}
+  @end{Reason}
+
 @end{Legality}
 
 @begin{StaticSem}
@@ -4369,6 +4400,14 @@ not at all) for different designated subtypes.
   an incomplete view is leads to semantic nonsense, and thus we don't consider
   this a potential incompatibility, as compilers most likely are doing the
   right thing.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0155-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule preventing a
+  dispatching call on an incomplete type before the completion. This is
+  not an incompatibility as previously this was prevented by the freezing
+  rules. However, that violated the intended design of the freezing rules,
+  so we've now changed to an explicit @LegalityName here, and eliminated the
+  associated freezing rules.]}
 @end{DiffWord2012}
 
 
@@ -5137,7 +5176,7 @@ of the master of the call is presumed to be the same as that of the level
 of the master that elaborated the@Chg{Version=[4],New=[],Old=[ function]}
 body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
 
-@Chg{Version=[4],New=[ or generic function @i<F>],Old=[]}@begin{Honest}
+@begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
   @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
   also applies (that is, the @ldquote@;a level@rdquote is of
