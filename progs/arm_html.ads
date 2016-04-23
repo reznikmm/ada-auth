@@ -103,6 +103,7 @@ package ARM_HTML is
     --			Revised_Clause_Header.
     --  3/26/13 - RLB - Added HTML_Script to allow adding Google Analytics
     --			code as needed.
+    --  4/20/16 - RLB - Added Force_New_Revision_Colors.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -143,6 +144,7 @@ package ARM_HTML is
 	              Footer_HTML : String;
 		      Title : in String := "";
 		      Body_Font : ARM_Output.Font_Family_Type;
+		      Force_New_Revision_Colors : Boolean;
 		      Text_Color : Color_String;
 		      Background_Color : Color_String;
 		      Link_Color : Color_String;
@@ -553,6 +555,7 @@ private
         Header_HTML : Ada.Strings.Unbounded.Unbounded_String;
         Footer_HTML : Ada.Strings.Unbounded.Unbounded_String;
 	Body_Font : ARM_Output.Font_Family_Type := ARM_Output.Roman;
+	Force_New_Revision_Colors : Boolean;
 	Text_Color : Color_String;
 	Background_Color : Color_String;
 	Link_Color : Color_String;

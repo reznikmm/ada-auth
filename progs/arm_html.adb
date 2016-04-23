@@ -191,6 +191,9 @@ package body ARM_HTML is
     --			are that color.)
     --  3/ 3/16 - RLB - The color change is hell on the RR manuals. Redid
     --			it to switch the colors only if version 5 is in use.
+    --  4/20/16 - RLB - Slightly increased the base indent as a lot of
+    --			paragraph numbers are overlapping.
+    --		      - Added Force_New_Revision_Colors.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -206,7 +209,7 @@ package body ARM_HTML is
     TRAILING_PERCENT : constant := 150;
 	-- Leading is 150% of normal height.
 
-    INDENT_EMS_FOR_PARANUMS : constant := 12;
+    INDENT_EMS_FOR_PARANUMS : constant := 18;
 	-- Indent *all* text (for HTML 4) this amount to leave (some) room for
 	-- the paragraph numbers. In 0.1 EMs.
 
@@ -214,7 +217,9 @@ package body ARM_HTML is
 	-- If True, we'll optimize for Firefox; otherwise, we'll optimize for
 	-- IE 6. Note that IE generally shows the Firefox code better than
 	-- Firefox shows the IE code, so we generally recommend setting to
-	-- True unless IE must be perfect.
+	-- True unless IE must be perfect. (Modern versions of IE are more
+	-- like Firefox, so it's unlikely that setting this to False should
+	-- be needed.)
 
     type Tag_Kind is (DIV, UL, DL);
 
@@ -1281,7 +1286,8 @@ package body ARM_HTML is
 	-- else not used, don't generate it.
 	end if;
 	if Revision_Used ('2') then
-	    if Revision_Used ('5') then -- Ugly color here, nice color for #5
+	    if Revision_Used ('5') or else Output_Object.Force_New_Revision_Colors then
+		-- Ugly color here, nice color for #5
                 Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.insert2 {text-decoration: underline; color: rgb(102,0,153) }"); -- Violet.
                 Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.delete2 {text-decoration: line-through; color: rgb(102,0,153) }");
                 --Ada.Text_IO.Put_Line (Output_Object.Output_File, "    SPAN.both2 {text-decoration: underline, line-through; color: rgb(102,0,153) }");
@@ -1634,6 +1640,7 @@ package body ARM_HTML is
 	              Footer_HTML : String;
 		      Title : in String := "";
 		      Body_Font : ARM_Output.Font_Family_Type;
+		      Force_New_Revision_Colors : Boolean;
 		      Text_Color : Color_String;
 		      Background_Color : Color_String;
 		      Link_Color : Color_String;
@@ -1714,6 +1721,7 @@ package body ARM_HTML is
 	Output_Object.Header_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Header_HTML);
 	Output_Object.Footer_HTML := Ada.Strings.Unbounded.To_Unbounded_String(Footer_HTML);
 	Output_Object.Body_Font := Body_Font;
+	Output_Object.Force_New_Revision_Colors := Force_New_Revision_Colors;
 	Output_Object.Text_Color := Text_Color;
 	Output_Object.Background_Color := Background_Color;
 	Output_Object.Link_Color := Link_Color;

@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -107,30 +107,35 @@ package ARM_Format is
     --			small.
     -- 11/26/12 - RLB - Added subdivision names.
     -- 12/17/12 - RLB - Added Ada 2012 AARM sections.
+    --  3/17/16 - RLB - Removed Changes_Only, added Base_Change_Version.
 
     type Format_Type is tagged limited private;
 
-    type Change_Kind is (Old_Only, New_Only, Changes_Only,
-	Show_Changes, New_Changes);
+    type Change_Kind is (Old_Only, New_Only, Show_Changes, New_Changes);
 	-- Which changes to show?
 	-- If Old_Only, we will get the original Ada Reference Manual or AARM.
 	-- If New_Only, we will get the reference documents with the updates
 	-- up to the Change_Version specified included.
-	-- If Changes_Only, we will get the reference documents with the updates
-	-- up to the Change_Version specified included; and insertions and
-	-- deletions will be shown for Change_Version.
-	-- If Show_Changes, original RM text will be shown as deleted,
-	-- and new RM text will be shown as inserted, up to and including the
-	-- Change_Version specified.
+	-- If Show_Changes, we will get the reference documents with the
+        -- updates up to the Base_Change_Version specified included; and
+        -- insertions and deletions will be shown for versions
+        -- Base_Change_Version .. Change_Version.
 	-- If New_Changes, original RM text removed, but new RM text will be
 	-- shown as inserted, up to and including the Change_Version specified.
 	-- In all cases, changes with versions newer than Change_Version are
 	-- ignored. Thus Change_Version = '0' is the same as Old_Only no
 	-- matter what command is given.
+	--
+	-- Note: Previous versions of this tool had Changes_Only as well;
+	-- that is the same as Show_Changes with Base_Change_Version =
+	-- Change_Version. (The previous version's Show_Changes is
+	-- equivalent to this version's Show_Changes with
+	-- Base_Change_Version = 1.)
 
     procedure Create (Format_Object : in out Format_Type;
 		      Changes : in ARM_Format.Change_Kind;
 		      Change_Version : in ARM_Contents.Change_Version_Type;
+		      Base_Change_Version : in ARM_Contents.Change_Version_Type;
 		      Display_Index_Entries : in Boolean;
 		      Include_Annotations : in Boolean;
 		      Include_ISO : in Boolean;
@@ -141,7 +146,8 @@ package ARM_Format is
 		      Use_ISO_2004_Contents_Format : in Boolean;
 		      Use_ISO_2004_List_Format : in Boolean;
 		      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind);
-	-- Initialize an input object. Changes and Change_Version determine
+	-- Initialize an input object. Changes, Change_Version, and
+	-- Base_Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
 	-- will not generate any visible text (although they might generate
@@ -309,6 +315,7 @@ private
 	-- Document information:
 	Changes : ARM_Format.Change_Kind; -- No Both here.
 	Change_Version : ARM_Contents.Change_Version_Type;
+	Base_Change_Version : ARM_Contents.Change_Version_Type;
 	Display_Index_Entries : Boolean;
 	Include_Annotations : Boolean;
 	Include_ISO : Boolean;

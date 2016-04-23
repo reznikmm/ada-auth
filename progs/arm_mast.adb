@@ -22,7 +22,7 @@ package body ARM_Master is
     -- execute it.
     --
     -- ---------------------------------------
-    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013
+    -- Copyright 2006, 2007, 2009, 2011, 2012, 2013, 2016
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -72,6 +72,8 @@ package body ARM_Master is
     --  8/31/12 - RLB - Added Output_Path.
     -- 11/26/12 - RLB - Added Subdivision_Names.
     --  3/26/13 - RLB - Added HTMLScript.
+    --  3/17/16 - RLB - Added Base_Change_Version.
+    --  4/20/16 - RLB - Added HTML_New_Revision_Colors.
 
     type Command_Type is (
 	-- Source commands:
@@ -104,6 +106,7 @@ package body ARM_Master is
 	HTML_Header,
 	HTML_Footer,
 	HTML_Color,
+	HTML_New_Revision_Colors,
 	-- RTF properties:
 	Single_RTF_Output_File,
 	RTF_Header_Prefix,
@@ -140,6 +143,7 @@ package body ARM_Master is
     -- Command line (global) properties:
     Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
     Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
+    Base_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
 
     -- Global properties:
     Display_Index_Entries : Boolean := False; -- Should Index entries be displayed?
@@ -180,6 +184,7 @@ package body ARM_Master is
     HTML_Script_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Header_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
     HTML_Footer_Text : Ada.Strings.Unbounded.Unbounded_String; -- Empty by default.
+    HTML_Use_New_Revision_Colors : Boolean := False;
     HTML_Text_Color : ARM_HTML.Color_String := "#000000";
     HTML_Background_Color : ARM_HTML.Color_String := "#FFFFF0";
     HTML_Link_Color : ARM_HTML.Color_String := "#0000FF";
@@ -262,6 +267,8 @@ package body ARM_Master is
 	    return HTML_Header;
 	elsif Canonical_Name = "htmlfooter" then
 	    return HTML_Footer;
+	elsif Canonical_Name = "htmlnewrevisioncolors" then
+	    return HTML_New_Revision_Colors;
 	elsif Canonical_Name = "htmlcolor" then
 	    return HTML_Color;
 	elsif Canonical_Name = "singlertfoutputfile" then
@@ -1024,7 +1031,7 @@ package body ARM_Master is
 		    Ada.Text_IO.Put_Line("Single HTML Output File");
 
 		when Use_MS_DOS_Names =>
-		    -- @Single_HTML_Output_File
+		    -- @UseMSDOSFileNames
 		    Use_MS_DOS_Filenames := True;
 		    Ada.Text_IO.Put_Line("Use MS-DOS (8.3) file names for HTML output files");
 
@@ -1080,6 +1087,11 @@ package body ARM_Master is
 		    if Ada.Strings.Unbounded.Length (HTML_Footer_Text) /= 0 then
 			Ada.Text_IO.Put_Line("Non-empty HTML Footer seen");
 		    end if;
+
+		when HTML_New_Revision_Colors =>
+		    -- @HTMLNewRevisionColors
+		    HTML_Use_New_Revision_Colors := True;
+		    Ada.Text_IO.Put_Line("Unconditionally use new revision colors in HTML");
 
 		when HTML_Color =>
 		    --@HTMLColor{Text=[<Color]>,Background=[<Color>],
@@ -1230,12 +1242,13 @@ package body ARM_Master is
 	-- Create an appropriate format object.
     begin
 	ARM_Format.Create (Format_Object, Change_Kind, Change_Version,
+                Base_Change_Version   => Base_Change_Version,
 		Display_Index_Entries => Display_Index_Entries,
-		Include_Annotations => Include_Annotations,
-		Include_ISO => Include_ISO_Text,
-		Link_Non_Terminals => Should_Link_Non_Terminals,
-		Number_Paragraphs => Should_Number_Paragraphs,
-		Examples_Font => Font_of_Examples,
+		Include_Annotations   => Include_Annotations,
+		Include_ISO	      => Include_ISO_Text,
+		Link_Non_Terminals    => Should_Link_Non_Terminals,
+		Number_Paragraphs     => Should_Number_Paragraphs,
+		Examples_Font	      => Font_of_Examples,
 		Use_ISO_2004_Note_Format => Use_ISO_2004_Note_Format,
 		Use_ISO_2004_Contents_Format => Use_ISO_2004_Contents_Format,
 		Use_ISO_2004_List_Format => Use_ISO_2004_List_Format,
@@ -1293,6 +1306,7 @@ package body ARM_Master is
 	File_Name : in String;
 	The_Change_Kind : ARM_Format.Change_Kind; -- Changes to generate.
 	The_Change_Version : ARM_Contents.Change_Version_Type; -- Change version.
+	The_Base_Change_Version : ARM_Contents.Change_Version_Type; -- Base change version.
         Output_Format : in Output_Format_Type;
         Output_Path : in String) is
 	-- Read and process the master file given.
@@ -1309,6 +1323,7 @@ package body ARM_Master is
 
 	Change_Kind := The_Change_Kind;
 	Change_Version := The_Change_Version;
+	Base_Change_Version := The_Base_Change_Version;
 
 	Source_Length := 0;
 	Read_Master_File (Input_Object);
@@ -1347,6 +1362,7 @@ package body ARM_Master is
 			             Footer_HTML => +HTML_Footer_Text,
 				     Title => Get_Versioned_String(Document_Title,Change_Version),
 				     Body_Font => Font_of_Body,
+				     Force_New_Revision_Colors => HTML_Use_New_Revision_Colors and then Change_Version >= '5',
 				     Text_Color => HTML_Text_Color,
 				     Background_Color => HTML_Background_Color,
 				     Link_Color => HTML_Link_Color,

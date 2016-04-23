@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013
+    --           2010, 2011, 2012, 2013, 2016
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -282,6 +282,7 @@ package body ARM_Format is
     --  7/ 5/13 - RLB - Added a nasty hack so added aspect names are marked
     --			as such in Show_Changes versions.
     -- 12/13/13 - RLB - Added InitialVersion parameter to ChgAttrib.
+    --  3/17/16 - RLB - Removed Changes_Only, added Base_Change_Version.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -325,6 +326,7 @@ package body ARM_Format is
     procedure Create (Format_Object : in out Format_Type;
 		      Changes : in ARM_Format.Change_Kind;
 		      Change_Version : in ARM_Contents.Change_Version_Type;
+		      Base_Change_Version : in ARM_Contents.Change_Version_Type;
 		      Display_Index_Entries : in Boolean;
 		      Include_Annotations : in Boolean;
 		      Include_ISO : in Boolean;
@@ -335,7 +337,8 @@ package body ARM_Format is
 		      Use_ISO_2004_Contents_Format : in Boolean;
 		      Use_ISO_2004_List_Format : in Boolean;
 		      Top_Level_Subdivision_Name : in ARM_Output.Top_Level_Subdivision_Name_Kind) is
-	-- Initialize an input object. Changes and Change_Version determine
+	-- Initialize an input object. Changes, Change_Version,
+	-- and Base_Change_Version determine
 	-- which changes should be displayed. If Display_Index_Entries is True,
 	-- index entries will be printed in the document; otherwise, they
 	-- will not generate any visible text (although they might generate
@@ -360,6 +363,7 @@ package body ARM_Format is
     begin
 	Format_Object.Changes := Changes;
 	Format_Object.Change_Version := Change_Version;
+	Format_Object.Base_Change_Version := Base_Change_Version;
 	Format_Object.Display_Index_Entries := Display_Index_Entries;
 	Format_Object.Include_Annotations := Include_Annotations;
 	Format_Object.Include_ISO := Include_ISO;
@@ -521,45 +525,13 @@ package body ARM_Format is
 		        Text_Kind := Do_Not_Display_Text;
 		    end if;
 	        end if;
-	    when ARM_Format.Changes_Only =>
-	        -- Display only the the changes for version
-	        -- Format_Object.Change_Version, older changes
-	        -- are applied and newer changes are ignored.
-	        if Operation = ARM_Output.Insertion then
-		    if Version > Format_Object.Change_Version then
-		        -- Change version is newer than we're displaying;
-		        -- ignore the item.
-		        Text_Kind := Do_Not_Display_Text;
-		    elsif Version < Format_Object.Change_Version then
-		        -- Change version is older than we're displaying;
-		        -- display the change normally.
-		        Text_Kind := ARM_Output.None;
-		    else
-		        -- The correct version, display the change
-		        -- as an insertion.
-		        Text_Kind := ARM_Output.Insertion;
-		    end if;
-	        else -- Deletion.
-		    if Version > Format_Object.Change_Version then
-		        -- Change version is newer than we're displaying;
-		        -- the item isn't deleted yet, display the change
-		        -- normally.
-		        Text_Kind := ARM_Output.None;
-		    elsif Version < Format_Object.Change_Version then
-		        -- Change version is older than we're displaying;
-		        -- the item is deleted, so ignore the item.
-		        Text_Kind := Do_Not_Display_Text;
-		    else
-		        -- The correct version, display the change
-		        -- as a deletion.
-		        Text_Kind := ARM_Output.Deletion;
-		    end if;
-	        end if;
 	    when ARM_Format.Show_Changes |
 		 ARM_Format.New_Changes =>
-	        -- Display all of the changes up to version
-	        -- Format_Object.Change_Version, newer changes are
-	        -- ignored. (New_Changes shows deletions as a single
+	        -- Display only the the changes for versions
+	        -- Format_Object.Base_Change_Version ..
+		-- Format_Object.Change_Version, older changes
+	        -- are applied and newer changes are ignored.
+	        -- (New_Changes shows deletions as a single
 	        -- character for older versions of Word, but otherwise
 	        -- is the same.)
 	        if Operation = ARM_Output.Insertion then
@@ -567,6 +539,10 @@ package body ARM_Format is
 		        -- Change version is newer than we're displaying;
 		        -- ignore the item.
 		        Text_Kind := Do_Not_Display_Text;
+		    elsif Version < Format_Object.Base_Change_Version then
+		        -- Change version is older than we're displaying;
+		        -- display the change normally.
+		        Text_Kind := ARM_Output.None;
 		    else
 		        -- This version or older, display the change
 		        -- as an insertion.
@@ -578,6 +554,10 @@ package body ARM_Format is
 		        -- the item isn't deleted yet, display the change
 		        -- normally.
 		        Text_Kind := ARM_Output.None;
+		    elsif Version < Format_Object.Base_Change_Version then
+		        -- Change version is older than we're displaying;
+		        -- the item is deleted, so ignore the item.
+		        Text_Kind := Do_Not_Display_Text;
 		    else
 		        -- The correct version, display the change
 		        -- as a deletion.
@@ -881,7 +861,6 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 				    Level, Clause_Number), Ada.Strings.Right),
 		            Clause_Text);
 	            when ARM_Format.New_Only |
-		         ARM_Format.Changes_Only |
 		         ARM_Format.Show_Changes |
 		         ARM_Format.New_Changes =>
 		        ARM_Output.Clause_Reference (Output_Object,
@@ -2069,31 +2048,27 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		        -- Format_Object.Change_Version, no insertions or deletions.
 --Ada.Text_IO.Put_Line ("%% False - New only");
 			return False; -- This is always deleted.
-		    when ARM_Format.Changes_Only =>
-		        -- Display only the the changes for version
-		        -- Format_Object.Change_Version, older changes
+		    when ARM_Format.Show_Changes |
+		         ARM_Format.New_Changes =>
+		        -- Display only the the changes for versions
+		        -- Format_Object.Base_Change_Version ..
+			-- Format_Object.Change_Version, older changes
 		        -- are applied and newer changes are ignored.
-		        if Format_Object.Next_Paragraph_Version < Format_Object.Change_Version then
+		        -- (New_Changes shows deletions as a single
+		        -- character for older versions of Word, but otherwise
+		        -- is the same.)
+		        if Format_Object.Next_Paragraph_Version <
+			   Format_Object.Base_Change_Version then
 			    -- Change version is older than we're displaying;
 			    -- no text will be shown.
---Ada.Text_IO.Put_Line ("%% False - changes only, old version");
+--Ada.Text_IO.Put_Line ("%% False - show changes, old version");
 			    return False; -- This is always deleted.
 		        else
 			    -- The correct version.
---Ada.Text_IO.Put_Line ("%% True - changes only, current version");
+--Ada.Text_IO.Put_Line ("%% True - show changes, new enough version");
 			    return True; -- Show the item, as the old text
 					 -- will be shown as deleted.
 		        end if;
-		    when ARM_Format.Show_Changes |
-		         ARM_Format.New_Changes =>
-		        -- Display all of the changes up to version
-		        -- Format_Object.Change_Version, newer changes are
-		        -- ignored. (New_Changes shows deletions as a single
-		        -- character for older versions of Word, but otherwise
-		        -- is the same.)
---Ada.Text_IO.Put_Line ("%% True - show changes");
-		        return True; -- Show the item, as the old text
-				     -- will be shown as deleted.
 	        end case;
 	    end Show_Leading_Text_for_Paragraph;
 
@@ -2169,11 +2144,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (DelNoMsg)");
 			-- so it is not safe to test here.)
 		        case Format_Object.Changes is
 			    when ARM_Format.New_Only |
-			         ARM_Format.Changes_Only |
 			         ARM_Format.Show_Changes |
 			         ARM_Format.New_Changes =>
 			        -- Note that we include this in the
-			        -- "Show_Changes" and "Changes_Only" versions,
+			        -- "Show_Changes" version, even when the item
+				-- is older than the base change version,
 			        -- so that complete paragraph deletions are obvious,
 			        -- and also so that we can use revision bars rather than
 			        -- displaying the changes in the RM version.
@@ -7855,12 +7830,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				            Check_Paragraph;
 				        -- else null; -- Nothing special to do.
 				        end if;
-				    when ARM_Format.Changes_Only |
-					 ARM_Format.Show_Changes |
+				    when ARM_Format.Show_Changes |
 					 ARM_Format.New_Changes =>
 					if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
-					    Format_Object.Change_Version and then
-					    Format_Object.Changes = ARM_Format.Changes_Only then
+					    Format_Object.Base_Change_Version then
 					    -- Just normal output text.
 				            if ARM_Database."=" (Format_Object.Next_Paragraph_Change_Kind,
 				               ARM_Database.Deleted) or else
@@ -10384,12 +10357,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        null; -- Nothing special to do.
 			    when ARM_Format.New_Only =>
 			        null; -- Nothing to do (we nulled out the text before we got here).
-			    when ARM_Format.Changes_Only |
-				 ARM_Format.Show_Changes |
+			    when ARM_Format.Show_Changes |
 				 ARM_Format.New_Changes =>
 				if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
-				    Format_Object.Change_Version and then
-				    Format_Object.Changes = ARM_Format.Changes_Only then
+				    Format_Object.Base_Change_Version then
 				    -- Old enough that only the new text is shown.
 			            null; -- Nothing to do (we nulled out the text before we got here).
 				else
@@ -10428,12 +10399,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        null; -- Nothing to do (we nulled out the text before we got here).
 			    when ARM_Format.New_Only =>
 			        null; -- Nothing special to do.
-			    when ARM_Format.Changes_Only |
-				 ARM_Format.Show_Changes |
+			    when ARM_Format.Show_Changes |
 				 ARM_Format.New_Changes =>
 				if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
-				    Format_Object.Change_Version and then
-				    Format_Object.Changes = ARM_Format.Changes_Only then
+				    Format_Object.Base_Change_Version then
 				    -- Old enough that only the new text is shown.
 			            null; -- Nothing special to do.
 				else
@@ -10490,11 +10459,10 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        -- Skip the text:
 			                ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
 				        ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-				    when ARM_Format.Changes_Only |
-					 ARM_Format.Show_Changes =>
+				    when ARM_Format.Show_Changes |
+				         ARM_Format.New_Changes =>
 				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version <
-				            Format_Object.Change_Version and then
-					    Format_Object.Changes = ARM_Format.Changes_Only then
+				            Format_Object.Base_Change_Version then
 					    -- Old enough that only the new text is shown.
 				            -- Skip the text:
 			                    ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
@@ -10528,44 +10496,18 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 						           Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
 					        end case;
 				                ARM_Output.Text_Format (Output_Object,
-									Format_Object.Text_Format);
+								        Format_Object.Text_Format);
+						if Format_Object.Changes = ARM_Format.New_Changes then
+				                    ARM_Output.Ordinary_Character (Output_Object, ' ');
+				                    -- Skip the text (we're not going to output it):
+			                            ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
+				                    ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
+						-- else if Format_Object.Changes = ARM_Format.Show_Changes then
+						--    Nothing else needed.
+						end if;
 				            -- else no text, so don't emit a change area.
 				            end if;
 					end if;
-				    when ARM_Format.New_Changes =>
-				        ARM_Input.Get_Char (Input_Object, Ch2);
-				        ARM_Input.Replace_Char (Input_Object);
-				        Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text :=
-					    Ch /= Ch2;
-				        if Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Was_Text then
-					    -- Non-empty text; calculate new change state: (current is deletion)
-				            Check_Paragraph;
-					    case Format_Object.Text_Format.Change is
-					        when ARM_Output.Deletion | ARM_Output.None =>
-						    Format_Object.Text_Format.Change := ARM_Output.Deletion;
-						    Format_Object.Text_Format.Version :=
-						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-						    Format_Object.Text_Format.Added_Version := '0';
-					        when ARM_Output.Insertion =>
-						    Format_Object.Text_Format.Change := ARM_Output.Both;
-						    Format_Object.Text_Format.Added_Version :=
-						       Format_Object.Text_Format.Version;
-						    Format_Object.Text_Format.Version :=
-						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-					        when ARM_Output.Both =>
-						    Format_Object.Text_Format.Change := ARM_Output.Both;
-						    -- Added_Version is unchanged.
-						    Format_Object.Text_Format.Version :=
-						       Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr-1).Change_Version;
-					    end case;
-				            ARM_Output.Text_Format (Output_Object,
-								    Format_Object.Text_Format);
-				            ARM_Output.Ordinary_Character (Output_Object, ' ');
-				            -- Skip the text (we're not going to output it):
-			                    ARM_Input.Skip_until_Close_Char (Input_Object, Ch);
-				            ARM_Input.Replace_Char (Input_Object); -- Let the normal termination clean this up.
-				        -- else no text, so don't emit a change area.
-				        end if;
 			        end case;
 			    end if;
 			    Format_Object.In_Change := True;
