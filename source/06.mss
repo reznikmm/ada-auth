@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2016/02/09 04:55:40 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1127,6 +1127,26 @@ denotes a function declaration}, the following attribute is defined:]}
   for F.]}
 @end(description)
 @EndPrefixType{}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0143-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} E that
+denotes an entry declaration of an entry family}
+(see @RefSecNum{Entries and Accept Statements}), the following attribute is
+defined:]}
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<E>, AttrName=<Index>, ARef=[AI12-0143-1],
+  InitialVersion=[5],
+  Text=[@Chg{Version=[5],New=[Within a precondition or postcondition expression
+  for entry family E, denotes the value of the entry index for the call of E.
+  The nominal subtype of this attribute is the entry index subtype.],Old=[]}]}@Comment{End of Annex text here.}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0143-1]}
+  @ChgAdded{Version=[5],NoPrefix=[T],Text=[Use of this attribute is allowed
+  only within a precondition or postcondition expression for E.]}
+@end(description)
+@EndPrefixType{}
+
 @end{StaticSem}
 
 @begin{Runtime}
@@ -1169,15 +1189,17 @@ as follows:]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0166-1]}
 @ChgAdded{Version=[3],Text=[The precondition checks are performed in an
 arbitrary order,
 and if any of the class-wide precondition expressions evaluate to True, it is
 not specified whether the other class-wide precondition expressions are
 evaluated. The precondition checks and any check for elaboration of the
-subprogram body are performed in an arbitrary order. It is not
-specified whether in a call on a protected operation, the checks are performed
-before or after starting the protected action. For an entry
-call, the checks are performed prior to checking whether the entry is open.@PDefn2{Term=(arbitrary order),
+subprogram body are performed in an arbitrary order. @Chg{Version=[5],New=[In],
+Old=[It is not specified whether in]} a call on a protected operation, the
+checks are performed before @Chg{Version=[5],New=[],Old=[or after ]}starting
+the protected action. For an entry call, the checks are performed prior to
+checking whether the entry is open.@PDefn2{Term=(arbitrary order),
   Sec=(allowed)}@PDefn{unspecified}]}
 
 @begin{Reason}
@@ -1379,6 +1401,14 @@ the value.]}
   like expected. In the case where redispatching is desired, an explicit
   conversion to a class-wide type can be used.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0166-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Specified that precondition
+  checks always take place before starting a protected action. Original Ada
+  2012 left this unspecified, so if an implementation made the checks after
+  starting the protected action, and a program depended upon that, the
+  program might fail in a different compiler. But such a program was depending
+  on unspecified behavior anyway, and thus was never portable; as such,
+  such programs should be rare.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -1410,6 +1440,12 @@ the value.]}
   original Ada 2012 violated the LSP semantics that class-wide preconditions
   were intended to model.]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0143-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The Index attribute is new.]}
+@end{Extend2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -3784,6 +3820,7 @@ rhs="@Chg{Version=[2],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0173-1]}
 @Chg{Version=[2],New=[@Defn2{Term=[result subtype], Sec=(of a function)}
 The @i<result subtype> of a function is the subtype denoted by the
 @nt<subtype_mark>, or defined by the @nt<access_definition>, after the reserved
@@ -3798,9 +3835,11 @@ of the function.@PDefn2{Term=[expected type], Sec=(return expression)}]}
 The expected type for @Chg{Version=[2],New=[the @nt{expression}, if any, of a
 @nt{simple_@!return_@!statement}],Old=[a return expression]} is the result type of
 the corresponding function.@Chg{Version=[2],New=[
-@PDefn2{Term=[expected type], Sec=(@nt{expression} of @nt{extended_return_statement})}
+@Chg{Version=[5],New=[@PDefn2{Term=[expected type], Sec=(@nt{expression} of @nt{extended_return_object_declaration})}],
+Old=[@PDefn2{Term=[expected type], Sec=(@nt{expression} of @nt{extended_return_statement})}]}
 The expected type for the
-@nt{expression} of an @nt{extended_return_statement} is that of the
+@nt{expression} of an
+@Chg{Version=[5],New=[@nt{extended_return_object_declaration}],Old=[@nt{extended_return_statement}]} is that of the
 @nt{return_@!subtype_@!indication}.],Old=[]}
 @begin{Honest}
 The same applies to generic functions.
@@ -3829,6 +3868,7 @@ not be within a body that is within the construct to which the
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0015-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0173-1]}
 A function body shall contain at least one
 @Chg{Version=[2],New=[return statement],Old=[@nt{return_@!statement}]} that
 applies to the function body,
@@ -3837,7 +3877,8 @@ A @Chg{Version=[2],New=[@nt{simple_@!return_@!statement}],Old=[@nt{return_@!stat
 include @Chg{Version=[2],New=[an @nt{expression}],Old=[a return expression]}
 if and only if it applies to a function
 body.@Chg{Version=[2],New=[ An @nt<extended_return_statement> shall apply to
-a function body.],Old=[]}@Chg{Version=[3],New=[ An @nt{extended_return_statement}
+a function body.],Old=[]}@Chg{Version=[3],New=[ An
+@Chg{Version=[5],New=[@nt{extended_return_object_declaration}],Old=[@nt{extended_return_statement}]}
 with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 
 @begin{Reason}
@@ -3873,6 +3914,13 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
   true even though a generic function is not a function.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0173-1]}
+@ChgAdded{Version=[5],Text=[The @i<@nt{expression} of an
+@nt{extended_return_statement}> is the
+@nt{expression} of the @nt{extended_return_object_declaration} of the
+@nt{extended_return_statement}.@Defn2{Term=(expression),Sec=(of an
+@nt{extended_return_statement})}]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For an
 @nt{extended_@!return_@!statement} that applies to a function body:]}
@@ -3881,6 +3929,7 @@ with the reserved word @key[constant] shall include an @nt{expression}.],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1],ARef=[AI05-0103-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined by a
 @nt{subtype_mark}, the @nt{return_@!subtype_@!indication} shall be a
 @nt{subtype_indication}. The type of the @nt{subtype_indication}
@@ -3898,6 +3947,7 @@ defined by the @nt{subtype_indication} shall be a definite subtype, or there
 shall be an @nt{expression}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is defined
 by an @nt{access_definition}, the @nt{return_@!subtype_@!indication} shall be an
 @nt{access_definition}. The subtype defined by the @nt{access_definition} shall
@@ -3911,6 +3961,7 @@ level of this anonymous access subtype is that of the result subtype.]]}
 @end{TheProof}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0032-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[3],Text=[If the result subtype of the function is class-wide,
 the accessibility level of the type of the subtype defined by the
 @nt{return_subtype_indication}
@@ -3926,6 +3977,7 @@ the function body.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}@Comment{Paragraph number only change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For any return statement
 that applies to a function body:]}
 
@@ -3933,6 +3985,7 @@ that applies to a function body:]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0188-1]}@Comment{Paragraph number only change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[@Redundant[If the result subtype of the function is limited,
 then the @nt{expression} of the return statement (if any) shall @Chg{Version=[3],
 New=[meet the restrictions described in @RefSecNum{Limited Types}],Old=[be an
@@ -3949,6 +4002,7 @@ these]}.]]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1],ARef=[AI05-0051-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[If the result subtype of the function is class-wide,
 the accessibility level of the type of the @nt{expression}
 @Chg{Version=[3],New=[(if any) ],Old=[]}of the return
@@ -3979,6 +4033,7 @@ statically deeper than that of the master that elaborated the function body.]}]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[3],Text=[If the subtype determined by the @nt{expression} of the
 @nt{simple_return_statement} or by the @nt{return_subtype_indication} has
 one or more access discriminants, the accessibility level of the anonymous
@@ -3995,6 +4050,7 @@ of the master that elaborated the function body.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0277-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[3],Text=[If the keyword @key[aliased] is present in an
 @nt{extended_return_object_declaration},
 the type of the extended return object shall be immutably limited.]}
@@ -4003,6 +4059,7 @@ the type of the extended return object shall be immutably limited.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0015-1],ARef=[AI05-0144-2]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[return object], Sec=(extended_return_statement)}
 Within an @nt{extended_return_statement}, the @i{return object} is declared
 with the given @nt{defining_identifier}, with the nominal subtype defined by
@@ -4015,6 +4072,7 @@ constant object.],Old=[]}]}
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0032-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed by AI12-0173-1 insertion.}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=[execution], Sec=(extended_return_statement)}
 For the execution of an @nt{extended_return_statement}, the
 @nt{subtype_indication} or @nt{access_definition} is elaborated. This creates
@@ -4811,6 +4869,17 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   thought it was intended. As such, we do not believe any implementation
   ever did this wrong (at least because of the old wording), and thus do not
   document this as a possible inconsistency.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0173-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a definition of the
+  term @nt{expression} of an @nt{extended_return_statement}. That wording was
+  commonly used before the @nt{extended_return_object_declaration} was split
+  into a separate syntax production, leaving the @nt{extended_return_statement}
+  without any @nt{expression} of its own. Moreover, the wording often just
+  uses @lquotes@;@nt{expression} a return statement@rquotes to cover both
+  kinds of return statement. Changing the wording in more than a
+  dozen places was unappealing, and some of the changes would be awkward to
+  read, so we defined the term and letf the majority of the wording unchanged.]}
 @end{DiffWord2012}
 
 

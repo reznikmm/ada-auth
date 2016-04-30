@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 
@@ -1818,6 +1818,29 @@ attribute (see @RefSecNum{Task and Entry Attributes})],Old=[]}.]}
   object to an operation implemented by a protected entry or procedure
   as the mode is required to be @key[in out] or @key[out].]}
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0166-1]}
+@ChgAdded{Version=[5],Text=[An internal call on a protected function shall not
+occur within a precondition expression (see @RefSecNum{Preconditions and Postconditions})
+of a protected operation nor within a @nt{default_expression} of a
+@nt{parameter_specification} of a protected operation.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI125-0166-1]}
+  @ChgAdded{Version=[5],Text=[These calls will be made before the start of the
+  protected action, and thus would not be subject to the expected mutual
+  exclusion. As such, they would be an automatic race condition (the state of
+  the called object could change before the start of the protected action for
+  the call on the protected entry or subprogram).]}
+@end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI125-0166-1]}
+  @ChgAdded{Version=[5],Text=[@RefSecNum{Preconditions and Postconditions}
+    actually defines "specific precondition expression"
+    and "class-wide precondition expression". This rule is intended to apply to
+    both.]}
+@end{Honest}
 @end{Legality}
 
 @begin{RunTime}
@@ -1940,6 +1963,16 @@ implies that the operation will not block.]}
   (other than for the 'Count attribute). This closes holes involving calls to
   access-to-protected, renaming as a procedure, and generic formal subprograms.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0166-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  @b<Correction:> Internal protected calls are now prohibited in preconditions
+  and default expressions of protected operations. These were allowed in
+  Ada 2012, but as they cause race conditions and as most existing
+  Ada 95 compilers crash when given such a default parameter, we expect
+  such code to be extremely rare.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Protected Subprograms and Protected Actions}
@@ -2257,8 +2290,11 @@ tasks and protected objects.
 @Syn{lhs=<entry_index>,rhs="@Syn2{expression}"}
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0169-1]}
 @Syn{lhs=<entry_body>,rhs="
-  @key{entry} @Syn2{defining_identifier}  @Syn2{entry_body_formal_part}  @Syn2{entry_barrier} @key{is}
+  @key{entry} @Syn2{defining_identifier}  @Syn2{entry_body_formal_part}@Chg{Version=[5],New=<
+    [@Syn2{aspect_specification}]
+  >,Old=[]}@Syn2{entry_barrier} @key{is}
     @Syn2{declarative_part}
   @key{begin}
     @Syn2{handled_sequence_of_statements}
@@ -2740,6 +2776,14 @@ The syntax rule for @nt{entry_body} is new.
   An optional @nt{aspect_specification} can be used in an @nt{entry_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0169-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  @b<Correction:>An optional @nt{aspect_specification} can be used in an
+  @nt{entry_body}. All other kinds of bodies allow (only) implementation-defined
+  aspects, we need to be consistent.]}
+@end{Extend2012}
 
 
 @LabeledSubClause{Entry Calls}
@@ -3238,9 +3282,11 @@ applies to the requeue target @i<E2> such that]}
 @end{Discussion}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0090-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0143-1]}
 @ChgAdded{Version=[4],Text=[The requeue target shall not have an applicable
-specific or class-wide postcondition which includes an Old
-attribute_reference.]}
+specific or class-wide postcondition @Chg{Version=[5],New=[that],Old=[which]}
+includes an Old@Chg{Version=[5],New=[ or Index @nt{attribute_reference}],
+Old=[attribute_reference]}.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0090-1]}
 @ChgAdded{Version=[4],Text=[If the requeue target is declared immediately
@@ -3448,7 +3494,7 @@ The @nt<requeue_statement> is new.
 @end{Extend2005}
 
 @begin{Inconsistent2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0090-1]}
   @ChgAdded{Version=[4],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   We now define that any preconditions of the requeue target are evaluated
   as part of a @nt<requeue_statement>. Original Ada 2012 did not specify this,
@@ -3460,7 +3506,7 @@ The @nt<requeue_statement> is new.
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0090-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0090-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   If a requeue target has a different postcondition than the original
   entry, the requeue is now illegal. In such a case, the original postcondition
@@ -3469,6 +3515,12 @@ The @nt<requeue_statement> is new.
   to any postconditions; thus we only allow it when the original entry has no
   postconditions or the requeue target has (at least) the same postconditions.]}
 @end{Incompatible2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0143-1]}
+  @ChgAdded{Version=[5],Text=[Added a @LegalityName for the new Index
+  attribute (see @RefSecNum{Preconditions and Postconditions}).]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Delay Statements, Duration, and Time}
@@ -5071,7 +5123,8 @@ the entry, even if the conditional call is not selected.
 @begin{Examples}
 @leading@keepnext@i{Example of a conditional entry call:}
 @begin{Example}
-@key(procedure) Spin(R : @key[in] Resource) @key(is)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@key(procedure) Spin(R : @key[in] @Chg{Version=[5],New=[@key[out] ],Old=[]}Resource) @key(is)@Chg{Version=[5],New=[  --@RI[ see @RefSecNum{Protected Units and Protected Objects}]],Old=[]}
 @key(begin)
    @key(loop)
       @key(select)
@@ -5862,6 +5915,9 @@ the Buffer can be passed to the Transfer class-wide operation defined for
 objects of a type covered by Queue'Class.]}
 
 @begin(Example)
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0178-1]}
+@ChgAdded{Version=[5],Text=[@key(type) Person_Name_Array @key(is array) (Positive @b<range> <>) @key(of) Person_Name; --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
 @key(protected) Buffer @key(is)@Chg{Version=[2],New=[ @key(new) Synchronized_Queue @key(with)  --@RI[ see @RefSecNum{Interface Types}]],Old=[]}
    @key(entry) @Chg{Version=[2],New=[Append_Wait(Person : @key(in) Person_Name);],Old=[Read (C : @key(out) Character);]}

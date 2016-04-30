@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/02/12 05:25:37 $}
+@Comment{$Date: 2016/04/23 04:41:12 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -71,12 +71,14 @@ declaration).>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1],ARef=[AI05-0277-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @Defn{declaration}
 Each of the following is defined to be a declaration:
 any @nt{basic_@!declaration};
 an @nt{enumeration_@!literal_@!specification};
 a @nt{discriminant_@!specification};
-a @nt{component_@!declaration};
+a @nt{component_@!declaration};@Chg{Version=[5],New=[
+an @nt{iterated_@!component_@!association};],Old=[]}
 a @nt{loop_@!parameter_@!specification};@Chg{Version=[3],New=[
 an @nt{iterator_@!specification};],Old=[]}
 a @nt{parameter_@!specification};
@@ -2156,6 +2158,9 @@ All of the following are objects:
 
   a loop parameter;
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+  @ChgAdded{Version=[5],Text=[the index parameter of an @nt{iterated_component_association};]}
+
   a choice parameter of an @nt<exception_handler>;
 
   an entry index of an @nt<entry_body>;
@@ -2255,6 +2260,9 @@ The following (and no others) represent constants:
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[a loop parameter unless specified to be a variable
   for a generalized loop (see @RefSecNum{Generalized Loop Iteration});]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+  @ChgAdded{Version=[5],Text=[the index parameter of an @nt{iterated_component_association};]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
   a @Chg{Version=[3],New=[],Old=[loop parameter, ]}choice
@@ -2916,6 +2924,7 @@ because if an object's nominal subtype is indefinite,
 an explicit initial value is required.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0255-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @Defn{stand-alone constant}
 @Defn{stand-alone variable}
 As indicated above,
@@ -2926,7 +2935,9 @@ A subcomponent of an object is not a stand-alone object,
 nor is an object that is created by an @nt<allocator>.
 An object declared by a
 @nt<loop_parameter_specification>,
-@Chg{Version=[3],New=[@nt{iterator_specification}, ],Old=[]}@nt<parameter_specification>,
+@Chg{Version=[3],New=[@nt{iterator_specification},
+],Old=[]}@Chg{Version=[5],New=[@nt{iterated_component_association},
+],Old=[]}@nt<parameter_specification>,
 @nt<entry_index_specification>, @nt<choice_parameter_specification>,
 @Chg{Version=[3],New=[@nt{extended_return_statement}, ],Old=[]}or
 a @nt{formal_object_declaration} @Chg{Version=[3],New=[of mode @key[in out] ],Old=[]}is

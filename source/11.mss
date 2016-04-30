@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -300,12 +300,13 @@ that are propagated by the @nt{sequence_of_@!statements}.]
 @begin{Examples}
 @leading@keepnext@i{Example of an exception handler:}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[begin]
    Open(File, In_File, "input.txt");   --@RI[ see @RefSecNum{File Management}]
 @key[exception]
    @key[when] E : Name_Error =>
       Put("Cannot open input file : ");
-      Put_Line(Exception_Message(E));  --@RI[ see @RefSecNum{The Package Exceptions}]
+      Put_Line(@Chg{Version=[5],New=[Ada.Exceptions.Exception_Message],Old=[Exception_Message]}(E));  --@RI[ see @RefSecNum{The Package Exceptions}]
       @key[raise];
 @key[end];
 @end{Example}
@@ -1778,9 +1779,11 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 from the response to that error:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @Chg{Version=[2],New=[],Old=[@key[with] Ada.Exceptions;
 @key[use] Ada;
-]}@key[package] File_System @key[is]
+]}@key[package] File_System @key[is]@Chg{Version=[5],New=[
+    @key[type] Data_Type @key[is] ...;],Old=[]}
     @key[type] File_Handle @key[is] @key[limited] @key[private];
 
     File_Not_Found : @key[exception];
@@ -1791,12 +1794,32 @@ from the response to that error:
     @key[procedure] Read(F : @key[in] @key[out] File_Handle; Data : @key[out] Data_Type);
         --@RI{ raises End_Of_File if the file is not open}
 
-    ...
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+    ...@Chg{Version=[5],New=[
+@key[private]
+    ...],Old=[]}
 @key[end] File_System;
 
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0178-1]}
+  @ChgAdded{Version=[5],Text=[The first ... provides a place for Close to
+  be declared, and the second ... provides a place for File_Handle to be
+  completed.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0178-1]}
+@ChgAdded{Version=[5],Text=[@key[package] @key[body] File_System @key[is]
+    ...]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0178-1]}
+  @ChgAdded{Version=[5],Text=[This ... provides a place for File_Exists and
+  the body of Close to be declared.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key[package] @key[body] File_System @key[is]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@Chg{Version=[5],New=[],Old=[@key[package] @key[body] File_System @key[is]]}
     @key[procedure] Open(F : @key[in] @key[out] File_Handle; Name : String) @key[is]
     @key[begin]
         @key[if] File_Exists(Name) @key[then]
@@ -1821,12 +1844,14 @@ from the response to that error:
 @key[end] File_System;
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[with] Ada.Text_IO;
 @key[with] Ada.Exceptions;
 @key[with] File_System; @key[use] File_System;
 @key[use] Ada;
 @key[procedure] Main @key[is]
-@key[begin]
+@Chg{Version=[5],New=[    Verbosity_Desired : Boolean := ...;
+],Old=[]}@key[begin]
     ... --@RI{ call operations in File_System}
 @key[exception]
     @key[when] End_Of_File =>

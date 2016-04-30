@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -69,11 +69,16 @@ called its @i{declarative region},
 
   a @nt{loop_statement};
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI125-0061-1]}
+  @ChgAdded{Version=[5],Text=[an @nt{iterated_component_association};]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0255-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
   @ChgAdded{Version=[3],Text=[a @nt{quantified_expression};]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
   @ChgAdded{Version=[2],Text=[an @nt{extended_return_statement};]}
 
   an @nt{accept_statement};

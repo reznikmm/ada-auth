@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2015/04/03 04:12:43 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1005,8 +1005,10 @@ the implementation.
 @Leading@Keepnext@i{Example of interrupt handlers:}
 @begin{example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 Device_Priority : @key[constant]
-  @key[array] (1..5) of System.Interrupt_Priority := ( ... );@Softpage
+  @key[array] (@Chg{Version=[5],New=[Ada.Interrupts.Interrupt_Id @key[range] ],Old=[]}1..5) @Chg{Version=[5],New=[@key[of]],Old=[of]}@Chg{Version=[5],New=[
+   ],Old=[]} System.Interrupt_Priority := ( ... );@Softpage
 @key[protected] @key[type] Device_Interface
   (Int_Id : Ada.Interrupts.Interrupt_Id) @Chg{Version=[3],New=[
      @key[with] Interrupt_Priority => Device_Priority(Int_Id) ],Old=[]}@key[is]

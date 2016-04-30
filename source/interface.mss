@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.74 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
+@comment{ $Revision: 1.75 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:43 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2585,9 +2585,11 @@ unchecked union subtype.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0026-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0174-1]}
 @ChgAdded{Version=[2],Text=[Any name that denotes a discriminant of an object
 of an unchecked union type shall occur within the declarative region of the
-type@Chg{Version=[3],New=[, and shall not
+type@Chg{Version=[3],New=[@Chg{Version=[5],New=[ or as the @nt{selector_name}
+of an @nt{aggregate}],Old=[]}, and shall not
 occur within a @nt{record_representation_clause}],Old=[]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
@@ -2715,9 +2717,12 @@ cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
   subtype is unconstrained.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Evaluation of a membership test if the
-  @nt{subtype_mark} denotes a constrained unchecked union subtype and the
-  expression lacks inferable discriminants.]}
+  @ChgRef{Version=[5],Kind=[Revised], ARef=[AI12-0162-1]}
+  @ChgAdded{Version=[2],Text=[Evaluation of @Chg{Version=[5],New=[an individual],Old=[a]}
+  membership test if the @nt{subtype_mark}@Chg{Version=[5],New=[ (if any)],Old=[]}
+  denotes a constrained unchecked union subtype and the
+  @Chg{Version=[5],New=[@Syni{tested_}@nt{simple_expression}],Old=[expression]}
+  lacks inferable discriminants.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Conversion from a derived unchecked union type to
@@ -2806,6 +2811,18 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
   to use the @ldquote@;needs finalization@rdquote definition,
   and eliminated generic contract issues.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0162-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Adjusted the wording to reflect
+  that membership tests can have more than one expression or @nt{subtype_mark}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0174-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Adjusted the wording to allow
+  named aggregates of an unchecked union type; it it clearly madness to
+  allow positional record components in an @nt{aggregate} but not named
+  component associations.]}
+@end{DiffWord2012}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledClause{Interfacing with COBOL}
@@ -3451,13 +3468,14 @@ either @lquotes@;BY CONTENT@rquotes@; or @lquotes@;BY REFERENCE@rquotes@;.
    @key(loop)
      Read (COBOL_File, COBOL_Record);
 
-     Ada_Record.Name := To_Ada(COBOL_Record.Name);
-     Ada_Record.SSN  := To_Ada(COBOL_Record.SSN);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+     Ada_Record.Name := @Chg{Version=[5],New=[COBOL.To_Ada],Old=[To_Ada]}(COBOL_Record.Name);
+     Ada_Record.SSN  := @Chg{Version=[5],New=[COBOL.To_Ada],Old=[To_Ada]}(COBOL_Record.SSN);
      Ada_Record.Salary :=
         To_Decimal(COBOL_Record.Salary, COBOL.High_Order_First);
      Ada_Record.Adjust :=
         To_Decimal(COBOL_Record.Adjust, COBOL.Leading_Separate);
-     ... @RI{-- Process Ada_Record}
+     ... --@RI{ Process Ada_Record}
    @key(end) @key(loop);
 @key(exception)
    @key[when] End_Error => ...
@@ -3643,14 +3661,15 @@ a Fortran @lquotes@;derived type@rquotes@;.
 @key[procedure] Ada_Application @key[is]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @key[type] Fortran_Matrix @key[is] @key[array] (Integer @key[range] <>,
-                                 Integer @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+   @key[type] Fortran_Matrix @key[is] @key[array] (@Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>,
+                                 @Chg{Version=[5],New=[Fortran_Integer],Old=[Integer]} @key[range] <>) @key[of] Double_Precision@Chg{Version=[3],New=[
       @key[with] Convention => Fortran;              ],Old=[;
-   @key[pragma] Convention (Fortran, Fortran_Matrix);]}    @RI{-- stored in Fortran's}
-                                                   @RI{-- column-major order}
+   @key[pragma] Convention (Fortran, Fortran_Matrix);]}    --@RI{ stored in Fortran's}
+                                                   --@RI{ column-major order}
    @key[procedure] Invert (Rank : @key[in] Fortran_Integer; X : @key[in] @key[out] Fortran_Matrix)@Chg{Version=[3],New=[
       @key[with] Import => True, Convention => Fortran;],Old=[;
-   @key[pragma] Import (Fortran, Invert);              ]} @RI{-- a Fortran subroutine}
+   @key[pragma] Import (Fortran, Invert);              ]} --@RI{ a Fortran subroutine}
 
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);

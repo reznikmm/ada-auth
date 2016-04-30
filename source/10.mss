@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1514,9 +1514,10 @@ above.
 @key(end) Office.Employees;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @ChgAdded{Version=[2],Text=[@key(limited with) Office.Employees;
 @key(package) Office.Departments @key(is)
-   @key(type) Department @key(is private);]}
+   @key(type) Department @key(is) @Chg{Version=[5],New=[...],Old=[@key(private)]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key(function) Manager_Of(Dept : Department) @key(return access) Employees.Employee;
@@ -3219,7 +3220,35 @@ A preelaborable construct can contain @nt{label}s and
 @nt{null_statement}s.
 @end{Ramification}
 
-A call to a subprogram other than a static function.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0175-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{To get conditional Leading}A
+call to a subprogram other than@Chg{Version=[5],New=[:],Old=[ a static function.]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[a static function;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[an instance of Unchecked_Conversion (see
+  @RefSecNum{Unchecked Type Conversions});]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[a function declared in System.Storage_Elements
+  (see @RefSecNum{The Package System.Storage_Elements}); or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[the functions To_Pointer and To_Address declared
+  in an instance of System.Address_to_Access_Conversions (see
+  @RefSecNum{The Package System.Address_to_Access_Conversions}).]}
+@end{Itemize}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0175-1]}
+  @ChgAdded{Version=[5],Text=[The parameters of any such function have to pass
+  the preelaborability rules, so they typically have to be a static
+  expression. The extra allowed functions are all forms of conversion that the
+  compiler understands, so there should be little implementation burden. Note
+  that such a call might raise an exception; preelaborable is not the same as
+  elaborable with no code.]}
+@end{Ramification}
 
 The evaluation of a @nt{primary} that is a @nt{name}
 of an object, unless the @nt{name} is a static expression,
@@ -4071,9 +4100,17 @@ required to appear last.
   and thus isn't appropriate for dynamic semantics permissions.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0175-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Added some intrinsic
+  conversion functions to those allowed to be called during the elaboration of
+  a preelaborated unit. This is necessary to allow a portable address aspect
+  in a preelaborated unit, important on small embedded systems.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0076-1]}
-  @ChgAdded{Version=[4],Text=[@B<Corrigendum:> Explicitly stated that modifying
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Explicitly stated that modifying
   a library-level constant in a pure package is erroneous. We don't document
   this as inconsistent as implementations certainly can still do whatever they
   were previously doing (no change is required); moreover, this case (and many

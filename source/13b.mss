@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -2274,9 +2274,10 @@ the following is a possible use:
 ...
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @Chg{Version=[3],New=[Our_Pool],Old=[MR_Pool]} : Mark_Release_Pool_Type (Pool_Size => 2000@Chg{Version=[3],New=[],Old=[,
                                   Block_Size => 100]});
-@Chg{Version=[3],New=[My_Mark : MR_Pool.Subpool_Handle; -- @Examcom{See @RefSecNum{Storage Subpool Example}}],Old=[]}
+@Chg{Version=[3],New=[My_Mark : @Chg{Version=[5],New=[Subpool_Handle],Old=[MR_Pool.Subpool_Handle]}; -- @Examcom{@Chg{Version=[5],New=[As declared in],Old=[See]} @RefSecNum{Storage Subpool Example}}],Old=[]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0111-3]}
 @key[type] Acc @key[is] @key[access] ...;
@@ -6191,21 +6192,23 @@ frozen.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1],ARef=[AI05-0019-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0155-1],ARef=[AI12-0168-1]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
 The end of a @nt{declarative_part}, @nt{protected_body},
 or a declaration of a library package or generic library package,
 causes @i(freezing) of each
-entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it,
-except for incomplete types.
+entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it@Chg{Version=[5],New=[],Old=[
+except for incomplete types]}.
 @Defn2{Term=[freezing], Sec=(entity caused by a body)}
-A @Chg{Version=[4],New=[@nt{proper_body}, @nt{body_stub}, or
-@nt{entry_body}],Old=[noninstance body@Chg{New=[ other than a renames-as-body],Old=[]}]}
+A @Chg{Version=[4],New=[@Chg{Version=[5],New=[noninstance ],Old=[]}@nt{proper_body},
+@nt{body_stub}, or @nt{entry_body}],Old=[noninstance body@Chg{New=[ other than
+a renames-as-body],Old=[]}]}
 causes freezing of each entity @Chg{Version=[3],New=[and profile ],Old=[]}declared
-before it within the same @nt{declarative_part}@Chg{Version=[3],
+before it within the same @nt{declarative_part}@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],
 New=[ that is not an incomplete type; it only causes
 freezing of an incomplete type if the body is within the immediate scope of the
-incomplete type],Old=[]}.
+incomplete type],Old=[]}]}.
 @begin{Discussion}
   This is worded carefully to handle nested packages and private types.
   Entities declared in a nested @nt{package_specification}
@@ -6710,6 +6713,24 @@ is frozen.],Old=[]}]}
 @end{Discussion}
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0155-1]}
+@ChgAdded{Version=[5],Text=[Notwithstanding the rest of this subclause,
+freezing an incomplete view has no effect.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In particular, freezing an incomplete view does
+  not freeze the completion of the view. For an incomplete type, once the
+  completion of the incomplete type is seen, any further references to the type
+  will be of the complete type, which will be frozen in the normal way.
+  @LegalityTitle prevent all problems for incomplete types themselves.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In constrast, freezing a partial view does have an
+  effect (the completion of the view is frozen and the program is illegal if it
+  hasn't occurred yet).]}
+@end{Ramification}
+
 @end{Intro}
 
 @begin{Legality}
@@ -7067,5 +7088,19 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   but as all known implementations freeze expression functions more
   aggressively than allowed by either the old or new wording, practically this
   will be an extension.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0168-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that the implicit
+  body created by an instance doesn't have any freezing effect. This was
+  an unintentional change caused by the Technical Corrigendum 1 oversimplifying
+  wording.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0155-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that incomplete types
+  do not freeze in any case. The one known case where incomplete freezing was
+  necessary has been plugged with a new @LegalityTitle (see
+  @RefSecNum{Incomplete Type Declarations}). This matches the original intent
+  (see @MetaRulesTitle above) and eliminates whack-a-mole trying to allow such
+  freezing without it having (almost) any effects.]}
 @end{DiffWord2012}
 

@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.120 $ $Date: 2016/02/12 05:25:38 $ $Author: randy $ }
+@comment{ $Revision: 1.121 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2016/02/12 05:25:38 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2369,8 +2369,10 @@ such polic@Chg{New=[ies],Old=[y]}. Other policies are implementation defined.]
 
 @begin{Legality}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0183-1]}
 The @SynI{policy_}@Syn2{identifier} shall be either FIFO_Queuing,
-Priority_Queuing or an implementation-defined @Syn2{identifier}.
+@Chg{Version=[5],New=[Ordered_FIFO_Queuing, ],Old=[]}Priority_Queuing or
+an implementation-defined @Syn2{identifier}.
 
 @end{Legality}
 
@@ -2397,14 +2399,63 @@ a protected object when more than one @nt{entry_barrier} @nt{condition} is True.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00355-01]}
-Two queuing policies, FIFO_Queuing and Priority_Queuing,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0163-1],ARef=[AI12-0183-1]}
+@Chg{Version=[5],New=[Three],Old=[Two]} queuing policies,
+FIFO_Queuing@Chg{Version=[5],New=[, Ordered_FIFO_Queuing, ],Old=[]}
+ and Priority_Queuing,
 are language defined. If no Queuing_Policy pragma
 @Chg{Version=[2],New=[applies to],Old=[appears in]} any of the program units
 comprising the partition, the queuing policy for that partition
 is FIFO_Queuing.@Chg{Version=[3],New=[@Defn2{Term=[queuing policy],
 Sec=(FIFO_Queuing)}@Defn{FIFO_Queuing queuing policy}],
-Old=[]} The rules for this policy are specified in
-@RefSecNum{Entry Calls} and @RefSecNum{Selective Accept}.
+Old=[]} The rules for @Chg{Version=[5],New=[the FIFO_Queuing],Old=[this]}
+policy are specified in @RefSecNum{Entry Calls} and
+@RefSecNum{Selective Accept}.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0163-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The
+Ordered_FIFO_Queuing policy is defined as follows:@Defn2{Term=[queuing policy],
+Sec=(Ordered_FIFO_Queuing)}@Defn{Ordered_FIFO_Queuing queuing policy}]}
+
+@begin{itemize}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[Calls are selected on a given entry queue in order
+of arrival.]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[When more than one condition of an
+@nt{entry_barrier} of a protected object becomes True, and more than one of the
+respective queues is nonempty, the call that arrived first is selected.]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[If the expiration time of two or more open
+@nt{delay_alternative}s is the same and no other @nt{accept_alternative}s are
+open, the @nt{sequence_of_statements} of the @nt{delay_alternative} that is
+first in textual order in the @nt{selective_accept} is executed.]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[When more than one alternative of a
+@nt{selective_accept} is open and has queued calls, the alternative whose queue
+has the call that arrived first is selected.]}
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A possible implementation for this policy would
+  be to assign a sequence number to each queued entry call, where the sequence
+  number is incremented globally across all queues associated with the
+  protected object or @nt{selective_accept}.]}
+@end{ImplNote}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[It would have been marginally easier to
+  use textual order for the case when multiple queues are selectable.
+  But textual order can lead to unfair queue servicing, since the
+  queues in earlier textual order will end up starving the later ones
+  if calls arrive fast enough. Applying arrival first as the selector
+  provides fairness for this policy.]}
+@end{Reason}
+
+@end{Itemize}
 
 @Leading@Keepnext@;The Priority_Queuing policy is defined as
 follows:@Chg{Version=[3],New=[@Defn2{Term=[queuing policy],
@@ -2582,6 +2633,14 @@ implementation-defined queuing policies.]}]}
   never appears inside of a unit; rather it @lquotes@;applies to@rquotes the
   unit.]}
 @end{DiffWord95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0163-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Defined the new queuing policy Ordered_FIFO_Queuing.]}
+@end{Extend2012}
+
+
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

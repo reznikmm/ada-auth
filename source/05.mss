@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2016/02/09 04:55:40 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.65 $}
+@Comment{$Revision: 1.66 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1043,10 +1043,11 @@ otherwise, there shall not be an @nt<identifier> after the @key{end loop}.
 @end{Syntax}
 
 @begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @Defn{loop parameter}
 A @nt{loop_parameter_specification} declares a @i{loop parameter},
-which is an object whose
-subtype is that defined by the @nt{discrete_subtype_definition}.
+which is an object whose subtype@Chg{Version=[5],New=[ (and nominal subtype)],Old=[]}
+ is that defined by the @nt{discrete_subtype_definition}.
 @IndexSeeAlso{Term=[parameter],See=[loop parameter]}
 @end{StaticSem}
 
@@ -1229,6 +1230,10 @@ The constant-ness of loop parameters is specified in
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of
   loop execution to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
+  @ChgAdded{Version=[5],Text=[Added text so that the nominal subtype of a
+  loop parameter is clearly defined.]}
 @end{Diffword2012}
 
 
@@ -1433,10 +1438,16 @@ an @nt{iterator_specification}.]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
-    @Syn2{defining_identifier} @key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
-  | @Syn2{defining_identifier} [: @Syn2{subtype_indication}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}"}
+    @Syn2{defining_identifier} @Chg{Version=[5],New=<[: @Syn2{loop_parameter_subtype_indication}] >,Old=<>}@key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
+  | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0156-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<loop_parameter_subtype_indication>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>,Old=<>}"}
+
 @end{Syntax}
 
 @begin{Resolution}
@@ -1472,12 +1483,18 @@ of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0151-1]}
-@ChgAdded{Version=[3],Text=[The @Chg{Version=[4],New=[subtype defined
-by],Old=[type of]} the @nt{subtype_indication}, if any, of an array component
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[The subtype defined by the
+@nt{loop_parameter_subtype_indication}, if any, of a generalized iterator
+component iterator shall statically match the iteration cursor
+subtype. ],Old=[]}The @Chg{Version=[4],New=[subtype defined by],Old=[type of]}
+the @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+Old=[@nt{subtype_indication}]}, if any, of an array component
 iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the
 component @Chg{Version=[4],New=[subtype],Old=[type]} of the type of the
 @SynI<iterable_>@nt{name}. The @Chg{Version=[4],New=[subtype defined
-by],Old=[type of]} the @nt{subtype_indication}, if any, of a container element
+by],Old=[type of]} the @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+Old=[@nt{subtype_indication}]}, if any, of a container element
 iterator shall @Chg{Version=[4],New=[statically match],Old=[cover]} the default
 element @Chg{Version=[4],New=[subtype],Old=[type]} for the type of the
 @SynI<iterable_>@nt{name}.]}
@@ -1536,16 +1553,24 @@ type at the point of the container element iterator.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0269-1],ARef=[AI05-0292-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
 @ChgAdded{Version=[3],Text=[An @nt{iterator_specification} declares a
 @i<loop parameter>.@Defn{loop parameter}
-In a generalized iterator, the nominal subtype of the loop parameter is
-the iteration cursor subtype. In an array component iterator or a
-container element iterator, if a @nt{subtype_indication} is present, it
-determines the nominal subtype of the loop parameter. In an array
-component iterator, if a @nt{subtype_indication} is not present, the
+In a generalized iterator, @Chg{Version=[5],New=[],Old=[the nominal subtype of
+the loop parameter is the iteration cursor subtype. In ]}an array component
+iterator@Chg{Version=[5],New=[,],Old=[]} or a container element iterator, if
+a @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+Old=[@nt{subtype_indication}]} is present, it
+determines the nominal subtype of the loop parameter.@Chg{Version=[5],New=[ In
+a generalized iterator, if a @nt{loop_parameter_subtype_indication} is not
+present, the nominal subtype of the loop parameter is the iteration cursor
+subtype.],Old=[]} In an array component iterator, if a
+@Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+Old=[@nt{subtype_indication}]} is not present, the
 nominal subtype of the loop parameter is the component subtype of the
 type of the @SynI{iterable_}@nt{name}. In a container element iterator, if a
-@nt{subtype_indication} is not present, the nominal subtype of the loop
+@Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
+Old=[@nt{subtype_indication}]} is not present, the nominal subtype of the loop
 parameter is the default element subtype for the type of the
 @SynI{iterable_}@nt{name}.]}
 
@@ -1560,13 +1585,24 @@ the Variable_Indexing aspect is not specified for the type of the
 
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
   @ChgAdded{Version=[4],Text=[The loop parameter of a generalized iterator has
   the same accessibility as the loop statement. This means that the loop
   parameter object is finalized when the loop statement is left. (It also may be
   finalized as part of assigning a new value to the loop parameter.) For array
-  component iterators and container element iterators, the loop parameter
-  directly denotes an element of the array or container and has the
-  accessibility of the associated array or container.]}
+  component iterators@Chg{Version=[5],New=[],Old=[and container element
+  iterators]}, the loop parameter directly denotes an element of the array
+  @Chg{Version=[5],New=[],Old=[or container ]}and has the accessibility of
+  the associated array@Chg{Version=[5],New=[],Old=[ or container]}.
+  @Chg{Version=[5],New=[For container element iterators, the loop parameter
+  denotes the result of the indexing function call (in the case of a constant
+  indexing) or a generalized reference thereof (in the case of a variable
+  indexing). Roughly speaking, the loop parameter has the accessibility level
+  of a single iteration of the loop. More precisely, the function result (or
+  the generalized reference thereof) is considered to be renamed in the
+  declarative part of a notional block statement which immediately encloses
+  the loop's sequence_of_statements; the accessibility of the loop parameter
+  is that of the block statement.],Old=[]}]}
 @end{Ramification}
 
 @end{StaticSem}
@@ -1725,6 +1761,14 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   potentially would raise unexpected exceptions because the element values
   might have been invalid or abnormal with respect to the declared constraint.]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0156-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}For consistency, we
+  now allow a @nt{subtype_indication} on a generalized iterator, and anonymous
+  access types on all forms of iterator. We introduced a new syntax
+  non-terminal, @nt{loop_parameter_subtype_indication} to simplfy the wording.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0120-1]}

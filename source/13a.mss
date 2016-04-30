@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -828,19 +828,22 @@ the ancestors of a @nt{type_declaration}.]}]}
 @end{Legality}
 
 @begin{StaticSem}
-If two subtypes statically match,
-then their subtype-specific aspects (Size and Alignment)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
+If two subtypes statically match, then their subtype-specific aspects
+(@Chg{Version=[5],New=[for example, ],Old=[]}Size and Alignment)
 are the same.
 @PDefn2{Term=[statically matching],Sec=(effect on subtype-specific aspects)}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
   This is necessary because we allow (for example)
   conversion between access types whose designated subtypes
   statically match.
-  Note that @Chg{Version=[3],New=[most aspects (including the subtype-specific aspects
-  Size and Alignment) may not be specified for a nonfirst subtype. The only
-  language-defined exceptions to this rule are the Static_Predicate and
-  Dynamic_Predicate aspects.],Old=[it is illegal to specify an aspect
+  Note that @Chg{Version=[3],New=[most aspects (including the subtype-specific
+  aspects Size and Alignment) may not be specified for a nonfirst subtype.
+  The only language-defined exceptions to this rule are the
+  @Chg{Version=[5],New=[Object_Size, ],Old=[]}Static_Predicate@Chg{Version=[5],New=[,],Old=[]}
+  and Dynamic_Predicate aspects.],Old=[it is illegal to specify an aspect
   (including a subtype-specific one) for a nonfirst subtype.]}
 
 @Leading@Keepnext@;Consider, for example:
@@ -894,9 +897,35 @@ Hence, the above is illegal.
 Furthermore, the compiler is forbidden from choosing different
 Sizes by default, for the same reason.
 
-The same issues apply to Alignment.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
+  The same issues apply to Alignment.@Chg{Version=[5],New=[ Similar issues
+  apply to Object_Size, Static_Predicate, and Dynamic_Predicate, but the
+  chosen solution is different: explicit rules in
+  @RefSecNum{Statically Matching Constraints and Subtypes} to ensure that
+  the aspects are the same if specified.],Old=[]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[The above existing static matching rule combined
+  with the updated definition of static matching in
+  @RefSecNum{Statically Matching Constraints and Subtypes}
+  does not cause incompatibilities in existing Ada code that does not
+  mention Object_Size. But it does constrain the implementation-defined value
+  of Object_Size when it is not specified for a subtype; the above rule applies
+  even in that case. (The effects noted in the example above would occur
+  otherwise.)]}
 @end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[We need this rule even though static matching
+  explicitly excludes confirming values of Object_Size. That's because a general
+  access type can designate any aliased object whose subtype statically matches
+  the the designated subtype. Since the Object_Size of a subtype determines the
+  number of bits allocated for an aliased object of the subtype, if we allowed
+  different Object_Sizes for statically matching subtypes, we'd be allowing the
+  access type to designate objects with differing numbers of bits. That isn't
+  going to work.]}
+@end{Discussion}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
@@ -1203,12 +1232,21 @@ but their value might be known at compile time anyway
 in many cases.
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
 An implementation need not support a specification for the
-Size for a given composite subtype, nor the size or storage place for an object
+@Chg{Version=[5],New=[Object_Size or ],Old=[]}Size for a given composite
+subtype, nor the size or storage place for an object
 (including a component) of a given composite subtype, unless the constraints
 on the subtype and its composite subcomponents (if any)
 are all static constraints.
 
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[We don't want to require that Object_Size or Size
+  be supported on types that might have a representation not completely
+  specified at compile time, or are represented discontiguously, or are
+  represented differently for different constraints.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00291-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
@@ -1507,6 +1545,9 @@ Some of the more stringent requirements are moved to
   incompatibility as only aspects that are neither operational nor
   representation could change behavior and there is no known implementation
   of these new aspects that allows multiple definitions.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[Added wording changes to support Object_Size.]}
 @end{DiffWord2012}
 
 
@@ -1552,6 +1593,7 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 @begin{Display}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @ChgAdded{Version=[3],Text=[@nt{basic_declaration}
   @nt{type_declaration}
     @nt{full_type_declaration}
@@ -1568,7 +1610,8 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
     @i<object declaration syntax>*
     @nt{single_task_declaration}*
     @nt{single_protected_declaration}*
-  @nt{number_declaration}  --  NO
+  @nt{number_declaration}  --  NO@Chg{Version=[5],New=[
+  @nt{iterated_component_association}  -- NO],Old=[]}
   @nt{subprogram_declaration}*
   @nt{abstract_subprogram_declaration}*
   @nt{null_procedure_declaration}*@Chg{Version=[4],New=[
@@ -1605,12 +1648,14 @@ rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,
 @nt{extended_return_statement}  --  NO]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0169-1]}
 @ChgAdded{Version=[3],Text=[-- @Examcom{We also allow @nt{aspect_specification}s on all kinds of bodies, but are no language-defined aspects}
 -- @Examcom{that may be specified on a body. These are allowed for implementation-defined aspects.}
 -- @Examcom{See above for subprogram bodies and stubs (as these can be declarations).}
 @nt{package_body}*
 @nt{task_body}*
-@nt{protected_body}*
+@nt{protected_body}*@Chg{Version=[5],New=[
+@nt{entry_body}*],Old=[]}
 @nt{package_body_stub}*
 @nt{task_body_stub}*
 @nt{protected_body_stub}*]}
@@ -2472,8 +2517,9 @@ Text=[The set of machine scalars.]}]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0191-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
 @Chg{New=[The following representation attributes are defined: Address,
-Alignment, Size, Storage_Size,
+Alignment, Size, @Chg{Version=[3],New=[Object_Size, ],Old=[]}Storage_Size,
 @Chg{Version=[3],New=[],Old=[and ]}Component_Size@Chg{Version=[3],New=[,
 Has_Same_Storage, and Overlaps_Storage],Old=[]}.],
 Old=[@Leading@;The following attributes are defined:]}
@@ -3224,21 +3270,37 @@ In an implementation, Boolean'Size shall be 1.
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00051-02]}
-@Leading@;If the Size of a subtype @Chg{Version=[2],New=[],Old=[is specified,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional "Leading".}
+If the Size of a subtype @Chg{Version=[2],New=[@Chg{Version=[5],New=[is
+nonconfirming and ],Old=[]}],Old=[is specified,
 and ]}allows for efficient independent addressability
 (see @RefSecNum{Shared Variables}) on the target architecture,
-then the Size of the following objects of the subtype should equal the
-Size of the subtype:
-@begin{Itemize}
-Aliased objects (including components).
+then the @Chg{Version=[5],New=[Object_Size],Old=[Size of the following objects]}
+of the subtype should @Chg{Version=[5],New=[have the
+same value in the absence of an explicit specification of a different
+value.],Old=[equal the Size of the subtype:]}
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 51
+and 52 were moved to the @ImplAdviceTitle for attribute Object_Size.>}]}@Comment{This
+message should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
-Unaliased components, unless the Size of the
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0059-1]}
+@ChgDeleted{Version=[5],Text=[Aliased objects (including components).]}
+
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0059-1]}
+@ChgDeleted{Version=[5],Text=[Unaliased components, unless the Size of the
 component is determined by a @nt{component_clause} or Component_Size
-clause.
+clause.]}
 @end{Itemize}
-@ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[If the Size of a subtype allows for efficient independent
-addressability, then the Size of most objects of the subtype should
+@ChgImplAdvice{Version=[5],Kind=[RevisedAdded],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],
+Text=[If the Size of a subtype @Chg{Version=[5],New=[ is nonconfirming
+and],Old=[]}allows for efficient independent
+addressability, then the @Chg{Version=[5],New=[Object_Size of the subtype
+(unless otherwise specified)],Old=[Size of most objects of the subtype]} should
 equal the Size of the subtype.]}]}
 @begin{Ramification}
 Thus, on a typical 32-bit machine,
@@ -3289,6 +3351,19 @@ since the hardware supports byte strings with a gap at the end of
 each word,
 one would want to pack in that manner.
 @end{ImplNote}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[We talk about the explicit specification of
+  Object_Size so that we have specified what happens if both Object_Size and
+  Size are specified incompatibly; we give priority to Object_Size. Note
+  that the value of Size no longer has any direct effect on the Size of
+  objects; what happens instead is that the value of Size can have an effect
+  on the value of Object_Size in the absence of a specification for Object_Size,
+  and it is always the value of Object_Size that determines the size of an
+  object.]}
+@end{Reason}
+
 
 A Size clause on a composite subtype should not affect
 the internal layout of components.
@@ -3546,11 +3621,165 @@ can override a specified Size.
 @end{Inconsistent83}
 
 @begin{DiffWord83}
-The requirement for a nonnegative value in a Size clause
-was not in RM83, but it's hard to see how it would make sense.
-For uniformity, we forbid negative sizes,
-rather than letting implementations define their meaning.
+  The requirement for a nonnegative value in a Size clause
+  was not in RM83, but it's hard to see how it would make sense.
+  For uniformity, we forbid negative sizes,
+  rather than letting implementations define their meaning.
 @end{DiffWord83}
+
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For every subtype S:]}
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Object_Size>, ARef=[AI12-0059-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[If S is definite, denotes
+  the size (in bits) of a stand-alone aliased object, or a component of subtype
+  S in the absence of an @nt{aspect_specification} or representation item that
+  specifies the size of the object or component. If S is indefinite, the meaning
+  is implementation-defined. The value of this attribute is of the type
+  @i<universal_integer>. If not specified otherwise, the Object_Size of a
+  subtype is at least as large as the Size of the subtype. Object_Size may be
+  specified via an @nt{attribute_definition_clause}; the expression of such a
+  clause shall be static and its value nonnegative. All aliased objects with
+  nominal subtype S have the size S'Object_Size. In the absence of an explicit
+  specification, the Object_Size of a subtype S defined by a
+  @nt{subtype_indication} without a constraint, is that of the value of the
+  Object_Size of the subtype denoted by the @nt{subtype_mark} of the
+  @nt{subtype_indication}, at the point of this definition.],Old=[]}]}
+  @Comment{End of Annex text here.}
+
+@ChgImplDef{Version=[5],Kind=[Added],InitialVersion=[5],Text=[@ChgAdded{Version=[5],Text=[The
+meaning of Object_Size for indefinite subtypes.]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We allow the specification of Object_Size
+  for any subtype (@i<not> just first subtypes, as with other aspects). An
+  implementation can, of course, put restrictions on which subtypes allow
+  specification of Object_Size (as with any representation attribute).]}
+@end{Ramification}
+@end(description)
+@end{StaticSem}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
+@ChgAdded{Version=[5],Text=[If S is a definite first subtype and S'Object_Size
+is not specified, S'Object_Size should be the smallest multiple of the storage
+element size larger than or equal to S'Size that is consistent with the
+alignment of S.]}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[If S is a definite first subtype for which Object_Size
+is not specified, S'Object_Size should be the smallest multiple of the storage
+element size larger than or equal to S'Size that is consistent with the
+alignment of S.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[Many implementations @ldquote@;round up@rdquote
+  allocations to the nearest multiple of the alignment. For instance, this
+  example appears in the GNAT documentation:]}
+
+@begin{Indent}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Type=[Leading],Text=<[Given] a record containing
+     an integer and a character:>}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] Rec @key[is record]
+   I : Integer;
+   C : Character;
+@key[end record];]}
+@end{Example}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Text=[will have a size of 40 (that is Rec'Size will
+     be 40). The alignment will be 4, because of the integer field, and so the
+     default size of record objects for this type will be 64 (8 bytes).]}
+@end{Indent}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We purposely used the vague phrase
+  @ldquote@;consistent with the alignment of S@rdquote so
+  that implementations that do not round up allocations (just using padding
+  to provide alignment) are not required to do any rounding up.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If X denotes an object (including
+a component) of subtype S, X'Size should equal S'Object_Size, unless:]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[X'Size is specified; or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[X is a nonaliased stand-alone object; or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The size of X is determined by a
+  @nt{component_clause} or Component_Size clause; or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The type containing component X is packed.]}
+@end{Itemize}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[The Size of most objects of a subtype should equal the Object_Size of
+the subtype.]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
+@ChgAdded{Version=[5],Text=[An Object_Size clause on a composite type
+should not affect the internal layout of components.]}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[An Object_Size clause on a composite type
+should not affect the internal layout of components.]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The recommended level of support for
+the Object_Size attribute of subtypes is:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[If S is a static signed integer subtype, the
+  implementation should support the specification of S'Object_Size to match the
+  size of any signed integer base subtype provided by the implementation that is
+  no smaller than S'Size. Corresponding support is expected for modular integer
+  subtypes, fixed point subtypes, and enumeration subtypes.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The intent is that a compiler need support only
+    those Object_Sizes for integer subtypes that it might select for an integer
+    type declaration. Similarly for the other kinds of subtypes listed.]}
+  @end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[If S is an array or record subtype with static
+  constraints and S is not a first subtype of a derived untagged by-reference
+  type, the implementation should support the specification of S'Object_Size to
+  be any multiple of the storage element size that is consistent with the
+  alignment of S, that is no smaller than S'Size, and that is no larger than
+  that of the largest composite subtype supported by the implementation.]}
+
+  @begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Any extra bits required this way will be padding
+    bits. Unlike elementary objects, padding bits can be considered part of
+    composite objects.]}
+  @end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[If S is some other subtype, only confirming
+  specifications of Object_Size need be supported.]}
+@end{Itemize}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[The recommended level of support for the Object_Size attribute should
+be followed.]}]}
+@end{ImplAdvice}
+
 
 @begin{StaticSem}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{To be consistent with 8652/0006}
@@ -4165,6 +4394,12 @@ except for certain explicit exceptions.
   the alignment of class-wide types.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Attribute Object_Size is new.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0070-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the behavior of
@@ -4751,9 +4986,10 @@ Word : @key[constant] := 4;  --@RI{  storage element is byte, 4 bytes per word}
 @key[type] State         @key[is] (A,M,W,P);
 @key[type] Mode          @key[is] (Fix, Dec, Exp, Signif);
 
-@key[type] Byte_Mask     @key[is] @key[array] (0..7)  @key[of] Boolean;
-@key[type] State_Mask    @key[is] @key[array] (State) @key[of] Boolean;
-@key[type] Mode_Mask     @key[is] @key[array] (Mode)  @key[of] Boolean;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@key[type] Byte_Mask     @key[is] @key[array] (0..7)  @key[of] Boolean@Chg{Version=[5],New=[ @key[with] Component_Size => 1],Old=[]};
+@key[type] State_Mask    @key[is] @key[array] (State) @key[of] Boolean@Chg{Version=[5],New=[ @key[with] Component_Size => 1],Old=[]};
+@key[type] Mode_Mask     @key[is] @key[array] (Mode)  @key[of] Boolean@Chg{Version=[5],New=[ @key[with] Component_Size => 1],Old=[]};
 
 @key[type] Program_Status_Word @key[is]
   @key[record]

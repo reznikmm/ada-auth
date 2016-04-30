@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/03/18 06:59:00 $}
+@Comment{$Date: 2016/04/23 04:41:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4828,6 +4828,11 @@ its ultimate ancestor.
 type defined by an @nt{access_definition} of an
 @nt{object_renaming_declaration} is the same as that of the renamed view.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0156-1]}
+@ChgAdded{Version=[5],Text=[The accessibility level of the anonymous access
+type defined by an @nt{access_definition} of a
+@nt{loop_parameter_subtype_indication} is that of the loop parameter.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00416-01]}
 @ChgNote{Use ChgAdded below to get conditional Leading}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}The accessibility level
@@ -6242,6 +6247,10 @@ uses of anonymous access types.]}
   deeper relationship applies within the return expression of an expression
   function. (Dynamic properties apply by equivalence, but static properties
   are handled separately.)]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0156-1]}
+  @ChgAdded{Version=[5],Text=[Added text to define the accessibility of
+  anonymous access types declaring a loop parameter.]}
 @end{DiffWord2012}
 
 

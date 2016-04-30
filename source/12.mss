@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -184,8 +184,9 @@ Exchange and Squaring:}
    @key[type] Elem @key[is] @key[private];
 @key[procedure] Exchange(U, V : @key[in] @key[out] Elem);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @key[generic]
-   @key[type] Item @key[is] @key[private];
+   @key[type] Item @Chg{Version=[5],New=[(<>) ],Old=[]}@key[is] @key[private];
    @key[with] @key[function] "*"(U, V : Item) @key[return] Item @key[is] <>;
 @key[function] Squaring(X : Item) @key[return] Item;
 @end{Example}
@@ -1173,12 +1174,13 @@ but the declaration of Bool_4 calls "="@-{5}.
 @leading@keepnext@i{Examples of generic instantiations (see
 @RefSecNum{Generic Declarations}):}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @tabclear()@tabset(P49)
 @key[procedure] Swap @key[is] @key[new] Exchange(Elem => Integer);
 @key[procedure] Swap @key[is] @key[new] Exchange(Character);  @\--@RI{  Swap is overloaded }
 @key[function] Square @key[is] @key[new] Squaring(Integer); @\--@RI{  "*" of Integer used by default}
-@key[function] Square @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
-@key[function] Square @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@RI{ same as previous    }
+@key[function] @Chg{Version=[5],New=[Square1],Old=[Square]} @key[is] @key[new] Squaring(Item => Matrix, "*" => Matrix_Product);
+@key[function] @Chg{Version=[5],New=[Square2],Old=[Square]} @key[is] @key[new] Squaring(Matrix, Matrix_Product); --@RI{ same as previous}
 
 @key[package] Int_Vectors @key[is] @key[new] On_Vectors(Integer, Table, "+");
 @end{Example}
@@ -3142,10 +3144,29 @@ incomplete],Old=[]}.
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0165-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{For conditional leading}
 @ChgAdded{Version=[2],Text=[The actual subprogram for a
-@nt{formal_@!abstract_@!subprogram_@!declaration} shall be a
-dispatching operation of the controlling type or of the actual type
-corresponding to the controlling type.]}
+@nt{formal_@!abstract_@!subprogram_@!declaration} shall
+be@Chg{Version=[5],New=[:],Old=[ a dispatching operation of the controlling
+type or of the actual type corresponding to the controlling type.]}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[a dispatching operation of the
+  controlling type; or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if the controlling type is a formal type, and
+  the actual type corresponding to that formal type is a specific type @i<T>,
+  a dispatching operation of type @i<T>; or]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if the controlling type is a formal type, and
+  the actual type is a class-wide type @i<T>'Class, an implicitly declared
+  subprogram corresponding to a primitive operation of type @i<T> (see
+  @StaticSemTitle below).]}
+@end{Itemize}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3156,14 +3177,25 @@ corresponding to the controlling type.]}
 @end{Honest}
 
 @begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[5],Text=[This means that the actual is a primitive
+  operation of the controlling type, an abstract formal subprogram, or the
+  implicitly available primitive operation for a class-wide type.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[5],Text=[An explicit class-wide operation cannot be
+  used for the actual of an formal abstract subprogram. Such an operation is
+  never primitive (only specific types have primitive subprograms).]}
+
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[This means that the actual is
-  either a primitive operation of the
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[This
+  means that the actual is either a primitive operation of the
   controlling type, or an abstract formal subprogram. Also note that this
   prevents the controlling type from being class-wide (with one exception
   explained below), as only specific types have primitive operations (and a
   formal subprogram eventually has to have an actual that is a primitive of
-  some type). This could happen in a case like:]}
+  some type). ]}This could happen in a case like:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{generic}
@@ -3176,15 +3208,36 @@ corresponding to the controlling type.]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[The instantiation here is always illegal,
-  because Some_Proc could never be a primitive operation of Something'Class
-  (there are no such operations). That's good, because we want calls to Foo
-  always to be dispatching calls.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[If Some_Proc is an
+  explicit class-wide operation, the],Old=[The]} instantiation here is
+  @Chg{Version=[5],New=[],Old=[always ]}illegal,
+  because Some_Proc @Chg{Version=[5],New=[is not],Old=[could never be]} a
+  primitive operation of Something'Class
+  (there are no such operations).@Chg{Version=[5],New=[],Old=[ That's good,
+  because we want calls to Foo always to be dispatching calls.]}]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[5],Text=[However, if Some_Proc is a primitive operation
+  of type Something, then the instantiation is legal; the actual is the
+  implicitly generated subprogram described in @StaticSemTitle below. This is
+  not a problem, since the rules given in
+  @RefSecNum{Formal Private and Derived Types} explain how this routine
+  dispatches even though its parameter is class-wide.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[5],Text=[We allow this special case because it is possible
+  for a class-wide operation to be primitive inside of an instance, and the
+  contract model does not allow us to make such cases illegal. As such, it
+  seems inconsistent to not allow the same in explicit instantiations.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[Since it is possible for a formal
-  tagged type to be instantiated with a class-wide type, it is possible for the
-  (real) controlling type to be class-wide in one unusual case:]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[Specifically,
+  since],Old=[Since]} it is possible for a formal tagged type to be
+  instantiated with a class-wide type, it is possible for the
+  (real) controlling type to be class-wide in
+  @Chg{Version=[5],New=[the following],Old=[one]} unusual case:]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3204,11 +3257,14 @@ corresponding to the controlling type.]}
 @end{Example}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0165-1]}
   @ChgAdded{Version=[2],Text=[The instantiation of New_P2 is legal, since
   Bar is a dispatching operation of the actual type of the controlling type
-  of the abstract formal subprogram Foo. This is not a problem, since the
+  of the abstract formal subprogram Foo.
+  @Chg{Version=[5],New=[Again,],Old=[This is not a problem, since]} the
   rules given in @RefSecNum{Formal Private and Derived Types} explain how
-  this routine dispatches even though its parameter is class-wide.]}
+  this routine dispatches@Chg{Version=[5],New=[],Old=[ even though its
+  parameter is class-wide]}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Note that this legality rule never needs to be
@@ -3460,6 +3516,17 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0165-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  We now allow the actual for a @nt{formal_abstract_subprogram_declaration}
+  to be an implicitly declared subprogram for a class-wide type. The rules
+  already required a compiler to be able to construct this subprogram for
+  use in an instantiation that occurs inside of a generic unit, so it made
+  no sense to prevent it from being used explicitly as well (in the same way
+  that the previous item allows them to be used for other kinds of
+  formal subprograms.]}
+@end{Extend2012}
 
 
 @LabeledClause{Formal Packages}
@@ -3714,14 +3781,17 @@ an instantiation of a package with formal packages:}]}
 @key[package] Symbol_Package @key[is]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key[type] String_Id @key[is] ...]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[   @key[subtype] Key_String @key[is] String(1..5);
+],Old=[]}   @key[type] String_Id @key[is] ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key[type] Symbol_Info @key[is] ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @ChgAdded{Version=[2],Text=[   @key[package] String_Table @key[is new] Ada.Containers.Ordered_Maps
-           (Key_Type => String,
+           (Key_Type => @Chg{Version=[5],New=[Key_String],Old=[String]},
             Element_Type => String_Id);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}

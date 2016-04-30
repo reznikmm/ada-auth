@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2015/04/03 04:12:42 $ $Author: randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -4976,11 +4976,12 @@ The graph is represented by a map from nodes to sets of edges.]}
 @ChgAdded{Version=[3],Text=[@key[end] Shortest_Paths;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @ChgAdded{Version=[3],Text=[@key[package body] Shortest_Paths @key[is]
    @key[function] Shortest_Path
      (G : Graphs.Vector; Source : Node; Target : Node) @key[return] Paths.List
    @key[is]
-      @key[use] Adjacency_Lists, Node_Maps, Paths, Graphs;
+      @key[use] @Chg{Version=[5],New=[],Old=[Adjacency_Lists, ]}Node_Maps, Paths, Graphs;
       Reached  : @key[array] (Node) @key[of] Boolean := (@key[others] => False);
       -- @ExamCom{The set of nodes whose shortest distance to the source is known.}]}
 

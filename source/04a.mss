@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2016/02/09 04:55:40 $}
+@Comment{$Date: 2016/04/23 04:41:12 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.140 $}
+@Comment{$Revision: 1.141 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -687,6 +687,7 @@ The exception Constraint_Error is raised if this check fails.
 @begin{Example}
 @tabclear()@tabset(P60)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178]}
   Tomorrow.Month     --@RI[  a record component @\(see @RefSecNum{Record Types})]
   Next_Car.Owner     --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
   Next_Car.Owner.Age --@RI[  a record component @\(see @RefSecNum{Incomplete Type Declarations})]
@@ -696,7 +697,7 @@ The exception Constraint_Error is raised if this check fails.
                      --@RI[  of the function call Min_Cell(H)]
 @Chg{Version=[2],New=<  Cashier.Append     --@RI[  a prefixed view of a procedure @\(see @RefSecNum{Interface Types})]
 >,Old=<>}  Control.Seize      --@RI[  an entry of a protected object @\(see @RefSecNum{Protected Units and Protected Objects})]
-  Pool(K).Write      --@RI[  an entry of the task Pool(K) @\(see @RefSecNum{Protected Units and Protected Objects})]
+  Pool(K).Write      --@RI[  an entry of the task Pool(K) @\(see @Chg{Version=[5],New=[@RefSecNum{Task Units and Task Objects}],Old=[@RefSecNum{Protected Units and Protected Objects}]})]
 @end{Example}
 
 @begin{WideAbove}
@@ -1338,7 +1339,9 @@ are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
-  @ChgAdded{Version=[4],Text=[This ensures that all descendants of an
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0160-1]}
+  @ChgAdded{Version=[4],Text=[This @Chg{Version=[5],New=[(and the following
+  @LegalityTitle) ],Old=[]}ensures that all descendants of an
   indexable container type have aspects with the same properties. This prevents
   generic contract problems with formal derived types.]}
 
@@ -1356,8 +1359,9 @@ are nonoverridable (see @RefSecNum{Aspect Specifications}).]}
 @end{Reason}
 
 @begin{NotIso}
-@ChgAdded{Version=[4],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 6 through 9
-were deleted.>}]}@Comment{This message should be
+@ChgAdded{Version=[4],Noparanum=[T],
+Text=[@Chg{Version=[5],New=[],Old=[@Shrink{@i<Paragraphs 6 through 9
+were deleted.>}]}]}@Comment{This message should be
 deleted if the paragraphs are ever renumbered. Note that this is under the
 wrong heading, so that the heading can also be eliminated.}
 @end{NotIso}
@@ -1368,8 +1372,14 @@ wrong heading, so that the heading can also be eliminated.}
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgRef{Version=[4],Kind=[DeletedNoDelMsg],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0160-1]}
 @ChgDeleted{Version=[4],Type=[Leading],Text=[@Chg{Version=[3],New=[The
-Constant_Indexing or Variable_Indexing aspect shall not be specified:],Old=[]}]}
+Constant_Indexing or Variable_Indexing aspect shall not be
+specified:],Old=[]}]}@ChgAdded{Version=[5],Text=[If an ancestor of a
+type @i<T> is an indexable container type, then any explicit
+specification of the Constant_Indexing or Variable_Indexing aspects shall be
+confirming; that is, the specified @nt{name} shall match the inherited aspect
+(see @RefSecNum{Aspect Specifications}).]}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
@@ -1383,13 +1393,25 @@ corresponding aspect specified or inherited; or],Old=[]}]}
 @nt{full_type_declaration} if the type has
 a tagged partial view.],Old=[]}]}
 @end{Itemize}
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 7 through 8
+were deleted.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[4],Kind=[DeletedNoDelMsg]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0160-1]}
 @ChgDeleted{Version=[4],Text=[@Chg{Version=[3],New=[@PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
 these rules apply also in the private part of an instance of a
 generic unit.],Old=[]}]}
+@ChgAdded{Version=[5],Text=[@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an instance of a
+generic unit.]}
 
 @begin{Ramification}
   @ChgNote{The following notes were moved to @RefSecNum{Aspect Specifications}
@@ -1535,6 +1557,17 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   Constant_Indexing and Variable_Indexing, and the @nt{generalized_indexing}
   syntax are new.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0160-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Prevented a derived type from specifying Constant_Indexing if the
+  ancestor specified Variable_Indexing (and vice versa). This is necessary
+  to preserve the intent that for an object Obj whose tag is that of its
+  nominal subtype, T'Class(Obj)(I) always has the same meaning as Obj(I).
+  Situations like this should be rare in practice; most types will either
+  define both aspects or neither.]}
+@end{Incompatible2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0104-1]}
@@ -2153,17 +2186,33 @@ R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0220-1]}
-@Chg{Version=[3],New=[The],Old=[If the components of a @nt{variant_part}
-are needed, then the]} value of a discriminant that governs
-@Chg{Version=[3],New=[a],Old=[the]} @nt{variant_part}
-@Chg{Version=[3],New=[@i<P> ],Old=[]}shall be given
-by a static expression@Chg{Version=[3],New=[, unless @i<P> is nested within
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1]}
+@Chg{Version=[5],New=[If a @nt{variant_part} @i{P} is nested within a
+@nt{variant} @i{V} that is not selected by the discriminant value governing
+the @nt{variant_part} enclosing @i{V}, then there is no restriction on the
+discriminant governing @i{P}. Otherwise, the value of the],
+Old=[@Chg{Version=[3],New=[The],Old=[If the components of a @nt{variant_part}
+are needed, then the]} value of a]}
+discriminant that governs @Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[a],Old=[the]}
+@nt{variant_part}]}
+@Chg{Version=[3],New=[@i<P> ],Old=[]}shall be given by a static
+expression@Chg{Version=[3],New=[, ],Old=[]}@Chg{Version=[5],New=[or by a
+nonstatic expression having a constrained static nominal subtype. In
+this latter case of a nonstatic expression, there shall be exactly one
+@nt{discrete_choice_list} of @i{P} that covers each value that belongs to the
+nominal subtype and satisfies the predicates of the subtype, and there
+shall be at least one such value.],
+Old=[@Chg{Version=[3],New=[unless @i<P> is nested within
 a @nt{variant} @i<V> that is not selected by the discriminant value
-governing the @nt{variant_part} enclosing @i<V>],Old=[]}.
+governing the @nt{variant_part} enclosing @i<V>],Old=[]}.]}
 @begin{Ramification}
-This expression might either be given within the aggregate itself,
-or in a constraint on the parent subtype in a @nt<derived_type_definition>
-for some ancestor of the type of the aggregate.
+  This expression might either be given within the aggregate itself,
+  or in a constraint on the parent subtype in a @nt<derived_type_definition>
+  for some ancestor of the type of the aggregate.
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0086-1]}
+  @ChgAdded{Version=[5],Text=[This means that in the nonstatic value case,
+  the (static) subtype cannot have a null range.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
@@ -2184,6 +2233,7 @@ default value.]}
 The evaluation of a @nt<record_aggregate> consists of the
 evaluation of the @nt<record_@!component_@!association_@!list>.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1]}
 @PDefn2{Term=[evaluation], Sec=(record_component_association_list)}
 For the evaluation of a @nt{record_@!component_@!association_@!list},
 any per-object constraints (see @RefSecNum(Record Types))
@@ -2196,14 +2246,30 @@ occur in an arbitrary order, except that the @nt<expression>
 for a discriminant is evaluated (and converted) prior to the
 elaboration of any per-object constraint that depends on it, which in
 turn occurs prior to the evaluation and conversion of the @nt{expression} for
-the component with the per-object constraint.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
+the component with the per-object
+constraint.@PDefn2{Term=[arbitrary order],Sec=[allowed]}@Chg{Version=[5],New=[
+If the value of a discriminant that governs a selected @nt{variant_part}  @i{P}
+is given by a nonstatic @nt{expression}, and the evaluation of that
+@nt{expression} yields a value that does not belong to the nominal subtype of
+the @nt{expression}, then Constraint_Error is
+raised.@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}],Old=[]}
+
 @begin{Ramification}
-The conversion in the first rule might raise Constraint_Error.
+  The conversion in the first rule might raise Constraint_Error.
 @end{Ramification}
 @begin{Discussion}
-This check in the first rule presumably happened as part of the dependent
-compatibility check in Ada 83.
+  This check in the first rule presumably happened as part of the dependent
+  compatibility check in Ada 83.
 @end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0086-1]}
+  @ChgAdded{Version=[5],Text=[The test on the value of the discriminant
+  can only fail if the value is outside the base range of its type, does not
+  satisfy the (static) predicates of the subtype (possible when the predicate
+  is disabled), or is an invalid representation. This is a rule similar to
+  that used for case statements. As with case statements, this is not a
+  @ldquote@;check@rdquote; it cannot be Suppressed.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01]}
 @ChgAdded{Version=[2],Text=[For a @nt<record_component_association> with an
@@ -2339,6 +2405,14 @@ a record aggregate. Now we do.
   association. This is to be consistent with the capabilities of a named
   access type.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0086-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The value of a
+  discriminant that governs a @nt{variant_part} in an @nt{aggregate} can
+  be nonstatic if the nominal subtype of the discriminant expression
+  is static and all possible values select a single @nt{variant}.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0046-1]}
@@ -2551,7 +2625,9 @@ unless the Initialize procedure is abstract
 Painted_Point'(Point @key{with} Red)
 (Point'(P) @key{with} Paint => Black)
 
-(Expression @key{with} Left => 1.2, Right => 3.4)
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+(Expression @key{with} Left => @Chg{Version=[5],New=[ @key{new} Literal'(Value => ],Old=[]}1.2@Chg{Version=[5],New=[)],Old=[]},@Chg{Version=[5],New=[
+                ],Old=[]} Right => @Chg{Version=[5],New=[@key{new} Literal'(Value => ],Old=[]}3.4@Chg{Version=[5],New=[)],Old=[]})
 Addition'(Binop @key{with null record})
              --@RI[ presuming Binop is of type Binary_Operation]
 @end(example)
@@ -2660,9 +2736,15 @@ we answer it explicitly.}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @Syn{lhs=<array_component_association>,rhs="
     @Syn2{discrete_choice_list} => @Syn2{expression}@Chg{Version=[2],New=[
-  | @Syn2{discrete_choice_list} => <>],Old=[]}"}
+  | @Syn2{discrete_choice_list} => <>@Chg{Version=[5],New=[
+  | @Syn2{iterated_component_association}],Old=[]}],Old=[]}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterated_component_association>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[@key[for] @Syn2{defining_identifier} @key[in] @Syn2{discrete_choice_list} => @Syn2{expression}],Old=<>}"}
 
 @end{Syntax}
 
@@ -2697,6 +2779,12 @@ a @nt{positional_array_aggregate} or as the
 @nt{discrete_choice} of the @nt{discrete_choice_list}
 in an @nt{array_component_association}.
 @end(Honest)
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+@ChgAdded{Version=[5],Text=[The @nt{defining_identifier} of an
+@nt{iterated_component_association} declares an @i<index parameter>,
+an object of the corresponding index
+type.@Defn2{Term=[index parameter],Sec=[of an array aggregate]}@Defn2{Term=[aggregate],Sec=[index parameter]}]}
 
 @end{Intro}
 
@@ -2820,8 +2908,10 @@ no applicable index constraint is defined.
 @end(Reason)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 The @nt{discrete_choice_list} of an
-@nt{array_component_association} is allowed to
+@nt{array_component_association} @Chg{Version=[5],New=[(including an
+@nt{iterated_component_association}) ],Old=[]}is allowed to
 have a @nt{discrete_choice} that is a nonstatic
 @Chg{Version=[3],New=[@nt<choice_expression>],Old=[@nt<expression>]}
 or that is a @Chg{Version=[3],New=[@nt{subtype_indication} or @nt{range}],
@@ -2871,6 +2961,10 @@ A subaggregate that is a @nt<string_literal> is equivalent
 to one that is a @nt<positional_array_aggregate> of the same length,
 with each @nt<expression> being the @nt<character_literal>
 for the corresponding character of the @nt<string_literal>.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+@ChgAdded{Version=[5],Text=[The subtype (and nominal subtype) of
+an index parameter is the corresponding index subtype.]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -2917,6 +3011,21 @@ of the array type if this aspect has been specified for the array type;
 otherwise, they are initialized ],Old=[]}by default
 as for a stand-alone object of the
 component subtype (see @RefSecNum{Object Declarations}).]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+@ChgAdded{Version=[5],Text=[During an evaluation of the @nt{expression}
+of an @nt{iterated_component_association}, the value of the corresponding
+index parameter is that of the corresponding index of the corresponding
+array component.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Taken together with the preceding rule that
+  @ldquote@;The array component expressions of the aggregate are evaluated in
+  an arbitrary order@rdquote, this implies that an index parameter can take
+  on its values in an arbitrary order. This is different than, for example,
+  a loop parameter.]}
+@end{Ramification}
 
 @Leading@Defn2{Term=[bounds],
   Sec=(of the index range of an @nt{array_aggregate})}
@@ -3005,6 +3114,10 @@ in parentheses is interpreted as a
 @Chg{Version=[3],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
 A @nt<named_array_aggregate>, such as (1 => X), may be used to specify
 an array with a single component.
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
+@ChgAdded{Version=[5],Text=[An index parameter is a constant object (see
+@refSecNum{Objects and Named Numbers}).]}
 @end{Notes}
 
 @begin{Examples}
@@ -3049,6 +3162,12 @@ C : @key(constant) Matrix := (1 .. 5 => (1 .. 8 => 0.0)); --@RI[ C'Last(1)=5, C'
 D : Bit_Vector(M .. N) := (M .. N => True);         --@RI[ see @RefSecNum{Array Types}]
 E : Bit_Vector(M .. N) := (@key(others) => True);
 F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"]
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
+@ChgAdded{Version=[5],Text=[G : @key[constant] Matrix :=
+    (@key[for] I @key[in] 1 .. 4 =>
+       (@key[for] J @key[in] 1 .. 4 =>
+          (@key[if] I=J @key[then] 1.0 @key[else] 0.0))); --@RI[ Identity matrix]]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -3058,7 +3177,8 @@ provided by an enclosing record aggregate:}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => String'('x', @key(others) => <>))  --@RI[ see @RefSecNum{Discriminants}]]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@ChgAdded{Version=[2],Text=[Buffer'(Size => 50, Pos => 1, Value => @Chg{Version=[5],New=[],Old=[String']}('x', @key(others) => <>))  --@RI[ see @RefSecNum{Discriminants}]]}
 @end{Example}
 @end{Examples}
 
@@ -3162,6 +3282,13 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   the Default_Component_Value, so it is unlikely that anyone will be affected
   by this inconsistency.]}
 @end{Inconsistent2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The
+  @nt{iterated_component_association} is new (more than 25 years after it
+  was originally proposed).]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0157-1]}
@@ -4479,8 +4606,10 @@ membership tests:)
 @begin{Example}
 X /= Y
 
-"" < "A" @key(and) "A" < "Aa"     --@RI[  True]
-"Aa" < "B" @key(and) "A" < "A  "  --@RI[  True]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
+@Chg{Version=[5],New=[S : String := "A";
+],Old=[]}"" < @Chg{Version=[5],New=[S],Old=["A"]} @key(and) @Chg{Version=[5],New=[S],Old=["A"]} < "Aa"     @Chg{Version=[5],New=[    ],Old=[]}--@RI[  True]
+@Chg{Version=[5],New=[S],Old=["A"]} < @Chg{Version=[5],New=["Bb"],Old=["B"]} @key(and) @Chg{Version=[5],New=[S],Old=["A"]} < "A  "  @Chg{Version=[5],New=[    ],Old=[]}--@RI[  True]
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 My_Car = @key(null)               --@RI[ @Chg{Version=[3],New=[True],Old=[true]} if My_Car has been set to null (see @RefSecNum{Incomplete Type Declarations})]

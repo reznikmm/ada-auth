@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2946,11 +2946,15 @@ of a @nt<discrete_@!subtype_@!definition>; or],Old=[]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00254-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0059-1]}
 @Defn2{Term=[statically matching], Sec=(for subtypes)}
 A subtype @i(statically matches) another subtype of the same type
 if they have statically matching constraints@Chg{Version=[2],New=[,
 @Chg{Version=[3],New=[all predicate specifications that apply to
-them come from the same declarations, ],Old=[]}and, for
+them come from the same declarations, @Chg{Version=[5],New=[Object_Size (see
+@RefSecNum{Operational and Representation Attributes}) has been specified to
+have a nonconfirming value for either both or neither, and the nonconfirming
+values, if any, are the same, ],Old=[]}],Old=[]}and, for
 access subtypes, either both or neither exclude null],Old=[]}.
 Two anonymous access@Chg{Version=[2],New=[-to-object],Old=[]} subtypes
 statically match if their designated subtypes statically
@@ -2970,6 +2974,31 @@ subtype conformant, and either both or neither exclude null],Old=[]}.
   parameters and access discriminants could never conform, so they couldn't
   be used in separate specifications.]}
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[If one of the subtypes is not yet frozen, an
+  implementation may have to repeat the check when the subtypes are both
+  frozen (as it is impossible to check the Object_Size part before the subtypes
+  are frozen). This recheck can only make a previously statically matching
+  subtype fail to match; it cannot make a match legal.]}
+@end{Ramification}
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[We exclude the case where both Object_Sizes are
+  confirming so that we don't introduce an incompatibility for
+  existing Ada code. But practically the implementation can simply
+  check that the Object_Size values are the same, as we have a rule in
+  @RefSecNum{Operational and Representation Aspects} that the
+  subtype-specific aspects (such as Object_Size) are always the same for
+  statically matching subtypes. We wrote the rules this way to avoid having
+  wording that appeared to require predicting the future ("would statically
+  match if ...").]}
+  @Comment{We generally do not reference particular paragraphs in the AARM;
+  the paragraph referred to above is paragraph 14. In part, this is because
+  we don't have a way in this tool to link to a particular paragraph,
+  even though a user could add #P14 to the appropriate link and get directly
+  there.}
+@end{Discussion}
 
 @Defn2{Term=[statically matching], Sec=(for ranges)}
 Two ranges of the same type @i{statically match} if both result
@@ -3079,4 +3108,8 @@ This subclause is new to Ada 95.
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of
   static compatibility to use the new term "satisfies the predicates"
   (see @RefSecNum{Subtype Predicates}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
+  @ChgAdded{Version=[5],Text=[Updated wording to take nonconfirming values of
+  Object_Size into account.]}
 @end{Diffword2012}

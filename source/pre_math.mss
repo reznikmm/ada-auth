@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.43 $ $Date: 2012/02/19 01:58:37 $ $Author: randy $ }
+@comment{ $Revision: 1.44 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2012/02/19 01:58:37 $}
+@Comment{$Date: 2016/04/23 04:41:14 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -493,6 +493,11 @@ declaration:
 
    @key[function] @AdaSubDefn{Random} (Gen : Generator) @key[return] Result_Subtype;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] Random (Gen   : Generator;
+                    First : Result_Subtype;
+                    Last  : Result_Subtype) @key[return] Result_Subtype
+      @key[with] Post => Random'Result @key[in] First .. Last;]}
 
    @key[procedure] @AdaSubDefn{Reset} (Gen       : @key[in] Generator;
                     Initiator : @key[in] Integer);
@@ -599,15 +604,17 @@ states are defined below.
 @key[function] Random (Gen : Generator) @key[return] Uniformly_Distributed;
 @key[function] Random (Gen : Generator) @key[return] Result_Subtype;
 @end{Example}
-@Trailing@;Obtains the @lquotes@;next@rquotes@; random number from the given generator,
-relative to its current state, according to an implementation-defined algorithm.
-The result of the function in Numerics.Float_Random is delivered as a value of
+@Trailing@;@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0144-1]}
+Obtains the @lquotes@;next@rquotes@; random number from the given generator,
+relative to its current state, according to an implementation-defined
+algorithm.@Chg{Version=[5],New=[],Old=[ The result of the function in
+Numerics.Float_Random is delivered as a value of
 the subtype Uniformly_Distributed, which is a subtype of the predefined type
 Float having a range of
 0.0 .. 1.0.
 The result of the function in an
 instantiation of Numerics.Discrete_Random is delivered as a value of the
-generic formal subtype Result_Subtype.
+generic formal subtype Result_Subtype.]}
 @ChgImplDef{Version=[2],Kind=[Deleted],InitialVersion=[0],
 Text=[@ChgDeleted{Version=[2],Text=[The
 algorithms for random number generation.]}]}
@@ -621,6 +628,21 @@ algorithms for random number generation.]}]}
    of a generator arises from the desire to make Random a function, rather than
    a procedure.
 @end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1]}
+@ChgAdded{Version=[5],Text=[@key[function] Random (Gen   : Generator;
+                 First : Result_Subtype;
+                 Last  : Result_Subtype) @key[return] Result_Subtype
+   @key[with] Post => Random'Result @key[in] First .. Last;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Obtains the @lquotes@;next@rquotes@;
+random number from the given generator, relative to its current state, according
+to an implementation-defined algorithm. If the range First .. Last is a null
+range, Constraint_Error is
+raised.@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}]}
 
 @begin{Example}
 @key[procedure] Reset (Gen       : @key[in] Generator;
@@ -693,14 +715,40 @@ implementation requirements of this subclause.]}
 @end{Bounded}
 
 @begin{ImplReq}
-A sufficiently long sequence of random numbers obtained by successive calls to
-Random is approximately uniformly distributed over the range of the result
-subtype.
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0144-1]}
+@ChgAdded{Version=[5],Text=[Each call of a Random function has a @i<result
+range>;@Defn2{Term=[result range],Sec=[of a Random function]} this is the
+range First .. Last for the version of Random with First and Last parameters
+and the range of the result subtype of the function otherwise.]}
 
-The Random function in an instantiation of Numerics.Discrete_Random is
-guaranteed to yield each value in its result subtype in a finite number of
-calls, provided that the number of such values does not exceed
-2 @+[15].
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0144-1]}
+A sufficiently long sequence of random numbers obtained by
+@Chg{Version=[5],New=[consecutive],Old=[successive]} calls to
+Random @Chg{Version=[5],New=[that have the same generator and result
+range ],Old=[]}is approximately uniformly distributed over the
+@Chg{Version=[5],New=[result ],Old=[]}range@Chg{Version=[5],New=[],Old=[ of
+the result subtype]}.
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0144-1]}
+  @ChgAdded{Version=[5],Text=[In this rule, @lquotes@;consecutive@rquotes@;
+  means at least that there are
+  no intervening explicit calls involving the same generator. This restricts
+  the rule to only applying to cases where just the Random function changes
+  the generator. We don't mean to impose a requirement if there are
+  intervening calls to Reset, to Random with same generator but a different
+  result range, or any other case that would affect the sequence of values
+  returned. Operations which use the resulting random values (for instance,
+  to store them somewhere) are not considered in determining if calls are
+  consecutive.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0144-1]}
+@Chg{Version=[5],New=[A],Old=[The]} Random function in an instantiation of
+Numerics.Discrete_Random is
+guaranteed to yield each value in its result @Chg{Version=[5],New=[range],
+Old=[subtype]} in a finite number of calls, provided that the number of such
+values does not exceed 2 @+[15].
 
 Other performance requirements for the random number generator, which apply
 only in implementations conforming to the Numerics Annex, and then only in the
@@ -925,3 +973,8 @@ generators in each Worker task.
   representation of the type unchanged while meeting this new requirement.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0144-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012} The function Random
+  with First and Last parameters is new.]}
+@end{Extend2012}

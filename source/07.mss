@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:41 $}
+@Comment{$Date: 2016/04/23 04:41:13 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1954,17 +1954,32 @@ on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-de
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
   part of type @i<T>.]}
 
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0167-1]}
+  @ChgAdded{Version=[5],Text=[In all of the above, for a class-wide object, we
+  are only referring to the parts of the specific root type of the class. We
+  don't want the overhead of checking every class-wide object in case some
+  future extension component @i<might> have type @i<T> (contrast this to
+  finalization, where we do intend that overhead).]}
+@end{Honest}
+
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
   @ChgAdded{Version=[4],Text=[For a view conversion to a class-wide type
-  occurring within the immediate scope of @i<T>, from a specific type that is
-  a descendant of @i<T> (including @i<T> itself), a check is performed
-  on the part of the object that is of type @i<T>.]}
+    occurring within the immediate scope of @i<T>, from a specific type that is
+    a descendant of @i<T> (including @i<T> itself), a check is performed
+    on the part of the object that is of type @i<T>.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
   @ChgAdded{Version=[4],Text=[Class-wide objects are treated as though they
     exist outside the scope of every type, and may be passed across package
     "boundaries" freely without further invariant checks.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0167-1]}
+  @ChgAdded{Version=[5],Text=[Despite this model, if an object of type @i<T>
+    that is a component of a class-wide object is modified within the scope of
+    the full view of type @i<T>, then there is no invariant check for @i<T>
+    at that point.]}
 @end{Reason}
 
 @end{Itemize}
@@ -2020,6 +2035,7 @@ value.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0149-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0167-1]}
   @ChgAdded{Version=[3],Text=[Invariant checks on subprogram return are not
   performed on objects that are accessible only through access
   values@Chg{Version=[4],New=[ that are subcomponents of some other object],Old=[]}.
@@ -2035,7 +2051,8 @@ value.]}
   access-to-subprogram value representing a private operation of the package.
   In the absence of such things, all values that the client can see will be
   checked for a private type or extension],Old=[ without help for the
-  designer of the package containing @i<T>]}.]}
+  designer of the package containing @i<T>]}.@Chg{Version=[5],New=[
+  Similar holes exist for class-wide objects as discussed above.],Old=[]}]}
 @end{Ramification}
 
 @begin{ImplNote}
@@ -2508,10 +2525,12 @@ and ]}the task.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0147-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0172-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
-@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
+@Chg{Version=[5],New=[a @nt{raise_expression},
+],Old=[]}@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
 @nt{qualified_expression} whose operand
 is permitted by this rule@Chg{Version=[3],New=[, or a @nt{conditional_expression}
 all of whose @Syni{dependent_}@nt{expression}s are permitted by this
@@ -2945,6 +2964,15 @@ rather than being a subclause of
   @RefSecNum{Incomplete Type Declarations}. But it is much better to have
   all of the reasons for limitedness together.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0172-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  @b{Correction:} A @nt{raise_expression} can be used in an expression
+  used in a limited context. This is harmless (no object will be created
+  if an exception is raised instead), useful, and thus appears to have been
+  an omission when @nt{raise_expression}s were added to the language.]}
+@end{Extend2012}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
