@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.9 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledAnnex{Definitions}
 
@@ -72,7 +72,9 @@ system.@SeeOther{Primary=[ARA],Other=[Ada Resource Association]}]}
 
 @ToGlossary{Term=[Ada Standard documents],Text=[The document(s) that
 define the Ada programming language, currently the Ada Standard
-@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}.
+@LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}
+along with its Technical Corrigendum @LocalLink{Target=[TC1-2012],
+Sec=[References],Text={[TC1-2012]}}
 Future corrigendum documents are also included (corrigenda fix bugs
 in a Standard).
 @Comment{reference @LocalLink{Target=[Ada95],
@@ -111,7 +113,7 @@ established grading criteria. A challenge is submitted to the ACAA.]}
 produces an acceptable result for every applicable test. Any deviation
 constitutes a non-conformity.]}
 
-@ToGlossary{Term=[Core language],Text=[Sections 2-13 and Annexes A, B, and J
+@ToGlossary{Term=[Core language],Text=[Clauses 2-13 and Annexes A, B, and J
 of @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}. All implementations are required to implement the core language.
 The tests for core language features are required of all implementations.]}
 

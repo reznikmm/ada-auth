@@ -1,7 +1,7 @@
 @Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.8 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -59,7 +59,7 @@ new tests, all modified tests, and all withdrawn tests, and an indication as to
 when each will be (or is) required for conformity assessments. Each version of
 the modification list is given a suffix letter. A ZIP archive and tar file
 containing the new and/or modified tests is available. The files are named
-MOD_4_0x, where 'x' represents the suffix letter for the AML version.
+MOD_4_1x, where 'x' represents the suffix letter for the AML version.
 
 @leading@;These files can be found on the ACAA's web site:
 @begin{Indent}
@@ -91,56 +91,56 @@ procedures.
 have been created and populated with test files after all decompression:
 
 @begin{FourCol}
-@exam{@shrink{./acats4_0/a}}@*
-@exam{@shrink{./acats4_0/b2}}@*
-@exam{@shrink{./acats4_0/b3}}@*
-@exam{@shrink{./acats4_0/b4}}@*
-@exam{@shrink{./acats4_0/b5}}@*
-@exam{@shrink{./acats4_0/b6}}@*
-@exam{@shrink{./acats4_0/b7}}@*
-@exam{@shrink{./acats4_0/b8}}@*
-@exam{@shrink{./acats4_0/b9}}@*
-@exam{@shrink{./acats4_0/ba}}@*
-@exam{@shrink{./acats4_0/bb}}@*
-@exam{@shrink{./acats4_0/bc}}@*
-@exam{@shrink{./acats4_0/bd}}@*
-@exam{@shrink{./acats4_0/be}}@*
-@exam{@shrink{./acats4_0/bxa}}@*
-@exam{@shrink{./acats4_0/c2}}@*
-@exam{@shrink{./acats4_0/c3}}@*
-@exam{@shrink{./acats4_0/c4}}@*
-@exam{@shrink{./acats4_0/c5}}@*
-@exam{@shrink{./acats4_0/c6}}@*
-@exam{@shrink{./acats4_0/c7}}@*
-@exam{@shrink{./acats4_0/c8}}@*
-@exam{@shrink{./acats4_0/c9}}@*
-@exam{@shrink{./acats4_0/ca}}@*
-@exam{@shrink{./acats4_0/cb}}@*
-@exam{@shrink{./acats4_0/cc}}@*
-@exam{@shrink{./acats4_0/cd}}@*
-@exam{@shrink{./acats4_0/ce}}@*
-@exam{@shrink{./acats4_0/cxa}}@*
-@exam{@shrink{./acats4_0/cxb}}@*
-@exam{@shrink{./acats4_0/cz}}@*
-@exam{@shrink{./acats4_0/d}}@*
-@exam{@shrink{./acats4_0/e}}@*
-@exam{@shrink{./acats4_0/l}}@*
-@exam{@shrink{./acats4_0/bxc}}@*
-@exam{@shrink{./acats4_0/bxd}}@*
-@exam{@shrink{./acats4_0/bxe}}@*
-@exam{@shrink{./acats4_0/bxf}}@*
-@exam{@shrink{./acats4_0/bxh}}@*
-@exam{@shrink{./acats4_0/cxc}}@*
-@exam{@shrink{./acats4_0/cxd}}@*
-@exam{@shrink{./acats4_0/cxe}}@*
-@exam{@shrink{./acats4_0/cxf}}@*
-@exam{@shrink{./acats4_0/cxg}}@*
-@exam{@shrink{./acats4_0/cxh}}@*
-@exam{@shrink{./acats4_0/lxd}}@*
-@exam{@shrink{./acats4_0/lxe}}@*
-@exam{@shrink{./acats4_0/lxh}}@*
-@exam{@shrink{./acats4_0/docs}}@*
-@exam{@shrink{./acats4_0/support}}@Comment{This one is too long for RTF otherwise}
+@exam{@shrink{./acats4_1/a}}@*
+@exam{@shrink{./acats4_1/b2}}@*
+@exam{@shrink{./acats4_1/b3}}@*
+@exam{@shrink{./acats4_1/b4}}@*
+@exam{@shrink{./acats4_1/b5}}@*
+@exam{@shrink{./acats4_1/b6}}@*
+@exam{@shrink{./acats4_1/b7}}@*
+@exam{@shrink{./acats4_1/b8}}@*
+@exam{@shrink{./acats4_1/b9}}@*
+@exam{@shrink{./acats4_1/ba}}@*
+@exam{@shrink{./acats4_1/bb}}@*
+@exam{@shrink{./acats4_1/bc}}@*
+@exam{@shrink{./acats4_1/bd}}@*
+@exam{@shrink{./acats4_1/be}}@*
+@exam{@shrink{./acats4_1/bxa}}@*
+@exam{@shrink{./acats4_1/c2}}@*
+@exam{@shrink{./acats4_1/c3}}@*
+@exam{@shrink{./acats4_1/c4}}@*
+@exam{@shrink{./acats4_1/c5}}@*
+@exam{@shrink{./acats4_1/c6}}@*
+@exam{@shrink{./acats4_1/c7}}@*
+@exam{@shrink{./acats4_1/c8}}@*
+@exam{@shrink{./acats4_1/c9}}@*
+@exam{@shrink{./acats4_1/ca}}@*
+@exam{@shrink{./acats4_1/cb}}@*
+@exam{@shrink{./acats4_1/cc}}@*
+@exam{@shrink{./acats4_1/cd}}@*
+@exam{@shrink{./acats4_1/ce}}@*
+@exam{@shrink{./acats4_1/cxa}}@*
+@exam{@shrink{./acats4_1/cxb}}@*
+@exam{@shrink{./acats4_1/cz}}@*
+@exam{@shrink{./acats4_1/d}}@*
+@exam{@shrink{./acats4_1/e}}@*
+@exam{@shrink{./acats4_1/l}}@*
+@exam{@shrink{./acats4_1/bxc}}@*
+@exam{@shrink{./acats4_1/bxd}}@*
+@exam{@shrink{./acats4_1/bxe}}@*
+@exam{@shrink{./acats4_1/bxf}}@*
+@exam{@shrink{./acats4_1/bxh}}@*
+@exam{@shrink{./acats4_1/cxc}}@*
+@exam{@shrink{./acats4_1/cxd}}@*
+@exam{@shrink{./acats4_1/cxe}}@*
+@exam{@shrink{./acats4_1/cxf}}@*
+@exam{@shrink{./acats4_1/cxg}}@*
+@exam{@shrink{./acats4_1/cxh}}@*
+@exam{@shrink{./acats4_1/lxd}}@*
+@exam{@shrink{./acats4_1/lxe}}@*
+@exam{@shrink{./acats4_1/lxh}}@*
+@exam{@shrink{./acats4_1/docs}}@*
+@exam{@shrink{./acats4_1/support}}@Comment{This one is too long for RTF otherwise}
 @end{Fourcol}
 
 @begin{Wideabove}
@@ -156,29 +156,29 @@ All ACATS files have been compressed (zipped) into compressed archives
 utility was used
 to compress them. They must be decompressed before they can be further
 processed. A decompression utility is available from the source of the ACATS
-distribution. All ACATS 4.0 files may be decompressed using the following
+distribution. All ACATS 4.1 files may be decompressed using the following
 steps. Approximately 48 MB of free space on a Windows machine hard drive will
 be required to accomplish the decompression using this technique.
 
 Create a directory on the hard disk to contain ACATS. In these examples, we
-assume the name is @Exam{acats4_0}, but any name can be used. Copy the archive
+assume the name is @Exam{acats4_1}, but any name can be used. Copy the archive
 (file with .zip extension) to the hard disk in the new directory. Decompress it
 insuring that directories are used. For the @Exam{unzip} program, this is the
 default setting. For the @exam{pkunzip} program, this is the -d option. For the
 @exam{winzip} program, ensure that "Use Directory Names" is checked. Also,
 ensure that the files are decompressed into the proper directory. For command
 line decompressors, this means ensuring that the current subdirectory is
-acats4_0. For @exam{winzip}, this simply means selecting acats4_0 as the extract
+acats4_1. For @exam{winzip}, this simply means selecting acats4_1 as the extract
 path.
 
-@leading@;For example, using unzip, and assuming that the archive name is ACATS40.zip,
+@leading@;For example, using unzip, and assuming that the archive name is ACATS41.zip,
 type
 @begin{Example}
-cd acats4_0
+cd acats4_1
 @end{Example}
 @leading@;to set the proper directory, and
 @begin{Example}
-unzip ACATS40
+unzip ACATS41
 @end{Example}
 to extract the files.
 
@@ -209,17 +209,17 @@ subdirectory (e.g., mkdir \ACATS) and unzip all archives there.
 
 @leading@;All ACATS files have been included in 1 Unix tar format file and then
 compressed using the Unix compress utility. To create a set of ACATS files,
-first copy the compressed files acats_40.tar.Z from the distribution source to
+first copy the compressed files acats_41.tar.Z from the distribution source to
 a hard drive. Uncompress the file with the Unix command
 @begin{example}
-uncompress acats_40.tar.Z
+uncompress acats_41.tar.Z
 @end{example}
 @leading@;(Note that particular Unix implementations may have different formats
 or require specific qualifiers.)  After the ACATS file has been uncompressed,
-it must be untarred. Move to the directory where you want the acats4_0
+it must be untarred. Move to the directory where you want the acats4_1
 directory to be created and then untar the ACATS files
 @begin{example}
-tar -xvf <path>/acats_40.tar
+tar -xvf <path>/acats_41.tar
 @end{example}
 where <path> is the location of the uncompressed tar file.
 
@@ -300,7 +300,7 @@ mnemonic.
 @LabeledClause{Tailoring the ACATS Test Suite}
 
 
-There are some files in the delivery that require modification before ACATS 4.0
+There are some files in the delivery that require modification before ACATS 4.1
 is ready for processing by an Ada implementation. Package ImpDef (impdef.a)
 must be edited to include values suitable for proper testing of an
 implementation if the defaults are not acceptable. The
@@ -308,12 +308,12 @@ macros.dfs file must similarly be edited to include values suitable for
 testing. All .tst files (including package Spprt13 (spprt13s.tst)) must have
 their macro symbols replaced by implementation specific values. A body for
 FcnDecl (fcndecl.ada) must be provided if necessary. Finally, Package Report
-(repbody.ada) must be modified if necessary.
+(report.a) must be modified if necessary.
 
 The required customization is described in the following sections.
 
 Customizations of these files from previous versions of the ACATS suite
-generally can be used with ACATS 4.0, but users should ensure that neither
+generally can be used with ACATS 4.1, but users should ensure that neither
 their requirements nor the underlying files have changed since the
 customizations were made.
 
@@ -321,12 +321,12 @@ customizations were made.
 @LabeledSubClause{ImpDef Customization}
 
 @begin{Indent}
-@red{@i{For ACATS 4.0, there are two new parameters in Impdef.
-Other than those parameters, there was no change to Impdef or
-any of its children from ACATS 3.1 to ACATS 4.0. A version of any of these
-packages that was tailored for ACATS 3.1 should be valid for ACATS 4.0 once the
-new parameters are defined unless some implementation characteristics have
-changed.}}
+@red{@i{For ACATS 4.1, there are seven new parameters in Impdef.
+Other than those parameters, and the removal of two obsolete, unused parameters,
+there was no change to Impdef or any of its children from ACATS 4.0 to
+ACATS 4.1. A version of any of these packages that was tailored for ACATS 4.0
+should be valid for ACATS 4.1 once the new parameters are defined unless some
+implementation characteristics have changed.}}
 @end{Indent}
 
 ACATS tests use the entities in ImpDef to control test execution. Much of the
@@ -381,9 +381,9 @@ part of the environment when the Annex tests are processed.}}
 
 @begin{Indent}
 @red{@i{
-There was no change to the @exam{macro.dfs} file from ACATS 3.1 to ACATS 4.0. A
-version of @exam{macro.dfs} that was tailored for ACATS 3.1 should be valid for ACATS
-4.0 unless some implementation characteristics have changed.}}
+There was no change to the @exam{macro.dfs} file from ACATS 4.0 to ACATS 4.1. A
+version of @exam{macro.dfs} that was tailored for ACATS 4.0 should be valid for ACATS
+4.1 unless some implementation characteristics have changed.}}
 @end{Indent}
 
 Tests in files with the extension @exam{.tst} contain symbols that represent
@@ -424,7 +424,7 @@ will not be modified.
 @LabeledSubClause{Packages SPPRT13 and FCNDECL}
 
 Package SPPRT13 declares six constants of type System.Address that are
-primarily used by tests of Section 13 features. It is in the file @exam{spprt13s.tst}.
+primarily used by tests of Clause 13 features. It is in the file @exam{spprt13s.tst}.
 As distributed, the package uses macro symbols that must be replaced. In most
 cases, the substitution can be accomplished by the macro substitution described
 in the preceding section. If appropriate literals, constants, or predefined
@@ -455,9 +455,13 @@ necessary, the ACAA) before use in a conformity assessment.
 
 All executable tests use the Report support package. It contains routines to
 automate test result reporting as well as routines designed to prevent
-optimizers from removing key sections of test code. The specification of
-package Report is in the file @exam{repspec.ada}; the body is
-in @exam{repbody.ada}.
+optimizers from removing key sections of test code. The package Report is in
+the file @exam{report.a}; this includes both the specification and body.
+
+The specification of package Report may be modified to change the setting
+of Generate_Event_Trace_File. (This setting controls whether Report writes
+an event trace file for the grading tool, see ** TBD ** for more information.)
+No other modifications of the specification of package Report are allowed.
 
 Under some conditions, the body of package Report may need to be modified. For
 example, the target system for a cross-compiler may require a simpler I/O
@@ -465,8 +469,11 @@ package than the standard package Text_IO. In such a case, it may be necessary
 to replace the context clause and the I/O procedure names in the body of
 Report.
 
-Modifications to Report must receive advance approval from the ACAL (and, if
-necessary, the ACAA) before use in a conformity assessment.
+Modifications to the body of Report must receive advance approval from the
+ACAL (and, if necessary, the ACAA) before use in a conformity assessment.
+No approval is needed to change the setting of Generate_Event_Trace_File,
+but the setting used should be reported to the ACAL performing a conformity
+assessment.
 
 
 @LabeledSubClause{Allowed Test Modifications}
@@ -541,7 +548,7 @@ the program library used for conformity assessment:
 NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
 Headers=[],
-Body=[@exam{repspec.ada}@\@exam{repbody.ada}
+Body=[@exam{report.a}@\
 @exam{impdef.a}@\@exam{impdefc.a} @i{(if testing Annex C)}
 @exam{fcndecl.ada}@\@exam{impdefd.a} @i{(if testing Annex D)}
 @exam{checkfil.ada}@\@exam{impdefe.a} @i{(if testing Annex E)}
@@ -786,18 +793,36 @@ The tests identified below need to add the limited view of one or more units
 to the environment separately from the full view of the units.
 
 @begin{FourCol}
+c3a1003@*
+c3a1004@*
 ca11023@*
-ca12001
+ca12001@*
+cc51010
 @end{FourCol}
 
 
 @LabeledSubSubClause{Foreign Language Interface Tests}
 
-Annex B, Interface to Other Languages, is part of the Ada core language. Any
-implementation that provides one or more of the packages Interfaces.C,
-Interfaces.COBOL, or Interfaces.Fortran @i{must} correctly process, and pass,
-the tests for interfaces to C, COBOL, and/or Fortran code respectively, with
-the possible exception of tests containing actual foreign code.
+Annex B, Interface to Other Languages, is part of the Ada core language.
+However, most of the features contained in it are optional. In particular,
+if an implementation does not support an optional feature in Annex B,
+then it must indicate the non-support by rejecting the test at compile time or
+by raising an appropriate exception at run time. (See
+Ada @URLLink{URL=[http://www.adaic.org/resources/add_content/standards/12rm/html/RM-B.html#p2],Text=[B(2/3)]}.)
+
+ACATS tests expect that an implementation that provides one or more of the
+packages Interfaces.C, Interfaces.COBOL, or Interfaces.Fortran implements the
+entire interface as defined by
+@URLLink{URL=[http://www.adaic.org/resources/add_content/standards/12rm/html/RM-B.html],Text=[Annex B]}.
+As such, ACATS testing procedures expect that the implementation will correctly
+process, and pass, all of the tests for interfaces to C, COBOL, and/or Fortran
+code respectively, with the possible exception of tests containing actual
+foreign code. If an implementation provides a partial implementation of
+one of the foreign language interfaces, special handling of the test results
+will be needed. In particular, some or all tests may fail by
+reporting an error on a line other than on marked with N/A => ERROR or may
+fail at runtime. Such cases need to be described to the ACAL and ACAA and
+will be handled on a case-by-case basis.
 
 An implementation that provides one or more of these Interfaces child packages
 must successfully compile the Ada units of tests with actual foreign language
@@ -812,7 +837,17 @@ bind.
 
 If one of the Interfaces child packages is not provided, then the corresponding
 tests may be graded as inapplicable, provided they reject the corresponding
-@key[with] clause.
+@key[with] clause (see @RefSecNum{Package Interfaces.C} (C),
+@RefSecNum{Package Interfaces.COBOL} (COBOL), and
+@RefSecNum{Package Interfaces.Fortran} (Fortran) for lists of tests that
+use the packages). Similarly,
+if a convention identifier for one of these
+languages is not supported, then the corresponding
+tests may be graded as inapplicable, provided they reject the corresponding
+aspect or @key[pragma] (see @RefSecNum{Convention C} (C),
+@RefSecNum{Convention COBOL} (COBOL), and
+@RefSecNum{Convention Fortran} (Fortran) for lists of tests containing each
+convention).
 
 The tests involving interfaces to foreign code are listed below.
 
@@ -837,8 +872,9 @@ test must report "PASSED" when executed.
 
 @Subheading{@Shrink{C Language Interface}}
 
-If the implementation provides the package Interfaces.C, the tests identified
-below must be satisfactorily processed as described above.
+The following tests check the C language interface; the ACATS expects that
+all of the tests identified below will be satisfactorily processed as
+described above if the C language interface is supported.
 
 The starred tests contain C code that must be compiled and linked if possible,
 as described above. The C code is easily identifiable because the file has the
@@ -849,6 +885,10 @@ will take the name of the C code from ImpDef.
 
 @begin{FourCol}
 cd30005*@*
+bxb3001@*
+bxb3002@*
+bxb3003@*
+bxb3004@*
 cxb3001@*
 cxb3002@*
 cxb3003@*
@@ -866,14 +906,19 @@ cxb3014@*
 cxb3015@*
 cxb3016@*
 cxb3017*@*
-cxb3018*
+cxb3018@*
+cxb3019@*
+cxb3020@*
+cxb3021@*
+cxb3022
 @end{FourCol}
 
 
 @Subheading{@Shrink{COBOL Language Interface}}
 
-If the implementation provides the package Interfaces.COBOL, the tests
-identified below must be processed satisfactorily, as described above.
+The following tests check the COBOL language interface; the ACATS expects that
+all of the tests identified below will be satisfactorily processed as
+described above if the COBOL language interface is supported.
 
 The starred test contains COBOL code that must be compiled and linked if
 possible, as described above. The COBOL code is easily identifiable because the
@@ -898,8 +943,10 @@ cxb4009*
 
 @Subheading{@Shrink{Fortran Language Interface}}
 
-If the implementation has a Fortran language interface, the tests identified
-below must be processed satisfactorily, as described above.
+The following tests check the Fortran language interface; the ACATS expects that
+all of the tests identified below will be satisfactorily processed as
+described above if the Fortran language interface is supported.
+
 
 The starred tests contain Fortran code that must be compiled and linked if
 possible, as described above. The Fortran code is easily identifiable because
@@ -1209,7 +1256,7 @@ Further, note that the general style and approach of the modern tests creates
 user-oriented test situations by including a variety of features and
 interactions. Only the primary test focus can be indicated in the test name.
 
-ACATS 4.0 tests are divided into core tests and Specialized Needs Annex tests.
+ACATS 4.1 tests are divided into core tests and Specialized Needs Annex tests.
 Recall that annexes A and B are part of the core language. All annex tests
 (including those for annexes A and B) have an 'X' as the second character of
 their name; Specialized Needs Annex tests have a letter between 'C' and 'H'

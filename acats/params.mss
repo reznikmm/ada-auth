@@ -1,11 +1,11 @@
 @Part(params, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/params.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.7 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledAnnex{Parameterization Files}
 
-In ACATS 4.0, two methods are used to account for the use of
+In ACATS 4.1, two methods are used to account for the use of
 implementation-dependent values in the tests.@Defn{implementation-dependent values}
 
 For legacy tests, a "macro" substitution technique is used. Legacy tests
@@ -31,7 +31,7 @@ package hierarchy.
 @LabeledClause{Macro Substitution File}
 
 The support file @Exam{MACRO.DFS} provides substitutions for special symbols
-that appear in certain ACATS 4.0 tests (indicated by the three-letter file
+that appear in certain ACATS 4.1 tests (indicated by the three-letter file
 type (extension) ".TST" and listed in
 Section @RefSecNum{Macro Substitution Tests}). The support program
 @Exam{Macrosub} may be used to insert these implementation-specific values
@@ -91,7 +91,7 @@ MAX_IN_LEN                60
 The following test files contain the special symbols used for substituting
 implementation-specific values, as described in
 Section @RefSecNum{Macro Substitution File}. This list also
-appears in the ACATS 4.0 "support" directory as @Exam{TSTTESTS.DAT}.
+appears in the ACATS 4.1 "support" directory as @Exam{TSTTESTS.DAT}.
 
 @begin{FourCol}
 A26007A.TST@*

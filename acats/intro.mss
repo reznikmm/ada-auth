@@ -1,7 +1,7 @@
 @Part(intro, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/intro.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.8 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledSection{Introduction}
 
@@ -9,7 +9,9 @@ The Ada Conformity Assessment Test Suite (ACATS) provides the official
 tests used to check conformity of an Ada implementation with the
 Ada programming
 language standard (@LocalLink{Target=[Ada2012],Sec=[References],
-Text=[ANSI/ISO/IEC 8652:1995]} and later corrigenda). The ACATS User's
+Text=[ANSI/ISO/IEC 8652:2012]} and later corrigenda, including
+@LocalLink{Target=[TC1-2012],Sec=[References],
+Text=[ANSI/ISO/IEC 8652:2012/COR 1:2016]}). The ACATS User's
 Guide is part of the ACATS and is distributed
 with the test programs and testing support packages. It explains the contents
 and use of the
@@ -52,11 +54,15 @@ Sec=[References],Text={[Ada83]}}. The ACAA later released ACATS 3.1 to improve
 the coverage and correctness of the ACATS for features defined in
 @LocalLink{Target=[Amend1],Sec=[References],Text={[Amend1]}}.
 
-This version of the ACATS is 4.0. It was developed in 2014 to
-test the enhancements and changes of the third edition of the Ada Standard,
+In 2014, the ACAA developed ACATS version 4.0 to test the enhancements and
+changes of the third edition of the Ada Standard,
 ISO/IEC 8652:2012 (@LocalLink{Target=[Ada2012],
-Sec=[References],Text={[Ada2012]}}). Subsequent maintenance or enhancement
-versions of the suite, if they are required, will be numbered 4.1, etc.
+Sec=[References],Text={[Ada2012]}}). This version of the ACATS, version 4.1,
+was released to improve the coverage and correctness of the ACATS for features
+defined in @LocalLink{Target=[Ada2012],
+Sec=[References],Text={[Ada2012]}}, including features originally defined in
+earlier versions of the Ada Standard. Subsequent maintenance or enhancement
+versions of the suite, if they are required, will be numbered 4.2, etc.
 
 The ACATS User's Guide describes the set of ACATS tests and how they are to be
 used in preparation for conformity assessment. The formal procedures for
@@ -73,9 +79,9 @@ developers who maintain a version of the ACATS as a quality control or software
 acceptance tool, and third-party testers (e.g., Ada Conformity Assessment
 Laboratories).
 
-Section @RefSecNum{Changes for ACATS 4.0} of the User's Guide for ACATS 4.0
+Section @RefSecNum{Changes for ACATS 4.1} of the User's Guide for ACATS 4.1
 summarizes the changes between
-ACATS 3.1 and ACATS 4.0. Section @RefSecNum{Test Objectives and Coverage}
+ACATS 4.0 and ACATS 4.1. Section @RefSecNum{Test Objectives and Coverage}
 describes test objectives and their relationship to ACATS tests and
 to the rules of the
 Ada Standards documents. Section @RefSecNum{Configuration Information}
@@ -84,11 +90,11 @@ including a description of the ACATS software and delivery files. Section
 @RefSecNum{Using the ACATS}
 provides step-by-step instructions for installing and using the test programs
 and test support packages, and for grading test results. The appendices include
-other information that characterizes the ACATS 4.0 release, along with
+other information that characterizes the ACATS 4.1 release, along with
 information on test construction.
 
 Refer to @RefSecNum{Definitions} and Section @RefSecNum{Grading Test Results}
-for the definition of an acceptable result and the rules for grading ACATS 4.0
+for the definition of an acceptable result and the rules for grading ACATS 4.1
 test program results. Section @RefSecNum{Deviation from Expected Results - Petition & Review}
 provides instructions for submitting a
 petition against a test program if a user believes that a deviation from the
@@ -108,7 +114,8 @@ every applicable test.
 A fundamental goal of conformity assessment (validation) is to promote Ada
 software portability by ensuring consistent processing of Ada language features
 as prescribed by the Ada Standard documents (@LocalLink{Target=[Ada2012],
-Sec=[References],Text={[Ada2012]}} and any future corrigendum
+Sec=[References],Text={[Ada2012]}}, @LocalLink{Target=[TC1-2012],
+Sec=[References],Text={[TC1-2012]}} and any future corrigendum
 documents@Defn{Ada Standard documents}). ACATS
 tests use language features in contexts and idioms expected in production
 software. While they exercise a wide range of language feature uses, they do
@@ -156,7 +163,7 @@ for Ada implementations (such as permissions or advice) are in this category
 It should be obvious that the importance of testing particular rules in the Ada
 standard vary widely. In part, that's because the various Ada features
 themselves have widely varying importance. (For example, looking at three
-features that ACATS 4.0 could have tested, proper operation of
+features that ACATS 4.1 could have tested, proper operation of
 if expressions is more important than correct functioning of record equality,
 which in turn is more important than run-time accessibility checks for
 coextensions.) But it's also because of the differing nature of the rules.

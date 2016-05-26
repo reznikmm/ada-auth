@@ -1,7 +1,7 @@
 @Part(applic, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/applic.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.8 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledAnnex{Test Applicability Criteria}
 
@@ -11,7 +11,7 @@ features of the language. A brief summary of these implementation-dependent
 features and the tests they affect are listed in this appendix.
 
 @leading@;Note that the applicability of each one of these tests is based on
-the criteria listed in the test file. During validation, all the
+the criteria listed in the test file. During conformity assessment, all the
 implementation-dependent tests are submitted for compilation and (if compiled
 successfully) are executed, with the following exceptions:
 
@@ -199,8 +199,8 @@ CXAA010.A
 
 @LabeledSubClause{Instantiation of Sequential_IO with indefinite types}
 
-@leading@keepnext@;If Sequential_IO does not support indefinite types, then the test
-contained in the following files are not applicable:
+@leading@keepnext@;If Sequential_IO does not support indefinite types, then the
+tests contained in the following files are not applicable:
 
 @begin{FourCol}
 CE2201D.DEP@*
@@ -208,10 +208,193 @@ CE2201E.DEP
 @end{FourCol}
 
 
+@LabeledSubClause{Package Ada.Directories.Hierarchical_File_Names}
+
+@leading@keepnext@;If package Ada.Directories.Hierarchical_File_Names is
+not supported, then the test contained in the following file is
+not applicable:
+
+@begin{FourCol}
+CXAG002.A
+@end{FourCol}
+
+
+@LabeledSubClause{Convention C}
+
+@leading@keepnext@;If convention C is not supported, then the tests contained
+in the following files are not applicable:
+
+@begin{FourCol}
+BXB3001.A@*
+BXB3002.A@*
+BXB3003.A@*
+BXB3004.A@*
+CXB30041.AM@*
+CXB30061.AM@*
+CXB30132.AM@*
+CXB30172.AM@*
+CXB30182.AM@*
+CXB3019.A@*
+CXB3020.A@*
+CXB3021.A@*
+CXB3022.A
+@end{FourCol}
+
+
+@LabeledSubClause{Convention COBOL}
+
+@leading@keepnext@;If convention COBOL is not supported, then the test
+contained in the following file is not applicable:
+
+@begin{FourCol}
+CXB40093.AM
+@end{FourCol}
+
+
+@LabeledSubClause{Convention Fortran}
+
+@leading@keepnext@;If convention Fortran is not supported, then the tests
+contained in the following files are not applicable:
+
+@begin{FourCol}
+C552002.A@*
+CXB50042.AM@*
+CXB50052.AM
+@end{FourCol}
+
+
+@LabeledSubClause{Package Interfaces.C}
+
+@leading@keepnext@;If package Interfaces.C is
+not supported, then the tests contained in the following files are
+not applicable:
+
+@begin{FourCol}
+BXB3001.A@*
+BXB3002.A@*
+BXB3003.A@*
+BXB3004.A@*
+CXB3001.A@*
+CXB3002.A@*
+CXB3003.A@*
+CXB30041.AM@*
+CXB3005.A@*
+CXB30061.AM@*
+CXB3007.A@*
+CXB3008.A@*
+CXB3009.A@*
+CXB3010.A@*
+CXB3011.A@*
+CXB3012.A@*
+CXB30132.AM@*
+CXB3014.A@*
+CXB3015.A@*
+CXB3016.A@*
+CXB30172.AM@*
+CXB30182.AM@*
+CXB3019.A@*
+CXB3020.A@*
+CXB3021.A@*
+CXB3022.A
+@end{FourCol}
+
+See also @RefSec{Foreign Language Interface Tests} for more information on
+processing these tests.
+
+
+@LabeledSubClause{Package Interfaces.C.Strings}
+
+@leading@keepnext@;If package Interfaces.C.Strings is
+not supported, then the tests contained in the following files are
+not applicable:
+
+@begin{FourCol}
+CXB3002.A@*
+CXB3008.A@*
+CXB3009.A@*
+CXB3010.A@*
+CXB3011.A@*
+CXB3012.A@*
+CXB30132.AM@*
+CXB3014.A@*
+CXB3016.A@*
+CXB30182.AM
+@end{FourCol}
+
+
+@LabeledSubClause{Package Interfaces.C.Pointers}
+
+@leading@keepnext@;If package Interfaces.C.Pointers is
+not supported, then the tests contained in the following files are
+not applicable:
+
+@begin{FourCol}
+CXB3003.A@*
+CXB3014.A@*
+CXB3015.A@*
+CXB3016.A
+@end{FourCol}
+
+
+@LabeledSubClause{Package Interfaces.COBOL}
+
+@leading@keepnext@;If package Interfaces.COBOL is
+not supported, then the tests contained in the following files are
+not applicable:
+
+@begin{FourCol}
+CXB4001.A@*
+CXB4002.A@*
+CXB4003.A@*
+CXB4004.A@*
+CXB4005.A@*
+CXB4006.A@*
+CXB4007.A@*
+CXB4008.A@*
+CXB40093.AM
+@end{FourCol}
+
+See also @RefSec{Foreign Language Interface Tests} for more information on
+processing these tests.
+
+
+@LabeledSubClause{Package Interfaces.Fortran}
+
+@leading@keepnext@;If package Interfaces.Fortran is
+not supported, then the tests contained in the following files are
+not applicable:
+
+@begin{FourCol}
+CXB5001.A@*
+CXB5002.A@*
+CXB5003.A@*
+CXB50042.AM@*
+CXB50052.AM
+@end{FourCol}
+
+See also @RefSec{Foreign Language Interface Tests} for more information on
+processing these tests.
+
+
+@LabeledSubClause{Unchecked Unions}
+
+@leading@keepnext@;If unchecked unions are not supported, then the tests
+contained in the following files are not applicable:
+
+@begin{FourCol}
+BXB3001.A@*
+BXB3002.A@*
+BXB3003.A@*
+BXB3004.A@*
+CXB3021.A@*
+CXB3022.A
+@end{FourCol}
+
+
 @LabeledSubClause{Special Handling Tests}
 
-@leading@keepnext@;Test requiring special handling may also be not applicable. See
-section @RefSec{Tests with Special Processing Requirements}, for details.
+@leading@keepnext@;Tests requiring special handling may also be not applicable.
+See section @RefSec{Tests with Special Processing Requirements}, for details.
 
 
 @LabeledClause{Reported Inapplicability}
@@ -433,6 +616,9 @@ CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
 CXAA020.A@*
+CXAA021.A@*
+CXAA022.A@*
+CXAG001.A@*
 CXF3A06.A@*
 CXG1003.A@*
 EE3203A.ADA@*
@@ -687,6 +873,9 @@ CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
 CXAA020.A@*
+CXAA021.A@*
+CXAA022.A@*
+CXAG001.A@*
 CXF3A06.A@*
 CXG1003.A@*
 EE3203A.ADA@*
@@ -1348,6 +1537,7 @@ CXAC004.A@*
 CXAC005.A@*
 CXAC006.A@*
 CXAC007.A@*
+CXAC008.A@*
 CXACA01.A@*
 CXACA02.A@*
 CXACB01.A@*
@@ -1365,15 +1555,58 @@ contained in the following files should report NOT_APPLICABLE:
 
 @begin{FourCol}
 CXAA019.A@*
-CXAB001.A
+CXAB001.A@*
+CXAB002.AU@*
+CXAB004.AU
+@end{FourCol}
+
+
+@LabeledSubClause{Wide Wide Text Files (Non-supported Features)}
+
+If @Exam{Use_Error} or @Exam{Name_Error} is raised by every attempt to create
+or open a wide wide text file (this is the appropriate behavior for an
+implementation which does not support wide wide text files), then the tests
+contained in the following files should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAB003.AU@*
+CXAB005.AU
+@end{FourCol}
+
+
+@LabeledSubClause{Directory Operations (Non-supported Features)}
+
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every
+attempt to read the current default directory, then the tests
+contained in the following files should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAG001.A@*
+CXAG002.A
+@end{FourCol}
+
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every
+attempt to set the current default directory, then the tests
+contained in the following files should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAG001.A
+@end{FourCol}
+
+@leading@keepnext@;If @Exam{Use_Error} or @Exam{Name_Error} is raised by every
+attempt to create a directory, then the tests contained in the following files
+should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAG001.A
 @end{FourCol}
 
 
 @LabeledSubClause{File I/O Tests}
 
 If sequential, text, wide text, wide wide text, direct access, and stream
-files are not supported, then the tests contained in the following files should
-report NOT_APPLICABLE:
+files are not supported, along with directory operations on them, then the
+tests contained in the following files should eport NOT_APPLICABLE:
 
 @begin{FourCol}
 CE2102A.ADA@*
@@ -1622,7 +1855,13 @@ CXAA017.A@*
 CXAA018.A@*
 CXAA019.A@*
 CXAA020.A@*
+CXAA021.A@*
+CXAA022.A@*
 CXAB001.A@*
+CXAB002.AU@*
+CXAB003.AU@*
+CXAB004.AU@*
+CXAB005.AU@*
 CXAC001.A@*
 CXAC002.A@*
 CXAC003.A@*
@@ -1630,11 +1869,14 @@ CXAC004.A@*
 CXAC005.A@*
 CXAC006.A@*
 CXAC007.A@*
+CXAC008.A@*
 CXACA01.A@*
 CXACA02.A@*
 CXACB01.A@*
 CXACB02.A@*
 CXACC01.A@*
+CXAG001.A@*
+CXAG002.A@*
 CXF3A06.A@*
 CXG1003.A@*
 EE3203A.ADA@*
@@ -1654,6 +1896,28 @@ NOT_APPLICABLE:
 
 @begin{FourCol}
 CB10002.A
+@end{FourCol}
+
+
+@LabeledSubClause{Environment Variables}
+
+@leading@keepnext@;If the target execution environment does not support
+reading environment variables, then the tests contained in the following files
+should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAH001.A@*
+CXAH002.A@*
+CXAH003.A
+@end{FourCol}
+
+@leading@keepnext@;If the target execution environment does not support
+creating, writing, and deleting environment variables, then the tests
+contained in the following files should report NOT_APPLICABLE:
+
+@begin{FourCol}
+CXAH002.A@*
+CXAH003.A
 @end{FourCol}
 
 

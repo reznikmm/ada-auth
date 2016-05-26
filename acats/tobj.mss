@@ -1,7 +1,7 @@
 @Part(crules, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/tobj.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2015/01/15 02:30:36 $}
+@comment{$Revision: 1.6 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledSection{Test Objectives and Coverage}
 
@@ -118,7 +118,7 @@ these documents are provided in Adobe Portable Document Format (PDF).
 (The spreadsheets are available on request from the ACAA Technical Agent,
 @URLLink{URL=[mailto:agent@ada-auth.org],Text=[agent@ada-auth.org]}.)
 
-@leading@;For ACATS 4.0, the following clauses of the Ada Standard documents are
+@leading@;For ACATS 4.1, the following subclauses of the Ada Standard documents are
 included in the new coverage documents:
 @begin{Example}
 3.2.4
@@ -126,11 +126,13 @@ included in the new coverage documents:
 4.1.3 through 4.4
 4.5.7 through 4.5.8
 5.4 through 5.5.2
+6.1.1
 6.5 through 6.8
-7.4 through 7.6.1
+7.3.2 through 7.6.1
 8.3.1 through 8.5.3
-Section 10 (10 through 10.2.1)
+Clause 10 (10 through 10.2.1)
 13.1.1
+B.3.3
 @end{Example}
 These clauses were selected because of their importance in rule changes
 in either @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}}

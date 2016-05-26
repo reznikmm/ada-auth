@@ -1,7 +1,7 @@
 @Part(refs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/refs.mss,v $}
-@comment{$Revision: 1.4 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.5 $ $Date: 2016/04/30 02:41:12 $}
 
 
 @UnnumberedSection{References}
@@ -53,6 +53,12 @@ Information technology @em Programming languages @em Ada @em
 Technical Corrigendum 1, June 2001. @Shrink{@i{(An unofficial
 version can be found at @URLLink{URL=[http://www.ada-auth.org/grab-bag.html],
 Text=[http://www.ada-auth.org/grab-bag.html]}.)}}
+
+@LocalTarget{Target=[TC1-2012],Text={[TC1-2012]}}@\ISO/IEC 8652:20012/COR 1:2016,
+Information technology @em Programming languages @em Ada @em
+Technical Corrigendum 1, February 2016. @Shrink{@i{(An unofficial
+version can be found at @URLLink{URL=[http://www.ada-auth.org/corrigendum1-12.html],
+Text=[http://www.ada-auth.org/corrigendum1-12.html]}.)}}
 
 @end{Description}
 

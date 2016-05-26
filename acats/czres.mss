@@ -1,7 +1,7 @@
 @Part(czres, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/czres.mss,v $}
-@comment{$Revision: 1.5 $ $Date: 2015/01/15 02:30:35 $}
+@comment{$Revision: 1.6 $ $Date: 2016/04/30 02:41:12 $}
 
 @LabeledAnnex{Results of CZ Tests}
 
@@ -23,11 +23,11 @@ lines depend on the customization of the ImpDef package, and will vary with the
 implementation.
 
 @begin{Example}
-,.,. CZ00004 ACATS 4.0 14-08-31 09:53:13
+,.,. CZ00004 ACATS 4.1 16-05-13 09:53:13
 ---- CZ00004 Check that Impdef values have been supplied for the special
                 needs annexes. Check that the routines in TCTouch work
                 correctly.
-   - CZ00004 TCTouch ACATS 4.0.
+   - CZ00004 TCTouch ACATS 4.1.
    * CZ00004 Assertion failed: Assertion Failed is expected.
    * CZ00004 Assertion failed: Assertion Failed is expected.
    * CZ00004 z should not equal Z Expecting: z Got: Z.
@@ -81,7 +81,7 @@ format of the output lines should be as described in the output text.
    - NO_NAME    INITIAL VALUES SHOULD BE 'NO_NAME' AND 'FAILED'.
 **** NO_NAME FAILED ****************************.
 
-,.,. PASS_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. PASS_TEST ACATS 4.1 16-05-13 09:57:42
 ---- PASS_TEST CHECKING 'TEST' AND 'RESULT' FOR 'PASSED'.
    - PASS_TEST THIS LINE IS EXACTLY 'MAX_LEN' LONG. ...5...60....5...70.
    - PASS_TEST THIS COMMENT HAS A WORD THAT SPANS THE FOLD POINT. THIS
@@ -94,38 +94,38 @@ format of the output lines should be as described in the output text.
                 'FAILED'.
 **** NO_NAME FAILED ****************************.
 
-,.,. FAIL_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. FAIL_TEST ACATS 4.1 16-05-13 09:57:42
 ---- FAIL_TEST CHECKING 'FAILED' AND 'RESULT' FOR 'FAILED'.
    * FAIL_TEST 'RESULT' SHOULD NOW BE 'FAILED'.
 **** FAIL_TEST FAILED ****************************.
 
-,.,. NA_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. NA_TEST ACATS 4.1 16-05-13 09:57:42
 ---- NA_TEST CHECKING 'NOT-APPLICABLE'.
    + NA_TEST 'RESULT' SHOULD NOW BE 'NOT-APPLICABLE'.
 ++++ NA_TEST NOT-APPLICABLE ++++++++++++++++++++.
 
-,.,. FAIL_NA_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. FAIL_NA_TEST ACATS 4.1 16-05-13 09:57:42
 ---- FAIL_NA_TEST CHECKING 'NOT_APPLICABLE', 'FAILED', 'NOT_APPLICABLE'.
    + FAIL_NA_TEST 'RESULT' BECOMES 'NOT-APPLICABLE'.
    * FAIL_NA_TEST 'RESULT' BECOMES 'FAILED'.
    + FAIL_NA_TEST CALLING 'NOT_APPLICABLE' DOESN'T CHANGE 'RESULT'.
 **** FAIL_NA_TEST FAILED ****************************.
 
-,.,. SPEC_NA_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. SPEC_NA_TEST ACATS 4.1 16-05-13 09:57:42
 ---- SPEC_NA_TEST CHECKING 'SPEC_ACT', 'NOT_APPLICABLE', 'SPEC_ACT'.
    ! SPEC_NA_TEST 'RESULT' BECOMES 'TENTATIVELY PASSED'.
    + SPEC_NA_TEST 'RESULT' BECOMES 'NOT APPLICABLE'.
    ! SPEC_NA_TEST CALLING 'SPECIAL_ACTION' DOESN'T CHANGE 'RESULT'.
 ++++ SPEC_NA_TEST NOT-APPLICABLE ++++++++++++++++++++.
 
-,.,. SPEC_FAIL_TEST ACATS 4.0 14-08-31 09:57:42
+,.,. SPEC_FAIL_TEST ACATS 4.1 16-05-13 09:57:42
 ---- SPEC_FAIL_TEST CHECKING 'SPEC_ACT', 'FAILED', 'SPEC_ACT'.
    ! SPEC_FAIL_TEST 'RESULT' BECOMES 'TENTATIVELY PASSED'.
    * SPEC_FAIL_TEST 'RESULT' BECOMES 'FAILED'.
    ! SPEC_FAIL_TEST CALLING 'SPECIAL_ACTION' DOESN'T CHANGE 'RESULT'.
 **** SPEC_FAIL_TEST FAILED ****************************.
 
-,.,. CZ1101A ACATS 4.0 14-08-31 09:57:42
+,.,. CZ1101A ACATS 4.1 16-05-13 09:57:42
 ---- CZ1101A CHECKING 'SPECIAL_ACTION' ALONE.
    ! CZ1101A 'RESULT' BECOMES 'TENTATIVELY PASSED'.
 !!!! CZ1101A TENTATIVELY PASSED !!!!!!!!!!!!!!!!.
@@ -139,7 +139,7 @@ format of the output lines should be as described in the output text.
 Only the time-stamp should differ.
 
 @begin{Example}
-,.,. CZ1102A ACATS 4.0 14-08-31 09:57:57
+,.,. CZ1102A ACATS 4.1 16-05-13 09:57:57
 ---- CZ1102A CHECK THAT THE DYNAMIC VALUE ROUTINES OF THE REPORT PACKAGE
                 WORK CORRECTLY.
 ==== CZ1102A PASSED ============================.
@@ -158,7 +158,7 @@ files, then test CZ1103A should produce the following report (except for
 differences in the time stamp). Note that failure messages are expected.
 
 @begin{Example}
-,.,. CZ1103A ACATS 4.0 14-08-31 09:58:10
+,.,. CZ1103A ACATS 4.1 16-05-13 09:58:10
 ---- CZ1103A CHECK THAT PROCEDURE CHECK_FILE WORKS.
    - CZ1103A BEGIN TEST WITH AN EMPTY FILE.
    - CZ1103A BEGIN TEST WITH A FILE WITH BLANK LINES.
@@ -186,7 +186,7 @@ differences in the time stamp). Note that failure messages are expected.
                 REVEALED ERROR: LINE WITH C.
 **** CZ1103A FAILED ****************************.
 
-,.,. CZ1103A ACATS 4.0 14-08-31 09:58:10
+,.,. CZ1103A ACATS 4.1 16-05-13 09:58:10
 ---- CZ1103A THE LINE ABOVE SHOULD REPORT FAILURE.
    ! CZ1103A COMPARE THIS OUTPUT TO THE EXPECTED RESULT.
 !!!! CZ1103A TENTATIVELY PASSED !!!!!!!!!!!!!!!!.
@@ -200,7 +200,7 @@ differences in the time stamp). Note that failure messages are expected.
 files, then CZ1103A produces different output, as illustrated below.
 
 @begin{Example}
-,.,. CZ1103A ACATS 4.0 14-08-31 09:59:00
+,.,. CZ1103A ACATS 4.1 16-05-13 09:59:00
 ---- CZ1103A CHECK THAT PROCEDURE CHECK_FILE WORKS.
    - CZ1103A BEGIN TEST WITH AN EMPTY FILE.
    * CZ1103A TEST WITH EMPTY FILE INCOMPLETE.
@@ -222,7 +222,7 @@ files, then CZ1103A produces different output, as illustrated below.
    * CZ1103A TEST WITH INCORRECT DATA INCOMPLETE.
 **** CZ1103A FAILED ****************************.
 
-,.,. CZ1103A ACATS 4.0 14-08-31 09:59:00
+,.,. CZ1103A ACATS 4.1 16-05-13 09:59:00
 ---- CZ1103A THE LINE ABOVE SHOULD REPORT FAILURE.
    ! CZ1103A COMPARE THIS OUTPUT TO THE EXPECTED RESULT.
 !!!! CZ1103A TENTATIVELY PASSED !!!!!!!!!!!!!!!!.
