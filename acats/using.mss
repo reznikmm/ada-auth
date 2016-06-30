@@ -1,7 +1,7 @@
 @Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.8 $ $Date: 2016/04/30 02:41:12 $}
+@comment{$Revision: 1.9 $ $Date: 2016/05/26 05:36:18 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -460,7 +460,8 @@ the file @exam{report.a}; this includes both the specification and body.
 
 The specification of package Report may be modified to change the setting
 of Generate_Event_Trace_File. (This setting controls whether Report writes
-an event trace file for the grading tool, see ** TBD ** for more information.)
+an event trace file for the grading tool, see @RefSecNum{Event Trace Files}
+for more information.)
 No other modifications of the specification of package Report are allowed.
 
 Under some conditions, the body of package Report may need to be modified. For
@@ -1289,6 +1290,12 @@ Tests that are non-applicable for an implementation are
 discussed in @RefSecNum{Inapplicable Tests}.
 Withdrawn tests are discussed in @RefSecNum{Withdrawn Tests}.
 
+The ACATS provides a tool that can be used to automate much of the test grading
+process; see @RefSecNum{ACATS Grading using the Grading Tool}. This tool
+enforces the expected results as described in the following sections, as
+well as checking for processing errors (compiling test files in the wrong
+order, for instance) and omissions (failing to compile required test files).
+
 
 @LabeledSubClause{Expected Results for Executable Tests}
 
@@ -1344,6 +1351,9 @@ generally will have errors only in one compilation unit per source file.
 Error messages must provide some
 means of specifying the location of an error, but they are not required to be
 in direct proximity with the @Exam{-- ERROR:} marking of the errors.
+The actual text of error messages is not used in determining whether an
+error is properly detected; only the location of the reported error is used.
+(The ACATS must not prevent innovation in error handling.)
 
 Some B-tests also include the notation @Exam{-- OK} to indicate constructs that
 @i{must not} be identified as errors. Such constructs are typically similar to

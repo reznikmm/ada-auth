@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2016/04/30 02:41:12 $}
+@comment{$Revision: 1.10 $ $Date: 2016/05/26 05:36:18 $}
 
 @LabeledSection{Configuration Information}
 
@@ -10,11 +10,13 @@ delivery, and it describes the test classes, naming conventions used, test
 program format, test structure, delivery structure, and file format.
 
 ACATS 4.1 is an update of ACATS 4.0, and has a similar delivery
-structure. The support tools are unchanged, except for updating
-header comments and version identification.
+structure. The existing support tools are unchanged, except for updating
+header comments and version identification. There are some additional and
+changed files to support the new test grading tool (see
+@RefSecNum{ACATS Grading using the Grading Tool}).
 
 The test suite does not provide tools or scripts that can be used to manage
-complete test processing, since such tools are normally specific to
+test processing (other than grading), since such tools are normally specific to
 particular implementations and host systems.
 
 @LabeledClause{Structure}
@@ -314,6 +316,11 @@ the test contains several) is expected. In such cases, an implementation is
 considered passing if it reports an error at any of the possible places for
 the error to be reported. It fails if no error is reported at any of the
 places.
+
+All of these test markings can be followed by an optional range indicator (see
+@RefSecNum{Range Indicators}). These describe the expected locations of an error
+message for the error, and are primarily used by the automated Grading Tool (see
+@RefSecNum{ACATS Grading using the Grading Tool}).
 
 
 @LabeledSubClause{Class C}
