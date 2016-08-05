@@ -1,7 +1,7 @@
 @Part(defs, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/defs.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2016/04/30 02:41:12 $}
+@comment{$Revision: 1.10 $ $Date: 2016/07/01 01:43:25 $}
 
 @LabeledAnnex{Definitions}
 
@@ -127,6 +127,19 @@ test(s) specifically test those objectives.]}
 @ToGlossary{Term=[Deviation],Text=[Failure of an Ada implementation to produce
 an acceptable result when processing an ACATS test program.]}
 
+@ToGlossary{Term=[Event Trace],Text=[A list of interesting events that occurs
+during the compilation, binding/linking, and execution of one or more ACATS
+tests. An abstraction of the implementation-specific details used by the
+grading tool.]}
+
+@ToGlossary{Term=[Grading Tool],Text=[A tool to automate grading of ACATS
+tests. Uses an event trace and test summary to determine the pass or fail
+results of ACATS tests.]}
+
+@ToGlossary{Term=[Range indicator],Text=[A range indicator provides detailed
+information about the expected location of an error; tests using range
+indicators can be graded more accurately by the grading tool.]}
+
 @ToGlossary{Term=[Specialized Needs Annex],Text=[(Abbreviated @b{SNA})
 One of annexes C through H of
 @LocalLink{Target=[Ada95],Sec=[References],Text={[Ada95]}}. Conformity testing against one or more Specialized Needs Annexes is
@@ -134,6 +147,9 @@ optional. There are tests that apply to each of the Specialized Needs Annexes.
 Results of processing these tests (if processed during a conformity assessment)
 are reported on the certificate and in the Certified Processors
 List.@SeeOther{Primary=[SNA],Other=[specialized needs annex]}]}
+
+@ToGlossary{Term=[Test Summary],Text=[A list of information about one or more
+ACATS tests, describing the test requirements to the grading tool.]}
 
 @ToGlossary{Term=[Validated Compilers List],Text=[(Abbreviated @b{VCL})
 Former designation of

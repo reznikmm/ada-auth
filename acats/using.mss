@@ -1,7 +1,7 @@
 @Part(using, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/using.mss,v $}
-@comment{$Revision: 1.9 $ $Date: 2016/05/26 05:36:18 $}
+@comment{$Revision: 1.10 $ $Date: 2016/07/01 01:43:25 $}
 
 @LabeledSection{Using the ACATS}
 
@@ -490,7 +490,7 @@ as closely as possible to the style and content of the original test. Very
 often, the only modification needed is to comment out earlier errors so that
 later errors can be identified. In some cases, code insertion will be required.
 An implementation @i{must} be able to demonstrate that it can detect and report
-@i{all} intended B-test errors.
+@i{all} intended B-test errors.@Defn2{Term=[split],Sec=[a B-Test]}
 
 Splits may also be required in executable tests, if, for example, an
 implementation capacity limitation is encountered (e.g., a number of generic

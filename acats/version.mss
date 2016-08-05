@@ -1,19 +1,18 @@
 @Part(version, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/version.mss,v $}
-@comment{$Revision: 1.7 $ $Date: 2016/04/30 02:41:12 $}
+@comment{$Revision: 1.8 $ $Date: 2016/07/01 01:43:25 $}
 
 @LabeledAnnex{Version Description}
 
-ACATS 4.1 includes 39nn tests in 45nn files, not including foundation and other
-support units. From Version 4.0 to 4.1,
+ACATS 4.1 includes 39nn tests in 45nn files, not including foundation and
+other support units. From Version 4.0 to 4.1,
 134 tests were added, comprising 179 files (including six foundation files).
 13 tests and one foundation (14 files) were modified.
-*** Redo for grading tools: One support file was added and two deleted.
+Seven support files were added and two deleted.
 Three tests (3 files) were removed.
-** Update:
-nn documentation files were added, nn documentation files were modified, and
-nn documentation files were deleted.
+36 documentation files were added, 161 documentation files were modified, and
+one documentation file was deleted.
 
 The following sections present a detailed description of ACATS 4.1, as follows:
 
@@ -178,18 +177,6 @@ b28001b.ada@*
 b28001c.ada@*
 b28001d.ada@*
 b28001e.ada@*
-b28001f.ada@*
-b28001g.ada@*
-b28001h.ada@*
-b28001i.ada@*
-b28001j.ada@*
-b28001k.ada@*
-b28001l.ada@*
-b28001m.ada@*
-b28001n.ada@*
-b28001o.ada@*
-b28001p.ada@*
-b28001q.ada@*
 b28001r.ada@*
 b28001s.ada@*
 b28001t.ada@*
@@ -4974,6 +4961,22 @@ ug-57.htm@*
 ug-571.htm@*
 ug-572.htm@*
 ug-58.htm@*
+ug-6.htm@*
+ug-61.htm@*
+ug-611.htm@*
+ug-612.htm@*
+ug-613.htm@*
+ug-614.htm@*
+ug-615.htm@*
+ug-62.htm@*
+ug-621.htm@*
+ug-622.htm@*
+ug-623.htm@*
+ug-63.htm@*
+ug-631.htm@*
+ug-632.htm@*
+ug-64.htm@*
+ug-65.htm@*
 ug-a.htm@*
 ug-a1.htm@*
 ug-a2.htm@*
@@ -4984,6 +4987,7 @@ ug-a51.htm@*
 ug-a52.htm@*
 ug-a53.htm@*
 ug-a54.htm@*
+ug-a55.htm@*
 ug-a6.htm@*
 ug-a7.htm@*
 ug-a8.htm@*
@@ -4992,6 +4996,8 @@ ug-aa.htm@*
 ug-ab.htm@*
 ug-ac.htm@*
 ug-ad.htm@*
+ug-ae.htm@*
+ug-af.htm@*
 ug-b.htm@*
 ug-b1.htm@*
 ug-b2.htm@*
@@ -5016,6 +5022,16 @@ ug-d18.htm@*
 ug-d19.htm@*
 ug-d1a.htm@*
 ug-d1b.htm@*
+ug-d1c.htm@*
+ug-d1d.htm@*
+ug-d1e.htm@*
+ug-d1f.htm@*
+ug-d1g.htm@*
+ug-d1h.htm@*
+ug-d1i.htm@*
+ug-d1j.htm@*
+ug-d1k.htm@*
+ug-d1l.htm@*
 ug-d2.htm@*
 ug-d21.htm@*
 ug-d22.htm@*
@@ -5035,6 +5051,9 @@ ug-d2f.htm@*
 ug-d2g.htm@*
 ug-d2h.htm@*
 ug-d2i.htm@*
+ug-d2j.htm@*
+ug-d2k.htm@*
+ug-d2l.htm@*
 ug-e.htm@*
 ug-f.htm@*
 ug-toc.htm@*
@@ -5089,6 +5108,17 @@ cz00004.a@*
 cz1101a.ada@*
 cz1102a.ada@*
 cz1103a.ada
+@end{Fourcol}
+
+@LabeledSubClause{Test Grading Tools}
+
+@begin{Fourcol}
+grade.a@*
+grd_data.a@*
+special.a@*
+summary.a@*
+trace.a@*
+tst_sum.a
 @end{Fourcol}
 
 @LabeledClause{Tests With Special Requirements}
@@ -5435,12 +5465,43 @@ fdb3a00.a
 
 @leading@;The following documentation files are new in ACATS 4.1:
 
-** Need to check for new HTML files **
-
 @begin{FourCol}
 cover06a.pdf@*
 cover06b.pdf@*
-cover-b.pdf
+cover-b.pdf@*
+ug-6.htm@*
+ug-61.htm@*
+ug-611.htm@*
+ug-612.htm@*
+ug-613.htm@*
+ug-614.htm@*
+ug-615.htm@*
+ug-62.htm@*
+ug-621.htm@*
+ug-622.htm@*
+ug-623.htm@*
+ug-63.htm@*
+ug-631.htm@*
+ug-632.htm@*
+ug-64.htm@*
+ug-65.htm@*
+ug-a55.htm@*
+ug-ad.htm@*
+ug-ae.htm@*
+ug-af.htm@*
+ug-d1c.htm@*
+ug-d1d.htm@*
+ug-d1e.htm@*
+ug-d1f.htm@*
+ug-d1g.htm@*
+ug-d1h.htm@*
+ug-d1i.htm@*
+ug-d1j.htm@*
+ug-d1k.htm@*
+ug-d1l.htm@*
+ug-d2j.htm@*
+ug-d2k.htm@*
+ug-d2l.htm
 @end{FourCol}
 
 
@@ -5448,10 +5509,14 @@ cover-b.pdf
 
 @leading@;The following support files are new in ACATS 4.1:
 
-** Need to check for others **
-
 @begin{FourCol}
-report.a
+grade.a@*
+grd_data.a@*
+report.a@*
+special.a@*
+summary.a@*
+trace.a@*
+tst_sum.a
 @end{FourCol}
 
 @LabeledClause{Test Files Modified Since ACATS 4.0}
@@ -5478,7 +5543,7 @@ f552a00.a
 
 @LabeledClause{Support Files Modified Since ACATS 4.0}
 
-@leading@;The following support files have been modified from their ACATS 4.0 versions:
+@leading@;The following support file has been modified from its ACATS 4.0 version:
 
 @begin{FourCol}
 impdef.a
@@ -5487,8 +5552,6 @@ impdef.a
 @LabeledClause{Documentation Files Modified Since ACATS 4.0}
 
 @leading@;The following documentation files have been modified from their ACATS 4.0 versions:
-
-** Need to check HTML files (others are thought to be right) **
 
 @begin{FourCol}
 acats-ug.pdf@*
@@ -5506,7 +5569,7 @@ coversum.pdf@*
 dirs.png@*
 mod-name.png@*
 ug-01.htm@*
-ug-02.htm@*
+ug-21.htm@*
 ug-1.htm@*
 ug-11.htm@*
 ug-12.htm@*
@@ -5670,8 +5733,6 @@ cd33002.a
 
 The following documentation files were present in ACATS 4.0 but do not
 appear in ACATS 4.1:
-
-** Need to check for more (especially in the HTML) **
 
 @begin{FourCol}
 cover06.pdf

@@ -1,7 +1,7 @@
 @Part(config, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/config.mss,v $}
-@comment{$Revision: 1.10 $ $Date: 2016/05/26 05:36:18 $}
+@comment{$Revision: 1.11 $ $Date: 2016/07/01 01:43:25 $}
 
 @LabeledSection{Configuration Information}
 
@@ -32,8 +32,8 @@ number of tests and files in the ACATS suite.
 NoBreak=[T],Border=[T],SmallSize=[F],
 Caption=[],
 Headers=[@\Total@\Core Tests@\SNA Tests@\Found@!ations@\Docs@\Other],
-Body=[Number of Files@\4787@\4287@\250@\54@\174@\22
-Number of Tests@\3910@\3718@\192@\0@\0@\0]}
+Body=[Number of Files@\5002@\4457@\250@\60@\208@\27
+Number of Tests@\4033@\3841@\192@\0@\0@\0]}
 
 @leading@;Others consists of:
 @table{Columns=[2],Alignment=[AllLeft],FirstColWidth=[1],LastColWidth=[4],
@@ -41,9 +41,10 @@ NoBreak=[T],Border=[F],SmallSize=[F],
 Caption=[],
 Headers=[],
 Body=[1@\List of all files
-14@\Code that is referenced by tests
+13@\Code that is referenced by tests
 3@\Code and data used for preprocessing tests to insert implementation specific information
-4@\Test routines for reporting code ("CZ" tests)]}
+4@\Test routines for reporting code ("CZ" tests)
+6@\Code for test grading tools]}
 
 The delivery structure of the test suite is described in
 Section @RefSecNum{Delivery Directory Structure}.
@@ -300,7 +301,7 @@ that cannot be associated with one of the indicated errors. If the test
 structure is such that a compiler cannot recover sufficiently to identify all
 errors, it may be permissible to "split" the test program into separate units
 for re-processing (see Section @RefSecNum{Allowed Test Modifications}
-for instructions on modifying tests).
+for instructions on modifying tests).@Defn2{Term=[split],Sec=[a B-Test]}
 
 In some cases and for some constructs, compilers may adopt various error
 handling and reporting strategies. In cases where the test designers determined

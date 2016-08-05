@@ -1,7 +1,7 @@
 @Part(changes, Root="acats.msm")
 
 @comment{$Source: e:\\cvsroot/ARM/ACATS/changes.mss,v $}
-@comment{$Revision: 1.6 $ $Date: 2016/05/26 05:36:18 $}
+@comment{$Revision: 1.7 $ $Date: 2016/07/01 01:43:25 $}
 
 @LabeledSection{Changes for ACATS 4.1}
 
@@ -18,8 +18,8 @@ Ada.Generic_Dispatching_Constructor,
 Ada.Environment_Variables, Ada.Text_IO.Bounded_IO and Unbounded_IO, and
 Ada.Containers.
 
-In addition, 16 additional tests were corrected or removed in to reflect
-changes in Ada reflected by @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}},
+In addition, 16 additional tests were corrected or removed to reflect
+changes in Ada made by @LocalLink{Target=[Ada2012],Sec=[References],Text={[Ada2012]}},
 as well as in response to
 test disputes and ARG issue resolutions.
 
