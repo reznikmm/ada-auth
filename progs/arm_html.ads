@@ -13,7 +13,8 @@ package ARM_HTML is
     -- a particular format.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2013
+    -- Copyright 2000, 2001, 2002, 2004, 2005, 2006, 2007, 2011, 2012, 2013,
+    --     2016
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -104,6 +105,7 @@ package ARM_HTML is
     --  3/26/13 - RLB - Added HTML_Script to allow adding Google Analytics
     --			code as needed.
     --  4/20/16 - RLB - Added Force_New_Revision_Colors.
+    --  8/18/16 - RLB - Added a more column text to avoid overflow.
 
     type HTML_Output_Type is new ARM_Output.Output_Type with private;
 
@@ -523,7 +525,7 @@ private
     type Column_Text_Item_Type;
     type Column_Text_Ptr is access Column_Text_Item_Type;
     type Column_Text_Item_Type is record
-	Text : String (1..120);
+	Text : String (1..240);
 	Length : Natural;
 	Item : Natural; -- Which item.
 	End_Para : Boolean; -- True if this item is an end paragraph.

@@ -1,6 +1,7 @@
 Ada formatting tool.
 
-Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012 AXE Consultants.
+Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2012, 2016
+   AXE Consultants.
 P.O. Box 1512, Madison WI  53701
 E-Mail: randy@rrsoftware.com
 
@@ -42,7 +43,7 @@ The output of the tool is written into a subdirectory
 does not require any pre or post processing except to have Word create the real
 table of contents for the .RTF outout.
 
-Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <Version>[ <Output_Path>]]]]
+Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <BaseVers> [<ChgVers>[ <Output_Path>]]]]]
 
 The <Master_File> specifies the layout of the document to generate (see below).
 If <Master_File> has no extension, ".MSM" is assumed.
@@ -59,25 +60,25 @@ The formats are:
 
 <Changes> are:
    No-Changes: The original text (same as specifying version 0).
-   New-Only: Text with changes applied through the specified version.
-   Show-Changes: The text with changes up through the specified version
-                 applied, and changes marked. For HTML, deleted text is shown
+   New-Only: Text with changes applied through the specified change
+             version (<ChgVers>). There are no marking for changes.
+   Show-Changes: The text with changes shown and marked for versions
+                 <BaseVers> though <ChgVers>. Changes for older versions
+                 are applied without marking. For HTML, deleted text is shown
                  as struck-through and inserted text as underlined. Changes for
 		 different versions are in different colors.
 		 For RTF, this uses Word's "changes" mechanisms, which can
                  shows changes in different colors.
-   Changes-Only: The text with changes up through the specified version
-                 applied, and changes for the specified version only marked
-                 as described above.
-   New-Changes: The text with changes up through the specified version
-                applied, and insertions marked. Deletions are marked by just a
-                single blank space. (See above for how these are marked). This
-                form is intended to be used with revision bars in Word 97/2000
-                (Older versions of Word do not reformat the document when
-                deletions are hidden, leaving unsightly blank spaces. This is
-                not a problem with current versions of Word)
+   New-Changes: The text with changes applied for versions <BaseVers> though
+                <ChgVers>, with insertions marked. Deletions are marked by just
+                a single blank space. (See Show-Changes for how these are
+                marked). This form is intended to be used with revision bars
+                in Word 97/2000 (Older versions of Word do not reformat the
+                document when deletions are hidden, leaving unsightly blank
+                spaces. This is not a problem with current versions of Word).
 
-<Version> = a value in 0 .. 9 representing the change version desired.
+<BaseVers> and <ChgVers> = a value in 0 .. 9 representing the base and
+                primary change version desired.
 
 <Output_Path> = the path to which to write the result files. This must end
    with a path separator.

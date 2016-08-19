@@ -275,7 +275,7 @@ procedure ARM_Formatter is
         end;
     exception
 	when No_Command_Error =>
-	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <LowerVers>[ <UpperVers>[ <Output Path>]]]]]}");
+	    Ada.Text_IO.Put_Line ("  Usage: Arm_Form <Master_File> [<Format>[ <Changes>[ <BaseVers>[ <ChgVers>[ <Output Path>]]]]]}");
 	    Ada.Text_IO.Put_Line ("     where: <Master_File> is the file name (and optional path) for the master file");
 	    Ada.Text_IO.Put_Line ("                        for the document;");
 	    Ada.Text_IO.Put_Line ("     where: <Format> = 'Text' (text files),");

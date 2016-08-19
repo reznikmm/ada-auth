@@ -500,7 +500,7 @@ private
 	Font : ARM_Output.Font_Family_Type; -- What is the current font family?
 	Size : ARM_Output.Size_Type; -- What is the current relative size?
 	Real_Size : Natural; -- What is the current size in halfpoints?
-	Color : ARM_Output.Color_Type; -- What is the current text color?
+ 	Color : ARM_Output.Color_Type; -- What is the current text color?
 	Change : ARM_Output.Change_Type := ARM_Output.None;
 	Version : ARM_Contents.Change_Version_Type := '0';
 	Added_Version : ARM_Contents.Change_Version_Type := '0';

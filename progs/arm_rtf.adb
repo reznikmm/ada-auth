@@ -19,7 +19,7 @@ package body ARM_RTF is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2010, 2011, 2012,
-    --	    2013
+    --	    2013, 2016
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -146,6 +146,11 @@ package body ARM_RTF is
     --			Revised_Clause_Header.
     -- 12/13/12 - RLB - Added style needed by AARM (only in deleted text).
     --  8/16/13 - RLB - Added missing style needed by recent RM change.
+    --  6/28/16 - RLB - Added missing style needed by recent ACATS
+    --			documentation change.
+    --  8/19/16 - RLB - Nasty bug in End_Hang_Item: it loses any open styles
+    --			if a line break has to be inserted.
+
 
     -- Note: We assume a lot about the Section_Names passed into
     -- Section in order to get the proper headers/footers/page numbers.
@@ -1523,6 +1528,21 @@ package body ARM_RTF is
 			 "\s85\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-140 \snext85 ");
 
+	    -- The following are indented three extra levels:
+	    Set_Style (Paragraph_Info(ARM_Output.Narrow_Hanging, 4),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 18,
+		       Style_Indent => INDENT_UNIT*4,
+		       Style_Hang_Width => 360,
+		       Style_Before => 0,
+		       Style_After => 100,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s86\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-200\slmult0 \snext86 ");
+			  -- Note: Narrower space between and afterwards.
+
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
 		       Font => ARM_Output.Swiss,
@@ -1533,7 +1553,7 @@ package body ARM_RTF is
 		       Style_After => 90,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s86\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s87\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -1546,7 +1566,7 @@ package body ARM_RTF is
 		           Style_After => 45,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -1557,7 +1577,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -1568,7 +1588,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -1579,7 +1599,7 @@ package body ARM_RTF is
 		           Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s91\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -2677,6 +2697,21 @@ package body ARM_RTF is
 			 "\s85\widctlpar\adjustright",
 		       Style_String_Suffix => "\cgrid\ql\sl-170\slmult0 \snext85 ");
 
+	    -- The following are indented three extra levels:
+	    Set_Style (Paragraph_Info(ARM_Output.Narrow_Hanging, 4),
+		       Font => ARM_Output.Default,
+		       Body_Font => Output_Object.Body_Font,
+		       Font_Size => 22,
+		       Style_Indent => INDENT_UNIT*4,
+		       Style_Hang_Width => 360,
+		       Style_Before => 0,
+		       Style_After => 120,
+		       Style_Justified => TRUE,
+		       Style_String_Prefix =>
+			 "\s86\widctlpar\adjustright",
+		       Style_String_Suffix => "\cgrid\qj\sl-240\slmult0 \snext86 ");
+			  -- Note: Narrower space between and afterwards.
+
 	    -- New styles should be added here, following numbers will need adjustments.
 	    Set_Style (Heading_4_Info,
 		       Font => ARM_Output.Swiss,
@@ -2687,7 +2722,7 @@ package body ARM_RTF is
 		       Style_After => 100,
 		       Style_Justified => FALSE,
 		       Style_String_Prefix =>
-			 "\s86\keepn\widctlpar\outlinelevel3\adjustright",
+			 "\s87\keepn\widctlpar\outlinelevel3\adjustright",
 		       Style_String_Suffix => "\b\ql\cgrid \sbasedon0 \snext0 ");
 	    if Output_Object.Big_Files then
 		-- Define the TOC styles:
@@ -2700,7 +2735,7 @@ package body ARM_RTF is
 			   Style_After => 60,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s87\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_2_Info,
 		           Font => ARM_Output.Swiss,
@@ -2711,7 +2746,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s88\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_3_Info,
 		           Font => ARM_Output.Swiss,
@@ -2722,7 +2757,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s89\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
                 Set_Style (TOC_4_Info,
 		           Font => ARM_Output.Swiss,
@@ -2733,7 +2768,7 @@ package body ARM_RTF is
 			   Style_After => 0,
 		           Style_Justified => FALSE,
 		           Style_String_Prefix =>
-		             "\s90\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
+		             "\s91\widctlpar\tqr\tldot\tx" & Paper_Width & "\adjustright",
 		           Style_String_Suffix => "\b\cgrid \sbasedon0 \snext0 ");
 	    end if;
 	    Set_Style (Table_C_Text_Info,
@@ -5088,6 +5123,7 @@ package body ARM_RTF is
 	-- Text_Prefixed_Style_Subtype, or if this has already been
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
+	Current_Format : ARM_Output.Format_Type;
     begin
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
@@ -5131,6 +5167,24 @@ package body ARM_RTF is
 	    Output_Object.Char_Count := Output_Object.Char_Count + 5;
 --Ada.Text_Io.Put_Line (" No_Break");
         else -- Line break needed.
+	    -- Just writing a line break clobbers any open styles.
+	    -- We have to save the current style, close it properly,
+	    -- do the line break stuff, and then reopen it. This showed as
+	    -- a bug only in RM-All, 3.3.1(19) [which should be shown as
+	    -- deleted, but was not.]
+	    -- Note that the HTML version does this save and restore dance,
+	    -- why we didn't do it here I'm not sure - RLB - 8/19/16.
+	    Current_Format :=  (Bold    => Output_Object.Is_Bold,
+				Italic  => Output_Object.Is_Italic,
+				Font    => Output_Object.Font,
+				Size    => Output_Object.Size,
+				Color   => Output_Object.Color,
+				Change  => Output_Object.Change,
+				Version => Output_Object.Version,
+				Added_Version => Output_Object.Added_Version,
+				Location=> Output_Object.Location);
+	    Text_Format (Output_Object, ARM_Output.NORMAL_FORMAT);
+		-- Clear the existing format.
 	    --Ada.Text_IO.Put_Line (Output_Object.Output_File, "\line ");
 	    --Output_Object.Char_Count := 0;
 	    --This idiot program JUSTIFIES the text fragment, so a line
@@ -5169,6 +5223,8 @@ package body ARM_RTF is
 	    Ada.Text_IO.Put (Output_Object.Output_File, "\tab ");
 	    Output_Object.Char_Count := Output_Object.Char_Count + 5;
 --Ada.Text_Io.Put_Line (" Break");
+	    -- Reset the format:
+	    Text_Format (Output_Object, Current_Format);
         end if;
     end End_Hang_Item;
 

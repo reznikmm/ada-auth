@@ -1693,7 +1693,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			else
 			    Format_Object.Style  := ARM_Output.Normal;
 			end if;
-		        Format_Object.Indent := 1 + Enclosing_Indent;
+			if Enclosing_Indent = Arm_Output.Paragraph_Indent_Type'Last then
+                            raise Program_Error with
+                               "Overindented (indent) text on line " & ARM_Input.Line_String (Input_Object);
+                        else
+		            Format_Object.Indent := 1 + Enclosing_Indent;
+                        end if;
 --Ada.Text_IO.Put_Line ("&& Child Indented paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
 --   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 			Format_Object.No_Breaks := False;
@@ -1704,7 +1709,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			else
 			    Format_Object.Style  := ARM_Output.Bulleted;
 			end if;
-		        Format_Object.Indent := 1 + Enclosing_Indent;
+			if Enclosing_Indent = Arm_Output.Paragraph_Indent_Type'Last then
+                            raise Program_Error with
+                               "Overindented (bullet) text on line " & ARM_Input.Line_String (Input_Object);
+                        else
+		            Format_Object.Indent := 1 + Enclosing_Indent;
+                        end if;
 --Ada.Text_IO.Put_Line ("&& Regular bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
 --   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
@@ -1716,7 +1726,12 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 			else
 			    Format_Object.Style  := ARM_Output.Nested_Bulleted;
 			end if;
-		        Format_Object.Indent := 1 + Enclosing_Indent;
+			if Enclosing_Indent = Arm_Output.Paragraph_Indent_Type'Last then
+                            raise Program_Error with
+                               "Overindented (nestbullet) text on line " & ARM_Input.Line_String (Input_Object);
+                        else
+		            Format_Object.Indent := 1 + Enclosing_Indent;
+                        end if;
 --Ada.Text_IO.Put_Line ("&& Nested bulleted paragraph, line " & ARM_Input.Line_String (Input_Object) & " EF=" & Paragraph_Type'Image(Enclosing_Format) & " Indent=" &
 --   ARM_Output.Paragraph_Indent_Type'Image(Format_Object.Indent));
 		        Format_Object.Paragraph_Tab_Stops := ARM_Output.NO_TABS;
