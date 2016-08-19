@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -69,7 +69,7 @@ called its @i{declarative region},
 
   a @nt{loop_statement};
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI125-0061-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
   @ChgAdded{Version=[5],Text=[an @nt{iterated_component_association};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0255-1]}
@@ -1643,8 +1643,9 @@ security queue derived from the Queue interface of 3.9.4 as:]}
 @key{procedure} Append(Q : @key{in out} Security_Queue; Person : @key{in} Person_Name);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0178-1]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
-@key{procedure} Remove_First(Q : @key{in out} Security_Queue; Person : @key{in} Person_Name);]}
+@key{procedure} Remove_First(Q : @key{in out} Security_Queue; Person : @Chg{Version=[5],New=[@key{out}],Old=[@key{in}]} Person_Name);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{overriding}
@@ -3080,6 +3081,11 @@ of a @nt{case_statement}@Chg{Version=[4],New=[ or @nt{case_expression}],Old=[]}.
   This means that the @nt{expression} is resolved without looking
   at the choices.
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[The @SynI<variable_>@nt{name} of an
+@nt{assignment_statement} @i<A>, if
+the @nt{expression} of @i<A> contains one or more @nt{target_name}s.]}
 @end{itemize}
 
 @leading@Defn2{Term=[interpretation], Sec=(of a complete context)}
@@ -3842,5 +3848,9 @@ Proc (List); -- @RI[OK in Ada 95, ambiguous in Ada 2005.]]}
   compiler would implement the much more complicated resolution necessary (and
   we are not aware of any that did). Therefore, we didn't document this as a
   potential incompatibility.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+  @ChgAdded{Version=[5],Text=[Added a resolution rule for @nt{target_name}
+  (see @RefSecNum{Target Name Symbols}).]}
 @end{DiffWord2012}
 

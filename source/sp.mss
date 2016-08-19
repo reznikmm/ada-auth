@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/08/05 07:11:22 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1683,13 +1683,22 @@ a component, object or type for which the aspect Independent or
 Independent_Components is True, in a way that prevents the implementation from
 providing the independent addressability required by the aspect.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1]}
+@ChgAdded{Version=[5],Text=[If a nonatomic subcomponent of an atomic object is
+passed as the actual parameter in a call then the formal parameter shall allow
+pass by copy (and, at run time, the parameter shall be passed by copy). A
+nonatomic subcomponent of an atomic object shall not be used as an actual for a
+generic formal of mode @key[in out]. A nonatomic subcomponent of an atomic type
+shall not be aliased. A nonatomic subcomponent of an atomic type or object shall
+not have components that are specified to be independently addressable.]}
+
 @end{Legality}
 
 @begin{NotIso}
 @ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 14
 was moved to @RefSec{Obsolescent Features}.>}]}@Comment{This message
 should be deleted if the paragraphs are ever renumbered.}@ChgNote{We use
-this message rather than the "automatic one" to get rid of the resolution
+this message rather than the "automatic one" to get rid of the static semantics
 subheader}
 @end{NotIso}
 
@@ -1778,17 +1787,40 @@ further specify the parameter passing rules involving atomic and volatile
 types and objects.
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1]}
+@ChgAdded{Version=[5],Text=[All reads of or writes to any nonatomic subcomponent
+of an atomic object shall be implemented by reading and/or writing all of the
+nearest enclosing atomic object.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For example, if a 32-bit record object has four
+  nonatomic components, each occupying one byte, then an assignment to one of
+  those components might normally be implemented on some target machines via
+  some sort of store_byte instruction; if the record object is atomic then
+  instead a 32-bit read-modify-write must be performed.
+  That read-modify-write need not be atomic, although the read
+  and the write must each separately be atomic. Note that it doesn't
+  matter whether the store_byte instruction would have executed atomically.
+  This rule is needed in some cases for memory-mapped device registers.]}
+@end{ImplNote}
+
 @end{RunTime}
 
 @begin{ImplReq}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0128-1]}
 @PDefn2{Term=[external effect], Sec=(volatile/atomic objects)}
 The external effect of a program
 (see @RefSecNum(Conformity of an Implementation with the Standard))
 is defined to include each read and update
 of a volatile or atomic object. The implementation shall not
 generate any memory reads or updates of atomic or volatile
-objects other than those specified by the program.
+objects other than those specified by the program.@Chg{Version=[5],New=[
+However, there may be target-dependent cases where reading or writing a
+volatile but nonatomic object (typically a component) necessarily involves
+reading and/or writing neighboring storage, and that neighboring storage might
+overlap a volatile object.],Old=[]}
 @begin{Discussion}
 The presumption is that volatile or atomic objects might reside in an
 @lquotes@;active@rquotes@; part of the address space where each read has a
@@ -1816,6 +1848,14 @@ V1 = V2) should not translate to Y:= V2; X:= V1;
 Reordering of stores to volatile variables: V1:= X; V2:= X; should not
 translate to V2:=X; V1:= X;
 @end{itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0128-1]}
+@ChgAdded{Version=[5],Text=[The part about @ldquote@;target-dependent
+cases@rdquote is intended to let compilers use a read-modify-write operation
+when a volatile component has a size that cannot be directly read or written
+with the available machine instructions. (For instance, writing a Boolean
+component with size 1 in a volatile packed array of Boolean requires a
+pre-read on most existing machines.)]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -1837,9 +1877,12 @@ no packing whatsoever can be achieved.]}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00259-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0128-1]}
 @ChgAdded{Version=[2],Text=[A load or store of a volatile object whose size is
 a multiple of System.Storage_Unit and whose alignment is nonzero, should be
-implemented by accessing exactly the bits of the object and no others.]}
+implemented by accessing exactly the bits of the object and no
+others@Chg{Version=[5],New=[, except in
+the case of a volatile but nonatomic subcomponent of an atomic object],Old=[]}.]}
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[A load or store of a volatile object whose size is
 a multiple of System.Storage_Unit and whose alignment is nonzero, should be
@@ -1847,10 +1890,13 @@ implemented by accessing exactly the bits of the object and no others.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0128-1]}
   @ChgAdded{Version=[2],Text=[Since any object can be a volatile object,
   including packed array components and bit-mapped record components, we
   require the above only when it is reasonable to assume that the machine
-  can avoid accessing bits outside of the object.]}
+  can avoid accessing bits outside of the object.@Chg{Version=[5],New=[ The
+  exception is needed so this advice doesn't conflict with other rules of
+  this subclauase.],Old=[]}]}
 @end{Reason}
 
 @begin{Ramification}
@@ -1882,6 +1928,22 @@ still be modified by an @lquotes@;external source.@rquotes@;
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
 @ChgAdded{Version=[4],Text=[Specifying the Pack aspect cannot override the
 effect of specifying an Atomic or Atomic_Components aspect.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0128-1]}
+@ChgAdded{Version=[5],Text=[When mapping an Ada object to a memory-mapped
+hardware register, the Ada object should be declared atomic to ensure that the
+compiler will read and write exactly the bits of the register as specified in
+the source code and no others.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is especially important for a write-only
+  hardware register, as in such a case a read-modify-write cycle will not work.
+  The only time the language guarantees such a cycle will not happen is when
+  writing an entire atomic object. If one wants to write individual components
+  of a write-only hardware register (assuming the hardware supports that), those
+  also need to be declared atomic.]}
+@end{Discussion}
 
 @end{Notes}
 
@@ -1942,6 +2004,19 @@ because the pragma was not used to mark variables as shared.
   account when determining the legality of parameter passing of volatile and
   atomic objects.]}
 @end{DiffWord2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0128-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012} Required
+  that nonatomic components of a atomic object use a read-modify-write cycle, as
+  well as clarifying that such a cycle is allowed for volatile objects that
+  aren't exactly the size of a machine scalar. That can introduce a
+  read-modify-write cycle where one was not used previously (for instance, if
+  the components are exactly byte-sized on most machines); it is thought that
+  this will more often fix bugs with access to hardware than it will cause them.
+  If this is an issue, declaring the components themselves as atomic will
+  restore the previous behavior.]}
+@end{Inconsistent2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}

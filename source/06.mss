@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -604,11 +604,13 @@ Sec=(postcondition expression)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0159-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0170-1]}
 @ChgAdded{Version=[3],Text=[Within the expression for a Pre'Class or Post'Class aspect for a primitive
 subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type @i<T>, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a formal parameter
 @Chg{Version=[4],New=[(or @i<S>'Result) ],Old=[]}of type
-@i<T> is interpreted as @Chg{Version=[4],New=[though it had a (notional) type
+@i<T> is interpreted as @Chg{Version=[4],New=[though it had a (notional)
+@Chg{Version=[4],New=[nonabstract ],Old=[]} type
 @i<NT> that is a formal derived type whose ancestor type is @i<T>, with directly
 visible primitive operations],Old=[having type @i<T>'Class]}. Similarly, a
 @Chg{Version=[4],New=[@nt<name>],Old=[name]} that denotes a
@@ -627,6 +629,13 @@ from @i<T>.]}]]}
   expression is well-defined for any primitive
   subprogram of a type descended from @i<T>.]}
 @end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0170-1]}
+  @ChgAdded{Version=[5],Text=[The operations of @i<NT> are also nonabstract,
+  so the rule against a call of an abstract subprogram does not trigger for a
+  class-wide precondition or postcondition.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[3],Text=[For an attribute_reference with attribute_designator
@@ -787,6 +796,7 @@ these rules also apply in the private part of an instance of a generic unit.]}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0113-1],ARef=[AI12-0131-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0170-1]}
 @ChgAdded{Version=[4],Type=[Leading],Text=[]}@Comment{Conditional Leading}
 @ChgAdded{Version=[3],Text=[If a Pre'Class or Post'Class aspect is specified for
 a primitive subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type
@@ -794,7 +804,8 @@ a primitive subprogram @Chg{Version=[4],New=[@i<S> ],Old=[]}of a tagged type
 @Chg{Version=[4],New=[a corresponding],Old=[the associated]} expression
 also applies to the corresponding primitive subprogram
 @Chg{Version=[4],New=[@i<S> ],Old=[]}of each descendant of
-@i<T>.@Chg{Version=[4],New=[ The @i<corresponding expression> is constructed
+@i<T>@Chg{Version=[5],New=[ @Redundant[(including @i<T>
+itself)]],Old=[]}.@Chg{Version=[4],New=[ The @i<corresponding expression> is constructed
 from the associated expression as follows:@Defn2{Term=[corresponding expresssion],Sec=[class-wide precondition]}
 @Defn2{Term=[corresponding expresssion],Sec=[class-wide postcondition]}],Old=[]}]}
 
@@ -882,6 +893,13 @@ then the respective precondition or postcondition expressions are considered
   @ChgAdded{Version=[4],Text=[a @nt{predicate} of a
   @nt{quantified_expression};]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0198-1]}
+  @ChgAdded{Version=[5],Text=[the @nt{expression} of an
+  @nt{array_component_association}, if the associated choice is a
+  @nt{subtype_indication} or @nt{range} that defines a nonstatic or null range,
+  or is an @key[others] choice and the applicable index constraint is
+  nonstatic or null;]}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[the right operand of a short-circuit control
   form; or]}
@@ -954,11 +972,14 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   @end{Itemize}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
-  @ChgAdded{Version=[4],NoPrefix=[T],Text=[The nominal subtype of X'Old is as
-  implied by the above definitions. The expected type of the prefix of an Old
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0185-1]}
+  @ChgAdded{Version=[4],NoPrefix=[T],Text=[The @Chg{Version=[5],New=[type
+  and ],Old=[]}nominal subtype of X'Old is as
+  implied by the above definitions.@Chg{Version=[5],New=[],Old=[ The expected
+  type of the prefix of an Old
   attribute is that of the attribute. Similarly, if an Old attribute shall
   resolve to be of some type, then the prefix of the attribute shall resolve to
-  be of that type.]}
+  be of that type.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Reference to this attribute is only
@@ -1109,17 +1130,20 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} F that
 denotes a function declaration}, the following attribute is defined:]}
 @begin(description)
-@ChgAttribute{Version=[3],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2], ARef=[AI05-0262-1],
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2],
+  ARef=[AI05-0262-1], ARef=[AI12-0185-1],
   InitialVersion=[3],
   Text=[@Chg{Version=[3],New=[Within a postcondition expression for function F,
   denotes the result object of the function. The type of this attribute is that
   of the function result except within a Post'Class postcondition expression for
-  a function with a controlling result or with a controlling access result. For
+  a function with a controlling result or with a controlling access
+  result@Chg{Version=[5],New=[; in those cases the type of the attribute was
+  described previously.],Old=[. For
   a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
   the function result type. For a controlling access result, the type of the
   attribute is an anonymous access type whose designated type is @i<T>'Class,
-  where @i<T> is the designated type of the function result type.],Old=[]}]}@Comment{End of Annex text here.}
+  where @i<T> is the designated type of the function result type.]}],Old=[]}]}@Comment{End of Annex text here.}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this
@@ -1359,6 +1383,27 @@ applies to both dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
     expectations on the foreign code that it most likely cannot analyze.]}
 @end{ImplNote}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0195-1]}
+@ChgAdded{Version=[5],Text=[For the purposes of the above rules, a call on
+an inherited subprogram is considered to involve a call on a subprogram @i<S>'
+whose body consists only of a call (with appropriate conversions) on the
+non-inherited subprogram @i<S> from which the inherited subprogram was
+derived. It is not specified whether class-wide precondition or
+postcondition expressions that are equivalent (with respect to which
+non-inherited function bodies are executed) for @i<S> and @i<S>' are
+evaluated once or twice. If evaluated only once, the value returned
+is used for both associated checks.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If the class-wide pre- and postcondition
+    expressions are equivalent for @i<S> and @i<S>' because none of the
+    primitive subprograms called in those expressions were overridden, no
+    wrapper is needed. Otherwise, a wrapper is presumably needed to
+    provide the correct logic.]}
+@end{ImplNote}
+
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
 @ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value, all
 precondition and postcondition checks performed are determined by the subprogram
@@ -1409,6 +1454,18 @@ the value.]}
   program might fail in a different compiler. But such a program was depending
   on unspecified behavior anyway, and thus was never portable; as such,
   such programs should be rare.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0195-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Specified that an inherited
+  subprogram check both the original and new versions of a class-wide
+  precondition. If a call on an inherited subprogram fails the original
+  class-wide precondition when it passes the new class-wide precondition,
+  then the call will fail the precondition check wheras it would have passed
+  in original Ada 2012. (A similar possibility exists for class-wide
+  postconditions.) This can only happen if the overriding subprograms somehow
+  fail to follow the guidelines of LSP, so this should be rare (the entire
+  point of class-wide preconditions and postconditions is to use them in
+  cases where LSP is followed).]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -1439,6 +1496,18 @@ the value.]}
   weaker than the class-wide precondition of a statically bound call. (The
   original Ada 2012 violated the LSP semantics that class-wide preconditions
   were intended to model.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0198-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> A component @nt{expression}
+  in an array aggregate can now be potentially unevaluated, requiring the
+  prefix to be statically determined. Existing code that uses the Old
+  attribute with a dynamic prefix in such contexts will now be illegal.
+  However, in many cases, the existing code will not do what the
+  programmer is expecting (as Old is evaluated textually, once per occurrence,
+  while array aggregate components are evaluated once per component). In
+  addition, Old is a new Ada 2012 feature, so most Ada legacy code will not
+  contain it. The problem is usually easily fixed by moving Old to an outer
+  object (such as the entire aggregate).]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
@@ -1446,6 +1515,17 @@ the value.]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The Index attribute is new.]}
 @end{Extend2012}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0170-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the wording about
+  the meaning of the notional type @i<NT> and the corresponding expression.
+  Both changes follow from other rules but are nonobvious.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0185-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Removed redundant (and sometimes
+  incorrect) wording about the resolution of the Old and Result attributes.]}
+@end{Diffword2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:02 $}
+@Comment{$Date: 2016/08/05 07:11:20 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.85 $}
+@Comment{$Revision: 1.86 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -784,8 +784,9 @@ have no effect on the meaning of an Ada program].]}
 @Defn{delimiter}
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
 characters@Chg{Version=[2],New=[:],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3]}
 @begin{Display}
-&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@ @ @ @ |
+&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@Chg{Version=[5],New=[@ @ @ @ @@],Old=[]}@ @ @ @ |
 @end{Display}
 
 @Defn{compound delimiter}
@@ -850,6 +851,11 @@ From URG recommendation.
   make it into the wording.]}
 @end{Extend2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+  @ChgAdded{Version=[5],Text=[Added the @nt{target_name} symbol to the list
+  of delimiters (see @RefSecNum{Target Name Symbols}).]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Identifiers}

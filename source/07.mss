@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1260,7 +1260,23 @@ Old=[within the immediate scope of the array type.]}
 In such a case, the predefined "=" operator is implicitly declared at
 that place, and assignment is allowed after that place.]
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0140-1]}
+@ChgAdded{Version=[5],Text=[The characteristics and constraints of the
+designated subtype of an access type follow a somewhat different rule. The view
+of the designated subtype of (a view of) an access type at a given place is
+determined by the view of the designated subtype that is visible at that place,
+rather than the view at the place where the access type is declared.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0140-1]}
+  @ChgAdded{Version=[5],Text=[Whether or not the designated subtype is
+  considered incomplete is determined by rules in
+  @RefSecNum{Incomplete Type Declarations};
+  this rule has no effect on that property.]}
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0140-1]}@Comment{Only because the paragraph number changes}
 @ChgAdded{Version=[3],Text=[A type is a @i<descendant>@Defn2{Term=[descendant],
 Sec=[of the full view of a type]} of the full view of some ancestor
 of its parent type only if the current view it has of its parent is a
@@ -1273,6 +1289,7 @@ descendant only through record extensions of a more distant ancestor].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0115-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0065-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0140-1]}@Comment{Only because the paragraph number changes}
 @ChgAdded{Version=[3],Text=[@Redundant[@Chg{Version=[4],New=[Furthermore,
 it],Old=[It]} is possible for there to be places
 where a derived type is @Chg{Version=[4],New=[known to be derived
@@ -1662,6 +1679,11 @@ has been moved to @lquotes@;Obsolescent Features.@rquotes@;
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the clarification added
   by AI05-0115-1, as it turned out to not be that clear. Hopefully this version
   is better.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0140-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the constraints and
+  properties that apply to a designated subtype. This additional wording
+  does not mean to change existing practice.]}
 @end{DiffWord2012}
 
 

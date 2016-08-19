@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:12 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -28,13 +28,15 @@ Finally, @nt<name>s can denote attributes of any of the foregoing.]
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0139-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3]}
 @Syn{tabs=[P22], lhs=<name>,rhs="
      @Syn2{direct_name}@\| @Syn2{explicit_dereference}
    | @Syn2{indexed_component}@\| @Syn2{slice}
    | @Syn2{selected_component}@\| @Syn2{attribute_reference}
    | @Syn2{type_conversion}@\| @Syn2{function_call}
    | @Syn2{character_literal}@Chg{Version=[3],New=[@\| @Syn2{qualified_expression}
-   | @Syn2{generalized_reference}@\| @Syn2{generalized_indexing}],Old=[]}"}
+   | @Syn2{generalized_reference}@\| @Syn2{generalized_indexing}@Chg{Version=[5],New=<
+   | @Syn2{target_name}>,Old=<>}],Old=[]}"}
 
 
 @Syn{lhs=<direct_name>,
@@ -302,6 +304,12 @@ of implicit dereference.
   @nt{generalized_indexing} as types of @nt{name}; these are documented
   as extensions in the appropriate subclauses.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+  @ChgAdded{Version=[5],Text=[Added a @nt{target_name}
+  (see @RefSecNum{Target Name Symbols}) to the syntax of @nt{name}.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Indexed Components}

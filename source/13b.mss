@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -6779,20 +6779,18 @@ before the constant is frozen
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00114-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[2],Text=[The above @LegalityTitle are stated
-@lquotes@;officially@rquotes@; in the referenced
-@Chg{Version=[3],New=[subclauses],Old=[clauses]}.]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0181-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The above
+@LegalityTitle are stated @lquotes@;officially@rquotes@; in the referenced
+@Chg{Version=[3],New=[subclauses],Old=[clauses]}.]}]}
 @end{TheProof}
 
 @Leading@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@Chg{New=[An operational or],Old=[A]} representation item that
+@Redundant[@Chg{New=[An operational or],Old=[A]} representation item that
 directly specifies an aspect of an entity shall appear before the entity is
-frozen (see @RefSecNum{Operational and Representation Aspects}).
-@ChgNote{A last minute change (requested by WG9) moved this rule to 13.1(9).
-However, the rule there only covers types and subtypes. So this rule is not
-redundant, and I removed the @Redundant for it. I don't have a way to mark
-that as a change, so it is just gone. RLB-29-08-00}
-
+frozen (see @RefSecNum{Operational and Representation Aspects}).]
+@Comment{These Redundant brackets were removed for versions 2 through 4;
+we don't have any sensible way to do that here, so we don't do it at all.}
 @begin{Discussion}
 
 @comment{The following is a "fix" to keep consistent with v. 5.95;
@@ -6810,15 +6808,20 @@ For example, an @nt{enumeration_@!representation_@!clause} is illegal after the
 type is frozen, even though the @ntf{_clause} refers to the first subtype.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00114-01]}
-@ChgAdded{Version=[2],Text=[The above @LegalityName is stated
-for types and subtypes in @RefSecNum{Operational and Representation Aspects},
-but the rule here covers all other entities as well.]}
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0181-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The above @LegalityName
+is stated for types and subtypes in
+@RefSecNum{Operational and Representation Aspects}, but the rule here covers
+all other entities as well.]}]}
 @end{Discussion}
 @begin{TheProof}
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00114-01]}
-@ChgDeleted{Version=[2],Text=[The above @LegalityTitle
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0181-1]}
+@Chg{Version=[5],New=[The above @LegalityTitle
 are stated @lquotes@;officially@rquotes@;
-in the referenced clauses.]}
+in the referenced subclauses.],Old=[@Chg{Version=[2],New=[],Old=[The above
+@LegalityTitle are stated @lquotes@;officially@rquotes@;
+in the referenced clauses.]}]}
 @end{TheProof}
 @begin{Discussion}
 @Leading@;Here's an example that illustrates when freezing occurs in the

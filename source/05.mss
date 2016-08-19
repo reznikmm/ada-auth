@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.66 $}
+@Comment{$Revision: 1.67 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -600,6 +600,111 @@ rules (which would eliminate ambiguities in some cases). Moreover, examples
 like this one are rare, as they depend on assigning into overloaded function
 calls.]}
 @end{Incompatible95}
+
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Target Name Symbols]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[@@, known as the @i<target name> of an assignment
+statement, provides an abbreviation to avoid repetition of potentially long
+names in assignment statements.@Defn{target name}]}
+
+@begin{Syntax}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<target_name>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<@@>,Old=<>}"}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[@Redundant[If a @nt{target_name} occurs in an
+@nt{assignment_statement} @i<A>, the @SynI<variable_>@nt{name} @i<V> of @i<A>
+is a complete context. The target name is a
+constant view of @i<V>, having the nominal subtype of @i<V>.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The complete context rule is formally given in
+  @RefSecNum{The Context of Overload Resolution}. The constant view rule is
+  formally given in @RefSecNum{Objects and Named Numbers}; the nominal subtype
+  follows from the equivalence given below in @StaticSemTitle.]}
+@end{TheProof}
+@end{Resolution}
+
+@begin{Legality}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[A @nt{target_name} shall only appear in the
+@nt{expression} of an @nt{assignment_statement}.]}
+@end{Legality}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[@Redundant[The @SynI<variable_>@nt{name} is
+evaluated only once.] In particular, if a @nt{target_name} with nominal subtype
+@i<S> appears in the @nt{expression} of an @nt{assignment_statement} @i<A>,
+then @i<A> is equivalent to a call on a local anonymous procedure with the
+actual parameter being the @SynI<variable_>@nt{name} of @i<A>, where the local
+anonymous procedure has an @key[in out] parameter with unique name @i<P> of
+subtype @i<S>, with a body being @i<A> with the @i<variable_>@nt{name} being
+replaced by @i<P>, and any @nt<target_name>s being replaced by the qualified
+expression @i<S>'(@i<P>).]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This equivalence defines all of the
+  @RuntimeTitle for these assignment statements.]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For example, the expression]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[My_Array(I) := @@*2 + @@/2;]}
+@end{Example}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[would be equivalent to]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=<@key[declare]
+   @key[procedure] [Anon] ([Target] : @key[in out] [Target_Subtype]) @key[is]
+   @key[begin]
+      [Target] := [Target_Subtype]'([Target])*2 +
+                  [Target_Subtype]'([Target])/2;
+   @key[end] [Anon];>}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={@key[begin]
+   [Anon] ([Target] => My_Array(I));
+@key[end];}}
+@end{Example}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[where all of the identifiers in square brackets
+  are anonynous placeholders.]}
+@end{Discussion}
+@end{StaticSem}
+
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1;>
+                       -- @Examcom<(Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+@ChgAdded{Version=[5],Text=[Long_Ago : Date := Yesterday; -- @Examcom<See @RefSecNum{Record Types}.>
+Long_Ago := (Year  => @@.Year - 1,
+             Month => (@key[if] @@.Month = January @key[then] January @key[else] Month_Name'Pred(@@.Month)),
+             Day   => (@key[if] @@.Day = 1 @key[then] 28 @key[else] @@.Day - 1));
+   -- @Examcom<A target_name can be used multiple times and as a prefix if needed.>]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2012}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0125-3]}
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2012}
+  The target name symbol @@ is new.]}
+@end{Extend2012}
 
 
 @LabeledClause{If Statements}

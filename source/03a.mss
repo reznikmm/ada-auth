@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:12 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -727,6 +727,14 @@ for @nt<index_constraint>s, and
 @nt<discriminant_constraint>s].@Chg{Version=[2],New=[ The set of possible values
 for an object of an access type can also be subjected to a condition that
 excludes the null value (see @RefSecNum{Access Types}).],Old=[]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0140-1]}
+  @ChgAdded{Version=[5],Text=[@ldquote@;Null constraint@rdquote includes the
+  cases of no explicit constraint, as well as unknown discriminants and
+  unconstrained array type declarations (which are explicit ways to declare
+  no constraint).]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01],ARef=[AI95-00415-01]}
 @Defn{subtype}
@@ -1829,7 +1837,7 @@ unit.@PDefn{generic contract issue}]}
 @end{Legality}
 
 @begin{Runtime}
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI125-0071]}
+@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[4],Text=[If any of the above @LegalityTitle is violated in an
 instance of a generic unit, Program_Error is raised at the point of the
 violation.]}
@@ -1960,13 +1968,13 @@ given subtype, then:]}
 @end{DescribeCode}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI125-0071]}
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[A value @i<satisfies> a
 predicate if the predicate is True for that
 value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0153-3],ARef=[AI05-0276-1]}
-@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI125-0071]}
+@ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[If any of the above
 @LegalityTitle is violated in an instance of a generic unit, Program_Error is
 raised at the point of the violation.]}]}
@@ -2281,7 +2289,13 @@ The following (and no others) represent constants:
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[the result of evaluating a @nt{qualified_expression};]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0125-3]}
+  @ChgAdded{Version=[5],Text=[a @nt{target_name} of an
+  @nt{assignment_statement} when used in the @nt{expression} of the assignment
+  (see @RefSecNum{Target Name Symbols});]}
+
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0120-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0125-3]}@Comment{Just a paragraph number change.}
   @ChgAdded{Version=[3],Text=[within the body of a protected function (or a
   function declared immediately within a @nt{protected_body}), the current
   instance of the enclosing protected unit;]}
@@ -2507,6 +2521,12 @@ assigning to an enclosing object.
   @RefSecNum{Names} for details.]}@ChgNote{This is defined an extension in @RefSecNum{Names}.}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+  @ChgAdded{Version=[5],Text=[Added a rule defining a @nt{target_name} as
+  a constant (see @RefSecNum{Target Name Symbols}).]}
+@end{DiffWord2012}
+
 
 @LabeledSubClause{Object Declarations}
 
@@ -2605,12 +2625,29 @@ protected type.
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00373-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0192-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Just to get conditional Leading here.}
 @ChgAdded{Version=[2],Text=[@Defn{requires late initialization}
 A component of an object is said to
-@i{require late initialization} if it has an access discriminant value
-constrained by a per-object expression, or if it has an initialization
-expression that includes a name denoting the current instance of the type
-or denoting an access discriminant.]}
+@i{require late initialization} if@Chg{Version=[5],New=[:],Old=[ it has an
+access discriminant value constrained by a per-object expression, or if it has
+an initialization expression that includes a name denoting the current instance
+of the type or denoting an access discriminant.]}]}
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1]}
+@ChgAdded{Version=[5],Text=[it has an access discriminant value constrained by a
+per-object expression;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1]}
+@ChgAdded{Version=[5],Text=[it has an initialization expression that includes a
+name denoting an access discriminant; or]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0192-1]}
+@ChgAdded{Version=[5],Text=[it has an initialization expression that includes
+a reference to the current instance of the type either by name or implicitly
+as the target object of a call.]}
+@end{Itemize}
+
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[Such components can depend on the values of
@@ -3081,6 +3118,22 @@ without an initialization expression.
   (see @RefSecNum{Scalar Types}) and Default_Component_Value
   (see @RefSecNum{Array Types}) aspects; the extension is documented there.]}
 @end{DiffWord2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0192-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}
+  @b<Correction:> Components of a protected type require late initialization if
+  their initialization includes (implicitly) the current instance of the type.
+  This means that the components could end up being initialized in a different
+  order. In most cases, this will have no visible effect, or even fix bugs.
+  Most code for which this is an issue depends on the (unspecified) order of
+  initialization, so it is at risk of failing with a new compiler version
+  regardless of Ada rule changes. However, there do exist very unlikely
+  cases where legal, portable Ada 2012 code would become erroneous. (See
+  the discussion section of @AILink{AI=[AI12-0192-1],Text=[AI12-0192-1]}
+  for an example.) These are so unlikely that it is expected that they
+  only exist in the minds of Ada lawyers.]}
+@end{Inconsistent2012}
 
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/08/05 07:11:21 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -527,16 +527,20 @@ type-related:]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0116-1]}
-A representation item that directly specifies an aspect of a subtype or
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0181-1]}
+@Chg{Version=[5],New=[A representation item that directly specifies an aspect of an entity shall
+appear before the entity is frozen (see @RefSecNum{Freezing Rules}). In
+addition, a],Old=[A]}
+representation item that directly specifies an aspect of a subtype or
 type shall appear after the type is completely defined
-(see @RefSecNum{Completions of Declarations}),
+(see @RefSecNum{Completions of Declarations})@Chg{Version=[5],New=[.],Old=[
 and before the subtype or type is frozen (see
 @RefSecNum{Freezing Rules}).@Chg{Version=[4],New=[],Old=[ If a
 representation item @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}is
 given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item
 @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}that
-directly specifies the same aspect of the entity.]}
+directly specifies the same aspect of the entity.]}]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 The fact that a representation item @Chg{New=[(or operational item,
@@ -579,7 +583,13 @@ another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
   declaration need not be known to determine their legality.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1]}
+@ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that freezes an
+entity shall not occur within an @nt{aspect_specification} that specifies a
+representation or operational aspect of that entity.]}
+
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0181-1]}@Comment{Just a paragraph number change}
 @ChgAdded{Version=[4],Text=[If a representation item, operational item, or
 @nt{aspect_specification} is given that directly specifies an aspect of an
 entity, then it is illegal to give another representation item, operational
@@ -605,6 +615,7 @@ the entity.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0106-1],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0116-1]}@Comment{Just a paragraph number change}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0181-1]}@Comment{Just a paragraph number change}
 @ChgAdded{Version=[3],Text=[Unless otherwise specified, it is illegal to
 specify an operational or representation aspect of a generic formal
 parameter.]}
@@ -905,17 +916,15 @@ Sizes by default, for the same reason.
   the aspects are the same if specified.],Old=[]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
-  @ChgAdded{Version=[5],Text=[The above existing static matching rule combined
-  with the updated definition of static matching in
-  @RefSecNum{Statically Matching Constraints and Subtypes}
-  does not cause incompatibilities in existing Ada code that does not
-  mention Object_Size. But it does constrain the implementation-defined value
-  of Object_Size when it is not specified for a subtype; the above rule applies
-  even in that case. (The effects noted in the example above would occur
-  otherwise.)]}
-@end{Reason}
+  @ChgAdded{Version=[5],Text=[The above static matching rule combined
+  with the definition of static matching in
+  @RefSecNum{Statically Matching Constraints and Subtypes} (after updating to
+  add Object_Size) does not cause incompatibilities in existing Ada 2012 code
+  that does not mention Object_Size. But it does constrain the
+  implementation-defined value of Object_Size when it is not specified for a
+  subtype; the above rule applies even in that case. (The effects noted in the
+  example above would occur otherwise.)]}
 
-@begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0059-1]}
   @ChgAdded{Version=[5],Text=[We need this rule even though static matching
   explicitly excludes confirming values of Object_Size. That's because a general
@@ -925,7 +934,7 @@ Sizes by default, for the same reason.
   different Object_Sizes for statically matching subtypes, we'd be allowing the
   access type to designate objects with differing numbers of bits. That isn't
   going to work.]}
-@end{Discussion}
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0009-1],ARef=[AI05-0295-1]}
@@ -1535,6 +1544,14 @@ Some of the more stringent requirements are moved to
   implicit or explicit conversion between the original and the derived type,
   it is unlikely that any program could exist without running into internal
   compiler errors or bogus results.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0181-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule preventing
+  self-referencing representation or operational aspects. This is technically
+  incompatible, but since the similar representation or operational item has
+  been illegal since they've existed, and they don't make any sense, it's
+  unlikely that any implementation accepted them or that they appear in any
+  program.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}
@@ -1728,13 +1745,15 @@ aspect.]}
 rather] are resolved at the end of the immediately enclosing declaration list.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0180-1]}
 @ChgAdded{Version=[3],Text=[If the associated declaration is for a subprogram or
 entry, the names of the formal parameters are directly visible within the
 @nt{aspect_definition}, as are certain attributes, as specified elsewhere in
 this International Standard for the identified aspect. If the associated
 declaration is a @nt{type_declaration}, within the @nt{aspect_definition} the
-names of any components are directly visible, and the name of the first subtype
-denotes the current instance of the type (see
+names of any @Chg{Version=[5],New=[visible ],Old=[]}components@Chg{Version=[5],New=[,
+protected subprograms, and entries],Old=[]} are directly visible, and the name
+of the first subtype denotes the current instance of the type (see
 @RefSecNum{The Context of Overload Resolution}). If the associated declaration
 is a @nt{subtype_declaration}, within the @nt{aspect_definition} the name of
 the new subtype denotes the current instance of the subtype.]}
@@ -1777,11 +1796,13 @@ aspect of a boolean type, in which case it is equivalent to the
 subprogram of a tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0194-1]}
 @ChgAdded{Version=[3],Text=[There are no language-defined aspects that
 may be specified on a @nt{renaming_declaration},
 a @nt{generic_formal_parameter_declaration}, a @nt{subunit}, a @nt{package_body},
-a @nt{task_body}, a @nt{protected_body}, or a @nt{body_stub} other than a
-@nt{subprogram_body_stub}.]}
+a @nt{task_body}, a @nt{protected_body},
+@Chg{Version=[5],New=[an @nt{entry_body}, ],Old=[]}or a @nt{body_stub} other
+than a @nt{subprogram_body_stub}.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Implementation-defined aspects can be allowed on
@@ -2033,7 +2054,7 @@ follow implementation-defined legality and semantics rules.]}
   syntax, so this freedom does not reduce portability.]}
 @end{Discussion}
 @ChgImplDef{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
-Text=[Implementation-defined aspects, inluding the syntax for specifying
+Text=[Implementation-defined aspects, including the syntax for specifying
 such aspects and the legality rules for such aspects.]}]}
 @end{ImplPerm}
 
@@ -2042,6 +2063,19 @@ such aspects and the legality rules for such aspects.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect specifications are new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0180-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Names of protected subprograms and entries are now directly visible in an
+  aspect of a type declaration. This was always intended to be the case, but it
+  was omitted from the Standard by an editing error. In the unlikely case that
+  a parameterless protected function has the same name and type as an entity
+  used in a type invariant expression, the meaning would change from the outside
+  entity which would now be hidden by the protected function. It is much more
+  likely that a conflict (itself rather unlikely) would cause a resolution
+  failure.]}
+@end{Inconsistent2012}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0154-1]}
@@ -2057,19 +2091,25 @@ such aspects and the legality rules for such aspects.]}]}
 @end{Incompatible2012}
 
 @begin{Diffword2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0105-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0105-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified the wording so that the restriction
   against language-defined aspects on subprogram completions includes
   completions that are expressions functions and null procedures.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0106-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0106-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Defined class-wide aspect
   for use in rules in @RefSecNum{Stream-oriented attributes}.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI125-0138-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0138-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Added a definition of
   nonoverridable aspects. This is necessary to prevent generic contract
   problems with formal derived types.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0194-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added @nt{entry_body} to the
+  list of entities that don't allow any language-defined aspects. This was
+  an oversight in @AILink{AI=[AI12-0169-1],Text=[AI12-0169-1]} which allowed @nt{aspect_specification}s on
+  an @nt{entry_body} in the first place.]}
 @end{Diffword2012}
 
 

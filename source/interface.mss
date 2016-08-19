@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/08/05 07:11:22 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1741,12 +1741,23 @@ parameters of mode @key[in] also apply to the return object of a function.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00337-01]}
 @ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0002-1]}
-@ChgDeleted{Version=[3],Text=[@Chg{Version=[2],New=[An Ada parameter of a
-private type is passed as specified for the full view of the type.],Old=[]}]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0184-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[An implementation should
+provide unsigned_long_long and long_long as 64-bit
+modular and signed integer types (respectively) in package Interfaces.C if
+the C implementation supports unsigned long long and long long as 64-bit
+types.],Old=[
+@Chg{Version=[3],New=[],Old=[An Ada parameter of a
+private type is passed as specified for the full view of the type.]}]}]}
 
 @ChgImplAdvice{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
 Text=[If C interfacing is supported, the interface correspondences between Ada
 and C should be supported.]}]}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[If the C implementation supports unsigned long long and long long,
+unsigned_long_long and long_long should be supported.]}]}
+
 @end{ImplAdvice}
 
 @begin{Notes}
@@ -1882,6 +1893,12 @@ specific numbers and types of parameters.
   between an Ada enumeration type and a C enumeration type; implementations
   should support convention C for enumeration types.]}
 @end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0184-1]}
+  @ChgAdded{Version=[5],Text=[Added @ImplAdviceTitle that types be defined in
+  Interfaces.C corresponding to long long and unsigned long long.]}
+@end{DiffWord2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.75 $ $Date: 2016/02/12 05:25:38 $ $Author: randy $ }
+@comment{ $Revision: 1.76 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2016/02/12 05:25:38 $}
+@Comment{$Date: 2016/08/05 07:11:22 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1172,6 +1172,29 @@ be a remote call interface library unit.
 @end{Discussion}
 @end{itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0002-1]}
+@ChgAdded{Version=[5],Text=[Specification of a stream-oriented attribute is illegal in the specification
+of a remote call interface library unit.
+In addition to the places where @LegalityTitle
+normally apply (see @RefSecNum{Generic Instantiation}), this rule applies also
+in the private part of an instance of a generic
+unit.@PDefn{generic contract issue}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This applies whether the stream-oriented
+  attribute is specified with an @nt{attribute_definition_clause} or with
+  a @nt{aspect_specification}.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Stream-oriented attributes are intended to be
+  used locally (to marshall values), while subprograms in a remote call
+  interface are intended to be used remotely. We resolve the conflict by
+  banning the local use routines. The type should be included in a remote
+  types package and imported into the remote call interface package.]}
+@end{Reason}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[A],Old=[If a]} pragma All_Calls_Remote
 @Chg{Version=[3],New=[sets the All_Calls_Remote representation aspect of
@@ -1362,6 +1385,15 @@ be supported as an alternative to RPC.]
   corrected Ada 2012. This is highly unlikely as PCS is going to be able to
   communicate with any partition of the program, including the local partition.]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0002-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Specifying user-defined stream-oriented attributes is now illegal in an
+  RCI unit. If a program contains such attributes, they and their associated
+  type will need to be moved to a remote types package (which is then
+  imported intot he RCI unit).]}
+@end{Incompatible2012}
 
 
 @LabeledClause{Consistency of a Distributed System}
