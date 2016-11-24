@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:20 $}
+@Comment{$Date: 2016/08/20 00:20:11 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.86 $}
+@Comment{$Revision: 1.87 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -416,6 +416,7 @@ Old=[@Defn{left square bracket}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3]}
 @Chg{Version=[2],New=[@Defn{graphic symbols}@Defn{glyphs}This table
 serves to show the correspondence between
 ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} names and the graphic symbols (glyphs) used in this
@@ -506,7 +507,7 @@ full stop, dot, point@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Ol
 @ @ @ @ @ @ @ @ @ @Chg{Version=[2],New=[/],Old=<[>}@*
 @ @ @ @ @ @ @ @ @ @Chg{Version=[2],New=[!],Old=<]>}@*
 @ @ @ @ @ @ @ @ @ @Chg<Version=[2],New=[%],Old=<{>>@*
-@Chg<Version=[2],New=[],Old=<@ @ @ @ @ @ @ @ @ }>>
+@Chg<Version=[2],New=[@Chg<Version=[5],New=[@ @ @ @ @ @ @ @ @ @@],Old=<>>],Old=<@ @ @ @ @ @ @ @ @ }>>
 @NewColumn
 @NoParanum@;name
 
@@ -520,7 +521,7 @@ vertical line@*
 @Chg{Version=[2],New=[solidus, divide],Old=[left square bracket]}@*
 @Chg{Version=[2],New=[exclamation point],Old=[right square bracket]}@*
 @Chg{Version=[2],New=[percent sign],Old=[left curly bracket]}@*
-@Chg{Version=[2],New=[],Old=[right curly bracket]}
+@Chg{Version=[2],New=[@Chg<Version=[5],New=[commerical at, at sign],Old=<>>],Old=[right curly bracket]}
 @end(FourCol)
 @end{StaticSem}
 

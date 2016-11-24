@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/08/20 00:20:11 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -692,17 +692,18 @@ expression @i<S>'(@i<P>).]}
                        -- @Examcom<(Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-@ChgAdded{Version=[5],Text=[Long_Ago : Date := Yesterday; -- @Examcom<See @RefSecNum{Record Types}.>
-Long_Ago := (Year  => @@.Year - 1,
-             Month => (@key[if] @@.Month = January @key[then] January @key[else] Month_Name'Pred(@@.Month)),
-             Day   => (@key[if] @@.Day = 1 @key[then] 28 @key[else] @@.Day - 1));
+@ChgAdded{Version=[5],Text=[My_Complex_Array : @key[array] (1 .. Max) @key[of] Complex; -- @Examcom<See @RefSecNum{Number Declarations}, @RefSecNum{Record Types}.>
+...
+-- @Examcom<Square the element in the Count (see @RefSecNum{Object Declarations}) position:>
+My_Complex_Array (Count) := (Re => @@.Re**2 - @@.Im**2,
+                             Im => 2.0 * @@.Re * @@.Im);
    -- @Examcom<A target_name can be used multiple times and as a prefix if needed.>]}
 @end{Example}
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0125-3]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI95-0125-3]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The target name symbol @@ is new.]}
 @end{Extend2012}
 
