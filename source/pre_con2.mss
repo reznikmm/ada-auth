@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2016/11/24 02:33:52 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -743,11 +743,16 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated; if Position does not designate an element
   in Container (including if it designates the root node), then Program_Error is
   propagated. Otherwise, Replace_Element assigns the value New_Item to the
-  element designated by Position.]}
+  element designated by
+  Position.@Chg{Version=[5],New=[ For the purposes of
+  determining whether the parameters overlap in a call to Replace_Element, the
+  Container parameter is not considered to overlap with any object
+  @Redundant[(including itself)].],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1921,6 +1926,15 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The generic package Containers.Multiway_Trees is new.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
+  Replace_Element is now defined such that it can be used
+  concurrently so long as it operates on different elements. This allows
+  some container operations to be used in parallel without separate
+  synchronization.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0069-1]}

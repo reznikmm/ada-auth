@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.121 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
+@comment{ $Revision: 1.122 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/11/24 02:33:53 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -2608,6 +2608,81 @@ implementation-defined queuing policies.]}]}
 
 @end{ImplAdvice}
 
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a task type (including the
+anonymous type of a @nt{single_task_declaration}), protected type (including the
+anonymous type of a @nt{single_protected_declaration}), or an
+@nt{entry_declaration}, the following language-defined representation aspect may
+be specified:]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Max_Entry_Queue_Length@\The type of
+aspect Max_Entry_Queue_Length is Integer.@AspectDefn{Max_Entry_Queue_Length}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Max_Entry_Queue_Length],
+    Text=[@ChgAdded{Version=[5],Text=[The maximum entry queue length for a
+      task type, protected type, or entry.]}]}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[If directly specified, the aspect_definition shall
+be a static expression no less than -1. If not specified, the aspect has value
+-1 (representing no additional restriction on queue length).]}
+@end{Description}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Text=[If the Max_Entry_Queue_Length aspect for a type has
+a nonnegative value, the Max_Entry_Queue_Length aspect for every individual
+entry of that type shall not be greater than the value of the aspect for the
+type. The Max_Entry_Queue_Length aspect of a type is nonoverridable.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Aspect Max_Entry_Queue_Length
+    can specify less than the partition-wide or type-wide default, but it can't
+    expand the length of a queue.]}
+  @end{Ramification}
+@end{Legality}
+
+@begin{Linktime}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Text=[If a restriction Max_Entry_Queue_Length applies to a
+partition, any value specified for the Max_Entry_Queue_Length aspect specified
+for the declaration of a type or entry in the partition shall not be greater
+than the value of the restriction.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[13.12(6) says that the restriction value has to
+    be static, so this is statically checkable. But the restriction does not
+    have to be in the same compilation as the aspect, so the check cannot, in
+    general, be done until link time.]}
+  @end{Ramification}
+@end{Linktime}
+
+@begin{Runtime}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Text=[If a nonconfirming value is specified for
+Max_Entry_Queue_Length for a type, and an entry call or requeue would cause the
+queue for any entry of the type to become longer than the specified value, then
+Program_Error is raised at the point of the call or
+requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Text=[If a nonconfirming value is specified for
+Max_Entry_Queue_Length for an entry,
+and an entry call or requeue would cause the queue for an entry to become longer
+than the specified value, then Program_Error is raised at the point of the call
+or requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@end{Runtime}
+
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0074],ARef=[AI95-00068-01]}
   @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Corrected the number of
@@ -2638,6 +2713,9 @@ implementation-defined queuing policies.]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0163-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Defined the new queuing policy Ordered_FIFO_Queuing.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+  @ChgAdded{Version=[5],Text=[Defined the new aspect Max_Enty_Queue_Length.]}
 @end{Extend2012}
 
 
@@ -4346,6 +4424,15 @@ suspension object. Suspend_Until_True_And_Set_Deadline is a potentially blocking
 operation.]}
 @end{RunTime}
 
+@begin{Bounded}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0171-1]}
+@ChgAdded{Version=[5],Text=[It is a bounded error for two or more tasks to call
+Suspend_Until_True on the same Suspension_Object concurrently. For each task,
+Program_Error might be raised, the task might proceed without suspending, or the
+task might suspend, potentially indefinitely. The state of the suspension object
+might end up either True or False.]}
+@end{Bounded}
+
 @begin{ImplReq}
 
 The implementation is required to allow the calling of Set_False and
@@ -4373,6 +4460,13 @@ object.]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Child
   package Ada.Synchronous_Task_Control.EDF is new.]}
 @end{Extend2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0171-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that Suspend_Until_True
+  should only be called from a single task, and what happens if that is
+  violated.]}
+@end{Diffword2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Synchronous Barriers]}

@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2016/08/20 00:20:11 $}
+@Comment{$Date: 2016/11/24 02:33:50 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.87 $}
+@Comment{$Revision: 1.88 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -115,12 +115,36 @@ characters allowed outside of comments are those in categories
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0004-1]}
 @ChgAdded{Version=[2],Text=[The semantics of an Ada program whose text is not
-in Normalization Form KC (as defined by @Chg{Version=[3],New=[Clause 21],Old=[section 24]}
+in Normalization Form @Chg{Version=[5],New=[C],Old=[KC]} (as
+defined by @Chg{Version=[3],New=[Clause 21],Old=[section 24]}
 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]})
 is implementation defined.]}
-@ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],Text=[The
-semantics of an Ada program whose text is not in Normalization Form KC.]}]}
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[2],
+Text=[@ChgAdded{Version=[2],Text=[The
+semantics of an Ada program whose text is not in Normalization Form
+@Chg{Version=[5],New=[C],Old=[KC]}.]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[In particular, an implementation can reject such
+  program source. It is easy during lexical analysis to reject source that
+  contains any code point not present in Normalization Form C. Portable
+  programs should always be encoded in Normalization Form C.]}
+@end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[Normalization Form C ensures that all source is in
+  a unique format; it eliminates ambiguities and security issues potentially
+  caused by source using unusual sequences of characters. Note that WC3
+  recommends that all Internet content be in Normalization Form C. We don't
+  require this as there is a potentially significant cost to checking this
+  (just rejecting unallowed code points is not enough), and some
+  implementations may need to be interoperable with tools
+  that produce unnormalized text.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
@@ -708,6 +732,19 @@ permitted in identifiers (in the standard mode).]}
   invoked for any implementations that cannot directly process the ACATS.]}
 @end{Diffword2005}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The interpretation of Ada source
+  that is in Normalization Form C but not in Normalization Form KC is no
+  longer implementation-defined. This change could potentially change the
+  meaning of a program for a compiler that normalized all program source
+  to Normalization Form KC before processing it. We don't document this as
+  an inconsistency as such handling was previously implementation defined
+  (so any such code was already defined to be not portable),
+  and we're not aware of any compiler that normalized source code (so we
+  don't expect to see this problem in the real world).]}
+@end{Diffword2012}
+
 
 @LabeledClause{Lexical Elements, Separators, and Delimiters}
 
@@ -911,6 +948,28 @@ a reserved word.]}
 @end{Reason}
 @end{SyntaxText}
 @end{Syntax}
+
+@begin{Legality}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1]}
+@ChgAdded{Version=[5],Text=[An identifier shall only contain characters that may
+be present in Normalization Form KC (as defined by Clause 21 of ISO/IEC
+10646:2011).]}
+
+  @begin{ImplNote}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[An implementation can usually detect this during
+    lexical processing. The code points not allowed are those for which Unicode
+    property NFKC_QC (Normalization Form KC Quick_Check) has the value No. We
+    say "might be allowed" so that characters for which the value is Maybe
+    (really, one of the possible values is Maybe) are allowed (these are mainly
+    combining marks). The necessary tables can be found in
+    @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/DerivedNormalizationProps.txt],
+    Text=[http://www.unicode.org/Public/UCD/latest/ucd/DerivedNormalizationProps.txt]}. Versions for older Unicode versions can be found on this site as
+    well; start at @URLLink{URL=[http://www.unicode.org/Public/],
+    Text=[http://www.unicode.org/Public/]} and find the appropriate version
+    number.]}
+  @end{ImplNote}
+@end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1167,6 +1226,17 @@ implementation-defined attributes or pragma names.
   and in any case, only Ada 2005 identifiers containing wide characters could
   be affected.]}
 @end{Incompatible2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@B<Correction:>
+  An identifier that contains any characters not permitted in Normalization
+  Form KC is now illegal. Ada 2012 allowed such identifiers, but their
+  interpretation was implementation-defined (so the use of such
+  identifiers was not portable). Identifiers that may be interpreted differently
+  by different compilers is a safety and security hazard, so we no longer
+  allow them.]}
+@end{Incompatible2012}
 
 
 @LabeledClause{Numeric Literals}

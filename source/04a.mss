@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:50 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -655,9 +655,12 @@ then the expanded name is ambiguous, independently of the @nt<selector_name>.
 
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00252-01],ARef=[AI95-00407-01]}
-@ChgAdded{Version=[2],Text=[For a subprogram whose first parameter is an
-access parameter, the prefix of any prefixed view shall denote an aliased
-view of an object.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0204-1]}
+@ChgAdded{Version=[2],Text=[For@Chg{Version=[5],New=[ a prefixed view of],Old=[]}
+a subprogram whose first parameter is an access parameter, the
+prefix@Chg{Version=[5],New=[],Old=[ of any prefixed view]}
+shall @Chg{Version=[5],New=[be legal as the prefix of an
+Access attribute reference],Old=[enote an aliased view of an object]}.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00407-01]}
 @ChgAdded{Version=[2],Text=[For a subprogram whose first parameter is of mode
@@ -787,6 +790,20 @@ My_Object.Do_Something_Else (Flag => True);]}
   a prefixed view to ignore the implicit subprograms declared for
   @ldquote@;implemented by@rdquote entries and protected subprograms.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Added a rule to ensure that all reasons that the prefix of an Access
+  attribute can be illegal are covered by the rule for the implicit Access
+  attribute of a prefixed view. If the object is a subcomponent
+  that depends on discriminants or fails a static accessibility check, Ada 2012
+  would have allowed the prefix while Ada 202x would not. This violated the
+  principle that a prefixed view and a normal call have the same semantics;
+  practically, the code may not have worked anyway if a compiler implemented
+  generalized indexing by code expansion into the canonical form. Thus, such
+  code wasn't practically portable.]}
+@end{Incompatible2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
@@ -1187,9 +1204,11 @@ equivalent to that of a dereference of the reference discriminant of the
 reference object.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0203-1]}
 @ChgAdded{Version=[3],Text=[Given a reference type @i<T>, the
 Implicit_Dereference aspect is inherited by descendants of type @i<T> if not
-overridden. If a descendant type constrains the value of the reference
+overridden@Chg{Version=[5],New=[ @Redundant[(which is only permitted if
+confirming)]],Old=[]}. If a descendant type constrains the value of the reference
 discriminant of @i<T> by a new discriminant, that new discriminant is the
 reference discriminant of the descendant. @Redundant[If the descendant type
 constrains the value of the reference discriminant of @i<T> by an
@@ -1439,6 +1458,9 @@ generic unit.]}
   allowed in generic bodies.],Old=[]}]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0204-1]}
+@ChgAdded{Version=[5],Text=[A @nt{generalized_indexing} is illegal if the
+equivalent prefixed view (see below) is illegal.]}
 @end{Legality}
 
 @begin{Syntax}
@@ -1575,6 +1597,17 @@ IB      ("pear").Data.@key[all] := Element'(...); -- @Examcom{Implicit indexing 
   nominal subtype, T'Class(Obj)(I) always has the same meaning as Obj(I).
   Situations like this should be rare in practice; most types will either
   define both aspects or neither.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Added a rule that a generalized indexing is illegal if the equivalent
+  prefixed view would be illegal. If the prefixed view would be illegal for
+  any reason, Ada 2012 would have allowed the generalized indexing while
+  Ada 202x does not. This violated the principle that a generalized indexing
+  and the equivalent prefixed view have the same semantics; practically, the
+  code may not have worked anyway if a compiler implemented generalized
+  indexing by code expansion into the canonical form. Thus, such code wasn't
+  practically portable.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}

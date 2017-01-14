@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2517,7 +2517,8 @@ A @nt{subprogram_renaming_declaration} can serve as the completion of
 a @nt{subprogram_declaration};
 @Defn{renaming-as-body}
 such a @nt{renaming_declaration} is called a @i{renaming-as-body}.
-@Defn{renaming-as-declaration}
+@Defn{
+renaming-as-declaration}
 A @nt{subprogram_renaming_declaration} that is not a completion is
 called a @i{renaming-as-declaration}@Redundant[,
 and is used to rename a subprogram
@@ -2675,6 +2676,19 @@ renaming-as-body shall not denote an abstract subprogram.]}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00228-01]}
 @ChgAdded{Version=[2],Text=[Such a subprogram has no body, so it hardly
 can replace one in the program.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0204-1]}
+@ChgAdded{Version=[5],Text=[If the @Syni{callable_entity_}@nt{name} of a
+renaming is a prefixed view, the prefix of that view shall denote an object
+for which renaming is allowed.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[The prefix in such a case is essentially renamed
+    and passed to any calls of the renamed subprogram. If the prefix isn't legal
+    to rename, that doesn't make sense (and allowing it might end up passing a
+    nonexistent object to some calls).]}
 @end{Reason}
 
 A @nt{name} that denotes a formal parameter
@@ -2931,6 +2945,16 @@ We'll live with the oddity.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Added a rule to ensure that the prefix of a renaming of a prefixed view
+  continues to exist during the life of a renames. If the prefix is a
+  subcomponent that depends on discriminants, Ada 2005 and 2012
+  would have allowed the prefix while Ada 202x would not. Without this change,
+  explicit forms (renaming the object and then using that in calls) would be
+  safer than the renaming; that's inconsistent with other kinds of renaming.]}
+@end{Incompatible2012}
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{Generic Renaming Declarations}

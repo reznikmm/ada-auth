@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:22 $}
+@Comment{$Date: 2016/11/24 02:33:53 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -3555,6 +3555,16 @@ declaration:
    @AdaObjDefn{i} : Imaginary @key[renames] Single_Precision_Complex_Types.i;
    @AdaObjDefn{j} : Imaginary @key[renames] Single_Precision_Complex_Types.j;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Double_Precision_Complex_Types} @key[is]
+      @key[new] Ada.Numerics.Generic_Complex_Types (Double_Precision);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Double_Complex} @key[is] @key[new] Double_Precision_Complex_Types.Complex;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgAdded{Version=[5],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Double_Imaginary],Of=[Double_Imaginary]} @key[is] Double_Precision_Complex_Types.Imaginary;]}
+
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -3581,16 +3591,21 @@ declaration:
 @ChgImplDef{Version=[1],Kind=[Added],Text=[@Chg{New=[The types Fortran_Integer,
 Real, Double_Precision, and Character_Set in Interfaces.Fortran.],Old=[]}]}
 @begin{Ramification}
-   The means by which the Complex type is provided in Interfaces.Fortran
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
+   The means by which the Complex @Chg{Version=[5],New=[and Double_Complex types
+   are],Old=[type is]} provided in Interfaces.Fortran
    creates a dependence of Interfaces.Fortran on Numerics.Generic_Complex_Types
    (see @RefSecNum{Complex Types}).
    This dependence is intentional and unavoidable,
-   if the Fortran-compatible Complex type is to be useful in Ada code
+   if the Fortran-compatible Complex @Chg{Version=[5],New=[and Double_Complex
+   types are],Old=[type is]} to be useful in Ada code
    without duplicating facilities defined elsewhere.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
 The types Fortran_Integer, Real, Double_Precision, Logical,
-Complex, and Fortran_Character are Fortran-compatible.
+Complex, @Chg{Version=[5],New=[Double_Complex, Character_Set,],Old=[]}
+and Fortran_Character are Fortran-compatible.
 
 The To_Fortran and To_Ada functions map between the
 Ada type Character and the Fortran type Character_Set,
@@ -3609,8 +3624,13 @@ type (see @RefSecNum(Interfacing Aspects)).
 @end[ImplReq]
 
 @begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
 An implementation may add additional declarations to the Fortran interface
-packages. For example, the Fortran interface package for an implementation of
+packages. For example, @Chg{Version=[5],New=[declarations are permitted
+for the character types corresponding to Fortran character kinds 'ascii' and
+'iso_10646', which in turn correspond to ISO/IEC 646:1991 and
+to UCS-4 as specified in ISO/IEC 10646:2011],Old=[the Fortran interface
+package for an implementation of
 Fortran 77 (ANSI X3.9-1978) that defines types like Integer*@i{n}, Real*@i{n},
 Logical*@i{n}, and Complex*@i{n} may contain the declarations of types named
 Integer_@!Star_@i{n}, Real_@!Star_@i{n}, Logical_@!Star_@i{n}, and
@@ -3622,14 +3642,23 @@ Fortran 90 that provides multiple @i{kinds} of intrinsic types, e.g. Integer
 and Character (Kind=@i{n}), may contain the declarations of types
 with the recommended names
 Integer_Kind_@i{n}, Real_Kind_@i{n}, Logical_Kind_@i{n}, Complex_Kind_@i{n},
-and Character_Kind_@i{n}.
+and Character_Kind_@i{n}]}.
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+  @ChgAdded{Version=[5],Text=[Fortran compilers are required to recognize
+  'ascii' and 'iso_10646' as arguments to the SELECTED_CHAR_KIND intrinsic
+  function, but are not required to support those kinds.]}
+@end{Reason}
 @begin[discussion]
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
 Implementations may add auxiliary declarations as needed to assist in the
-declarations of additional Fortran-compatible types. For example, if a double
-precision complex type is defined, then Numerics.@!Generic_@!Complex_@!Types may be
-instantiated for the double precision type. Similarly, if a wide character
+declarations of additional Fortran-compatible types. For example,
+@Chg{Version=[5],New=[],Old=[if a double precision complex type is defined,
+then Numerics.@!Generic_@!Complex_@!Types may be
+instantiated for the double precision type. Similarly,]} if a wide character
 type is defined to match a Fortran 90 wide character type (accessible in
-Fortran 90 with the Kind modifier), then an auxiliary character set may be
+Fortran 90 with the Kind @Chg{Version=[5],New=[attribute],Old=[modifier]}),
+then an auxiliary character set may be
 declared to serve as its component type.
 @end[discussion]
 @end{ImplPerm}
@@ -3691,6 +3720,14 @@ a Fortran @lquotes@;derived type@rquotes@;.
    Rank      : @key[constant] Fortran_Integer := 100;
    My_Matrix : Fortran_Matrix (1 .. Rank, 1 .. Rank);
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgAdded{Version=[5],Text=[   Precision: @b<constant> := 6;
+   @key<type> Standard_Deviation @key<is digits> Precision
+      @key<with> Convention => Fortran;
+   Deviation : Standard_Deviation;
+      -- @Examcom<Declarations to match the following Fortran declarations:>
+      --   @i{integer, parameter :: precision = selected_real_kind(p=6)}
+      --   @i{real(precision) :: deviation}]}
 
 @key[begin]
 
@@ -3700,6 +3737,23 @@ a Fortran @lquotes@;derived type@rquotes@;.
    Invert (Rank, My_Matrix);
    ...
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
+@ChgAdded{Version=[5],Text=[   Deviation := ...;
+   ...]}
+
 @key[end] Ada_Application;
 @end{Example}
 @end{Examples}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0058-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The package
+  Double_Precision_Complex_Types and associated types are added to package
+  Interfaces.Fortran. In unusual circumstances, this could cause an
+  incompatibility; we don't document it as an incompatibility as implementations
+  are allowed to add declarations to this package, so that risk of an
+  incompatibility is present for any move from one version of an implementation
+  to another (not to mention to another implementation). As such, the
+  language-defined additions make no change in the risk of incompatibility.]}
+@end{DiffWord2012}
+

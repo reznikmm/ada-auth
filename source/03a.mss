@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:50 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2289,7 +2289,7 @@ The following (and no others) represent constants:
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
   @ChgAdded{Version=[3],Text=[the result of evaluating a @nt{qualified_expression};]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0125-3]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0125-3]}
   @ChgAdded{Version=[5],Text=[a @nt{target_name} of an
   @nt{assignment_statement} when used in the @nt{expression} of the assignment
   (see @RefSecNum{Target Name Symbols});]}

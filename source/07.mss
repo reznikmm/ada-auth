@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.140 $}
+@Comment{$Revision: 1.141 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1757,7 +1757,8 @@ current instance is @i<T>@Chg{Version=[4],New=[. Within an invariant
 expression],Old=[for the Type_Invariant aspect and @i<T>'Class]}
 for the Type_Invariant'Class aspect@Chg{Version=[4],New=[ of a
 type @i<T>, the type of this current instance is interpreted as though it
-had a (notional) type @i<NT> that is a visible formal derived type whose
+had a (notional) @Chg{Version=[5],New=[nonabstract ],Old=[]}type
+@i<NT> that is a visible formal derived type whose
 ancestor type is @i<T>.@Redundant[ The effect of this
 interpretation is that the only operations that can be applied to this
 current instance are those defined for such a formal derived type.]],Old=[.]}]}
@@ -1804,15 +1805,52 @@ operation shall be abstract or shall be overridden.]}
 specified for a type @i<T>, then the invariant expression applies to @i<T>.]]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[If the Type_Invariant'Class aspect is
-specified for a tagged type @i<T>, then the invariant expression applies to all
-descendants of @i<T>.]]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0199-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading}
+@ChgAdded{Version=[3],Text=[If the Type_Invariant'Class aspect is
+specified for a tagged type @i<T>, then @Chg{Version=[5],New=[a
+@i<corresponding expression> also applies to each nonabstract descendant
+@i{T1} of @i{T} @Redundant[(including @i{T} itself if it is nonabstract)]. The
+corresponding expression is constructed from the associated expression
+as follows:@Defn2{Term=[corresponding expression],Sec=[class-wide type invariant]}],
+Old=[the invariant expression applies to all descendants of @i<T>.]}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0199-1]}
+  @ChgAdded{Version=[5],Text=[References to non-discriminant components of @i{T}
+  (or to @i{T} itself) are replaced with references to the corresponding
+  components of @i{T1} (or to @i{T1} as a whole).]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0199-1]}
+    @ChgAdded{Version=[5],Text=[The only nondiscriminant components visible at
+    the point of such an aspect specification are necessarily inherited from
+    some nonprivate ancestor.]}
+  @end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0199-1]}
+  @ChgAdded{Version=[5],Text=[References to discriminants of @i{T} are replaced
+  with references to the corresponding discriminant of @i{T1}, or to the
+  specified value for the discriminant, if the discriminant is specified by the
+  @nt{derived_type_definition} for some type that is an ancestor of @i{T1} and
+  a descendant of @i{T} (see @RefSecNum{Discriminants}).]}
+@end{Itemize}
 
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=["Applies" is formally defined in
-  @RefSecNum{Aspect Specifications}.]}
+  @ChgRef{Version=[5],Kind=[Deleted]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=["Applies" is
+  formally defined in
+  @RefSecNum{Aspect Specifications}.]}]}
 @end{TheProof}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The associated expression from which the
+  corresponding expression is constructed is the one that applies to the
+  descendant type; "applies" is formally defined in
+  @RefSecNum{Aspect Specifications}.]}
+@end{Discussion}
 @end{StaticSem}
 @begin{Runtime}
 
@@ -1973,8 +2011,12 @@ on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-de
     @end{Itemize}
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0193-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
-  part of type @i<T>.]}
+  part of type @i<T>.@Chg{Version=[5],New=[ In the case of a call to a
+  protected operation, the check is performed before the end of the protected
+  action. In the case of a call to a task entry, the check is performed before
+  the end of the rendezvous.],Old=[]}]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0167-1]}
@@ -2171,6 +2213,16 @@ value.]}
   class-wide type invariants work more like expected. In the case where
   redispatching is desired, an explicit conversion to a class-wide type can be
   used.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0199-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Class-wide type invariants are
+  no longer checked for abstract types. Thus, a program that previously
+  raised Assertion_Error because of a call to a concrete subprogram of an
+  abstract type will no longer do so. However, programs that depend on assertion
+  failure are likely to be very rare, some explicit conversion to
+  the abstract type is needed to get static binding, and additionally many such
+  checks would call abstract functions (likely causing some compiler failure).
+  As such, this incompatibility most likely will never be seen in practice.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -2201,6 +2253,10 @@ value.]}
   checked anyway (meaning it's more likely to fix a bug than cause one),
   and programs depending on assertion failure should be very rare outside of
   test cases, we don't document this as inconsistent.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified when type invariant
+  checks happen for protected actions and entry calls.]}
 @end{DiffWord2012}
 
 

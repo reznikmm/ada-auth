@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2016/11/24 02:33:52 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -3107,9 +3107,25 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
   when the formal subtype excludes null implicitly.]}
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0204-1]}
+@ChgAdded{Version=[5],Text=[If the named default, if any, is a prefixed view,
+the prefix of that view shall denote an object for which renaming is allowed
+(see @RefSecNum{Object Renaming Declarations}). Similarly, if the actual
+subprogram in an instantiation is a prefixed view, the prefix of that view
+shall denote an object for which renaming is allowed.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[The prefix in such a case is essentially renamed
+    at the point of the instantiation and passed to any calls of the
+    formal subprogram in the generic. If the prefix isn't legal
+    to rename, that doesn't make sense (and allowing it might end up passing a
+    nonexistent object to some calls).]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00260-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0296-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number change only}
 @ChgAdded{Version=[2],Text=[If a formal parameter of a
 @nt{formal_@!abstract_@!subprogram_@!declaration} is of a
 specific tagged type @i<T> or of an anonymous access type designating a
@@ -3515,6 +3531,18 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   @nt{formal_abstract_subprogram_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Added a rule to ensure that for an actual subprogram that is a prefixed
+  view, that the prefix continues to exist during the life of the instantiation.
+  If the prefix is a subcomponent that depends on discriminants, Ada 2005 and
+  2012 would have allowed the prefix while Ada 202x would not. Without this
+  change, explicit forms (renaming the object and then using that in
+  instantiations) would be safer than directly using the prefixed view;
+  that's inconsistent with other kinds of actual subprograms.]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0165-1]}

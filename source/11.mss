@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1663,6 +1663,48 @@ but if it is invoked within a protected action, it might result in deadlock or a
 (nested) protected action.]}
 @end{Bounded}
 
+@begin{ImplReq}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
+@ChgAdded{Version=[5],Text=[Any postcondition expression or type invariant
+expression occurring in the specification of a language-defined unit is enabled
+(see @RefSecNum{Preconditions and Postconditions} and
+@RefSecNum{Type Invariants}).]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The Assertion_Policy does not have an effect
+  on such postconditions and invariants. This has no execution impact since
+  such assertions shouldn't fail anyway (see the next rule).]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
+@ChgAdded{Version=[5],Text=[The evaluation of any such postcondition or type
+invariant expression shall either yield True or propagate an exception from a
+@nt{raise_expression} that appears within the assertion expression.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In other words, evaluating such an an assertion
+  expression will not return a result of False, nor will it propagate an
+  exception other than by evaluating a @nt{raise_expression} which is
+  syntactically all or part of the assertion expression.]}
+@end{Ramification}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Evaluation of any expression might raise
+  Storage_Error.]}
+@end{Honest}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This allows the Standard to express semantic
+  requirements as postconditions or invariants (which are invariably clearer
+  than English prose would be) while keeping it clear that failing the assertion
+  check (or any other run time check) is not conforming behavior.]}
+@end{Reason}
+@end{ImplReq}
+
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgAdded{Version=[2],Text=[Assertion_Error may be declared by renaming an
@@ -1722,7 +1764,7 @@ would if the first expression had not been evaluated.]}
 @begin{Metarules}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[Our intent is that any assertion expression that
-  violates this ImplPerm is considered pathological. We definitely want
+  violates this @ImplPermName is considered pathological. We definitely want
   compilers to be able to assume that if you evaluate an assertion expression
   once and it is True, you don't need to evaluate it again if all you are
   doing in the mean time is evaluating assertion expressions. We were unable
@@ -1768,6 +1810,14 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
   Assertion_Policy pragmas are now allowed in more places and can specify
   behavior for individual kinds of assertions.]}
 @end{Extend2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0179-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording that postconditions
+  and type invariants given on language-defined units cannot fail. This is not
+  considered an inconsistency, since there are no such postconditions or
+  invariants in Ada 2012.]}
+@end{Diffword2012}
 
 
 

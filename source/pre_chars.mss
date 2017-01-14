@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.48 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.49 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2016/11/24 02:33:53 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -102,6 +102,7 @@ Wide_Characters or Wide_Wide_Characters.]}]}
 @keepnext--@RI{Character classification functions}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0185-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0004-1]}
   @key[function] @AdaSubDefn{Is_Control}           (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Graphic}           (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Letter}            (Item : @key[in] Character) @key[return] Boolean;
@@ -118,7 +119,8 @@ Wide_Characters or Wide_Wide_Characters.]}]}
   @key[function] @AdaSubDefn{Is_Mark}              (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Other_Format}      (Item : @key[in] Character) @key[return] Boolean;
   @key[function] @AdaSubDefn{Is_Punctuation_Connector} (Item : @key[in] Character) @key[return] Boolean;
-  @key[function] @AdaSubDefn{Is_Space}             (Item : @key[in] Character) @key[return] Boolean;],Old=[]}
+  @key[function] @AdaSubDefn{Is_Space}             (Item : @key[in] Character) @key[return] Boolean;],Old=[]}@Chg{Version=[5],New=[
+  @key[function] @AdaSubDefn{Is_NFKC}              (Item : @key[in] Character) @key[return] Boolean;],Old=[]}
 
 @keepnext--@RI{Conversion functions for Character and String}
 
@@ -268,6 +270,12 @@ character with position 95 ('_', known as Low_Line or Underscore).]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0185-1]}
 @ChgAdded{Version=[3],Text=[Is_Space@\True if Item is a character with
 position 32 (' ') or 160 (No_Break_Space).]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1]}
+@ChgAdded{Version=[5],Text=[Is_NFKC@\True if Item could be present in a string
+normalized to Normalization Form KC (as defined by Clause 21 of ISO/IEC
+10646:2011); this includes all characters except those with positions 160, 168,
+170, 175, 178, 179, 180, 181, 184, 185, 186, 188, 189, and 190.]}
 @end{description}
 
 Each of the names
@@ -464,6 +472,17 @@ are not considered lower case letters by Ada.Characters.Handling.]}
   these functions don't have any relationship to the characters allowed in
   identifiers.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  Added an additional classification routine Is_NFKC. If
+  Characters.Handling is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Is_NFKC is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
@@ -1052,6 +1071,9 @@ Wide_Characters.Handling has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Space} (Item : Wide_Character) @key[return] Boolean;]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Is_NFKC} (Item : Wide_Character) @key[return] Boolean;]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Graphic} (Item : Wide_Character) @key[return] Boolean;]}
 
@@ -1218,6 +1240,39 @@ designated by Item is categorized as @ntf{separator_space}; otherwise returns
 False.]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Keepnext=[T],Text=[@key[function] Is_NFKC (Item : Wide_Character) @key[return] Boolean;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if the Wide_Character
+designated by Item could be present in a string normalized to Normalization Form
+KC (as defined by Clause 21 of ISO/IEC 10646:2011), otherwise returns False.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Wide_Characters for which this function returns
+  False are not allowed in identifiers (see @RefSecNum{Identifiers}) even if
+  they are categorized as letters or digits.]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This function returns False if the Unicode
+  property NFKC Quick Check (NFKC_QC in the files) has the value No. See the
+  @ImplNoteTitle in @RefSecNum{Identifiers} for the source of this property.]}
+@end{ImplNote}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A string for which Is_NFKC is true for every
+  character may still not be in Normalization Form KC, as Is_NFKC returns true
+  for characters that are dependent on characters around them as to whether they are
+  removed by normalization. Ada does not provide a full normalization operation
+  (it is complex and expensive).]}
+@end{Discussion}
+
+@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Keepnext=[T],Text=[@key[function] Is_Graphic (Item : Wide_Character) @key[return] Boolean;]}
 @end{Example}
@@ -1325,6 +1380,17 @@ provided in @RefSec{String Comparison} are also available for wide strings
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The package Wide_Characters.Handling is new.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  Added an additional classification routine Is_NFKC. If
+  Wide_Characters.Handling is referenced in a @nt{use_clause}, and an
+  entity @i<E> with a @nt{defining_identifier} of Is_NFKC is
+  defined in a package that is also referenced in a @nt{use_clause}, the entity
+  @i<E> may no longer be use-visible, resulting in errors. This should be rare
+  and is easily fixed if it does occur.]}
+@end{Incompatible2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[The Package Wide_Wide_Characters.Handling]}

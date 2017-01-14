@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -6655,7 +6655,8 @@ the @nt{default_@!expression} for that parameter causes freezing.]}
   of a declarative part freezes everything in the declarative part.]}
 @end{Discussion}
 
-@Leading@PDefn2{Term=[freezing],
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0186-1]}
+@PDefn2{Term=[freezing],
   Sec=[type caused by the freezing of a subtype]}
 At the place where a subtype is frozen,
 its type is frozen.
@@ -6663,7 +6664,9 @@ its type is frozen.
 @PDefn2{Term=[freezing],
   Sec=(first subtype caused by the freezing of the type)}
 At the place where a type is frozen, any expressions or @nt<name>s within
-the full type definition cause freezing;
+the full type definition cause
+freezing@Chg{Version=[5],New=[, other than those that occur within an
+@nt{access_type_definition} or an @nt{access_definition}],Old=[]};
 the first subtype, and
 any component subtypes,
 index subtypes, and parent subtype
@@ -7105,5 +7108,13 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   @RefSecNum{Incomplete Type Declarations}). This matches the original intent
   (see @MetaRulesTitle above) and eliminates whack-a-mole trying to allow such
   freezing without it having (almost) any effects.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0186-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that the subtype names
+  in an access type are not frozen at the point of the type declaration. This
+  has always been true (there is an Ada 95-era AARM note that says so) but
+  it didn't follow from the actual wording. Since the ACATS requires the
+  AARM note to be true, no compiler could actually get this wrong, so no
+  incompatibility is possible.]}
 @end{DiffWord2012}
 

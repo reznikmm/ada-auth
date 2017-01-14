@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2016/08/20 00:20:11 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -681,7 +681,7 @@ expression @i<S>'(@i<P>).]}
 @end{Example}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[where all of the identifiers in square brackets
-  are anonynous placeholders.]}
+  are anonymous placeholders.]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -702,7 +702,7 @@ My_Complex_Array (Count) := (Re => @@.Re**2 - @@.Im**2,
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI95-0125-3]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The target name symbol @@ is new.]}
 @end{Extend2012}

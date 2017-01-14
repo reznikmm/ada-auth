@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 
@@ -2615,6 +2615,7 @@ an entry is called are specified by the
 corresponding @nt{accept_@!statement}s (if any) for an entry of a task unit,
 and by the corresponding @nt<entry_@!body> for an entry of a protected unit.]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0193-1]}
 @PDefn2{Term=[execution], Sec=(accept_statement)}
 For the execution of an @nt{accept_statement}, the @nt<entry_index>, if
 any, is first evaluated and converted to the entry index subtype;
@@ -2628,9 +2629,14 @@ until a caller of the corresponding entry is selected
 the @nt<handled_sequence_of_statements>, if any, of the @nt<accept_statement>
 is executed, with the formal parameters associated with the
 corresponding actual parameters of the selected entry call.
-Upon completion of the @nt<handled_sequence_of_statements>,
-the @nt<accept_statement> completes and is left.
-When an exception is propagated from the
+@Chg{Version=[5],New=[Execution of the rendezvous consists of the
+execution ],Old=[]}of the @nt{handled_sequence_of_statements},
+@Chg{Version=[5],New=[ performance of any postcondition or type
+invariant checks associated with the entry, and any finalization associated
+with these checks, as described in
+@RefSecNum{Preconditions and Postconditions} and @RefSecNum{Type Invariants}.
+After execution of the rendezvous, ],Old=[]}the @nt<accept_statement>
+completes and is left. When an exception is propagated from the
 @nt{handled_sequence_of_statements} of an @nt{accept_statement},
 the same exception is also raised by the execution of the corresponding
 @nt{entry_call_statement}.
@@ -2648,6 +2654,13 @@ Note that we say @lquotes@;propagated from the
 not @lquotes@;propagated from an @nt{accept_statement}.@rquotes@;
 The latter would be wrong @em we don't want exceptions propagated by
 the @nt<entry_index> to be sent to the caller (there is none yet!).
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
+  @ChgAdded{Version=[5],Text=[Execution of the rendezvous does not include
+  any checks associated with parameter copy back or any
+  post-call subtype predicate check for a parameter which is
+  passed by reference. These checks are performed by
+  the caller after the execution of the rendezvous.]}
 @end{Ramification}
 
 @Defn{rendezvous}
@@ -2780,10 +2793,18 @@ The syntax rule for @nt{entry_body} is new.
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0169-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
-  @b<Correction:>An optional @nt{aspect_specification} can be used in an
+  @b<Correction:> An optional @nt{aspect_specification} can be used in an
   @nt{entry_body}. All other kinds of bodies allow (only) implementation-defined
   aspects, we need to be consistent.]}
 @end{Extend2012}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that postcondition and
+  invariant checks are clearly part of the rendezvous for an entry call.
+  @RefSecNum{Preconditions and Postconditions} already said this, so the
+  intent was clear and this is not an inconsistency.]}
+@end{Diffword2012}
 
 
 @LabeledSubClause{Entry Calls}

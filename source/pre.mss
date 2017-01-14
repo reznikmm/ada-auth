@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:43 $}
+@Comment{$Date: 2016/11/24 02:33:53 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.53 $}
+@comment{$Revision: 1.54 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -289,15 +289,21 @@ nonportable under System.
 @begin{ImplReq}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0200-1]}
 The implementation shall ensure that each
 language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
-the sense that concurrent calls on @Chg{Version=[4],New=[any language-defined],
-Old=[the same]} subprogram perform as specified,
-so long as all@Chg{Version=[4],New=[ objects that are denoted by],Old=[]}
-parameters that could be passed by reference @Chg{Version=[4],New=[or
-designated by parameters of an access type are],Old=[denote]}
-nonoverlapping@Chg{Version=[4],New=[],Old=[ objects]}.
+the sense that concurrent calls on @Chg{Version=[4],New=[any@Chg{Version=[5],
+New=[ two (possibly the same)],Old=[]} language-defined],
+Old=[the same]} @Chg{Version=[5],New=[subprograms],Old=[subprogram]}
+perform as specified,
+so long as all@Chg{Version=[4],New=[ @Chg{Version=[5],New=[pairs of ],Old=[]}objects
+@Chg{Version=[5],New=[(one from each call)],Old=[]} that
+are@Chg{Version=[5],New=[ either],Old=[]} denoted by],Old=[]}
+parameters that could be passed by reference@Chg{Version=[5],New=[,],Old=[]}
+@Chg{Version=[4],New=[or @Chg{Version=[5],New=[are ],Old=[]}designated by
+parameters of an access type@Chg{Version=[5],New=[,],Old=[]}
+are],Old=[denote]} nonoverlapping@Chg{Version=[4],New=[],Old=[ objects]}.
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
   @ChgAdded{Version=[4],Text=[So long as the parameters are disjoint, concurrent
@@ -423,4 +429,8 @@ The order and lettering of the annexes has been changed.
   type, and simultaneous calls on different language-defined subprograms. While
   this might change behavior of some programs, it would do so by eliminating
   erroneous execution, so we don't consider this an inconsistency.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0200-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The rules requiring concurrent
+  access of language-defined subprograms were clarified further.]}
 @end{DiffWord2012}

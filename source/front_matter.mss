@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.87 $ $Date: 2016/02/12 05:25:38 $}
+@comment{$Revision: 1.88 $ $Date: 2016/11/24 02:33:53 $}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
@@ -319,9 +319,10 @@ This is the International Standard @em ISO/IEC 8652:@Chg{Version=[3],New=[2012],
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Technical Corrigendum 1
+@ChgAdded{Version=[2],Text=[],Old=[Technical Corrigendum 1
 @em ISO/IEC 8652:1995:COR.1:2001. This document lists corrections to the
-International Standard.]}]}@ChgNote{This is consolidated into the Ada 2012 RM}
+International Standard.]}]}@ChgNote{The Corrigenda are consolidated into
+this document, so we don't mention them separately.}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}

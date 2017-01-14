@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:52 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1840,16 +1840,22 @@ overridden to have the value False for the derived type, unless otherwise
 specified in this International Standard.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
 @ChgAdded{Version=[4],Text=[Certain type-related aspects are defined to be
-@i<nonoverridable>; all such aspects are specified using
-an @nt{aspect_definition} that is a @nt{name}.@Defn2{Term=[nonoverridable],Sec=[aspect]}]}
+@i<nonoverridable>@Chg{Version=[5],New=[],Old=[; all such aspects are specified
+using an @nt{aspect_definition} that is a
+@nt{name}]}.@Defn2{Term=[nonoverridable],Sec=[aspect]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
 @ChgAdded{Version=[4],Text=[If a nonoverridable aspect is directly specified
 for a type @i<T>, then any explicit specification of that aspect for any
-other descendant of @i<T> shall be @i<confirming>;@PDefn2{Term=[confirming],Sec=[nonoverridable aspect]}
-that is, the specified @nt{name} shall @i<match>@Defn2{Term=[match],Sec=[value of nonoverridable aspect]}
-the inherited aspect, meaning that the specified @nt{name} shall denote the
+other descendant of @i<T> shall be
+@PDefn2{Term=[confirming],Sec=[nonoverridable aspect]}@i<confirming>@Chg{Version=[5],New=[.
+In the case of an aspect whose value is a @nt{name}, this means that],Old=[; that is,]}
+the specified @nt{name} shall @i<match>@Defn2{Term=[match],Sec=[value of nonoverridable aspect]}
+the inherited aspect@Chg{Version=[5],New=[ and therefore],Old=[, meaning that
+the specified @nt{name} shall]} denote the
 same declarations as would the inherited @nt{name}.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -1876,18 +1882,24 @@ these rules about nonoverridable aspects also apply in the private part
 of an instance of a generic unit.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
 @ChgAdded{Version=[4],Text=[@Redundant[The Default_Iterator, Iterator_Element,
-Implicit_Dereference, Constant_Indexing, and Variable_Indexing aspects
-are nonoverridable.]]}
+Implicit_Dereference, Constant_Indexing, @Chg{Version=[5],New=[],Old=[and
+]}Variable_Indexing@Chg{Version=[5],New=[, and Max_Entry_Queue_Length],Old=[]}
+aspects are nonoverridable.]]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised]}
   @ChgAdded{Version=[4],Text=[We don't need an assume-the-worst rule for most
   nonoverridable aspects as they only work on tagged types and deriving from
   formal tagged types is not allowed in generic bodies. In the case of
   Implicit_Dereference, a derivation in a generic body does not cause problems
   (the ancestor necessarily cannot have the aspect, else specifying the aspect
-  would be illegal), as there could be no place with visibility on both aspects.]}
+  would be illegal), as there could be no place with visibility on both
+  aspects.@Chg{Version=[5],New=[ In the case of Max_Entry_Queue_Length, it is
+  only allowed on task types and protected types, and entries, and there are
+  not formal versions of either of those things.],Old=[]}]}
 @end{Discussion}
 
 @end{Legality}
@@ -2110,6 +2122,11 @@ such aspects and the legality rules for such aspects.]}]}
   list of entities that don't allow any language-defined aspects. This was
   an oversight in @AILink{AI=[AI12-0169-1],Text=[AI12-0169-1]} which allowed @nt{aspect_specification}s on
   an @nt{entry_body} in the first place.]}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+  @ChgAdded{Version=[4],Text=[@b<Correction:> Extended the definition of
+  nonoverridable aspects to cover most kinds of aspects.]}
+
 @end{Diffword2012}
 
 
@@ -3670,7 +3687,7 @@ can override a specified Size.
 
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0059-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For every subtype S:]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{every subtype S}:]}
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
   Leading=<F>, Prefix=<S>, AttrName=<Object_Size>, ARef=[AI12-0059-1],
@@ -3679,7 +3696,8 @@ can override a specified Size.
   S in the absence of an @nt{aspect_specification} or representation item that
   specifies the size of the object or component. If S is indefinite, the meaning
   is implementation-defined. The value of this attribute is of the type
-  @i<universal_integer>. If not specified otherwise, the Object_Size of a
+  @i<universal_integer>.],Old=[]}]}@Comment{End of Annex text here.}
+  @Chg{Version=[5],New=[If not specified otherwise, the Object_Size of a
   subtype is at least as large as the Size of the subtype. Object_Size may be
   specified via an @nt{attribute_definition_clause}; the expression of such a
   clause shall be static and its value nonnegative. All aliased objects with
@@ -3687,8 +3705,7 @@ can override a specified Size.
   specification, the Object_Size of a subtype S defined by a
   @nt{subtype_indication} without a constraint, is that of the value of the
   Object_Size of the subtype denoted by the @nt{subtype_mark} of the
-  @nt{subtype_indication}, at the point of this definition.],Old=[]}]}
-  @Comment{End of Annex text here.}
+  @nt{subtype_indication}, at the point of this definition.],Old=[]}
 
 @ChgImplDef{Version=[5],Kind=[Added],InitialVersion=[5],Text=[@ChgAdded{Version=[5],Text=[The
 meaning of Object_Size for indefinite subtypes.]}]}

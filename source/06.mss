@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2016/08/05 07:11:21 $}
+@Comment{$Date: 2016/11/24 02:33:51 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1495,7 +1495,7 @@ the value.]}
   the evaluated class-wide precondition on a dispatching call would have been
   weaker than the class-wide precondition of a statically bound call. (The
   original Ada 2012 violated the LSP semantics that class-wide preconditions
-  were intended to model.]}
+  were intended to model.)]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0198-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> A component @nt{expression}

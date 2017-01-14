@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2016/02/12 05:25:37 $}
+@Comment{$Date: 2016/11/24 02:33:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1575,6 +1575,12 @@ shall raise an exception at run time.
   exception would be raised if a subprogram were called in the
   package Edited_Output with a length greater than 1.
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
+@ChgAdded{Version=[5],Text=[For an implementation that conforms to this
+Standard, the implementation of a language-defined unit shall abide by all
+postconditions and type invariants specified for the unit by this International
+Standard (see @RefSecNum{Pragmas Assert and Assertion_Policy}).]}
 @end{ImplReq}
 
 @begin{DocReq}
@@ -1687,6 +1693,7 @@ capabilities.
   but it does conform to the Standard.
 @end{Discussion}
 @end{Notes}
+
 
 @LabeledSubClause{Method of Description and Syntax Notation}
 
@@ -1985,6 +1992,40 @@ different categories:
        compilation rules at compile time when possible.
      @end{Ramification}
 
+     @begin{Metarules}
+     @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+     @ChgAdded{Version=[5],Text=[When the Standard says that some construct
+       @i<C1> has equivalent dynamic semantics to some other construct @i<C2>,
+       then there should be a language rule that says that @i<C1> is illegal
+       if @i<C2> is illegal.]}
+
+       @begin{Reason}
+         @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
+         @ChgAdded{Version=[5],Text=[We don't want to infer @LegalityTitle
+         from @RuntimeTitle rules.]}
+       @end{Reason}
+
+     @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+     @ChgAdded{Version=[5],Text=[When the value of an @nt{expression} is needed
+       to enforce a @LegalityName or @LinktimeName, then there should be a
+       language rule requiring the @nt{expression} to be static (see
+       @RefSecNum{Static Expressions and Static Subtypes}).]}
+
+       @begin{Discussion}
+         @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+         @ChgAdded{Version=[5],Text=[This most likely occurs when the
+           @nt{expression} specifies the value of an aspect.]}
+       @end{Discussion}
+       @begin{Honest}
+         @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+         @ChgAdded{Version=[5],Text=[Because of the need to support
+         assume-the-best/assume-the-worst semantics, something similar to
+         (but not exactly the same as) static may be needed in generic units.
+         This happens for aspect Nonblocking (see
+         @RefSecNum{Intertask Communication}), for instance.]}
+       @end{Honest}
+     @end{Metarules}
+
      @Keepnext@;Errors that are required to be detected at run time by the
      execution of an Ada program;
 
@@ -2153,13 +2194,17 @@ ISO/IEC 646:1991,
     set for information interchange}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
-@Chg{Version=[2],New=[@Defn{ISO/IEC 1539-1:2004}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 1539-1:2010}
+@Defn{1539-1:2010, ISO/IEC standard}
+@Defn{Fortran standard}],Old=[@Defn{ISO/IEC 1539-1:2004}
 @Defn{1539-1:2004, ISO/IEC standard}
-@Defn{Fortran standard}],
+@Defn{Fortran standard}]}],
 Old=[@Defn{ISO/IEC 1539:1991}
 @Defn{1539:1991, ISO/IEC standard}
 @Defn{FORTRAN standard}]}
-ISO/IEC @Chg{Version=[2],New=[1539-1:2004],Old=[1539:1991]},
+ISO/IEC @Chg{Version=[2],New=[@Chg{Version=[5],New=[1539-1:2010],
+Old=[1539-1:2004]}],Old=[1539:1991]},
 @i{Information technology @em Programming languages @em @Chg{Version=[2],
 New=[Fortran @em Part 1: Base language],Old=[FORTRAN]}}.
 

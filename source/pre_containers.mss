@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.99 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
+@comment{ $Revision: 1.100 $ $Date: 2016/11/24 02:33:52 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:43 $}
+@Comment{$Date: 2016/11/24 02:33:52 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -20,20 +20,35 @@ Several predefined container types are provided by the children
 of package Ada.Containers (see @RefSecNum{The Package Containers}).]}>}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Text=[A variety of sequence and associative containers are
 provided. Each container includes a @i{cursor} type. A cursor is a reference
 to an element within a container. Many operations on cursors are common to
 all of the containers. A cursor referencing
 an element in a container is considered to be overlapping
-with the container object itself.@PDefn2{Term=[cursor],Sec=[for a container]}
+@Chg{Version=[5],New=[only ],Old=[]}with the
+@Chg{Version=[5],New=[element],Old=[container object]}
+itself.@PDefn2{Term=[cursor],Sec=[for a container]}
 @Defn2{Term=[container],Sec=[cursor]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[2],Text=[The last sentence is intended to clarify that
-  operations that just use a cursor are on the same footing as operations that
-  use a container in terms of the reentrancy rules of Annex A.]}
+  operations that just use a cursor @Chg{Version=[5],New=[do not interfere if
+  the cursor objects designated diferent elements of the container],Old=[are
+  on the same footing as operations that
+  use a container]} in terms of the reentrancy rules of
+  @RefSecNum{Predefined Language Environment}.]}
 @end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[A cursor is not considered to overlap with other
+  elements of the associated container, thus parallel operations involving a set
+  of cursors each operating on mutually exclusive sets of elements from the same
+  container are expected to work.]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Within this clause we provide Implementation Advice
@@ -170,10 +185,13 @@ These include:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[2],Text=[Library packages must be
   reentrant @en multiple tasks can use the packages as long as they operate on
   separate containers. Thus, it is only necessary for a user to protect a
-  container if a single container needs to be used by multiple tasks.]}
+  container if a single container needs to be used by multiple tasks@Chg{Version=[5],New=[ and
+  concurrent calls to operations of the container have overlapping
+  parameters],Old=[]}.]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[Language-defined types must stream "properly".
@@ -325,6 +343,14 @@ within the instance, where:]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Added a definition of
   strict weak ordering.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
+  We now say that a cursor only overlaps with the element it designates,
+  rather than with the whole container. This allows some reading operations
+  to operate on the container in parallel without separate synchronization.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0035-1]}
@@ -1289,10 +1315,24 @@ Container. The capacity of Container does not change.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container), then No_Element is returned.
 Otherwise, a cursor designating the element at position Index in Container is
-returned.]}
+returned.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to To_Cursor, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)].],Old=[]}]}
+
+  @begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[Without the preceding rule, concurrent calls to To_Cursor
+   on the same container would interfere by the reentrancy rules in
+   @RefSecNum{Predefined Language Environment},
+   since the container object of the concurrent calls would overlap with itself.
+   We want these to not interfere, for example to allow the Vector elements to
+   be split into separate @ldquote@;chunks@rdquote for parallel processing.]}
+  @end{Reason}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1345,13 +1385,18 @@ designated by Position.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Index is not in the range
 First_Index (Container) .. Last_Index (Container), then Constraint_Error is
 propagated. Otherwise@Chg{Version=[3],New=[,],Old=[]}
 Replace_Element assigns the value New_Item to the element at
 position Index. Any exception raised during the assignment is propagated. The
 element at position Index is not an empty element after successful call to
-Replace_Element.]}
+Replace_Element.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to Replace_Element, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)], and the Index parameter is
+considered to overlap with the element at position Index.],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1362,13 +1407,18 @@ Replace_Element.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
 in Container, then Program_Error is propagated.
 Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
 assigns New_Item to the element designated by Position. Any exception raised
 during the assignment is propagated. The element at Position is not an empty
-element after successful call to Replace_Element.]}
+element after successful call to
+Replace_Element.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to Replace_Element, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)].],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2888,6 +2938,15 @@ value of Last_Index.]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
+  To_Cursor and Replace_Element are now defined such that they can be used
+  concurrently so long as they operate on different elements. This allows
+  some container operations to be used in parallel without separate
+  synchronization.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
@@ -3451,11 +3510,16 @@ designated by Position.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
 in Container, then Program_Error is propagated.
 Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
-assigns the value New_Item to the element designated by Position.]}
+assigns the value New_Item to the element designated by
+Position.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to Replace_Element, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)].],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4525,6 +4589,15 @@ probably not a stable sort.]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Replace_Element is now defined such that it can be used
+  concurrently so long as it operates on different elements. This allows
+  some container operations to be used in parallel without separate
+  synchronization.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
@@ -4861,11 +4934,16 @@ component of the node designated by Position.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
 in Container, then Program_Error is propagated.
 Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
-assigns New_Item to the element of the node designated by Position.]}
+assigns New_Item to the element of the node designated by
+Position.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to Replace_Element, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)].],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5533,6 +5611,15 @@ unless specified by the operation.]}]}
   prohibits tampering in order to more clearly define where the check is
   made and the exception raised.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
+  Replace_Element is now defined such that it can be used
+  concurrently so long as it operates on different elements. This allows
+  some container operations to be used in parallel without separate
+  synchronization.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
@@ -7218,13 +7305,18 @@ designated by Position.]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
 Container, then Program_Error is propagated.
 If an element equivalent to New_Item is already present in Container at a
 position other than Position, Program_Error is propagated. Otherwise,
 Replace_Element assigns New_Item to the element designated by Position. Any
-exception raised by the assignment is propagated.]}
+exception raised by the assignment is
+propagated.@Chg{Version=[5],New=[ For the purposes of
+determining whether the parameters overlap in a call to Replace_Element, the
+Container parameter is not considered to overlap with any object
+@Redundant[(including itself)].],Old=[]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -8060,6 +8152,15 @@ unless specified by the operation.]}]}
   prohibits tampering in order to more clearly define where the check is
   made and the exception raised.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
+  Replace_Element is now defined such that it can be used
+  concurrently so long as it operates on different elements. This allows
+  some container operations to be used in parallel without separate
+  synchronization.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
