@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:53 $}
+@Comment{$Date: 2017/01/14 02:32:57 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.54 $}
+@comment{$Revision: 1.55 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -290,10 +290,10 @@ nonportable under System.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0052-1],ARef=[AI12-0114-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0200-1]}
-The implementation shall ensure that each
+The implementation shall ensure that@Chg{Version=[5],New=[],Old=[ each
 language@Chg{Version=[2],New=[-],Old=[]}defined subprogram is
 reentrant@Chg{Version=[2],New=[@Defn{reentrant}],Old=[]}@ChgNote{Suggested by Gary Dismukes} in
-the sense that concurrent calls on @Chg{Version=[4],New=[any@Chg{Version=[5],
+the sense that]} concurrent calls on @Chg{Version=[4],New=[any@Chg{Version=[5],
 New=[ two (possibly the same)],Old=[]} language-defined],
 Old=[the same]} @Chg{Version=[5],New=[subprograms],Old=[subprogram]}
 perform as specified,

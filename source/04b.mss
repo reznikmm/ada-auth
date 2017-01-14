@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2017/01/14 02:32:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.67 $}
+@Comment{$Revision: 1.68 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2170,7 +2170,7 @@ The rules for evaluating static expressions are designed
 to maximize portability of static calculations.
 @end{MetaRules}
 
-@begin{Intro}
+@begin{StaticSem}@Comment{Was "Intro" by mistake until version 5}
 @Leading@Defn2{Term=[static], Sec=(expression)}
 A static expression is
 @Redundant[a scalar or string expression that is]
@@ -2463,7 +2463,7 @@ and its constraint is static.
 An object is @i(statically constrained) if its nominal subtype is
 statically constrained,
 or if it is a static string constant.
-@end{Intro}
+@end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1]}

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2017/01/14 02:32:57 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:53 $}
+@Comment{$Date: 2017/01/14 02:32:57 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1260,7 +1260,8 @@ KC (as defined by Clause 21 of ISO/IEC 10646:2011), otherwise returns False.]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[This function returns False if the Unicode
   property NFKC Quick Check (NFKC_QC in the files) has the value No. See the
-  @ImplNoteTitle in @RefSecNum{Identifiers} for the source of this property.]}
+  Implementation Notes in @RefSecNum{Identifiers} for the source of this
+  property.]}
 @end{ImplNote}
 
 @begin{Discussion}

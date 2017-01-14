@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/01/14 02:32:56 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.140 $}
+@Comment{$Revision: 1.141 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -929,6 +929,15 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
    constant; the type of X'Old is the type of X. These implicit constant
    declarations occur in an
    arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}],Old=[]}]}@Comment{End of Annex text here.}
+
+  @begin{Ramification}
+     @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
+     @ChgAdded{Version=[5],Text=[In the case of an accept statement, the
+       constant is declared inside of the rendezvous. It is considered part of
+       the initialization of the postcondition check, which is part of the
+       rendezvous by definition (see @RefSecNum{Entries and Accept Statements}).]}
+  @end{Ramification}
+
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Type=[Leading],NoPrefix=[T],Text=[The implicitly declared

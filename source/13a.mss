@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:52 $}
+@Comment{$Date: 2017/01/14 02:32:56 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -860,18 +860,22 @@ are the same.
 @Leading@Keepnext@;Consider, for example:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[package] P1 @key[is]
-   @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1;
-   @key[for] S1'Size @key[use] 16; --@RI{ Illegal!}
+   @key[subtype] S1 @key[is] Integer @key[range] 0..2**16-1@Chg{Version=[5],New=[
+      @key[with] Size =>],Old=[;
+   @key[for] S1'Size @key[use]]} 16; --@RI{ Illegal!}
       --@RI{ S1'Size would be 16 by default.}
    @key[type] A1 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S1;
    X1: A1;
 @key[end] P1;
 
 @ChgRef{Version=[1],Kind=[Revised]}@ChgNote{Presentation AI-00114}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[package] P2 @key[is]
-   @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1;
-   @key[for] S2'Size @key[use] 32; --@RI{ Illegal!}
+   @key[subtype] S2 @key[is] Integer @key[range] 0..2**16-1@Chg{Version=[5],New=[
+      @key[with] Size =>],Old=[;
+   @key[for] S2'Size @key[use]]} 32; --@RI{ Illegal!}
    @key[type] A2 @key[is] @key[access] @Chg{New=[@Key[all] ],Old=[]}S2;
    X2: A2;
 @key[end] P2;
@@ -1214,9 +1218,11 @@ a constant declared before the entity.
 @begin{Reason}
 @Leading@;This is to avoid the following sort of thing:
 @begin{Example}
-X : Integer := F(...);
-Y : Address := G(...);
-@key[for] X'Address @key[use] Y;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+X : Integer := F(...)@Chg{Version=[5],New=[
+   @key[with] Address => Y],Old=[]};
+Y : Address := G(...);@Chg{Version=[5],New=[],Old=[
+@key[for] X'Address @key[use] Y;]}
 @end{Example}
 
 In the above, we have to evaluate the initialization expression for X
@@ -1225,9 +1231,11 @@ This seems like an unreasonable implementation burden.
 
 @Leading@;The above code should instead be written like this:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 Y : @key[constant] Address := G(...);
-X : Integer := F(...);
-@key[for] X'Address @key[use] Y;
+X : Integer := F(...)@Chg{Version=[5],New=[
+   @key[with] Address =>],Old=[;
+@key[for] X'Address @key[use]]} Y;
 @end{Example}
 
 This allows the expression @lquotes@;Y@rquotes@; to be safely evaluated before X is
@@ -1899,7 +1907,7 @@ aspects are nonoverridable.]]}
   would be illegal), as there could be no place with visibility on both
   aspects.@Chg{Version=[5],New=[ In the case of Max_Entry_Queue_Length, it is
   only allowed on task types and protected types, and entries, and there are
-  not formal versions of either of those things.],Old=[]}]}
+  not formal versions of any of those things.],Old=[]}]}
 @end{Discussion}
 
 @end{Legality}

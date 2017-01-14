@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/01/14 02:32:56 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 
@@ -2615,6 +2615,11 @@ an entry is called are specified by the
 corresponding @nt{accept_@!statement}s (if any) for an entry of a task unit,
 and by the corresponding @nt<entry_@!body> for an entry of a protected unit.]
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0193-1]}
+@ChgAdded{Version=[5],Text=[@Defn{rendezvous}
+The interaction between a task that calls an entry and an
+accepting task is called a @i(rendezvous).]}
+
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0193-1]}
 @PDefn2{Term=[execution], Sec=(accept_statement)}
 For the execution of an @nt{accept_statement}, the @nt<entry_index>, if
@@ -2632,11 +2637,12 @@ corresponding actual parameters of the selected entry call.
 @Chg{Version=[5],New=[Execution of the rendezvous consists of the
 execution ],Old=[]}of the @nt{handled_sequence_of_statements},
 @Chg{Version=[5],New=[ performance of any postcondition or type
-invariant checks associated with the entry, and any finalization associated
-with these checks, as described in
+invariant checks associated with the entry, and any initialization or
+finalization associated with these checks, as described in
 @RefSecNum{Preconditions and Postconditions} and @RefSecNum{Type Invariants}.
 After execution of the rendezvous, ],Old=[]}the @nt<accept_statement>
-completes and is left. When an exception is propagated from the
+completes and is left. @Chg{Version=[5],New=[@Redundant[The two tasks then
+proceed independently.] ],Old=[]}When an exception is propagated from the
 @nt{handled_sequence_of_statements} of an @nt{accept_statement},
 the same exception is also raised by the execution of the corresponding
 @nt{entry_call_statement}.
@@ -2663,11 +2669,12 @@ the @nt<entry_index> to be sent to the caller (there is none yet!).
   the caller after the execution of the rendezvous.]}
 @end{Ramification}
 
-@Defn{rendezvous}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0193-1]}
+@ChgDeleted{Version=[5],Text=[@Defn{rendezvous}
 The above interaction between a calling task and an
 accepting task is called a @i(rendezvous).
 @Redundant[After a rendezvous, the two tasks continue
-their execution independently.]
+their execution independently.]]}
 
 @Redundant[An @nt<entry_body> is executed when the @nt<condition> of the
 @nt<entry_barrier> evaluates to True and a caller of the corresponding

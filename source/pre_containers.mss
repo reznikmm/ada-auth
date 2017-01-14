@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.100 $ $Date: 2016/11/24 02:33:52 $ $Author: randy $ }
+@comment{ $Revision: 1.101 $ $Date: 2017/01/14 02:32:56 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:52 $}
+@Comment{$Date: 2017/01/14 02:32:56 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -38,7 +38,8 @@ itself.@PDefn2{Term=[cursor],Sec=[for a container]}
   operations that just use a cursor @Chg{Version=[5],New=[do not interfere if
   the cursor objects designated diferent elements of the container],Old=[are
   on the same footing as operations that
-  use a container]} in terms of the reentrancy rules of
+  use a container]} in terms of
+  the @Chg{Version=[5],New=[concurrent call],Old=[reentrancy]} rules of
   @RefSecNum{Predefined Language Environment}.]}
 @end{Reason}
 
@@ -185,9 +186,10 @@ These include:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0196-1]}
-  @ChgAdded{Version=[2],Text=[Library packages must be
-  reentrant @en multiple tasks can use the packages as long as they operate on
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgAdded{Version=[2],Text=[Library packages must @Chg{Version=[5],New=[allow
+  concurrent calls],Old=[be
+  reentrant]} @en multiple tasks can use the packages as long as they operate on
   separate containers. Thus, it is only necessary for a user to protect a
   container if a single container needs to be used by multiple tasks@Chg{Version=[5],New=[ and
   concurrent calls to operations of the container have overlapping
@@ -1327,7 +1329,7 @@ Container parameter is not considered to overlap with any object
   @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[Without the preceding rule, concurrent calls to To_Cursor
-   on the same container would interfere by the reentrancy rules in
+   on the same container would interfere by the concurrent call rules in
    @RefSecNum{Predefined Language Environment},
    since the container object of the concurrent calls would overlap with itself.
    We want these to not interfere, for example to allow the Vector elements to

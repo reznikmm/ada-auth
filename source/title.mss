@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.71 $ $Date: 2016/08/20 00:20:12 $}
+@comment{$Revision: 1.72 $ $Date: 2017/01/14 02:32:57 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -66,7 +66,7 @@ End comment}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 9>,Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 10>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[@Grow{with Technical Corrigendum 1}]}],Old=[]}],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}
 @end{NotISO}
@@ -87,7 +87,7 @@ End comment}
 
 @Noparanum@;@Chg{Version=[2], New=[Copyright @Latin1(169) 2004, 2005, 2006  Ada-Europe], Old=[]}
 
-@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012@Chg{Version=[4], New=[, 2013, 2014, 2015, 2016@Chg{Version=[5], New=[],Old=[]}],Old=[]}  AXE Consultants], Old=[]}
+@Noparanum@;@Chg{Version=[3], New=[Copyright @Latin1(169) 2008, 2009, 2010, 2011, 2012@Chg{Version=[4], New=[, 2013, 2014, 2015, 2016@Chg{Version=[5], New=[, 2017],Old=[]}],Old=[]}  AXE Consultants], Old=[]}
 @end{NotISO}
 @begin{ISOOnly}
 @Comment{The following is not needed in the final Standard:
@@ -223,7 +223,7 @@ EVEN IF AXE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.], Old=[]}
 
 @Noparanum@;@Chg{Version=[5], New=[@b{Ada 202x version}], Old=[]}
 
-@Noparanum@;@Chg{Version=[5], New=[Copyright @Latin1(169) 2016 AXE Consultants.  All Rights Reserved.], Old=[]}
+@Noparanum@;@Chg{Version=[5], New=[Copyright @Latin1(169) 2016, 2017 AXE Consultants.  All Rights Reserved.], Old=[]}
 
 @Noparanum@;@Chg{Version=[5], New=[This document may be copied, in whole or in part, in any form or by any means,
 as is, or with alterations, provided that (1) alterations are clearly marked as
