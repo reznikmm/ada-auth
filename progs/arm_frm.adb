@@ -8345,7 +8345,6 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Version : ARM_Contents.Change_Version_Type;
 			InitialVersion : ARM_Contents.Change_Version_Type;
 			Display_Ref : Boolean;
-			Which_Param : ARM_Input.Param_Num;
 			References : Reference_Ptr := null;
 
 
@@ -8844,7 +8843,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		        ", line " & ARM_Input.Line_String (Input_Object));
 
 		when Unknown =>
-		    Ada.Text_IO.Put_Line ("  -- Unknown command (skipped) - " &
+		    Ada.Text_IO.Put_Line ("  ?? Unknown command (skipped) - " &
 		        Ada.Strings.Fixed.Trim (Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right) &
 		        " on line " & ARM_Input.Line_String (Input_Object));
 	    end case;
@@ -9359,7 +9358,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 		    Format_Object.Last_Non_Space := True;
 
 		when Unknown =>
-		    Ada.Text_IO.Put_Line ("  -- Unknown command (skipped) - " &
+		    Ada.Text_IO.Put_Line ("  ?? Unknown command (skipped) - " &
 		        Ada.Strings.Fixed.Trim (Name, Ada.Strings.Right) &
 		        " on line " & ARM_Input.Line_String (Input_Object));
 	    end case;
