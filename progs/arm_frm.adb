@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013, 2016
+    --           2010, 2011, 2012, 2013, 2016, 2017
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -283,6 +283,7 @@ package body ARM_Format is
     --			as such in Show_Changes versions.
     -- 12/13/13 - RLB - Added InitialVersion parameter to ChgAttrib.
     --  3/17/16 - RLB - Removed Changes_Only, added Base_Change_Version.
+    --  7/21/17 - RLB - Changed maximum prefix length.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -6374,7 +6375,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 
 		when Reset_Prefix_Type =>
 		    -- Set Format_Object.Prefix_Text string to the default.
-		    Format_Object.Prefix_Text := "@b{NONE!}" & (10..200 => ' ');
+		    Format_Object.Prefix_Text := "@b{NONE!}" & (10..MAX_PREFIX => ' ');
 		    Format_Object.Prefix_Text_Len := 9;
 
 		when Attribute | Attribute_Leading =>

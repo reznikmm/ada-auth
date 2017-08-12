@@ -13,7 +13,7 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016, 2017
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -108,6 +108,7 @@ package ARM_Format is
     -- 11/26/12 - RLB - Added subdivision names.
     -- 12/17/12 - RLB - Added Ada 2012 AARM sections.
     --  3/17/16 - RLB - Removed Changes_Only, added Base_Change_Version.
+    --  7/21/17 - RLB - Changed the prefix length
 
     type Format_Type is tagged limited private;
 
@@ -311,6 +312,8 @@ private
 	end case;
     end record;
 
+    MAX_PREFIX : constant := 250; -- Maximum length of a prefix.
+
     type Format_Type is tagged limited record
 	-- Document information:
 	Changes : ARM_Format.Change_Kind; -- No Both here.
@@ -415,7 +418,7 @@ private
 	Syntax_Tab_Len : Natural := 0;
 
 	-- Attributes:
-	Prefix_Text : String (1..200) := "@b{NONE!}" & (10..200 => ' ');
+	Prefix_Text : String (1..MAX_PREFIX) := "@b{NONE!}" & (10..MAX_PREFIX => ' ');
 	    -- This text is used as part of the attribute list text.
 	    -- It is shared between multiple attributes, which is why it is
 	    -- handled this way.
