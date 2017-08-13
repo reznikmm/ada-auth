@@ -1,0 +1,40 @@
+project Ada_Form is
+
+   for Source_Dirs use ("progs");
+   for Object_Dir use ".obj";
+   for Main use ("arm_form.ada");
+
+   package Naming is
+      for Body ("arm_formatter") use "arm_form.ada";
+      for Spec ("arm_master") use "arm_mast.ads";
+      for Spec ("arm_contents") use "arm_cont.ads";
+      for Spec ("arm_format") use "arm_frm.ads";
+      for Spec ("arm_output") use "arm_out.ads";
+      for Spec ("arm_input") use "arm_inp.ads";
+      for Spec ("arm_database") use "arm_db.ads";
+      for Spec ("arm_subindex") use "arm_sub.ads";
+      for Spec ("arm_index") use "arm_indx.ads";
+      for Spec ("arm_string") use "arm_str.ads";
+      for Spec ("arm_syntax") use "arm_syn.ads";
+      for Spec ("arm_format.data") use "arm_frmd.ads";
+      for Spec ("arm_texinfo") use "arm_texi.ads";
+
+      for Body ("arm_master") use "arm_mast.adb";
+      for Body ("arm_contents") use "arm_cont.adb";
+      for Body ("arm_format") use "arm_frm.adb";
+      for Body ("arm_input") use "arm_inp.adb";
+      for Body ("arm_database") use "arm_db.adb";
+      for Body ("arm_subindex") use "arm_sub.adb";
+      for Body ("arm_index") use "arm_indx.adb";
+      for Body ("arm_string") use "arm_str.adb";
+      for Body ("arm_syntax") use "arm_syn.adb";
+      for Body ("arm_format.data") use "arm_frmd.adb";
+      for Body ("arm_format.scan") use "arm_frms.adb";
+      for Body ("arm_texinfo") use "arm_texi.adb";
+   end Naming;
+
+   package Compiler is
+      for Default_Switches ("ada") use ("-g", "-gnata");
+   end Compiler;
+
+end Ada_Form;
