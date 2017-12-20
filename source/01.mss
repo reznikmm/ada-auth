@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2016/11/24 02:33:50 $}
+@Comment{$Date: 2017/08/12 03:47:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -2194,16 +2194,16 @@ ISO/IEC 646:1991,
     set for information interchange}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00415-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
-@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 1539-1:2010}
-@Defn{1539-1:2010, ISO/IEC standard}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1],ARef=[AI12-0224-1]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 1539-1:2018}
+@Defn{1539-1:2018, ISO/IEC standard}
 @Defn{Fortran standard}],Old=[@Defn{ISO/IEC 1539-1:2004}
 @Defn{1539-1:2004, ISO/IEC standard}
 @Defn{Fortran standard}]}],
 Old=[@Defn{ISO/IEC 1539:1991}
 @Defn{1539:1991, ISO/IEC standard}
 @Defn{FORTRAN standard}]}
-ISO/IEC @Chg{Version=[2],New=[@Chg{Version=[5],New=[1539-1:2010],
+ISO/IEC @Chg{Version=[2],New=[@Chg{Version=[5],New=[1539-1:2018],
 Old=[1539-1:2004]}],Old=[1539:1991]},
 @i{Information technology @em Programming languages @em @Chg{Version=[2],
 New=[Fortran @em Part 1: Base language],Old=[FORTRAN]}}.

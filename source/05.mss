@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1589,10 +1589,10 @@ of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0151-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1],ARef=[AI12-0183-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[The subtype defined by the
 @nt{loop_parameter_subtype_indication}, if any, of a generalized iterator
-component iterator shall statically match the iteration cursor
+shall statically match the iteration cursor
 subtype. ],Old=[]}The @Chg{Version=[4],New=[subtype defined by],Old=[type of]}
 the @Chg{Version=[5],New=[@nt{loop_parameter_subtype_indication}],
 Old=[@nt{subtype_indication}]}, if any, of an array component

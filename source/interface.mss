@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2017/08/12 03:47:34 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:53 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -299,6 +299,24 @@ and its designated profile's parameter and result types are all @i[L]-compatible
 
 T is derived from an @i[L]-compatible type,
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0207-1]}
+@ChgAdded{Version=[5],Text=[T is an anonymous access type, and T is
+eligible for convention @i[L],]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We say this so that the presence of an anonymous
+    access
+    component does not necessarily prevent a type from being eligible for
+    convention @i[L]. We want the anonymous access type to take the convention
+    from the enclosing type, but if we only said that, the definition would
+    be circular (one can only portably apply the convention @i[L] to a record
+    type R if the components of R already have convention @i[L]; but the
+    anonymous components of R have to take the convention from R). We
+    include the part of about T being eligible for convention @i[L] so that we
+    don't force convention @i[L] on some type that is incompatible with it.]}
+@end{Reason}
+
 The implementation permits T as an @i[L]-compatible type.
 
 @begin{discussion}
@@ -334,6 +352,19 @@ New=[],Old=[ specified in the pragma]}.
   @Chg{Version=[3],New=[a specified],Old=[a pragma]}
   Convention.
 @end[Ramification]
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0207-1]}
+@ChgAdded{Version=[5],Text=[If convention @i[L] is specified for a type T, for
+each component of T that has an anonymous access type, the convention of the
+anonymous access type is @i[L]. If convention @i[L] is specified for an object
+that has an anonymous access type, the convention of the anonymous access type
+is @i[L].]}
+
+@begin(Ramification)
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This applies to both anonymous access-to-object
+  and anonymous access-to-subprogram types.]}
+@end(Ramification)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @Chg{Version=[3],New=[],Old=[A @nt{pragma} Import shall be the completion of
@@ -559,10 +590,14 @@ precedence.
 @begin{Erron}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00320-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0219-1]}
 @ChgAdded{Version=[2],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 It is the programmer's responsibility to ensure that the use of interfacing
 @Chg{Version=[3],New=[aspects],Old=[pragmas]} does not violate Ada semantics;
-otherwise, program execution is erroneous.]}
+otherwise, program execution is erroneous.@Chg{Version=[5],New=[ For example,
+passing an object with mode @key[in] to imported code that modifies it causes
+erroneous execution. Similarly, calling an imported subprogram that is not pure
+from a pure package causes erroneous execution.],Old=[]}]}
 @end{Erron}
 
 @begin{ImplAdvice}
@@ -806,6 +841,20 @@ upward compatibility.
   are new; @nt{pragma}s Convention, Import, and Export are now obsolescent.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0207-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  The convention of anonymous access components is that of the enclosing type
+  (in Ada 2012, it was Ada). Similarly, the convention of the anonymous access
+  type of an object is that of the object (again, in Ada 2012 it was Ada).
+  While this is formally incompatible, it should be more useful in portable
+  code; it makes little sense to have a component of an Ada access type in a
+  record with a C convention. For most implementations, this will have no
+  real effect as convention Ada anonymous access types were allowed as
+  C-compatible anyway. But such code was not portable, as this was not
+  required in Ada 2012.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0135-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
@@ -813,6 +862,14 @@ upward compatibility.
   This will make the use of enumeration types portable for implementations
   that support interfacing to a particular language.]}
 @end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0219-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added some examples to the
+  erroneous execution text; this is a very important rule as it means that
+  Ada compilers can assume that provided interfacing declarations reflect
+  the actual foreign code.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{The Package Interfaces}
@@ -1712,16 +1769,22 @@ C struct corresponding to the Ada type T.]}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0059],ARef=[AI95-00131-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00343-01]}
-An Ada parameter of a record type T, of any mode,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0219-1]}
+An Ada parameter of a record type T,@Chg{Version=[5],New=[],Old=[ of any mode,]}
 @Chg{New=[other than an @key{in} parameter of a @Chg{Version=[2],
 New=[type of convention ],Old=[]}C_Pass_By_Copy@Chg{Version=[2],
 New=[],Old=[-compatible type]},],Old=[]}
-is passed as a t* argument to a C function, where t is the
+is passed as a t* argument to a C function,
+@Chg{Version=[5],New=[with the const modifier if the Ada mode is
+@key[in], ],Old=[]}where t is the
 C struct corresponding to the Ada type T.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0219-1]}
 An Ada parameter of an array type with component type
-T, of any mode, is passed as a t* argument to a
-C function, where t is the C type corresponding to the
+T@Chg{Version=[5],New=[],Old=[, of any mode,]}
+is passed as a t* argument to a C function,
+@Chg{Version=[5],New=[with the const modifier if the Ada mode is
+@key[in], ],Old=[]}where t is the C type corresponding to the
 Ada type T.
 
 An Ada parameter of an access-to-subprogram type
@@ -1898,6 +1961,10 @@ specific numbers and types of parameters.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0184-1]}
   @ChgAdded{Version=[5],Text=[Added @ImplAdviceTitle that types be defined in
   Interfaces.C corresponding to long long and unsigned long long.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0219-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added advice that
+  const t* map to Ada @key[in] parameters and vice versa.]}
 @end{DiffWord2012}
 
 
@@ -3698,6 +3765,13 @@ declared in a library package or subprogram,
 can correspond to a Fortran common
 block; the type also corresponds to
 a Fortran @lquotes@;derived type@rquotes@;.
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0224-1]}
+@ChgAdded{Version=[5],Text=[For Fortran facilities not addressed by this
+subclause, consider using the Fortran to C interoperability features defined in
+ISO/IEC 1594-1:2018 along with the C interfacing features defined in
+@RefSecNum{Interfacing with C and C++}.]}
+
 @end[Notes]
 @begin{Examples}
 @Leading@Keepnext@i{Example of Interfaces.Fortran:}

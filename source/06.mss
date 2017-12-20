@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2017/01/14 02:32:56 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -909,6 +909,36 @@ then the respective precondition or postcondition expressions are considered
   of a membership operation.]}
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0217-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{name} @i<statically names>
+an object if it:@Defn{Statically names}]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[statically denotes the declaration of an object
+    @Redundant[(possibly through one or more renames)];]}
+    @begin{TheProof}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[Follows from the definition of statically
+      denotes (see @RefSecNum{Static Expressions and Static Subtypes}).]}
+    @end{TheProof}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[is a @nt{selected_component} whose prefix
+    statically names an object, there is no implicit dereference of the prefix,
+    and the @nt{selector_name} names a component that does not depend on
+    a discriminant; or]}
+    @begin{Reason}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[We disallow components that depend on a
+      discriminant so that no discriminant checks are needed to evaluate the
+      @nt{selected_component}.]}
+    @end{Reason}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[is an @nt{indexed_component} whose prefix
+    statically names an object, the object is statically constrained, and the
+    index expressions of the object are static and have values that are within
+    the range of the index constraint.]}
+@end{Itemize}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object of a nonlimited type}, the following attribute is defined:]}
@@ -991,6 +1021,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   be of that type.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0217-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Reference to this attribute is only
   allowed within a postcondition expression. The @nt{prefix} of an Old
   @nt{attribute_reference} shall not contain a Result @nt{attribute_reference},
@@ -998,7 +1029,8 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   the postcondition expression but not within @nt{prefix} itself (for example,
   the loop parameter of an enclosing @nt{quantified_expression}).
   The @nt{prefix} of an Old @nt{attribute_reference} that is
-  potentially unevaluated shall statically denote an entity.]}
+  potentially unevaluated shall statically
+  @Chg{Version=[5],New=[name],Old=[denote]} an entity.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1520,9 +1552,15 @@ the value.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0143-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0143-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The Index attribute is new.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0217-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The prefix of a statically
+  unevaluated Old attribute can be a @nt{selected_component} or
+  @nt{indexed_component}. This is considered a correction as the old rule
+  is unintentionally too fierce, rejecting safe cases.]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -2171,12 +2209,16 @@ of a subprogram with a synchronization kind of By_Entry],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0207-1]}
 @ChgAdded{Version=[2],Text=[The calling convention for an
 anonymous access-to-subprogram parameter
 or anonymous access-to-subprogram result is @i<protected> if the reserved
 word @key{protected} appears in its definition@Chg{Version=[3],New=[;],Old=[ and]}
 otherwise@Chg{Version=[3],New=[, it],Old=[]} is the convention
-of the subprogram that contains the parameter.]}
+of the @Chg{Version=[5],New=[entity],Old=[subprogram]} that
+@Chg{Version=[5],New=[has],Old=[contains]} the parameter@Chg{Version=[5],New=[
+or result, unless that entity has convention @i<protected>, @i<entry>, or
+Intrinsic, in which case the convention is Ada],Old=[]}.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[The calling convention for other
@@ -2550,6 +2592,16 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
   as part of mode conformance (since it affects the parameter passing
   mechanism).]}
 @end{Diffword2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0207-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  The convention of an anonymous access-to-subprogram parameter of a protected
+  entry or subprogram is Ada; if one wants it to be @i<protected> it can be
+  declared with the keyword @key[protected]. This is incompatible, but only
+  in a very rare case; usually the intent is to pass a normal subprogram
+  to a protected subprogram (and this was impossible in Ada 2012).]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0107-1],ARef=[AI05-0159-1]}
@@ -3463,10 +3515,13 @@ are of an elementary type, then the call is legal only if:]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[For each @nt{name} @i<N> that is passed as a parameter of mode @key[in out] or
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0216-1]}
+@ChgAdded{Version=[3],Text=[For each @nt{name} @i<N> that
+@Chg{Version=[5],New=[denotes an object of an elementary type
+and ],Old=[]}is passed as a parameter of mode @key[in out] or
 @key[out] to the call @i<C>, there is no other @nt{name} among the other
-parameters of mode @key[in out] or @key[out] to @i<C> that is known to denote the
-same object.]}
+parameters of mode @key[in out] or @key[out] to @i<C> that is known to denote
+the same object.]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3869,6 +3924,15 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   explicitly aliased parameters are a new Ada 2012 feature.]}
 @end{Incompatible2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0216-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The @key[in out] parameter
+  rule only applies to actual parameters of elementary types. While this
+  allows additional programs (and thus could be considered an extension),
+  it is unlikely to change anything in a real program (it could only matter
+  in a call with 4 or more parameters, and then only if two composite
+  parameters have matching actuals). Thus we document it as a wording change.]}
+@end{DiffWord2012}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:50 $}
+@Comment{$Date: 2017/08/12 03:47:33 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3476,6 +3476,33 @@ computation or retrieval of a value of that type.
 @PDefn2{Term=[evaluation], Sec=(primary that is a name)}
 The value of a @nt<primary> that is a @nt{name} denoting an object
 is the value of the object.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0227-1]}
+@ChgAdded{Version=[5],Text=[An expression of a numeric universal type is
+evaluated as if it has type @i<root_integer> (for @i<universal_integer>) or
+@i<root_real> (otherwise) unless the context identifies a specific type (in
+which case that type is used).]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This has no effect for a static expression; its
+    value may be arbitrarily small or large since no specific type is expected
+    for any expression for which this rule specifies one of the root types. The
+    only effect of this rule is to allow Constraint_Error to be raised if the
+    value is outside of the base range of @i<root_integer> or @i<root_real> when
+    the expression is not static.]}
+  @end{Ramification}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This rule means that implementations don't have
+    to support unlimited range math at runtime for universal expressions. Note
+    that universal expressions for which the context doesn't specify a specific
+    type are quite rare; attribute prefixes and results are the only known
+    cases. (For operators, @RefSecNum{The Context of Overload Resolution}
+    already specifies that the operator of a root type get used, which provides
+    a specific type.)]}
+  @end{Reason}
 @end{RunTime}
 
 @begin{ImplPerm}
@@ -3618,6 +3645,16 @@ still have to be parenthesized when used in a bound of a range.
   Ada 2012 syntax; so they should be rare.]}
 @end{Incompatible2012}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0227-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording so that universal
+  expressions evaluated at runtime can raise Constraint_Error if the value is
+  outside of the range of @i<root_integer> or @i<root_real>. We don't document
+  this as an inconsistency as the rule requires no implementation to change
+  (as Constraint_Error is not required); it just allows implementations that
+  already raise Constraint_Error (which is all of them surveyed) to be
+  considered correct.]}
+@end{Diffword2012}
 
 
 @LabeledClause{Operators and Expression Evaluation}
@@ -3698,6 +3735,16 @@ raise the exception Constraint_Error.
   when the Machine_Overflows attribute is false, and the
   computation overflows.
 @end{Honest}
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For integer types, this is normatively stated in
+  the @RunTimeTitle of @RefSecNum{Integer Types}. For floating point types,
+  this is normatively stated at the end of the @ImplReqTitle of
+  @RefSecNum{Model of Floating Point Arithmetic}. For fixed point types,
+  this is normatively stated at the end of the @ImplReqTitle of
+  @RefSecNum{Model of Fixed Point Arithmetic}.]}
+@end{TheProof}
+
 
 @end{RunTime}
 
@@ -4773,7 +4820,7 @@ conversions.],Old=[]}
   predefined "="). Moreover, (like the composition of untagged record "=" in
   Ada 2012) this is more likely to fix bugs than cause
   them (who defines an "=" with a presumably different result and does not want
-  clients to us it?).]}
+  clients to use it?).]}
 @end{Inconsistent2012}
 
 @begin{DiffWord2012}

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2017/01/14 02:32:56 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -527,13 +527,13 @@ type-related:]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0116-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0181-1]}
-@Chg{Version=[5],New=[A representation item that directly specifies an aspect of an entity shall
-appear before the entity is frozen (see @RefSecNum{Freezing Rules}). In
-addition, a],Old=[A]}
-representation item that directly specifies an aspect of a subtype or
-type shall appear after the type is completely defined
-(see @RefSecNum{Completions of Declarations})@Chg{Version=[5],New=[.],Old=[
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0181-1],ARef=[AI12-0222-1]}
+@Chg{Version=[5],New=[A representation item or operational item that directly
+specifies an aspect of an entity shall
+appear before the entity is frozen (see @RefSecNum{Freezing Rules}).],Old=[ A
+representation item that directly specifies an aspect of a subtype or type shall appear after
+the type is completely defined
+(see @RefSecNum{Completions of Declarations})
 and before the subtype or type is frozen (see
 @RefSecNum{Freezing Rules}).@Chg{Version=[4],New=[],Old=[ If a
 representation item @Chg{Version=[3],New=[or @nt{aspect_specification} ],Old=[]}is
@@ -543,8 +543,9 @@ entity, then it is illegal to give another representation item
 directly specifies the same aspect of the entity.]}]}
 @begin{Ramification}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
-The fact that a representation item @Chg{New=[(or operational item,
-see next paragraph) ],Old=[]}that directly specifies
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0222-1]}
+The fact that a representation item @Chg{New=[(or operational item@Chg{Version=[5],New=[],Old=[,
+see next paragraph]}) ],Old=[]}that directly specifies
 an aspect of an entity is required to appear before the entity is frozen
 prevents changing the representation of an entity
 after using the entity in ways that require the representation to be known.
@@ -562,10 +563,20 @@ after using the entity in ways that require the representation to be known.
   to complicate the wording solely to support obsolescent features.]}]}
 @end{Honest}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1],ARef=[AI12-0206-1]}
+@ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that freezes an
+entity shall not occur within an @nt{aspect_specification} that specifies a
+representation or operational aspect of that entity.]}
+
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0183-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0116-1]}
-@ChgAdded{Version=[1],Text=[An operational item that directly specifies an
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0222-1]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[5],New=[A representation aspect of
+a subtype or type shall not be specified (whether
+by a representation item or an @nt{aspect_specification}) before the type is
+completely defined (see @RefSecNum{Completions of Declarations}).],Old=[An
+operational item that directly specifies an
 aspect of @Chg{Version=[3],New=[an entity],Old=[a type]} shall appear before the
 @Chg{Version=[3],New=[entity],Old=[type]} is frozen (see
 @RefSecNum{Freezing Rules}).@Chg{Version=[4],New=[],Old=[ If an operational
@@ -574,7 +585,7 @@ item @Chg{Version=[3],New=[or
 @Chg{Version=[3],New=[an entity],Old=[a type]}, then it is illegal to give
 another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
 ],Old=[]}that directly specifies the same aspect of the
-@Chg{Version=[3],New=[entity],Old=[type]}.]}]}
+@Chg{Version=[3],New=[entity],Old=[type]}.]}]}]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[AddedNormal]}
   @ChgAdded{Version=[1],Text=[Unlike representation items, operational
@@ -582,11 +593,6 @@ another operational item @Chg{Version=[3],New=[or @nt{aspect_specification}
   partial views. Since they don't affect the representation, the full
   declaration need not be known to determine their legality.]}
 @end{Ramification}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1]}
-@ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that freezes an
-entity shall not occur within an @nt{aspect_specification} that specifies a
-representation or operational aspect of that entity.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0116-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0181-1]}@Comment{Just a paragraph number change}
@@ -1560,6 +1566,12 @@ Some of the more stringent requirements are moved to
   been illegal since they've existed, and they don't make any sense, it's
   unlikely that any implementation accepted them or that they appear in any
   program.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0222-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule preventing
+  giving a representation aspect on a partial view. Since this has always
+  been prohibited for other kinds of representation items, it's unlikely
+  that any implementation accepted them or that they appear in any program.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}
@@ -1906,7 +1918,7 @@ aspects are nonoverridable.]]}
   (the ancestor necessarily cannot have the aspect, else specifying the aspect
   would be illegal), as there could be no place with visibility on both
   aspects.@Chg{Version=[5],New=[ In the case of Max_Entry_Queue_Length, it is
-  only allowed on task types and protected types, and entries, and there are
+  only allowed on task and protected types, and on entries, and there are
   not formal versions of any of those things.],Old=[]}]}
 @end{Discussion}
 
@@ -1988,6 +2000,17 @@ attributes may be specified with an @nt{aspect_specification} instead of an
   @ChgAdded{Version=[3],Text=[The name of the aspect is the same as that of the attribute
   (see @RefSecNum{Operational and Representation Attributes}), so the @nt{aspect_mark}
   is the @nt{attribute_designator} of the attribute.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[Unless specified otherwise, all of the
+  requirements for specifying a particular aspect with an
+  @nt{attribute_definition_clause} also apply to an @nt{aspect_specification}
+  for the aspect. These are enforced at the freezing point of the entity. For
+  example, when specifying the Size aspect of a subtype, the expression
+  has to be a static expression with an integer type and a nonnegative
+  value, all of the recommended level of support requirements apply if
+  @RefSecNum{Systems Programming} is supported
+  (see @RefSecNum{Required Representation Support}), and so on.]}
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
@@ -2132,7 +2155,7 @@ such aspects and the legality rules for such aspects.]}]}
   an @nt{entry_body} in the first place.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0206-1]}
-  @ChgAdded{Version=[4],Text=[@b<Correction:> Extended the definition of
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Extended the definition of
   nonoverridable aspects to cover most kinds of aspects.]}
 
 @end{Diffword2012}

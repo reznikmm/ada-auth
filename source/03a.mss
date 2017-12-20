@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:50 $}
+@Comment{$Date: 2017/08/12 03:47:33 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2366,11 +2366,17 @@ generic formal object of mode @key[in]); or]}
 @ChgAdded{Version=[3],Text=[it is part of the object denoted by a
 @nt{function_call} or @nt{aggregate}; or]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0228-1]}
+@ChgAdded{Version=[5],Text=[it is a @nt{qualified_expression} where the operand
+denotes a view of a composite object that is known to be constrained; or]}
+
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0228-1]}@Comment{Just the paragraph number}
 @ChgAdded{Version=[3],Text=[it is part of a constant return object of an
 @nt{extended_return_statement}; or]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0228-1]}@Comment{Just the paragraph number}
 @ChgAdded{Version=[3],Text=[it is a dereference of a pool-specific access type,
 and there is no ancestor of its type that has a constrained partial view.]}
 
@@ -2384,27 +2390,50 @@ That's true even for access-to-constant types (the denoted object does not
 have to be a constant).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1],ARef=[AI05-0008-1]}
-@ChgAdded{Version=[3],Text=[There are other cases that could have been
-included in this definition (view conversions, the current instance of
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0228-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[We don't mention view
+conversions as there are no mutable tagged types
+(discriminant defaults are allowed only if the type is immutably limited),
+so all tagged view conversions are either of an indefinite type (if it has
+discriminants without defaults), an immutably limited type (if the
+discriminants do have defaults), or constrained (if there are no discriminants).
+This matches the first three bullets here, so all tagged view conversions are
+known to be constrained without needing to mention them explicitly. Untagged
+view conversions only can occur in parameter passing (as actuals to @key[in out]
+or @key[out] parameters), and "known to be constrained" is not used there.],Old=[There are other
+cases that could have been included in this definition (view conversions,
+the current instance of
 a type, objects of a formal discriminated
 private type), but these are not relevant to the places this term is
 used, so they were not included. If this term is used in additional places,
 the definition should be checked to see if any of these additional cases
-are relevant and appropriate wording added if necessary.]}
+are relevant and appropriate wording added if necessary.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0228-1]}
+@ChgAdded{Version=[5],Text=[We don't need to mention the current instance
+of a (sub)type, either. If a current instance of a type or subtype
+appears in an aspect specification, it represents a value, so whether or not
+it is known to be constrained is irrelevant (the term is only defined for
+composite objects). Otherwise, the current instance of a type can only be used
+in an immutably limited type, so all such instances are known to be
+constrained by the third bullet.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0008-1],ARef=[AI05-0041-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0228-1]}@Comment{Just the paragraph number}
 @ChgAdded{Version=[3],Type=[Leading],Keepnext=[T],Text=[For the purposes of
 determining within a generic body whether an object is known
 to be constrained:]}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just the paragraph number}
 @ChgAdded{Version=[3],Text=[if a subtype is a descendant of an untagged generic
 formal private or derived type, and the subtype is not an unconstrained array
 subtype, it is not considered indefinite and is considered to have a
 constrained partial view;]}
 
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just the paragraph number}
 @ChgAdded{Version=[3],Text=[if a subtype is a descendant of a formal access type, it is not
 considered pool-specific.]}
 
@@ -2520,6 +2549,15 @@ assigning to an enclosing object.
   @nt{qualified_expression}s to be used in more places. See
   @RefSecNum{Names} for details.]}@ChgNote{This is defined an extension in @RefSecNum{Names}.}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0228-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  A @nt{qualified_expression} of an object that is known to be constrained
+  is now also known to be constrained. This allows qualification to be used
+  to disambiguate a function call used as a prefix in a rename without making
+  the rename illegal.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
@@ -5176,8 +5214,11 @@ paragraphs are ever renumbered.}
 @end(description)
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0124-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0225-1]}
 @ChgAdded{Version=[4],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
-@nt{prefix} X that denotes an object of a scalar type@Redundant[ (after
+@nt{prefix} X @Chg{Version=[5],New=[],Old=[that denotes an object ]}of a scalar
+type@Chg{Version=[5],New=[ other than @i<universal_real> or
+@i<universal_fixed>],Old=[]}@Redundant[ (after
 any implicit dereference)]}, the following attributes are defined:]}
 
 @begin(description)
@@ -5204,6 +5245,16 @@ any implicit dereference)]}, the following attributes are defined:]}
 
 @EndPrefixType{}
 @end(description)
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0225-1]}
+  @ChgAdded{Version=[5],Text=[We do not allow universal real or fixed types as
+  the details of the result depends on the properties of the type, so a specific
+  nominal subtype is needed. On the other hand, the desired string for an
+  integer type does not depend upon the type, so we can allow any integer type,
+  including @i<universal_integer>. Such a type is evaluated as type
+  @i<root_integer> (as all universal integer runtime operations are), so
+  Constraint_Error may be raised if the magnitude of the value is too large.]}
+@end{Reason}
 @end{RunTime}
 
 @begin{ImplPerm}
@@ -5453,6 +5504,11 @@ More explicit rules are provided for nongraphic characters.
   @b<Corrigendum:> An object can be now used as the prefix of the Image
   attribute (as well as Wide_Image and Wide_Wide_Image), a
   convenience feature already present in some implementations.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0225-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Scalar values (as well as objects)
+  can be now used as the prefix of the Image attribute (as well as Wide_Image
+  and Wide_Wide_Image).]}
 @end{Extend2012}
 
 

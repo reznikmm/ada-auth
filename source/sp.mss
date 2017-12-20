@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2017/08/12 03:47:34 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2016/08/05 07:11:22 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2147,9 +2147,12 @@ the following attribute is defined:
 @end{Description}
 @EndPrefixType{}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0231-1]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if a value of Null_Task_Id is passed
-as a parameter to Abort_Task, Is_Terminated, and Is_Callable.
+as a parameter to Abort_Task,
+@Chg{Version=[5],New=[Activation_Is_Complete, ],Old=[]}Is_Terminated,
+and Is_Callable.
 
 @PDefn2{Term=[potentially blocking operation],Sec=(Abort_Task)}
 @PDefn2{Term=[blocking, potentially],Sec=(Abort_Task)}
@@ -2244,6 +2247,12 @@ Task_Id value that identifies the environment task.
   @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting in
   errors. This should be rare and is easily fixed if it does occur.]}
 @end{Incompatible2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0231-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Defined what happens if
+  Null_Task_Id is passed to Activation_Is_Complete.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{The Package Task_Attributes}

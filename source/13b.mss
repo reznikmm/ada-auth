@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:52 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3712,7 +3712,7 @@ address of the object to the subpool.]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[There is no Deallocate_From_Subpool. There is
 no efficient way for the implementation to determine the subpool for
-an arbitrary object, and if the pool implementer can determinate that,
+an arbitrary object, and if the pool implementer can determine that,
 they can use that as part of the implementation of Deallocate.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}

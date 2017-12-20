@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2014/07/24 04:20:38 $}
+@Comment{$Date: 2017/08/12 03:47:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @LabeledClause{Array Types}
 
@@ -1884,12 +1884,13 @@ is constrained or unconstrained.]
 discriminated type @Redundant[(after any implicit dereference)]},
 the following attribute is defined:
 @begin(description)
-@ChgAttribute{Version=[3], Kind=[Revised], ChginAnnex=[T],
-  Leading=[F], Prefix=<A>, AttrName=<Constrained>, ARef=[AI05-0214-1],
+@ChgAttribute{Version=[5], Kind=[Revised], ChginAnnex=[T],
+  Leading=[F], Prefix=<A>, AttrName=<Constrained>, ARef=[AI05-0214-1], ARef=[AI12-0183-1],
   InitialVersion=[0],
   Text=[Yields the value True if A denotes a constant, a value,
   @Chg{Version=[3],New=[a tagged object, ],Old=[]}or a constrained variable,
-  and False otherwise.]}
+  and False otherwise.@Chg{Version=[5],New=[ The value of this attribute is
+  of the predefined type Boolean.],Old=[]}]}
 @begin(ImplNote)
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0214-1]}
  This attribute is primarily used on parameters, to determine whether

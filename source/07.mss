@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2232,7 +2232,7 @@ value.]}
   part of a package to which a class-wide invariant applies now requires
   overriding. This is a very unlikely situation, and will prevent problems
   with invariant checks being added to routines that assume that they don't
-  need them.]}
+  have them.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}

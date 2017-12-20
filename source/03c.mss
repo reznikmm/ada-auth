@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:12 $}
+@Comment{$Date: 2017/08/12 03:47:33 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3146,6 +3146,7 @@ and aliased subcomponents of other objects.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1],ARef=[AI05-0142-4],ARef=[AI05-0277-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0228-1]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
 it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,],Old=[ or]}
@@ -3155,7 +3156,9 @@ it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,],Old=[ or]}
 with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
-(see @RefSecNum{Type Conversions}) of an aliased view.
+(see @RefSecNum{Type Conversions}) of an aliased view.@Chg{Version=[5],New=[
+A @nt{qualified_expression} is an aliased view when the
+operand denotes an aliased view.],Old=[]}
 @Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of
 @Chg{Version=[3],New=[an immutably limited type (see @RefSecNum{Limited Types})
 is],Old=[a limited@Chg{Version=[2],New=[ tagged],Old=[]} type,
@@ -3776,6 +3779,13 @@ types used as parameters allow passing of subprograms at any level.],Old=[]}
   @ChgAdded{Version=[3],Text=[Explicitly aliased parameters (see
   @RefSecNum{Subprogram Declarations}) are defined to be aliased.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0228-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  A @nt{qualified_expression} of an aliased object
+  is now also aliased.]}
+@end{Extend2012}
 
 
 @LabeledSubClause{Incomplete Type Declarations}

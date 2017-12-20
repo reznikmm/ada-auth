@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2017/01/14 02:32:56 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.68 $}
+@Comment{$Revision: 1.69 $}
 
 @LabeledClause{Type Conversions}
 
@@ -810,8 +810,10 @@ Array Type Conversion
   @IndexCheck{Accessibility_Check}]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[This check is needed for operands that are access
-    parameters and in instance bodies. Other cases are handled by the
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+    @ChgAdded{Version=[2],Text=[This check is needed for operands that are
+    @Chg{Version=[5],New=[],Old=[access
+    parameters and ]}in instance bodies. Other cases are handled by the
     legality rule given previously.]}
   @end{Reason}
 
@@ -2168,6 +2170,15 @@ is nonscalar.
 
 The rules for evaluating static expressions are designed
 to maximize portability of static calculations.
+
+@begin{Reason}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0201-1]}
+@ChgAdded{Version=[5],Text=[We support static string expressions so that, for
+example, the @nt{aspect_definition} for a Link_Name aspect can contain a
+concatenation. We don't support static aggregates (even for string types) or
+non-string static nonscalar types; we're trying to keep it cheap and simple
+(from the implementer's viewpoint).]}
+@end{Reason}
 @end{MetaRules}
 
 @begin{StaticSem}@Comment{Was "Intro" by mistake until version 5}
@@ -2233,9 +2244,11 @@ and whose @nt<attribute_designator>
 is First, Last, or Length,
 with an optional dimension;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1]}
 a @nt{type_conversion}
-whose @nt{subtype_mark} denotes a static scalar subtype,
-and whose operand is a static expression;
+whose @nt{subtype_mark} denotes a static
+@Chg{Version=[5],New=<@Redundant[(scalar or string)]>,Old=[scalar]}
+subtype, and whose operand is a static expression;
 
 a @nt{qualified_expression}
 whose @nt{subtype_mark} denotes a
@@ -2290,7 +2303,7 @@ a static expression enclosed in parentheses.
   in a @nt<record_aggregate> or @nt<extension_aggregate>.
 @end{Ramification}
 
-@Leading@Defn2{Term=[statically], Sec=(denote)}
+@Leading@Defn{statically denote}
 A @nt{name} @i(statically denotes) an entity if it
 denotes the entity and:
 @begin(itemize)
@@ -2320,7 +2333,14 @@ a predefined operator whose parameter and result
 types are all scalar types none of which are descendants of
 formal scalar types;
 
-a predefined concatenation operator whose result type is a string type;
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0201-1]}
+@ChgAdded{Version=[5],Text=[a predefined relational operator whose parameters
+are of a string type that is not a descendant of a formal array type;]}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1]}
+a predefined concatenation operator whose result type is a string
+type@Chg{Version=[5],New=[ that is not a descendant of a formal array
+type],Old=[]};
 
 an enumeration literal;
 
@@ -2331,13 +2351,15 @@ and if the parameter and result types are scalar.
 
 In any case, a generic formal subprogram is not a static function.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1]}
 @Defn2{Term=[static], Sec=(constant)}
 A @i(static constant) is
 a constant view declared by a full constant declaration
 or an @nt<object_@!renaming_@!declaration> with a static nominal subtype,
 having a value defined by a static scalar expression or by
-a static string expression whose value has a length not exceeding
-the maximum length of a @nt{string_@!literal} in the implementation.
+a static string expression@Chg{Version=[5],New=[],Old=[ whose value has a
+length not exceeding the maximum length of a @nt{string_@!literal} in the
+implementation]}.
 @begin{Ramification}
 A deferred constant is not static;
 the view introduced by the corresponding full constant declaration
@@ -2345,7 +2367,9 @@ can be static.
 @end{Ramification}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-The reason for restricting the length of static string constants is so
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0201-1]}
+@ChgDeleted{Version=[5],Text=[The reason for restricting the length of static
+string constants is so
 that compilers don't have to store giant strings in their symbol tables.
 Since most string constants will be initialized
 from @nt{string_literal}s, the length limit seems pretty natural.
@@ -2355,12 +2379,13 @@ We're trying to keep it cheap and simple
 (from the implementer's viewpoint),
 while still allowing, for example,
 the @Chg{Version=[3],New=[@nt{aspect_definition} for a Link_Name aspect],
-Old=[link name of a pragma Import]} to contain a concatenation.
+Old=[link name of a pragma Import]} to contain a concatenation.]}
 
-The length we're talking about is the maximum number of characters in
-the value represented by a @nt{string_literal},
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0201-1]}
+@ChgDeleted{Version=[5],Text=[The length we're talking about is the maximum
+number of characters in the value represented by a @nt{string_literal},
 not the number of characters in the source representation;
-the quotes don't count.
+the quotes don't count.]}
 @end{Reason}
 
 @Defn2{Term=[static], Sec=(range)}
@@ -2457,7 +2482,7 @@ The different kinds of @i(static constraint) are defined as follows:
 @Chg{Version=[2],New=[In any case, the constraint of the first subtype of a
 scalar formal type is neither static nor null.],Old=[]}
 
-@Defn2{Term=[statically], Sec=(constrained)}
+@Defn{statically constrained}
 A subtype is @i(statically constrained) if it is constrained,
 and its constraint is static.
 An object is @i(statically constrained) if its nominal subtype is
@@ -2910,6 +2935,21 @@ raising.
   for the new possibilities allowed by the @nt{membership_choice_list}.]}
 @end{DiffWord2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0201-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  Added a missing exclusion for concatenations of a string type descended from
+  a formal array type. This could potentially make some expression non-static;
+  but as that could only matter in a context where a static string is required
+  (such as the Link_Name aspect), it is quite unlikely.]}
+@end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0201-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Expressions
+  involving string relational operators or string type conversions now can be
+  static.]}
+@end{Extend2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

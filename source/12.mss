@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:52 $}
+@Comment{$Date: 2017/08/12 03:47:34 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -3552,8 +3552,8 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   already required a compiler to be able to construct this subprogram for
   use in an instantiation that occurs inside of a generic unit, so it made
   no sense to prevent it from being used explicitly as well (in the same way
-  that the previous item allows them to be used for other kinds of
-  formal subprograms.]}
+  that the previous extension allows them to be used for other kinds of
+  formal subprograms).]}
 @end{Extend2012}
 
 
