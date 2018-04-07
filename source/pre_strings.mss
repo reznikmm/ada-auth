@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2015/04/03 04:12:43 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2015/04/03 04:12:43 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -425,9 +425,10 @@ procedures.
 @Leading@keepnext
 @Leading@;The library package Strings.Fixed has the following declaration:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}@key[package] Ada.Strings.Fixed @key[is]
-   @key[pragma] Preelaborate(Fixed);
+@ChildUnit{Parent=[Ada.Strings],Child=[Fixed]}@key[package] Ada.Strings.Fixed@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Fixed);]}
 
 
 --@Examcom{ "Copy" procedure for strings of possibly different lengths}
@@ -1266,9 +1267,10 @@ the copying and comparison of bounded strings.@end{reason}
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Strings.Bounded has the following declaration:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}@key[package] Ada.Strings.Bounded @key[is]
-   @key[pragma] Preelaborate(Bounded);
+@ChildUnit{Parent=[Ada.Strings],Child=[Bounded]}@key[package] Ada.Strings.Bounded@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Bounded);]}
 
 
    @key[generic]
@@ -1933,9 +1935,10 @@ as the length does not exceed the allocated length.
 @begin{StaticSem}
 @Leading@;The library package Strings.Unbounded has the following declaration:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[with] Ada.Strings.Maps;
-@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded @key[is]
-   @key[pragma] Preelaborate(Unbounded);
+@ChildUnit{Parent=[Ada.Strings],Child=[Unbounded]}@key[package] Ada.Strings.Unbounded@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Unbounded);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    @key[type] @AdaTypeDefn{Unbounded_String} @key[is] @key[private];@Chg{Version=[2],New=[
@@ -2526,8 +2529,9 @@ for strings of Character elements.
 @begin{StaticSem}
 The package Strings.Wide_Maps has the following declaration.
 @begin{example}
-@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Maps]}@key[package] Ada.Strings.Wide_Maps @key[is]
-   @key[pragma] Preelaborate(Wide_Maps);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChildUnit{Parent=[Ada.Strings],Child=[Wide_@!Maps]}@key[package] Ada.Strings.Wide_Maps@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Wide_Maps);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
    --@Examcom{ Representation for a set of Wide_Character values:}
@@ -2833,8 +2837,9 @@ for strings of Character elements.
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps @key<is>@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Maps]}
-   @key<pragma> Preelaborate(Wide_Wide_Maps);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[@key<package> Ada.Strings.Wide_Wide_Maps@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Strings],Child=[Wide_Wide_Maps]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Wide_Wide_Maps);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @Examcom[Representation for a set of Wide_Wide_Character values:]
@@ -3148,13 +3153,14 @@ function Strings.Bounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<generic>@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash]}
    @key<with package> Bounded @key<is>
       @key<new> Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key<function> Ada.Strings.Bounded.Hash (Key : Bounded.Bounded_String)
-   @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate(@Chg{Version=[3],New=[Ada.Strings.Bounded.Hash],Old=[Hash]});]}
+   @key<return> Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(@Chg{Version=[3],New=[Ada.Strings.Bounded.Hash],Old=[Hash]})]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3173,10 +3179,11 @@ function Strings.Unbounded.Hash has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0298-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Containers;
 @key<function> Ada.Strings.Unbounded.Hash (Key : Unbounded_String)@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash]}
-   @key<return> Containers.Hash_Type;
-@key<pragma> Preelaborate(@Chg{Version=[3],New=[Ada.Strings.Unbounded.Hash],Old=[Hash]});]}
+   @key<return> Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(@Chg{Version=[3],New=[Ada.Strings.Unbounded.Hash],Old=[Hash]})]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3229,13 +3236,14 @@ function Strings.Bounded.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key[generic]
    @key[with package] Bounded @key[is]
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Hash_Case_Insensitive]}
-   (Key : Bounded.Bounded_String) @key[return] Containers.Hash_Type;
-@key[pragma] Preelaborate(Ada.Strings.Bounded.Hash_Case_Insensitive);]}
+   (Key : Bounded.Bounded_String) @key[return] Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Bounded.Hash_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3251,10 +3259,11 @@ Strings.Unbounded.Hash_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key<with> Ada.Containers;
 @key[function] Ada.Strings.Unbounded.Hash_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Hash_Case_Insensitive]}
-   (Key : Unbounded_String) @key[return] Containers.Hash_Type;
-@key[pragma] Preelaborate(Ada.Strings.Unbounded.Hash_Case_Insensitive);]}
+   (Key : Unbounded_String) @key[return] Containers.Hash_Type@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Unbounded.Hash_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3352,12 +3361,13 @@ function Strings.Bounded.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[with package] Bounded @key[is]
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Equal_Case_Insensitive]}
-   (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Ada.Strings.Bounded.Equal_Case_Insensitive);]}
+   (Left, Right : Bounded.Bounded_String) @key[return] Boolean@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Bounded.Equal_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3373,9 +3383,10 @@ Strings.Unbounded.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Unbounded.Equal_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Equal_Case_Insensitive]}
-   (Left, Right : Unbounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Ada.Strings.Unbounded.Equal_Case_Insensitive);]}
+   (Left, Right : Unbounded_String) @key[return] Boolean@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Unbounded.Equal_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3422,12 +3433,13 @@ function Strings.Bounded.Less_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[with package] Bounded @key[is]
       @key[new] Ada.Strings.Bounded.Generic_Bounded_Length (<>);
 @key[function] Ada.Strings.Bounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Bounded],Child=[Less_Case_Insensitive]}
-  (Left, Right : Bounded.Bounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Ada.Strings.Bounded.Less_Case_Insensitive);]}
+  (Left, Right : Bounded.Bounded_String) @key[return] Boolean@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Bounded.Less_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -3443,9 +3455,10 @@ Strings.Unbounded.Less_Case_Insensitive has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[function] Ada.Strings.Unbounded.Less_Case_Insensitive@SubChildUnit{Parent=[Ada.Strings.Unbounded],Child=[Less_Case_Insensitive]}
-  (Left, Right : Unbounded_String) @key[return] Boolean;
-@key[pragma] Preelaborate(Ada.Strings.Unbounded.Less_Case_Insensitive);]}
+  (Left, Right : Unbounded_String) @key[return] Boolean@Chg{Version=[5],New=[],Old=[;]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking],Old=[(Ada.Strings.Unbounded.Less_Case_Insensitive)]};]}
 @end{Example}
 
 @begin{DescribeCode}

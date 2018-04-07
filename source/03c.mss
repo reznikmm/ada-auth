@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:33 $}
+@Comment{$Date: 2017/12/20 04:30:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -295,8 +295,9 @@ of the generic body result in distinct tags.@PDefn{Unspecified}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @key[is]
-    @Chg{Version=[2],New=[@key[pragma] Preelaborate(Tags);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChildUnit{Parent=[Ada],Child=[Tags]}@key[package] Ada.Tags @Chg{Version=[5],New=[],Old=[ @key[is]]}
+    @Chg{Version=[2],New=[@Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Tag);]}
     ],Old=[]}@key[type] @AdaTypeDefn{Tag} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Tag);],Old=[]}
 
@@ -607,6 +608,7 @@ generic function exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@ChildUnit{Parent=[Ada.Tags],Child=[Generic_@!Dispatching_@!Constructor]}@key{generic}
     @key{type} T (<>) @key{is abstract tagged limited private};
     @key{type} Parameters (<>) @key{is limited private};
@@ -615,8 +617,9 @@ generic function exists:]}
 @key{function} Ada.Tags.Generic_Dispatching_Constructor
    (The_Tag : Tag;
     Params  : @key{not null access} Parameters) @key{return} T'Class@Chg{Version=[3],New=[
-   @key{with} Convention => Intrinsic],Old=[]};
-@key{pragma} Preelaborate(Generic_Dispatching_Constructor);@Chg{Version=[3],New=[],Old=[
+   @key{with} @Chg{Version=[5],New=[Preelaborate, ],Old=[]}Convention => Intrinsic@Chg{Version=[5],New=[,
+        Nonblocking => Constructor'Nonblocking],Old=[]}],Old=[]};@Chg{Version=[5],New=[],Old=[
+@key{pragma} Preelaborate(Generic_Dispatching_Constructor);]}@Chg{Version=[3],New=[],Old=[
 @key{pragma} Convention(Intrinsic, Generic_Dispatching_Constructor);]}]}
 @end{Example}
 
@@ -5838,8 +5841,8 @@ denotes an aliased view of an object}:
 The following attribute is defined for @PrefixType{a @nt{prefix} P that
 denotes a subprogram}:
 @begin(description)
-@ChgAttribute{Version=[3],Kind=[Revised],ChginAnnex=[F], Leading=[F],
-  Prefix=<P>, AttrName=<Access>,ARef=[AI95-00229-01], ARef=[AI95-00254-01],ARef=[AI05-0239-1],
+@ChgAttribute{Version=[5],Kind=[Revised],ChginAnnex=[F], Leading=[F],
+  Prefix=<P>, AttrName=<Access>,ARef=[AI95-00229-01], ARef=[AI95-00254-01],ARef=[AI05-0239-1],ARef=[AI12-0064-2],
   Text=<P'Access yields an access value that designates the subprogram
   denoted by P.
   The type of P'Access is an access-to-subprogram type (@i(S)),
@@ -5847,12 +5850,13 @@ denotes a subprogram}:
 @EndPrefixType{}
 @PDefn2{Term=[accessibility rule],Sec=(Access attribute)}
   The accessibility level of P shall not be statically deeper than
-  that of @i{S}.
+  that of @i{S}.@Chg{Version=[5],New=[ If @i{S} is nonblocking, P shall
+  be nonblocking. ],Old=[]}
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
-  this rule applies also in the private part of an
-  instance of a generic unit.
+  @Chg{Version=[5],New=[these rules apply],Old=[this rule applies]} also in
+  the private part of an instance of a generic unit.
   The profile of P
   shall be @Chg{Version=[3],New=[subtype conformant],Old=[subtype-conformant]}
   with the designated profile of @i(S),
@@ -6261,6 +6265,10 @@ uses of anonymous access types.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0156-1]}
   @ChgAdded{Version=[5],Text=[Added text to define the accessibility of
   anonymous access types declaring a loop parameter.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Added Nonblocking (see
+  @RefSecNum{Intertask Communication}) matching to P'Access.]}
 @end{DiffWord2012}
 
 

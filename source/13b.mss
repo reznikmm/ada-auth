@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.116 $}
+@Comment{$Revision: 1.117 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -511,10 +511,11 @@ converts from that record type to type Address.
 
 @Leading@;The following language-defined generic library package exists:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChildUnit{Parent=[System],Child=[Address_@!To_@!Access_@!Conversions]}@key[generic]
-    @key[type] Object(<>) @key[is] @key[limited] @key[private];
-@key[package] System.Address_To_Access_Conversions @key[is]
-   @key[pragma] Preelaborate(Address_To_Access_Conversions);
+   @key[type] Object(<>) @key[is] @key[limited] @key[private];
+@key[package] System.Address_To_Access_Conversions @Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Address_To_Access_Conversions);]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
    @key[type] Object_Pointer @key[is] @key[access] @key[all] Object;
@@ -740,13 +741,14 @@ of the generic function Unchecked_Conversion.]
 @Leading@keepnext@;The following language-defined generic library function exists:
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[generic]
    @key[type] Source(<>) @key[is] @key[limited] @key[private];
    @key[type] Target(<>) @key[is] @key[limited] @key[private];
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Conversion]}@key[function] Ada.Unchecked_Conversion(S : Source) @key[return] Target@Chg{Version=[3],New=[
-   @key(with) Convention => Intrinsic],Old=[]};@Chg{Version=[3],New=[],Old=[
-@key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);]}
-@key[pragma] Pure(Ada.Unchecked_Conversion);
+   @key(with) @Chg{Version=[5],New=[Pure, Nonblocking, ],Old=[]}Convention => Intrinsic],Old=[]};@Chg{Version=[3],New=[],Old=[
+@key[pragma] Convention(Intrinsic, Ada.Unchecked_Conversion);]}@Chg{Version=[5],New=[],Old=[
+@key[pragma] Pure(Ada.Unchecked_Conversion);]}
 @end{Example}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -2485,13 +2487,14 @@ the generic procedure Unchecked_Deallocation.]
 @leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name)@Chg{Version=[3],New=[
-   @key(with) Convention => Intrinsic;],Old=[;
-@key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}
-@key[pragma] Preelaborate(Ada.Unchecked_Deallocation);
+   @key(with) @Chg{Version=[5],New=[Preelaborate, Nonblocking, ],Old=[]}Convention => Intrinsic;],Old=[;
+@key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}@Chg{Version=[5],New=[],Old=[
+@key[pragma] Preelaborate(Ada.Unchecked_Deallocation);]}
 @end{Example}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -4597,8 +4600,9 @@ calls on the Read and Write procedures of the Root_Stream_Type.
 (User-defined T'Read and T'Write attributes can also make such calls,
 or can call the Read and Write attributes of other types.)
 @begin{example}
-@ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams @key[is]
-    @key[pragma] Pure(Streams)@Defn{unpolluted};@Comment{This *must* be a Duff joke}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams@Chg{Version=[5],New=[],Old=[ @key[is]]}
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[, Nonblocking => False @key[is]],Old=[(Streams)@Defn{unpolluted};@Comment{This *must* be a Duff joke}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Root_Stream_Type} @key[is] @key[abstract tagged limited private];@Chg{Version=[2],New=[
@@ -4625,6 +4629,16 @@ or can call the Read and Write attributes of other types.)
    ... -- @RI{not specified by the language}
 @key[end] Ada.Streams;
 @end{example}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+  @ChgAdded{Version=[5],Text=[This package must allow blocking
+    (Nonblocking => False) for compatibility. The purpose of this package
+    is to provide a template for overriding user-defined routines; and
+    such routines can only allow blocking if the root type does so.
+    Users can still declare their overridding routines nonblocking if they
+    wish.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00227-01]}
 The Read operation transfers @Chg{Version=[2],New=[],Old=[Item'Length ]}stream
@@ -5276,6 +5290,18 @@ unspecified how many stream elements have been read from the stream.]}
 In the default implementation of Read and Input for a type, End_Error
 is raised if the end of the stream is reached before the reading of a value of
 the type is completed.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
+@ChgAdded{Version=[5],Text=[The aspect Nonblocking is the Boolean literal False
+for the default implementations of stream-oriented attributes.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The underlying Read/Write operations are called
+  via dispatching calls. Since we cannot afford any incompatibility with
+  existing Ada code, the stream operations allow blocking. Thus the
+  stream-oriented attributes must allow blocking as well.]}
+@end{Reason}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01]}
@@ -5976,6 +6002,10 @@ class-wide types descended from S.
   @LegalityTitle apply when a stream-oriented attribute is specified
   via an @nt{aspect_specification} as applied when it is specified via
   an @nt{attribute_definition_clause}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Added the definition of Nonblocking (see
+  @RefSecnum{Intertask Communication}) for stream-oriented attributes.]}
 @end{DiffWord2012}
 
 

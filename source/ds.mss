@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.76 $ $Date: 2016/08/05 07:11:22 $ $Author: randy $ }
+@comment{ $Revision: 1.77 $ $Date: 2017/12/20 04:30:55 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2016/08/05 07:11:22 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -2165,8 +2165,10 @@ and its acronym are more familiar.
 
 @leading@keepnext@;The following language-defined library package exists:
 @begin{example}
-@b(with) Ada.Streams; @RI{-- see @RefSecNum[The Package Streams]}
-@key(package) System.RPC @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@b(with) Ada.Streams; -- @Examcom{see @RefSecNum[The Package Streams]}
+@key(package) System.RPC@Chg{Version=[5],New=[
+   @key(with) Nonblocking => False],Old=[]} @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
    @key(type) @AdaTypeDefn{Partition_Id} @key(is range) 0 .. @RI(implementation-defined);
 
@@ -2301,10 +2303,11 @@ The full effects of this message are dependent on the implementation of
 the PCS.
 @end{Honest}
 
-@PDefn2{Term=[potentially blocking operation],Sec=(RPC operations)}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0241-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[potentially blocking operation],Sec=(RPC operations)}
 @PDefn2{Term=[blocking, potentially],Sec=(RPC operations)}
 The subprograms declared in System.RPC are potentially
-blocking operations.
+blocking operations.]}
 @end{RunTime}
 
 @begin{ImplReq}

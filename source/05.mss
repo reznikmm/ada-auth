@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:54 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1352,11 +1352,12 @@ The constant-ness of loop parameters is specified in
 language-defined generic library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@ChildUnit{Parent=[Ada],Child=[Iterator_Interfaces]}@key[generic]
    @key[type] Cursor;
    @key[with function] Has_Element (Position : Cursor) @key[return] Boolean;
-@key[package] Ada.Iterator_Interfaces @key[is]
-   @key[pragma] Pure (Iterator_Interfaces);]}
+@key[package] Ada.Iterator_Interfaces@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with] Pure, Nonblocking => False @key[is]],Old=[@key[pragma] Pure (Iterator_Interfaces);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Forward_Iterator} @key[is limited interface];
@@ -1373,6 +1374,16 @@ language-defined generic library package exists:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Iterator_Interfaces;]}
 @end{Example}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+  @ChgAdded{Version=[5],Text=[This package must allow blocking
+    (Nonblocking => False) for compatibility. The purpose of this package
+    is to provide a template for overriding user-defined routines; and
+    such routines can only allow blocking if the root type does so.
+    Users can still declare their overridding routines nonblocking if they
+    wish.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgAdded{Version=[3],Text=[An @i<iterator type> is a type descended from

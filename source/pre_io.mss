@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2015/04/03 04:12:42 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -1302,6 +1302,7 @@ Append_File is new in Ada 95.
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
@@ -1311,10 +1312,12 @@ Append_File is new in Ada 95.
                     Base  : @key[in] Number_Base := Default_Base);
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
-                    Base : @key[in] Number_Base := Default_Base);
+                    Base : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
 
    @key[end] Integer_IO;
 
@@ -1331,6 +1334,7 @@ Append_File is new in Ada 95.
       @key[procedure] @AdaSubDefn{Get}(Item  : @key[out] Num;
                     Width : @key[in]  Field := 0);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Put}(File  : @key[in] File_Type;
                     Item  : @key[in] Num;
                     Width : @key[in] Field := Default_Width;
@@ -1340,10 +1344,12 @@ Append_File is new in Ada 95.
                     Base  : @key[in] Number_Base := Default_Base);
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
-                    Base : @key[in] Number_Base := Default_Base);
+                    Base : @key[in] Number_Base := Default_Base)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
 
    @key[end] Modular_IO;
 
@@ -1373,13 +1379,16 @@ Append_File is new in Ada 95.
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in] String;
                     Item : @key[out] Num;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
    @key[end] Float_IO;
 
    @key[generic]
@@ -1406,13 +1415,16 @@ Append_File is new in Ada 95.
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
    @key[end] Fixed_IO;
 
    @key[generic]
@@ -1439,13 +1451,16 @@ Append_File is new in Ada 95.
                     Aft  : @key[in] Field := Default_Aft;
                     Exp  : @key[in] Field := Default_Exp);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Num;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in] Num;
                     Aft  : @key[in] Field := Default_Aft;
-                    Exp  : @key[in] Field := Default_Exp);
+                    Exp  : @key[in] Field := Default_Exp)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
    @key[end] Decimal_IO;
 
    --@RI{ Generic package for Input-Output of Enumeration Types}
@@ -1469,12 +1484,15 @@ Append_File is new in Ada 95.
                     Width : @key[in] Field    := Default_Width;
                     Set   : @key[in] Type_Set := Default_Setting);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key[procedure] @AdaSubDefn{Get}(From : @key[in]  String;
                     Item : @key[out] Enum;
-                    Last : @key[out] Positive);
+                    Last : @key[out] Positive)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
       @key[procedure] @AdaSubDefn{Put}(To   : @key[out] String;
                     Item : @key[in]  Enum;
-                    Set  : @key[in]  Type_Set := Default_Setting);
+                    Set  : @key[in]  Type_Set := Default_Setting)@Chg{Version=[5],New=[
+         @key[with] Nonblocking],Old=[]};
    @key[end] Enumeration_IO;
 
 @keepnext@;--@RI{ Exceptions}

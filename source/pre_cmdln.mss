@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.29 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.30 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -16,8 +16,9 @@ bounds of type Command_Line.Exit_Status],Old=[]}.]}
 @begin{StaticSem}
 @Leading@Keepnext@;The library package Ada.Command_Line has the following declaration:
 @begin{Example}
-@key[package] Ada.Command_Line @key[is]@ChildUnit{Parent=[Ada],Child=[Command_Line]}
-  @key[pragma] Preelaborate(Command_Line);
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key[package] Ada.Command_Line@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Command_Line]}
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Command_Line);]}
 
   @key[function] @AdaSubDefn{Argument_Count} @key[return] Natural;
 

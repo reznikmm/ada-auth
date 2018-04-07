@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.71 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.72 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -88,10 +88,11 @@ operations.}
 Numerics.Generic_Complex_Types has the following declaration:
 @begin{Example}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key{generic}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Types]}
    @key{type} Real @key{is} @key{digits} <>;
-@key{package} Ada.Numerics.Generic_Complex_Types @key{is}
-   @Chg{New=[@key{pragma}],Old=[pragma]} Pure(Generic_Complex_Types);
+@key{package} Ada.Numerics.Generic_Complex_Types@Chg{Version=[5],New=[],Old=[ @key{is}]}
+   @Chg{Version=[5],New=[@key{with}],Old=[@Chg{New=[@key{pragma}],Old=[pragma]}]} Pure@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Generic_Complex_Types);]}
 
    @key{type} @AdaTypeDefn{Complex} @key{is}
       @key{record}
@@ -592,13 +593,14 @@ Generic_Complex_Types as defined in ISO/IEC CD 13813
 Numerics.Generic_Complex_Elementary_Functions has the following declaration:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[with] Ada.Numerics.Generic_Complex_Types;
 @key[generic]@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Elementary_@!Functions]}
    @key[with] @key[package] Complex_Types @key[is]
          @key[new] Ada.Numerics.Generic_Complex_Types (<>);
    @key[use] Complex_Types;
-@key[package] Ada.Numerics.Generic_Complex_Elementary_Functions @key[is]
-   @Chg{Version=[2],New=[@key{pragma}],Old=[pragma]} Pure(Generic_Complex_Elementary_Functions);
+@key[package] Ada.Numerics.Generic_Complex_Elementary_Functions@Chg{Version=[5],New=[],Old=[ @key[is]]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@Chg{Version=[2],New=[@key{pragma}],Old=[pragma]}]} Pure@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Generic_Complex_Elementary_Functions);]}
 
    @key[function] @AdaSubDefn{Sqrt} (X : Complex)   @key[return] Complex;
    @key[function] @AdaSubDefn{Log}  (X : Complex)   @key[return] Complex;
@@ -1044,13 +1046,16 @@ Text_IO.Complex_IO has the following declaration:
                   Exp  : @key[in] Field := Default_Exp);
 
 
-@trailing@;   @key[procedure] @AdaSubDefn{Get} (From : @key[in]  String;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+   @key[procedure] @AdaSubDefn{Get} (From : @key[in]  String;
                   Item : @key[out] Complex;
-                  Last : @key[out] Positive);
+                  Last : @key[out] Positive)@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};
    @key[procedure] @AdaSubDefn{Put} (To   : @key[out] String;
                   Item : @key[in]  Complex;
                   Aft  : @key[in]  Field := Default_Aft;
-                  Exp  : @key[in]  Field := Default_Exp);
+                  Exp  : @key[in]  Field := Default_Exp)@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};
 
 @key[end] Ada.Text_IO.Complex_IO;
 @end{Example}
@@ -2604,10 +2609,11 @@ are also provided as children of Numerics.]}
 package Numerics.Generic_Real_Arrays has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Real @key{is digits} <>;
-@key{package} Ada.Numerics.Generic_Real_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Real_Arrays]}
-   @key{pragma} Pure(Generic_Real_Arrays);]}
+@key{package} Ada.Numerics.Generic_Real_Arrays@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_Real_Arrays]}
+   @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[, Nonblocking @key{is}],Old=[(Generic_Real_Arrays);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Types}]}
@@ -3251,6 +3257,7 @@ and Numerics.Generic_Real_Arrays.Eigensystem fails to converge.]}]}
 package Numerics.Generic_Complex_Arrays has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Numerics.Generic_Real_Arrays, Ada.Numerics.Generic_Complex_Types;
 @key{generic}
    @key{with package} Real_Arrays   @key{is new}
@@ -3259,8 +3266,8 @@ package Numerics.Generic_Complex_Arrays has the following declaration:]}
    @key{with package} Complex_Types @key{is new}
       Ada.Numerics.Generic_Complex_Types (Real);
    @key{use} Complex_Types;
-@key{package} Ada.Numerics.Generic_Complex_Arrays @key{is}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Arrays]}
-   @key{pragma} Pure(Generic_Complex_Arrays);]}
+@key{package} Ada.Numerics.Generic_Complex_Arrays@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Complex_@!Arrays]}
+   @Chg{Version=[5],New=[@key{with}],Old=[@key{pragma}]} Pure@Chg{Version=[5],New=[, Nonblocking @key{is}],Old=[(Generic_Complex_Arrays);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Types}]}

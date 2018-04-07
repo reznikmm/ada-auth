@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -758,9 +758,10 @@ are not handled by the handlers of the
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01],ARef=[AI95-00400-01],ARef=[AI95-00438-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChildUnit{Parent=[Ada],Child=[Exceptions]}@Chg{Version=[2],New=[@key[with] Ada.Streams;
-],Old=[]}@key[package] Ada.Exceptions @key[is]@Chg{Version=[2],New=[
-    @key[pragma] Preelaborate(Exceptions);],Old=[]}
+],Old=[]}@key[package] Ada.Exceptions @Chg{Version=[5],New=[],Old=[ @key[is]]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Exceptions);]}],Old=[]}
     @key[type] @AdaTypeDefn{Exception_Id} @key[is] @key[private];@Chg{Version=[2],New=[
     @key[pragma] Preelaborable_Initialization(Exception_Id);],Old=[]}
     @AdaObjDefn{Null_Id} : @key[constant] Exception_Id;

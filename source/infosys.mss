@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -988,7 +988,9 @@ in @RefSecNum(Edited Output Generation).
 @begin{StaticSem}
 @leading@;The library package Text_IO.Editing has the following declaration:
 @begin{Example}
-@key(package) Ada.Text_IO.Editing @key(is)@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key(package) Ada.Text_IO.Editing@Chg{Version=[5],New=[
+   @key(with) Nonblocking],Old=[]} @key(is)@ChildUnit{Parent=[Ada.Text_IO],Child=[Editing]}
 
    @key(type) @AdaTypeDefn{Picture} @key(is) @key(private);
 
@@ -1037,20 +1039,24 @@ in @RefSecNum(Edited Output Generation).
                       Radix_Mark : @key(in) Character := Default_Radix_Mark)
          @key(return) String;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key(procedure) @AdaSubDefn{Put} (File       : @key(in) File_Type;
                      Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;
                      Fill       : @key(in) Character := Default_Fill;
                      Separator  : @key(in) Character := Default_Separator;
-                     Radix_Mark : @key(in) Character := Default_Radix_Mark);
+                     Radix_Mark : @key(in) Character := Default_Radix_Mark)@Chg{Version=[5],New=[
+         @key(with) Nonblocking => False],Old=[]};
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
       @key(procedure) @AdaSubDefn{Put} (Item       : @key(in) Num;
                      Pic        : @key(in) Picture;
                      Currency   : @key(in) String    := Default_Currency;
                      Fill       : @key(in) Character := Default_Fill;
                      Separator  : @key(in) Character := Default_Separator;
-                     Radix_Mark : @key(in) Character := Default_Radix_Mark);
+                     Radix_Mark : @key(in) Character := Default_Radix_Mark)@Chg{Version=[5],New=[
+         @key(with) Nonblocking => False],Old=[]};
 
 @trailing@;      @key(procedure) @AdaSubDefn{Put} (To         : @key(out) String;
                      Item       : @key(in) Num;

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:51 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -857,12 +857,14 @@ such homograph remains that is not thus overridden, then they are all hidden
 from all visibility.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00251-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0183-1]}
 @ChgAdded{Version=[2],Text=[Otherwise (all are null procedures, abstract
 subprograms, or require overriding), then any null procedure overrides all
 abstract subprograms and all subprograms that require overriding; if more than
-one such homograph remains that is not thus overridden, then if they are all
-fully conformant with one another, one is chosen arbitrarily; if not, they are
-all hidden from all visibility.
+one such homograph remains that is not thus overridden, then if
+@Chg{Version=[5],New=[the profiles of the remaining homographs],Old=[they]} are
+all fully conformant with one another, one is chosen arbitrarily; if not, they
+are all hidden from all visibility.
 @Defn2{Term=[full conformance],Sec=(required)}]}
 
 @begin{Discussion}

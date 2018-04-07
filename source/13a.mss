@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -522,6 +522,7 @@ type-related:]}
 @ChgAdded{Version=[1],Text=[Output clause]}
 
 @end{Itemize}
+
 @end{Ramification}
 
 
@@ -627,16 +628,18 @@ specify an operational or representation aspect of a generic formal
 parameter.]}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2]}
   @ChgAdded{Version=[3],Text=[Specifying an aspect on a generic formal
   parameter implies an added contract for a generic unit. That contract
   needs to be defined via generic parameter matching rules, and, as
   aspects vary widely, that has to be done for each such aspect. Since
-  most aspects do not need this complexity (including all language-defined
-  aspects as of this writing), we avoid the complexity by saying that
-  such contract-forming aspect specifications are banned unless the
-  rules defining them explicitly exist. Note that the method of specification
-  does not matter: @nt{aspect_specification}s, representation items,
-  and operational items are all covered by this (and similar) rules.]}
+  most aspects do not need this complexity@Chg{Version=[5],New=[],Old=[ (including
+  all language-defined aspects as of this writing)]}, we avoid the complexity
+  by saying that such contract-forming aspect specifications are banned unless
+  the rules defining them explicitly exist. Note that the method of
+  specification does not matter: @nt{aspect_specification}s, representation
+  items, and operational items are all covered by this
+  @Chg{Version=[5],New=[rule],Old=[(and similar) rules]}.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
@@ -1612,8 +1615,12 @@ rhs=`@Chg{Version=[3],New="
 rhs="@Chg{Version=[3],New=<@SynI<aspect_>@Syn2<identifier>['Class]>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0187-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_definition>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>>,Old=<>}"}
+rhs="@Chg{Version=[5],New=[
+   ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[ |
+   @Syn2<type_property_aspect_definition> |
+   @Syn2<subprogram_property_aspect_definition>],Old=[]}>,Old=<>}"}
 
 @end{Syntax}
 
@@ -1816,20 +1823,25 @@ aspect of a boolean type, in which case it is equivalent to the
 subprogram of a tagged type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0194-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0194-1]}
 @ChgAdded{Version=[3],Text=[There are no language-defined aspects that
 may be specified on a @nt{renaming_declaration},
-a @nt{generic_formal_parameter_declaration}, a @nt{subunit}, a @nt{package_body},
-a @nt{task_body}, a @nt{protected_body},
+@Chg{Version=[5],New=[],Old=[a @nt{generic_formal_parameter_declaration}, ]}a
+@nt{subunit}, a @nt{package_body}, a @nt{task_body}, a @nt{protected_body},
 @Chg{Version=[5],New=[an @nt{entry_body}, ],Old=[]}or a @nt{body_stub} other
 than a @nt{subprogram_body_stub}.]}
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2]}
   @ChgAdded{Version=[3],Text=[Implementation-defined aspects can be allowed on
   these, of course; the implementation will need to define the semantics. In
-  particular, the implementation will need to define actual type matching
-  rules for any aspects allowed on formal types; there are no default matching
-  rules defined by the language.]}
+  @Chg{Version=[5],New=[addition],Old=[particular]},
+  @Chg{Version=[5],New=[the language does not define default aspect matching
+  rules for generic formals; only the handful of aspects allowed on formals
+  have such rules. Therefore, ],Old=[]}the implementation will need to define
+  actual type matching rules for any aspects allowed on formal
+  types@Chg{Version=[5],New=[],Old=[; there are no default matching
+  rules defined by the language]}.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1],ARef=[AI05-0267-1]}
@@ -1867,15 +1879,16 @@ using an @nt{aspect_definition} that is a
 @nt{name}]}.@Defn2{Term=[nonoverridable],Sec=[aspect]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0211-1]}
 @ChgAdded{Version=[4],Text=[If a nonoverridable aspect is directly specified
 for a type @i<T>, then any explicit specification of that aspect for any
-other descendant of @i<T> shall be
+@Chg{Version=[5],New=[],Old=[other ]}descendant of @i<T>
+@Chg{Version=[5],New=[(other than @i<T> itself) ],Old=[]}shall be
 @PDefn2{Term=[confirming],Sec=[nonoverridable aspect]}@i<confirming>@Chg{Version=[5],New=[.
 In the case of an aspect whose value is a @nt{name}, this means that],Old=[; that is,]}
 the specified @nt{name} shall @i<match>@Defn2{Term=[match],Sec=[value of nonoverridable aspect]}
-the inherited aspect@Chg{Version=[5],New=[ and therefore],Old=[, meaning that
-the specified @nt{name} shall]} denote the
+the inherited aspect@Chg{Version=[5],New=[ in the sense that it],Old=[, meaning that
+the specified @nt{name}]} shall denote the
 same declarations as would the inherited @nt{name}.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
@@ -1887,6 +1900,7 @@ type inherits the aspect, then a matching definition shall be specified
 (directly or by inheritance) for the partial view.]}
 
 @begin{Ramification}
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
   @ChgAdded{Version=[4],Text=[In order to enforce these rules without breaking
   privacy, we cannot allow a private type that could have a particular
   overridable aspect to have a hidden definition of that aspect. There is no
@@ -1894,7 +1908,22 @@ type inherits the aspect, then a matching definition shall be specified
   aspect could not be specified on descendants in that case).]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0211-1]}
+@ChgAdded{Version=[5],Text=[If a type inherits a nonoverridable aspect from
+multiple ancestors, the value of the aspect inherited from any given ancestor
+shall be confirming of the values inherited from all other ancestors.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If more than one progenitor of a type @i<T>
+    specifies a nonoverridable aspect, they all have to specify the same
+    primitive of @i<T>. Otherwise, we'd have two different values for the
+    aspect that depend on the view of the type; that would violate the
+    definition of type aspects being the same for all views of a type.]}
+@end{Reason}
+
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0211-1]}@Comment{Just to change the paragraph number}
 @ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
@@ -2154,9 +2183,18 @@ such aspects and the legality rules for such aspects.]}]}
   an oversight in @AILink{AI=[AI12-0169-1],Text=[AI12-0169-1]} which allowed @nt{aspect_specification}s on
   an @nt{entry_body} in the first place.]}
 
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0206-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Extended the definition of
   nonoverridable aspects to cover most kinds of aspects.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0211-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a rule so that the
+  a nonoverridable aspect has to be the same for every ancestor of a type.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Removed formal parameters from the list of
+  entities that don't have any language-defined aspects, since Nonblocking
+  (see @RefSecNum{Intertask Communication}) is language-defined.]}
 
 @end{Diffword2012}
 

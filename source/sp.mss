@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2017/08/12 03:47:34 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -811,12 +811,15 @@ a protected procedure that is an interrupt handler.
 @Leading@Keepnext@;The following language-defined packages exist:
 @begin{example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0167-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key{with} System;@ChildUnit{Parent=[Ada],Child=[Interrupts]}@Chg{Version=[3],New=[
 @key{with} System.Multiprocessors;],Old=[]}
-@key[package] Ada.Interrupts @key[is]
+@key[package] Ada.Interrupts@Chg{Version=[5],New=[
+   @key[with] Nonblocking ],Old=[]}@key[is]
    @key[type] @AdaTypeDefn{Interrupt_Id} @key[is] @RI{implementation-defined};
    @key[type] @AdaTypeDefn{Parameterless_Handler} @key[is]
-      @key[access] @key[protected] @key[procedure];
+      @key[access] @key[protected] @key[procedure]@Chg{Version=[5],New=[
+      @key[with] Nonblocking => False],Old=[]};
 
 @ChgRef{Version=[1], Kind=[Deleted]}
 @Chg[New=<>,Old=<@ @;@comment{Empty paragraph to hang junk paragraph number from original RM}>]
@@ -2053,8 +2056,9 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@key[package] Ada.Task_Identification @key[is]@ChildUnit{Parent=[Ada],Child=[Task_Identification]}@Chg{Version=[2],New=[
-   @key[pragma] Preelaborate(Task_Identification);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key[package] Ada.Task_Identification@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Task_Identification]}@Chg{Version=[2],New=[
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Task_Identification);]}],Old=[]}
    @key[type] @AdaTypeDefn{Task_Id} @key[is] @key{private};@Chg{Version=[2],New=[
    @key[pragma] Preelaborable_Initialization (Task_Id);],Old=[]}
    @AdaSubDefn{Null_Task_Id} : @key{constant} Task_Id;
@@ -2062,10 +2066,12 @@ termination procedures with a task or set of tasks is defined.],Old=[]}]
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0070],ARef=[AI95-00101-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0189-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
    @key{function}  @AdaSubDefn{Image}                  (T : Task_Id) @key{return} String;
    @key[function]  @AdaSubDefn{Current_Task}     @key[return] Task_Id;@Chg{Version=[3],New=[
    @key[function]  @AdaSubDefn{Environment_Task} @key[return] Task_Id;],Old=[]}
-   @Key[procedure] @AdaSubDefn{Abort_Task}             (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id);
+   @Key[procedure] @AdaSubDefn{Abort_Task}             (T : @key[in] @Chg{New=[],Old=[@key[out] ]}Task_Id)@Chg{Version=[5],New=[
+      @key[with] Nonblocking => False],Old=[]};
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0189-1]}
    @key[function]  @AdaSubDefn{Is_Terminated}          (T : Task_Id) @key{return} Boolean;
@@ -2154,10 +2160,11 @@ as a parameter to Abort_Task,
 @Chg{Version=[5],New=[Activation_Is_Complete, ],Old=[]}Is_Terminated,
 and Is_Callable.
 
-@PDefn2{Term=[potentially blocking operation],Sec=(Abort_Task)}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0241-1]}
+@ChgDeleted{Version=[5],Text=[@PDefn2{Term=[potentially blocking operation],Sec=(Abort_Task)}
 @PDefn2{Term=[blocking, potentially],Sec=(Abort_Task)}
 Abort_Task is a potentially blocking operation
-(see @RefSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).]}
 @end{RunTime}
 
 @begin{Bounded}
@@ -2260,11 +2267,13 @@ Task_Id value that identifies the environment task.
 @begin{StaticSem}
 @Leading@Keepnext@;The following language-defined generic library package exists:
 @begin{example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key{with} Ada.Task_Identification; @key{use} Ada.Task_Identification;
 @key{generic}
    @key{type} Attribute @key{is} @key{private};
    Initial_Value : @key[in] Attribute;
-@key{package} Ada.Task_Attributes @key{is}@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
+@key{package} Ada.Task_Attributes@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada],Child=[Task_Attributes]}
 
    @key{type} @AdaTypeDefn{Attribute_Handle} @key{is} @key{access} @key{all} Attribute;
 
@@ -2598,10 +2607,11 @@ task, the execution of the program is erroneous.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key<with> Ada.Task_Identification;
 @key<with> Ada.Exceptions;
-@key<package> Ada.Task_Termination @key<is>@ChildUnit{Parent=[Ada],Child=[Task_Termination]}
-   @key<pragma> Preelaborate(Task_Termination);]}
+@key<package> Ada.Task_Termination@Chg{Version=[5],New=[],Old=[ @key<is>]}@ChildUnit{Parent=[Ada],Child=[Task_Termination]}
+   @Chg{Version=[5],New=[@key<with>],Old=[@key<pragma>]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Task_Termination);]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<type> @AdaTypeDefn{Cause_Of_Termination} @key<is> (Normal, Abnormal, Unhandled_Exception);]}

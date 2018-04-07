@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:33 $}
+@Comment{$Date: 2017/12/20 04:30:54 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -687,7 +687,6 @@ evaluation of the @nt{prefix}.
 For a @nt{selected_component} that denotes a component of a @nt{variant},
 a check is made that the values of the discriminants are such that
 the value or object denoted by the @nt<prefix> has this component.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 The exception Constraint_Error is raised if this check fails.
 
@@ -1812,36 +1811,53 @@ into a composite value of an array type, record type, or record extension.]
 @end{Intro}
 
 @begin{Syntax}
-@Syn{lhs=<aggregate>,rhs="@Syn2{record_aggregate} | @Syn2{extension_aggregate} | @Syn2{array_aggregate}"}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
+@Syn{lhs=<aggregate>,rhs="@Syn2{record_aggregate} | @Syn2{extension_aggregate} | @Syn2{array_aggregate}@Chg<Version=[5],New=[ | @Syn2{delta_aggregate}],Old=[]>"}
 @end{Syntax}
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
 @PDefn2{Term=[expected type],Sec=(aggregate)}
-The expected type for an @nt{aggregate} shall be a
-single @Chg{Version=[2],New=[],Old=[nonlimited ]}array
-type, record type, or record extension.
+@Chg{Version=[5],New=[The expected type for a @nt{delta_aggregate} shall be a
+single array type, or a single descendant of a record type or of a record
+extension. ],Old=[]}The expected type for
+@Chg{Version=[5],New=[any other],Old=[an]} @nt{aggregate} shall be a single
+@Chg{Version=[2],New=[],Old=[nonlimited ]}array type, record type, or
+record extension.
 @begin{Discussion}
-See @RefSec{The Context of Overload Resolution}
-for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
+  See @RefSec{The Context of Overload Resolution}
+  for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
 @end{Discussion}
 @begin{Ramification}
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
-@ChgAdded{Version=[3],Text=[There are additional rules for each kind of
-aggregate. These aggregate rules are additive; a legal expression needs to
-satisfy all of the applicable rules. That means the rule given here must be
-satisfied even when it is syntactically possible to tell which specific kind of
-aggregate is being used.]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
+  @ChgAdded{Version=[3],Text=[There are additional rules for each kind of
+  aggregate. These aggregate rules are additive; a legal expression needs to
+  satisfy all of the applicable rules. That means the rule given here must be
+  satisfied even when it is syntactically possible to tell which specific kind of
+  aggregate is being used.]}
 @end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[The messiness here is needed to allow any record
+  type with any visible components to be used in a @nt{delta_aggregate} while
+  keeping exact compatibility for other kinds of aggregates. It would have been
+  cleaner to use a single rule for all @nt{aggregate}s, but that would have
+  caused a few unlikely @nt{aggregate}s that are legal in Ada 95, Ada 2005,
+  and Ada 2012 to fail to resolve in Ada 2020.]}
+@end{Reason}
 @end{Resolution}
 
 @begin{Legality}
-An @nt{aggregate} shall not be of a class-wide type.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
+@Chg{Version=[5],New=[A @nt{record_aggregate} or
+@nt{extension_aggregate}],Old=[An @nt{aggregate}]}
+shall not be of a class-wide type.
 @begin{Ramification}
-When the
-expected type in some context is class-wide, an aggregate has to
-be explicitly qualified by the specific type of value to be created,
-so that the expected type for the aggregate itself is specific.
+  When the
+  expected type in some context is class-wide, an aggregate has to
+  be explicitly qualified by the specific type of value to be created,
+  so that the expected type for the aggregate itself is specific.
 @end{Ramification}
 @begin{Discussion}
   We used to disallow @nt<aggregate>s of a type with unknown
@@ -1853,6 +1869,14 @@ so that the expected type for the aggregate itself is specific.
   have unknown discriminants are private types, private extensions,
   and types derived from them).
 @end{Discussion}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[We don't mention @nt{delta_aggregate}s, as those
+  can get the specific type from the object represented by the
+  @Syni{base_}@nt{expression} (possibly at runtime). We don't mention
+  @nt{array_aggregate}s, as those cannot even be of a tagged type, so
+  being class-wide is impossible.]}
+@end{Reason}
 
 @end{Legality}
 
@@ -1967,6 +1991,11 @@ will work (see @RefSecNum{Assignment and Finalization}).
   be of a limited type.]}
 @end{Extend95}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[Made wording changes for @nt{delta_aggregate}s.]}
+@end{DiffWord2012}
+
 
 @LabeledSubClause{Record Aggregates}
 
@@ -2046,6 +2075,7 @@ The presence of a @key(with) is used to resolve between
 a @nt{record_aggregate} and an @nt{extension_aggregate}.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
 @Defn2{Term=[needed component],
   Sec=(@nt<record_aggregate> @nt<record_component_association_list>)}
 For the @nt<record_@!component_@!association_@!list>
@@ -2056,8 +2086,16 @@ an @nt<extension_aggregate>,
 only those components not determined by the ancestor expression or
 subtype are needed
 (see @RefSecNum{Extension Aggregates}).]
-Each @nt{selector_@!name} in a @nt{record_@!component_@!association} shall denote
-a needed component @Redundant[(including possibly a discriminant)].
+Each @Chg{Version=[5],New=[@Syni<component_>@nt{selector_@!name}],
+Old=[@nt{selector_@!name}]} in a
+@nt{record_@!component_@!association}@Chg{Version=[5],New=[
+of a @nt{record_aggregate} or @nt{extension_aggregate}],Old=[]} shall denote
+a needed component @Redundant[(including possibly a
+discriminant)].@Chg{Version=[5],New=[ Each @Syni{component_}@nt{selector_name}
+in a @nt{record_component_association} of a @nt{record_delta_aggregate}
+(see @RefSecNum{Delta Aggregates}) shall
+denote a nondiscriminant component of the type of the @nt{aggregate}.],Old=[]}
+
 @begin{Ramification}
 For the association list of a @nt{record_aggregate},
 @lquotes@;needed components@rquotes@; includes every component of the composite value, but
@@ -2069,8 +2107,7 @@ determines which @nt<variant> is chosen, and hence which components
 are needed.
 
 If an extension defines a new @nt{known_discriminant_part}, then all of
-its discriminants are needed in the component association list of
-an extension
+its discriminants are needed in the component association list of an extension
 aggregate for that type, even if the discriminants have the same
 names and types as discriminants of the type of the ancestor
 expression.
@@ -2079,6 +2116,17 @@ the @nt<record_@!component_@!association_@!list>
 are well defined, and that discriminants that govern @nt{variant_part}s
 can be given by static expressions.
 @end{Ramification}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We don't define @ldquote@;needed@rdquote
+  for @nt{record_delta_aggregate}s so that there is no completeness requirement.
+  But that means that we need to ensure that the rules using
+  @ldquote@;needed@rdquote doesn't appear to apply to
+  @nt{record_delta_aggregate}s, and we also need @LegalityTitle to prevent
+  giving the same component twice and giving components from two different
+  variants.]}
+@end{Reason}
 
 @Leading@Keepnext@PDefn2{Term=[expected type],
   Sec=(record_component_association expression)}
@@ -2124,11 +2172,16 @@ then it shall be a descendant of a record type, through one
 or more record extensions (and no private extensions).
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0016-1]}
-@Chg{Version=[3],New=[The reserved words @key[null record] may appear only if],
-Old=[If]} there are no components needed in a given
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[A @nt{record_component_association_list} shall
+be],Old=[The reserved words]} @key[null record] @Chg{Version=[5],New=[only if
+the list occurs in a @nt{record_aggregate} or @nt{extension_aggregate}, and],
+Old=[only if]}],Old=[If]} there are no components needed
+@Chg{Version=[5],New=[for that list],Old=[in a given
 @nt<record_@!component_@!association_@!list>@Chg{Version=[3],New=[],Old=[,
 then the reserved words @key(null record) shall appear rather
-than a list of @nt<record_@!component_@!association>s]}.
+than a list of @nt<record_@!component_@!association>s]}]}.
+
 @begin{Ramification}
   For example, "(@key(null record))" is a @nt<record_aggregate>
   for a null record type. Similarly, "(T'(A) @key(with null record))" is
@@ -2146,18 +2199,23 @@ than a list of @nt<record_@!component_@!association>s]}.
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0199-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0046-1]}
-Each @nt<record_component_association>@Chg{Version=[2],New=[ other than an
-@key{others} choice with a <>],Old=[]} shall have at least
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
+@Chg{Version=[5],New=[For a @nt{record_aggregate} or @nt{extension_aggregate},
+each],Old=[Each]} @nt<record_component_association>@Chg{Version=[2],New=[ other
+than an @key{others} choice with a <>],Old=[]} shall have at least
 one associated component, and each needed component
 shall be associated with exactly
-one @nt<record_@!component_@!association>.
+one @nt<record_@!component_@!association>. @Chg{Version=[5],New=[For a
+@nt{record_delta_aggregate}, each @SynI{component_}@nt{selector_name} of each
+@nt{component_choice_list} shall denote a distinct nondiscriminant component of
+the type of the aggregate.],Old=[
 If a @nt<record_@!component_@!association> @Chg{Version=[2],New=[with an
 @nt{expression} ],Old=[]}has two or more associated components, all of them
 shall be of the same type@Chg{Version=[3],New=[, or all of them shall be of
 anonymous access types whose subtypes
 statically match],Old=[]}.@Chg{Version=[4],New=[
 In addition, @LegalityTitle are enforced separately for each associated
-component.],Old=[]}
+component.],Old=[]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
@@ -2176,15 +2234,12 @@ component.],Old=[]}
   That means that (@key{others} => <>) always represents a default-initialized
   record or array value.],Old=[]}
 @end{Reason}
+
 @begin{Discussion}
-  @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0046-1]}
-  @ChgAdded{Version=[4],Type=[Leading],Text=[]}@ChgNote{Fake to get conditional "leading"}
-  AI83-00244 also requires that the @nt{expression} shall
-  be legal for each associated component. @Chg{Version=[4],New=[Ada 95
-  omitted this wording, as it was thought that all cases of
-  difference had been eliminated. That probably was true, but Ada 2005
-  reintroduced cases where the types match but the legality differs.
-  For example:],Old=[This is
+  @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0046-1]}
+  @ChgDeleted{Version=[4],Text=[AI83-00244 also requires that the
+  @nt{expression} shall
+  be legal for each associated component. This is
   because even though two components have the same type, they might have
   different subtypes. Therefore, the legality of the
   @nt<expression>, particularly if it is an array aggregate,
@@ -2195,23 +2250,6 @@ component.],Old=[]}
   See @RefSecNum{Array Aggregates}. This was the only case (that we know of)
   where a subtype provided by context affected the legality
   of an @nt{expression}.]}
-
-@begin{Example}
-@ChgRef{Version=[4],Kind=[Added]}
-@ChgAdded{Version=[4],Text=[@key[type] Rec (D : @key[access] Integer) @key[is record]
-          F : @key[access] Integer;
-@key[end record];]}
-
-@ChgRef{Version=[4],Kind=[Added]}
-@ChgAdded{Version=[4],Text=[...
-X : @key[aliased] Integer;
-R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
-@end{Example}
-
-  @ChgRef{Version=[4],Kind=[Added]}
-  @ChgAdded{Version=[4],Text=[There are additional ways for this to happen;
-  because of cases like the above we require that the @LegalityTitle are checked
-  individually for each associated component.]}
 @end{Discussion}
 @begin{Ramification}
   The rule that requires at least one associated component for
@@ -2226,9 +2264,44 @@ R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
   nor specified twice.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0046-1],ARef=[AI12-0127-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{record_component_association} with an
+@nt{expression} has two or more associated components, all of them shall be of
+the same type, or all of them shall be of anonymous access types whose
+subtypes statically match. In addition, @LegalityTitle are enforced separately
+for each associated component.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0046-1]}
+  @ChgAdded{Version=[4],Type=[Leading],Text=[AI83-00244 also requires that the @nt{expression} shall
+  be legal for each associated component. Ada 95
+  omitted this wording, as it was thought that all cases of
+  difference had been eliminated. That probably was true, but Ada 2005
+  reintroduced cases where the types match but the legality differs.
+  For example:]}
+
+@begin{Example}
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[@key[type] Rec (D : @key[access] Integer) @key[is record]
+          F : @key[access] Integer;
+@key[end record];]}
+
+@ChgRef{Version=[4],Kind=[AddedNormal]}
+@ChgAdded{Version=[4],Text=[...
+X : @key[aliased] Integer;
+R : Rec := (D | F => X'Access); -- @examcom<Legal for D, illegal for F>]}
+@end{Example}
+
+  @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgAdded{Version=[4],Text=[There are additional ways for this to happen;
+  because of cases like the above we require that the @LegalityTitle are checked
+  individually for each associated component.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0220-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1]}
-@Chg{Version=[5],New=[If a @nt{variant_part} @i{P} is nested within a
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0086-1],ARef=[AI12-0127-1]}
+@Chg{Version=[5],New=[For a @nt{record_aggregate} or @nt{extension_aggregate},
+if a @nt{variant_part} @i{P} is nested within a
 @nt{variant} @i{V} that is not selected by the discriminant value governing
 the @nt{variant_part} enclosing @i{V}, then there is no restriction on the
 discriminant governing @i{P}. Otherwise, the value of the],
@@ -2266,6 +2339,39 @@ than <>.]}
 but <> means uninitialized for a discrete type unless the component has a
 default value.]}
 @end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{record_component_association}
+of the @nt{record_component_association_list}
+of a @nt{record_delta_aggregate} shall not:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[use the compound delimiter <> (box) rather than
+an @nt{expression};]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[have an @nt{expression} of a limited type;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[omit the @nt{component_choice_list}; or]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[A @nt{record_delta_aggregate} cannot use
+  positional notation; all choices shall be named choices.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[have a @nt{component_choice_list} that is an
+@key[others] choice.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+@ChgAdded{Version=[5],Text=[For a @nt{record_delta_aggregate}, no two
+@SynI{component_}@nt{selector_name}s shall denote components declared within
+different @nt{variant}s of the same @nt{variant_part}.]}
 
 @end{Legality}
 
@@ -2463,6 +2569,10 @@ a record aggregate. Now we do.
   (16.c) appeared to say that this was not necessary, and since we explicitly
   state this sort of thing for generic instances, it seemed better to be
   explicit.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[Made wording changes for @nt{delta_aggregate}s.]}
+
 @end{DiffWord2012}
 
 
@@ -2772,9 +2882,14 @@ we answer it explicitly.}
   | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>)],Old=[]}"}
 
 
-@Syn{lhs=<named_array_aggregate>,rhs="
-    (@Syn2{array_component_association} {, @Syn2{array_component_association}})"}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
+@Syn{lhs=<named_array_aggregate>,rhs="@Chg{Version=[5],New=[(@Syn2{array_component_association_list})],Old=[
+    (@Syn2{array_component_association} {, @Syn2{array_component_association}})]}"}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<array_component_association_list>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[
+    @Syn2{array_component_association} {, @Syn2{array_component_association}}],Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
@@ -2922,6 +3037,12 @@ defines an applicable index constraint:
   is being used within a larger aggregate.
   @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[For the @SynI<base_>@nt{expression} of a
+  @nt{delta_aggregate}, if the nominal subtype of the @nt{delta_aggregate} is
+  a constrained array subtype, the applicable index constraint is the
+  constraint of the subtype;]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0147-1]}
   For a parenthesized @nt{expression}, the
   applicable index constraint is that, if any, defined for the
@@ -2949,7 +3070,7 @@ no applicable index constraint is defined.
 @end(Reason)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1],ARef=[AI12-0127-1]}
 The @nt{discrete_choice_list} of an
 @nt{array_component_association} @Chg{Version=[5],New=[(including an
 @nt{iterated_component_association}) ],Old=[]}is allowed to
@@ -2958,12 +3079,22 @@ have a @nt{discrete_choice} that is a nonstatic
 or that is a @Chg{Version=[3],New=[@nt{subtype_indication} or @nt{range}],
 Old=[@nt{discrete_range}]} that defines a nonstatic or
 null range, only if it is the single @nt{discrete_choice} of
-its @nt{discrete_choice_list}, and there is only one
-@nt{array_component_association} in the @nt<array_aggregate>.
+its @nt{discrete_choice_list}, and @Chg{Version=[5],New=[either ],Old=[]}there
+is only one @nt{array_component_association} in the
+@Chg{Version=[5],New=[enclosing @nt{array_component_association_list} or the
+enclosing @nt{aggregate} is an @nt{array_delta_aggregate}@Redundant[, not an
+@nt{array_aggregate}]],Old=[@nt<array_aggregate>]}.
+
 @begin{Discussion}
-We now allow a nonstatic @key(others) choice even if there are
-other array component expressions as well.
+  We now allow a nonstatic @key(others) choice even if there are
+  other array component expressions as well.
 @end{Discussion}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[We allow multiple dynamic choices in
+  @nt{array_delta_aggregate}s, but only one dynamic choice per association even
+  in that case.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
 In a @nt<named_array_aggregate>
@@ -3337,7 +3468,249 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   Added expression functions to the contexts that provide an applicable
   index constraint, because expression functions are handled separately in
   static semantics and legality rules.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[Made syntax and wording changes for
+    @nt{delta_aggregate}s.]}
 @end{DiffWord2012}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Delta Aggregates]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[A (record or array) delta aggregate yields a
+composite value resulting from starting with a copy of another value of the same
+type and then subsequently assigning to some (but typically not all) components
+of the copy.@Defn{delta aggregate}]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<delta_aggregate>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[@Syn2{record_delta_aggregate} | @Syn2{array_delta_aggregate}],Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<record_delta_aggregate>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[
+    (@SynI<base_>@Syn2{expression} @key[with] @key[delta] @Syn2{record_component_association_list})],Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<array_delta_aggregate>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[
+    (@SynI<base_>@Syn2{expression} @key[with] @key[delta] @Syn2{array_component_association_list})],Old=<>}"}
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[The expected type for a @nt{record_delta_aggregate}
+shall be a single descendant of a record type or record
+extension.@PDefn2{Term=[expected type],Sec=(record delta aggregate)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[The expected type for an @nt{array_delta_aggregate}
+shall be a single array type.@PDefn2{Term=[expected type],Sec=(array delta aggregate)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[The expected type for the
+@SynI[base_]@nt{expression} of any @nt{delta_aggregate} is the type of the
+enclosing @nt{delta_aggregate}.@PDefn2{Term=[expected type],Sec=(base expression of a delta aggregate)}
+@PDefn2{Term=[expected type],Sec=(delta aggregate base expression)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[The @ResolutionTitle and
+@LegalityTitle for each @nt{record_component_association} of a
+@nt{record_delta_aggregate} are as defined in @RefSecNum{Record Aggregates}.]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[For an @nt{array_delta_aggregate}, the expected
+type for each @nt{discrete_choice} in an @nt{array_component_association} is
+the index type of the type of the @nt{delta_aggregate}.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[The expected type of the
+@nt{expression} in an @nt{array_component_association} is defined as for
+an @nt{array_component_association} occurring within an @nt{array_aggregate}
+of the type of the @nt{delta_aggregate}.]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[For an @nt{array_delta_aggregate}, the
+@nt{array_component_association} shall not use the box symbol <>, and the
+@nt{discrete_choice} shall not be @key[others].]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[For an @nt{array_delta_aggregate}, the
+dimensionality of the type of the @nt{delta_aggregate} shall be 1.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[For an @nt{array_delta_aggregate}, the
+@SynI<base_>@nt{expression} and each @nt{expression} in
+every @nt{array_component_association} shall be of a nonlimited type.]}
+
+@begin(Ramification)
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The @SynI{base_}@nt{expression} of a
+  @nt{record_delta_aggregate} may be of a limited type (for example a record
+  with limited components), as it is not restricted. A rule in
+  @RefSecNum{Record Aggregates} ensures we do not assign to a limited
+  component. We do not allow any part of an @nt{array_delta_aggregate} to be
+  of a limited type, even the @SynI{base_}@nt{expression}, as this is a useless
+  construct (you would not be able to update anything as the components
+  necessarily are also limited except in pathological cases).]}
+@end(Ramification)
+@end{Legality}
+
+@begin{Runtime}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Text=[The evaluation of a @nt{delta_aggregate} begins with
+evaluating the @SynI<base_>@nt{expression} of the @nt{delta_aggregate} and using
+that value to create and initialize the anonymous object of the @nt{aggregate}.
+The bounds of the anonymous object of an @nt{array_delta_aggregate} and the
+discriminants and tag (if any) of the anonymous object of a
+@nt{record_delta_aggregate} are those of the @SynI{base_}@nt{expression}.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is the same anonymous object as described in
+  @RefSec{Assignment and Finalization}; in particular, it might be required
+  to be built in place.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This requires that the underlying tag (if any)
+  associated with the @nt{delta_aggregate} is that of the
+  @SynI{base_}@nt{expression} in the @nt{delta_aggregate} and not that of the
+  nominal type of the @SynI{base_}@nt{expression} in the
+  @nt{delta_aggregate}.]}
+@end{Ramification}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The anonymous object associated with the
+  evaluation of a @nt{delta_aggregate} begins its life as a variable, not a
+  constant (@RefSecNum{Objects and Named Numbers} notwithstanding). This must be
+  the case because the object is initialized and then subsequently modified.
+  After evaluation of the @nt{delta_aggregate} is complete, the object is a
+  constant object. This is similar to the way that an extended return statement
+  can provide a variable view of an object that will eventually be a constant
+  object after the function returns its result.]}
+@end{Honest}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a @nt{record_delta_aggregate},
+for each component associated with each @nt{record_component_association}
+(in an unspecified order):]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[if the associated component belongs to a
+    @nt{variant}, a check is made that the values of the discriminants are such
+    that the anonymous object has this component.
+    @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+    The exception Constraint_Error is raised if this check
+    fails.@IndexCheck{Discriminant_Check}]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the @nt{expression} of the
+    @nt{record_component_association} is evaluated, converted to the nominal
+    subtype of the associated component, and assigned to the component of the
+    anonymous object.]}
+
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For an @nt{array_delta_aggregate},
+for each @nt{discrete_choice} of each @nt{array_component_association} (in the
+order given in the enclosing @nt{discrete_choice_list} and
+@nt{array_component_association_list}, respectively) the
+@nt{discrete_choice} is evaluated; for each represented index value (in
+ascending order, if the @nt{discrete_choice} represents a range):]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the index value is converted to the index type
+    of the array type.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[a check is made that the index value belongs to
+    the index range of the anonymous object of the @nt{aggregate};
+    @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+    Constraint_Error is raised if this check fails.@IndexCheck{Index_Check}]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the component @nt{expression} is evaluated,
+    converted to the array component subtype, and assigned to the component
+    of the anonymous object identified by the index value.]}
+@end{Itemize}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Unlike other @nt{aggregate}s, an
+    @nt{array_delta_aggregate} is evaluated in the order that it is written.
+    This is necessary to get deterministic behavior, as (unlike other
+    @nt{aggregate}s, including @nt{record_delta_aggregate}s) there is no
+    requirement that the specified components be distinct. As such, the
+    order requirement ensures that every @nt{array_delta_aggregate} has
+    a well-defined result, even if the same component is specified multiple
+    times.]}
+@end{Reason}
+
+@end{Runtime}
+
+@begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[Simple use in a
+postcondition:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[procedure] Twelfth (D : @key[in out] Date) --@Examcom{ see @RefSecNum{Record Types} for type Date}
+   @key[with] Post => D = (D'Old @key[with delta] Day => 12);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[procedure] The_Answer (V : @key[in out] Vector; A, B : @key[in] Integer) --@Examcom{ see @RefSecNum{Array Types} for type Vector}
+   @key[with] Post => V = (V'Old @key[with delta] A .. B => 42.0, V'First => 0.0);]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
+be non-trivial:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[New_Cell : Cell := (Min_Cell (Link) @key[with delta] Value => 42);
+   --@Examcom{ see @RefSecNum{Incomplete Type Declarations} for Cell and Link; @RefSecNum{Subprogram Declarations} for Min_Cell}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[A1 : Vector := ((1.0, 2.0, 3.0) @key[with delta] Integer (Random * 3.0) => 14.2);
+   --@Examcom{ see @RefSecNum{Array Types} for declaration of type Vector}
+   --@Examcom{ see @RefSecNum{Subprogram Declarations} for declaration of Random}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Tomorrow := ((Yesterday @key[with delta] Day => 12) @key[with delta] Month => Apr); --@Examcom{ see @RefSecNum{Record Types}}]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression may
+also be class-wide:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Translate (P : Point'Class; X, Y : Float) @key[return] Point'Class @key[is]
+   (P @key[with delta] X => P.X + X,
+                 Y => P.Y + Y); --@Examcom{ see @RefSecNum{Tagged Types and Type Extensions} for declaration of type Point}]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Delta aggregates
+  are new.]}
+@end{Extend2012}
 
 
 @LabeledClause{Expressions}

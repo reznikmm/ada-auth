@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.122 $ $Date: 2016/11/24 02:33:53 $ $Author: randy $ }
+@comment{ $Revision: 1.123 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2016/11/24 02:33:53 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -479,17 +479,20 @@ language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0166-1]}
-@ChgAdded{Version=[2],Text=[@key<package> Ada.Dispatching @key<is>@ChildUnit{Parent=[Ada],Child=[Dispatching]}
-  @key<pragma> @Chg{Version=[3],New=[Preelaborate],Old=[Pure]}(Dispatching);@Chg{Version=[3],New=[],Old=[
-  @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[@key[package] Ada.Dispatching@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Dispatching]}
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} @Chg{Version=[3],New=[Preelaborate],Old=[Pure]}@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Dispatching);]}@Chg{Version=[3],New=[],Old=[
+  @AdaExcDefn{Dispatching_Policy_Error} : @key[exception];
 @key<end> Ada.Dispatching;]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
-@ChgAdded{Version=[3],Text=[  @key<procedure> @AdaSubDefn{Yield};]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[  @key[procedure] @AdaSubDefn{Yield}@Chg{Version=[5],New=[
+   @key[with] Nonblocking => False],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1]}
-@ChgAdded{Version=[3],Text=[  @AdaExcDefn{Dispatching_Policy_Error} : @key<exception>;
-@key<end> Ada.Dispatching;]}
+@ChgAdded{Version=[3],Text=[  @AdaExcDefn{Dispatching_Policy_Error} : @key[exception];
+@key[end] Ada.Dispatching;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -581,6 +584,7 @@ if we count the idle task.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgDeleted{Version=[2],Text=[@Defn{preemptible resource}
 A preemptible resource is a resource that while allocated
 to one task can be allocated (temporarily) to another
@@ -592,8 +596,8 @@ is a nonpreemptible resource.
 When a higher-priority task is dispatched to the processor, and the previously
 running task is placed on the appropriate ready queue, the latter task
 is said to be @i{preempted}.]}
-@ChgAdded{Version=[3],Text=[A call of Yield is a task dispatching point. Yield
-is a potentially blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+@ChgAdded{Version=[3],Text=[A call of Yield is a task dispatching point.@Chg{Version=[5],New=[],Old=[ Yield
+is a potentially blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions}).]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[A processor that is executing a task is available
@@ -1258,11 +1262,12 @@ Old=[]}]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[@key<package> Ada.Dispatching.Non_Preemptive @key<is>@ChildUnit{Parent=[Ada.Dispatching],Child=[Non_Preemptive]}
-  @key<pragma> Preelaborate(Non_Preemptive);
-  @key<procedure> @AdaSubDefn{Yield_To_Higher};
-  @key<procedure> @AdaSubDefn{Yield_To_Same_Or_Higher} @key<renames> Yield;
-@key<end> Ada.Dispatching.Non_Preemptive;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Dispatching.Non_Preemptive@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Dispatching],Child=[Non_Preemptive]}
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Non_Preemptive);]}
+  @key[procedure] @AdaSubDefn{Yield_To_Higher};
+  @key[procedure] @AdaSubDefn{Yield_To_Same_Or_Higher} @key[renames] Yield;
+@key[end] Ada.Dispatching.Non_Preemptive;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0166-1],ARef=[AI05-0264-1]}
@@ -1449,9 +1454,11 @@ Old=[]}]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
 @key{with} Ada.Real_Time;
-@key{package} Ada.Dispatching.Round_Robin @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[Round_Robin]}
+@key{package} Ada.Dispatching.Round_Robin@Chg{Version=[5],New=[
+  @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[Round_Robin]}
   @AdaObjDefn{Default_Quantum} : @key{constant} Ada.Real_Time.Time_Span :=
              @RI[implementation-defined];
   @key{procedure} @AdaSubDefn{Set_Quantum} (Pri     : @key{in} System.Priority;
@@ -1710,9 +1717,11 @@ Old=[]}]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Real_Time;
 @key{with} Ada.Task_Identification;
-@key{package} Ada.Dispatching.EDF @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
+@key{package} Ada.Dispatching.EDF@Chg{Version=[5],New=[
+  @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
   @key{subtype} @AdaSubtypeDefn{Name=[Deadline],Of=[Time]} @key{is} Ada.Real_Time.Time;
   @AdaObjDefn{Default_Deadline} : @key{constant} Deadline :=
               Ada.Real_Time.Time_Last;
@@ -1721,7 +1730,8 @@ language-defined library package exists:]}
               Ada.Task_Identification.Current_Task);
   @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline} (
               Delay_Until_Time : @key{in} Ada.Real_Time.Time;
-              Deadline_Offset : @key{in} Ada.Real_Time.Time_Span);
+              Deadline_Offset : @key{in} Ada.Real_Time.Time_Span)@Chg{Version=[5],New=[
+     @key{with} Nonblocking => False],Old=[]};
   @key{function} @AdaSubDefn{Get_Deadline} (T : Ada.Task_Identification.Task_Id :=
               Ada.Task_Identification.Current_Task) @key{return} Deadline;
 @key{end} Ada.Dispatching.EDF;]}
@@ -2628,7 +2638,7 @@ aspect Max_Entry_Queue_Length is Integer.@AspectDefn{Max_Entry_Queue_Length}]}
 
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[If directly specified, the aspect_definition shall
+@ChgAdded{Version=[5],Text=[@\If directly specified, the aspect_definition shall
 be a static expression no less than -1. If not specified, the aspect has value
 -1 (representing no additional restriction on queue length).]}
 @end{Description}
@@ -2753,10 +2763,11 @@ how the base priority of a task can be modified or queried at run time.]
 @Leading@Keepnext@;The following language-defined library package exists:
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key[with] System;
 @key[with] Ada.Task_Identification; @RI{-- See @RefSecNum[The Package Task_Identification]}
-@key[package] Ada.Dynamic_Priorities @key[is]@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}@Chg{Version=[2],New=[
-    @key[pragma] Preelaborate(Dynamic_Priorities);],Old=[]}
+@key[package] Ada.Dynamic_Priorities@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Dynamic_Priorities]}@Chg{Version=[2],New=[
+    @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Dynamic_Priorities);]}],Old=[]}
 
     @key[procedure] @AdaSubDefn{Set_Priority}(Priority : @key[in] System.Any_Priority;
                            T : @key[in] Ada.Task_Identification.Task_Id :=
@@ -3754,7 +3765,9 @@ a high-resolution, monotonic clock package.]
 @begin{StaticSem}
 @Leading@;The following language-defined library package exists:
 @begin{example}
-@key[package] Ada.Real_Time @key[is]@ChildUnit{Parent=[Ada],Child=[Real_Time]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key[package] Ada.Real_Time@Chg{Version=[5],New=[
+  @key[with] Nonblocking],Old=[]} @key[is]@ChildUnit{Parent=[Ada],Child=[Real_Time]}
 
   @key[type] @AdaTypeDefn{Time} @key[is] @key[private];
   @AdaObjDefn{Time_First} : @key[constant] Time;
@@ -4342,14 +4355,17 @@ queues.]
 @Leading@;The following language-defined package exists:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
-@key{package} Ada.Synchronous_Task_Control @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}@Chg{Version=[2],New=[
-  @key[pragma] Preelaborate(Synchronous_Task_Control);],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key{package} Ada.Synchronous_Task_Control@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada],Child=[Synchronous_Task_Control]}@Chg{Version=[2],New=[
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Synchronous_Task_Control);]}],Old=[]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
   @key{type} @AdaTypeDefn{Suspension_Object} @key{is} @key{limited} @key{private};
   @key{procedure} @AdaSubDefn{Set_True}(S : @key{in} @key{out} Suspension_Object);
   @key{procedure} @AdaSubDefn{Set_False}(S : @key{in} @key{out} Suspension_Object);
   @key{function} @AdaSubDefn{Current_State}(S : Suspension_Object) @key{return} Boolean;
-  @key{procedure} @AdaSubDefn{Suspend_Until_True}(S : @key{in} @key{out} Suspension_Object);
+  @key{procedure} @AdaSubDefn{Suspend_Until_True}(S : @key{in} @key{out} Suspension_Object)@Chg{Version=[5],New=[
+     @key[with] Nonblocking => False],Old=[]};
 @key{private}
      ... -- @RI{not specified by the language}
 @key{end} Ada.Synchronous_Task_Control;
@@ -4366,10 +4382,14 @@ limited record type.@end{implnote}
 exists:]}
 @begin{example}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1]}
-@ChgAdded{Version=[3],Text=[@key{package} Ada.Synchronous_Task_Control.EDF @key{is}@ChildUnit{Parent=[Ada.Synchronous_Task_Control],Child=[EDF]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[@b{with} Ada.Real_Time;
+],Old=[]}@key{package} Ada.Synchronous_Task_Control.EDF@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Synchronous_Task_Control],Child=[EDF]}
    @key{procedure} @AdaSubDefn{Suspend_Until_True_And_Set_Deadline}
       (S  : @key{in out} Suspension_Object;
-       TS : @key{in}     Ada.Real_Time.Time_Span);
+       TS : @key{in}     Ada.Real_Time.Time_Span)@Chg{Version=[5],New=[
+      @key[with] Nonblocking => False],Old=[]};
 @key{end} Ada.Synchronous_Task_Control.EDF;]}
 @end{example}
 
@@ -4406,22 +4426,24 @@ state of the object S is @Chg{Version=[2],New=[True],Old=[true]}; at that
 point the task becomes ready
 and the state of the object becomes @Chg{Version=[2],New=[False],Old=[false]}.
 
-@PDefn2{Term=[potentially blocking operation],Sec=(Suspend_Until_True)}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@Chg{Version=[5],New=[],Old=[@PDefn2{Term=[potentially blocking operation],Sec=(Suspend_Until_True)}
 @PDefn2{Term=[blocking, potentially],Sec=(Suspend_Until_True)}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-Program_Error is raised upon calling Suspend_Until_True if another
-task is already waiting on that suspension object.
+]}Program_Error is raised upon calling Suspend_Until_True if another
+task is already waiting on that suspension object.@Chg{Version=[5],New=[],Old=[
 Suspend_Until_True is a potentially blocking operation
-(see @RefSecNum{Protected Subprograms and Protected Actions}).
+(see @RefSecNum{Protected Subprograms and Protected Actions}).]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0168-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[The procedure Suspend_Until_True_And_Set_Deadline
 blocks the calling task until the state of the object S is True; at that point
 the task becomes ready with a deadline of Ada.Real_Time.Clock + TS, and the
 state of the object becomes False. Program_Error is raised upon calling
 Suspend_Until_True_And_Set_Deadline if another task is already waiting on that
-suspension object. Suspend_Until_True_And_Set_Deadline is a potentially blocking
-operation.]}
+suspension object.@Chg{Version=[5],New=[],Old=[ Suspend_Until_True_And_Set_Deadline
+is a potentially blocking operation.]}]}
 @end{RunTime}
 
 @begin{Bounded}
@@ -4485,8 +4507,9 @@ a specified count value.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[package] Ada.Synchronous_Barriers @key{is}@ChildUnit{Parent=[Ada],Child=[Synchronous_Barriers]}
-   @key[pragma] Preelaborate(Synchronous_Barriers);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Synchronous_Barriers@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Synchronous_Barriers]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Synchronous_Barriers);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Barrier_Limit],Of=[Positive]} @key[is] Positive @key[range] 1 .. @RI<implementation-defined>;]}
@@ -4497,8 +4520,10 @@ Text=[The value of Barrier_Limit'Last in Synchronous_Barriers.]}]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Synchronous_Barrier} (Release_Threshold : Barrier_Limit) @key[is limited private];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Wait_For_Release} (The_Barrier : @key[in out] Synchronous_Barrier;
-                               Notified    :    @key[out] Boolean);]}
+                               Notified    :    @key[out] Boolean)@Chg{Version=[5],New=[
+      @key[with] Nonblocking => False],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[private]
@@ -4542,8 +4567,10 @@ aborted when the tasks waiting on the object are released.]}
 Text=[When an aborted task that is waiting on a Synchronous_Barrier is aborted.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0174-1]}
-@ChgAdded{Version=[3],Text=[Wait_For_Release is a potentially blocking operation
-(see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Wait_For_Release is
+a potentially blocking operation
+(see @RefSecNum{Protected Subprograms and Protected Actions}).]}]}
 @end{Runtime}
 
 @begin{Bounded}
@@ -4579,9 +4606,10 @@ It uses a conceptual @i{held priority} value to represent the task's
 @Leading@;The following language-defined library package exists:
 @begin{example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00362-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key{with} Ada.Task_Identification;
-@key{package} Ada.Asynchronous_Task_Control @key{is}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}@Chg{Version=[2],New=[
-  @key[pragma] Preelaborate(Asynchronous_Task_Control);],Old=[]}
+@key{package} Ada.Asynchronous_Task_Control@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{parent=[Ada],Child=[Asynchronous_Task_Control]}@Chg{Version=[2],New=[
+  @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Asynchronous_Task_Control);]}],Old=[]}
   @key{procedure} @AdaSubDefn{Hold}(T : @key[in] Ada.Task_Identification.Task_Id);
   @key{procedure} @AdaSubDefn{Continue}(T : @key[in] Ada.Task_Identification.Task_Id);
   @key{function} @AdaSubDefn{Is_Held}(T : Ada.Task_Identification.Task_Id)
@@ -5193,9 +5221,11 @@ describes a language-defined package to measure execution time.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Task_Identification;
 @key{with} Ada.Real_Time; @key{use} Ada.Real_Time;
-@key{package} Ada.Execution_Time @key{is}@ChildUnit{Parent=[Ada],Child=[Execution_Time]}]}
+@key{package} Ada.Execution_Time@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada],Child=[Execution_Time]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{CPU_Time} @key{is private};
@@ -5468,8 +5498,10 @@ amount of CPU time.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} System;
-@key{package} Ada.Execution_Time.Timers @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Timers]}]}
+@key{package} Ada.Execution_Time.Timers@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Timers]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer} (T : @key{not null access constant}
@@ -5477,8 +5509,10 @@ language-defined library package exists:]}
       @key{tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Timer_Handler} @key{is}
-      @key{access protected procedure} (TM : @key{in out} Timer);]}
+      @key{access protected procedure} (TM : @key{in out} Timer)@Chg{Version=[5],New=[
+      @key{with} Nonblocking => False],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{Min_Handler_Ceiling} : @key{constant} System.Any_Priority :=
@@ -5704,9 +5738,11 @@ language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0169-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} System;@Chg{Version=[3],New=[
 @key{with} System.Multiprocessors;],Old=[]}
-@key{package} Ada.Execution_Time.Group_Budgets @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
+@key{package} Ada.Execution_Time.Group_Budgets@Chg{Version=[5],New=[
+  @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Group_Budgets]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0169-1]}
@@ -5715,8 +5751,10 @@ language-defined library package exists:]}
    ],Old=[]} @key{is tagged limited private};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Group_Budget_Handler} @key{is access}
-       @key{protected procedure} (GB : @key{in out} Group_Budget);]}
+       @key{protected procedure} (GB : @key{in out} Group_Budget)@Chg{Version=[5],New=[
+       @key{with} Nonblocking => False],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Task_Array} @key{is array} (Positive @key{range} <>) @key{of}
@@ -5991,8 +6029,10 @@ measure the execution time of interrupt handlers.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key{with} Ada.Interrupts;
-@key{package} Ada.Execution_Time.Interrupts @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Interrupts]}
+@key{package} Ada.Execution_Time.Interrupts@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Execution_Time],Child=[Interrupts]}
    @key{function} @AdaSubDefn{Clock} (Interrupt : Ada.Interrupts.Interrupt_Id)
         @key{return} CPU_Time;
    @key{function} @AdaSubDefn{Supported} (Interrupt : Ada.Interrupts.Interrupt_Id)
@@ -6059,12 +6099,16 @@ without the need for a task or a delay statement.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[@key{package} Ada.Real_Time.Timing_Events@Chg{Version=[5],New=[
+  @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Real_Time],Child=[Timing_Events]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[  @key{type} @AdaTypeDefn{Timing_Event} @key{is tagged limited private};
   @key{type} @AdaTypeDefn{Timing_Event_Handler}
-       @key{is access protected procedure} (Event : @key{in out} Timing_Event);]}
+       @key{is access protected procedure} (Event : @key{in out} Timing_Event)@Chg{Version=[5],New=[
+       @key{with} Nonblocking => False],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[  @key{procedure} @AdaSubDefn{Set_Handler} (Event   : @key{in out} Timing_Event;
@@ -6354,8 +6398,9 @@ allows implementations on multiprocessor platforms to be configured.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[package] System.Multiprocessors @key{is}@ChildUnit{Parent=[System],Child=[Multiprocessors]}
-   @key[pragma] Preelaborate(Multiprocessors);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@key[package] System.Multiprocessors@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[System],Child=[Multiprocessors]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Multiprocessors);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{CPU_Range} @key[is range] 0 .. @RI<implementation-defined>;
@@ -6472,9 +6517,11 @@ startup.]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[with] Ada.Real_Time;
 @key[with] Ada.Task_Identification;
-@key[package] System.Multiprocessors.Dispatching_Domains @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}]}
+@key[package] System.Multiprocessors.Dispatching_Domains@Chg{Version=[5],New=[
+   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[System.Multiprocessors],Child=[Dispatching_Domains]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaExcDefn{Dispatching_Domain_Error} : @key[exception];]}

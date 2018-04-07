@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2260,6 +2260,288 @@ value.]}
 @end{DiffWord2012}
 
 
+@LabeledAddedSubClause{Version=[5],Name=[Stable Properties of a Type]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[It is usual that some of the characteristics of a
+data type are unchanged by most of the primitive operations on the type. Such
+characteristics are called @i{stable properties} of the
+type.@Defn{stable property}@Defn2{Term=[property],Sec=[stable]}]}
+@end{Intro}
+
+@begin{Syntax}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<type_property_aspect_definition>,Old=<>}>,
+rhs="@Chg<Version=[5],New=[@Syn2<name> {, @Syn2<name>}],Old=<>>"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<subprogram_property_aspect_definition>,Old=<>}>,
+rhs="@Chg<Version=[5],New=<[@key<not>] @Syn2<name> {, [@key<not>] @Syn2<name>}>,Old=<>>"}
+
+@end{Syntax}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[A @i{property function} of type @i<T> is a function
+with a single parameter of type @i<T> or of a class-wide type that covers
+@i<T>.@Defn{property function}@Defn2{Term=[function],Sec=[property]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This provides restrictions on name resolution so
+  overloaded functions can be used as a stable property function.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a private type, private
+extension, or full type that does not have a partial view, the following
+language-defined aspects may be specified with an @nt{aspect_specification}
+(see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[Stable_Properties@\This aspect shall be specified by
+a @nt{type_property_aspect_definition}; each @nt{name} shall statically denote
+a single property function of the type. This aspect defines the
+@i<stable property functions> of the associated
+type.@Defn2{Term=[stable property function],Sec=[of a type]}@Defn2{Term=[function],Sec={stable property}}
+@Defn2{Term=[type],Sec=[stable property function of]}@AspectDefn{Stable_Properties}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We do not allow this aspect on generic formal
+  types, as it is only meaningful for primitive subprograms and generic formal
+  types have no such subprograms.]}
+@end{Discussion}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Stable_Properties],
+    Text=[@ChgAdded{Version=[5],Text=[A list of functions
+    describing characteristics that usually are unchanged by primitive
+    operations of the type or an individual primitive subprogram.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[Stable_Properties'Class@\This aspect shall be
+specified by a @nt{type_property_aspect_definition}; each
+@nt{name} shall statically denote a single property function of the type. This
+aspect defines the @i{class-wide stable property functions} of the associated
+type. @Redundant[Unlike most class-wide aspects, Stable_Properties'Class is not
+inherited by descendant types and subprograms, but the enhanced class-wide
+postconditions are inherited in the normal
+manner.]@Defn{class-wide stable property function}@Defn2{Term=[stable property function],Sec=[class-wide]}@AspectDefn{Stable_Properties'Class}]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Class-wide inheritance has to be explicitly
+  defined. Here we are not making such a definition, so there is no inheritance.
+  @RefSecNum{Preconditions and Postconditions} defines the inheritance of
+  class-wide postconditions.]}
+@end{TheProof}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Since class-wide postconditions are inherited by
+  descendants, we don't need the stable property functions to be inherited; if
+  they were inherited, we'd be duplicating the checks, which we don't want.]}
+@end{Discussion}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Stable_Properties'Class],
+    Text=[@ChgAdded{Version=[5],Text=[A list of functions
+    describing characteristics that usually are unchanged by primitive
+    operations of a class of types or a primitive subprogram for such a class.]}]}
+
+@end{Description}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a primitive subprogram, the
+following language-defined aspects may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[Stable_Properties@\This aspect shall be specified by
+a @nt{subprogram_property_aspect_definition}; each @nt{name} shall statically
+denote a single property function of a type for which the associated subprogram
+is primitive.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[Stable_Properties'Class@\This aspect shall be
+specified by a @nt{subprogram_property_aspect_definition}; each @nt{name} shall
+statically denote a single property function of a tagged type for which the
+associated subprogram is primitive. @Redundant[Unlike most class-wide aspects,
+Stable_Properties'Class is not inherited by descendant subprograms, but the
+enhanced class-wide postconditions are inherited in the normal manner.]]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The subprogram versions of Stable_Properties are
+  provided to allow overriding the stable properties of a type for an individual
+  primitive subprogram. While they can be used even if the type has no stable
+  properties, that is not an intended use (as simply modifying the postcondition
+  directly makes more sense for something that only happens in one place).]}
+@end{Reason}
+
+@end{Description}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A stable property function of a type
+@i<T> (including a class-wide stable property function) shall have a nonlimited
+return type and shall be:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[a primitive function with a single parameter of
+  mode @key[in] of type @i<T>; or]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[a function that is declared immediately within the
+  declarative region in which an ancestor type of @i<T> is declared and has a
+  single parameter of mode @key[in] of a class-wide type that covers @i<T>.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[In a
+@nt{subprogram_property_aspect_definition} for a subprogram @i<S>:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[all or none of the items shall be preceded by
+  @key[not];]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Mixing @key[not] functions with
+    regular functions is not allowed.]}
+@end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[any property functions mentioned after @key[not]
+  shall be a stable property function of a type for which @i<S> is primitive.]}
+@end{Itemize}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a primitive subprogram @i<S> of
+a type @i<T>, the stable property functions for @i<S> for type @i<T> are:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties specified
+    that does not include @key[not], those functions denoted in the aspect
+    Stable_Properties for @i<S> that have a parameter of @i<T> or @i<T>'Class;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[if @i<S> has an aspect Stable_Properties specified
+    that includes @key[not], those functions denoted in the aspect
+    Stable_Properties for @i<T>, excluding those denoted in the aspect
+    Stable_Properties for @i<S>;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[if @i<S> does not have an aspect
+    Stable_Properties, those functions denoted in the aspect Stable_Properties
+    for @i<T>, if any.]}
+
+@end{Itemize}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[A primitive subprogram can be primitive for
+    more than one type, and thus there can be more than one such set of stable
+    properties for a subprogram. Thus we say @ldquote@;stable property
+    functions for subprogram @i<S> for type @i<T>@rdquote.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[A similar definition applies for class-wide stable
+property functions by replacing aspect Stable_Properties with aspect
+Stable_Properties'Class in the above definition.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[The @i<explicit> specific postcondition expression
+for a subprogram @i<S> is the @nt{expression} directly specified for @i<S> with
+the Post aspect. Similarly, the @i<explicit> class-wide postcondition expression
+for a subprogram @i<S> is the @nt{expression} directly specified for @i<S> with
+the Post'Class aspect.@Defn{explicit specific postcondition expression}@Defn{explicit class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=(explicit)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T>
+that is not a stable property function of @i<T>, the specific postcondition
+expression of @i<S> is modified to include expressions of the
+form @exam{@i<F>(@i<P>) = @i<F>(@i<P>)'Old}, all @key[and]ed with each other
+and any explicit specific postcondition expression, where @i<F> is each stable
+property function of @i<S> for type @i<T> that does not occur in the explicit
+specific postcondition expression of @i<S>, and @i<P> is each parameter of @i<S>
+that has type @i<T>. The resulting specific postcondition expression of @i<S>
+is used in place of the explicit specific postcondition expression of @i<S>
+@Redundant[when interpreting the meaning of the postcondition as defined
+in @RefSecNum{Preconditions and Postconditions}].]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[There is one @exam{F(P) = F(P)'Old}
+    subexpression for every combination of a stable expression function of
+    type @i<T> and a parameter of type @i<T>. For instance, if there is three
+    stable property functions for type @i<T> and two parameters of type @i<T>,
+    then there are six such subexpressions appended to the postcondition.]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The resulting specific postcondition is
+    evaluated as described in @RefSecNum{Preconditions and Postconditions}. One
+    hopes that compilers can be smart enough to prove that many of these added
+    postcondition subexpressions cannot fail, but that is not required here.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T>
+that is not a stable property function of @i<T>, the class-wide postcondition
+expression of @i<S> is modified to include expressions of the form
+@exam{@i<F>(@i<P>) = @i<F>(@i<P>)'Old}, all @key[and]ed with each other and any
+explicit class-wide postcondition expression, where @i<F> is each class-wide
+stable property function of @i<S> for type @i<T> that does not occur in any
+class-wide postcondition expression that applies to @i<S>, and @i<P> is each
+parameter of @i<S> that has type @i<T>. The resulting class-wide postcondition
+expression of @i<S> is used in place of the explicit class-wide postcondition
+expression of @i<S> @Redundant[when interpreting the meaning of the
+postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
+
+@begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[We suppress stable property expressions if the
+    property function appears in the explicit class-wide postcondition, or in
+    any inherited class-wide postconditions. If we didn't do that, we could have
+    conflicting requirements in an inherited postcondition and the current one.
+    We also avoid redundant property checks.]}
+@end{Reason}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The resulting class-wide postcondition is
+    evaluated as described in @RefSecNum{Preconditions and Postconditions}. In
+    particular, the enhanced class-wide postcondition @i<is> the class-wide
+    postcondition for @i<S>, and therefore inherited postconditions include any
+    stable property expressions for @i<S>.]}
+@end{Ramification}
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These aspects are new.]}
+@end{Extend2012}
+
+
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{Deferred Constants}
 
@@ -2635,25 +2917,33 @@ rule],Old=[]}:]}
 or the @nt{expression} of an @nt{array_component_association} (see
 @RefSecNum{Array Aggregates})],Old=[]}
 
-@ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the @nt{qualified_expression} of an initialized allocator
-(see @RefSecNum{Allocators})],Old=[]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
+@ChgAdded{Version=[5],Text=[the @Syni{base_}@nt{expression} of a @nt{record_delta_aggregate}
+(see @RefSecNum{Delta Aggregates})]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@Chg{Version=[2],New=[the @nt{expression} of a return statement (see
-@RefSecNum{Return Statements})],Old=[]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgAdded{Version=[2],Text=[the @nt{qualified_expression} of an initialized allocator
+(see @RefSecNum{Allocators})]}
+
+@ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgAdded{Version=[2],Text=[the @nt{expression} of a return statement (see
+@RefSecNum{Return Statements})]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
-@Chg{Version=[3],New=[the
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgAdded{Version=[3],Text=[the
 @Chg{Version=[4],New=[return expression],Old=[@nt{expression}]} of an
 @Chg{Version=[4],New=[expression function],Old=[@nt{expression_function_declaration}]}
-(see @RefSecNum{Expression Functions})],Old=[]}
+(see @RefSecNum{Expression Functions})]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Only because the paragraph number has changed}
-@Chg{Version=[2],New=[the @nt{default_expression} or actual parameter for a
-formal object of mode @b{in} (see @RefSecNum{Formal Objects})],Old=[]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgAdded{Version=[2],Text=[the @nt{default_expression} or actual parameter for a
+formal object of mode @b{in} (see @RefSecNum{Formal Objects})]}
 
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3052,6 +3342,12 @@ rather than being a subclause of
   an omission when @nt{raise_expression}s were added to the language.]}
 @end{Extend2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+  @ChgAdded{Version=[5],Text=[Added the @Syni{base_}@nt{expression} of a
+  @nt{delta_aggregate} as a limited context.]}
+@end{DiffWord2012}
+
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledRevisedClause{Version=[3],New=[Assignment and Finalization],Old=[User-Defined Assignment and Finalization]}
@@ -3121,9 +3417,10 @@ or Finalize is applied to the containing object.
 @leading@keepnext@;The following language-defined library package exists:
 @begin{Example}@ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0020],ARef=[AI95-00126-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
-@key[package] Ada.Finalization @key[is]@ChildUnit{Parent=[Ada],Child=[Finalization]}
-    @key[pragma] @Chg{Version=[3],New=[Pure],Old=[Preelaborate]}(Finalization);@Chg{Version=[3],New=[],Old=[@Chg{New=[
-    @key[pragma] Remote_Types(Finalization);],Old=[]}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@key[package] Ada.Finalization@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada],Child=[Finalization]}
+    @Chg{Version=[5],New=[@key[with] Pure, Nonblocking => False @key[is]],Old=[@key[pragma] @Chg{Version=[3],New=[Pure],Old=[Preelaborate]}(Finalization);@Chg{Version=[3],New=[],Old=[@Chg{New=[
+    @key[pragma] Remote_Types(Finalization);],Old=[]}]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Controlled} @key[is abstract tagged private];@Chg{Version=[2],New=[
@@ -3145,6 +3442,16 @@ or Finalize is applied to the containing object.
     ... -- @RI{not specified by the language}
 @key[end] Ada.Finalization;
 @end{Example}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+  @ChgAdded{Version=[5],Text=[This package must allow blocking
+    (Nonblocking => False) for compatibility. The purpose of this package
+    is to provide a template for overriding user-defined routines; and
+    such routines can only allow blocking if the root type does so.
+    Users can still declare their overridding routines nonblocking if they
+    wish.]}
+@end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00348-01]}
 @Defn{controlled type}

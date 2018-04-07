@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:13 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3293,7 +3293,24 @@ This follows from the rule above forbidding nonnull statements.
 implementations will have to take some run-time action during initialization,
 even if the Initialize procedure is null.]}
 @end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+@ChgAdded{Version=[5],Text=[The elaboration of any elaborable construct that
+is not preelaborable.]}
 @end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+@ChgAdded{Version=[5],Text=[A generic declaration is preelaborable unless every
+instance would perform one of the above actions.]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0232-1]}
+   @ChgAdded{Version=[5],Text=[A generic declaration is preelaborable unless
+   there is no instance that could be declared preelaborated. For instance,
+   a generic package declaration that directly contains a variable initialized
+   by a non-static function that is not a formal function is not preelaborable
+   (and thus would be illegal if pragma Preelaborate is applied to it).]}
+@end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00403-01]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[]}@Comment{Phony addition to get conditional leading}
@@ -3531,9 +3548,12 @@ A @nt{pragma} Pure is a library unit pragma.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0035-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0232-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn{pure}
-A @i{pure} @Chg{Version=[3],New=[compilation unit],Old=[@nt{library_item}]}
-is a preelaborable @Chg{Version=[3],New=[compilation unit],Old=[@nt{library_item}]} whose
+A @i{pure} @Chg{Version=[3],New=[@Chg{Version=[5],New=[program],Old=[compilation]}
+unit],Old=[@nt{library_item}]} is a preelaborable
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[program],Old=[compilation]}
+unit],Old=[@nt{library_item}]} whose
 elaboration does not perform any of the following actions:]}
 
 @begin{Itemize}
@@ -3608,10 +3628,12 @@ is defined by the language to be zero;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0035-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0232-1]}
 @ChgAdded{Version=[2],Text=[the elaboration of the declaration of a
 @Chg{Version=[3],New=[nonderived ],Old=[]}named
 access-to-constant type for which the Storage_Size has been specified by an
-expression other than a static expression with value zero.]}
+expression other than a static expression with value
+zero@Chg{Version=[5],New=[;],Old=[.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3623,15 +3645,34 @@ expression other than a static expression with value zero.]}
   would represent state.]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+@ChgAdded{Version=[5],Text=[the elaboration of any program unit that is not
+pure.]}
+
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+@ChgAdded{Version=[5],Text=[A generic declaration is pure unless every
+instance would perform one of the above actions.]}
+
+@begin{Ramification}
+   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0232-1]}
+   @ChgAdded{Version=[5],Text=[A generic declaration is pure unless
+   there is no instance that could be declared pure. For instance,
+   a generic package declaration that directly contains a variable declaration
+   is not pure (and thus would be illegal if pragma Pure is applied to it).]}
+@end{Ramification}
+
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0035-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0232-1]}@Comment{Just to change the paragraph number}
 @ChgAdded{Version=[3],Text=[A generic body is pure only if elaboration of a
 corresponding instance body would not perform any such actions presuming any
 composite formal types have nonvisible components whose default initialization
 evaluates an @nt{allocator} of an access-to-variable type.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00366-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0232-1]}@Comment{Just to change the paragraph number}
 @ChgAdded{Version=[2],Text=[The Storage_Size for an anonymous
 access-to-variable type declared at library level in a library unit that is
 declared pure is defined to be zero.]}
@@ -4100,6 +4141,16 @@ required to appear last.
   and thus isn't appropriate for dynamic semantics permissions.]}
 @end{DiffWord2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0232-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@B<Correction:>
+  Added a rule that a generic declaration is not pure if no instance could be
+  pure (for instance, because the generic declaration would elaborates a
+  variable.) This was legal in Ada 2012, but of course no instance could have
+  been declared pure. A similar rule (with a similar effect) was added for
+  preelaborable generic declarations.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0175-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Added some intrinsic
@@ -4116,5 +4167,10 @@ required to appear last.
   were previously doing (no change is required); moreover, this case (and many
   more) were erroneous in Ada 2005 and before, so we're just restoring the
   previous semantics.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0232-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Explicitly stated that
+  the pure and preelaborate rules are recursive; that is, they apply to the
+  contents of nested packages and generic packages.]}
 @end{DiffWord2012}
 

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.49 $ $Date: 2012/11/28 23:53:05 $ $Author: randy $ }
+@comment{ $Revision: 1.50 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:05 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -73,24 +73,36 @@ Directories has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   -- @RI[File and directory name operations:]]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Full_Name} (Name : @key{in} String) @key{return} String;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Full_Name} (Name : @key{in} String) @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Simple_Name} (Name : @key{in} String) @key{return} String;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Simple_Name} (Name : @key{in} String) @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Containing_Directory} (Name : @key{in} String) @key{return} String;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Containing_Directory} (Name : @key{in} String) @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Extension} (Name : @key{in} String) @key{return} String;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Extension} (Name : @key{in} String) @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Base_Name} (Name : @key{in} String) @key{return} String;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Base_Name} (Name : @key{in} String) @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Compose} (Containing_Directory : @key{in} String := "";
                      Name                 : @key{in} String;
-                     Extension            : @key{in} String := "") @key{return} String;]}
+                     Extension            : @key{in} String := "") @key{return} String@Chg{Version=[5],New=[
+      @key[with] Nonblocking],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0049-1]}
 @ChgAdded{Version=[3],Text=[   @Key{type} @AdaTypeDefn{Name_Case_Kind} @key{is}
@@ -1265,7 +1277,9 @@ Directories.Hierarchical_File_Names has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{package} Ada.Directories.Hierarchical_File_Names @key{is}@ChildUnit{Parent=[Ada.Directories],Child=[Hierarchical_File_Names]}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgAdded{Version=[3],Text=[@key[package] Ada.Directories.Hierarchical_File_Names@Chg{Version=[5],New=[
+   @key[with] Nonblocking],Old=[]} @key[is]@ChildUnit{Parent=[Ada.Directories],Child=[Hierarchical_File_Names]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Simple_Name} (Name : @key{in} String) @key{return} Boolean;]}

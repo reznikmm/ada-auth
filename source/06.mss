@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:55 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1393,6 +1393,15 @@ applies to both dispatching and non-dispatching calls on @i<S>.]],Old=[]}]}
     statically bound call, these are the same; for an access-to-subprogram,
     (which has no class-wide preconditions of its own), we check the
     class-wide preconditions of the invoked routine.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0233-1]}
+  @ChgAdded{Version=[5],Text=[Since this check is based on the
+    @ldquote@;callable entity@rdquote, it does not depend on the view of
+    the entity. This matters any time the ancestor type (if any) of the partial
+      view differs from the parent type of the full view. In such a case,
+    the view of the callable entity associated with the full view might inherit
+    a Pre'Class while the view of the same callable entity associated with the
+    partial view does not.]}
 @end{Ramification}
 
 @begin{ImplNote}
@@ -5582,7 +5591,7 @@ Elaboration_Check.]}
 
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0157-1]}
-  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
+  @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   A @nt{aggregate} can directly be the return expression of an expression
   function. This eliminates the double parentheses that otherwise would be
   necessary.]}

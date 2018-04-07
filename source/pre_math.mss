@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.44 $ $Date: 2016/04/23 04:41:14 $ $Author: randy $ }
+@comment{ $Revision: 1.45 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2016/04/23 04:41:14 $}
+@Comment{$Date: 2017/12/20 04:30:56 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -80,11 +80,12 @@ children of Numerics.
 @Leading@;The generic library package
 Numerics.Generic_Elementary_Functions has the following declaration:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @key{generic}
    @key{type} Float_Type @key{is} @key{digits} <>;
 @ChildUnit{Parent=[Ada.Numerics],Child=[Generic_@!Elementary_@!Functions]}
-@key{package} Ada.Numerics.Generic_Elementary_Functions @key{is}
-   @key[pragma] Pure(Generic_Elementary_Functions);
+@key{package} Ada.Numerics.Generic_Elementary_Functions@Chg{Version=[5],New=[],Old=[ @key{is}]}
+   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Pure@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Generic_Elementary_Functions);]}
 
    @key{function} @AdaSubDefn{Sqrt}    (X           : Float_Type'Base) @key{return} Float_Type'Base;
    @key{function} @AdaSubDefn{Log}     (X           : Float_Type'Base) @key{return} Float_Type'Base;

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2017/12/20 04:30:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.69 $}
+@Comment{$Revision: 1.70 $}
 
 @LabeledClause{Type Conversions}
 
@@ -650,17 +650,22 @@ the operand type is not @i<universal_@!access>:]}
     @ChgAdded{Version=[2],Text=[The reason it is illegal to convert from an
     access-to-subprogram type declared in a generic body to one declared outside
     that body is that in an implementation that shares generic bodies,
-    procedures declared inside the generic need to have a different
+    subprograms declared inside the generic need to have a different
     calling convention @em they need an extra parameter pointing to the
-    data declared in the current instance. For procedures declared in the spec,
+    data declared in the current instance. For subprograms declared in the spec,
     that's OK, because the compiler can know about them at compile time of
     the instantiation.]}
   @end{Reason}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[If the target type is nonblocking, the operand
+  type shall be nonblocking.]}
 @end(inneritemize)
 
 @end(itemize)
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just for a paragraph number change}
 @ChgAdded{Version=[4],Text=[@PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -1379,6 +1384,11 @@ as a @nt<name>.
   want to repeat those rules here. This doesn't change the behavior for
   predicate checks possible in original Ada 2012, only ones using the new
   aspect Predicate_Failure.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Required Nonblocking
+  (see @RefSecNum{Intertask Communication}) matching for
+  access-to-subprogram conversions.]}
 @end{Diffword2012}
 
 
@@ -2244,6 +2254,12 @@ and whose @nt<attribute_designator>
 is First, Last, or Length,
 with an optional dimension;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
+@ChgAdded{Version=[5],Text=[an @nt{attribute_reference} whose
+@nt{prefix} denotes a non-generic
+entity that is not declared in a generic unit, and whose
+@nt{attribute_designator} is Nonblocking;]}
+
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0201-1]}
 a @nt{type_conversion}
 whose @nt{subtype_mark} denotes a static
@@ -2945,11 +2961,17 @@ raising.
 @end{Incompatible2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0201-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0201-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Expressions
   involving string relational operators or string type conversions now can be
   static.]}
 @end{Extend2012}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Defined the staticness of the Nonblocking
+  attribute (see @RefSecNum{Intertask Communication}).]}
+@end{Diffword2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
