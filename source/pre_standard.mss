@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_standard.mss,v $ }
-@comment{ $Revision: 1.42 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@comment{ $Revision: 1.43 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
 @Part(predefstandard, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2018/04/07 06:16:42 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -250,15 +250,17 @@ the visible part of package Standard.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}@Comment{Odd missing paragraph number here}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
-@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
+@Chg{Version=[2],New=[],Old=[@noparanum@;]}   --@RI{ The declaration of type Wide_Character is based on the standard @Chg{Version=[2],New=[ISO/IEC],Old=[ISO]} 10646@Chg{Version=[2],New=[:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[]} BMP character@Chg{Version=[2],New=[],Old=[ set.]}}
    --@RI{ @Chg{Version=[2],New=[set. ],Old=[]}The first 256 positions have the same contents as type Character. See @refsecnum[Character types].}
 @comment[blank line]
    @key[type] @AdaTypeDefn{Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[@Chg{Version=[2],New=[Hex_0000FFFE],Old=[FFFE]}], @RI[@Chg{Version=[2],New=[Hex_0000FFFF],Old=[FFFF]}]);
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
+@ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[   --@RI[ The declaration of type Wide_Wide_Character is based on the full]
-   --@RI[ ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} character set. The first 65536 positions have the]
+   --@RI[ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} character set. The first 65536 positions have the]
    --@RI[ same contents as type Wide_Character. See @refsecnum[Character types].]
 @comment[blank line]
    @key[type] @AdaTypeDefn{Wide_Wide_Character} @key[is] (@RI[nul], @RI[soh] ... @RI[Hex_7FFFFFFE], @RI[Hex_7FFFFFFF]);

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/04/07 06:16:42 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -936,14 +936,11 @@ expected.
 @Defn{shift}@Defn{rotate}
 For each such modular type in Interfaces,
 shifting and rotating subprograms as specified in the declaration of
-Interfaces above.
-These subprograms are Intrinsic.
+Interfaces above. These subprograms are Intrinsic.
 They operate on a bit-by-bit basis,
-using the binary representation of the
- value of the operands
+using the binary representation of the value of the operands
 to yield a binary representation for the result.
-The Amount parameter gives the number of bits by which to shift
-or rotate.
+The Amount parameter gives the number of bits by which to shift or rotate.
 For shifting, zero bits are shifted in, except in the case of
 Shift_Right_Arithmetic, where one bits are shifted in if Value is
 at least half the modulus.
@@ -964,6 +961,89 @@ which would have been upward incompatible,
 or else invent new operator symbols,
 which seemed like too much mechanism.
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0264-1]}
+  @ChgAdded{Version=[5],Text=[@ldquote@;Shifting@rdquote and
+  @ldquote@;rotating@rdquote have the conventional meaning.
+  Neither of these terms is usefully defined by the usual normative references
+  of the Standard, so we provide pseudo-code here to describe the intended
+  semantics of the above wording (all operations in these examples are
+  using modular semantics).]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Rotate_Left (Value : Unsigned_@i<n>; Amount : Natural)
+   @key[return] Unsigned_@i<n> @key[is]
+   Result : Unsigned_@i<n> := Value;
+   Bit : Unsigned_@i<n> @key[range] 0 .. 1;
+@key[begin]
+   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+      Bit := Result/2**(@i<n>-1); -- @Examcom{High-bit of Result}
+      Result := Result*2 + Bit;
+   @key[end] @key[loop];
+   @key[return] Result;
+@key[end] Rotate_Left;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Rotate_Right (Value : Unsigned_@i<n>; Amount : Natural)
+   @key[return] Unsigned_@i<n> @key[is]
+   Result : Unsigned_@i<n> := Value;
+   Bit : Unsigned_@i<n> @key[range] 0 .. 1;
+@key[begin]
+   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+      Bit := Result mod 2; -- @Examcom{Low-bit of Result}
+      Result := Result/2 + (Bit * 2**(@i<n>-1));
+   @key[end] @key[loop];
+   @key[return] Result;
+@key[end] Rotate_Right;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Shift_Left (Value : Unsigned_@i<n>; Amount : Natural)
+   @key[return] Unsigned_@i<n> @key[is]
+   Result : Unsigned_@i<n> := Value;
+@key[begin]
+   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+      Result := Result * 2;
+   @key[end] @key[loop];
+   @key[return] Result;
+@key[end] Shift_Left;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Shift_Right (Value : Unsigned_@i<n>; Amount : Natural)
+   @key[return] Unsigned_@i<n> @key[is]
+   Result : Unsigned_@i<n> := Value;
+@key[begin]
+   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+      Result := Result / 2;
+   @key[end] @key[loop];
+   @key[return] Result;
+@key[end] Shift_Right;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Shift_Right_Arithmetic (Value : Unsigned_@i<n>; Amount : Natural)
+   @key[return] Unsigned_@i<n> @key[is]
+   Result : Unsigned_@i<n> := Value;
+   Neg : constant Boolean :=
+      Result/2**(@i<n>-1) = 1; -- @Examcom{High-bit of Result}
+@key[begin]
+   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+      @key[if] Neg then
+         Result := Result / 2 + 2**(@i<n>-1);
+      @key[else]
+         Result := Result / 2;
+      @key[end] @key[if];
+   @key[end] @key[loop];
+   @key[return] Result;
+@key[end] Shift_Right_Arithmetic;]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0264-1]}
+  @ChgAdded{Version=[5],Text=[These generally correspond to machine
+  instructions, although there may not be an exact match in terms of boundary
+  conditions, as Ada requires the correct result to be produced for all values
+  of Amount.]}
+@end{Honest}
 
 Floating point types corresponding to each floating point format
 fully supported by the hardware.
@@ -3694,12 +3774,12 @@ type (see @RefSecNum(Interfacing Aspects)).
 @end[ImplReq]
 
 @begin{ImplPerm}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0058-1],ARef=[AI12-0263-1]}
 An implementation may add additional declarations to the Fortran interface
 packages. For example, @Chg{Version=[5],New=[declarations are permitted
 for the character types corresponding to Fortran character kinds 'ascii' and
 'iso_10646', which in turn correspond to ISO/IEC 646:1991 and
-to UCS-4 as specified in ISO/IEC 10646:2011],Old=[the Fortran interface
+to UCS-4 as specified in ISO/IEC 10646:2017],Old=[the Fortran interface
 package for an implementation of
 Fortran 77 (ANSI X3.9-1978) that defines types like Integer*@i{n}, Real*@i{n},
 Logical*@i{n}, and Complex*@i{n} may contain the declarations of types named

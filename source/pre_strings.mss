@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/04/07 06:16:42 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -3324,10 +3324,13 @@ Strings.Equal_Case_Insensitive has the following declaration:]}
 
 @begin{DescribeCode}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns True if the strings consist
 of the same sequence of characters after applying locale-independent simple case
-folding, as defined by documents referenced in the note in Clause 1 of ISO/IEC
-10646:2011. Otherwise, returns False. This function uses the same method as is
+folding, as defined by documents referenced in
+@Chg{Version=[5],New=[],Old=[the note in ]}Clause @Chg{Version=[5],New=[2],Old=[1]}
+of ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}.
+Otherwise, returns False. This function uses the same method as is
 used to determine whether two identifiers are the same.]}
 
 @begin{Discussion}
@@ -3340,6 +3343,12 @@ used to determine whether two identifiers are the same.]}
   strings as different. Additionally, Unicode says that the result of this
   function will never change for strings made up solely of defined code points;
   there is no such guarantee for case conversion to lower case.]}
+
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+  @ChgAdded{Version=[5],Text=[The @ldquote@;documents
+  referenced@rdquote means Unicode, Chapter 4 (specifically, section 4.2 @em
+  Case). See the Implementation Notes in @RefSecNum{Identifiers} for a source
+  for machine-readable definitions of this properties.]}
 @end{Discussion}
 @end{DescribeCode}
 

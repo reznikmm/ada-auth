@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:39 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1234,24 +1234,32 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00262-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0077-1],ARef=[AI05-0122-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0261-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A @nt<name> denoting a
 @Chg{Version=[3],New=[@nt{library_item} (or the corresponding declaration
 for a child of a generic within an instance @em see
 @RefSecNum{Compilation Units - Library Units}), if it],Old=[library item that]}
 is visible only due to being mentioned in
-one or more @nt<with_clause>s that include the reserved word
+one or more @nt<with_clause>s @Chg{Version=[5],New=[of unit @i<U> ],Old=[]}that
+include the reserved word
 @key<private>@Chg{Version=[3],New=[,],Old=[]} shall appear only within:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a private part;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a body, but not within the
-@nt<subprogram_specification> of a library subprogram body;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0261-1]}
+@ChgAdded{Version=[2],Text=[a body@Chg{Version=[5],New=[ of a public
+descendant of @i<U>],Old=[]}, but not within the
+@nt<subprogram_specification> of a @Chg{Version=[5],New=[],Old=[library
+subprogram ]}body@Chg{Version=[5],New=[ of a subprogram that is a public
+descendant of @i<U>],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[a private descendant of the unit on which one of these
-@nt<with_clause>s appear; or]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0261-1]}
+@ChgAdded{Version=[2],Text=[a private descendant of @Chg{Version=[5],New=[@i<U>
+or its body],Old=[the unit on which one of these @nt<with_clause>s appear]};
+or]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[a pragma within a context clause.]}
@@ -1620,6 +1628,15 @@ definition in @RefSecNum{Use Clauses}.
   rules for private with clauses also apply to "sprouted" generic child
   units.]}
 @end{DiffWord2005}
+
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0261-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Fixed wording so the
+  privately withed units are visible in the subprogram specification of the
+  body of a private descendant; otherwise, the private specification is
+  legal but the completion is not.]}
+@end{DiffWord2012}
 
 
 @LabeledSubClause{Subunits of Compilation Units}

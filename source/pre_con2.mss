@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2016/11/24 02:33:52 $ $Author: randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2018/04/07 06:16:40 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -3026,7 +3026,8 @@ holder container unless specified by the operation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Vectors provides a private type Vector and a set of
+Containers.Bounded_Vectors@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Vectors]}
+provides a private type Vector and a set of
 operations. It provides the same operations as the package Containers.Vectors
 (see @RefSecNum{The Generic Package Containers.Vectors}), with the difference that the
 maximum storage is bounded.]}
@@ -3172,7 +3173,8 @@ minimize copying does not apply to bounded vectors.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Doubly_Linked_Lists provides a private type List
+Containers.Bounded_Doubly_Linked_Lists@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Doubly_Linked_Lists]}
+provides a private type List
 and a set of operations. It provides the same operations as the
 package Containers.Doubly_Linked_Lists
 (see @RefSecNum{The Generic Package Containers.Doubly_Linked_Lists}), with the
@@ -3339,7 +3341,8 @@ minimize copying does not apply to bounded lists.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Hashed_Maps provides a private type Map
+Containers.Bounded_Hashed_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Hashed_Maps]}
+provides a private type Map
 and a set of operations. It provides the same operations as the
 package Containers.Hashed_Maps
 (see @RefSecNum{The Generic Package Containers.Hashed_Maps}), with the
@@ -3518,11 +3521,11 @@ minimize copying does not apply to bounded hashed maps.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Ordered_Maps provides a private type Map
-and a set of operations. It provides the same operations as the
-package Containers.Ordered_Maps
-(see @RefSecNum{The Generic Package Containers.Ordered_Maps}), with the
-difference that the maximum storage is bounded.]}
+Containers.Bounded_Ordered_Maps@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Ordered_Maps]}
+provides a private type Map and a set of operations. It provides the same
+operations as the package Containers.Ordered_Maps (see
+@RefSecNum{The Generic Package Containers.Ordered_Maps}), with the difference
+that the maximum storage is bounded.]}
 
 @begin{StaticSem}
 
@@ -3677,9 +3680,9 @@ minimize copying does not apply to bounded ordered maps.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Hashed_Sets provides a private type Set
-and a set of operations. It provides the same operations as the
-package Containers.Hashed_Sets
+Containers.Bounded_Hashed_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Hashed_Sets]}
+provides a private type Set and a set of operations. It provides the same
+operations as the package Containers.Hashed_Sets
 (see @RefSecNum{The Generic Package Containers.Hashed_Sets}), with the
 difference that the maximum storage is bounded.]}
 
@@ -3851,9 +3854,9 @@ minimize copying does not apply to bounded hashed sets.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Ordered_Sets provides a private type Set
-and a set of operations. It provides the same operations as the
-package Containers.Ordered_Sets
+Containers.Bounded_Ordered_Sets@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Ordered_Sets]}
+provides a private type Set and a set of operations. It provides the same
+operations as the package Containers.Ordered_Sets
 (see @RefSecNum{The Generic Package Containers.Ordered_Sets}), with the
 difference that the maximum storage is bounded.]}
 
@@ -4007,9 +4010,9 @@ minimize copying does not apply to bounded ordered sets.]}]}
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[The language-defined generic package
-Containers.Bounded_Multiway_Trees provides a private type Tree and a set of
-operations. It provides the same operations as the package
-Containers.Multiway_Trees (see
+Containers.Bounded_Multiway_Trees@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Multiway_Trees]}
+provides a private type Tree and a set of operations. It provides the same
+operations as the package Containers.Multiway_Trees (see
 @RefSecNum{The Generic Package Containers.Multiway_Trees}), with the difference
 that the maximum storage is bounded.]}
 
@@ -4940,6 +4943,146 @@ implicit pointers or dynamic allocation.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic
   package Containers.Bounded_Priority_Queues is new.]}
 @end{Extend2005}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Generic Package Containers.Bounded_Indefinite_Holders]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+@ChgAdded{Version=[5],Text=[For each instance of
+The language-defined generic package
+Containers.Bounded_Indefinite_Holders@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Indefinite_Holders]}
+provides a private type Holder and a set of operations for that type. It
+provides the same operations as the package Containers.Indefinite_Holders
+(see @RefSecNum{The Generic Package Containers.Indefinite_Holders}), with the
+difference that the maximum storage is bounded.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The declaration of the generic
+library package Containers.Bounded_Indefinite_Holders has the same contents and
+semantics as Containers.Indefinite_Holders except:]}
+
+@begin{Itemize}
+
+ @ChgRef{Version=[5],Kind=[AddedNormal]}
+ @ChgAdded{Version=[5],Text=[The following is added to
+   the context clause:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[with] System.Storage_Elements; @key[use] System.Storage_Elements;]}
+@end{Example}
+
+ @ChgRef{Version=[5],Kind=[AddedNormal]}
+ @ChgAdded{Version=[5],Type=[Leading],Text=[An additional generic parameter
+   follows Element_Type:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   Max_Element_Size_in_Storage_Elements : Storage_Count;]}
+@end{Example}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This value is in Storage_Elements so that it can
+   be used as a discriminant on a storage pool object in the implementation of
+   the object; Ada doesn't allow discriminant dependent components to use
+   formulas.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This is a generic parameter as it is a property
+   of the Element_Type; the largest possible object of Element_Type is unlikely
+   to be different for different containers, so making it a discriminant (as
+   Capacity is) provides no useful capability.]}
+@end{Reason}
+
+ @ChgRef{Version=[5],Kind=[AddedNormal]}
+ @ChgAdded{Version=[5],Type=[Leading],Text=[Add to the precondition of To_Holder
+   and Replace_Element:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[  @key[and then] (@key[if] New_Item'Size >
+               Max_Element_Size_in_Storage_Elements * System.Storage_Unit
+            @key[then raise] Program_Error)]}
+@end{Example}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This ensures that an object that won't fit is not
+   inserted into the container.]}
+@end{Reason}
+@end{Itemize}
+@end{StaticSem}
+
+@begin{Bounded}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+It is a bounded error to assign from a bounded holder object while tampering
+with elements of that object is prohibited. Either Program_Error is raised by
+the assignment, execution proceeds with the target object prohibiting tampering
+with elements, or execution proceeds normally.]}
+@end{Bounded}
+
+@begin{ImplReq}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For each instance of
+Containers.Indefinite_Holders and each instance of
+Containers.Bounded_Indefinite_Holders, if the two instances meet the following
+conditions, then the output generated by the Holder'Output or Holder'Write
+subprograms of either instance shall be readable by the Holder'Input or
+Holder'Read of the other instance, respectively:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the Element_Type parameters of the two instances
+  are statically matching subtypes of the same type; and]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the output generated by Element_Type'Output or
+  Element_Type'Write is readable by Element_Type'Input or Element_Type'Read,
+  respectively (where Element_Type denotes the type of the two actual
+  Element_Type parameters).]}
+@end{Itemize}
+@end{ImplReq}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+@ChgAdded{Version=[5],Text=[Bounded holder objects should be implemented without
+dynamic allocation and any finalization should be trivial unless Element_Type
+needs finalization.]}
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[Bounded holder objects should be implemented without dynamic allocation.]}]}
+
+@begin{Honest}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[Implementation of this container in Ada will
+   probably require the use of a special storage pool. When we say "without
+   dynamic allocation", we mean that this pool does not use heap memory and has
+   a trivial finalization routine (that is, procedures Adjust and Finalize are
+   null procedures). All storage pools are controlled, so we can't reasonably
+   say that a bounded holder will not need finalization.]}
+@end{Honest}
+
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[If the implementation supports discontiguous
+   objects that require multiple calls to Allocate in a storage pool, the
+   storage pool will need to support such allocations. The storage pool
+   implementation can assume that all Allocate calls occur together, and
+   similarly for Deallocate calls, thus simplifying the pool implementation so
+   that allocation only occurs at a high-water mark location.]}
+@end{ImplNote}
+@end{ImplAdvice}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012} The generic
+  package Containers.Bounded_Indefinite_Holders is new.]}
+@end{Extend2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[Example of Container Use]}

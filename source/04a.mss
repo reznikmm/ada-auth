@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:54 $}
+@Comment{$Date: 2018/04/07 06:16:38 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3678,7 +3678,7 @@ postcondition:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
-be non-trivial:]}
+be nontrivial:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}

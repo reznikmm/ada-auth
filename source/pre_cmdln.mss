@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.30 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.31 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/04/07 06:16:42 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -53,9 +53,11 @@ The meaning of @lquotes@;number of arguments@rquotes@; is implementation defined
 @begin{Example}@Keepnext
 @key[function] Argument (Number : @key[in] Positive) @key[return] String;
 @end{Example}
-@Trailing@;If the external execution environment supports passing arguments to
+@Trailing@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0259-1]}
+If the external execution environment supports passing arguments to
 a program, then
-Argument returns an implementation-defined value corresponding to
+Argument returns an implementation-defined value@Chg{Version=[5],New=[ with
+lower bound 1],Old=[]} corresponding to
 the argument at relative position Number.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Number is outside the range 1..Argument_Count, then
@@ -69,9 +71,11 @@ raise Constraint_Error, since Argument_Count is 0.@end{ramification}
 @key[function] Command_Name @key[return] String;
 @end{Example}
 @Trailing@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0259-1]}
 If the external execution environment supports passing arguments to
 a program, then
-Command_Name returns an implementation-defined value corresponding to
+Command_Name returns an implementation-defined value@Chg{Version=[5],New=[ with
+lower bound 1],Old=[]} corresponding to
 the name of the command invoking the program;
 otherwise@Chg{Version=[3],New=[,],Old=[]}
 Command_Name returns the null string.
@@ -127,3 +131,12 @@ includes the command name, whereas Argument_Count does not.
 @Defn{extensions to Ada 83}
 This @Chg{Version=[3],New=[subclause],Old=[clause]} is new in Ada 95.
 @end{Extend83}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0259-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Defined the lower bound of
+  functions Argument and Command_Name. This could be inconsistent if someone
+  depended on the lower bound of these routines (and it wasn't 1), but such
+  code was never portable (even to later versions of the same implementation).
+  Thus we don't document it as an inconsistency.]}
+@end{Diffword2012}

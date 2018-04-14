@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:39 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -503,10 +503,13 @@ The syntax rules for @nt{defining_designator} and
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a
 @Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[4],New=[,
-a generic subprogram,],Old=[]} or @Chg{Version=[4],New=[an ],Old=[]}entry,
-the following language-defined aspects may be specified with an
+a generic subprogram,],Old=[]} @Chg{Version=[5],New=[],Old=[or
+]}@Chg{Version=[4],New=[an ],Old=[]}entry,@Chg{Version=[5],New=[ or an
+access-to-subprogram type,],Old=[]} the following language-defined aspects
+may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Ramification}
@@ -521,9 +524,11 @@ completing that specification with a renames-as-body of the instance.]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
 @ChgAdded{Version=[3],Text=[Pre@\This aspect
-  specifies a specific precondition for a callable entity; it shall
-  be specified by an @nt{expression}, called a
+  specifies a specific precondition for a callable
+  entity@Chg{Version=[5],New=[ or an access-to-subprogram type],Old=[]}; it
+  shall be specified by an @nt{expression}, called a
   @i<specific precondition
   expression>.@Defn{specific precondition expression}@Defn2{Term=[precondition expression],Sec=[specific]}
   If not specified for an entity, the specific precondition
@@ -564,6 +569,13 @@ completing that specification with a renames-as-body of the instance.]}
   class-wide precondition of True, so that adding such a precondition to a
   descendant has no effect (necessary as a dispatching call through the root
   routine would not check any precondition).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgAdded{Version=[5],Text=[Pre'Class cannot be specified on
+  access-to-subprogram type because of a @LegalityName found in
+  @RefSecNum{Aspect Specifications} that limits 'Class aspects to
+  tagged types and primitive subprograms of tagged types. The same is true for
+  Post'Class (below).]}
 @end{Ramification}
 
 @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Pre'Class],
@@ -571,9 +583,11 @@ completing that specification with a renames-as-body of the instance.]}
     derivation.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
 @ChgAdded{Version=[3],Text=[Post@\This aspect
-  specifies a specific postcondition for a callable entity; it shall be
-  specified by an @nt{expression}, called a @i<specific postcondition
+  specifies a specific postcondition for a callable
+  entity@Chg{Version=[5],New=[ or an access-to-subprogram type],Old=[]}; it
+  shall be specified by an @nt{expression}, called a @i<specific postcondition
   expression>.@Defn{specific postcondition expression}@Defn2{Term=[postcondition expression],Sec=[specific]}
   If not specified for an entity, the specific postcondition
   expression for the entity is the enumeration literal True.@AspectDefn{Post}]}
@@ -861,10 +875,12 @@ aspect would be illegal.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1],ARef=[AI05-0290-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
 @ChgAdded{Version=[3],Text=[If performing checks is required by the Pre,
 Pre'Class, Post, or Post'Class assertion policies (see
 @RefSecNum{Pragmas Assert and Assertion_Policy}) in effect at the point of a
-corresponding aspect specification applicable to a given subprogram or entry,
+corresponding aspect specification applicable to a given subprogram@Chg{Version=[5],New=[,],Old=[ or]}
+entry,@Chg{Version=[5],New=[ or access-to-subprogram type,],Old=[]}
 then the respective precondition or postcondition expressions are considered
 @i<enabled>.@Defn2{Term=[enabled],Sec=[precondition expression]}@Defn2{Term=[enabled],Sec=[postcondition expression]}]}
 
@@ -1168,23 +1184,30 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @EndPrefixType{}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0220-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} F that
-denotes a function declaration}, the following attribute is defined:]}
+denotes a function declaration@Chg{Version=[5],New=[ or an access-to-function
+type],Old=[]}}, the following attribute is defined:]}
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<F>, AttrName=<Result>, ARef=[AI05-0145-2],
-  ARef=[AI05-0262-1], ARef=[AI12-0185-1],
+  ARef=[AI05-0262-1], ARef=[AI12-0185-1], ARef=[AI12-0220-1],
   InitialVersion=[3],
-  Text=[@Chg{Version=[3],New=[Within a postcondition expression for function F,
-  denotes the result object of the function. The type of this attribute is that
-  of the function result except within a Post'Class postcondition expression for
+  Text=[@Chg{Version=[3],New=[Within a postcondition expression for
+  @Chg{Version=[5],New=[],Old=[function ]}F,
+  denotes the @Chg{Version=[5],New=[return],Old=[result]} object of the
+  function@Chg{Version=[5],New=[ call for which the postcondition expression is
+  evaluated],Old=[]}. The type of this attribute is that
+  of the @Chg{Version=[5],New=[result subtype of the ],Old=[]}function
+  @Chg{Version=[5],New=[or access-to-function type ],Old=[result]} except
+  within a Post'Class postcondition expression for
   a function with a controlling result or with a controlling access
   result@Chg{Version=[5],New=[; in those cases the type of the attribute was
-  described previously.],Old=[. For
+  described previously],Old=[. For
   a controlling result, the type of the attribute is @i<T>'Class, where @i<T> is
   the function result type. For a controlling access result, the type of the
   attribute is an anonymous access type whose designated type is @i<T>'Class,
-  where @i<T> is the designated type of the function result type.]}],Old=[]}]}@Comment{End of Annex text here.}
+  where @i<T> is the designated type of the function result type]}.],Old=[]}]}@Comment{End of Annex text here.}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Use of this
@@ -1192,6 +1215,13 @@ denotes a function declaration}, the following attribute is defined:]}
   for F.]}
 @end(description)
 @EndPrefixType{}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0220-1]}
+  @ChgAdded{Version=[5],Text=[An @ldquote@;access-to-function type@rdquote
+  is an access-to-subprogram type whose designated profile is a function
+  profile.]}
+@end{Honest}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0143-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} E that
@@ -1455,10 +1485,43 @@ is used for both associated checks.]}
 
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1],ARef=[AI05-0254-1]}
-@ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value, all
-precondition and postcondition checks performed are determined by the subprogram
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
+@ChgAdded{Version=[3],Text=[For a call via an access-to-subprogram value,
+@Chg{Version=[5],New=[],Old=[all ]}precondition and postcondition checks
+performed are @Chg{Version=[5],New=[as ],Old=[]}determined by the subprogram
 or entry denoted by the prefix of the Access attribute reference that produced
-the value.]}
+the value.@Chg{Version=[5],New=[ In addition, a precondition check of any
+precondition expression associated with the access-to-subprogram type is
+performed. Similarly, a postcondition check of any postcondition expression
+associated with the access-to-subprogram type is performed.],Old=[]}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgAdded{Version=[5],Text=[A call via an access-to-subprogram value can be
+  considered equivalent (with respect to dynamic semantics) to call to a
+  notional "wrapper" subprogram which has the Pre and Post aspects and the
+  profile of the access-to-subprogram type and whose body contains (and
+  returns, in the case of a function) only a call to the designated
+  subprogram. However, other evaluation orders for the checks are allowed
+  beyond those allowed by strictly following this model. This equivalence
+  can be used to determine the appropriate point at which the constant
+  associated with an Old attribute reference in the Post aspect for an
+  access-to-subprogram type is elaborated and finalized.]}
+@end{ImplNote}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgAdded{Version=[5],Text=[In the case of type conversion
+  between two access-to-subprogram types, the Pre and Post aspects of the
+  source type of the conversion play no role in any subsequent call via
+  the conversion result; only the Pre and Post aspects of the target type
+  of the conversion are relevant in that case. The same applies in the
+  case of a "conversion" (using the term loosely) which is accomplished by
+  combining a dereference and a 'Access attribute reference, as in
+  @exam{Some_Pointer.@key[all]'Access}.]}
+@end{Ramification}
+
+
 @end{Runtime}
 
 @begin{Notes}
@@ -1570,6 +1633,10 @@ the value.]}
   unevaluated Old attribute can be a @nt{selected_component} or
   @nt{indexed_component}. This is considered a correction as the old rule
   is unintentionally too fierce, rejecting safe cases.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgAdded{Version=[5],Text=[Pre and Post can be given on an
+  access-to-subprogram type.]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -5046,20 +5113,22 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
-@LabeledRevisedSubClause{Version=[3],InitialVersion=[2],New=[Nonreturning Procedures],Old=[Pragma No_Return]}
+@LabeledRevisedSubClause{Version=[5],InitialVersion=[2],New=[Nonreturning Subprograms],Old=[Pragma No_Return]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Specifying aspect],Old=[A @nt{pragma}]}
 No_Return @Chg{Version=[3],New=[to have the value True ],Old=[]}indicates
-that a procedure cannot return normally@Redundant[; it may propagate
-an exception or loop forever].]}
+that a @Chg{Version=[5],New=[subprogram],Old=[procedure]} cannot return
+normally@Redundant[; it may propagate an exception or loop forever].]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[Aspect],Old=[@nt{Pragma}]}
 No_Deposit@Defn{No_Deposit aspect} will have to wait for
-Ada @Chg{Version=[3],New=[2020],Old=[2017]}. :-)]}
+Ada @Chg{Version=[3],New=[@Chg{Version=[5],New=[2028],Old=[2020]}],Old=[2017]}. :-)]}
 @end{Discussion}
 
 @begin{NotIso}
@@ -5087,7 +5156,10 @@ Text=`@Chg{Version=[3],New=[],Old=[@key{pragma} @prag<No_Return>(@SynI{procedure
 @begin{StaticSem}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a procedure or generic procedure, the following
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0269-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For a
+@Chg{Version=[5],New=[subprogram],Old=[procedure]} or generic
+@Chg{Version=[5],New=[subprogram],Old=[procedure]}, the following
 language-defined representation aspect may be specified:]}
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -5100,14 +5172,20 @@ When aspect No_Return is True for an entity, the entity is said to be
 @nt{aspect_definition} shall be a static expression. @Redundant[This aspect is
 never inherited;] if not directly specified, the aspect is False.]}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[No_Return],
-  Text=[@ChgAdded{Version=[3],Text=[A procedure will not return normally.]}]}
+@ChgAspectDesc{Version=[5],Kind=[Revised],Aspect=[No_Return],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[A
+        @Chg{Version=[5],New=[subprogram],Old=[procedure]}
+        will not return normally.]}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}@ChgNote{Moved from below}
-@ChgAdded{Version=[3],Text=[If a generic procedure is nonreturning, then so are
-its instances. If a procedure declared within a generic unit is nonreturning,
-then so are the corresponding copies of that procedure in instances.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0269-1]}
+@ChgAdded{Version=[3],Text=[If a generic
+@Chg{Version=[5],New=[subprogram],Old=[procedure]} is nonreturning, then so are
+its instances. If a @Chg{Version=[5],New=[subprogram],Old=[procedure]} declared
+within a generic unit is nonreturning,
+then so are the corresponding copies of that
+@Chg{Version=[5],New=[subprogram],Old=[procedure]} in instances.]}
 
 @end{StaticSem}
 
@@ -5131,21 +5209,37 @@ null procedure nor an instance of a generic unit.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
   @ChgAdded{Version=[2],Text=[The procedure can be abstract.@Chg{Version=[3],New=[],
   Old=[ The denoted declaration can be a @nt{renaming_declaration} if it obeys the usual rules
   for representation pragmas: the renaming has to occur immediately within the
   same declarative region as the renamed subprogram.]} If a nonreturning
-  procedure is renamed (anywhere) calls through the new name still have the
-  nonreturning semantics.]}
+  @Chg{Version=[5],New=[subprogram],Old=[procedure]} is renamed (anywhere) calls
+  through the new name still have the nonreturning semantics.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00329-01],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[A return statement shall not apply to a
 nonreturning procedure or generic procedure.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0269-1]}
+@ChgAdded{Version=[5],Text=[Any return statement that applies to a nonreturning
+function or generic function shall be a @nt{simple_return_statement} with an
+@nt{expression} that is a @nt{raise_expression}, a call on a nonreturning
+function, or a parenthesized @nt{expression} of one of these.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We still require at least one return statement in
+  a function; we just require that all such return statements don't actually
+  return a value.]}
+@end{Ramification}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
-@ChgAdded{Version=[2],Text=[A procedure shall be nonreturning if it overrides
-a dispatching nonreturning procedure.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
+@ChgAdded{Version=[2],Text=[A @Chg{Version=[5],New=[subprogram],Old=[procedure]}
+shall be nonreturning if it overrides a dispatching nonreturning
+@Chg{Version=[5],New=[subprogram],Old=[procedure]}.
 @PDefn{generic contract issue}
 In addition to the places where
 @LegalityTitle normally apply (see @RefSecNum{Generic Instantiation}),
@@ -5153,13 +5247,18 @@ this rule applies also in the private part of an instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised]}
   @ChgAdded{Version=[2],Text=[This ensures that dispatching calls to
-  nonreturning procedures will, in fact, not return.]}
+  nonreturning @Chg{Version=[5],New=[subprograms],Old=[procedures]} will, in
+  fact, not return.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
 @ChgAdded{Version=[2],Text=[If a renaming-as-body completes a nonreturning
-procedure declaration, then the renamed procedure shall be nonreturning.]}
+@Chg{Version=[5],New=[subprogram],Old=[procedure]} declaration, then the
+renamed @Chg{Version=[5],New=[subprogram],Old=[procedure]} shall be
+nonreturning.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5194,10 +5293,14 @@ normally, Program_Error is raised at the point of the call.
 @end{RunTime}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
   @ChgAdded{Version=[2],Text=[Note that there is no name for suppressing
   this check, since the check represents a bug, imposes no time overhead,
   and minimal space overhead (since it can usually be statically eliminated
-  as dead code).]}
+  as dead code).@Chg{Version=[5],New=[ We don't need a similar rule for
+  nonreturning functions as this is standard semantics for all functions
+  that normally complete without a transfer of control (such as a return
+  statement).],Old=[]}]}
 @end{Discussion}
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5241,6 +5344,13 @@ normally, Program_Error is raised at the point of the call.
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Aspect No_Return is new; @nt{pragma} No_Return is now obsolescent.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0269-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Aspect No_Return can now be applied to functions as well as procedures.]}
+@end{Extend2012}
+
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -5477,7 +5587,7 @@ statement.]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0177-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<expression_function_declaration>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
    [@Syn2{overriding_indicator}]
@@ -5492,13 +5602,78 @@ rhs="@Chg{Version=[3],New=<
 
 @begin{Resolution}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the @nt{expression}
 @Chg{Version=[4],New=[or @nt{aggregate} ],Old=[]}of an
 @nt{expression_@!function_@!declaration} is the result type (see
 @RefSecNum{Return Statements}) of the function.@PDefn2{Term=[expected type],
 Sec=(expression of expression function)}]}
 @end{Resolution}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0177-1],ARef=[AI05-0264-1],ARef=[AI12-0157-1],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Text=[An @nt{expression_@!function_@!declaration} declares
+an @i{expression function}.@Defn{expression function}@Defn2{Term=[function],Sec=[expression]}
+The @i<return expression>@Defn2{Term=[return expression],Sec=[of expression function]}
+of an expression function is the @nt{expression} or @nt{aggregate} of the
+@nt{expression_function_declaration}. A completion
+is not allowed for an @nt{expression_@!function_@!declaration}; however, an
+@nt{expression_@!function_@!declaration} can complete a previous declaration.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @i<potentially static expression>
+is defined in the same way as a static expression except
+that@Defn{potentially static expression}]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[a name denoting a formal parameter of an
+    expression function is a potentially static expression; and]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[each use of @ldquote@;static expression@rdquote
+    in the definition of @ldquote@;static expression@rdquote is replaced with
+    a corresponding use of @ldquote@;potentially static expression@rdquote
+    in the definition of @ldquote@;potentially static expression@rdquote.]}
+@end{Itemize}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[These uses occur in the definition of
+  @ldquote@;static expression@rdquote in the cases of function calls, type
+  conversions, qualified expressions, membership tests, short circuit control
+  forms, conditional expressions, and parenthesized expressions.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following language-defined
+representation aspect may be specified for an expression function:]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[Static@\The type of aspect Static is Boolean. When
+aspect Static is True for an expression function, the function is a @i<static
+expression function>. If directly specified, the @nt{aspect_definition} shall
+be a static@AspectDefn{Static}
+expression.@Defn{static expression function}@Defn2{Term=[expression function],Sec=(static)}]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Static],
+  Text=[@ChgAdded{Version=[5],Text=[Specifies that an associated expression
+    function can be used in static expressions.]}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@\The Static value for an inherited function is True
+if some corresponding primitive function of the parent or progenitor type is a
+static expression function; otherwise, if not directly specified, the aspect is
+False.]}
+@end{Description}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[A static expression function is a static
+function; see @RefSecNum{Static Expressions and Static Subtypes}.]]}
+@end{StaticSem}
+
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
@@ -5509,7 +5684,7 @@ completion, it shall be the completion of a @nt{subprogram_declaration} or
 shall conform fully to that of the declaration.@Defn2{Term=[full conformance],Sec=(required)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[If the result subtype has one or more unconstrained
 access discriminants, the accessibility level of the anonymous access type of
 each access discriminant, as determined by the @nt{expression}
@@ -5536,23 +5711,70 @@ elaborated the @nt{expression_@!function_@!declaration}.]}
   cannot fail as a tagged type cannot be
   declared locally in an expression function.]}
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Aspect Static shall be specified
+to have the value True only if the associated
+@nt{expression_@!function_@!declaration}:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[is not a completion;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[has an @nt{expression} that is a potentially
+    static expression;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[contains no calls to itself;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[each parameter (if any) is of mode @key[in]
+    and is of a static subtype;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[has a result subtype that is a static subtype;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[has no applicable precondition or postcondition
+    expression; and]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[is not type-invariant preserving for any type
+    (see @RefSecNum{Type Invariants}).]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Since a string subtype can be static,
+  this allows an expression function of a string type to be static.]}
+@end{Ramification}
+
 @end{Legality}
 
+@begin{NotIso}
+@ChgAdded{Version=[3],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraph 6
+was deleted.>}]}@Comment{This message should be deleted if the paragraphs
+are ever renumbered.}@ChgNote{This special message is needed to get rid of
+the old, now unused, subheader}
+@end{NotIso}
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0264-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
-@ChgAdded{Version=[3],Text=[An @nt{expression_@!function_@!declaration} declares
-an @i{expression function}.@Defn{expression function}@Defn2{Term=[function],Sec=[expression]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[An
+@nt{expression_@!function_@!declaration} declares an @i{expression
+function}.@Defn{expression function}@Defn2{Term=[function],Sec=[expression]}
 @Chg{Version=[4],New=[The @i<return expression>@Defn2{Term=[return expression],Sec=[of expression function]}
 of an expression function is the @nt{expression} or @nt{aggregate} of the
 @nt{expression_function_declaration}. ],Old=[]}A completion
 is not allowed for an @nt{expression_@!function_@!declaration}; however, an
-@nt{expression_@!function_@!declaration} can complete a previous declaration.]}
+@nt{expression_@!function_@!declaration} can complete a previous declaration.]}]}
 @end{StaticSem}
 
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0177-1],ARef=[AI05-0262-1]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI95-0147-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0157-1]}
 @ChgAdded{Version=[3],Text=[ The execution of an expression function is invoked
 by a subprogram call. For the execution of a subprogram call on an expression
 function, the execution of the @nt{subprogram_body} executes an implicit
@@ -5595,5 +5817,9 @@ Elaboration_Check.]}
   A @nt{aggregate} can directly be the return expression of an expression
   function. This eliminates the double parentheses that otherwise would be
   necessary.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[5],Text=[Aspect Static is new; it allows using suitable
+  expression functions in static expressions.]}
 @end{Extend2012}
 

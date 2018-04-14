@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.59 $ $Date: 2012/11/28 23:53:06 $ $Author: randy $ }
+@Comment{ $Revision: 1.60 $ $Date: 2018/04/07 06:16:41 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2012/11/28 23:53:06 $}
+@Comment{$Date: 2018/04/07 06:16:41 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1203,8 +1203,10 @@ pragma.]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0247-1]}
 @ChgAdded{Version=[2],Text=[An implementation is required to detect a
-potentially blocking operation within a protected operation, and to raise
+potentially blocking operation @Chg{Version=[5],New=[during],Old=[within]}
+a protected operation, and to raise
 Program_Error (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
 @end{RunTime}
 

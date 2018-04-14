@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:39 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1851,7 +1851,79 @@ Old=[the invariant expression applies to all descendants of @i<T>.]}]}
   descendant type; "applies" is formally defined in
   @RefSecNum{Aspect Specifications}.]}
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If one or more invariant
+expressions apply to a nonabstract type @i<T>, then
+a subprogram or entry is said to be @i<type-invariant preserving> for @i<T>
+if@Defn{type-invariant preserving}]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[it is declared within the immediate
+    scope of @i<T> (or by an instance of a generic unit, and the generic is
+    declared within the immediate scope of type @i<T>), or is the Read or Input
+    stream-oriented attribute of type @i<T>, and either:]}
+
+@begin{InnerItemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<T> is a private type or a private extension
+      and the subprogram or entry is visible outside the immediate scope of type
+      @i<T> or overrides an inherited operation that is visible outside the
+      immediate scope of @i<T>; or]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<T> is a record extension, and the subprogram
+      or entry is a primitive operation visible outside the immediate scope of
+      type @i<T> or overrides an inherited operation that is visible outside the
+      immediate scope of @i<T>.]}
+
+@end{InnerItemize}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[and at least one of the following
+    applies to the callable entity:]}
+
+@begin{InnerItemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[has a result with a part of type @i<T>;]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[has one or more @key[out] or @key[in out]
+      parameters with a part of type @i<T>;]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[has an access-to-object parameter or result
+      whose designated type has a part of type @i<T>; or]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[is a procedure or entry that has an @key[in]
+      parameter with a part of type @i<T>.]}
+
+@begin{Discussion}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[We don't check @key[in] parameters for
+        functions to avoid infinite recursion for calls to public functions
+        appearing in invariant expressions. Such function calls are unavoidable
+        for class-wide invariants and likely for other invariants. This is the
+        simplest rule that avoids trouble, and functions are much more likely to
+        be queries that don't modify their parameters than other callable
+        entities.]}]}
+@end{Discussion}
+
+@end{InnerItemize}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[5],NoPrefix=[T],Text=[Each such part of type @i<T> is
+    said to be @i<subject to an invariant check>
+    for @i<T>.@Defn{subtype to an invariant check}@Defn2{Term=[invariant check],Sec=(subject to)}]}
+
+@end{Itemize}
+
+
 @end{StaticSem}
+
 @begin{Runtime}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0290-1]}
@@ -1936,87 +2008,119 @@ on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-de
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0146-1]}
-  @ChgAdded{Version=[3],Text=[After a successful call on the Read or Input
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0075-1],ARef=[AI12-0193-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Upon],Old=[After a]}
+    successful @Chg{Version=[5],New=[return from a ],Old=[]}call on
+    @Chg{Version=[5],New=[any subprogram or entry which is
+    type-invariant preserving for @i<T>, an invariant],Old=[the Read or Input
     @Chg{Version=[4],New=[stream-oriented],Old=[stream]} attribute of the
-    type @i<T>, the check is performed on the object
-    initialized by the @Chg{Version=[4],New=[],Old=[stream ]}attribute;]}
+    type @i<T>, the]} check is performed on
+    @Chg{Version=[5],New=[each part of type @i<T> which is subject to an invariant check
+    for @i<T>. In the case of a call to a protected operation, the check is
+    performed before the end of the protected action. In the case of a call
+    to a task entry, the check is performed before the end of the
+    rendezvous],Old=[the object
+    initialized by the @Chg{Version=[4],New=[],Old=[stream ]}attribute]};]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 16
+through 20 were deleted.>}]}@Comment{This message should be deleted if the
+paragraphs are ever renumbered.}
+@end{NotIso}
+
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
-  @ChgAdded{Version=[3],Type=[Leading],Text=[An invariant is checked upon successful return from a call
-  on any subprogram or entry that:]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[An
+  invariant is checked upon successful return from a call
+  on any subprogram or entry that:]}]}
   @begin{Itemize}
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
     @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0042-1]}
-    @ChgAdded{Version=[3],Text=[is declared within the immediate
+    @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
+    @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[is declared within the immediate
       scope of type @i<T> (or by an instance of a generic unit, and the generic
-      is declared within the immediate scope of type @i<T>),@Chg{Version=[4],New=[],Old=[ and]}]}
+      is declared within the immediate scope of type @i<T>),@Chg{Version=[4],New=[],Old=[ and]}]}]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal]}
     @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0042-1]}
-    @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[is visible outside the
+    @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Chg{Version=[4],New=[],Old=[is
+      visible outside the
       immediate scope of type @i<T> or overrides an operation that is visible outside
-      the immediate scope of @i<T>, and]}]}
+      the immediate scope of @i<T>, and]}]}]}
 
     @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0289-1]}
     @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0042-1],ARef=[AI12-0044-1]}
+    @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
     @ChgAdded{Version=[4],Type=[Leading],Text=[]}@ChgNote{To get conditional Leading}
-    @Chg{Version=[3],New=[@Chg{Version=[4],New=[and either:],
-      Old=[has a result with a part of type @i<T>, or one or more parameters
-      with a part of type @i<T>, or an access to variable
-      parameter whose designated type has a part of type @i<T>.]}],Old=[]}
+    @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Chg{Version=[4],New=[and
+      either:], Old=[has a result with a part of type @i<T>, or one or more
+      parameters with a part of type @i<T>, or an access to variable
+      parameter whose designated type has a part of type @i<T>.]}]}]}
 
 @begin{Itemize}
       @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
-      @ChgAdded{Version=[4],Text=[has a result with a part of type @i<T>, or]}
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[has a result with a
+        part of type @i<T>, or]}]}
 
       @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1]}
-      @ChgAdded{Version=[4],Text=[has one or more @key[out] or @key[in out]
-        parameters with a part of type @i<T>, or]}
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[has one or more
+        @key[out] or @key[in out] parameters with a part of type @i<T>, or]}]}
 
       @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0044-1],ARef=[AI12-0149-1]}
-      @ChgAdded{Version=[4],Text=[has an access-to-object parameter or result
-        whose designated type has a part of type @i<T>, or]}
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[has an
+        access-to-object parameter or result
+        whose designated type has a part of type @i<T>, or]}]}
 
       @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1],ARef=[AI12-0044-1]}
-      @ChgAdded{Version=[4],Text=[is a procedure or entry that has an @key[in]
-        parameter with a part of type @i<T>,]}
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[is a procedure
+        or entry that has an @key[in] parameter with a part of type @i<T>,]}]}
 
 @begin{Discussion}
       @ChgRef{Version=[4],Kind=[AddedNormal]}
-      @ChgAdded{Version=[4],Text=[We don't check @key[in] parameters for
+      @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[We don't
+        check @key[in] parameters for
         functions to avoid infinite recursion for calls to public functions
         appearing in invariant expressions. Such function calls are unavoidable
         for class-wide invariants and likely for other invariants. This is the
         simplest rule that avoids trouble, and functions are much more likely to
         be queries that don't modify their parameters than other callable
-        entities.]}
+        entities.]}]}
 @end{Discussion}
 @end{Itemize}
 
     @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
-    @ChgAdded{Version=[4],Type=[Leading],Text=[and either:]}
+    @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+    @ChgAdded{Version=[4],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[and either:]}]}
 
     @begin{Itemize}
       @ChgRef{Version=[4],Kind=[Added]}
-      @ChgAdded{Version=[4],Text=[@i<T> is a private type or a private extension
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[@i<T> is a
+        private type or a private extension
         and the subprogram or entry is visible outside the immediate scope of
         type @i<T> or overrides an inherited operation that is visible outside
-        the immediate scope of @i<T>, or]}
+        the immediate scope of @i<T>, or]}]}
 
       @ChgRef{Version=[4],Kind=[Added]}
-      @ChgAdded{Version=[4],Text=[@i<T> is a record extension, and the
+      @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0075-1]}
+      @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[@i<T> is a
+        record extension, and the
         subprogram or entry is a primitive operation visible outside the
         immediate scope of type @i<T> or overrides an inherited operation that
-        is visible outside the immediate scope of @i<T>.]}
+        is visible outside the immediate scope of @i<T>.]}]}
     @end{Itemize}
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0193-1]}
-  @ChgAdded{Version=[3],NoPrefix=[T],Text=[The check is performed on each such
-  part of type @i<T>.@Chg{Version=[5],New=[ In the case of a call to a
-  protected operation, the check is performed before the end of the protected
-  action. In the case of a call to a task entry, the check is performed before
-  the end of the rendezvous.],Old=[]}]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The check
+  is performed on each such
+  part of type @i<T>.]}]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0167-1]}
@@ -2254,10 +2358,100 @@ value.]}
   and programs depending on assertion failure should be very rare outside of
   test cases, we don't document this as inconsistent.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[5],Text=[Defined the term @ldquote@;type-invariant
+  preserving@rdquote to allow rules in other subclauses to reference these
+  rules. No semantic change is intended.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified when type invariant
   checks happen for protected actions and entry calls.]}
 @end{DiffWord2012}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a private type or private
+extension, the following
+language-defined aspect may be specified with an @nt{aspect_specification}
+(see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[Default_Initial_Condition@\This aspect shall be
+specified by an expression, called a @i<default initial condition expression>.
+Default_Initial_Condition may be specified on a
+@nt{private_type_declaration} or a @nt{private_extension_declaration}.
+@Defn{default initial condition expression}
+@AspectDefn{Default_Initial_Condition}]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Default_Initial_Condition],
+  Text=[@ChgAdded{Version=[5],Text=[A condition that must hold true after
+  the default initialization of an object.]}]}
+@end{Description}
+
+@begin{Resolution}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[The expected type for a default initial condition
+expression is any boolean type.]}
+
+@end{Resolution}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[The Default_Initial_Condition aspect shall not be
+specified for a type whose partial view has unknown
+discriminants@Redundant[, whether explicitly declared or inherited].]}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[If the Default_Initial_Value aspect is specified for
+a type T, then the default initial condition expression applies to T and to all
+descendants of T.]}
+
+@end{StaticSem}
+
+@begin{Runtime}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[If one or more default initial condition expressions
+apply to a type T, then a default initial condition check is performed after
+successful default initialization of an object of type T by default (see
+@RefSecNum{Object Declarations}).
+In the case of a controlled type, the check is performed after the call to the
+type's Initialize procedure (see @RefSecNum{Assignment and Finalization}).]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[If performing checks is required by the Default_Initial_Condition
+assertion policy (see @RefSecNum{Pragmas Assert and Assertion_Policy}) in
+effect at the point of the
+corresponding @nt{aspect_specification} applicable to a given type, then
+the respective default initial condition expression is
+considered enabled.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[The default initial condition check consists of the
+evaluation of each enabled default initial condition expression that applies to
+T. These evaluations, if there are more than one, are performed in an arbitrary
+order. If any of these evaluate to False, Assertions.Assertion_Error is raised
+at the point of the object initialization.@Defn{default initial condition check}@Defn2{Term=[check, language-defined],
+Sec=[controlled by assertion policy]}]}
+
+@end{Runtime}
+
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Aspect Default_Initial_Condition is new.]}
+@end{Extend2012}
 
 
 @LabeledAddedSubClause{Version=[5],Name=[Stable Properties of a Type]}

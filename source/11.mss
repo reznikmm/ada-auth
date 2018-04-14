@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:40 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.96 $}
+@Comment{$Revision: 1.97 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1397,10 +1397,13 @@ implementation, checked at run-time, or handled in some implementation-defined
 manner.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[3],Text=[Assert pragmas, subtype predicates (see
 @RefSecNum{Subtype Predicates}), preconditions and postconditions (see
-@RefSecNum{Preconditions and Postconditions}), and type invariants (see
-@RefSecNum{Type Invariants}) are collectively referred to as
+@RefSecNum{Preconditions and Postconditions}), @Chg{Version=[5],New=[],Old=[ and]}
+type invariants (see @RefSecNum{Type Invariants})@Chg{Version=[5],New=[, and
+default initial conditions (see @RefSecNum{Default Initial Conditions})],Old=[]}
+are collectively referred to as
 @i{assertions}; their boolean expressions are referred to as @i{assertion
 expressions}.@Defn{assertions}@Defn{assertion expressions}]}
 
@@ -1500,10 +1503,12 @@ of a @nt{pragma} Assert is type String.]}
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00286-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[The
 @SynI<assertion_>@nt{aspect_mark} of a @nt{pragma} Assertion_Policy shall
 be one of Assert, Static_Predicate, Dynamic_Predicate, Pre, Pre'Class, Post,
-Post'Class, Type_Invariant, Type_Invariant'Class, or some
+Post'Class, Type_Invariant, Type_Invariant'Class,
+@Chg{Version=[5],New=[Default_Initial_Condition, ],Old=[]}or some
 implementation defined @nt{aspect_mark}. ],Old=[]}The
 @SynI<policy_>@nt<identifier>@Chg{Version=[3],New=[],Old=[ of a @nt{pragma}
 Assertion_Policy]} shall be either Check, Ignore, or @Chg{Version=[3],New=[some],Old=[an]}
@@ -1665,23 +1670,26 @@ but if it is invoked within a protected action, it might result in deadlock or a
 @end{Bounded}
 
 @begin{ImplReq}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
-@ChgAdded{Version=[5],Text=[Any postcondition expression or type invariant
-expression occurring in the specification of a language-defined unit is enabled
-(see @RefSecNum{Preconditions and Postconditions} and
-@RefSecNum{Type Invariants}).]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[Any postcondition expression, type invariant
+expression, or default initial condition expression occurring in the
+specification of a language-defined unit is enabled
+(see @RefSecNum{Preconditions and Postconditions},
+@RefSecNum{Type Invariants}, and @RefSecNum{Default Initial Conditions}).]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[The Assertion_Policy does not have an effect
-  on such postconditions and invariants. This has no execution impact since
-  such assertions shouldn't fail anyway (see the next rule).]}
+  on such postconditions, invariants, and default initial conditions. This
+  has no execution impact since such assertions shouldn't fail anyway (see
+  the next rule).]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
-@ChgAdded{Version=[5],Text=[The evaluation of any such postcondition or type
-invariant expression shall either yield True or propagate an exception from a
-@nt{raise_expression} that appears within the assertion expression.]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
+@ChgAdded{Version=[5],Text=[The evaluation of any such postcondition, type
+invariant, or default initial condition expression shall either yield True
+or propagate an exception from a @nt{raise_expression} that appears within
+the assertion expression.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1700,9 +1708,10 @@ invariant expression shall either yield True or propagate an exception from a
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[This allows the Standard to express semantic
-  requirements as postconditions or invariants (which are invariably clearer
-  than English prose would be) while keeping it clear that failing the assertion
-  check (or any other run time check) is not conforming behavior.]}
+  requirements as postconditions, invariants, or default initial conditions
+  (which are invariably clearer than English prose would be) while keeping it
+  clear that failing the assertion check (or any other run time check) is not
+  conforming behavior.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1813,11 +1822,15 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend2005}
 
 @begin{Diffword2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0179-1]}
-  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording that postconditions
-  and type invariants given on language-defined units cannot fail. This is not
-  considered an inconsistency, since there are no such postconditions or
-  invariants in Ada 2012.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording that postconditions,
+  type invariants, and default initial conditions given on language-defined
+  units cannot fail. This is not considered an inconsistency, since there are no
+  such postconditions, invariants, or default initial conditions in Ada 2012.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+  @ChgAdded{Version=[5],Text=[Added default initial conditions to the
+  kinds of assertions (see @RefSecNum{Default Initial Conditions}).]}
 @end{Diffword2012}
 
 
@@ -2079,8 +2092,7 @@ exception Constraint_Error is raised upon failure.]
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @RootDefn{Access_Check}
-Access_Check @\@Redundant[When evaluating a dereference (explicit
-or implicit),
+Access_Check @\When evaluating a dereference (explicit or implicit),
 check that the value of the @nt{name} is not @key{null}.
 @Chg{Version=[2],New=[When converting to a subtype that excludes null,
 check that the converted value is not @key{null}.],
@@ -2088,46 +2100,45 @@ Old=[When passing an actual parameter to a formal access parameter,
 check that the value of the actual parameter is not @key{null}.
 @Chg{Version=[1],New=[When evaluating a @nt{discriminant_association} for an
 access discriminant, check that the value of the discriminant is not @key{null}.],
-Old=[]}]}]
+Old=[]}]}
 
 @RootDefn{Discriminant_Check}
-Discriminant_Check @\@Redundant[Check that the discriminants of a
-composite value
+Discriminant_Check @\Check that the discriminants of a composite value
 have the values imposed by a discriminant constraint. Also, when
 accessing a record component, check that it exists for the current
-discriminant values.]
+discriminant values.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @RootDefn{Division_Check}
-Division_Check @\@Redundant[Check that the second operand is not zero
-for the
+Division_Check @\Check that the second operand is not zero for the
 operations /, @Chg{Version=[2],New=[@key[rem]],Old=[rem]} and
-@Chg{Version=[2],New=[@key[mod]],Old=[mod]}.]
+@Chg{Version=[2],New=[@key[mod]],Old=[mod]}.
 
 @RootDefn{Index_Check}
-Index_Check @\@Redundant[Check that the bounds of an array value are
+Index_Check @\Check that the bounds of an array value are
 equal to the
 corresponding bounds of an index constraint. Also, when accessing a
 component of an array object, check for each dimension that the given
 index value belongs to the range defined by the bounds of the array
 object. Also, when accessing a slice of an array object, check that
 the given discrete range is compatible with the range defined by the
-bounds of the array object.]
+bounds of the array object.
 
 @RootDefn{Length_Check}
-Length_Check @\@Redundant[Check that two arrays have matching
+Length_Check @\Check that two arrays have matching
 components,
 in the case of array subtype conversions,
-and logical operators for arrays of boolean components.]
+and logical operators for arrays of boolean components.
 
 @RootDefn{Overflow_Check}
-Overflow_Check @\@Redundant[Check that a scalar value is within the
+Overflow_Check @\Check that a scalar value is within the
 base range of
 its type, in cases where the implementation chooses to raise an
-exception instead of returning the correct mathematical result.]
+exception instead of returning the correct mathematical result.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0244-1]}
 @RootDefn{Range_Check}
-Range_Check @\@Redundant[Check that a scalar value satisfies a range
+Range_Check @\Check that a scalar value satisfies a range
 constraint.
 Also, for the elaboration of a @nt<subtype_indication>, check that
 the @nt<constraint> (if present) is compatible with the
@@ -2135,14 +2146,17 @@ subtype denoted by the @nt{subtype_mark}.
 Also, for an @nt<aggregate>, check that an index or
 discriminant value belongs to the corresponding subtype. Also, check
 that when the result of an operation yields an array, the value of
-each component belongs to the component subtype.]
+each component belongs to the component subtype.@Chg{Version=[5],New=[
+Also, for the attributes Value, Wide_Value, and Wide_Wide_Value, check that the
+given string has the appropriate syntax and value for the base subtype of the
+@nt{prefix} of the @nt{attribute_reference}.],Old=[]}
 
 @RootDefn{Tag_Check}
-Tag_Check @\@Redundant[Check that operand tags in a dispatching call
+Tag_Check @\Check that operand tags in a dispatching call
 are all equal.
 Check for the correct tag on tagged type conversions,
 for an @nt{assignment_statement},
-and when returning a tagged limited object from a function.]
+and when returning a tagged limited object from a function.
 @end{Hang2List}
 
 @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
@@ -2151,27 +2165,27 @@ exception Program_Error is raised upon failure.]
 @begin{Hang2List}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Accessibility_Check}
-Accessibility_Check @\@Redundant[Check the accessibility level of an
-entity or view.]]}
+Accessibility_Check @\Check the accessibility level of an
+entity or view.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Allocation_Check}
-Allocation_Check @\@Redundant[For an @nt<allocator>, check that the master of
+Allocation_Check @\For an @nt<allocator>, check that the master of
 any tasks to be created by the @nt{allocator} is not yet completed or some
 dependents have not yet terminated, and that the finalization of the
-collection has not started.]]}
+collection has not started.]}
 
 @RootDefn{Elaboration_Check}
-Elaboration_Check @\@Redundant[When a subprogram or protected entry is
+Elaboration_Check @\When a subprogram or protected entry is
 called, a task activation is accomplished,
 or a generic instantiation is elaborated, check that the body
-of the corresponding unit has already been elaborated.]
+of the corresponding unit has already been elaborated.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00280]}
 @ChgNote{This item is not in alphabetical order}
 @ChgDeleted{Version=[2],Text=[@RootDefn{Accessibility_Check}
-Accessibility_Check @\@Redundant[Check the accessibility level of an
-entity or view.]]}
+Accessibility_Check @\Check the accessibility level of an
+entity or view.]}
 
 @end{Hang2List}
 
@@ -2180,11 +2194,11 @@ exception Storage_Error is raised upon failure.]
 @begin{Hang2List}
 @RootDefn{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
-Storage_Check @\@Redundant[Check that evaluation of an @nt{allocator}
+Storage_Check @\Check that evaluation of an @nt{allocator}
 does not require
 more space than is available for a storage pool. Check
 that the space available for a task or subprogram has
-not been exceeded.]
+not been exceeded.
 @begin{Reason}
 We considered splitting this out into three categories:
 Pool_Check (for @nt{allocator}s), Stack_Check (for stack usage),
@@ -2416,6 +2430,13 @@ Program_Error checks was corrected to be alphabetical.]}
   able to reason about the body), and so that assertion policies and
   suppress work the same way for inlining.]}
 @end{DiffWord2005}
+
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0244-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction>: Range_Check is defined to
+  include checks associated with the Value and related attributes.]}
+@end{DiffWord2012}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

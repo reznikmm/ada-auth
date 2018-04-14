@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:54 $}
+@Comment{$Date: 2018/04/07 06:16:39 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.70 $}
+@Comment{$Revision: 1.71 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2360,6 +2360,10 @@ type],Old=[]};
 
 an enumeration literal;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1]}
+@ChgAdded{Version=[5],Text=[a static expression function
+(see @RefSecNum{Expression Functions});]}
+
 a language-defined attribute that is a function,
 if the @nt{prefix} denotes a static scalar subtype,
 and if the parameter and result types are scalar.
@@ -2650,6 +2654,28 @@ The declaration of X is legal, since the divide-by-zero part of the
 expression is not evaluated.
 X is a static constant equal to True.
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The preceding
+  @ldquote@;statically unevaluated@rdquote rule allows]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[X : @key[constant] := (@key[if] True @key[then] 37 @key[else] (1 / 0));]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[but does not allow]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] If_Then_Else (Flag : Boolean; X, Y : Integer) @key[return] Integer @key[is]
+   (@key[if] Flag @key[then] X @key[else] Y) @key[with] Static; -- @Examcom{see @RefSecNum{Expression Functions}}
+X : @key[constant] := If_Then_Else (True, 37, 1 / 0);]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Trailing],Text=[because evaluation of a function
+  call includes evaluation of all of its actual parameters.]}
 @end{Discussion}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00269-01]}
@@ -2971,6 +2997,10 @@ raising.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
   @ChgAdded{Version=[5],Text=[Defined the staticness of the Nonblocking
   attribute (see @RefSecNum{Intertask Communication}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0075-1]}
+  @ChgAdded{Version=[5],Text=[Expression functions can be static if declared
+  correctly; this is documented as an extension in @RefSecNum{Expression Functions}.]}
 @end{Diffword2012}
 
 

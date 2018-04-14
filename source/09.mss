@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:39 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 
@@ -1982,7 +1982,8 @@ directly specified, the @nt{aspect_definition} shall be a
 nonblocking-static expression. The expected type for the @nt{expression} is
 the predefined type Boolean. @Redundant[The @nt{aspect_definition} can be
 omitted from the specification of this aspect; in that case the
-nonblocking expression for the entity is the enumeration literal True.]]}
+nonblocking expression for the entity is the enumeration literal
+True.@AspectDefn{Nonblocking}]]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Nonblocking],
   InitialVersion=[5],
@@ -2244,7 +2245,7 @@ denotes a subtype (including formal subtypes)}:]}
     S; evaluation of S'Nonblocking evaluates that expression.],Old=[]}
 @end(description)
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0247-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following are defined to be
 @i{potentially blocking} operations:@Defn{potentially blocking operation}
 @Defn{blocking, potentially}]}
@@ -2281,23 +2282,12 @@ denotes a subtype (including formal subtypes)}:]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[during a protected action, an external call on a
     protected subprogram (or an external requeue) with the same target object as
-    that of the protected action;]}
+    that of the protected action.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[This is really a deadlocking call, rather than a
     blocking call, but we include it in this list for simplicity.]}
-@end{Reason}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[a call on a subprogram whose body contains a
-    potentially blocking operation.]}
-
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This allows an implementation to check and raise
-    Program_Error as soon as a subprogram is called, rather than waiting to find
-    out whether it actually reaches the potentially blocking operation.]}
 @end{Reason}
 
 @end{Itemize}
@@ -2308,10 +2298,9 @@ then a call on the subprogram is a potentially blocking operation.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Other subprograms that allow blocking are not
-    necessarily potentially blocking; if the body of such a subprogram does not
-    contain any potentially blocking operations, then a call on it is not
-    a potentially blocking operation.]}
+  @ChgAdded{Version=[5],Text=[Calls on other subprograms that allow blocking
+    are not themselves potentially blocking; the execution of the body
+    could execute a potentially blocking operation.]}
 @end{Ramification}
 
 @end{StaticSem}
@@ -2898,9 +2887,13 @@ in this bounded error case. A way to ensure that this does not happen is to use
 pragma Detect_Blocking (see @RefSecNum{Pragma Detect_Blocking}).]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0064-2]}
-@ChgDeleted{Version=[5],Text=[Certain language-defined subprograms are
-potentially blocking.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0064-2],ARef=[AI12-0247-1]}
+@Chg{Version=[5],New=[During a protected action, a call on a subprogram whose
+body contains a potentially blocking operation is a bounded error.
+@PDefn2{Term=(bounded error),Sec=(cause)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+If the bounded error is detected, Program_Error is raised; otherwise, the call proceeds
+normally. ],Old=[Certain language-defined subprograms are potentially blocking.
 In particular, the subprograms of
 the language-defined input-output packages that manipulate
 files (implicitly or explicitly) are potentially blocking.
@@ -2920,6 +2913,14 @@ subprograms in language-defined input-output packages not covered by this rule
 string parameters defined in the packages nested in Text_IO.],Old=[]}]}@ChgNote{This
 was the resolution of a ramification.}
 @end{Discussion}
+@begin{Reason}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI12-0247-1]}
+@ChgAdded{Version=[5],Text=[This allows an implementation to check and raise
+  Program_Error as soon as a subprogram is called, rather than waiting to find
+  out whether it actually reaches the potentially blocking operation. If the
+  call proceeds normally, reaching the potentially blocking operation is a
+  separate bounded error, covered by the previous rules.]}
+@end{Reason}
 @end{Bounded}
 
 @begin{Notes}
@@ -3011,6 +3012,12 @@ Control.Release;
   @ChgAdded{Version=[5],Text=[Moved the definition of potentially blocking
   operations to @RefSecNum{Intertask Communication}, so it could be
   integrated into the definition of the Nonblocking aspect.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0247-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a separate bounded error
+  for a subprogram containing a blocking operation, to keep compatibility with
+  Ada 95 rules without requiring a correct implementation of pragma
+  Detect_Blocking to do full program analysis.]}
 @end{DiffWord2012}
 
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/07 06:16:40 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1772,9 +1772,11 @@ aspect.]}
 rather] are resolved at the end of the immediately enclosing declaration list.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0180-1]}
-@ChgAdded{Version=[3],Text=[If the associated declaration is for a subprogram or
-entry, the names of the formal parameters are directly visible within the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0180-1],ARef=[AI12-0220-1]}
+@ChgAdded{Version=[3],Text=[If the associated declaration is for a
+subprogram@Chg{Version=[5],New=[,],Old=[ or]} entry, @Chg{Version=[5],New=[ or
+access-to-subprogram type,],Old=[]} the names of the formal parameters are
+directly visible within the
 @nt{aspect_definition}, as are certain attributes, as specified elsewhere in
 this International Standard for the identified aspect. If the associated
 declaration is a @nt{type_declaration}, within the @nt{aspect_definition} the
@@ -2160,6 +2162,15 @@ such aspects and the legality rules for such aspects.]}]}
   capability not available from the associated pragma, and moreover
   no known Ada 2012 implementation has ever allowed late evaluation of
   such aspects. As such, there should be no practical incompatibility.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgAdded{Version=[5],Text=[Parameters of access-to-subprogram types are
+  now visible in aspect specifications. This can be incompatible if some
+  entity with the same name as a parameter is used in an existing aspect
+  specification. We believe that all such aspects require either static
+  expressions or statically denoting of a subprogram; since a parameter
+  can be neither of these and hides everything else, all such cases will be
+  caught at compile-time. In addition, we expect such cases to be very rare.]}
 @end{Incompatible2012}
 
 @begin{Diffword2012}

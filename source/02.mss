@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2016/11/24 02:33:50 $}
+@Comment{$Date: 2018/04/07 06:16:38 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.88 $}
+@Comment{$Revision: 1.89 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -21,12 +21,13 @@ described in this @Chg{Version=[3],New=[clause],Old=[section]}.]
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @Defn{character set}
 The @Chg{Version=[2],New=[character repertoire for the text of an Ada
 program consists of the
-entire coding space described by the ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}
-Universal
-Multiple-Octet Coded Character Set. This coding space is organized in
+entire coding space described by the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}
+Universal @Chg{Version=[5],New=[],Old=[Multiple-Octet ]}Coded
+Character Set. This coding space is organized in
 @i<planes>, each plane comprising 65536 characters.@Defn2{Term=[plane],Sec=[character]}
 @Defn{character plane}],Old=[only characters
 allowed outside of @nt{comment}s are the @nt{graphic_character}s and
@@ -48,8 +49,9 @@ representation of the space character.]}
 @begin(Discussion)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 It is our intent to follow the terminology of
-@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[ISO 10646 BMP]} where
+@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[ISO 10646 BMP]} where
 appropriate, and to remain compatible with the character
 classifications defined in @RefSec{Character Handling}.@Chg{Version=[2],
 New=[],Old=[Note that our definition for
@@ -74,9 +76,10 @@ rhs="@Chg{Version=[2],New=<>,Old=<@Synf{identifier_letter} | @Synf{digit} | @Syn
 @begin{SyntaxText}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[A @ntf{character} is defined by this International
-Standard for each cell in the coding space described by ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]},
-regardless of whether or not ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} allocates a character to that
+Standard for each cell in the coding space described by ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]},
+regardless of whether or not ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} allocates a character to that
 cell.]}
 @end{SyntaxText}
 @end{Syntax}
@@ -84,17 +87,18 @@ cell.]}
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0079-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 The@Chg{Version=[2],New=[],Old=[ character repertoire for the text of
 an Ada program consists of the
 collection of characters
-@Chg{Version=[2],New=[described by the ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],
+@Chg{Version=[2],New=[described by the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],
 Old=[called the Basic Multilingual Plane (BMP) of the
 ISO 10646]} Universal Multiple-Octet Coded Character Set, plus a set
 of @ntf<format_effector>s and, in comments only,
 a set of @ntf<other_control_function>s; the]} coded representation for
 @Chg{Version=[2],New=[],Old=[these ]}characters is implementation defined
 @Redundant[(it need not be a
-representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],
+representation defined within @Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],
 Old=[ISO-10646-1]})].@Chg{Version=[2],New=[ A character whose relative
 code @Chg{Version=[3],New=[point],Old=[position]} in its plane
 is 16#FFFE# or 16#FFFF# is not allowed anywhere
@@ -115,11 +119,11 @@ characters allowed outside of comments are those in categories
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0004-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0004-1],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[The semantics of an Ada program whose text is not
 in Normalization Form @Chg{Version=[5],New=[C],Old=[KC]} (as
 defined by @Chg{Version=[3],New=[Clause 21],Old=[section 24]}
-of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]})
+of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]})
 is implementation defined.]}
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[2],
 Text=[@ChgAdded{Version=[2],Text=[The
@@ -148,11 +152,13 @@ semantics of an Ada program whose text is not in Normalization Form
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 The description of the
 language definition in this International Standard uses the @Chg{Version=[2],
 New=[character properties General Category, Simple Uppercase Mapping,
 Uppercase Mapping, and Special Case Condition of the documents referenced by
-the note in @Chg{Version=[3],New=[Clause],Old=[section]} 1 of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[graphic symbols
+@Chg{Version=[5],New=[],Old=[the note in ]}@Chg{Version=[3],New=[Clause],Old=[section]} @Chg{Version=[5],New=[2],Old=[1]}
+of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}],Old=[graphic symbols
 defined for Row 00: Basic Latin and Row 00: Latin-1 Supplement
 of the ISO 10646 BMP; these correspond to the graphic symbols of
 ISO 8859-1 (Latin-1); no graphic symbols are used in this International Standard for
@@ -162,6 +168,14 @@ for the visual representation of
 the text of an Ada program is not specified.
 @PDefn{unspecified}
 
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0263-1]}
+  @ChgAdded{Version=[5],Text=[The @ldquote@;documents
+  referenced@rdquote means Unicode, Chapter 4. See the Discussion after the
+  the character categorization definition for a source for machine-readable
+  definitions of these properties.]}
+@end{Discussion}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
 @Leading@keepnext@;@Chg{Version=[2],New=[Characters],Old=[The categories of
@@ -169,8 +183,9 @@ characters]} are @Chg{Version=[2],New=[categorized],Old=[defined]} as follows:
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[Our character classification considers that the
-cells not allocated in ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} are graphic characters, except for
+cells not allocated in ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} are graphic characters, except for
 those whose relative code @Chg{Version=[3],New=[point],Old=[position]}
 in their plane is 16#FFFE# or 16#FFFF#. This
 seems to provide the best compatibility with future versions of ISO/IEC 10646,
@@ -376,35 +391,44 @@ These are mentioned in ISO/IEC 10646:2003 as useful for implementations, with a
 reference to Unicode. Machine-readable tables are available on the web at URLs:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt],
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt],
+Text=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt]}
+@URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt],
+Text=[http://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt]}],
+Old=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt],
 Text=[http://www.unicode.org/Public/4.0-Update/UnicodeData-4.0.0.txt]}
 @URLLink{URL=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt],
-Text=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt]}]}
+Text=[http://www.unicode.org/Public/4.0-Update/CaseFolding-4.0.0.txt]}]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[with an explanatory document found at URL:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html],
-Text=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html]}]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[@URLLink{URL=[http://www.unicode.org/reports/tr44/tr44-20.html],
+Text=[http://www.unicode.org/reports/tr44/tr44-20.html]}],
+Old=[@URLLink{URL=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html],
+Text=[http://www.unicode.org/Public/4.0-Update/UCD-4.0.0.html]}]}]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[The actual text of the standard only makes
 specific references to the
-corresponding clauses of ISO/IEC 10646:2003, not to Unicode.]}
+corresponding clauses of ISO/IEC 10646@Chg{Version=[5],New=[],Old=[:2003]},
+not to Unicode.]}
 
 @end{Discussion}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @Leading@Chg{Version=[2],New=[],Old=[@Defn{names of @ntf{special_character}s}
 @Defn2{Term=[special_character],Sec=(names)}]}The
 following names are used when referring to certain
 @Chg{Version=[2],New=[characters (the first name is that given in
-ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]})],Old=[@ntf{special_character}s]}:
+ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]})],Old=[@ntf{special_character}s]}:
 @Defn{quotation mark}
 @Defn{number sign}
 @Defn{ampersand}
@@ -440,10 +464,10 @@ Old=[@Defn{left square bracket}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3],ARef=[AI12-0263-1]}
 @Chg{Version=[2],New=[@Defn{graphic symbols}@Defn{glyphs}This table
 serves to show the correspondence between
-ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} names and the graphic symbols (glyphs) used in this
+ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} names and the graphic symbols (glyphs) used in this
 International Standard. These are the characters],
 Old=[These are the ones]}
 that play a special role in the syntax of Ada@Chg{Version=[2],New=[],
@@ -453,6 +477,7 @@ The first name given is the name from ISO 10646-1; the subsequent
 names, if any, are those used within the
 standard, depending on context]}.
 @end{Discussion}
+
 @Comment{The original version follows here (commented out)
 @begin{Display}
 @TabClear()@TabSet(P9)
@@ -950,10 +975,10 @@ a reserved word.]}
 @end{Syntax}
 
 @begin{Legality}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0004-1],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[5],Text=[An identifier shall only contain characters that may
 be present in Normalization Form KC (as defined by Clause 21 of ISO/IEC
-10646:2011).]}
+10646:2017).]}
 
   @begin{ImplNote}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -974,14 +999,16 @@ be present in Normalization Form KC (as defined by Clause 21 of ISO/IEC
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0091-1],ARef=[AI05-0227-1],ARef=[AI05-0266-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @Comment{Removed the "Type=[Leading]" along with the bullets. Don't have
 a way to make it doubly conditional (only in Version=[2]), and since it is
 mainly for spacing, we just forget it.}
 @ChgAdded{Version=[2],Text=[Two @nt{identifier}s are ]}@Chg{Version=[2],
 New=[considered the same if they consist of the same sequence of characters
 after applying @Chg{Version=[3],New=[locale-independent simple case folding,
-as defined by documents referenced in the note in Clause 1 of
-ISO/IEC 10646:2011.@Defn{case insensitive}],Old=[the following transformations
+as defined by documents referenced @Chg{Version=[5],New=[],Old=[in the note ]}in
+Clause @Chg{Version=[5],New=[2],Old=[1]} of
+ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}.@Defn{case insensitive}],Old=[the following transformations
 (in this order):]}],Old=[All characters of an @nt{identifier} are significant,
 including any underline character.
 @Defn{case insensitive}
@@ -1012,10 +1039,15 @@ characters is converted to upper case.
   are not considered equivalent to one another).]}]}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0227-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
   @ChgAdded{Version=[3],Text=[The @ldquote@;documents referenced@rdquote means
-  Unicode. Note that simple case folding is supposed to be compatible between
-  Unicode versions, so the Unicode version used doesn't
-  matter.]}
+  Unicode@Chg{Version=[5],New=[, Chapter 4 (specifically, section 4.2
+  @em Case)],Old=[]}. Note that simple case folding is supposed to be
+  compatible between Unicode versions, so the Unicode version used doesn't
+  matter.@Chg{Version=[5],New=[ A machine-readable version of the needed
+  mapping can be found at:
+  @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt],
+  Text=[http://www.unicode.org/Public/UCD/latest/ucd/CaseFolding.txt]}.],Old=[]}]}
 @end(Discussion)
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0091-1],ARef=[AI05-0227-1]}

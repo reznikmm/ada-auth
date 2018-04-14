@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.84 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.85 $ $Date: 2018/04/07 06:16:41 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/04/07 06:16:41 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -612,6 +612,21 @@ When a handler is attached to an interrupt, the interrupt is blocked
 during the execution of every protected action on the protected object
 containing the handler.
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0252-1]}
+@ChgAdded{Version=[5],Text=[If restriction No_Dynamic_Attachment is in effect,
+then a check is made that the interrupt identified by an Attach_Handler aspect
+does not appear in any previously elaborated Attach_Handler aspect;
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+Program_Error is raised if this check fails.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[When No_Dynamic_Attachment is in effect,
+  it is not possible to call any previous handler. Therefore, the only
+  possibility is to replace the original handler, rendering it ineffective.
+  Having an unused handler in a program is likely a bug, so we require
+  an exception to be raised.]}
+@end{Reason}
 @end{RunTime}
 
 @begin{Erron}
@@ -802,6 +817,14 @@ a protected procedure that is an interrupt handler.
   Interrupt_Handler.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0252-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}
+  @b[Correction:] Program_Error might be raised if two handlers are attached
+  when restriction No_Dynamic_Attachment is in effect (including as part of
+  the Ravenscar profile). Original Ada 2012 would have just ignored the first
+  handler. This is almost certainly a bug rather than an intended result.]}
+@end{Inconsistent2012}
 
 
 @LabeledSubClause{The Package Interrupts}

@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2015/03/03 05:38:25 $}
+@Comment{$Date: 2018/04/07 06:16:42 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.59 $}
+@Comment{$Revision: 1.60 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -1119,31 +1119,43 @@ is as follows:@PDefn2{Term=[representation pragma], Sec=(No_Return)}
 @end{SyntaxText}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
 @AddedPragmaSyn<Version=[3],@ChgAdded{Version=[3],
-Text=[@key{pragma} @prag<No_Return> (@SynI[procedure_]@Syn2[local_name]{, @SynI[procedure_]@Syn2[local_name]});]}>
+Text=[@key{pragma} @prag<No_Return> (@Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]}{, @Chg{Version=[5],New=[@SynI[subprogram_]@Syn2[local_name]],Old=[@SynI[procedure_]@Syn2[local_name]]});]}>
 @end{Syntax}
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Text=[Each @SynI{procedure_}@nt{local_name}
-shall denote one or more procedures or generic procedures.
-@Redundant[The @SynI{procedure_}@nt{local_name} shall not denote a null
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
+@ChgAdded{Version=[3],Text=[Each @Chg{Version=[5],New=[@SynI[subprogram_]@nt{local_name}],Old=[@SynI[procedure_]@nt{local_name}]}
+shall denote one or more @Chg{Version=[5],New=[subprograms],Old=[procedures]}
+or generic @Chg{Version=[5],New=[subprograms],Old=[procedures]}.
+@Redundant[The @Chg{Version=[5],New=[@SynI[subprogram_]@nt{local_name}],Old=[@SynI[procedure_]@nt{local_name}]} shall not denote a null
 procedure nor an instance of a generic unit.]]}
 @end{Legality}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0269-1]}
 @ChgAdded{Version=[3],Text=[@nt{Pragma} No_Return specifies that the No_Return
-aspect (see @RefSecNum{Nonreturning Procedures}) for each procedure denoted
+aspect (see @RefSecNum{Nonreturning Subprograms}) for each
+@Chg{Version=[5],New=[subprogram],Old=[procedure]} denoted
 by each @nt{local_name} given in the @nt{pragma} has the value True.]}
 @end{StaticSem}
 
 @begin{DiffWord2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
   @ChgAdded{Version=[3],Text=[This subclause is new. Pragma No_Return was moved
-  here from @RefSecNum{Nonreturning Procedures}; aspect No_Return lives
+  here from @RefSecNum{Nonreturning Subprograms}; aspect No_Return lives
   there now.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0269-1]}
+  @ChgAdded{Version=[5],Text=[This subclause is new. Pragma No_Return was moved
+  here from @RefSecNum{Nonreturning Subprograms}; aspect No_Return lives
+  there now.]}
+@end{DiffWord2012}
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Pragma Pack]}

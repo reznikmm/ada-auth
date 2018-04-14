@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:33 $}
+@Comment{$Date: 2018/04/07 06:16:38 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1695,7 +1695,7 @@ an @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
    This aspect shall be specified by an @nt{expression}, which
    determines the action to be performed when a predicate check fails because a
    directly-specified predicate aspect of the subtype evaluates to
-   False, as explained below.]}
+   False, as explained below.@AspectDefn{Predicate_Failure}]}
 @end{Description}
 @ChgAspectDesc{Version=[4],Kind=[Added],Aspect=[Predicate_Failure],
   InitialVersion=[4],
@@ -5687,16 +5687,18 @@ one of its enumeration literals is a @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0181-1],ARef=[AI05-0262-1],ARef=[AI05-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @Defn{Latin-1}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 @Defn{Character}
 The predefined type Character is a character type whose values
 correspond to the 256 code @Chg{Version=[3],New=[points],Old=[positions]}
 of Row 00 (also known as Latin-1) of the
-@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[ISO 10646]}
-Basic Multilingual Plane (BMP).
+@Chg{Version=[2],New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],
+Old=[2003]}],Old=[ISO 10646]} Basic Multilingual Plane (BMP).
 Each of the graphic characters of Row 00 of the BMP has
 a corresponding @nt<character_literal> in Character.
 Each of the nongraphic @Chg{Version=[3],New=[characters],Old=[positions]}
@@ -5713,20 +5715,23 @@ in @RefSec{The Package Standard}, but are set in @i{italics}.
 
 @begin{Discussion}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[@i{Code point} is defined in ISO/IEC 10646:2011.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
+@ChgAdded{Version=[3],Text=[@i{Code point} is defined in ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @Defn{Wide_Character}
 @Defn{BMP}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Character is a character type whose
 values correspond to the 65536 code
 @Chg{Version=[3],New=[points],Old=[positions]} of the @Chg{Version=[2],
-New=[ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}],Old=[ISO 10646]}
-Basic Multilingual Plane (BMP).
+New=[ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],
+Old=[2011]}],Old=[2003]}],Old=[ISO 10646]} Basic Multilingual Plane (BMP).
 Each of the graphic characters of the BMP has
 a corresponding @nt<character_literal> in Wide_Character.
 The first 256 values of Wide_Character
@@ -5745,13 +5750,16 @@ All other values of Wide_Character are considered graphic characters,
 and have]} a corresponding @nt<character_literal>.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}@Comment{This changes the paragraph number! I didn't catch this until 2018, so it stays.}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[@Defn{Wide_Wide_Character}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}],
+@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}],
+Old=[@Defn{ISO/IEC 10646:2011}]}],
 Old=[@Defn{ISO/IEC 10646:2003}]}],Old=[@Defn{ISO 10646}]}
 The predefined type Wide_Wide_Character is a character type whose values
 correspond to the 2147483648 code @Chg{Version=[3],New=[points],Old=[positions]}
-of the ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]} character set.
+of the ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],
+Old=[2011]}],Old=[2003]} character set.
 Each of the @ntf{graphic_character}s
 has a corresponding @nt{character_literal} in
 Wide_Wide_Character. The first 65536 values of Wide_Wide_Character have the
@@ -5759,7 +5767,7 @@ same @nt{character_literal} or language-defined name as defined for
 Wide_Character.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00285-01]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}@Comment{This changes the paragraph number! I didn't catch this until 2018, so it stays.}
 @ChgAdded{Version=[2],Text=[The characters whose code
 @Chg{Version=[3],New=[point],Old=[position]} is larger
 than 16#FF# and which are not @ntf{graphic_character}s have language-defined
@@ -5798,7 +5806,7 @@ other interpretations for the predefined types Character and
 Wide_Character@Redundant[, to conform to local conventions].]}
 @end{ImplPerm}
 @begin{NotIso}
-@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 6 and 7
+@ChgAdded{Version=[2],Noparanum=[T],Text=[@Shrink{@i<Original Paragraphs 4 and 5
 were deleted.>}]}@Comment{This message should be deleted if the paragraphs
 are ever renumbered.}
 @end{NotIso}

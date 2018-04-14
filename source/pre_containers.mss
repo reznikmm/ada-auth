@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.101 $ $Date: 2017/01/14 02:32:56 $ $Author: randy $ }
+@comment{ $Revision: 1.102 $ $Date: 2018/04/07 06:16:40 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2017/01/14 02:32:56 $}
+@Comment{$Date: 2018/04/07 06:16:40 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -217,21 +217,30 @@ These include:]}
 
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0258-1]}
 @ChgAdded{Version=[2],Text=[If a container's element type is controlled, the
 point at which the element is finalized will depend on the implementation of
-the container. We do not specify precisely where this will happen (it will
-happen no later than the finalization of the container, of course) in order to
-give implementation's flexibility to cache, block, or split the nodes of the
-container. In particular, Delete does not necessarily finalize the element; the
-implementation may (or may not) hold the space for reuse.]}
+the container. @Chg{Version=[5],New=[For certain
+kinds of containers, we require finalization behavior based on the canonical
+implementation of the container (see the @ImplReqTitle below).
+For the "normal" containers, we],Old=[We]}
+do not specify precisely where this will happen (it will happen no later than
+the finalization of the container, of course) in order to give implementations
+flexibility to cache, block, @Chg{Version=[5],New=[],Old=[or ]}split
+@Chg{Version=[5],New=[, or reuse],Old=[]}the nodes of the
+container.@Chg{Version=[5],New=[],Old=[ In particular, Delete does not
+necessarily finalize the element; the implementation may (or may not) hold the
+space for reuse.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[This is not likely to be a hardship, as the element
-type has to be nonlimited. Types used to manage scarce resources generally
-need to be limited. Otherwise, the amount of resources needed is hard to
-control, as the language allows a lot of variation in the number or order of
-adjusts/finalizations. For common uses of nonlimited controlled types such as
-managing storage, the types already have to manage arbitrary copies.]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0258-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[This is not likely to
+be a hardship, as the element type has to be nonlimited. Types used to manage
+scarce resources generally need to be limited. Otherwise, the amount of
+resources needed is hard to control, as the language allows a lot of variation
+in the number or order of adjusts/finalizations. For common uses of nonlimited
+controlled types such as managing storage, the types already have to manage
+arbitrary copies.]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[The use of controlled types also brings up the
@@ -332,6 +341,39 @@ within the instance, where:]}
 @end{ImplNote}
 @end{StaticSem}
 
+@begin{ImplReq}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0258-1]}
+@ChgAdded{Version=[5],Text=[For an indefinite container (one whose type is
+defined in an instance of a child package of Containers whose
+@nt{defining_identifier} contains "Indefinite"), each element of the container
+shall be created when it is inserted into the container and finalized when it is
+deleted from the container (or when the container object is finalized if the
+element has not been deleted). For a bounded container (one whose type is
+defined in an instance of a child package of Containers whose
+@nt{defining_identifier} starts with "Bounded") that is not an indefinite
+container, all of the elements of the capacity of the container shall be created
+and default initialized when the container object is created; the elements shall
+be finalized when the container object is finalized. @Redundant[For other kinds
+of containers, when elements are created and finalized is unspecified.]]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Revised]}
+  @ChgAdded{Version=[5],Text=[This allows a user to be able to reason about the
+  behavior of elements that have controlled parts. In most cases, such elements
+  need to be stored in an indefinite container.]}
+@end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[Revised]}
+  @ChgAdded{Version=[5],Text=[If the containers are implemented in Ada, this
+  implies that elements for an indefinite container are allocated individually,
+  and that a bounded container contains an array of elements or other data
+  structure that is initialized for the entire capacity of the container when it
+  is created. There is no such restriction on the implementation of the "normal"
+  containers; these can be handled in any way convenient to the implementation
+  @em in particular, node reuse is allowed.]}
+@end{ImplNote} @end{ImplReq}
+
 @begin{Extend95}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -360,6 +402,13 @@ within the instance, where:]}
   @ldquote@;performs indefinite insertion@rdquote. This is used in
   other subclauses and any resulting inconsistencies are documented
   there.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0258-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Defined when objects
+  are created and finalized for Bounded and Indefinite containers,
+  so that these can be used reliably with controlled element types.
+  This is not incompatible as this behavior was previously unspecified;
+  code depending on specific behavior was wrong.]}
 @end{DiffWord2012}
 
 

@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2017/08/12 03:47:33 $}
+@Comment{$Date: 2018/04/07 06:16:38 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1576,11 +1576,12 @@ shall raise an exception at run time.
   package Edited_Output with a length greater than 1.
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[For an implementation that conforms to this
 Standard, the implementation of a language-defined unit shall abide by all
-postconditions and type invariants specified for the unit by this International
-Standard (see @RefSecNum{Pragmas Assert and Assertion_Policy}).]}
+postconditions, type invariants, and default initial conditions specified
+for the unit by this International Standard (see
+@RefSecNum{Pragmas Assert and Assertion_Policy}).]}
 @end{ImplReq}
 
 @begin{DocReq}
@@ -1816,21 +1817,39 @@ ASCII characters; no characters outside of the 7-bit range are required.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00395-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0227-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0263-1]}
 @ChgAdded{Version=[2],Text=[When this International Standard mentions the
 conversion of some character or sequence of characters to upper case, it means
 the character or sequence of characters obtained by using
 @Chg{Version=[3],New=[simple upper case mapping],Old=[locale-independent
-full case folding]}, as defined by documents referenced in the note in
-@Chg{Version=[3],New=[Clause],Old=[section]} 1
-of ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}.]}
+full case folding]}, as defined by documents referenced in
+@Chg{Version=[5],New=[],Old=[the note
+in ]}@Chg{Version=[3],New=[Clause],Old=[section]} @Chg{Version=[5],New=[2],Old=[1]}
+of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]}.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[3],Kind=[DeletedAdded]}
+  @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[Unless otherwise
   specified for sequences of characters, case folding is applied to the
   sequence, not to individual characters. It sometimes can make a
   difference.]}]}
 @end{Discussion}
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0263-1]}
+  @ChgAdded{Version=[5],Text=[The @ldquote@;documents
+  referenced@rdquote means Unicode, Chapter 4 (specifically, section
+  4.2 @em Case). Machine-readble versions of Simple Uppercase Mapping
+  and Simple Lowercase Mapping can be found in
+  @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt],
+  Text=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt]}.
+  Data for older Unicode versions can be found on this site as
+  well; start at @URLLink{URL=[http://www.unicode.org/Public/],
+  Text=[http://www.unicode.org/Public/]} and find the appropriate version
+  number. Simple Uppercase Mapping is the 12th field in this file (the 13th
+  element of each line, since Unicode counts from 0); the Simple Lowercase
+  Mapping is the 13th field in this file. In both cases, if no character
+  is present in the field, the character maps to itself.]}
+@end{ImplNote}
 @end{WideAbove}
 
 @begin{WideAbove}
@@ -2272,11 +2291,14 @@ Corrigendum 1:2001 and Technical Corrigendum 2:2004]}],Old=[]}.
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0001],ARef=[AI95-00124-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
-@Chg{Version=[2],New=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0260-1]}
+@Chg{Version=[2],New=[@Chg{Version=[5],New=[@Defn{ISO/IEC 10646:2017}
+@Defn{10646:2017, ISO/IEC standard}],Old=[@Chg{Version=[3],New=[@Defn{ISO/IEC 10646:2011}
 @Defn{10646:2011, ISO/IEC standard}],Old=[@Defn{ISO/IEC 10646:2003}
-@Defn{10646:2003, ISO/IEC standard}]}
+@Defn{10646:2003, ISO/IEC standard}]}]}
 @Defn2{Term=[character set standard],Sec=(16 and 32-bit)}
-ISO/IEC 10646:@Chg{Version=[3],New=[2011],Old=[2003]}, @i{Information technology @em Universal Multiple-Octet
+ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[@Chg{Version=[3],New=[2011],Old=[2003]}]},
+@i{Information technology @em Universal@Chg{Version=[5],New=[],Old=[ Multiple-Octet]}
 Coded Character Set (UCS)}.],
 Old=[@Defn{ISO/IEC 10646-1:1993}
 @Defn{10646-1:1993, ISO/IEC standard}
