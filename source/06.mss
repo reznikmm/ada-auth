@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:39 $}
+@Comment{$Date: 2018/04/14 05:32:20 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -3264,7 +3264,7 @@ otherwise, the actual is interpreted only as a @nt{name}, if possible.
 
 @begin{Legality}
 If the mode is @key(in out) or @key(out),
-the actual shall be a @nt<name> that denotes a variable.
+the actual shall be a @nt<name> that denotes a variable.@Defn2{Term=[variable],Sec=(required)]@Defn2{Term=[object],Sec=(required)}
 @begin{Discussion}
   We no longer need @lquotes@;or a
   @nt{type_conversion} whose argument is the @nt{name} of a variable,@rquotes@;

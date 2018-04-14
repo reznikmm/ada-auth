@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:39 $}
+@Comment{$Date: 2018/04/14 05:32:20 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.109 $}
+@Comment{$Revision: 1.110 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1240,7 +1240,7 @@ so @lquotes@;@key[with] A.B.C.D;@rquotes@; is illegal in the same places as
 for a child of a generic within an instance @em see
 @RefSecNum{Compilation Units - Library Units}), if it],Old=[library item that]}
 is visible only due to being mentioned in
-one or more @nt<with_clause>s @Chg{Version=[5],New=[of unit @i<U> ],Old=[]}that
+one or more @nt<with_clause>s @Chg{Version=[5],New=[of a unit @i<U> ],Old=[]}that
 include the reserved word
 @key<private>@Chg{Version=[3],New=[,],Old=[]} shall appear only within:]}
 @begin{Itemize}

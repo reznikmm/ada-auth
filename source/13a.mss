@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:40 $}
+@Comment{$Date: 2018/04/14 05:32:21 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1736,7 +1736,8 @@ kind of entity. If the @nt{aspect_mark} identifies:]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes an
 object, the @nt{aspect_definition} shall be a @nt{name}. The expected type for
 the @nt{name} is the type of the identified aspect of the associated
-entity;@PDefn2{Term=[expected type], Sec=[object in an @nt{aspect_specification}]}]}
+entity;@PDefn2{Term=[expected type], Sec=[object in an @nt{aspect_specification}]}
+@Defn2{Term=[object],Sec=(required)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that is

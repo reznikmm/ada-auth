@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:54 $}
+@Comment{$Date: 2018/04/14 05:32:20 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -371,7 +371,7 @@ For example:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 The target @Redundant[denoted by the
 @i(variable_)@nt<name>] shall be a variable@Chg{Version=[2],New=[ of a
-nonlimited type],Old=[]}.
+nonlimited type],Old=[]}.@Defn2{Term=[variable],Sec=(required)}@Defn2@Defn2{Term=[object],Sec=(required)}
 
 If the target is of a tagged class-wide type @i(T)'Class, then
 the @nt<expression> shall either be dynamically tagged,

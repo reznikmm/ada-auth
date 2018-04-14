@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/14 05:32:21 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.117 $}
+@Comment{$Revision: 1.118 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1700,7 +1700,8 @@ Storage_Size or Storage_Pool may be specified for
 a nonderived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a
-variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size (access)}],Old=[]}
+variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size (access)}
+@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Pool of memory from which @key[new] will
@@ -2882,7 +2883,8 @@ of type Root_Storage_Pool'Class.]}
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0190-1],ARef=[AI05-0229-1]}
-@Chg{Version=[3],New=[The @SynI{storage_pool_}@nt{name} shall denote a variable.],
+@Chg{Version=[3],New=[The @SynI{storage_pool_}@nt{name} shall denote a
+variable.@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}],
 Old=[The @SynI{first_subtype_}@nt<local_name> of a @nt{pragma} Controlled
 shall denote a nonderived access subtype.]}
 

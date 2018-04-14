@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:34 $}
+@Comment{$Date: 2018/04/14 05:32:21 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1358,7 +1358,7 @@ For a generic formal object of mode @key{in}, the actual shall be an
 @nt{expression}.
 For a generic formal object of mode @key{in out}, the actual shall be
 a @nt{name} that denotes a variable for which renaming is allowed
-(see @RefSecNum{Object Renaming Declarations}).
+(see @RefSecNum{Object Renaming Declarations}).@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}
 @begin{Honest}
 The part of this that requires an @nt{expression} or @nt{name} is a
 @ResolutionName,

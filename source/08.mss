@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/04/14 05:32:20 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2124,7 +2124,7 @@ That makes the rule different for @key[in] vs. @key[in out].
 @end{Resolution}
 
 @begin{Legality}
-The renamed entity shall be an object.
+The renamed entity shall be an object.@Defn2{Term=[object],Sec=(required)}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00231-01],ARef=[AI95-00409-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[In the case
