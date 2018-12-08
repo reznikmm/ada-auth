@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:39 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2372,18 +2372,19 @@ value.]}
 @LabeledAddedSubClause{Version=[5],Name=[Default Initial Conditions]}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a private type or private
-extension, the following
+extension (including a generic formal type), the following
 language-defined aspect may be specified with an @nt{aspect_specification}
 (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[Default_Initial_Condition@\This aspect shall be
-specified by an expression, called a @i<default initial condition expression>.
-Default_Initial_Condition may be specified on a
-@nt{private_type_declaration} or a @nt{private_extension_declaration}.
+specified by an @nt{expression}, called a @i<default initial condition
+expression>. Default_Initial_Condition may be specified on a
+@nt{private_type_declaration}, a @nt{private_extension_declaration},
+a @nt{formal_private_type_definition}, or a @nt{formal_derived_type_definition}.
 @Defn{default initial condition expression}
 @AspectDefn{Default_Initial_Condition}]}
 
@@ -2412,7 +2413,7 @@ discriminants@Redundant[, whether explicitly declared or inherited].]}
 @begin{StaticSem}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
-@ChgAdded{Version=[5],Text=[If the Default_Initial_Value aspect is specified for
+@ChgAdded{Version=[5],Text=[If the Default_Initial_Condition aspect is specified for
 a type T, then the default initial condition expression applies to T and to all
 descendants of T.]}
 
@@ -2444,11 +2445,22 @@ order. If any of these evaluate to False, Assertions.Assertion_Error is raised
 at the point of the object initialization.@Defn{default initial condition check}@Defn2{Term=[check, language-defined],
 Sec=[controlled by assertion policy]}]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[For a generic formal type T, default
+initial condition checks performed are as determined by the actual type, along
+with any default initial condition of the formal type itself.]]}
+
+@begin{TheProof}
+  @ChgAdded{Version=[5],Text=[This follows from the general dynamic semantics
+  rules given above, but we mention it explicitly so that there can be no doubt
+  that it is intended.]}
+@end{TheProof}
+
 @end{Runtime}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Aspect Default_Initial_Condition is new.]}
 @end{Extend2012}
@@ -2464,18 +2476,6 @@ characteristics are called @i{stable properties} of the
 type.@Defn{stable property}@Defn2{Term=[property],Sec=[stable]}]}
 @end{Intro}
 
-@begin{Syntax}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<type_property_aspect_definition>,Old=<>}>,
-rhs="@Chg<Version=[5],New=[@Syn2<name> {, @Syn2<name>}],Old=<>>"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<subprogram_property_aspect_definition>,Old=<>}>,
-rhs="@Chg<Version=[5],New=<[@key<not>] @Syn2<name> {, [@key<not>] @Syn2<name>}>,Old=<>>"}
-
-@end{Syntax}
-
 @begin{StaticSem}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
@@ -2489,16 +2489,34 @@ with a single parameter of type @i<T> or of a class-wide type that covers
   overloaded functions can be used as a stable property function.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For a private type, private
-extension, or full type that does not have a partial view, the following
-language-defined aspects may be specified with an @nt{aspect_specification}
-(see @RefSecNum{Aspect Specifications}):]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0285-1]}
+@ChgAdded{Version=[5],Text=[A @i<type property aspect definition> is
+@Defn{type property aspect definition}a list of @nt{name}s written in the syntax
+of a @nt{positional_array_aggregate}. A @i<subprogram property aspect
+definition>@Defn{subprogram property aspect definition} is a list of @nt{name}s
+preceded by an optional @key[not] written in the syntax of a
+@nt{positional_array_aggregate}.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A single @nt{name} would technically be a
+  parenthesized @nt{expression} rather than an @nt{aggregate}; we mean to
+  include that here. We say "syntax of a @nt{positional_array_aggregate}"
+  to hopefully clarify that the specification
+  is in no other way an actual @nt{aggregate}.]}
+@end{Honest}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0272-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a nonformal private type,
+nonformal private extension, or full type that does not have a partial view, the
+following language-defined aspects may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @ChgAdded{Version=[5],Text=[Stable_Properties@\This aspect shall be specified by
-a @nt{type_property_aspect_definition}; each @nt{name} shall statically denote
+a type property aspect definition; each @nt{name} shall statically denote
 a single property function of the type. This aspect defines the
 @i<stable property functions> of the associated
 type.@Defn2{Term=[stable property function],Sec=[of a type]}@Defn2{Term=[function],Sec={stable property}}
@@ -2511,14 +2529,20 @@ type.@Defn2{Term=[stable property function],Sec=[of a type]}@Defn2{Term=[functio
   types have no such subprograms.]}
 @end{Discussion}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Class-wide aspects are only allowed on tagged types
+  (see @RefSecNum{Aspect Specifications}), so we don't say that here.]}
+@end{Ramification}
+
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Stable_Properties],
     Text=[@ChgAdded{Version=[5],Text=[A list of functions
     describing characteristics that usually are unchanged by primitive
     operations of the type or an individual primitive subprogram.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @ChgAdded{Version=[5],Text=[Stable_Properties'Class@\This aspect shall be
-specified by a @nt{type_property_aspect_definition}; each
+specified by a type property aspect definition; each
 @nt{name} shall statically denote a single property function of the type. This
 aspect defines the @i{class-wide stable property functions} of the associated
 type. @Redundant[Unlike most class-wide aspects, Stable_Properties'Class is not
@@ -2541,6 +2565,13 @@ manner.]@Defn{class-wide stable property function}@Defn2{Term=[stable property f
   they were inherited, we'd be duplicating the checks, which we don't want.]}
 @end{Discussion}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Class-wide aspects are only allowed on primitive
+  subprograms of tagged types (see @RefSecNum{Aspect Specifications}), so we
+  don't say that here.]}
+@end{Ramification}
+
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Stable_Properties'Class],
     Text=[@ChgAdded{Version=[5],Text=[A list of functions
     describing characteristics that usually are unchanged by primitive
@@ -2555,15 +2586,15 @@ following language-defined aspects may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @ChgAdded{Version=[5],Text=[Stable_Properties@\This aspect shall be specified by
-a @nt{subprogram_property_aspect_definition}; each @nt{name} shall statically
+a subprogram property aspect definition; each @nt{name} shall statically
 denote a single property function of a type for which the associated subprogram
 is primitive.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @ChgAdded{Version=[5],Text=[Stable_Properties'Class@\This aspect shall be
-specified by a @nt{subprogram_property_aspect_definition}; each @nt{name} shall
+specified by a subprogram property aspect definition; each @nt{name} shall
 statically denote a single property function of a tagged type for which the
 associated subprogram is primitive. @Redundant[Unlike most class-wide aspects,
 Stable_Properties'Class is not inherited by descendant subprograms, but the
@@ -2600,9 +2631,9 @@ return type and shall be:]}
   single parameter of mode @key[in] of a class-wide type that covers @i<T>.]}
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[In a
-@nt{subprogram_property_aspect_definition} for a subprogram @i<S>:]}
+subprogram property aspect definition for a subprogram @i<S>:]}
 
 @begin{Itemize}
 
@@ -2729,8 +2760,15 @@ postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
 @end{Ramification}
 @end{StaticSem}
 
+@begin{Notes}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[For an example of the use of these aspects,
+  see the Vector container definition in
+  @RefSecNum{The Generic Package Containers.Vectors}.]}
+@end{Notes}
+
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   These aspects are new.]}
 @end{Extend2012}

@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:20 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2073,8 +2073,9 @@ irrelevant, since failing these tests is highly unlikely.
 @begin{Syntax}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00423-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0275-1]}
 @Syn{lhs=<object_renaming_declaration>,rhs="@Chg{Version=[2],New=[
-    ],Old=[]}@Syn2{defining_identifier} : @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark} @key{renames} @SynI{object_}@Syn2{name}@Chg{Version=[3],New=<
+    ],Old=[]}@Syn2{defining_identifier} @Chg{Version=[5],New=<[>,Old=<>}: @Chg{Version=[2],New=<[@Syn2{null_exclusion}] >,Old=<>}@Syn2{subtype_mark}@Chg{Version=[5],New=<]>,Old=<>} @key{renames} @SynI{object_}@Syn2{name}@Chg{Version=[3],New=<
         [@Syn2{aspect_specification}]>,Old=[]};@Chg{Version=[2],New=[
   | @Syn2{defining_identifier} : @Syn2{access_definition} @key{renames} @SynI{object_}@Syn2{name}@Chg{Version=[3],New=<
         [@Syn2{aspect_specification}]>,Old=[]};],Old=[]}"}
@@ -2083,15 +2084,30 @@ irrelevant, since failing these tests is highly unlikely.
 @begin{Resolution}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00254-01],ARef=[AI95-00409-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0275-1]}
 The type of the @SynI{object_}@nt{name} shall resolve to
-the type determined by the @nt{subtype_mark}@Chg{Version=[2],New=[,
+the type determined by the @nt{subtype_mark}@Chg{Version=[5],New=[, if
+present. If no @nt{subtype_mark} or @nt{access_definition} is present,
+the expected type of the @SynI{object_}@nt{name} is any type],
+Old=[@Chg{Version=[2],New=[,
 or in the case where the type is defined by an @nt{access_definition}, to an
 anonymous access type. If the anonymous access type is an access-to-object type,
 the type of the @SynI{object_}@nt{name}
 shall have the same designated type as that of the @nt{access_definition}.
 If the anonymous access type is an access-to-subprogram type,
 the type of the @SynI{object_}@nt{name} shall have a designated profile
-that is type conformant with that of the @nt{access_definition}],Old=[]}.
+that is type conformant with that of the @nt{access_definition}],Old=[]}]}.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0275-1]}
+@ChgAdded{Version=[5],Text=[In the case where the type is defined by an
+@nt{access_definition}, the type of the
+@SynI{object_}@nt{name} shall resolve to an anonymous access type.
+If the anonymous access type is an access-to-object type,
+the type of the @SynI{object_}@nt{name}
+shall have the same designated type as that of the @nt{access_definition}.
+If the anonymous access type is an access-to-subprogram type,
+the type of the @SynI{object_}@nt{name} shall have a designated profile
+that is type conformant with that of the @nt{access_definition}.]}
 
 @begin{Reason}
 @leading@;A previous version of Ada 9X used the usual
@@ -2401,6 +2417,16 @@ using the type T2 of the previous example:]}
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0275-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The @nt{subtype_mark} in an object renaming is now optional,
+  as the subtype information it provides is not trustworthy anyway
+  (that comes from the renamed object and there is no requirement that
+  it is the same as that of the object).]}
+@end{Extend2012}
+
+
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledSubClause{Exception Renaming Declarations}
@@ -2519,8 +2545,7 @@ A @nt{subprogram_renaming_declaration} can serve as the completion of
 a @nt{subprogram_declaration};
 @Defn{renaming-as-body}
 such a @nt{renaming_declaration} is called a @i{renaming-as-body}.
-@Defn{
-renaming-as-declaration}
+@Defn{renaming-as-declaration}
 A @nt{subprogram_renaming_declaration} that is not a completion is
 called a @i{renaming-as-declaration}@Redundant[,
 and is used to rename a subprogram

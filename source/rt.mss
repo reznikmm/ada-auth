@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.123 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.124 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/09/05 05:22:38 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -517,20 +517,29 @@ is waiting for access to a protected object keeps its processor busy.
 is waiting for access to a protected object keeps its processor busy.}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00321-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @Defn{task dispatching}
 @Defn{dispatching, task}
 @RootDefn{task dispatching point}
 @RootDefn{dispatching point}
-@i{Task dispatching} is the process by which one ready task is selected
-for execution on a processor. This selection is done at certain points
-during the execution of a task called @i{task dispatching points}.
-A task reaches a task dispatching point whenever it becomes blocked,
-and @Chg{Version=[2],New=[when it terminates],Old=[whenever it becomes ready.
+@i{Task dispatching} is the process by which @Chg{Version=[5],New=[a logical
+thread of control associated with a],Old=[one]} ready task is selected
+for execution on a processor. This selection is done @Chg{Version=[5],New=[],Old=[at
+certain points ]}during the execution of @Chg{Version=[5],New=[such a logical
+thread of control, at certain points],Old=[a task]}
+called @i{task dispatching points}. @Chg{Version=[5],New=[Such a logical
+thread of control],Old=[A task]} reaches a task dispatching point whenever
+it becomes blocked, and @Chg{Version=[2],New=[when @Chg{Version=[5],New=[its
+associated task],Old=[it]} terminates],Old=[whenever it becomes ready.
 In addition, the completion of an @nt{accept_statement}
 (see @RefSecNum{Entries and Accept Statements}), and task termination are
 task dispatching points for the executing task]}.
 @Redundant[Other task dispatching points are defined
 throughout this Annex@Chg{Version=[2],New=[ for specific policies],Old=[]}.]
+@Chg{Version=[5],New=[Below we talk in terms of tasks, but in the context of a
+  parallel construct, a single task can be represented by multiple
+  logical threads of control, each of which can appear separately on a
+  ready queue.],Old=[]}
 @begin{Ramification}
 On multiprocessor systems, more than one task can be chosen, at the
 same time, for execution on more than one processor, as explained below.
@@ -728,6 +737,13 @@ deferred while the affected task performs a protected action.]}
   Dispatching_Policy_Error and none of the child packages that could raise
   that exception are pure.]}
 @end{Incompatible2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[Redid the description of task dispatching to
+  include the separate threads of control that can be started by a parallel
+  construct.]}
+@end{DiffWord2012}
 
 
 @LabeledRevisedSubClause{Version=[2],
@@ -6828,6 +6844,22 @@ on which each Interrupt_Id can be handled.]}]}
 dispatching domains that can be created and raise Dispatching_Domain_Error if an
 attempt is made to exceed this number.]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[The implementation may defer the effect of a
+Set_CPU or an Assign_Task operation until the specified task leaves an
+ongoing parallel construct.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[These operations can change the set of CPUs
+  that a parallel operation is allowed to use. This could require the ability
+  to move or suspend one or more threads to execute them on a different CPU.
+  However, parallel constructs are primarily intended to improve performance
+  of code, and the overhead needed to support such a rarely used operation
+  could be substantial. Therefore, rather than requiring support we allow
+  the implementation to wait to implement these operations until the
+  parallel construct (and thus the extra threads) have completed.]}
+@end{Reason}
 @end{ImplPerm}
 
 @begin{Extend2005}
@@ -6874,7 +6906,7 @@ the program can't do anything useful).]}
   default.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0082-1]}
-  @ChgAdded{Version=[4],Text=[@b{Corrigndum:} Added a definition to clarify
+  @ChgAdded{Version=[4],Text=[@b{Corrigendum:} Added a definition to clarify
   that a "dispatching domain" is a concept which is identified by an
   object of type Dispatching_Domain; more than one object might identify
   the same dispatching domain (for instance, the result of function

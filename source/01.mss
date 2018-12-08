@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2018/04/07 06:16:38 $}
+@Comment{$Date: 2018/09/05 05:22:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1838,7 +1838,7 @@ of ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0263-1]}
   @ChgAdded{Version=[5],Text=[The @ldquote@;documents
   referenced@rdquote means Unicode, Chapter 4 (specifically, section
-  4.2 @em Case). Machine-readble versions of Simple Uppercase Mapping
+  4.2 @em Case). Machine-readable versions of Simple Uppercase Mapping
   and Simple Lowercase Mapping can be found in
   @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt],
   Text=[http://www.unicode.org/Public/UCD/latest/ucd/UnicodeData.txt]}.

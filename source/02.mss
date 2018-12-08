@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:38 $}
+@Comment{$Date: 2018/09/05 05:22:36 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.89 $}
+@Comment{$Revision: 1.90 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2192,6 +2192,7 @@ end of the reserved word]}.],Old=[ (ignoring upper/lower case distinctions):]}
 @Chg{Version=[2],New=[@key{overriding}],Old=[]}
 
 @noparanum@key{package}
+@Chg{Version=[5],New=[@key{parallel}],Old=[]}
 @key{pragma}
 @key{private}
 @key{procedure}
@@ -2292,4 +2293,12 @@ Replacements of Characters@rquotes@; has been moved to
   reserved in Ada 2012: @key{some}. Uses of this word as an identifier will need
   to be changed, but we do not expect them to be common.]}
 @end{Incompatible2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2005}The
+  following word is not reserved in Ada 2012, but is reserved in Ada 2012:
+  @key{parallel}. Uses of this word as an identifier will need
+  to be changed, but we do not expect them to be common.]}
+@end{Incompatible2012}
 

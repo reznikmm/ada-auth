@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:39 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.71 $}
+@Comment{$Revision: 1.72 $}
 
 @LabeledClause{Type Conversions}
 
@@ -1056,8 +1056,10 @@ type.
 @end{Ramification}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
-@ChgAdded{Version=[4],Type=[Leading],Text=[Evaluation of a value conversion of a
-composite type either creates a new anonymous object@Redundant[ (similar to the
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0226-1]}
+@ChgAdded{Version=[4],Type=[Leading],Text=[Evaluation of a value conversion of
+@Chg{Version=[5],New=[an object],Old=[a composite type]} either creates a new
+anonymous object@Redundant[ (similar to the
 object created by the evaluation of an @nt{aggregate} or a function call)] or
 yields a new view of the operand object without creating a new object:]}
 
@@ -1072,22 +1074,49 @@ yields a new view of the operand object without creating a new object:]}
    aliased components and the operand type is an array type having unaliased
    components, then a new object is created;]}
 
+   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0226-1]}
+   @ChgAdded{Version=[5],Text=[If the target type is an elementary type,
+   then a new object is created;]}
+
    @ChgRef{Version=[4],Kind=[Added]}
+   @ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{To mark a paragraph number change}
    @ChgAdded{Version=[4],Text=[Otherwise, it is unspecified whether a new object
    is created.@PDefn{unspecified}]}
 @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0027-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{To mark a paragraph number change}
 @ChgAdded{Version=[4],Text=[If a new object is created, then the initialization
 of that object is an assignment operation.]}
 
 @begin{Reason}
-   @ChgRef{Version=[4],Kind=[Added]}
+   @ChgRef{Version=[4],Kind=[AddedNormal]}
    @ChgAdded{Version=[4],Text=[This makes a difference in the case of converting
    from an array type with unaliased components to one with aliased components
    if the element type has a controlled part.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
+   @ChgAdded{Version=[5],Text=[For an elementary type, the representation might
+   change so we require a new object to avoid problems.]}
 @end{Reason}
 
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
+   @ChgAdded{Version=[5],Text=[The temporary object need not be materialized
+   in most cases; it should be handled like the return object of a predefined
+   operator. Generally, whether the object exists can only be detected if it
+   is renamed (unless a part of the type is controlled).]}
+@end{ImplNote}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
+   @ChgAdded{Version=[5],Text=[This set of rules does not apply in those cases
+   where the operand is not an object (such as a value conversion of a named
+   number); in such cases, the result isn't an object, so it isn't necessary to
+   describe what that means. The rules cover all value conversions of composite
+   types (since there aren't any values of composite types separate from
+   objects).]}
+@end{Discussion}
 @end{RunTime}
 
 @begin{Notes}
@@ -1389,6 +1418,11 @@ as a @nt<name>.
   @ChgAdded{Version=[5],Text=[Required Nonblocking
   (see @RefSecNum{Intertask Communication}) matching for
   access-to-subprogram conversions.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
+  @ChgAdded{Version=[5],Text=[Described the objects associated with
+  value conversions of elementary types. This is necessary to support
+  an extension documented in @RefSecNum{Objects and Named Numbers}.]}
 @end{Diffword2012}
 
 

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:20 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -41,10 +41,20 @@ description of subprograms.
 @LabeledClause{Simple and Compound Statements - Sequences of Statements}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @Redundant[A @nt<statement> is either simple or compound.
 A @nt<simple_statement> encloses
 no other @nt<statement>. A @nt<compound_statement> can enclose
-@nt<simple_statement>s and other @nt<compound_statement>s.]
+@nt<simple_statement>s and other @nt<compound_statement>s.]@Chg{Version=[5],New=[
+A @i<parallel construct>@Defn{parallel construct}@Defn2{Term=[construct],Sec=[parallel]}
+is a construct that introduces additional
+logical threads of control (see clause @RefSecNum{Tasks and Synchronization})
+without creating a new task.
+Parallel loops (see @RefSecNum{Loop Statements}) and
+@nt{parallel_block_statement}s (see
+@RefSecNum{Parallel Block Statements}) are parallel
+constructs.@IndexSee{Term=[parallel processing],See=(parallel construct)}
+@IndexSee{Term=[concurrent processing],See=(parallel construct)}],Old=[]}
 @end{Intro}
 
 @begin{Syntax}
@@ -65,10 +75,12 @@ no other @nt<statement>. A @nt<compound_statement> can enclose
    | @Syn2{code_statement}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @Syn{tabs=[P31], lhs=<compound_statement>,rhs="
      @Syn2{if_statement}@\| @Syn2{case_statement}
    | @Syn2{loop_statement}@\| @Syn2{block_statement}@Chg{Version=[2],New=[
-   | @Syn2{extended_return_statement}],Old=[]}
+   | @Syn2{extended_return_statement}],Old=[]}@Chg{Version=[5],New=[
+   | @Syn2{parallel_block_statement}],Old=[]}
    | @Syn2{accept_statement}@\| @Syn2{select_statement}"}
 
 @Syn{lhs=<null_statement>,rhs="@key{null};"}
@@ -207,7 +219,41 @@ until the @ntf{sequence_} is completed.
 It could be completed by reaching the end of it,
 or by a transfer of control.
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[Within a parallel construct, if a transfer of
+control out of the construct is initiated by one of the logical threads of
+control, an attempt is made to @i<cancel>@Defn2{Term=[cancel],Sec=[a logical
+thread]}@Defn2{Term=[cancel],Sec=[a parallel construct]} all other logical
+threads of control initiated by the parallel construct. Once all other logical
+threads of control of the construct either complete or are canceled, the
+transfer of control occurs.  If two or more logical threads of control of the
+same construct initiate such a transfer of control concurrently, one of them is
+chosen arbitrarily and the others are canceled.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+When a logical thread of control is canceled, the
+cancellation causes it to complete as though it had performed a transfer of
+control to the point where it would have finished its execution. Such a
+cancellation is deferred while the logical thread of control is executing within
+an abort-deferred operation (see
+@RefSecNum{Abort of a Task - Abort of a Sequence of Statements}), and may be
+deferred further, but not past
+a point where the logical thread initiates a new nested parallel construct or
+reaches an exception handler that is outside such an abort-deferred operation.]}
 @end{RunTime}
+
+@begin{Bounded}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[During the execution of a parallel construct, it is
+a bounded error to invoke an operation that is potentially blocking (see
+@RefSecNum{Intertask Communication}). Program_Error is raised if the error is
+detected by the implementation; otherwise, the execution of the potentially
+blocking operation might proceed normally, or it might result in the indefinite
+blocking of some or all of the logical threads of control making up the current
+task.]}
+@end{Bounded}
 
 @begin{Notes}
 A @nt<statement_identifier> that appears immediately within
@@ -283,12 +329,19 @@ although RM83-5.1(6) did not take this view.
 @end{Extend95}
 
 @begin{Extend2005}
-  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-0179-1]}
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0179-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   A @nt{label} can end a @nt{sequence_of_statements},
   eliminating the requirement for having an explicit @key[null]; statement
   after an ending label (a common use).]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The definition of @ldquote@;parallel constructs@rdquote and the
+  @nt{parallel_block_statement} are new.]}
+@end{Extend2012}
 
 
 @LabeledClause{Assignment Statements}
@@ -371,7 +424,7 @@ For example:
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
 The target @Redundant[denoted by the
 @i(variable_)@nt<name>] shall be a variable@Chg{Version=[2],New=[ of a
-nonlimited type],Old=[]}.@Defn2{Term=[variable],Sec=(required)}@Defn2@Defn2{Term=[object],Sec=(required)}
+nonlimited type],Old=[]}.@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}
 
 If the target is of a tagged class-wide type @i(T)'Class, then
 the @nt<expression> shall either be dynamically tagged,
@@ -1120,9 +1173,11 @@ for @nt<name>s, rather than being separated out along with
 @LabeledClause{Loop Statements}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @Redundant[A @nt{loop_statement} includes a
 @nt{sequence_of_statements} that is to be executed repeatedly,
-zero or more times.]
+zero or more times@Chg{Version=[5],New=[ with the iterations
+running sequentially or concurrently with one another],Old=[]}.]
 @end{Intro}
 
 @begin{Syntax}
@@ -1134,9 +1189,11 @@ zero or more times.]
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
-   | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
-   | @key{for} @Syn2{iterator_specification}],Old=[]}"}
+   | @Chg{Version=[5],New=[[@key[parallel] ],Old=[]}@key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
+   | @Chg{Version=[5],New=[           ],Old=[]}@key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=[
+   |            @key{for} @Syn2{procedural_iterator}],Old=[]}"}
 
 @Syn{lhs=<loop_parameter_specification>,rhs="
    @Syn2{defining_identifier} @key{in} [@key{reverse}] @Syn2{discrete_subtype_definition}"}
@@ -1145,6 +1202,11 @@ zero or more times.]
 If a @nt{loop_statement} has a @SynI{loop_}@nt{statement_identifier},
 then the @nt<identifier> shall be repeated after the @key{end loop};
 otherwise, there shall not be an @nt<identifier> after the @key{end loop}.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[An @nt{iteration_scheme} that begins with the reserved word
+@key[parallel] shall not have the reserved word @key[reverse] in its
+@nt{loop_parameter_specification}.]}
 @end(SyntaxText)
 @end{Syntax}
 
@@ -1158,9 +1220,10 @@ which is an object whose subtype@Chg{Version=[5],New=[ (and nominal subtype)],Ol
 @end{StaticSem}
 
 @begin{RunTime}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @PDefn2{Term=[execution], Sec=(loop_statement)}
 For the execution of a @nt{loop_statement},
-the @nt{sequence_of_statements} is executed repeatedly,
+the @nt{sequence_of_statements} is executed@Chg{Version=[5],New=[],Old=[ repeatedly,]}
 zero or more times,
 until the @nt{loop_statement} is complete.
 The @nt{loop_statement} is complete when a transfer
@@ -1177,6 +1240,7 @@ if False, the execution of the @nt{loop_@!statement} is complete.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @PDefn2{Term=[execution],
   Sec=(loop_statement with a for iteration_scheme)}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
@@ -1200,20 +1264,24 @@ until the loop is left as a consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
 the corresponding value of the discrete subtype is assigned to the
-loop parameter. These values are assigned in increasing order unless
+loop parameter. @Chg{Version=[5],New=[If the reserved word parallel is present
+(a @i{parallel loop}),@Defn{parallel loop}@Defn2{Term=[loop],Sec=[parallel]}
+each iteration is a separate logical thread of control (see
+clause @RefSecNum{Tasks and Synchronization}), with its own copy of the loop
+parameter; otherwise the],Old=[These]}
+values are assigned in increasing order unless
 the reserved word @key{reverse} is present, in which case the values
 are assigned in decreasing order.
 @begin{Ramification}
-The order of creating the loop parameter and evaluating the
-@nt{discrete_subtype_definition} doesn't matter,
-since the creation of the loop parameter has no side effects (other
-than possibly raising Storage_Error, but anything can do that).
+  The order of creating the loop parameter and evaluating the
+  @nt{discrete_subtype_definition} doesn't matter,
+  since the creation of the loop parameter has no side effects (other
+  than possibly raising Storage_Error, but anything can do that).
 
-@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[The predicate (if any) necessarily has to be a
-static predicate as a dynamic predicate is explicitly disallowed @em
-see @RefSecNum{Subtype Predicates}.]}
-
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
+  @ChgAdded{Version=[3],Text=[The predicate (if any) necessarily has to be a
+  static predicate as a dynamic predicate is explicitly disallowed @em
+  see @RefSecNum{Subtype Predicates}.]}
 @end{Ramification}
 
 @begin{Reason}
@@ -1235,6 +1303,15 @@ see @RefSecNum{Subtype Predicates}.]}
 @key[end loop];]}
 @end{Example}
 @end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[Each iteration of a parallel loop is a
+  separate logical thread of control. Normally these logical threads of
+  control will be grouped into "chunks" for the purpose of execution to
+  reduce the cost of creating large numbers of (physical) threads of
+  control.]}
+@end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
@@ -1317,6 +1394,19 @@ Summation:
       Next := Next.Succ;
    @key[end] @key[loop] Summation;
 @end{Example}
+
+@begin{WideAbove}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Type=[Leading],KeepNext=[T],
+Text=[@i{Example of a parallel loop:}]}
+@end{WideAbove}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[-- @ExamCom{see @RefSecNum{Array Types}}
+@key[parallel for] I @key[in] Grid'Range(1) @key[loop]
+   Grid(I, 1) := (@key[for all] J @key[in] Grid'Range(2) => Grid(I,J) = True);
+@key[end loop];]}
+@end{Example}
 @end{Examples}
 
 @begin{DiffWord83}
@@ -1330,6 +1420,12 @@ The constant-ness of loop parameters is specified in
   allowed in @key[for] loops; these are documented as an extension in the
   appropriate subclause.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel loops
+  are new.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
@@ -1899,6 +1995,232 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
 @end{DiffWord2012}
 
 
+@LabeledAddedSubClause{Version=[5],Name=[Procedural Iterators]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[A @nt{procedural_iterator} invokes a
+user-defined procedure, passing in the body of the enclosing @nt{loop_statement}
+as a parameter of an anonymous access-to-procedure type, to allow the loop body
+to be executed repeatedly as part of the invocation of the user-defined
+procedure.]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<procedural_iterator>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+     @Syn2{iterator_parameter_specification} @key[of] @Syn2{iterator_procedure_call}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_parameter_specification>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+     @Syn2{formal_part}
+   | (@Syn2{identifier}{, @Syn2{identifier}})>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_procedure_call>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+     @SynI{procedure_}@Syn2{name}
+   | @SynI{procedure_}@Syn2{prefix} @Syn2{iterator_actual_parameter_part}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_actual_parameter_part>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+     (@Syn2{iterator_parameter_association} {, @Syn2{iterator_parameter_association}})>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_parameter_association>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+     @Syn2{parameter_association}
+   | @Syn2{parameter_association_with_box}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<parameter_association_with_box>,Old=<>}>,
+rhs="@Chg{Version=[5],New={
+   [ @SynI{formal_parameter_}@Syn2{selector_name} => ] <>},Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[At most one @nt{iterator_parameter_association} within an
+@nt{iterator_actual_parameter_part} shall be a
+@nt{parameter_association_with_box}.]}
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[The @nt{name} or @nt{prefix} given in an
+@nt{iterator_procedure_call} shall resolve to denote a callable entity @i<C>
+that is a procedure, or an entry renamed as (viewed as) a procedure. The
+@nt{name} or @nt{prefix} shall not resolve to denote an abstract subprogram
+unless it is also a dispatching subprogram. @Redundant[When there is an
+@nt{iterator_actual_parameter_part}, the @nt{prefix} can be an
+@nt{implicit_dereference} of an access-to-subprogram value.]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[An @nt{iterator_procedure_call} without a
+@nt{parameter_association_with_box} is
+equivalent to one with an @nt{iterator_actual_parameter_part} with an
+additional @nt{parameter_association_with_box} at the end, with the
+@SynI{formal_parameter_}@nt{selector_name} identifying the last formal
+parameter of the callable entity denoted by the @nt{name} or @nt{prefix}.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[An @nt{iterator_procedure_call} shall contain at
+most one @nt{iterator_parameter_association} for each formal parameter of the
+callable entity @i<C>. Each formal parameter without an
+@nt{iterator_parameter_association} shall have a
+@nt{default_expression} (in the profile of the view of @i<C> denoted by the
+@nt{name} or @nt{prefix}).@Redundant[ This rule is an overloading
+rule (see @RefSecNum{The Context of Overload Resolution}).]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[The formal parameter of the callable entity @i<C>
+associated with the @nt{parameter_association_with_box} shall be of an
+anonymous access-to-procedure type @i<A>.]}
+@end{Resolution}
+
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[The anonymous access-to-procedure type @i<A> shall
+have at least one formal parameter in its parameter profile. If the
+@nt{iterator_parameter_specification} is a @nt{formal_part}, then this
+@nt{formal_part} shall be mode conformant with that of @i<A>.
+If the @nt{iterator_parameter_specification} is a list of @nt{identifier}s,
+the number of formal parameters of @i<A> shall be the same as the length of
+this list.]}
+
+@end{Legality}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[A @nt{loop_statement} with an @nt{iteration_scheme}
+that has a @nt{procedural_iterator} is equivalent to a local declaration of a
+procedure P followed by a @nt{procedure_call_statement} that is formed from the
+@nt{iterator_procedure_call}
+by replacing the <> of the @nt{parameter_association_with_box} with P'Access.
+The @nt{formal_part} of the locally declared procedure P is formed from the
+@nt{formal_part} of the anonymous access-to-procedure type @i<A>, by replacing
+the @nt{identifier} of each formal parameter of this @nt{formal_part} with the
+@nt{identifier} of the corresponding formal parameter or element of the list
+of @nt{identifier}s given in the @nt{iterator_parameter_specification}.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following aspect may be specified
+for a subprogram or entry S that has at least one formal parameter of an
+anonymous access-to-subprogram type:]}
+
+@begin{Description}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[Allows_Exit@\The Allows_Exit aspect is of type Boolean. The
+   specified value shall be static. The Allows_Exit of an inherited primitive
+   subprogram is True if Allows_Exit is True either for the corresponding
+   subprogram of the progenitor type or for any other inherited subprogram that
+   it overrides. If not specified or inherited as True, the Allows_Exit aspect
+   of a subprogram or entry is False.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],NoPrefix=[T],Text=[Specifying the Allows_Exit aspect
+   True for a subprogram asserts that the
+   subprogram is prepared to be completed by arbitrary transfers of control
+   from the subprogram represented by the access-to-subprogram
+   value@Redundant[, including propagation of exceptions. A subprogram for which
+   Allows_Exit is True should use finalization for any necessary cleanup, and
+   in particular should not use exception handling to implement cleanup].]}
+
+   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Allows_Exit],
+     Text=[@ChgAdded{Version=[5],Text=[An assertion that a subprogram
+     will operate correctly for arbitrary transfers of control.]}]}
+   @begin{Ramification}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Text=[A subprogram that does not need cleanup
+     meets the assertion, and thus can specify Allows_Exit to True.]}
+   @end{Ramification}
+@end{Description}
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[If a subprogram or entry overrides an inherited
+dispatching subprogram that has a True Allows_Exit aspect, only a confirming
+specification of True is permitted for the aspect on the overriding
+declaration.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
+@nt{loop_statement} with a @nt{procedural_iterator} as its @nt{iteration_scheme}
+shall contain an @nt{exit_statement}, return statement, @nt{goto_statement}, or
+@nt{requeue_statement} that leaves the loop only if the callable entity
+@i<C> associated with the @nt{procedural_iterator} has an Allows_Exit aspect
+specified True.]}
+
+@end{Legality}
+
+@begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Example of iterating over a map from
+My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[for] (C : Cursor) @key[of] My_Map.Iterate @key[loop]
+   Put_Line (My_Key_Type'Image (Key (C)) & " => " &
+      My_Element_Type'Image (Element (C)));
+@key[end loop];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[--@Examcom{ The above is equivalent to:}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[declare]
+   @key[procedure] P (C : Cursor) @key[is]
+   @key[begin]
+      Put_Line (My_Key_Type'Image (Key (c)) & " => " &
+         My_Element_Type'Image (Element (C)));
+   @key[end] P;
+@key[begin]
+   My_Map.Iterator (P'Access);
+@key[end];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Example of iterating over the
+environment variables (see @RefSecNum{The Package Environment_Variables}):]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[for] (Name, Val) @key[of] Ada.Environment_Variables.Iterate(<>) @key[loop]
+   --@examcom{  "(<>)" is optional because it is the last parameter}
+   Put_Line (Name & " => " & Val);
+@key[end loop];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[--@Examcom{ The above is equivalent to:}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[declare]
+   @key[procedure] P (Name : String; Val : String) @key[is]
+   @key[begin]
+      Put_Line (Name & " => " & Val);
+   @key[end] P;
+@key[begin]
+   Ada.Environment_Variables.Iterate (P'Access);
+@key[end];]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
+  iterators are new in Ada 2020.]}
+@end{Extend2012}
+
+
 @RMNewPageVer{Version=[0]}@Comment{For printed version of Ada 95}
 @RMNewPageVer{Version=[1]}@Comment{For printed version of Ada 95 + TC1 RM}
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
@@ -1970,6 +2292,114 @@ names denoting local entities such as Swap.Temp in the above example
 The syntax rule for @nt{block_statement} now uses the syntactic category
 @nt{handled_sequence_of_statements}.
 @end{DiffWord83}
+
+
+@LabeledAddedSubClause{Version=[5], Name=[Parallel Block Statements]}
+
+@begin{Intro}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[A @nt{parallel_block_statement}
+comprises two or more @nt{handled_sequence_of_statements} separated by
+@key[and] where each represents an independent activity that is intended to
+proceed concurrently with the others.]]}
+
+@end{Intro}
+
+@begin{Syntax}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<parallel_block_statement>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @key[parallel] @key[do]
+       @Syn2{handled_sequence_of_statements}
+    @key[and]
+       @Syn2{handled_sequence_of_statements}
+   {@key[and]
+       @Syn2{handled_sequence_of_statements}}
+    @key[end do];>,Old=<>}"}
+
+@end{Syntax}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[
+Each @nt{handled_sequence_of_statements} represents a separate logical thread
+of control that proceeds independently and concurrently. The
+@nt{parallel_block_statement} is complete once every one of the
+@nt{handled_sequence_of_statements} has completed, either by reaching the end
+of its execution, or due to a transfer of control out of the construct
+by one of the @nt{handled_sequence_of_statements}
+(see @RefSecNum{Simple and Compound Statements - Sequences of Statements}).]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[Although each @nt{handled_sequence_of_statements}
+  of a parallel block represents a separate logical thread of control, the
+  implementation may choose to combine two or more such logical threads
+  of control into a single physical thread of control to reduce the cost
+  of creating numerous physical threads of control.]}
+@end{ImplNote}
+@end{StaticSem}
+
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[@key[procedure] Traverse (T : Expr_Ptr) @key[is] --@Examcom{ see @RefSecNum{Tagged Types and Type Extensions}}
+@key[begin]
+   @key[if] T /= @key[null] @key[and then]
+      T.@key[all] @key[in] Binary_Operation'Class --@Examcom{ see @RefSecNum{Type Extensions}}
+   @key[then] --@Examcom{ recurse down the binary tree}
+      @key[parallel do]
+         Traverse (T.Left);
+      @key[and]
+         Traverse (T.Right);
+      @key[and]
+         Ada.Text_IO.Put_Line
+            ("Processing " & Ada.Tags.Expanded_Name (T'Tag));
+      @key[end do];
+   @key[end if];
+@key[end] Traverse;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgAdded{Version=[5],Text=[@key[function] Search (S : String; Char : Character) @key[return] Boolean @key[is]
+@key[begin]
+   @key[if] S'Length <= 1000 @key[then]
+       --@Examcom{ Sequential scan}
+       @key[return] (@key[for] @key[some] C @key[of] S => C = Char);
+   @key[else]
+       --@Examcom{ Parallel divide and conquer}
+       @key[declare]
+          Mid : @key[constant] Positive := S'First + S'Length/2 - 1;
+       @key[begin]
+          @key[parallel do]
+             @key[for] C @key[of] S(S'First .. Mid) @key[loop]
+                @key[if] C = Char @key[then]
+                   @key[return] True;  --@Examcom{ Terminates enclosing @key[do]}
+                @key[end if];
+             @key[end loop];
+          @key[and]
+             @key[for] C @key[of] S(Mid + 1 .. S'Last) @key[loop]
+                @key[if] C = Char @key[then]
+                   @key[return] True;  --@Examcom{ Terminates enclosing @key[do]}
+                @key[end if];
+             @key[end loop];
+          @key[end do];
+          --@Examcom{ Not found}
+          @key[return] False;
+       @key[end];
+   @key[end if];
+@key[end] Search;]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The @nt{parallel_block_statement} is new.]}
+@end{Extend2012}
+
 
 @LabeledClause{Exit Statements}
 

@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:21 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1615,12 +1615,10 @@ rhs=`@Chg{Version=[3],New="
 rhs="@Chg{Version=[3],New=<@SynI<aspect_>@Syn2<identifier>['Class]>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=[
-   ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[ |
-   @Syn2<type_property_aspect_definition> |
-   @Syn2<subprogram_property_aspect_definition>],Old=[]}>,Old=<>}"}
+   ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[ | @Syn2<aggregate>],Old=[]}>,Old=<>}"}
 
 @end{Syntax}
 
@@ -1934,11 +1932,11 @@ these rules about nonoverridable aspects also apply in the private part
 of an instance of a generic unit.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0256-1]}
 @ChgAdded{Version=[4],Text=[@Redundant[The Default_Iterator, Iterator_Element,
 Implicit_Dereference, Constant_Indexing, @Chg{Version=[5],New=[],Old=[and
-]}Variable_Indexing@Chg{Version=[5],New=[, and Max_Entry_Queue_Length],Old=[]}
-aspects are nonoverridable.]]}
+]}Variable_Indexing@Chg{Version=[5],New=[, Max_Entry_Queue_Length, and
+No_Controlled_Parts],Old=[]} aspects are nonoverridable.]]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1951,7 +1949,8 @@ aspects are nonoverridable.]]}
   would be illegal), as there could be no place with visibility on both
   aspects.@Chg{Version=[5],New=[ In the case of Max_Entry_Queue_Length, it is
   only allowed on task and protected types, and on entries, and there are
-  not formal versions of any of those things.],Old=[]}]}
+  not formal versions of any of those things. In the case of
+  No_Controlled_Parts, we defined an assume-the-worst rule with the aspect.],Old=[]}]}
 @end{Discussion}
 
 @end{Legality}
@@ -4666,16 +4665,73 @@ Text=[The recommended level of support for
 @nt{enumeration_representation_clause}s should be followed.]}]}
 @end{ImplAdvice}
 
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0237-1]}
+@Comment{We use inserted paragraphs here, even though we're directly in front
+of a note, because the Annex K.1 version needs to be inserted, and there's no
+value to having everything except the first paragraph being inserted.}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{every discrete
+subtype S}, the following attributes are defined:]}
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Enum_Rep>, ARef=[AI12-0237-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[S'Enum_Rep denotes a
+  function with the following specification:],Old=[]}
+@begin{Descexample}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@key[function] S'Enum_Rep (Arg : S'Base) @key[return] @i<universal_integer>]}
+@end{Descexample}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],NoPrefix=[T],Text=[This function returns the
+  representation value of the value of Arg, as a value of type
+  @i<universal_integer>. The @i<representation value>@Defn{representation value}
+  is@Defn2{Term=[value],Sec=[representation]} the internal code specified in an
+  enumeration representation clause, if any, for the type corresponding to the
+  value of Arg, and otherwise is the position number of the
+  value.]}]}@Comment{End of Annex text here.}
+
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Enum_Val>, ARef=[AI12-0237-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[S'Enum_Val denotes a
+  function with the following specification:],Old=[]}
+@begin{Descexample}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@key[function] S'Enum_Val (Arg : @i<universal_integer>) @key[return] S'Base]}
+@end{Descexample}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],NoPrefix=[T],Text=[This function returns a value of the
+  type of S whose representation value equals the value of Arg. For the
+  evaluation of a call on
+  S'Enum_Val, if there is no value in the base range of its type
+  with the given representation value, Constraint_Error is raised.]}]}@Comment{End of Annex text here.}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We define these on all discrete types so that they
+  can be used inside of a generic unit on a subtype of a generic formal discrete
+  type. They're not useful on integer types (they have the same effect as S'Pos
+  and S'Val).]}
+@end{Reason}
+@end{Description}
+@end{StaticSem}
+
 @begin{Notes}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-Unchecked_Conversion may be used to query the internal codes used
-for an enumeration type.
-The attributes of the type, such as Succ, Pred, and Pos,
-are unaffected by the @Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt{representation_clause}]}.
-For example, Pos always returns the position number, @i{not} the
-internal integer code that might have been specified in
-@Chg{New=[an @nt{enumeration_representation_clause}],
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0237-1]}
+@Chg{Version=[5],New=[Attribute Enum_Rep],Old=[Unchecked_Conversion]}
+may be used to query the internal codes used
+for an enumeration type@Chg{Version=[5],New=[; attribute Enum_Val may be used
+to convert from an internal code to an enumeration value],Old=[]}. The
+@Chg{Version=[5],New=[other ],Old=[]}attributes of the type, such as Succ, Pred,
+and Pos, are unaffected by the
+@Chg{New=[@nt{enumeration_representation_clause}],Old=[@nt{representation_clause}]}.
+For example, Pos always returns the position number, @i{not} the internal
+integer code that might have been specified in @Chg{New=[an
+@nt{enumeration_representation_clause}],
 Old=[a @nt{representation_clause}]}@Chg<Version=[3],New=[],Old=[}]>.
 @begin{Discussion}
 @Leading@;Suppose the enumeration type in question is derived:
@@ -4736,6 +4792,12 @@ This is satisfied by all known implementations.
   @nt{enumeration_representation_clause}. (<> is newly added to
   @nt{array_aggregate}s.)]}
 @end{DiffWord95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0237-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Attributes Enum_Rep and Enum_Val are new.]}
+@end{Extend2012}
 
 
 

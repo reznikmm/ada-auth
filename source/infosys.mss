@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/infosys.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
 @Part(infosys, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/09/05 05:22:38 $}
 @LabeledNormativeAnnex{Information Systems}
 
 @begin{Intro}
@@ -74,9 +74,11 @@ This Annex is new to Ada 95.
 @LabeledClause{Machine_Radix Attribute Definition Clause}
 
 @begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0272-1]}
 @PDefn2{Term=[specifiable], Sec=(of Machine_Radix for decimal first subtypes)}
 @Defn{Machine_Radix clause}
-Machine_Radix may be specified for a decimal first subtype
+@Chg{Version=[5],New=[The representation attribute ],Old=[]}Machine_Radix
+may be specified for a decimal first subtype
 (see @RefSecNum{Fixed Point Types})
 via an @nt{attribute_definition_clause};
 the expression of such a clause shall be static,
@@ -127,6 +129,13 @@ instructions that exploit the packed decimal representation.
 @key[for] Money'Machine_Radix @key[use] 10;
 @end{example}
 @end{Examples}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
+  @ChgAdded{Version=[5],Text=[Clarified that Machine_Radix is a representation
+  aspect.]}
+@end{DiffWord2012}
+
 
 @LabeledClause{The Package Decimal}
 

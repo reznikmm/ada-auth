@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:38 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3557,7 +3557,7 @@ every @nt{array_component_association} shall be of a nonlimited type.]}
   @ChgAdded{Version=[5],Text=[The @SynI{base_}@nt{expression} of a
   @nt{record_delta_aggregate} may be of a limited type (for example a record
   with limited components), as it is not restricted. A rule in
-  @RefSecNum{Record Aggregates} ensures we do not assign to a limited
+  @RefSecNum{Record Aggregates} ensures that we do not assign to a limited
   component. We do not allow any part of an @nt{array_delta_aggregate} to be
   of a limited type, even the @SynI{base_}@nt{expression}, as this is a useless
   construct (you would not be able to update anything as the components
@@ -3569,11 +3569,12 @@ every @nt{array_component_association} shall be of a nonlimited type.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0127-1]}
 @ChgAdded{Version=[5],Text=[The evaluation of a @nt{delta_aggregate} begins with
-evaluating the @SynI<base_>@nt{expression} of the @nt{delta_aggregate} and using
-that value to create and initialize the anonymous object of the @nt{aggregate}.
-The bounds of the anonymous object of an @nt{array_delta_aggregate} and the
-discriminants and tag (if any) of the anonymous object of a
-@nt{record_delta_aggregate} are those of the @SynI{base_}@nt{expression}.]}
+the evaluation of the @SynI<base_>@nt{expression} of the @nt{delta_aggregate}
+and using that value to create and initialize the anonymous object of the
+@nt{aggregate}. The bounds of the anonymous object of an
+@nt{array_delta_aggregate} and the discriminants and tag (if any) of the
+anonymous object of a @nt{record_delta_aggregate} are those of the
+@SynI{base_}@nt{expression}.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}

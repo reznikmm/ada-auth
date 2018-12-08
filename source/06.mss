@@ -1,10 +1,10 @@
-@Part(06, Root="ada.mss")
+`@Part(06, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:20 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -503,9 +503,11 @@ The syntax rules for @nt{defining_designator} and
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0247-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0045-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0220-1],ARef=[AI12-0272-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a
-@Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[4],New=[,
+@Chg{Version=[4],New=[noninstance ],Old=[]}subprogram@Chg{Version=[5],New=[
+@Redundant[(including a generic formal
+subprogram)]],Old=[]}@Chg{Version=[4],New=[,
 a generic subprogram,],Old=[]} @Chg{Version=[5],New=[],Old=[or
 ]}@Chg{Version=[4],New=[an ],Old=[]}entry,@Chg{Version=[5],New=[ or an
 access-to-subprogram type,],Old=[]} the following language-defined aspects
@@ -514,13 +516,19 @@ may be specified with an
 
 @begin{Ramification}
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
-@ChgAdded{Version=[4],Text=[@ldquote@;Noninstance subprogram@rdquote excludes
-a subprogram that is an instance of a generic subprogram. In that case, the
-aspects should be specified on the generic subprogram. If preconditions or
-postconditions need to be added to an instance of a generic subprogram, it
-can be accomplished by creating a separate subprogram specification and then
-completing that specification with a renames-as-body of the instance.]}
+  @ChgAdded{Version=[4],Text=[@ldquote@;Noninstance subprogram@rdquote excludes
+  a subprogram that is an instance of a generic subprogram. In that case, the
+  aspects should be specified on the generic subprogram. If preconditions or
+  postconditions need to be added to an instance of a generic subprogram, it
+  can be accomplished by creating a separate subprogram specification and then
+  completing that specification with a renames-as-body of the instance.]}
 @end{Ramification}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
+  @ChgAdded{Version=[5],Text=[A generic formal subprogram is a subprogram, and
+  there are no rules to prevent using these attributes on it.]}
+@end{TheProof}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -571,7 +579,7 @@ completing that specification with a renames-as-body of the instance.]}
   routine would not check any precondition).]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
-  @ChgAdded{Version=[5],Text=[Pre'Class cannot be specified on
+  @ChgAdded{Version=[5],Text=[Pre'Class cannot be specified on an
   access-to-subprogram type because of a @LegalityName found in
   @RefSecNum{Aspect Specifications} that limits 'Class aspects to
   tagged types and primitive subprograms of tagged types. The same is true for
@@ -1516,11 +1524,23 @@ associated with the access-to-subprogram type is performed.],Old=[]}]}
   source type of the conversion play no role in any subsequent call via
   the conversion result; only the Pre and Post aspects of the target type
   of the conversion are relevant in that case. The same applies in the
-  case of a "conversion" (using the term loosely) which is accomplished by
-  combining a dereference and a 'Access attribute reference, as in
-  @exam{Some_Pointer.@key[all]'Access}.]}
+  case of a @ldquote@;conversion@rdquote (using the term loosely) which
+  is accomplished by combining a dereference and an Access attribute
+  reference, as in @exam{Some_Pointer.@key[all]'Access}.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[For a call on a generic formal
+subprogram, precondition and postcondition checks performed are as determined by
+the subprogram or entry denoted by the actual subprogram, along with any
+specific precondition and specific postcondition of the formal subprogram
+itself.]]}
+
+@begin{TheProof}
+  @ChgAdded{Version=[5],Text=[This follows from the general @RunTimeTitle
+  rules given above, but we mention it explicitly so that there can be no
+  doubt that it is intended.]}
+@end{TheProof}
 
 @end{Runtime}
 
@@ -1634,9 +1654,9 @@ associated with the access-to-subprogram type is performed.],Old=[]}]}
   @nt{indexed_component}. This is considered a correction as the old rule
   is unintentionally too fierce, rejecting safe cases.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1],ARef=[AI12-0272-1]}
   @ChgAdded{Version=[5],Text=[Pre and Post can be given on an
-  access-to-subprogram type.]}
+  access-to-subprogram type and on a generic formal subprogram.]}
 @end{Extend2012}
 
 @begin{Diffword2012}
@@ -3264,7 +3284,7 @@ otherwise, the actual is interpreted only as a @nt{name}, if possible.
 
 @begin{Legality}
 If the mode is @key(in out) or @key(out),
-the actual shall be a @nt<name> that denotes a variable.@Defn2{Term=[variable],Sec=(required)]@Defn2{Term=[object],Sec=(required)}
+the actual shall be a @nt<name> that denotes a variable.@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}
 @begin{Discussion}
   We no longer need @lquotes@;or a
   @nt{type_conversion} whose argument is the @nt{name} of a variable,@rquotes@;

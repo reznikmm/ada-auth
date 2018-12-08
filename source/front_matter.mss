@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.89 $ $Date: 2017/01/14 02:32:57 $}
+@comment{$Revision: 1.90 $ $Date: 2018/09/05 05:22:38 $}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
@@ -564,6 +564,7 @@ A block statement comprises a sequence of statements
 preceded by the declaration of local entities used by the
 statements.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 Certain statements are associated with concurrent execution.
 A delay statement delays the execution of a task for a
 specified duration or until a specified time. An entry call
@@ -582,7 +583,10 @@ form of the select statement allows a selective wait for one
 of several alternative rendezvous. Other forms of the
 select statement allow conditional or timed entry calls and
 the asynchronous transfer of control in response to some
-triggering event.
+triggering event.@Chg{Version=[5],New=[ Various parallel
+constructs, including parallel loops and parallel blocks,
+support the initiation of multiple logical threads of control designed
+to execute in parallel when multiple processors are available.],Old=[]}
 
 Execution of a program unit may encounter error situations
 in which normal program execution cannot continue. For

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:54 $}
+@Comment{$Date: 2018/09/05 05:22:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.140 $}
+@Comment{$Revision: 1.141 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4729,9 +4729,19 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0278-1]}
   @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
-  is the operand of an explicit conversion, the master is that of the target
-  type of the conversion;]}
+  is @Chg{Version=[5],New=[converted to a named access type],Old=[the operand
+  of an explicit conversion]}, the master is that of the target type of the
+  conversion;]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0278-1]}
+    @ChgAdded{Version=[5],Text=[The conversion can be an explicit type
+    conversion, or an implicit subtype conversion (these happen when anonymous
+    access types are allowed to match named general access types, see
+    @RefSecNum{The Context of Overload Resolution}).]}
+  @end{Ramification}
 
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[If the result is of an anonymous access type and
@@ -5171,6 +5181,7 @@ checks.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0277-1]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>,
 @Chg{Version=[4],New=[or the return expression of an expression function
@@ -5180,7 +5191,8 @@ parameter of @i<F> is statically deeper than the level of the return object of
 @i<F>, the level of the return object is considered to be the same as that of
 the level of the explicitly aliased parameter; for statically comparing with the
 level of other entities, an explicitly aliased parameter of @i<F> is considered to
-have the accessibility level of the body of @i<F>.]}
+have the accessibility level of @Chg{Version=[5],New=[a parameter of @i<F>
+that is not explicitly aliased],Old=[the body of @i<F>]}.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
@@ -6216,6 +6228,17 @@ uses of anonymous access types.]}
   access-to-object parameter.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0278-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Defined that the accessibility of a function that returns an anonymous
+  access type is the same for implicit and explicit conversions to a named
+  access type. This could cause code that is legal and does not raise an
+  exception in original Ada 2012 to become illegal or raise
+  Program_Error because of an accessibility failure in Ada 2020. This is more
+  likely to prevent a dangling pointer bug than to prevent something useful.]}
+@end{Inconsistent2012}
+
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0027-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
@@ -6269,6 +6292,10 @@ uses of anonymous access types.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
   @ChgAdded{Version=[5],Text=[Added Nonblocking (see
   @RefSecNum{Intertask Communication}) matching to P'Access.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0277-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the static level of
+  explicitly aliased parameters.]}
 @end{DiffWord2012}
 
 

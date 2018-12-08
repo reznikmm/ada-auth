@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:38 $}
+@Comment{$Date: 2018/09/05 05:22:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2186,7 +2186,9 @@ All of the following are objects:
   the result of evaluating an @nt<aggregate>;
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[a @nt{qualified_expression} whose operand denotes an object;]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0226-1]}
+  @ChgAdded{Version=[3],Text=[a @Chg{Version=[5],New=[value conversion or ],
+    Old=[]}@nt{qualified_expression} whose operand denotes an object;]}
 
   a component, slice, or view conversion of another object.
 @end(itemize)
@@ -2287,7 +2289,10 @@ The following (and no others) represent constants:
   a @nt<function_call> or an @nt<aggregate>;
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0003-1]}
-  @ChgAdded{Version=[3],Text=[the result of evaluating a @nt{qualified_expression};]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0226-1]}
+  @ChgAdded{Version=[3],Text=[the result of evaluating a
+    @Chg{Version=[5],New=[value conversion
+    or ],Old=[]}@nt{qualified_expression};]}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0125-3]}
   @ChgAdded{Version=[5],Text=[a @nt{target_name} of an
@@ -2366,8 +2371,9 @@ generic formal object of mode @key[in]); or]}
 @ChgAdded{Version=[3],Text=[it is part of the object denoted by a
 @nt{function_call} or @nt{aggregate}; or]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0228-1]}
-@ChgAdded{Version=[5],Text=[it is a @nt{qualified_expression} where the operand
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0226-1],ARef=[AI12-0228-1]}
+@ChgAdded{Version=[5],Text=[it is a value conversion or
+@nt{qualified_expression} where the operand
 denotes a view of a composite object that is known to be constrained; or]}
 
 @ChgRef{Version=[3],Kind=[Added]}
@@ -2557,6 +2563,10 @@ assigning to an enclosing object.
   is now also known to be constrained. This allows qualification to be used
   to disambiguate a function call used as a prefix in a rename without making
   the rename illegal.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0226-1]}
+  @ChgAdded{Version=[5],Text=[A value conversion of an object is an
+  object; this makes value conversions consistent with qualified expressions.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}

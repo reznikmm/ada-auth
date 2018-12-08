@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.77 $ $Date: 2017/12/20 04:30:55 $ $Author: randy $ }
+@comment{ $Revision: 1.78 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2017/12/20 04:30:55 $}
+@Comment{$Date: 2018/09/05 05:22:38 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -747,6 +747,24 @@ limited interface types,],Old=[]} or limited private types.]}
 @ChgAdded{Version=[1],Text=[A type that is derived from a remote access type
 is also a remote access type.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0283-1]}
+@ChgAdded{Version=[5],Text=[A remote access-to-subprogram type shall not be
+nonblocking (see @RefSecNum{Intertask Communication}).]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[All calls on remote subprograms are considered
+  potentially blocking, so they cannot statically be allowed in nonblocking
+  code.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The type declaration of a remote type is illegal
+  if the Nonblocking aspect is True, either implicitly by inheritance or
+  by explicit specification.]}
+@end{Ramification}
+
 @Leading@;The following restrictions apply to the use of a
 remote access-to-subprogram type:
 @begin{Itemize}
@@ -1003,6 +1021,10 @@ synchronized, protected, or task interface type.]}
   not allowed. The intent is clear, and no implementation has ever allowed
   specifying the aspects (the attributes already cannot be specified),
   so we don't document this as an incompatibility.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
+  @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
+  remote calls are not considered nonblocking.]}
 @end{DiffWord2012}
 
 
@@ -1128,6 +1150,24 @@ it shall not @Chg{New=[be, nor shall its visible part],Old=[]} contain@Chg{New=[
 declaration of a subprogram @Chg{Version=[3],New=[for],Old=[to]} which
 @Chg{Version=[3],New=[aspect],Old=[a pragma]} Inline @Chg{Version=[3],New=[is True],
 Old=[applies]};
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0283-1]}
+@ChgAdded{Version=[5],Text=[it shall not be, nor shall its visible part contain,
+the declaration of a subprogram that is nonblocking (see @RefSecNum{Intertask Communication});]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[All such subprograms are remote subprograms, and
+  all calls on remote subprograms are considered potentially blocking, so
+  they cannot statically be allowed in nonblocking code.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The type declaration of a remote subprogram is
+  illegal if the Nonblocking aspect is True, either implicitly by inheritance
+  or by explicit specification.]}
+@end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00240-01],ARef=[AI95-00366-01]}
@@ -1395,6 +1435,12 @@ be supported as an alternative to RPC.]
   imported intot he RCI unit).]}
 @end{Incompatible2012}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
+  @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
+  remote calls are not considered nonblocking.]}
+@end{DiffWord2012}
+
 
 @LabeledClause{Consistency of a Distributed System}
 
@@ -1563,6 +1609,27 @@ programs.
 In a dispatching call with two or more controlling operands,
 if one controlling operand is designated by a value of a
 remote access-to-class-wide type, then all shall be.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0283-1]}
+@ChgAdded{Version=[5],Text=[A nonblocking program unit shall not contain, other
+than within nested units with Nonblocking specified as statically False, a
+dispatching call with a controlling operand designated by a value of a remote
+access-to-class-wide type.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Such a dispatching call is a potentially
+  blocking call (see below) even if the called subprogram is nonblocking, so
+  we must not assert that no blocking is possible.]}
+@end{Reason}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The calls is illegal if the Nonblocking aspect
+  of the containing unit is True, either implicitly by inheritance
+  or by explicit specification.]}
+@end{Ramification}
+
 @end{Legality}
 
 @begin{RunTime}
@@ -1635,10 +1702,12 @@ The exception Communication_Error
 cannot be completed due to difficulties in communicating with the called
 partition.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0183-1]}
 @PDefn2{Term=[potentially blocking operation],Sec=(remote subprogram call)}
 @PDefn2{Term=[blocking, potentially],Sec=(remote subprogram call)}
 All forms of remote subprogram calls are potentially blocking operations
-(see @RefSecNum{Protected Subprograms and Protected Actions}).
+(see @Chg{Version=[5],New=[@RefSecNum{Intertask Communication}],
+Old=[@RefSecNum{Protected Subprograms and Protected Actions}]}).
 @begin{Reason}
 Asynchronous remote procedure calls are potentially blocking since the
 implementation may require waiting for the availability of shared resources
@@ -1897,6 +1966,12 @@ not include the library unit that defines the exception.
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected the text to
   note that remote access types can be defined in remote types units.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
+  @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
+  remote calls are not considered nonblocking.]}
+@end{DiffWord2012}
 
 
 @LabeledRevisedSubClause{Version=[3],New=[Asynchronous Remote Calls],Old=[Pragma Asynchronous]}

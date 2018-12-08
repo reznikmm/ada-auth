@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.60 $ $Date: 2018/04/07 06:16:41 $ $Author: randy $ }
+@Comment{ $Revision: 1.61 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:41 $}
+@Comment{$Date: 2018/09/05 05:22:38 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1149,7 +1149,7 @@ proscribed
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0152-1],ARef=[AI05-0190-1]}
-  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 95}Restrictions
+  @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}Restrictions
   No_Anonymous_Allocators, No_Coextensions, and No_Access_Parameter_Allocators
   are new.]}
 @end{Extend2005}
@@ -1172,6 +1172,61 @@ proscribed
   that does not use the Import aspect would be very difficult and probably is
   not what the user is trying to prevent anyway.]}
 @end{DiffWord2005}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Aspect No_Controlled_Parts]}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a type, the following
+type-related, operational aspect may be specified:]}
+
+@begin{Description}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[No_Controlled_Parts@\The type of this aspect
+  is Boolean. If True, requires that the type and any
+  descendants do not have any controlled parts. If specified, the
+  value of the expression shall be static. If not specified, the value of
+  this aspect is False.]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[No_Controlled_Parts],
+     Text=[@ChgAdded{Version=[5],Text=[A specification that a type and
+     its descendants do not have controlled parts.]}]}
+@end{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgAdded{Version=[5],Text=[The No_Controlled_Parts aspect is nonoverridable
+(see @RefSecNum{Aspect Specifications}).]}
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgAdded{Version=[5],Text=[If No_Controlled_Parts is True for a type, no
+component of the type shall have a controlled part nor shall the type itself be
+controlled. In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}), this rule also applies in the private
+part of an instance of a generic unit.@PDefn{generic contract issue}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+@ChgAdded{Version=[5],Text=[When enforcing the above rule within a generic body,
+a generic formal private type and a generic formal derived type of a composite
+type are considered to have a controlled part.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is a typical generic assume-the-worst rule.]}
+@end{Reason}
+
+@end{Legality}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0256-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Aspect
+  No_Controlled_Parts is new.]}
+@end{Extend2012}
+
 
 
 @LabeledAddedClause{Version=[2],Name=[Pragma Detect_Blocking]}

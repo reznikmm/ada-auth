@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2018/09/05 05:22:38 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -978,7 +978,7 @@ which seemed like too much mechanism.
    Result : Unsigned_@i<n> := Value;
    Bit : Unsigned_@i<n> @key[range] 0 .. 1;
 @key[begin]
-   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+   @key[for] Count @key[in] 1 .. Amount @key[loop]
       Bit := Result/2**(@i<n>-1); -- @Examcom{High-bit of Result}
       Result := Result*2 + Bit;
    @key[end] @key[loop];
@@ -991,7 +991,7 @@ which seemed like too much mechanism.
    Result : Unsigned_@i<n> := Value;
    Bit : Unsigned_@i<n> @key[range] 0 .. 1;
 @key[begin]
-   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+   @key[for] Count @key[in] 1 .. Amount @key[loop]
       Bit := Result mod 2; -- @Examcom{Low-bit of Result}
       Result := Result/2 + (Bit * 2**(@i<n>-1));
    @key[end] @key[loop];
@@ -1003,7 +1003,7 @@ which seemed like too much mechanism.
    @key[return] Unsigned_@i<n> @key[is]
    Result : Unsigned_@i<n> := Value;
 @key[begin]
-   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+   @key[for] Count @key[in] 1 .. Amount @key[loop]
       Result := Result * 2;
    @key[end] @key[loop];
    @key[return] Result;
@@ -1014,7 +1014,7 @@ which seemed like too much mechanism.
    @key[return] Unsigned_@i<n> @key[is]
    Result : Unsigned_@i<n> := Value;
 @key[begin]
-   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+   @key[for] Count @key[in] 1 .. Amount @key[loop]
       Result := Result / 2;
    @key[end] @key[loop];
    @key[return] Result;
@@ -1027,7 +1027,7 @@ which seemed like too much mechanism.
    Neg : constant Boolean :=
       Result/2**(@i<n>-1) = 1; -- @Examcom{High-bit of Result}
 @key[begin]
-   @key[for] Cnt @key[in] 1 .. Amount @key[loop]
+   @key[for] Count @key[in] 1 .. Amount @key[loop]
       @key[if] Neg then
          Result := Result / 2 + 2**(@i<n>-1);
       @key[else]

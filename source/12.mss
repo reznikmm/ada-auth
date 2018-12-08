@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:21 $}
+@Comment{$Date: 2018/09/05 05:22:37 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -3078,10 +3078,13 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0183-1]}
   @ChgAdded{Version=[2],Text=[if the actual matching the
-  @nt{formal_subprogram_declaration} denotes a generic formal object of
+  @nt{formal_subprogram_declaration} denotes a generic formal
+  @Chg{Version=[5],New=[subprogram],Old=[object]} of
   another generic unit @i{G}, and the instantiation containing the actual
-  that occurs within the body of a generic unit @i{G} or within the body of a
+  @Chg{Version=[5],New=[],Old=[that ]}occurs within the body of
+  a generic unit @i{G} or within the body of a
   generic unit declared within the declarative region of
   the generic unit @i{G}, then the corresponding parameter or result type of
   the formal subprogram of @i{G} shall have a @nt{null_exclusion};]}
