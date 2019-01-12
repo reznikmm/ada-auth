@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.14 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.15 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -46,8 +46,10 @@ Environment_Variables has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0286-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}@Chg{Version=[3],New=[],Old=[ (]}
-      @Chg{Version=[3],New=[(],Old=[ ]}Process : @key{not null access procedure} (Name, Value : @key{in} String));]}
+      @Chg{Version=[3],New=[(],Old=[ ]}Process : @key{not null access procedure} (Name, Value : @key{in} String))@Chg{Version=[5],New=[
+      @key[with] Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[@key{end} Ada.Environment_Variables;]}
@@ -150,8 +152,10 @@ propagated.]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0286-1]}
 @ChgAdded{Version=[2],Text=[@key{procedure} Iterate@Chg{Version=[3],New=[],Old=[ (]}
-   @Chg{Version=[3],New=[(],Old=[  ]}Process : @key{not null access procedure} (Name, Value : @key{in} String));]}
+   @Chg{Version=[3],New=[(],Old=[  ]}Process : @key{not null access procedure} (Name, Value : @key{in} String))@Chg{Version=[5],New=[
+      @key[with] Allows_Exit],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00370-01]}

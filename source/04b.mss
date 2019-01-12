@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2232,12 +2232,17 @@ A static expression is
 one of the following:
 
 @begin{Itemize}
-a @nt{numeric_literal};
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0249-1]}
+a @nt{numeric_literal}@Chg{Version=[5],New=[ of a numeric type],Old=[]};
 @begin{Ramification}
-  A @nt<numeric_literal> is always a static expression, even if
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0249-1]}
+  A @nt<numeric_literal>@Chg{Version=[5],New=[ of a numeric type],Old=[]}
+  is always a static expression, even if
   its expected type is not that of a static subtype. However, if its value
   is explicitly converted to, or qualified by, a nonstatic subtype,
-  the resulting expression is nonstatic.
+  the resulting expression is nonstatic.@Chg{Version=[5],New=[ Non-numeric
+  types can have numeric literals if aspect Integer_Literal or Real_Literal
+  is used; these are never static.],Old=[]}
 @end{Ramification}
 
 a @nt{string_literal} of a static string subtype;
@@ -2455,6 +2460,7 @@ type is a descendant of a formal scalar type.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00263-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
 @Defn2{Term=[static], Sec=(subtype)}
 A @i(static subtype) is either a @i(static scalar subtype) or a
 @i(static string subtype).
@@ -2465,11 +2471,13 @@ formal @Chg{Version=[2],New=[],Old=[scalar ]}type, or
 a constrained scalar subtype formed by imposing a compatible
 static constraint on a static scalar subtype.
 @Defn2{Term=[static], Sec=(string subtype)}
-A static string subtype is an unconstrained string subtype
+A static string subtype is @Chg{Version=[5],New=[a string subtype that does not
+have a specified String_Literal aspect, and that is ],Old=[]}an unconstrained
+@Chg{Version=[5],New=[array],Old=[string]} subtype
 whose index subtype and component subtype are
 static@Chg{Version=[2],New=[],Old=[ (and whose type is not a descendant
 of a formal array type)]},
-or a constrained string subtype formed by imposing a compatible static
+or a constrained @Chg{Version=[5],New=[array],Old=[string]} subtype formed by imposing a compatible static
 constraint on a static string subtype.
 In any case, the subtype of a generic formal object of mode @key[in out],
 and the result subtype of a generic formal function, are not static.@Chg{Version=[3],
@@ -3035,6 +3043,12 @@ raising.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0075-1]}
   @ChgAdded{Version=[5],Text=[Expression functions can be static if declared
   correctly; this is documented as an extension in @RefSecNum{Expression Functions}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+  @ChgAdded{Version=[5],Text=[A @nt{numeric_literal} can be non-static if
+  they are defined by an Integer_Literal or Real_Literal aspect
+  (see @RefSecNum{User-Defined Literals}). Similarly, a string subtype cannot
+  be a static string subtype if the type has a String_Literal aspect.]}
 @end{Diffword2012}
 
 

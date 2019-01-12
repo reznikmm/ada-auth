@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.50 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.51 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -161,12 +161,14 @@ Directories has the following declaration:]}
                              Directory_Entry : @key{out} Directory_Entry_Type);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0286-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} Search (
       Directory : @key{in} String;
       Pattern   : @key{in} String;
       Filter    : @key{in} Filter_Type := (@key{others} => True);
       Process   : @key{not null access procedure} (
-          Directory_Entry : @key{in} Directory_Entry_Type));]}
+          Directory_Entry : @key{in} Directory_Entry_Type))@Chg{Version=[5],New=[
+      @key[with] Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   -- @RI{Operations on Directory Entries:}]}
@@ -804,12 +806,15 @@ results of a Directories search if the contents of the directory are
 altered while a search is in progress.],Old=[]}]}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key{procedure} Search (
-    Directory : @key{in} String;
-    Pattern   : @key{in} String;
-    Filter    : @key{in} Filter_Type := (@key{others} => True);
-    Process   : @key{not null access procedure} (
-        Directory_Entry : @key{in} Directory_Entry_Type));]}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0286-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} Search (
+      Directory : @key{in} String;
+      Pattern   : @key{in} String;
+      Filter    : @key{in} Filter_Type := (@key{others} => True);
+      Process   : @key{not null access procedure} (
+          Directory_Entry : @key{in} Directory_Entry_Type))@Chg{Version=[5],New=[
+      @key[with] Allows_Exit],Old=[]};]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0262-1]}

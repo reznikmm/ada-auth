@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:36 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3729,6 +3729,18 @@ The syntax rules for @nt{general_access_modifier} and
   any limited type to be treated as aliased, this was inconsistently
   implemented in compilers, and was likely to not work as expected for types
   that are ultimately nonlimited.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0289-1]}
+  @ChgAdded{Version=[5],Text=[@B[Correction:] Static matching (see
+  @RefSecNum{Statically Matching Constraints and Subtypes}) requires that both
+  anonymous access types exclude null; and full conformance requires statically
+  matching subtypes. Therefore, an access parameter that designates an untagged
+  private type P (which does not exclude null) does not match its completion if
+  P is completed with a tagged type (in that case, the parameter is controlling
+  and thus excludes null, regardless of whether there is an explicit null
+  exclusion on the body). Similar considerations apply in contexts where mode
+  conformance and subtype conformance are required (for instance, subprogram
+  renaming).]}
 @end{Incompatible95}
 
 @begin{Extend95}
@@ -4673,8 +4685,11 @@ is the same as that of
 the operand.
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0292-1]}
 @ChgAdded{Version=[3],Text=[The accessibility level of a
-@nt{conditional_expression} is the accessibility level of the evaluated
+@nt{conditional_expression} @Chg{Version=[5],New=[(see
+@RefSecNum{Conditional Expressions}) ],Old=[]}is
+the accessibility level of the evaluated
 @Syni{dependent_}@nt{expression}.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}

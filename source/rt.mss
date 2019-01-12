@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.124 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
+@comment{ $Revision: 1.125 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2018/09/05 05:22:38 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -354,6 +354,22 @@ During rendezvous, the task accepting the entry call inherits the
 @Chg{New=[],Old=[active ]}priority of the @Chg{New=[entry call],Old=[caller]}
 (see @RefSecNum{Entry Calls}@Chg{New=[ and @RefSecNum{Entry Queuing Policies}],Old=[]}).
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[While starting a protected action on a protected
+object when the FIFO_Spinning admission policy is in effect, a task inherits the
+ceiling priority of the protected object (see
+@RefSecNum{Intertask Communication}, @RefSecNum{Priority Ceiling Locking},
+and @RefSecNum{Admission Policies}).]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+  @ChgAdded{Version=[5],Text=[Priority inheritance is needed for FIFO_Spinning
+  to ensure that lower priority tasks that initiate spin waiting earlier than
+  other higher priority tasks continue to spin to ensure that they can be
+  granted the resource when it becomes available in order to support FIFO
+  ordering.]}
+@end{Reason}
+
 During a protected action on a protected object, a task inherits the ceiling
 priority of the protected object (see @RefSecNum{Intertask Communication} and
 @RefSecNum{Priority Ceiling Locking}).
@@ -436,6 +452,10 @@ The description of the Priority pragma has been moved to this annex.
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified when the Priority
   and Interrupt_Priority aspect expressions are evaluated.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+  @ChgAdded{Version=[5],Text=[Added an additional case of priority inheritance
+  when the new admission policy FIFO_Spinning is in effect.]}
 @end{DiffWord2012}
 
 
@@ -499,7 +519,66 @@ language-defined library package exists:]}
 @ChgAdded{Version=[2],Text=[Dispatching serves as the parent of other
 language-defined library units concerned with task dispatching.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a noninstance subprogram
+(including a generic formal subprogram), a generic subprogram, or an entry, the
+following language-defined aspect may be specified with an
+@nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[Yield@\The type of aspect Yield is
+Boolean.@AspectDefn{Yield}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Yield],
+    Text=[@ChgAdded{Version=[5],Text=[Ensures that a callable entity includes
+      a task dispatching point.]}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[If directly specified, the @nt{aspect_definition}
+shall be a static expression. If not specified (including by inheritance), the
+aspect is False.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[If a Yield aspect is specified True for a primitive subprogram @i<S>
+of a type @i<T>, then the aspect is inherited by the corresponding primitive
+subprogram of each descendant of @i<T>.]}
+@end{Description}
+
 @end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[If the Yield aspect is specified
+for a dispatching subprogram that inherits the aspect, the specified
+value shall be confirming. If the Nonblocking aspect (see
+@RefSecNum{Intertask Communication}) of
+the associated callable entity is statically True, the Yield aspect
+shall not be specified as True.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[If the Nonblocking aspect (see
+@RefSecNum{Intertask Communication}) of the associated callable entity is
+statically True, the Yield aspect shall not be specified as True. For a callable
+entity that is declared within a generic body, this rule is checked assuming
+that any nonstatic Nonblocking attributes in the expression of the Nonblocking
+aspect of the entity are statically True.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
+  @ChgAdded{Version=[5],Text=[The second sentence here is an assume-the-worst
+  rule. The only Nonblocking attributes that are nonstatic are those that
+  depend, directly or indirectly, on the nonblocking aspect of a generic formal
+  parameter. We have to assume these might in fact have the value True if given
+  an appropriate actual entity.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[In addition to the places where @LegalityTitle
+normally apply (see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an
+instance of a generic unit.@PDefn{generic contract issue}]}
+@end{Legality}
 
 @begin{RunTime}
 
@@ -616,6 +695,7 @@ is a potentially blocking operation (see @RefSecNum{Protected Subprograms and Pr
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00321-01]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0279-1]}
 @ChgDeleted{Version=[2],Text=[@PDefn{task dispatching point}
 @PDefn{dispatching point}
 A new running task is also selected whenever there is a nonempty ready queue
@@ -623,6 +703,10 @@ with a higher priority than the priority of the running
 task, or when the task dispatching policy requires a
 running task to go back to a ready queue.
 @Redundant[These are also task dispatching points.]]}
+@ChgAdded{Version=[5],Text=[If the Yield aspect has the value True, then a call
+to Yield is included within the body of the associated callable entity, and
+invoked immediately prior to returning from the body if and only if no other
+task dispatching points were encountered during the execution of the body.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[Thus, when a task becomes ready, this is a task
@@ -737,6 +821,12 @@ deferred while the affected task performs a protected action.]}
   Dispatching_Policy_Error and none of the child packages that could raise
   that exception are pure.]}
 @end{Incompatible2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Aspect Yield is new.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
@@ -1278,7 +1368,7 @@ Old=[]}]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[3],Text=[@key[package] Ada.Dispatching.Non_Preemptive@Chg{Version=[5],New=[],Old=[ @key[is]]}@ChildUnit{Parent=[Ada.Dispatching],Child=[Non_Preemptive]}
   @Chg{Version=[5],New=[@key[with]],Old=[@key[pragma]]} Preelaborate@Chg{Version=[5],New=[, Nonblocking @key[is]],Old=[(Non_Preemptive);]}
   @key[procedure] @AdaSubDefn{Yield_To_Higher};
@@ -2745,6 +2835,103 @@ or requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)
 @end{Extend2012}
 
 
+@LabeledAddedSubClause{Version=[5],Name=[Admission Policies]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[@Redundant[This subclause specifies a mechanism
+for a user to choose an admission policy. It also defines one such policy.
+Other policies are implementation defined.]]}
+
+@ChgImplDef{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[Implementation-defined admission policies.]}]}
+@end{Intro}
+
+@begin{Syntax}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Admission_Policy is as follows:]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],Text=`@key{pragma} @prag<Admission_Policy> (@SynI{policy_}@Syn2{identifier});'}>
+@end{Syntax}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[The @SynI{policy_}@nt{identifier} shall be either
+FIFO_Spinning or an implementation-defined identifier.]}
+@end{Legality}
+
+@begin{Linktime}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[An Admission_Policy pragma is a configuration
+pragma.]}
+
+@end{Linktime}
+
+@begin{Runtime}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[An admission policy governs the order in which
+competing tasks are evaluated for acquiring the execution resource associated
+with a protected object. The admission policy is specified by an
+Admission_Policy pragma.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[One admission policy, FIFO_Spinning, is language
+defined. If FIFO_Spinning is in effect, and starting a protected action on a
+protected object involves busy-waiting, then calls are selected for acquiring
+the execution resource of the protected object in the order in which the
+busy-wait was initiated; otherwise the FIFO_Spinning policy has no effect. If no
+Admission_Policy pragma applies to any of the program units in the partition,
+the admission policy for that partition is implementation defined.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A possible implementation for this policy
+  would be to apply the abstraction of a ticketing system by assigning
+  two sequence number values to each protected object. One sequence
+  number represents the next available ticket number, and the other
+  sequence number represents the ticket number currently being serviced
+  by the protected object. The next available ticket number is
+  incremented and assigned to a task when the task initiates a busy-wait
+  for acquiring the execution resource associated with the protected
+  object. The ticket number currently being serviced is incremented when
+  a task releases this execution resource. As part of acquiring the
+  execution resource, a task busy-waits until its assigned ticket number
+  equals the protected object's value for the ticket number currently
+  being serviced. While a task busy-waits, it monitors the active
+  priority of the protected object in order to inherit any modifications
+  to the protected object's active priority.]}
+@end{ImplNote}
+@end{Runtime}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+@ChgAdded{Version=[5],Text=[Implementations are allowed to define other
+admission policies, but need not support more than one admission policy per
+partition.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This rule is in fact redundant, as
+  @RefSecNum{Pragmas and Program Units} allows an
+  implementation to limit the use of configuration pragmas to an empty
+  environment. In that case, there would be no way to have multiple
+  policies in a partition.]}
+@end{Discussion}
+@end{ImplPerm}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0276-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Admission Policies and the specific policy FIFO_Spinning are new.]}
+@end{Extend2012}
+
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -3274,6 +3461,47 @@ construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
 @begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0290-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@Defn{pure-barrier-eligible}A
+scalar @nt{expression} within a protected unit is said to be
+@i<pure-barrier-eligible> if it is one of the following:]}
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a static expression;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a @nt{name} that statically denotes a scalar
+component of the immediately enclosing protected unit;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a Count @nt{attribute_reference} whose @nt{prefix}
+statically denotes an entry declaration of the immediately enclosing unit;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a call to a predefined relational operator or
+boolean logical operator (@key[and], @key[or], @key[xor], @key[not]), where
+each operand is pure-barrier-eligible;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a membership test whose
+@SynI{tested_}@nt{simple_expression} is pure-barrier-eligible, and whose
+@nt{membership_choice_list} meets the requirements for a static membership test
+(see @RefSecNum{Static Expressions and Static Subtypes});]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a short-circuit control form both of whose operands are
+pure-barrier-eligible;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a @nt{conditional_expression} all of whose
+@nt{condition}s, @SynI{selecting_}@nt{expression}s, and
+@Syni{dependent_}@nt{expression}s are pure-barrier-eligible; or]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[a pure-barrier-eligible @nt{expression} enclosed in
+parentheses.]}
+@end{Itemize}
+
 @Leading@;The following @SynI{restriction_}@nt{identifier}s are language defined:
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0013-1],ARef=[AI05-0216-1]}
@@ -3489,8 +3717,14 @@ restriction No_Dynamic_CPU_Assignment is in effect, then no runtime check
 is needed when specifying the CPU aspect. If the restriction is used with
 the Ravenscar profile, no runtime checks are needed.]}
 @end{Ramification}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0290-1]}
+@ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],Sec=(Pure_Barriers)}@Defn{Pure_Barriers restriction}
+   Pure_Barriers @\The Boolean expression in each protected entry
+   barrier is pure-barrier-eligible.]}
+
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0290-1]}@ChgNote{Just changes the paragraph number}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(Simple_Barriers)}@Chg{Version=[3],New=[@Defn{Simple_Barriers restriction}],
    Old=[]}Simple_Barriers @\The
    Boolean expression in @Chg{Version=[3],New=[each],Old=[an]} entry barrier
@@ -3760,13 +3994,19 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
   @b{Corrigendum:} Restriction No_Dynamic_CPU_Assignment is newly
   added to Ada, for use as part of the Ravenscar profile
-  (see @RefSecNum{The Ravenscar Profile}).]}
+  (see @RefSecNum{The Ravenscar and Jorvik Profiles}).]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0117-1]}
   @ChgAdded{Version=[4],Text=[@b{Corrigendum:} Restriction
   No_Tasks_Unassigned_To_CPU is newly added to Ada; it ensures that no
   task is running on an implementation-defined CPU so that task scheduling
   can be analyzed.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0290-1]}
+  @ChgAdded{Version=[5],Text=[@b{Corrigendum:} Restriction
+  Pure_Barriers is newly added to Ada; it allows the Jorvik profile to use
+  more expressive barriers than the Ravenscar profile without having to
+  worry about exceptions or side-effects.]}
 @end{Extend2012}
 
 
@@ -4898,13 +5138,16 @@ Text=[The metrics for entry-less protected objects.]}]}
 @end{Metrics}
 
 
-@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}
+@LabeledRevisedClause{Version=[5],InitialVersion=[3],New=[The Ravenscar and Jorvik Profiles],Old=[The Ravenscar Profile]}}
+@Comment{@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[2],Text=[@Redundant[This @Chg{Version=[3],New=[subclause],Old=[clause]}
-@Chg{Version=[3],New=[defines the Ravenscar profile.@Defn{Ravenscar}],
+@Chg{Version=[3],New=[defines the Ravenscar @Chg{Version=[5],New=[and Jorvik@Defn{Jorvik}
+profiles],Old=[profile]}.@Defn{Ravenscar}],
 Old=[specifies a mechanism for defining run-time profiles.]}]]}
 @end{Intro}
 
@@ -4932,9 +5175,13 @@ Text=`@Chg[Version=[2],New=[@key{pragma} @prag<Profile> (@SynI{profile_}@Syn2{id
 @begin{Legality}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0246-1]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[2],Text=[The @SynI{profile_}@nt{identifier}
-@Chg{Version=[3],New=[Ravenscar is a usage profile (see @RefSecNum{Pragma Restrictions and Pragma Profile}).
-For usage profile Ravenscar, there shall be no],Old=[shall be the name
+@Chg{Version=[3],New=[Ravenscar @Chg{Version=[5],New=[and
+@SynI{profile_}@nt{identifier} Jorvik are],Old=[is a]} usage
+@Chg{Version=[5],New=[profiles],Old=[profile]} (see @RefSecNum{Pragma Restrictions and Pragma Profile}).
+For usage @Chg{Version=[5],New=[profiles],Old=[profile]}
+Ravenscar@Chg{Version=[5],New=[ and Jorvik],Old=[]}, there shall be no],Old=[shall be the name
 of a run-time profile. The semantics of any]}
 @SynI{profile_}@nt{pragma_@!argument_@!association}s@Chg{Version=[3],New=[],Old=[
 are defined by
@@ -4979,7 +5226,7 @@ pragmas that is defined for each run-time profile.]}]}
               No_Dependence => Ada.Asynchronous_Task_Control,
               No_Dependence => Ada.Calendar,
               No_Dependence => Ada.Execution_Time.Group_Budgets,
-              No_Dependence => Ada.Execution_Time.Timers@Chg{Version=[4],New=[,
+              No_Dependence => Ada.Execution_Time.Timers,@Chg{Version=[4],New=[
               No_Dependence => Ada.Synchronous_Barriers,],Old=[]}
               No_Dependence => Ada.Task_Attributes@Chg{Version=[3],New=[,
               No_Dependence => System.Multiprocessors.Dispatching_Domains],Old=[]});]}
@@ -4994,6 +5241,59 @@ name.@Comment{ This is another example of Ada's lousy marketing sense; casual
 readers, especially those outside of Ada, have no conception of what
 @lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
 it to find out how it can help them.}]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0291-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The
+usage profile Jorvik is equivalent to the following set of pragmas:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0291-1]}
+@ChgAdded{Version=[5],Text=[
+@key{pragma} Task_Dispatching_Policy (FIFO_Within_Priorities);
+@key{pragma} Locking_Policy (Ceiling_Locking);
+@key{pragma} Detect_Blocking;
+@key{pragma} Restrictions (
+              No_Abort_Statements,
+              No_Dynamic_Attachment,
+              No_Dynamic_CPU_Assignment,
+              No_Dynamic_Priorities,
+              No_Local_Protected_Objects,
+              No_Local_Timing_Events,
+              No_Protected_Type_Allocators,
+              No_Requeue_Statements,
+              No_Select_Statements,
+              No_Specific_Termination_Handlers,
+              No_Task_Allocators,
+              No_Task_Hierarchy,
+              No_Task_Termination,
+              Pure_Barriers,
+              Max_Task_Entries => 0,
+              No_Dependence => Ada.Asynchronous_Task_Control,
+              No_Dependence => Ada.Execution_Time.Group_Budgets,
+              No_Dependence => Ada.Execution_Time.Timers,
+              No_Dependence => Ada.Task_Attributes,
+              No_Dependence => System.Multiprocessors.Dispatching_Domains);]}
+@end{Example}
+
+@begin{Discussion}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The Jorvik profile removes a number
+of restrictions from the Ravenscar profile to allow additional applications to
+benefit from predicability and low overhead. Specifically, the following
+restrictions are removed:]}
+@begin{Display}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[    No_Implicit_Heap_Allocations
+    No_Relative_Delay
+    Max_Entry_Queue_Length => 1
+    Max_Protected_Entries => 1
+    No_Dependence => Ada.Calendar
+    No_Dependence => Ada.Synchronous_Barriers]}
+@end{Display}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Jorvik also replaces restriction Simple_Barriers with
+Pure_Barriers (a weaker requirement than Simple_Barriers).]}
 @end{Discussion}
 @end{StaticSem}
 
@@ -5035,8 +5335,10 @@ will execute when the Ravenscar profile is in effect.]}]}}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[3],Text=[On a multiprocessor system, an implementation should
-support a fully partitioned approach. Each processor should have separate and
+support a fully partitioned approach@Chg{Version=[5],New=[ if either of these
+profiles is specified],Old=[]}. Each processor should have separate and
 disjoint ready queues.]}
 
 @ChgImplAdvice{Version=[3],Kind=[Added],Text=[@ChgAdded{Version=[3],
@@ -5046,21 +5348,34 @@ and disjoint ready queue.]}]}
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI95-00249-01],ARef=[AI05-0246-1]}
-@ChgAdded{Version=[3],Text=[The effect of the Max_Entry_Queue_Length => 1
-restriction applies only to protected entry queues due to the accompanying
-restriction of Max_Task_Entries => 0.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For the Ravenscar profile,
+the],Old=[The]} effect of the
+@Chg{Version=[5],New=[restriction ],Old=[]}Max_Entry_Queue_Length => 1
+@Chg{Version=[5],New=[],Old=[restriction ]}applies only to protected entry
+queues due to the accompanying restriction
+@Chg{Version=[5],New=[],Old=[of ]}Max_Task_Entries => 0.@Chg{Version=[5],New=[ The restriction
+Max_Entry_Queue_Length is not applied by the Jorvik profile.],Old=[]}]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
-@ChgAdded{Version=[4],Text=[When the Ravenscar profile is in effect (via the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
+@ChgAdded{Version=[4],Text=[When the Ravenscar @Chg{Version=[5],New=[or
+Jorvik ],Old=[]}profile is in effect (via the
 effect of the No_Dynamic_CPU_Assignment restriction), all of the tasks in the
 partition will execute on a single CPU unless the programmer explicitly uses
 aspect CPU to specify the CPU assignments for tasks. The use of multiple CPUs
 requires care, as many guarantees of single CPU scheduling no longer apply.]}
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0055-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[4],Text=[It is not recommended to specify the CPU of a task
-to be Not_A_Specific_CPU when the Ravenscar profile is in effect. How a
+to be Not_A_Specific_CPU when the Ravenscar @Chg{Version=[5],New=[or
+Jorvik ],Old=[]}profile is in effect. How a
 partition executes strongly depends on the assignment of tasks to CPUs.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0291-1]}
+@ChgAdded{Version=[5],Text=[Any unit that meets the requirements of the
+Ravenscar profile also meets the requirements of the Yorvik profile.]}
 @end{Notes}
 
 @begin{Extend95}
@@ -5095,6 +5410,12 @@ partition executes strongly depends on the assignment of tasks to CPUs.]}
   tasks to processors statically. As such, the new check is more likely to
   catch bugs than break a working program.]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0291-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The Jorvik profile is new.]}
+@end{Extend2012}
 
 
 @Comment{Moved the following to the previous subclause...

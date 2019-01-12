@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.90 $ $Date: 2018/09/05 05:22:38 $}
+@comment{$Revision: 1.91 $ $Date: 2018/12/08 03:20:13 $}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
@@ -926,7 +926,7 @@ high-integrity systems, further dispatching policies such as Round Robin
 and Earliest Deadline First, support for timing events, and support for
 control of CPU time utilization. See
 @Chg{Version=[3],New=[subclauses],Old=[clauses]} @RefSecNum{Priority Scheduling},
-@RefSecNum{The Ravenscar Profile},
+@RefSecNum{The Ravenscar and Jorvik Profiles},
 @RefSecNum{Execution Time}, and
 @RefSecNum{Timing Events}.],Old=[]}
 

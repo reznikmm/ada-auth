@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1389,36 +1389,61 @@ Old=[The type of a generic formal object of mode
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For a
-@nt{formal_object_declaration} with a @nt{null_exclusion} or an
-@nt{access_definition} that has a @nt{null_exclusion}:]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
+@ChgNote{Removed Type=[Leading] here, only want it in versions 2-4}
+@ChgAdded{Version=[2],Text=[For a
+@nt{formal_object_declaration} @Chg{Version=[5],New=[of mode
+@key[in out] ],Old=[]}with a @nt{null_exclusion} or an
+@nt{access_definition} that has a @nt{null_exclusion}@Chg{Version=[5],New=[,
+the subtype of the actual matching the
+@nt{formal_object_declaration} shall exclude null. In addition, if
+the actual matching the @nt{formal_object_declaration} statically denotes the
+generic formal object of mode @key[in out] of another generic unit @i<G>, and
+the instantiation containing the actual occurs within the body of @i<G> or
+within the body of a generic unit declared within the declarative region of
+@i<G>, then the declaration of the formal object of @i<G> shall have a
+@nt{null_exclusion}. @PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an
+instance of a generic unit.],Old=[:]}]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[if the actual matching the
-  @nt{formal_object_declaration} denotes the generic formal object
-  of another generic unit @i{G}, and the instantiation containing the actual
+  @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[if the actual
+  matching the @nt{formal_object_declaration}
+  denotes the generic formal object of another
+  generic unit @i{G}, and the instantiation containing the actual
   occurs within the body
   of @i{G} or within the body of a generic unit declared within the declarative
   region of @i{G}, then the declaration of the formal object of @i{G}
-  shall have a @nt{null_exclusion};]}
+  shall have a @nt{null_exclusion};]}]}
 
-  @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the actual
+  @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[otherwise,
+  the subtype of the actual
   matching the @nt{formal_object_declaration} shall exclude null.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
-  instance of a generic unit.]}
+  instance of a generic unit.]}]}
+@end{Itemize}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00423-01]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
   @Chg{Version=[2],New=[This rule prevents @lquotes@;lying@rquotes.
   @b<Null> must never be the value of an object with an explicit
   @nt{null_exclusion}. The first bullet is an assume-the-worst rule
   which prevents trouble in generic bodies (including bodies of child
-  units) when the subtype of the formal object excludes null implicitly.],
+  units) when the subtype of the formal object
+  @Chg{Version=[5],New=[of mode @key[in out] ],Old=[]}excludes null
+  implicitly. @Chg{Version=[5],New=[Since a generic formal object of mode
+  @key[in] is like a constant initialized to the value of the actual,
+  the run-time check performed by the initialization is enough to prevent
+  lying; thus we don't need a @LegalityName for such objects.],Old=[]}],
   Old=[Since a generic formal object is like a
   constant of mode @key{in} initialized to the value of the actual,
   a limited type would not make sense, since initializing a constant is
@@ -1426,7 +1451,6 @@ Old=[The type of a generic formal object of mode
   That is, generic formal objects of mode @key{in} are passed by copy,
   and limited types are not supposed to be copied.]}
 @end{Reason}
-@end{Itemize}
 
 @end{Legality}
 
@@ -1600,6 +1624,15 @@ important benefit, and any change has some cost.
   An optional @nt{aspect_specification} can be used in a @nt{formal_object_declaration}.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b<Correction:>
+  The @LegalityName for matching null exclusions only applies to formal
+  objects with mode @b<in out>. (@b<In> mode formal objects have a run-time
+  check to avoid problems.) This is an extension as some instantiations that
+  were illegal in original Ada 2012 are now legal.]}
+@end{Extend2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
@@ -3078,9 +3111,10 @@ a @nt{formal_subprogram_declaration} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0183-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0183-1],ARef=[AI12-0287-1]}
   @ChgAdded{Version=[2],Text=[if the actual matching the
-  @nt{formal_subprogram_declaration} denotes a generic formal
+  @nt{formal_subprogram_declaration}
+  @Chg{Version=[5],New=[statically ],Old=[]}denotes a generic formal
   @Chg{Version=[5],New=[subprogram],Old=[object]} of
   another generic unit @i{G}, and the instantiation containing the actual
   @Chg{Version=[5],New=[],Old=[that ]}occurs within the body of
@@ -3558,6 +3592,13 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   that the previous extension allows them to be used for other kinds of
   formal subprograms).]}
 @end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording to ensure that
+  the object subject to a @LegalityName can be determined at compile-time.
+  The alternative being nonsense, we treat this as a wording change.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Formal Packages}

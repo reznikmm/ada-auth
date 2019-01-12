@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:21 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.118 $}
+@Comment{$Revision: 1.119 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1611,10 +1611,12 @@ For the same reason, @lquotes@;specified@rquotes@; means the same thing as
 @begin{StaticSem}
 @Leading@keepnext@;The following language-defined library package exists:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0235-1]}
 @key[with] Ada.Finalization;
 @key[with] System.Storage_Elements;
-@ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @key[is]
-    @key{pragma} Preelaborate(System.Storage_Pools);
+@ChildUnit{Parent=[System],Child=[Storage_Pools]}@key[package] System.Storage_Pools @Chg{Version=[5],New=[
+    @key[with] Pure, Nonblocking => False @key[is]],Old=[@key[is]
+    @key{pragma} Preelaborate(System.Storage_Pools);]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00161-01]}
     @key[type] @AdaTypeDefn{Root_Storage_Pool} @key[is]
@@ -2379,6 +2381,15 @@ objects incorrectly by missing various cases.
   alignments for calls to Allocate made by @nt{allocator}s,
   up to Max_Alignment_For_Allocation. This eases implementation in some cases.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0235-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Package System.Storage_Pools now has Pure categorization, so it can be
+  mentioned for any package. Note that this does not allow storage pool
+  objects to be shared between partitions, as these necessarily must
+  be variables; however, this does allow a storage pool type to be shared.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0043-1]}
@@ -4601,6 +4612,11 @@ make dispatching
 calls on the Read and Write procedures of the Root_Stream_Type.
 (User-defined T'Read and T'Write attributes can also make such calls,
 or can call the Read and Write attributes of other types.)
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The library package Ada.Streams has the
+following declaration:]}
+
 @begin{example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChildUnit{Parent=[Ada],Child=[Streams]}@key[package] Ada.Streams@Chg{Version=[5],New=[],Old=[ @key[is]]}
@@ -4679,22 +4695,215 @@ because then a read of 0 elements would always raise Constraint_Error.
 A better choice of lower bound is @Chg{Version=[3],New=[0 or ],Old=[]}1.]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Text=[In addition, three packages provide stream
+implementations which do not make use of any file operations. These three
+packages provide the same operations, with Streams.FIFO_Streams providing an
+abstract interface, and two child packages providing implementations of that
+interface. The difference is that for Streams.FIFO_Streams.Bounded, the maximum
+storage is bounded.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The library package
+Ada.Streams.FIFO_Streams has the following declaration:]}
+
+@begin{example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Streams],Child=[FIFO_Streams]}@key[package] Ada.Streams.FIFO_Streams
+   @key[with] Pure, Nonblocking @key[is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{FIFO_Stream} @key[is abstract new] Root_Stream_Type @key[with private];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Element_Count} (Stream : FIFO_Stream)
+      @key[return] Stream_Element_Count @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Clear} (Stream : @key[in out] FIFO_Stream) @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... -- @RI{not specified by the language}
+@key[end] Ada.Streams.FIFO_Streams;]}
+@end{example}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The library package
+Ada.Streams.FIFO_Streams.Unbounded has the following declaration:]}
+
+@begin{example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Streams.FIFO_Streams],Child=[Unbounded]}@key[package] Ada.Streams.FIFO_Streams.Unbounded
+   @key[with] Prelaborated, Nonblocking @key[is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Stream_Type} @key[is new] FIFO_Stream @key[with private]
+      @key[with] Default_Initial_Condition =>
+          Element_Count (Stream_Type) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Read} (
+      Stream : @key[in out] Stream_Type;
+      Item   : @key[out] Stream_Element_Array;
+      Last   : @key[out] Stream_Element_Offset)
+      @key[with] Post =>
+          (@key[declare]
+             Num_Read : @key[constant] Stream_Element_Count :=
+                Stream_Element_Count'Min
+                   (Element_Count(Stream)'Old, Item'Length);
+           @key[begin]
+                 Last = Num_Read + Item'First - 1
+              @key[and]
+                 Element_Count (Stream) =
+                    Element_Count (Stream)'Old - Num_Read);]}
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[Num_Read is the number of elements read; this is
+   the minimum of Item'Length and the number of available elements. Last then is
+   determined by that, and the Element_Count decreases by the number of elements
+   read.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Write} (
+      Stream : @key[in out] Stream_Type;
+      Item   : @key[in] Stream_Element_Array)
+      @key[with] Post =>
+         Element_Count (Stream) =
+         Element_Count (Stream)'Old + Item'Length;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[function] @AdaSubDefn{Element_Count} (Stream : Stream_Type)
+      @key[return] Stream_Element_Count;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Clear} (Stream : @key[in out] Stream_Type)
+      @key[with] Post => Element_Count (Stream) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... -- @RI{not specified by the language}
+@key[end] Ada.Streams.FIFO_Streams.Unbounded;]}
+@end{example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The library package
+Ada.Streams.FIFO_Streams.Bounded has the following declaration:]}
+
+@begin{example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Streams.FIFO_Streams],Child=[Bounded]}@key[package] Ada.Streams.FIFO_Streams.Bounded
+    @key[with] Pure, Nonblocking @key[is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Stream_Type} (Max_Elements : Stream_Element_Count)
+      @key[is new] FIFO_Stream @key[with private]
+         @key[with] Default_Initial_Condition =>
+            Element_Count (Stream_Type) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Read} (
+      Stream : @key[in out] Stream_Type;
+      Item   : @key[out] Stream_Element_Array;
+      Last   : @key[out] Stream_Element_Offset)
+      @key[with] Post =>
+          (@key[declare]
+             Num_Read : @key[constant] Stream_Element_Count :=
+                Stream_Element_Count'Min
+                   (Element_Count(Stream)'Old, Item'Length);
+           @key[begin]
+                 Last = Num_Read + Item'First - 1
+              @key[and]
+                 Element_Count (Stream) =
+                    Element_Count (Stream)'Old - Num_Read);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[procedure] @AdaSubDefn{Write} (
+      Stream : @key[in out] Stream_Type;
+      Item   : @key[in] Stream_Element_Array)
+      @key[with] Pre =>
+              Element_Count (Stream) + Item'Length <= Stream.Max_Elements
+              @key[or else] (@key[raise] Constraint_Error),
+           Post =>
+              Element_Count (Stream) =
+              Element_Count (Stream)'Old + Item'Length;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+   @key[function] @AdaSubDefn{Element_Count} (Stream : Stream_Type)
+      @key[return] Stream_Element_Count
+      @key[with] Post => Element_Count'Result <= Stream.Max_Elements;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[overriding]
+    @key[procedure] @AdaSubDefn{Clear} (Stream : @key[in out] Stream_Type)
+       @key[with] Post => Element_Count (Stream) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... -- @RI{not specified by the language}
+@key[end] Ada.Streams.FIFO_Streams.Bounded;]}
+@end{example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Text=[The Element_Count functions return the number of
+stream elements that are available for reading from the given stream.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Text=[The Read and Write procedures behave as described
+for package Ada.Streams above. Stream elements are read in FIFO (first-in,
+first-out) order; stream elements are available for reading immediately after
+they are written.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Text=[The Clear procedures remove any available stream
+elements from the given stream.]}
+
 @end{StaticSem}
 
 @begin{ImplPerm}
-@ChgRef{Version=[1],Kind=[Added],Ref=[8652/0044],ARef=[AI95-00181-01]}
+@ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0044],ARef=[AI95-00181-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0293-1]}@Comment{Just renumbered.}
 @ChgAdded{Version=[1],Text=[If Stream_Element'Size is not a multiple of
 System.Storage_Unit, then the components of Stream_@!Element_@!Array need
 not be aliased.]}
 @begin{Ramification}
-@ChgRef{Version=[1],Kind=[Added]}
-@ChgRef{Version=[2],Kind=[RevisedAdded],ARef=[AI95-00114-01]}
+@ChgRef{Version=[1],Kind=[AddedNormal]}
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00114-01]}
 @ChgAdded{Version=[1],Text=[If the Stream_Element'Size is less than the size of
 System.Storage_Unit, then components of Stream_@!Element_@!Array need not be
 aliased. This is necessary as the components of type Stream_Element size might
 not be addressable on the target @Chg{Version=[2],New=[architecture],Old=[architechture]}.]}
 @end{Ramification}
 @end{ImplPerm}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+@ChgAdded{Version=[5],Text=[Streams.FIFO_Streams.Bounded.Stream_Type objects
+should be implemented without implicit pointers or dynamic
+allocation.]}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[Streams.FIFO_Streams.Bounded.Stream_Type objects
+should be implemented without implicit pointers or dynamic
+allocation.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The Streams.FIFO_Streams.Bounded package is
+  provided in orde to make available an alternative to the
+  Streaams.FIFO_Streams.Unbounded package which gives more predictable memory
+  usage.]}
+@end{Reason}
+@end{ImplAdvice}
 
 @begin{Notes}
 See @RefSec{The Package Streams.Stream_IO} for an example of extending
@@ -4726,6 +4935,13 @@ Item'First is Stream_Element_Offset'First, Read will raise Constraint_Error.]}
   @ChgAdded{Version=[2],Text=[Fixed the wording for Read to properly define
   the result in Last when no stream elements are transfered.]}
 @end{DiffWord95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Package Ada.Streams.FIFO_Streams and its children are new.]}
+@end{Extend2012}
+
 
 
 @LabeledSubClause{Stream-Oriented Attributes}

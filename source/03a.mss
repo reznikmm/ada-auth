@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:36 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2318,6 +2318,7 @@ The following (and no others) represent constants:
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0294-1]}
 @Defn{nominal subtype}
 At the place where a view of an
 object is defined, a @i(nominal subtype) is associated
@@ -2326,7 +2327,8 @@ with the view.
 @IndexSee{Term=[subtype (of an object)],See=(actual subtype of an object)}
 The object's @i(actual subtype) (that is, its
 subtype) can be more restrictive than
-the nominal subtype of the view; it always is if the nominal subtype
+the nominal subtype of the view; it always is
+@Chg{Version=[5],New=[more restrictive ],Old=[]}if the nominal subtype
 is an @i(indefinite subtype).
 @Defn{indefinite subtype}
 @Defn{definite subtype}

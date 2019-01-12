@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.61 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
+@Comment{ $Revision: 1.62 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:38 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1233,8 +1233,12 @@ type are considered to have a controlled part.]}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
-@ChgAdded{Version=[2],Text=[The following @nt{pragma} forces an implementation
-to detect potentially blocking operations within a protected operation.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[2],Text=[The following @nt{pragma}
+@Chg{Version=[5],New=[requires],Old=[forces]} an implementation
+to detect potentially blocking operations @Chg{Version=[5],New=[during
+the execution of],Old=[within]} a protected operation@Chg{Version=[5],New=[ or
+a parallel construct],Old=[]}.]}
 @end{Intro}
 
 @begin{Syntax}
@@ -1258,18 +1262,26 @@ pragma.]}
 
 @begin{RunTime}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0247-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0247-1],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[2],Text=[An implementation is required to detect a
-potentially blocking operation @Chg{Version=[5],New=[during],Old=[within]}
-a protected operation, and to raise
-Program_Error (see @RefSecNum{Protected Subprograms and Protected Actions}).]}
+potentially blocking operation @Chg{Version=[5],New=[that occurs during the
+execution of],Old=[within]}
+a protected operation@Chg{Version=[5],New=[ or a parallel construct defined
+within a compilation unit to which the pragma applies],Old=[]},
+and to raise
+Program_Error (see @Chg{Version=[5],New=[@RefSecNum{Intertask Communication}],
+Old=[@RefSecNum{Protected Subprograms and Protected Actions}]}).]}
 @end{RunTime}
 
 @begin{ImplPerm}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00305-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[2],Text=[An implementation is allowed to reject a
-@nt{compilation_unit} if a potentially blocking operation is present directly
-within an @nt{entry_body} or the body of a protected subprogram.]}
+@nt{compilation_unit} @Chg{Version=[5],New=[to which a
+pragma Detect_Blocking applies ],Old=[]}if a potentially blocking operation
+is present directly within an @nt{entry_body}@Chg{Version=[5],New=[,],Old=[ or]}
+the body of a protected subprogram@Chg{Version=[5],New=[, or a parallel construct
+occurring within the compilation unit],Old=[]}.]}
 @end{ImplPerm}
 
 @begin{Notes}
@@ -1284,6 +1296,14 @@ and need not be detected.]}
   @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 95}
   Pragma Detect_Blocking is new.]}
 @end{Extend95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+  @ChgAdded{Version=[2],Text=[@Defn{extensions to Ada 2012}
+  Pragma Detect_Blocking now applies to parallel constructs as well as
+  protected actions.]}
+@end{Extend2012}
+
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[Pragma Partition_Elaboration_Policy]}
@@ -1315,7 +1335,7 @@ Sequential, Concurrent or an implementation-defined identifier.]}
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Note that the Ravenscar profile (see
-@RefSecNum{The Ravenscar Profile}) has nothing to say about which
+@RefSecNum{The Ravenscar and Jorvik Profiles}) has nothing to say about which
 Partition_Elaboration_Policy is used. This was intentionally omitted from the
 profile, as there was no agreement as to whether the Sequential policy should
 be required for Ravenscar programs. As such it was defined separately.]}

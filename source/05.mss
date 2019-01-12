@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -227,7 +227,7 @@ control, an attempt is made to @i<cancel>@Defn2{Term=[cancel],Sec=[a logical
 thread]}@Defn2{Term=[cancel],Sec=[a parallel construct]} all other logical
 threads of control initiated by the parallel construct. Once all other logical
 threads of control of the construct either complete or are canceled, the
-transfer of control occurs.  If two or more logical threads of control of the
+transfer of control occurs. If two or more logical threads of control of the
 same construct initiate such a transfer of control concurrently, one of them is
 chosen arbitrarily and the others are canceled.]}
 
@@ -1189,11 +1189,18 @@ running sequentially or concurrently with one another],Old=[]}.]
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
-   | @Chg{Version=[5],New=[[@key[parallel] ],Old=[]}@key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
-   | @Chg{Version=[5],New=[           ],Old=[]}@key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=[
-   |            @key{for} @Syn2{procedural_iterator}],Old=[]}"}
+   | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
+   | @key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=<
+   | @key{for} @Syn2{procedural_iterator}
+   | @key[parallel] [(@Syn2{chunk_specification})]
+     @key{for} @Syn2{loop_parameter_specification}>,Old=[]}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<chunk_specification>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<     @SynI{integer_}@Syn2{simple_expression}
+   | @Syn2{defining_identifier} @key[in] @Syn2{discrete_subtype_definition}>,Old=<>}"}
 
 @Syn{lhs=<loop_parameter_specification>,rhs="
    @Syn2{defining_identifier} @key{in} [@key{reverse}] @Syn2{discrete_subtype_definition}"}
@@ -1210,6 +1217,13 @@ otherwise, there shall not be an @nt<identifier> after the @key{end loop}.
 @end(SyntaxText)
 @end{Syntax}
 
+@begin{Resolution}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
+@ChgAdded{Version=[5],Text=[In a @nt{chunk_specification} that is an
+@Syni{integer_}@nt{simple_expression}, the
+@Syni{integer_}@nt{simple_expression} is expected to be of any integer type.]}
+@end{Resolution}
+
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
 @Defn{loop parameter}
@@ -1217,6 +1231,12 @@ A @nt{loop_parameter_specification} declares a @i{loop parameter},
 which is an object whose subtype@Chg{Version=[5],New=[ (and nominal subtype)],Old=[]}
  is that defined by the @nt{discrete_subtype_definition}.
 @IndexSeeAlso{Term=[parameter],See=[loop parameter]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
+@ChgAdded{Version=[5],Text=[In a @nt{chunk_specification} that has a
+@nt{discrete_subtype_definition}, the @nt{chunk_specification} declares a
+@i{chunk parameter} object@Defn{chunk parameter} whose subtype (and nominal
+subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1238,19 +1258,48 @@ execution of the @nt{sequence_of_@!statements}; if the value of the
 @nt{condition} is True, the @nt{sequence_of_@!statements} is executed;
 if False, the execution of the @nt{loop_@!statement} is complete.
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[If the reserved word @key[parallel] is present
+in a @nt{loop_statement} (a
+@i{parallel loop}),@Defn{parallel loop}@Defn2{Term=[loop],Sec=[parallel]}
+the iterations are partitioned into one or more @Defn{chunk}@i{chunks}, each
+with its own separate logical thread of control (see
+clause @RefSecNum{Tasks and Synchronization}). If a @nt{chunk_specification}
+is present in a parallel loop, it is elaborated first, and the result of the
+elaboration determines the maximum number of chunks used for the parallel loop.
+@PDefn2{Term=[elaboration], Sec=(chunk_specification)}
+If the @nt{chunk_specification}
+is an @SynI{integer_}@nt{simple_expression}, the elaboration evaluates the
+expression, and the value of the expression determines the maximum number
+of chunks. If a @nt{discrete_subtype_definition} is present, the
+elaboration elaborates the @nt{discrete_subtype_definition}, which
+defines the subtype of the chunk parameter, and the number
+of values in this subtype determines the maximum number of chunks. After
+elaborating the @nt{chunk_specification}, a check is made that the determined
+maximum number of chunks is greater than zero. If
+this check fails, Program_Error is raised.
+@Comment{@IndexCheck{Unknown_Check}}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
-@PDefn2{Term=[execution],
-  Sec=(loop_statement with a for iteration_scheme)}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+@Chg{Version=[5],New=[@PDefn2{Term=[execution],
+  Sec=(loop_statement with a for loop_parameter_specification)}],
+Old=[@PDefn2{Term=[execution],
+  Sec=(loop_statement with a for iteration_scheme)}]}
 @PDefn2{Term=[elaboration], Sec=(loop_parameter_specification)}
-For the execution of a @nt{loop_statement} with
-@Chg{Version=[3],New=[the],Old=[a @key{for}]}
-@nt{iteration_scheme}@Chg{Version=[3],New=[ being @key[for]
-@nt{loop_@!parameter_@!specification}],Old=[]},
-the @nt{loop_@!parameter_@!specification} is first elaborated. This
-elaboration creates the loop parameter and elaborates the
-@nt{discrete_@!subtype_@!definition}.
+For the execution of a @nt{loop_statement} @Chg{Version=[5],New=[that has an],
+Old=[with @Chg{Version=[3],New=[the],Old=[a @key{for}]}]}
+@nt{iteration_scheme}@Chg{Version=[3],New=[ @Chg{Version=[5],New=[including
+a],Old=[being @key[for]]} @nt{loop_@!parameter_@!specification}],Old=[]},
+@Chg{Version=[5],New=[after
+elaborating the @nt{chunk_specification}, if any, ],Old=[]}the
+@nt{loop_@!parameter_@!specification} is
+@Chg{Version=[5],New=[],Old=[first ]}elaborated. This
+elaboration @Chg{Version=[5],New=[],Old=[creates the loop parameter
+and ]}elaborates the @nt{discrete_@!subtype_@!definition}@Chg{Version=[5],New=[,
+which defines the subtype of the loop parameter],Old=[]}.
 If the @nt{discrete_@!subtype_@!definition} defines a subtype
 with a null range,
 the execution of the
@@ -1264,19 +1313,36 @@ until the loop is left as a consequence of a transfer of control).
 @Defn2{Term=[assignment operation], Sec=(during execution of a @key{for} loop)}
 Prior to each such iteration,
 the corresponding value of the discrete subtype is assigned to the
-loop parameter. @Chg{Version=[5],New=[If the reserved word parallel is present
-(a @i{parallel loop}),@Defn{parallel loop}@Defn2{Term=[loop],Sec=[parallel]}
-each iteration is a separate logical thread of control (see
-clause @RefSecNum{Tasks and Synchronization}), with its own copy of the loop
-parameter; otherwise the],Old=[These]}
-values are assigned in increasing order unless
-the reserved word @key{reverse} is present, in which case the values
-are assigned in decreasing order.
+loop parameter@Chg{Version=[5],New=[ associated with the given iteration.
+If the loop is a parallel loop,
+each chunk has its own logical thread of control with its own copy of the loop
+parameter; otherwise (a @i<sequential loop>)@Defn{sequential loop}@Defn2{Term=[loop],Sec=[sequential]},
+a single logical thread of control performs the loop, and there is a single copy
+of the loop parameter. Each logical thread of control handles a distinct
+subrange of the values of the subtype of the loop parameter such that
+all values are covered with no overlaps.
+Within each logical thread of control, the],Old=[. These]}
+values are assigned @Chg{Version=[5],New=[to the loop parameter ],Old=[]}in
+increasing order unless the reserved word @key{reverse} is present, in which
+case the values are assigned in decreasing order.
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0294-1]}
+  @ChgAdded{Version=[5],Text=[This wording does not describe when the loop
+     parameter
+     object(s) are created. That creation has no side-effects (other than
+     possibly raising Storage_Error, but anything can do that), so we
+     simplified the wording by leaving it out. Each object has to be created
+     before any iteration that depends on it starts, but we do not (for
+     instance) require that the objects are all created at once at the start
+     of the loop, nor that the objects are created after the elaboration of the
+     @nt{discrete_subtype_definition}.]}
+@end{Honest}
 @begin{Ramification}
-  The order of creating the loop parameter and evaluating the
-  @nt{discrete_subtype_definition} doesn't matter,
-  since the creation of the loop parameter has no side effects (other
-  than possibly raising Storage_Error, but anything can do that).
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0294-1]}
+  @ChgDeleted{Version=[5],Text=[The order of creating the loop parameter and
+  evaluating the @nt{discrete_subtype_definition} doesn't matter, since the
+  creation of the loop parameter has no side effects (other than possibly
+  raising Storage_Error, but anything can do that).]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[The predicate (if any) necessarily has to be a
@@ -1304,16 +1370,23 @@ are assigned in decreasing order.
 @end{Example}
 @end{Reason}
 
-@begin{ImplNote}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-  @ChgAdded{Version=[5],Text=[Each iteration of a parallel loop is a
-  separate logical thread of control. Normally these logical threads of
-  control will be grouped into "chunks" for the purpose of execution to
-  reduce the cost of creating large numbers of (physical) threads of
-  control.]}
-@end{ImplNote}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{chunk_specification} with a
+@nt{discrete_subtype_definition} is present, then the logical thread of control
+associated with a given chunk has its own copy of the chunk parameter
+initialized with a distinct value from the discrete subtype defined by the
+@nt{discrete_subtype_definition}. The values of the chunk parameters are
+assigned such that they increase with increasing values of the ranges covered
+by the corresponding loop parameters.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
+@ChgAdded{Version=[5],Text=[Whether or not a @nt{chunk_specification}
+is present in a parallel loop,
+the total number of iterations of the loop represents an upper bound
+on the number of logical threads of control devoted to the loop.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just because the paragraph number will change}
 @ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
 @nt{loop_statement} with the @nt{iteration_scheme} being @key[for]
 @nt{iterator_specification}, see @RefSecNum{Generalized Loop Iteration}.]]}
@@ -1422,7 +1495,7 @@ The constant-ness of loop parameters is specified in
 @end{DiffWord2005}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel loops
   are new.]}
 @end{Extend2012}
@@ -2048,14 +2121,12 @@ rhs="@Chg{Version=[5],New={
 
 @begin{Resolution}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1]}
 @ChgAdded{Version=[5],Text=[The @nt{name} or @nt{prefix} given in an
 @nt{iterator_procedure_call} shall resolve to denote a callable entity @i<C>
-that is a procedure, or an entry renamed as (viewed as) a procedure. The
-@nt{name} or @nt{prefix} shall not resolve to denote an abstract subprogram
-unless it is also a dispatching subprogram. @Redundant[When there is an
-@nt{iterator_actual_parameter_part}, the @nt{prefix} can be an
-@nt{implicit_dereference} of an access-to-subprogram value.]]}
+that is a procedure, or an entry renamed as (viewed as) a procedure.
+@Redundant[When there is an @nt{iterator_actual_parameter_part}, the @nt{prefix}
+can be an @nt{implicit_dereference} of an access-to-subprogram value.]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @ChgAdded{Version=[5],Text=[An @nt{iterator_procedure_call} without a
@@ -2091,6 +2162,11 @@ have at least one formal parameter in its parameter profile. If the
 If the @nt{iterator_parameter_specification} is a list of @nt{identifier}s,
 the number of formal parameters of @i<A> shall be the same as the length of
 this list.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1]}
+@ChgAdded{Version=[5],Text=[If the @nt{name} or @nt{prefix} given in an
+@nt{iterator_procedure_call} denotes an abstract subprogram, the subprogram
+shall be a dispatching subprogram.]}
 
 @end{Legality}
 
@@ -2158,6 +2234,26 @@ shall contain an @nt{exit_statement}, return statement, @nt{goto_statement}, or
 @i<C> associated with the @nt{procedural_iterator} has an Allows_Exit aspect
 specified True.]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
+@nt{loop_statement} with a @nt{procedural_iterator} as its @nt{iteration_scheme}
+shall not contain an @nt{accept_statement}.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[An @nt{accept_statement} is not allowed in a
+  procedure (see 9.5.2), it has to be directly in a @nt{task_body}. Since the
+  loop body here is implemented as  a procedure, we can't allow
+  @nt{accept_statement}s there, either, even if the loop itself is directly in
+  a @nt{task_body}.]}
+@end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This includes cases where the
+  @nt{accept_statement} is part of another construct, for instance, a
+  @nt{select_statement}.]}
+@end{Ramification}
+
 @end{Legality}
 
 @begin{Examples}
@@ -2215,7 +2311,8 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):]}
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],
+    ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
   iterators are new in Ada 2020.]}
 @end{Extend2012}

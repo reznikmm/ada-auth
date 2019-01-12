@@ -1,10 +1,10 @@
 `@Part(06, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1669,6 +1669,17 @@ itself.]]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Removed redundant (and sometimes
   incorrect) wording about the resolution of the Old and Result attributes.]}
 @end{Diffword2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Global and Global'Class Aspects]}
+
+Editor's note: This subclause is not yet approved and thus is not yet provided.
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0143-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The Global and Global'Class aspects are new.]}
+@end{Extend2012}
 
 
 @NotISORMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}

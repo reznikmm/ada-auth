@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2161,35 +2161,60 @@ subtype conformant designated profiles.
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[For an
 @nt{object_renaming_declaration} with a @nt{null_exclusion} or an
-@nt{access_definition} that has a @nt{null_exclusion}:]}
+@nt{access_definition} that has a @nt{null_exclusion}@Chg{Version=[5],New=[,
+the subtype of the @Syni{object_}@nt{name} shall exclude null. In addition,
+if the @nt{object_renaming_declaration} occurs within the body of a
+generic unit @i{G} or within the body of a generic unit declared within the
+declarative region of generic unit @i{G}, then],Old=[]}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[if the @Syni{object_}@nt{name} denotes a
-  generic formal object of a generic unit @i{G}, and the
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[2],Text=[if the @Syni{object_}@nt{name}
+  @Chg{Version=[5],New=[statically ],Old=[]}denotes a
+  generic formal object @Chg{Version=[5],New=[of mode @b<in out> ],Old=[]}of
+  @Chg{Version=[5],New=[],Old=[a generic unit ]}@i{G},
+  @Chg{Version=[5],New=[],Old=[and the
   @nt{object_renaming_declaration} occurs within the body of @i{G} or within
-  the body of a generic unit declared within the declarative region of @i{G},
-  then the declaration of the formal object of @i{G} shall have a
+  the body of a generic unit declared within the declarative region of
+  @i{G}, ]}then the declaration of @Chg{Version=[5],New=[that],Old=[the
+  formal]} object @Chg{Version=[5],New=[],Old=[of @i{G} ]}shall have a
   @nt{null_exclusion};]}
 
   @ChgRef{Version=[2],Kind=[Added]}
-  @ChgAdded{Version=[2],Text=[otherwise, the subtype of the
-  @Syni{object_}@nt{name} shall exclude null.
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[if],Old=[otherwise, the
+  subtype of]} the @Syni{object_}@nt{name} @Chg{Version=[5],New=[statically
+  denotes a call of a generic formal function of @i{G},
+  then the declaration of the result of that function shall have a
+  @nt{null_exclusion}],Old=[shall exclude null.
   @PDefn{generic contract issue}
   In addition to the places where @LegalityTitle normally apply
   (see @RefSecNum{Generic Instantiation}),
   this rule applies also in the private part of an
-  instance of a generic unit.]}
+  instance of a generic unit]}.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0287-1]}
+@ChgAdded{Version=[5],Text=[@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+this rule applies also in the private part of an
+instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1]}
   @ChgAdded{Version=[2],Type=[Leading],Text=[This rule prevents
   @lquotes@;lying@rquotes.
   @b<Null> must never be the value of an object with an explicit
-  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
-  which prevents trouble in one obscure case:]}
+  @nt{null_exclusion}. The @Chg{Version=[5],New=[bullets are],Old=[first
+  bullet is]} an assume-the-worst rule
+  which prevents trouble in @Chg{Version=[5],New=[two],Old=[one]}
+  obscure @Chg{Version=[5],New=[cases],Old=[case]}:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{type} Acc_I @key{is access} Integer;
@@ -2212,16 +2237,18 @@ Obj : Acc_I := @key{null};]}
 @ChgAdded{Version=[2],Text=[@key{package} Inst @key{is new} Gen (B => Obj);]}
 @end{Example}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1]}
   @ChgAdded{Version=[2],Text=[Without the first bullet rule, D would
   be legal, and contain the value @key{null}, because the rule about lying
   is satisfied for generic matching (Obj matches B; B does not explicitly
   state @key{not null}),
   @LegalityTitle are not rechecked in the body of any instance, and the
-  template passes the lying rule as well. The rule is so complex because it
-  has to apply to formals used in bodies of child generics as well as in
-  the bodies of generics.]}
+  template passes the lying rule as well. The
+  @Chg{Version=[5],New=[second bullet handles a similar case involving
+  formal functions. The rules are],Old=[rule is]} so complex because
+  @Chg{Version=[5],New=[they have],Old=[it has]} to apply to formals used
+  in bodies of child generics as well as in the bodies of generics.]}
 @end{Reason}
-@end{Itemize}
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0017],ARef=[AI95-00184-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00363-01]}
@@ -2417,6 +2444,16 @@ using the type T2 of the previous example:]}
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
+  The @LegalityTitle for renames with null exclusions no longer applies to
+  generic formal objects of mode @b<in>, but does apply to renames of
+  generic formal functions. This means a few unlikely programs are now illegal
+  that were previously allowed by original Ada 2012, while more programs that
+  were previously llegal will be allowed.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0275-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
@@ -2587,9 +2624,10 @@ the @nt{subprogram_specification} that has an explicit @nt{null_exclusion}:]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
   @ChgAdded{Version=[2],Text=[if the @Syni{callable_entity_}@nt{name}
-  denotes a generic formal subprogram of
-  a generic unit @i{G}, and the @nt{subprogram_renaming_declaration} occurs
+  @Chg{Version=[5],New=[statically ],Old=[]}denotes a generic formal subprogram
+  of a generic unit @i{G}, and the @nt{subprogram_renaming_declaration} occurs
   within the body of a generic unit @i{G} or within the body of a generic unit
   declared within the declarative region of the generic unit @i{G}, then the
   corresponding parameter or result subtype of the formal subprogram of @i{G}
@@ -2864,12 +2902,14 @@ types in the profile are anonymous, so the corresponding specifications
 cannot be written; the same holds for certain attributes, such as Pos.
 
 
-Calls with the new @nt{name} of a renamed entry are
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0292-1]}
+@ChgDeleted{Version=[5],Text=[Calls with the new @nt{name} of
+a renamed entry are
 @nt{procedure_call_statement}s and are not allowed at places
 where the syntax requires an @nt{entry_call_statement} in
 @ntf{conditional_} and @nt{timed_entry_call}s,
 nor in an @nt{asynchronous_select}; similarly, the Count
-attribute is not available for the new @nt{name}.
+attribute is not available for the new @nt{name}.]}
 
 The primitiveness of a renaming-as-declaration is determined by its
 profile, and by where it occurs, as for any declaration of
@@ -2982,6 +3022,14 @@ We'll live with the oddity.
   explicit forms (renaming the object and then using that in calls) would be
   safer than the renaming; that's inconsistent with other kinds of renaming.]}
 @end{Incompatible2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0287-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording to ensure that
+  the object subject to a @LegalityName can be determined at compile-time.
+  The alternative being nonsense, we treat this as a wording change.]}
+@end{DiffWord2012}
+
 
 @ISOOnlyRMNewPageVer{Version=[3]}@Comment{For ISO version of Ada 2012 Standard}
 @LabeledSubClause{Generic Renaming Declarations}

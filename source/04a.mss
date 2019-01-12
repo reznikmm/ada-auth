@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.147 $}
+@Comment{$Revision: 1.148 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1684,10 +1684,14 @@ A @nt{character_literal} that is a @nt<name> shall correspond to a
 @nt<defining_character_literal> of the expected type, or
 of the result type of the expected profile.
 
-For each character of a @nt{string_literal} with a given
-expected string type, there shall be
-a corresponding @nt<defining_character_literal> of
-the component type of the expected string type.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
+@Chg{Version=[5],New=[If the expected type for a string_literal is a
+one-dimensional array type with a component type that is an enumeration type,
+then for],Old=[For]} each character of @Chg{Version=[5],New=[the],Old=[a]}
+@nt{string_literal} @Chg{Version=[5],New=[],Old=[with a given expected string
+type, ]}there shall be a corresponding @nt<defining_character_literal> of the
+@Chg{Version=[5],New=[enumeration type],Old=[component type of the expected
+string type]}.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
 @ChgDeleted{Version=[2],Text=[A literal @s<null>@ChgNote{We use @S since this
@@ -1711,16 +1715,25 @@ New=[@PDefn{universal_integer}@PDefn{universal_real}@PDefn{universal_access}],Ol
 @end{StaticSem}
 
 @begin{RunTime}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0249-1]}
 @PDefn2{Term=[evaluation], Sec=(numeric literal)}
 @PDefn2{Term=[evaluation], Sec=(null literal)}
 @Defn{null access value}
 @IndexSee{Term=[null pointer],See=(null access value)}
-The evaluation of a numeric literal, or the literal @key(null),
-yields the represented value.
+@Chg{Version=[5],New=[If its expected type is a numeric type, the],Old=[The]}
+evaluation of a numeric literal@Chg{Version=[5],New=[],Old=[, or the literal
+@key(null),]} yields the represented value.@Chg{Version=[5],New=[ The evaluation
+of the literal @key(null) yields the null value of the
+expected type. In other cases, the effect of evaluating a numeric
+literal is determined by the Integer_Literal or Real_Literal aspect
+that applies (see @RefSecNum{User-Defined Literals}).],Old=[]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
 @PDefn2{Term=[evaluation], Sec=(string_literal)}
 The evaluation of a @nt{string_literal} that is a @nt<primary>
-yields an array value containing the value of each character of the
+@Chg{Version=[5],New=[and has an expected type that is a one-dimensional array
+type with a character type as its component type, ],Old=[]}yields
+an array value containing the value of each character of the
 sequence of characters of the @nt<string_literal>,
 as defined in @RefSecNum{String Literals}.
 The bounds of this array value are determined according to the rules for
@@ -1728,9 +1741,12 @@ The bounds of this array value are determined according to the rules for
 except that for a null string literal, the upper bound is the predecessor
 of the lower bound.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
 @IndexCheck{Range_Check}
 For the evaluation of a @nt<string_literal> of type @i(T),
-a check is made that the value of each
+@Chg{Version=[5],New=[if its expected type is a one-dimensional array type
+with a component subtype that is a constrained subtype of a character
+type, ],Old=[]}a check is made that the value of each
 character of the @nt<string_literal> belongs to the component
 subtype of @i(T).
 For the evaluation of a null string literal, a check is made that its
@@ -1799,6 +1815,137 @@ functions.
   type @i<universal_access>, which is similar to other literals. @key{Null}
   can be used with anonymous access types.]}
 @end{Extend95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+  @ChgAdded{Version=[5],Text=[The rules in this subclause are adjusted to allow
+  for the possibility of user-defined literals. These are fully documented
+  in the next subclause.]}
+@end{DiffWord2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[User-Defined Literals]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[Using one or more of the aspects defined below, a
+type may be specified to allow the use of one or more kinds of literals as
+values of the type.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following nonoverridable,
+type-related operational aspects may be specified for any type @i<T>:]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[Integer_Literal@\This aspect is specified by a
+@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+parameter of type String and a result type of @i<T>.@AspectDefn{Integer_Literal}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Integer_Literal],
+    Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined integer literals.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[Real_Literal@\This aspect is specified by a
+@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+parameter of type String and a result type of @i<T>.@AspectDefn{Real_Literal}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Real_Literal],
+    Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined real literals.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1]}
+@ChgAdded{Version=[5],Text=[String_Literal@\This aspect is specified by a
+@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+parameter of type Wide_Wide_String and a result type of @i<T>.@AspectDefn{String_Literal}]}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
+    Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined string literals.]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[@Redundant[A type with a specified
+String_Literal aspect is considered a @i<string type>.]@PDefn{string type}]}
+
+@end{Description}
+
+@end{StaticSem}
+
+@begin{Legality}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+@ChgAdded{Version=[5],Text=[The Integer_Literal or Real_Literal aspect shall not
+be specified for a type @i<T> if the full view of @i<T> is a numeric type.
+The String_Literal aspect shall not be specified for a type @i<T> if the
+full view of @i<T> is a string type (in the absence of the
+String_Literal aspect specification).
+@PDefn{generic contract issue}
+In addition to the places where @LegalityTitle normally apply
+(see @RefSecNum{Generic Instantiation}),
+these rules also apply in the private part of an instance of a generic unit.]}
+@end{Legality}
+
+@begin{Runtime}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[For the evaluation of an integer (or real) literal
+with expected type having an Integer_Literal (or Real_Literal) aspect specified,
+the value is the result of a call on the function specified by the aspect, with
+the parameter being a string with lower bound one whose value corresponds to the
+textual representation of the integer (or real) literal.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1]}
+@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{string_literal} with
+expected type having a String_Literal aspect specified, the value is the result
+of a call on the function specified by the aspect, with the parameter being the
+Wide_Wide_String with lower bound one that corresponds to the literal.]}
+@end{Runtime}
+
+@begin{Bounded}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[It is a bounded error if the evaluation of a
+literal with expected type having a corresponding _Literal aspect specified,
+propagates an exception. The possible effect is that an error is reported
+prior to run time, or Program_Error or the exception propagated by the
+evaluation is raised at the point of use of the value of the literal.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+  @ChgAdded{Version=[5],Text=[As always, an implementation may apply "as-if"
+  optimizations (those that result in the same external effects in the absence
+  of erroneous execution) to the function calls associated with user-defined
+  literals. In particular, if the function associated with a _Literal aspect has
+  a Global aspect that indicates no references to global variables, then a
+  number of optimizations are available to the implementation:]}
+@begin{Itemize}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The implementation can evaluate a user-defined
+    literal function at compile-time if it has access to the body of the
+    function (for example, if it is inlined), and that body doesn't reference
+    anything evaluated at runtime. If the compile-time evaluation results in an
+    exception, this bounded error allows the compilation unit to be rejected.]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Implementations can use existing permissions
+    (see @RefSecNum{The Global and Global'Class Aspects}) to avoid evaluating
+    the function associated with a user-defined literal more than once for a
+    particular literal value. This evaluation can be "hoisted" (done once per
+    compilation unit during the elaboration of the unit) if the compiler can
+    prove that the function doesn't depend on any constants or locals with a
+    runtime value not yet elaborated.]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[If the literal value is not needed by the
+    execution of the program, the function call can be omitted even if it might
+    have side-effects (again, see @RefSecNum{The Global and Global'Class Aspects}).]}
+@end{Itemize}
+@end{ImplNote}
+@end{Bounded}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The user-defined
+  literal aspects Integer_Literal, Real_Literal, and String_Literal are new.]}
+@end{Extend2012}
 
 
 @LabeledClause{Aggregates}

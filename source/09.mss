@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2018/12/08 03:20:13 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.130 $}
+@Comment{$Revision: 1.131 $}
 
 @begin{Intro}
 
@@ -2333,11 +2333,12 @@ then a call on the subprogram is a potentially blocking operation.]}
 
 @begin{Legality}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A nonblocking program unit shall not
-contain, other than within nested units with Nonblocking specified as statically
-False, a call on a callable entity for which the Nonblocking aspect is
-statically False, nor shall it contain any of the following:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A parallel construct or a nonblocking
+program unit shall not contain, other than within nested units with Nonblocking
+specified as statically False, a call on a callable entity for which the
+Nonblocking aspect is statically False, nor shall it contain any of the
+following:]}
 
 @begin{Itemize}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2962,7 +2963,7 @@ string parameters defined in the packages nested in Text_IO.],Old=[]}]}@ChgNote{
 was the resolution of a ramification.}
 @end{Discussion}
 @begin{Reason}
-@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI12-0247-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0247-1]}
 @ChgAdded{Version=[5],Text=[This allows an implementation to check and raise
   Program_Error as soon as a subprogram is called, rather than waiting to find
   out whether it actually reaches the potentially blocking operation. If the
@@ -2972,15 +2973,21 @@ was the resolution of a ramification.}
 @end{Bounded}
 
 @begin{Notes}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0276-1]}
 If two tasks both try to start a protected action
 on a protected object, and at most one is calling
-a protected function, then only one of the tasks can proceed.
+a protected @Chg{Version=[5],New=[nonexclusive ],Old=[]}function,
+then only one of the tasks can proceed.
 Although the other task cannot proceed, it is not considered
 blocked, and it might be consuming processing resources while it
-awaits its turn. There is no language-defined ordering or queuing
+awaits its turn. @Chg{Version=[5],New=[Unless there is an admission
+policy (see @RefSecNum{Admission Policies}) in effect, there],Old=[There]}
+is no language-defined ordering or queuing
 presumed for tasks competing to start a protected action @em
 on a multiprocessor such tasks might use busy-waiting; for
-monoprocessor considerations, see @RefSec{Priority Ceiling Locking}.
+@Chg{Version=[5],New=[further ],Old=[]}monoprocessor
+@Chg{Version=[5],New=[and multiprocessor ],Old=[]}considerations,
+see @RefSec{Priority Ceiling Locking}.
 @begin{Discussion}
 The intended implementation on a multi-processor is in terms of
 @lquotes@;spin locks@rquotes@; @em the waiting task will spin.
@@ -6630,17 +6637,21 @@ circumstances:
   If A1 signals some action that in turn signals A2.
 @end(Itemize)
 
+@ChgNote{Prior to Ada 2020 (by AI12-0267-1) these two section changes where here
 @end{RunTime}
 
-@begin{Erron}
-@Leading@;@PDefn2{Term=(erroneous execution),Sec=(cause)}
+@begin{Erron} -- end ChgNote}
+
+@Leading@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0267-1]}
+@Chg{Version=[5],New=[],Old=[@PDefn2{Term=(erroneous execution),Sec=(cause)}
 Given an action of assigning to an object,
 and an action of reading or updating a part of the same object
 (or of a neighboring object if the two are not
 independently addressable), then the execution of the actions is erroneous
-unless the actions are @i(sequential).
-@Defn2{Term=[sequential], Sec=(actions)}
-Two actions are sequential if one of the following is true:
+unless the actions are
+@i(sequential).]}@Defn2{Term=[sequential], Sec=(actions)}@Defn2{Term=(actions),Sec=(sequential)}
+Two actions @Chg{Version=[5],New=[are defined to be @i(sequential)],Old=[are
+sequential]} if one of the following is true:
 @begin(Itemize)
   One action signals the other;
 
@@ -6655,21 +6666,28 @@ Two actions are sequential if one of the following is true:
     (but necessarily equivalent to some @lquotes@;sequential@rquotes@;) order.
   @end{Reason}
 
-  Both actions occur as part
-  of protected actions on the same protected object, and
-  at most one of the actions is part of a call on a protected function
-  of the protected object.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0292-1]}
+  Both actions occur as part of protected actions on the same protected
+  object, and at @Chg{Version=[5],New=[least],Old=[most]} one of the actions
+  is part of a call on @Chg{Version=[5],New=[an exclusive],Old=[a]}
+  protected @Chg{Version=[5],New=[operation],Old=[function]} of the
+  protected object.
   @begin(Reason)
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0292-1]}
     Because actions within protected actions do not always imply
     signaling, we have to mention them here explicitly to make sure
     that actions occurring within different protected actions of the
     same protected object are sequential with respect to one another
-    (unless both are part of calls on protected functions).
+    (unless both are part of calls on
+    @Chg{Version=[5],New=[nonexclusive ],Old=[]}protected functions).
   @end(Reason)
   @begin(Ramification)
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0292-1]}
     It doesn't matter whether or not the variable being assigned is
     actually a subcomponent of the protected object; globals can be
-    safely updated from within the bodies of protected procedures or entries.
+    safely updated from within the bodies of protected
+    procedures@Chg{Version=[5],New=[, protected],Old=[ or]}
+    entries@Chg{Version=[5],New=[, or exclusive protected functions],Old=[]}.
   @end(Ramification)
 @end(Itemize)
 
@@ -6705,7 +6723,46 @@ see @RefSecNum(Shared Variable Control).
   statistics gathering don't need to be ordered since they are
   just accumulating aggregate counts, sums, products, etc.
 @end(Discussion)
-@end{Erron}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[Two actions that are not sequential are defined
+to be @i<concurrent> actions.@Defn2{Term=[concurrent], Sec=(actions)}@Defn2{Term=(actions),Sec=(concurrent)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[Two actions are defined to @i<conflict> if one
+action@Defn{conflict}@Defn2{Term=[actions], Sec=(conflicting)} assigns to an
+object, and the other action reads or assigns to a part of the same
+object (or of a neighboring object if the two are not independently
+addressable).  The action comprising a call on a subprogram or an
+entry is defined to @i{potentially conflict} with another action if the
+Global aspect (or Global'Class aspect in the case of a dispatching
+call) of the called subprogram or entry is such that a conflicting
+action would be possible during the execution of the call. Similarly
+two calls are considered to potentially conflict if they each have
+Global (or Global'Class in the case of a dispatching call) aspects
+such that conflicting actions would be possible during the execution
+of the calls.@Defn2{Term=[potentially conflict], Sec=(actions)}@Defn2{Term=[actions], Sec=(potentially conflicting)}@Defn2{Term=[conflict], Sec=(potentially)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[A @i<synchronized> object@Defn{synchronized object}
+is an object of a task or protected type, an atomic object (see
+@RefSecNum{Shared Variable Control}), a suspension object (see
+@RefSecNum{Synchronous Task Control}), or a synchronous barrier (see
+@RefSecNum{Synchronous Barriers}). @Redundant[Operations on such objects are
+necessarily sequential with respect to one another, and hence are never
+considered to conflict.]]}
+
+@ChgNote{Prior to Ada 2020 (by AI12-0267-1) this was end{Erron}}
+@end{Runtime}
+
+@begin{Erron}@ChgNote{New for Ada 2020}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[The execution of two concurrent actions is
+erroneous@PDefn2{Term=(erroneous execution),Sec=(cause)} if the actions make
+conflicting uses of a shared variable (or neighboring variables that are not
+independently addressable).]}
+
+@end{Erron}@ChgNote{New for Ada 2020}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
@@ -6732,7 +6789,124 @@ see @RefSecNum(Shared Variable Control).
   @ChgAdded{Version=[5],Text=[Added wording to support interaction of
   parallel constructs with tasks by changing various wording to talk about
   logical threads of control rather than purely about tasks.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to define conflicting actions;
+  this is used to define conflict policies.]}
 @end{Diffword2012}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[Conflict Check Policies]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[This subclause determines what checks are performed
+relating to possible concurrent conflicting actions
+(see @RefSecNum{Shared Variables}).]}
+
+@begin{Syntax}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a
+@nt{pragma} Conflict_Check_Policy is as follows:]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],Text=`@key{pragma} @prag<Conflict_Check_Policy> (@SynI{policy_}@Syn2{identifier});'}>
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Conflict_Check_Policy is allowed only
+immediately within a @nt{declarative_part}, a @nt{package_specification}, or as
+a configuration pragma.]}
+
+@end{Syntax}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[The @SynI{policy_}@nt{identifier} shall be one of
+Unchecked, Known_Conflict_Checks, Parallel_Conflict_Checks, All_Conflict_Checks,
+or an implementation-defined conflict check policy.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[A @nt{pragma} Conflict_Check_Policy given in a
+@nt{declarative_part} or immediately within a @nt{package_specification} applies
+from the place of the pragma to the end of the innermost enclosing declarative
+region. The region for a @nt{pragma} Conflict_Check_Policy given as a configuration
+pragma is the declarative region for the entire compilation unit (or units) to
+which it applies.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{pragma} Conflict_Check_Policy applies to a
+@nt{generic_instantiation}, then the @nt{pragma} Conflict_Check_Policy applies
+to the entire instance.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0294-1]}
+@ChgAdded{Version=[5],Text=[If multiple Conflict_Check_Policy pragmas apply to a
+given construct, the conflict check policy is determined by the one in the
+innermost enclosing region. If no Conflict_Check_Policy pragma applies to
+a construct, the policy is Parallel_Conflict_Checks (see below).]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Certain potentially conflicting
+actions are disallowed according to which conflict check policies apply at the
+place where the action or actions occur, as follows:]}
+
+@begin{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Unchecked@\This policy imposes no restrictions.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Known_Conflict_Checks@\If this policy applies to two
+  concurrent actions occuring within the same compilation unit, they are
+  disallowed if they are known to denote the same object (see
+  @RefSecNum{Parameter Associations}) with uses that potentially conflict. For
+  the purposes of this check, any parallel loop may be presumed to involve
+  multiple concurrent iterations, and any named task type may be presumed to
+  have multiple instances.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Parallel_Conflict_Checks@\This policy includes the
+  restrictions imposed by the Known_Conflict_Checks policy, and in addition
+  disallows a parallel construct from reading or updating a variable that is
+  global to the construct, unless it is a synchronized object, or unless the
+  construct is a parallel loop, and the global variable is a part of a component
+  of an array denoted by an indexed component with at least one index expression
+  that statically denotes the loop parameter of the
+  @nt{loop_parameter_specification} or the chunk parameter of the parallel
+  loop.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[All_Conflict_Checks@\This policy includes the
+  restrictions imposed by the Parallel_Conflict_Checks policy, and in addition
+  disallows a task body from reading or updating a variable that is global to
+  the task body, unless it is a synchronized object.]}
+
+@end{Description}
+
+@end{Legality}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgAdded{Version=[5],Text=[When the applicable conflict check policy is
+Known_Conflict_Checks, the implementation may disallow two concurrent actions if
+the implementation can prove they will at run-time denote the same object with
+uses that potentially conflict.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This permission allows additional enforcement in
+  instance bodies (where @LegalityTitle aren't usually enforced), in subunits
+  and their parents, and across compilation units, if the implementation
+  wishes.]}
+@end{Ramification}
+@end{ImplPerm}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Conflict check policies (and the associated checks) are new.]}
+@end{Extend2012}
 
 
 @LabeledClause{Example of Tasking and Synchronization}

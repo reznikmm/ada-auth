@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2017/08/12 03:47:33 $}
+@Comment{$Date: 2018/12/08 03:20:12 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @LabeledClause{Array Types}
 
@@ -702,9 +702,12 @@ a character type.
 @LabeledSubClause{String Types}
 
 @begin{StaticSem}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
 @Defn{string type}
 A one-dimensional array type whose component type is a character type
-is called a @i(string) type.
+is called a @Chg{Version=[5],New=[@i(string type), as is a type
+with a specified String_Literal aspect
+(see @RefSecNum{User-Defined Literals})],Old=[@i(string) type]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @Leading@redundant[There are @Chg{Version=[2],New=[three],Old=[two]} predefined
