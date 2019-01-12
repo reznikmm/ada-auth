@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -2237,7 +2237,8 @@ specified True.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
 @nt{loop_statement} with a @nt{procedural_iterator} as its @nt{iteration_scheme}
-shall not contain an @nt{accept_statement}.]}
+shall not contain an @nt{accept_statement} whose @nt{entry_declaration} occurs
+outside the @nt{loop_statement}.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}

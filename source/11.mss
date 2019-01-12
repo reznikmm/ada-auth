@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:40 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.97 $}
+@Comment{$Revision: 1.98 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -219,8 +219,9 @@ We explicitly define elaboration for @nt{exception_declaration}s.
     {@Syn2{exception_handler}}]"}
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @Syn{lhs=<exception_handler>,rhs="
-  @key{when} [@Syn2{choice_parameter_specification}:] @Syn2{exception_choice} {| @Syn2{exception_choice}} =>
+  @key{when} [@Syn2{choice_parameter_specification}:] @Syn2{exception_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{exception_choice}} =>
      @Syn2{sequence_of_statements}"}
 
 @Syn{lhs=<choice_parameter_specification>,rhs="@Syn2{defining_identifier}"}
@@ -1304,6 +1305,12 @@ exception contains such a character.]}
 @end{ImplNote}
 @end{ImplAdvice}
 
+@begin{Notes}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[UTF-8 encoding (see @RefSecNum{String Encoding})
+can be used to represent non-ASCII characters in exception messages.]}
+@end{Notes}
+
 @begin{Extend83}
 @Defn{extensions to Ada 83}
   The Identity attribute of exceptions is new, as is the package
@@ -2210,6 +2217,31 @@ given that it is not feasible to split Storage_Error.
 @end{Reason}
 @end{Hang2List}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@Redundant[The following check
+corresponds to situations in which the exception Assertion_Error is raised upon
+failure.]]}
+
+@begin{Hang2List}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Container_Check}
+@Defn2{Term=[Assertion_Error],Sec=(raised by failure of run-time check)}
+Container_Check@\Check the precondition of a routine declared in a
+descendant unit of Containers or in an instance of a generic unit that is
+declared in, or is, a descendant unit of Containers.]}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[One could use @key[pragma] Assertion_Policy to
+  eliminate such checks, but that would require recompiling the Ada.Containers
+  packages (the assertion policy that determines whether the checks are made is
+  that used to compile the unit). In addition, we do not want to specify the
+  behavior of the Ada.Containers operations if the precondition fails; that is
+  different than the usual behavior of Assertion_Policy. By using Suppress for
+  this purpose, we make it clear that a failed check that is suppressed means
+  erroneous execution.]}
+@end{Reason}
+@end{Hang2List}
+
 @Leading@Redundant[The following check corresponds to all situations in which
 any predefined exception is raised.]
 @begin{Hang2List}
@@ -2247,10 +2279,23 @@ checks.
 @end{StaticSem}
 
 @begin{Erron}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a given check has been suppressed,
 and the corresponding error situation occurs,
-the execution of the program is erroneous.
+the execution of the program is erroneous.@Chg{Version=[5],New=[ Similarly, if a
+precondition check has been suppressed and the evaluation of the precondition
+would have raised an exception, execution is erroneous.],Old=[]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[It's unclear that a precondition expression that
+  executes @exam{@key[raise] @i<some_exception>} is an "error situation"; the
+  precondition never actually evaluates to False in that case. Thus, we spell
+  out that case. We only allow suppressing preconditions associated with
+  language-defined units; other preconditions follow the rules of the
+  appropriate Assertion_Policy.]}
+@end{Reason}
 @end{Erron}
 
 @begin{ImplPerm}
@@ -2431,6 +2476,12 @@ Program_Error checks was corrected to be alphabetical.]}
   suppress work the same way for inlining.]}
 @end{DiffWord2005}
 
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Container_Check
+  is new.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0244-1]}

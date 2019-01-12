@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/01/12 03:52:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @LabeledClause{Array Types}
 
@@ -1627,8 +1627,9 @@ intentionally parallel to those given in @RefSec{Record Aggregates}.
    (@Syn2{discriminant_association} {, @Syn2{discriminant_association}})"}
 
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @Syn{lhs=<discriminant_association>,rhs="
-   [@SynI{discriminant_}@Syn2{selector_name} {| @SynI{discriminant_}@Syn2{selector_name}} =>] @Syn2{expression}"}
+   [@SynI{discriminant_}@Syn2{selector_name} {@Chg{Version=[5],New=['|'],Old=[|]} @SynI{discriminant_}@Syn2{selector_name}} =>] @Syn2{expression}"}
 
 @begin{SyntaxText}
 @Defn{named discriminant association}
@@ -2434,7 +2435,8 @@ parallel those for case statements.
       @Syn2{component_list}"}
 
 
-@Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {| @Syn2{discrete_choice}}"}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
+@Syn{lhs=<discrete_choice_list>,rhs="@Syn2{discrete_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{discrete_choice}}"}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
 @Syn{lhs=<discrete_choice>,rhs="@Chg{Version=[3],New=[@Syn2{choice_expression}],Old=[@Syn2{expression}]} | @Chg{Version=[3],New=[@SynI{discrete_}@Syn2{subtype_indication} | @Syn2{range}],Old=[@Syn2{discrete_range}]} | @key{others}"}

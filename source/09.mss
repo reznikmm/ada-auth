@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.131 $}
+@Comment{$Revision: 1.132 $}
 
 @begin{Intro}
 
@@ -6844,6 +6844,14 @@ to the entire instance.]}
 given construct, the conflict check policy is determined by the one in the
 innermost enclosing region. If no Conflict_Check_Policy pragma applies to
 a construct, the policy is Parallel_Conflict_Checks (see below).]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
+  @ChgAdded{Version=[5],Text=[The region mentioned in this rule is the region to
+  which the policy pragma applies, and not the declarative region in which the
+  policy pragma appears. This distinction matters when there are multiple policy
+  pragmas in a single declarative region.]}
+@end{Honest}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[Certain potentially conflicting

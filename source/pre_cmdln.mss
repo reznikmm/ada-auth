@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.31 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
+@comment{ $Revision: 1.32 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -140,3 +140,35 @@ This @Chg{Version=[3],New=[subclause],Old=[clause]} is new in Ada 95.
   code was never portable (even to later versions of the same implementation).
   Thus we don't document it as an inconsistency.]}
 @end{Diffword2012}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[The Packages Wide_Command_Line and Wide_Wide_Command_Line]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The packages Wide_Command_Line and
+Wide_Wide_Command_Line allow a program to obtain the values of its arguments
+and to set the exit status code to be returned on normal termination.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package Wide_Command_Line is
+the same as for Command_Line, except that each occurrence of String is
+replaced by Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Command_Line]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package
+Wide_Wide_Command_Line is the same as for Command_Line, except that each
+occurrence of String is replaced by
+Wide_Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Command_Line]}]}
+
+@end{StaticSem}
+
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These packages are new.]}
+@end{Extend2012}
+

@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2165,8 +2165,9 @@ using either a named or a positional association.]
     [@Syn2{component_choice_list} =>] @Syn2{expression}@Chg{Version=[2],New=[
    | @Syn2{component_choice_list} => <>],Old=[]}"}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @Syn{lhs=<component_choice_list>,rhs="
-     @SynI{component_}@Syn2{selector_name} {| @SynI{component_}@Syn2{selector_name}}
+     @SynI{component_}@Syn2{selector_name} {@Chg{Version=[5],New=['|'],Old=[|]} @SynI{component_}@Syn2{selector_name}}
    | @key{others}"}
 
 @begin(SyntaxText)
@@ -3023,15 +3024,20 @@ we answer it explicitly.}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @Syn{lhs=<positional_array_aggregate>,rhs="
     (@Syn2{expression}, @Syn2{expression} {, @Syn2{expression}})
   | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression})@Chg{Version=[2],New=[
-  | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>)],Old=[]}"}
+  | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>)@Chg{Version=[5],New="
+  | '['@Syn2{expression}, @Syn2{expression} {, @Syn2{expression}}']'
+  | '['@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression}']'
+  | '['@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>']'",Old=[]}],Old=[]}"}
 
-
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1]}
-@Syn{lhs=<named_array_aggregate>,rhs="@Chg{Version=[5],New=[(@Syn2{array_component_association_list})],Old=[
-    (@Syn2{array_component_association} {, @Syn2{array_component_association}})]}"}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1],ARef=[AI12-0212-1]}
+@Syn{lhs=<named_array_aggregate>,rhs="
+    @Chg{Version=[5],New="(@Syn2{array_component_association_list})
+  | '['@Syn2{array_component_association_list}']'",
+Old=[@Syn2{array_component_association} {, @Syn2{array_component_association}})]}"}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0127-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<array_component_association_list>,Old=<>}>,
@@ -3944,8 +3950,9 @@ rhs="@Chg{Version=[3],New=<
    | @Syn2{simple_expression} [@key{not}] @key{in} @Syn2{subtype_mark}"}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<membership_choice_list>,Old=<>}>,
-rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {| @Syn2{membership_choice}}>,Old=<>}"}
+rhs="@Chg{Version=[3],New=<@Syn2{membership_choice} {@Chg{Version=[5],New=['|'],Old=[|]} @Syn2{membership_choice}}>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
@@ -3961,10 +3968,12 @@ rhs="@Chg{Version=[3],New=<@Chg{Version=[4],New=<@SynI{choice_}@Syn2{simple_expr
 @Syn{lhs=<factor>,rhs="@Syn2{primary} [** @Syn2{primary}] | @key{abs} @Syn2{primary} | @key{not} @Syn2{primary}"}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0003-1],ARef=[AI05-0147-1],ARef=[AI05-0176-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0190-1]}
 @Syn{lhs=<primary>,rhs="
    @Syn2{numeric_literal} | @key{null} | @Syn2{string_literal} | @Syn2{aggregate}
  | @Syn2{name} | @Chg{Version=[3],New=[],Old=[@Syn2{qualified_expression} | ]}@Syn2{allocator} | (@Syn2{expression})@Chg{Version=[3],New=[
- | (@Syn2{conditional_expression}) | (@Syn2{quantified_expression})],Old=[]}"}
+ | (@Syn2{conditional_expression}) | (@Syn2{quantified_expression})@Chg{Version=[5],New=[
+ | @Syn2{anonymous_function}],Old=[]}],Old=[]}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -4175,6 +4184,9 @@ still have to be parenthesized when used in a bound of a range.
   (as Constraint_Error is not required); it just allows implementations that
   already raise Constraint_Error (which is all of them surveyed) to be
   considered correct.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+  @ChgAdded{Version=[5],Text=[Added @nt{anonymous_function} to @nt{primary}.]}
 @end{Diffword2012}
 
 
@@ -6484,3 +6496,67 @@ is composite (as opposed to prime) can be written:]}
   clear that the semantics is short-circuited, and what the result is when
   there are no values for the loop parameter.]}
 @end{DiffWord2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[Anonymous Functions]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+@ChgAdded{Version=[5],Text=[Anonymous functions provide a way to define a
+function at a point where an access-to-function type is the expected type, or in
+a generic instantiation as an actual parameter corresponding to a formal
+subprogram parameter.]}
+@end{Intro}
+
+@begin{Syntax}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<anonymous_function>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<(@key[function] [@Syn2{function_formal_parameter_list}] @key[return] @Syn2{expression})>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<function_formal_parameter_list>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<@Syn2{formal_part} | (@Syn2{identifier} {, @Syn2{identifier}})>,Old=<>}"}
+@end{Syntax}
+
+@begin{Resolution}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+@ChgAdded{Version=[5],Text=[In a context where there is an expected type rather
+than an expected profile for a @nt{anonymous_function}, the expected type shall
+be a single access-to-function type, and the profile of this type is considered
+the expected profile for the @nt{anonymous_function}. The result type of the
+expected profile of the @nt{anonymous_function} is the expected type for the
+expression of the @nt{anonymous_function}. If there is no
+@nt{function_formal_parameter_list}, the expected profile shall have no
+parameters. If the @nt{function_formal_parameter_list} is a @nt{formal_part},
+then it shall be subtype conformant to the expected profile if there is an
+expected type, or merely mode conformant otherwise. If the
+@nt{function_formal_parameter_list} is a sequence of identifiers, the number of
+identifiers in the sequence shall be the same as the number of formal parameters
+in the expected profile.]}
+@end{Resolution}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+@ChgAdded{Version=[5],Text=[A @nt{anonymous_function} used in a context
+where there is an expected type is equivalent to a local
+@nt{expression_function_declaration} (see @RefSecNum{Expression Functions}),
+with the @nt{anonymous_function} replaced by an Access
+@nt{attribute_reference} of this locally defined function; otherwise, the
+@nt{anonymous_function} is equivalent to such a local declaration with the
+@nt{anonymous_function} replaced by a @nt{name} denoting this locally defined
+function. The profile of this locally defined function has a result
+type determined by the expected profile, and a formal part determined
+by the @nt{formal_part}, if provided in the @nt{anonymous_function}, or by the
+formal part of the expected profile otherwise, but with the name of
+each formal parameter of the expected profile replaced by the
+corresponding identifier in the sequence of identifiers.  The @nt{expression}
+of this locally defined expression function is that of the
+@nt{anonymous_function}.]}
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0190-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Function
+  expressions are new.]}
+@end{Extend2012}
+

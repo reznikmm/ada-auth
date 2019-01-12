@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:36 $}
+@Comment{$Date: 2019/01/12 03:52:46 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.90 $}
+@Comment{$Revision: 1.91 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -460,11 +460,13 @@ ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old
 Old=[@Defn{left square bracket}
 @Defn{right square bracket}
 @Defn{left curly bracket}
-@Defn{right curly bracket}]}
+@Defn{right curly bracket}]}@Chg{Version=[5],New=[@Defn{at sign}
+@Defn{left square bracket}
+@Defn{right square bracket}],Old=[]}
 @begin{Discussion}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0266-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3],ARef=[AI12-0263-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3],ARef=[AI12-0212-1],ARef=[AI12-0263-1]}
 @Chg{Version=[2],New=[@Defn{graphic symbols}@Defn{glyphs}This table
 serves to show the correspondence between
 ISO/IEC 10646:@Chg{Version=[3],New=[@Chg{Version=[5],New=[2017],Old=[2011]}],Old=[2003]} names and the graphic symbols (glyphs) used in this
@@ -527,7 +529,8 @@ WARNING: The items that go together are in separate columns!!}
 @ @ @ @ @ @ @ @ @ +@*
 @ @ @ @ @ @ @ @ @ ,@*
 @ @ @ @ @ @ @ @ @ @en@;@*
-@ @ @ @ @ @ @ @ @ .@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Old=[@ @ @ @ @ @ @ @ @ /]}@ChgNote{Funny layout so HTML and RTF look right}
+@ @ @ @ @ @ @ @ @ .@*
+@Chg{Version=[2],New=[@Chg<Version=[5],New=[@ @ @ @ @ @ @ @ @ @@],Old=<>>],Old=[@*]}@Chg{Version=[2],New=[],Old=[@ @ @ @ @ @ @ @ @ /]}@ChgNote{Funny layout so HTML and RTF look right}
 @NewColumn
 @NoParanum@;name
 
@@ -541,7 +544,8 @@ asterisk, multiply@*
 plus sign@*
 comma@*
 hyphen-minus, minus@*
-full stop, dot, point@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Old=[solidus, divide]}@ChgNote{Funny layout so HTML and RTF look right}
+full stop, dot, point@*
+@Chg{Version=[2],New=[@Chg<Version=[5],New=[commerical at, at sign],Old=<>>],Old=[@*]}@Chg{Version=[2],New=[],Old=[solidus, divide]}@ChgNote{Funny layout so HTML and RTF look right}
 
 @NewColumn
 @NoParanum@;@ @ @Chg{Version=[2],New=[graphic ],Old=[@ @ @ @ ]}symbol
@@ -556,7 +560,8 @@ full stop, dot, point@Chg{Version=[2],New=[],Old=[@*]}@Chg{Version=[2],New=[],Ol
 @ @ @ @ @ @ @ @ @ @Chg{Version=[2],New=[/],Old=<[>}@*
 @ @ @ @ @ @ @ @ @ @Chg{Version=[2],New=[!],Old=<]>}@*
 @ @ @ @ @ @ @ @ @ @Chg<Version=[2],New=[%],Old=<{>>@*
-@Chg<Version=[2],New=[@Chg<Version=[5],New=[@ @ @ @ @ @ @ @ @ @@],Old=<>>],Old=<@ @ @ @ @ @ @ @ @ }>>
+@Chg<Version=[5],New=<@ @ @ @ @ @ @ @ @ [>,Old=<>>@*
+@Chg<Version=[2],New=[@Chg<Version=[5],New=<@ @ @ @ @ @ @ @ @ ]>,Old=<>>],Old=<@ @ @ @ @ @ @ @ @ }>>
 @NewColumn
 @NoParanum@;name
 
@@ -570,7 +575,8 @@ vertical line@*
 @Chg{Version=[2],New=[solidus, divide],Old=[left square bracket]}@*
 @Chg{Version=[2],New=[exclamation point],Old=[right square bracket]}@*
 @Chg{Version=[2],New=[percent sign],Old=[left curly bracket]}@*
-@Chg{Version=[2],New=[@Chg<Version=[5],New=[commerical at, at sign],Old=<>>],Old=[right curly bracket]}
+@Chg<Version=[5],New=[left square bracket],Old=[]>@*
+@Chg{Version=[2],New=[@Chg<Version=[5],New=[right square bracket],Old=<>>],Old=[right curly bracket]}
 @end(FourCol)
 @end{StaticSem}
 
@@ -847,9 +853,9 @@ have no effect on the meaning of an Ada program].]}
 @Defn{delimiter}
 A @i{delimiter} is either one of the following@Chg{Version=[2],New=[],Old=[ special]}
 characters@Chg{Version=[2],New=[:],Old=[]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0125-3],ARef=[AI12-0212-1]}
 @begin{Display}
-&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@Chg{Version=[5],New=[@ @ @ @ @@],Old=[]}@ @ @ @ |
+&@ @ @ @ '@ @ @ @ (@ @ @ @ )@ @ @ @ *@ @ @ @ +@ @ @ @ ,@ @ @ @ @en@ @ @ @ .@ @ @ @ /@ @ @ @ :@ @ @ @ ;@ @ @ @ <@ @ @ @ =@ @ @ @ >@Chg{Version=[5],New=<@ @ @ @ @@@ @ @ @ [@ @ @ @ ]>,Old=[]}@ @ @ @ |
 @end{Display}
 
 @Defn{compound delimiter}
@@ -915,8 +921,9 @@ From URG recommendation.
 @end{Extend2005}
 
 @begin{DiffWord2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-  @ChgAdded{Version=[5],Text=[Added the @nt{target_name} symbol to the list
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[Added square brackets and the
+  @nt{target_name} symbol to the list
   of delimiters (see @RefSecNum{Target Name Symbols}).]}
 @end{DiffWord2012}
 

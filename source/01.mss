@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2018/09/05 05:22:36 $}
+@Comment{$Date: 2019/01/12 03:52:46 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1743,12 +1743,23 @@ equivalent.
 @nt<term> ::= @nt<factor> | @nt<term> @nt<multiplying_operator> @nt<factor>
 @end(Display)
 
-@leading@keepnext@;A vertical line separates alternative items unless it occurs
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
+@leading@keepnext@;A vertical line separates
+alternative items@Chg{Version=[5],New=[],Old=[ unless it occurs
 immediately after an opening curly bracket,
-in which case it stands for itself:
+in which case it stands for itself]}:
 @begin(Display)
-@nt<constraint> ::= @nt<scalar_constraint> | @nt<composite_constraint>
-@nt<discrete_choice_list> ::= @nt<discrete_choice> {| @nt<discrete_choice>}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}@nt<constraint> ::= @nt<scalar_constraint> | @nt<composite_constraint>@Chg{Version=[5],New=[],Old=[
+@nt<discrete_choice_list> ::= @nt<discrete_choice> {| @nt<discrete_choice>}]}
+@end(Display)
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For symbols used in this
+notation (square brackets, curly brackets, and the vertical line), the symbols
+when surrounded by ' represent themselves:]}
+@begin(Display)
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}@ChgAdded{Version=[5],Text=<@nt<discrete_choice_list> ::= @nt<discrete_choice> {'|' @nt<discrete_choice>}
+@nt<named_container_aggregate> ::= '[' @nt<container_element_association_list> ']'>}
 @end(Display)
 
 @Defn2{Term=[italics],Sec=(syntax rules)}
@@ -1973,6 +1984,14 @@ The preferred places for other line breaks are after semicolons.
   "simple upper case mapping", because "full case folding" is a mapping
   (mostly) to lower case.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[Changed the syntax description to quote
+  symbols used in the notation when they appear as themselves. We made this
+  change to allow square brackets in Ada syntax, but the change also allowed
+  us to get rid of an old hack for vertical lines.]}
+@end{DiffWord2012}
 
 
 

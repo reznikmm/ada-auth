@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_environ.mss,v $ }
-@comment{ $Revision: 1.15 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
+@comment{ $Revision: 1.16 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
 @Part(predefenviron, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 
 @LabeledAddedClause{Version=[2],Name=[The Package Environment_Variables]}
 
@@ -261,4 +261,35 @@ Package Environment_Variables is new.]}
   @nt{use_clause}, the entity @i<E> may no longer be use-visible, resulting in
   errors. This should be rare and is easily fixed if it does occur.]}
 @end{Incompatible2005}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[The Packages Wide_Environment_Variables and Wide_Wide_Environment_Variables]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The packages Wide_Environment_Variables and
+Wide_Wide_Environment_Variables allow a program to read or modify environment
+variables.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package Wide_Environment_Variables is the same as for
+Environment_Variables, except that each occurrence of String is replaced by
+Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Environment_Variables]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package
+Wide_Wide_Environment_Variables is the same as for Environment_Variables, except
+that each occurrence of String is replaced by
+Wide_Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Environment_Variables]}]}
+@end{StaticSem}
+
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These packages are new.]}
+@end{Extend2012}
+
 

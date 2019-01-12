@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.122 $}
+@Comment{$Revision: 1.123 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1723,10 +1723,12 @@ rhs="@Chg{Version=[5],New=[
 @begin{Resolution}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{aspect_mark} identifies an
 aspect of the entity defined by the associated declaration (the @i<associated
 entity>@Defn2{Term=[associated entity],Sec=[of an aspect specification]}); the
-aspect denotes an object, a value, an expression, a subprogram, or some other
+aspect denotes an object, a value, an expression, @Chg{Version=[5],New=[an
+@nt{aggregate}, ],Old=[]}a subprogram, or some other
 kind of entity. If the @nt{aspect_mark} identifies:]}
 @begin{Itemize}
 
@@ -1745,6 +1747,21 @@ of the associated
 entity;@PDefn2{Term=[expected type],
 Sec=[@nt{name} in an @nt{aspect_specification}]}@PDefn2{Term=[expected type],
 Sec=[@nt{expression} in an @nt{aspect_specification}]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[5],Text=[an aspect that is an @nt{aggregate}, the aspect
+definition shall be an @nt{expression} that is an @nt{aggregate}, with the form
+of the @nt{aggregate} determined by the identified aspect;]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[The only requirement here is that the
+  @nt{expression} is syntactically an @nt{aggregate}; there is no requirement
+  that it resolve to some particular type or even that it should resolve
+  like an @nt{aggregate}. Each aspect that uses an @nt{aggregate} is responsible
+  for specifying how the choice(s), component(s), and other contents of the
+  @nt{aggregate} are resolved and interpreted.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[an aspect that denotes a subprogram, the
@@ -2158,7 +2175,7 @@ such aspects and the legality rules for such aspects.]}]}
   are resolved and evaluated immediately. This is incompatible, as a
   reference to an entity defined after the aspect will now be illegal.
   However, this would have
-  require retroactive enforcement of such aspects, which is a new
+  required retroactive enforcement of such aspects, which is a new
   capability not available from the associated pragma, and moreover
   no known Ada 2012 implementation has ever allowed late evaluation of
   such aspects. As such, there should be no practical incompatibility.]}
@@ -2172,6 +2189,14 @@ such aspects and the legality rules for such aspects.]}]}
   can be neither of these and hides everything else, all such cases will be
   caught at compile-time. In addition, we expect such cases to be very rare.]}
 @end{Incompatible2012}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  An aspect can be an unresolved @nt{aggregate}, these can be used to
+  specify a list of entities, or to set a group of different but related
+  properties with a single aspect.]}
+@end{Extend2012}
 
 @begin{Diffword2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0105-1]}

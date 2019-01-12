@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.72 $}
+@Comment{$Revision: 1.73 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -322,6 +322,62 @@ a property of a file object, not of an external file.
    @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
    @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create}(File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode := Out_File;
+                       Name : @key[in] Wide_String := "";
+                       Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}  (File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode;
+                       Name : @key[in] Wide_String;
+                       Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_File_Names;]}
+
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create}(File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode := Out_File;
+                       Name : @key[in] Wide_Wide_String := "";
+                       Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}  (File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode;
+                       Name : @key[in] Wide_Wide_String;
+                       Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_Wide_File_Names;]}
+
+
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Sequential_IO;
@@ -374,6 +430,15 @@ any nesting depth, so this note is obsolete.}
   a procedure Flush is defined in some other package that is also referenced
   in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
   resulting in errors. This should be rare and is easily fixed if it does occur.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[The Wide_File_Names and Wide_Wide_File_Names
+  nested packages are newly added to Ada.Sequential_IO.
+  If an instance of Ada.Sequential_IO is referenced in a @nt{use_clause}, and
+  an entity with one of those names is defined in some other package that is
+  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
 @end{Incompatible2012}
 
 
@@ -581,6 +646,31 @@ additional effects described in subclause
     if the mode of the file is In_File.]}
 
 @end{DescribeCode}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The nested package Wide_File_Names provides
+operations equivalent to the operations of the same name of the outer package
+except that Wide_String is used instead of String for the name and form of the
+external file.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[The expectation is that if one opens a file with
+    this package and then requests the name with Name, the result will include
+  the same wide_characters that were used to open the file (rather than some
+  encoded form). Since file names are completely implementation-defined, we
+  can't say this normatively. We have no expectations when retrieving the name
+  of a file opened with this package using the String Name. Similar
+  considerations apply to the nested package Wide_Wide_File_Names (see below).]}
+@end{ImplNote}
+
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The nested package Wide_Wide_File_Names provides
+operations equivalent to the operations of the same name of the outer package
+except that Wide_Wide_String is used instead of String for the name and form of
+the external file.]}
+
 @end{StaticSem}
 
 @begin{ImplPerm}
@@ -613,6 +703,10 @@ Any such restriction should be documented.
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0130-1]}
   @ChgAdded{Version=[4],Text=[Procedure Flush is now defined here, so it
   can be used for all of the I/O packages.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[The nested Wide_File_Names and
+  Wide_Wide_File_Names packages are now described here.]}
 @end{DiffWord2012}
 
 
@@ -752,6 +846,63 @@ The exception Mode_Error is propagated if the mode is not In_File.
    @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
    @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create}(File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode := Inout_File;
+                       Name : @key[in] Wide_String := "";
+                       Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}  (File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode;
+                       Name : @key[in] Wide_String;
+                       Form : @key[in] Wide_String := "");]}
+
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_File_Names;]}
+
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create}(File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode := Inout_File;
+                       Name : @key[in] Wide_Wide_String := "";
+                       Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}  (File : @key[in out] File_Type;
+                       Mode : @key[in] File_Mode;
+                       Name : @key[in] Wide_Wide_String;
+                       Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}   (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}   (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_Wide_File_Names;]}
+
+
 @key[private]
    ... -- @RI{not specified by the language}
 @key[end] Ada.Direct_IO;
@@ -801,6 +952,15 @@ declared in some other (nongeneric) package.],Old=[]}]}
   a procedure Flush is defined in some other package that is also referenced
   in a @nt{use_clause}, the user-defined Flush may no longer be use-visible,
   resulting in errors. This should be rare and is easily fixed if it does occur.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[The Wide_File_Names and Wide_Wide_File_Names
+  nested packages are newly added to Ada.Direct_IO.
+  If an instance of Ada.Direct_IO is referenced in a @nt{use_clause}, and
+  an entity with one of those names is defined in some other package that is
+  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
 @end{Incompatible2012}
 
 
@@ -1497,6 +1657,7 @@ Append_File is new in Ada 95.
 
 @keepnext@;--@RI{ Exceptions}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0021-1]}
    @AdaExcDefn{Status_Error} : @key[exception] @key[renames] IO_Exceptions.Status_Error;
    @AdaExcDefn{Mode_Error}   : @key[exception] @key[renames] IO_Exceptions.Mode_Error;
    @AdaExcDefn{Name_Error}   : @key[exception] @key[renames] IO_Exceptions.Name_Error;
@@ -1504,10 +1665,70 @@ Append_File is new in Ada 95.
    @AdaExcDefn{Device_Error} : @key[exception] @key[renames] IO_Exceptions.Device_Error;
    @AdaExcDefn{End_Error}    : @key[exception] @key[renames] IO_Exceptions.End_Error;
    @AdaExcDefn{Data_Error}   : @key[exception] @key[renames] IO_Exceptions.Data_Error;
-   @AdaExcDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;
+   @AdaExcDefn{Layout_Error} : @key[exception] @key[renames] IO_Exceptions.Layout_Error;@Chg{Version=[5],New=[],Old=[
 @key[private]
    ... -- @RI{not specified by the language}
-@key[end] Ada.Text_IO;
+@key[end] Ada.Text_IO;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create} (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode := Out_File;
+                        Name : @key[in] Wide_String := "";
+                        Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}   (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode;
+                        Name : @key[in] Wide_String;
+                        Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}    (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}    (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_File_Names;]}
+
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create} (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode := Out_File;
+                        Name : @key[in] Wide_Wide_String := "";
+                        Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open}   (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode;
+                        Name : @key[in] Wide_Wide_String;
+                        Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name}    (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form}    (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_Wide_File_Names;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... -- @RI{not specified by the language}
+@key[end] Ada.Text_IO;]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00360-01]}
@@ -1550,6 +1771,18 @@ generic packages Modular_IO and Decimal_IO are new in Ada 95.
   @ChgAdded{Version=[2],Text=[The Text_IO.Get_Line functions are new;
   they are described in @RefSec{Input-Output of Characters and Strings}.]}
 @end{DiffWord95}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  The Wide_File_Names and Wide_Wide_File_Names
+  nested packages are newly added to Ada.Text_IO.
+  If an instance of Ada.Text_IO is referenced in a @nt{use_clause}, and
+  an entity with one of those names is defined in some other package that is
+  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Text File Management}
@@ -3597,6 +3830,61 @@ Text=[Current size for a stream file for which positioning is not supported.]}]}
     @AdaExcDefn{End_Error}    : @key(exception) @key(renames) IO_Exceptions.End_Error;
     @AdaExcDefn{Data_Error}   : @key(exception) @key(renames) IO_Exceptions.Data_Error;
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create} (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode := Out_File;
+                        Name : @key[in] Wide_String := "";
+                        Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open} (File : @key[in out] File_Type;
+                      Mode : @key[in] File_Mode;
+                      Name : @key[in] Wide_String;
+                      Form : @key[in] Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name} (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form} (File : @key[in] File_Type) @key[return] Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_File_Names;]}
+
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[   @key[package] @AdaPackDefn{Wide_Wide_File_Names} @key[is]]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{File management}]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Create} (File : @key[in out] File_Type;
+                        Mode : @key[in] File_Mode := Out_File;
+                        Name : @key[in] Wide_Wide_String := "";
+                        Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[procedure] @AdaSubDefn{Open} (File : @key[in out] File_Type;
+                      Mode : @key[in] File_Mode;
+                      Name : @key[in] Wide_Wide_String;
+                      Form : @key[in] Wide_Wide_String := "");]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Name} (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[      @key[function] @AdaSubDefn{Form} (File : @key[in] File_Type) @key[return] Wide_Wide_String;]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key[end] Wide_Wide_File_Names;]}
+
 @key[private]
    ... -- @RI{not specified by the language}
 @key(end) Ada.Streams.Stream_IO;
@@ -3838,6 +4126,18 @@ closed file.]}
   is @i<not> a remote types package; File_Type objects cannot be
   passed between partitions.]}
 @end{Extend2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  The Wide_File_Names and Wide_Wide_File_Names
+  nested packages are newly added to Ada.Streaam_IO.
+  If an instance of Ada.Stream_IO is referenced in a @nt{use_clause}, and
+  an entity with one of those names is defined in some other package that is
+  also referenced in a @nt{use_clause}, the user-defined entity may no longer be
+  use-visible, resulting in errors. This should be rare and is easily fixed if
+  it does occur.]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0102-1]}

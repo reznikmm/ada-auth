@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/01/12 03:52:47 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1577,4 +1577,39 @@ are True.]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   Package Ada.Directories.Hierarchical_File_Names is new.]}
 @end{Extend2005}
+
+
+@LabeledAddedSubClause{Version=[5],Name=[The Packages Wide_Directories and Wide_Wide_Directories]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The packages Wide_Directories and
+Wide_Wide_Directories provide operations for manipulating files and directories,
+and their names.]}
+@end{Intro}
+
+@begin{StaticSem}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package Wide_Directories is the
+same as for Directories (including its optional child packages Information and
+Hierarchical_File_Names), except that each occurrence of String is replaced by
+Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Directories]}
+@ChildUnit{Parent=[Ada.Wide_Directories],Child=[Information]}
+@ChildUnit{Parent=[Ada.Wide_Directories],Child=[Hierarchical_File_Names]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+@ChgAdded{Version=[5],Text=[The specification of package Wide_Wide_Directories is the same as for
+Directories (including its optional child packages Information and
+Hierarchical_File_Names), except that each occurrence of String is replaced by
+Wide_Wide_String.@ChildUnit{Parent=[Ada],Child=[Wide_Wide_Directories]}
+@ChildUnit{Parent=[Ada.Wide_Wide_Directories],Child=[Information]}
+@ChildUnit{Parent=[Ada.Wide_Wide_Directories],Child=[Hierarchical_File_Names]}]}
+@end{StaticSem}
+
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These six packages are new.]}
+@end{Extend2012}
 
