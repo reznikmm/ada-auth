@@ -284,6 +284,8 @@ package body ARM_Format is
     -- 12/13/13 - RLB - Added InitialVersion parameter to ChgAttrib.
     --  3/17/16 - RLB - Removed Changes_Only, added Base_Change_Version.
     --  7/21/17 - RLB - Changed maximum prefix length.
+    --  1/27/19 - RLB - Added code to deal with attribute references where
+    --			the paragraph is closed.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -9977,6 +9979,33 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			    end case;
 			end ChgRef_Command;
 
+
+			function XRef_String (Text_Kind :
+				in ARM_Database.Paragraph_Change_Kind_Type;
+				Text_Version, Initial_Version : in Character)
+			    return String is
+			    -- Return the correct Cross-Reference string
+			    -- for this item. If we're not in a paragraph,
+			    -- we need to include appropriate @ChgRef and
+			    -- a @Noprefix commands, lest this XRef hang out
+			    -- with the incorrect kind of paragraph number.
+			begin
+			    if Format_Object.In_Paragraph then
+				-- We can just stick this on the existing
+				-- paragraph.
+				return " See @RefSecbyNum{" &
+				       Clause_String(Format_Object) & "}.";
+			    else
+				-- We have to create a separate paragraph (this
+				-- usually happens if some other format
+				-- immediately precedes the end).
+				return ChgRef_Command (Text_Kind, Text_Version, Initial_Version) &
+				       "@noprefix@;See @RefSecbyNum{" &
+				       Clause_String(Format_Object) & "}.";
+			    end if;
+			end XRef_String;
+
+
 			procedure Write_to_DB (Prefix_Kind, Text_Kind :
 				in ARM_Database.Paragraph_Change_Kind_Type;
 				Prefix_Version, Text_Version,
@@ -9994,7 +10023,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        ":" & Ascii.LF & Ascii.LF &
 				        ChgRef_Command (Text_Kind, Text_Version, Initial_Version) &
 				        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+					XRef_String (Text_Kind, Text_Version, Initial_Version),
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version,
 				    Initial_Version => Initial_Version);
@@ -10008,7 +10037,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				        ":" & Ascii.LF & Ascii.LF &
 				        ChgRef_Command (Text_Kind, Text_Version, Initial_Version) &
 				        "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				        " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+					XRef_String (Text_Kind, Text_Version, Initial_Version),
 				    Change_Kind => Prefix_Kind,
 				    Version => Prefix_Version,
 				    Initial_Version => Initial_Version);
@@ -10023,9 +10052,11 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			Text_Buffer_Len := Text_Buffer_Len - 1; -- Remove command close character.
 --Ada.Text_IO.Put_Line ("&& Attr: " & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) &
 --   "; Prefix kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Prefix_Change_Kind) &
---   "; Attr chg kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind) &
---   "; Attr Prefix Vers=" & Format_Object.Attr_Prefix_Version & "; Attr Text Vers=" & Format_Object.Attr_Version &
---   "; Attr Init Vers=" & Format_Object.Attr_Initial_Version);
+--   "; Attr chg kind=" & ARM_Database.Paragraph_Change_Kind_Type'Image(Format_Object.Attr_Change_Kind));
+--Ada.Text_IO.Put_Line ("         Attr Prefix Vers=" & Format_Object.Attr_Prefix_Version & "; Attr Text Vers=" & Format_Object.Attr_Version &
+--   "; Attr Init Vers=" & Format_Object.Attr_Initial_Version &
+--   "; In_Paragraph: " & Boolean'Image(Format_Object.In_Paragraph));
+--Ada.Text_IO.Put_Line ("    Text_Buffer: " & Text_Buffer(1..Text_Buffer_Len));
 
 			-- How the prefix text is handled depends only on
 			-- the Initial_Version and what version we're generating.
@@ -10093,16 +10124,16 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			                ARM_Database.Insert (Format_Object.Attr_DB,
 				            Sort_Key => Sort_Key,
 				            Hang_Item =>
-					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=<" &
 				                Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & ">}",
 				            Text =>
 					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
 					        "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
 				                ":]}" & Ascii.LF & Ascii.LF &
 				                ChgRef_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version) &
 					        "@leading@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				                " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+						XRef_String (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version),
 				            Change_Kind => PKind,
 				            Version => PVersion,
 				            Initial_Version => Format_Object.Attr_Initial_Version);
@@ -10110,16 +10141,16 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			                ARM_Database.Insert (Format_Object.Attr_DB,
 				            Sort_Key => Sort_Key,
 				            Hang_Item =>
-					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
+					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=<" &
 				                Format_Object.Attr_Prefix(1..Format_Object.Attr_Prefix_Len) &
-					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & "]}",
+					           ''' & Format_Object.Attr_Name(1..Format_Object.Attr_Name_Len) & ">}",
 				            Text =>
 					        "@ChgAdded{Version=[" & Format_Object.Attr_Initial_Version & "],Text=[" &
 					        "For " & Format_Object.Prefix_Text(1..Format_Object.Prefix_Text_Len) &
 				                ":]}" & Ascii.LF & Ascii.LF &
 				                ChgRef_Command (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version) &
 				                "@noprefix@;" & Text_Buffer(1..Text_Buffer_Len) &
-				                " See @RefSecbyNum{" & Clause_String(Format_Object) & "}.",
+						XRef_String (Format_Object.Attr_Change_Kind, Format_Object.Attr_Version, Format_Object.Attr_Initial_Version),
 				            Change_Kind => PKind,
 				            Version => PVersion,
 				            Initial_Version => Format_Object.Attr_Initial_Version);
