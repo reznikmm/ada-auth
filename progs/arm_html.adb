@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012, 2013, 2016
+    --		 2008, 2009, 2011, 2012, 2013, 2016, 2018
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -194,6 +194,7 @@ package body ARM_HTML is
     --  4/20/16 - RLB - Slightly increased the base indent as a lot of
     --			paragraph numbers are overlapping.
     --		      - Added Force_New_Revision_Colors.
+    --  3/ 8/18 - RLB - Increased the size of the HTML re-read line buffer.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -1539,7 +1540,7 @@ package body ARM_HTML is
 		Reading_File : Ada.Text_IO.File_Type;
 		Real_Name : constant String :=
 		    Ada.Strings.Fixed.Head (Original_Name, Original_Name'Length-3);
-		Buffer : String (1..1000);
+		Buffer : String (1..1600);
 		Len : Natural;
 		Body_Seen : Boolean := False;
 		Loc : Natural;

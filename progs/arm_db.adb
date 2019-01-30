@@ -11,7 +11,7 @@ package body ARM_Database is
     -- appendixes.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011, 2012
+    -- Copyright 2000, 2004, 2005, 2006, 2009, 2011, 2012, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -54,12 +54,13 @@ package body ARM_Database is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     -- 10/20/11 - RLB - Added Initial_Version parameter.
     --  3/19/12 - RLB - Added code to suppress indexing of deleted glossary items.
+    --  1/27/19 - RLB - Lengthened components to allow Reduce attributes.
 
     type String_Ptr is access String;
     type Item is record
 	Next : Item_List;
-	Sort_Key : String(1 .. 50);
-	Hang : String(1 .. 75);
+	Sort_Key : String(1 .. 55);
+	Hang : String(1 .. 85);
 	Hang_Len : Natural;
 	Text : String_Ptr;
 	Change_Kind : Paragraph_Change_Kind_Type;
@@ -115,6 +116,17 @@ package body ARM_Database is
 	if not Database_Object.Is_Valid then
 	    raise Not_Valid_Error;
 	end if;
+--if Sort_Key'Length > Temp_Item.Sort_Key'Length - 10 then
+--    Ada.Text_IO.Put_Line ("?? Sort_Key near or beyond size limit; Length=" &
+--      Natural'Image(Sort_Key'Length) & "; Limit=" &
+--     Natural'Image(Temp_Item.Sort_Key'Length) & "; Sort_Key=" & Sort_Key);
+--end if;
+--if Hang_Item'Length > Temp_Item.Hang'Length - 10 then
+--    Ada.Text_IO.Put_Line ("?? Hang_Item near or beyond size limit; Length=" &
+--      Natural'Image(Hang_Item'Length) & "; Limit=" &
+--     Natural'Image(Temp_Item.Hang'Length) & "; Hang_Item=" & Hang_Item);
+--end if;
+
 	Ada.Strings.Fixed.Move (Target => Temp_Item.Sort_Key,
 				Source => Ada.Characters.Handling.To_Lower(Sort_Key),
 				Drop   => Ada.Strings.Right,
