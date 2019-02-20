@@ -7,7 +7,7 @@ package ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2011
+    -- Copyright 2000, 2002, 2004, 2011, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -41,6 +41,7 @@ package ARM_Input is
     -- 12/06/04 - RLB - Expanded Check_One_of_Parameter_Names to take up to
     --			five names.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  2/19/19 - RLB - Added Exit_On_Param_End to Skip_Until_Close_Char.
 
     type Input_Type is abstract tagged limited null record;
 
@@ -126,8 +127,14 @@ package ARM_Input is
 
     procedure Skip_until_Close_Char
 	     (Input_Object : in out Input_Type'Class;
-	      Close_Char : in Character);
+	      Close_Char : in Character;
+	      Exit_On_Para_End : in Boolean := True);
         -- Skip text from Input_Object until the matching Close_Char is found.
+	-- Exit this early if there is a paragraph end in the middle if
+	-- Exit_On_Para_End is True (otherwise, continue to the end).
+	-- This parameter should set to False only for features which are
+	-- never going to be part of the result document (like a comment);
+	-- otherwise, we maya fail to count paragraphs properly.
 
     procedure Check_Parameter_Name (Input_Object : in out Input_Type'Class;
 				    Param_Name : in ARM_Input.Command_Name_Type;

@@ -8,7 +8,7 @@ package ARM_File is
     -- This package contains the definition of reading an input file.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2011
+    -- Copyright 2000, 2011, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
@@ -39,6 +39,9 @@ package ARM_File is
     --
     --  5/15/00 - RLB - Created package.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  2/15/19 - RLB - Added Recording_Start_Line to help debugging.
+    --  2/19/19 - RLB - Added Extra_LF so we can put back the line end of
+    --			the previous line.
 
     type File_Input_Type is new ARM_Input.Input_Type with private;
 
@@ -89,10 +92,12 @@ private
 	Buffer : String(1..250);
 	Buffer_Last : Natural := 0;
 	Buffer_Index : Natural := 0; -- Last character read from buffer.
+	Extra_LF : Boolean := False;
 	-- For recording:
 	Recording : Boolean := False;
 	Recording_Buffer : String(1..ARM_Input.MAX_RECORDING_SIZE);
 	Recording_Len : Natural := 0;
+	Recording_Start_Line : Natural := 0;
 	-- Name:
 	Name : String(1..120);
 	Name_Len : Natural;

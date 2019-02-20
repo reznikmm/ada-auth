@@ -10,7 +10,7 @@ package body ARM_Input is
     -- or other entity, and routines to lex the input entities.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2011, 2013
+    -- Copyright 2000, 2002, 2004, 2005, 2011, 2013, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -51,6 +51,11 @@ package body ARM_Input is
     -- 10/18/11 - RLB - Changed to GPLv3 license.
     --  3/26/13 - RLB - Added %% as a bracket pairing, so the Google
     --			Analytics snippett can be inserted.
+    --  2/19/19 - RLB - Added code to have Skip_to_Close_Char to stop
+    --			if it reaches a hard paragraph break. Otherwise,
+    --			paragraphs are miscounted. (This should happen
+    --			rarely, if at all.) Added a parameter to control that
+    --			behavior.
 
     function Is_Open_Char (Open_Char : in Character) return Boolean is
 	-- Return True if character is a parameter opening character
@@ -188,8 +193,11 @@ package body ARM_Input is
 
     procedure Skip_until_Close_Char
 	     (Input_Object : in out Input_Type'Class;
-	      Close_Char : in Character) is
+	      Close_Char : in Character;
+	      Exit_On_Para_End : in Boolean := True) is
         -- Skip text from Input_Object until the matching Close_Char is found.
+	-- Exit this early if there is a paragraph end in the middle if
+	-- Exit_On_Para_End is True (otherwise, continue to the end).
         -- Note that we watch for matching opening characters, in
         -- case a nested command uses one.
         Ch : Character;
@@ -200,6 +208,12 @@ package body ARM_Input is
     begin
 	if Close_Char = '"' then
 	    Start_Ch := Character'Val(128);
+	    -- This character shouldn't occur in input text.
+	    -- Buglet: We don't have a way to tell whether this is an inner
+	    -- command or just the end; best to avoid nesting of
+	    -- quoted parameters.
+	elsif Close_Char = '%' then
+	    Start_Ch := Character'Val(129);
 	    -- This character shouldn't occur in input text.
 	    -- Buglet: We don't have a way to tell whether this is an inner
 	    -- command or just the end; best to avoid nesting of
@@ -230,10 +244,26 @@ package body ARM_Input is
 	        Ada.Text_IO.Put_Line ("  ** End of file when skipping to end, started on line " &
 			Start_Line);
 		exit;
+	    elsif Ch = Ascii.LF and then
+		Exit_On_Para_End then -- Possible end of paragraph.
+		-- Check next character:
+	        ARM_Input.Get_Char (Input_Object, Ch);
+		if Ch /= Ascii.LF then
+		    goto Skip_Get; -- Soft line end, not interesting.
+		else -- Hard paragraph end!
+		    -- Note: This is only known to occur in attribute definitions.
+		    -- If we don't do this, we will not count the extra paragraphs,
+		    -- meaning the numbers would be wrong.
+--Ada.Text_IO.Put_Line ("?? Skip: Paragraph end found on line " &
+--   ARM_Input.Line_String (Input_Object));
+		    ARM_Input.Replace_Char (Input_Object);
+		    exit;
+		end if;
 	    end if;
 	    -- Ignore everything until the end character
 	    -- turns up (or the end of file).
 	    ARM_Input.Get_Char (Input_Object, Ch);
+	    <<Skip_Get>> null;
         end loop;
     end Skip_until_Close_Char;
 
