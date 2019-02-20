@@ -13,7 +13,8 @@ package ARM_Format is
     -- determine what to output.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016, 2017, 2019
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2010, 2011, 2012, 2016,
+    --		 2017, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -111,6 +112,7 @@ package ARM_Format is
     --  7/21/17 - RLB - Changed the prefix length.
     --  1/27/19 - RLB - Changed the attribute length so that the reduce
     --			attributes will fit.
+    --  2/15/19 - RLB - Added Attr_Omit to the attribut parameters.
 
     type Format_Type is tagged limited private;
 
@@ -437,6 +439,7 @@ private
 	Attr_Prefix_Text_Change_Kind : ARM_Database.Paragraph_Change_Kind_Type;
 	Attr_Version : ARM_Contents.Change_Version_Type;
 	Attr_Initial_Version : ARM_Contents.Change_Version_Type;
+	Attr_Omit : Boolean; -- Omit Attr from the attribute annex.
 	    -- The above ten items are used only when processing Attribute
 	    -- and Attribute_Leading commands.
 

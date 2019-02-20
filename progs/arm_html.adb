@@ -16,7 +16,7 @@ package body ARM_HTML is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007,
-    --		 2008, 2009, 2011, 2012, 2013, 2016, 2018
+    --		 2008, 2009, 2011, 2012, 2013, 2016, 2018, 2019
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -195,6 +195,7 @@ package body ARM_HTML is
     --			paragraph numbers are overlapping.
     --		      - Added Force_New_Revision_Colors.
     --  3/ 8/18 - RLB - Increased the size of the HTML re-read line buffer.
+    --  2/19/19 - RLB - Added some (commented out) hang tracing.
 
     LINE_LENGTH : constant := 78;
 	-- Maximum intended line length.
@@ -2432,10 +2433,12 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "<dd class="" & PName & "">");
 			    Output_Object.Char_Count := Output_Object.Char_Count + 13 + PName'Length;
 		            Output_Object.Saw_Hang_End := True;
+--Ada.Text_IO.Put_Line("HTML: 4Comp, Hang Start, Noprefix");
 		        else -- Has prefix.
 	    	            Ada.Text_IO.Put (Output_Object.Output_File, "<dt>");
 			    Output_Object.Char_Count := Output_Object.Char_Count + 4;
 		            Output_Object.Saw_Hang_End := False;
+--Ada.Text_IO.Put_Line("HTML: 4Comp, Hang Start");
 		        end if;
 		        Put_Compatibility_Font_Info (Output_Object, Style, Indent);
 		    end;
@@ -2522,9 +2525,11 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 		    if No_Prefix then
 		        Put_Style (Paragraph_Name (Style, Indent) & "-Body", Use_DIV => True);
 		        Output_Object.Saw_Hang_End := True;
+--Ada.Text_IO.Put_Line("HTML: 4, Hang Start, Noprefix");
 		    else -- Has prefix.
 		        Put_Style (Paragraph_Name (Style, Indent) & "-Term", Use_DIV => True);
 		        Output_Object.Saw_Hang_End := False;
+--Ada.Text_IO.Put_Line("HTML: 4, Hang Start, Normal");
 		    end if;
 	    end case;
 	    Output_Object.Paragraph_Style  := Style;
@@ -4162,6 +4167,7 @@ Ada.Text_IO.Put_Line("  @@ Calc columns for" & Natural'Image(Output_Object.Colum
 	-- called for the current paragraph, or if the paragraph was started
 	-- with No_Prefix = True.
     begin
+--Ada.Text_IO.Put_Line("HTML: End_Hang");
 	if not Output_Object.Is_Valid then
 	    Ada.Exceptions.Raise_Exception (ARM_Output.Not_Valid_Error'Identity,
 		"Not valid object");

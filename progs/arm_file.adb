@@ -8,7 +8,7 @@ package body ARM_File is
     -- This package contains the definition of reading an input file.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2011
+    -- Copyright 2000, 2011, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53704
     -- E-Mail: randy@rrsoftware.com
@@ -39,6 +39,8 @@ package body ARM_File is
     --
     --  5/15/00 - RLB - Created package.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  2/15/19 - RLB - Improved error handling of recording buffer overflow.
+    --  2/19/19 - RLB - Added replacement of previous line end.
 
     procedure Open (Input_Object : in out File_Input_Type;
 		    File_Name : in String) is
@@ -49,6 +51,7 @@ package body ARM_File is
         Input_Object.Line_Counter := 0;
         Input_Object.Buffer_Last := 0;
         Input_Object.Buffer_Index := 0;
+        Input_Object.Extra_LF := False;
         Input_Object.Is_Valid := True;
 	if File_Name'Length > Input_Object.Name'Length then
 	    Input_Object.Name := File_Name(File_Name'First .. File_Name'First + Input_Object.Name'Length - 1);
@@ -80,9 +83,16 @@ package body ARM_File is
 	--	   Not_Valid_Error if Input_Object is not valid (open).
     begin
 	if not Input_Object.Is_Valid then
-	    raise ARM_Input.Not_Valid_Error;
+	    raise ARM_Input.Not_Valid_Error with "No file open";
 	end if;
-        if Input_Object.Buffer_Index >= Input_Object.Buffer_Last then
+	if Input_Object.Extra_LF then
+	    -- A special put-back of the previous line. We don't adjust
+	    -- the line counter for this character, and it is already
+	    -- in the recording buffer if necessary.
+            Char := Ascii.LF;
+	    Input_Object.Extra_LF := False;
+	    return;
+        elsif Input_Object.Buffer_Index >= Input_Object.Buffer_Last then
 	    begin
 		Ada.Text_IO.Get_Line (Input_Object.Fyle,
 				      Input_Object.Buffer,
@@ -110,8 +120,15 @@ package body ARM_File is
         Input_Object.Buffer_Index := Input_Object.Buffer_Index + 1;
         if Input_Object.Recording then
 	    Input_Object.Recording_Len := Input_Object.Recording_Len + 1;
-	    Input_Object.Recording_Buffer(Input_Object.Recording_Len) :=
-		Input_Object.Buffer(Input_Object.Buffer_Index);
+	    if Input_Object.Recording_Len > Input_Object.Recording_Buffer'Last then
+	        Ada.Text_IO.Put_Line ("  ** Too many characters recorded on line " & Line_String (Input_Object));
+	        Ada.Text_IO.Put_Line ("     Recording started on line" & Natural'Image(Input_Object.Recording_Start_Line));
+		Input_Object.Recording_Len := Input_Object.Recording_Buffer'Last;
+		Input_Object.Recording := False;
+	    else
+	        Input_Object.Recording_Buffer(Input_Object.Recording_Len) :=
+		    Input_Object.Buffer(Input_Object.Buffer_Index);
+	    end if;
         end if;
         Char := Input_Object.Buffer(Input_Object.Buffer_Index);
     end Get_Char;
@@ -123,10 +140,16 @@ package body ARM_File is
         -- Raises: Not_Valid_Error if Input_Object is not valid (open).
     begin
 	if not Input_Object.Is_Valid then
-	    raise ARM_Input.Not_Valid_Error;
+	    raise ARM_Input.Not_Valid_Error with "No file open";
 	end if;
         if Input_Object.Buffer_Index = 0 then
-	    raise Program_Error; -- Called twice or before any calls to Get_Char.
+	    if Input_Object.Extra_LF then -- Extra put back already done.
+	        raise Program_Error with "Replace_Char called too many times";
+	    else
+		Input_Object.Extra_LF := True;
+		-- We don't adjust the buffer or the recording in this case.
+		return;
+	    end if;
         end if;
         Input_Object.Buffer_Index := Input_Object.Buffer_Index - 1;
         if Input_Object.Recording then
@@ -159,6 +182,7 @@ package body ARM_File is
 	end if;
         Input_Object.Recording := True;
         Input_Object.Recording_Len := 0;
+        Input_Object.Recording_Start_Line := Input_Object.Line_Counter;
     end Start_Recording;
 
 
@@ -174,6 +198,7 @@ package body ARM_File is
 	end if;
         if Input_Object.Recording_Len > Result'Length then
 	    Ada.Text_IO.Put_Line ("  ** Too many characters recorded on line " & Line_String (Input_Object));
+	    Ada.Text_IO.Put_Line ("     Recording started on line" & Natural'Image(Input_Object.Recording_Start_Line));
 	    Len := 0;
         else
 	    Result (Result'First .. Result'First + Input_Object.Recording_Len - 1) :=
