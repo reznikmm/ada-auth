@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:37 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1909,7 +1909,7 @@ if@Defn{type-invariant preserving}]}
         for class-wide invariants and likely for other invariants. This is the
         simplest rule that avoids trouble, and functions are much more likely to
         be queries that don't modify their parameters than other callable
-        entities.]}]}
+        entities.]}
 @end{Discussion}
 
 @end{InnerItemize}
@@ -1931,8 +1931,7 @@ if@Defn{type-invariant preserving}]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If one or more invariant expressions
 apply to a @Chg{Version=[4],New=[nonabstract ],Old=[]}type @i<T>, then an
 invariant check is performed at the following places,
-on the specified object(s):@Defn{invariant check}@Defn2{Term=[check, language-defined],
-  Sec=[controlled by assertion policy]}]}
+on the specified object(s):@Defn{invariant check}]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2176,7 +2175,8 @@ each enabled invariant expression that applies to @i<T>, on each of the objects
 specified above. If any of these evaluate to False,
 Assertions.Assertion_Error is raised at the point of the object
 initialization, conversion, or call.@Defn2{Term=(Assertion_Error),
-Sec=(raised by failure of run-time check)} If a given call requires more than one
+Sec=(raised by failure of runtime check)}@Defn2{Term=[check, language-defined],
+Sec=[controlled by assertion policy]}]} If a given call requires more than one
 evaluation of an invariant expression, either for multiple objects of a single
 type or for multiple types with invariants, the evaluations are performed in
 an arbitrary order, and if one of them evaluates to False, it is not specified whether
@@ -2443,7 +2443,8 @@ evaluation of each enabled default initial condition expression that applies to
 T. These evaluations, if there are more than one, are performed in an arbitrary
 order. If any of these evaluate to False, Assertions.Assertion_Error is raised
 at the point of the object initialization.@Defn{default initial condition check}@Defn2{Term=[check, language-defined],
-Sec=[controlled by assertion policy]}]}
+Sec=[controlled by assertion policy]}@Defn2{Term=(Assertion_Error),
+Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
 @ChgAdded{Version=[5],Text=[@Redundant[For a generic formal type T, default
@@ -3117,16 +3118,18 @@ and ]}the task.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0147-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0172-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0172-1],ARef=[AI12-0236-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
 type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
 @Chg{Version=[5],New=[a @nt{raise_expression},
 ],Old=[]}@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
 @nt{qualified_expression} whose operand
-is permitted by this rule@Chg{Version=[3],New=[, or a @nt{conditional_expression}
+is permitted by this rule@Chg{Version=[3],New=[,
+@Chg{Version=[5],New=[],Old=[or ]}a @nt{conditional_expression}
 all of whose @Syni{dependent_}@nt{expression}s are permitted by this
-rule],Old=[]}:]}
+rule],Old=[]}@Chg{Version=[5],New=[, or a @nt{declare_expression} whose
+@SynI<body_>@nt{expression} is permitted by this rule],Old=[]}:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -3154,18 +3157,18 @@ or the @nt{expression} of an @nt{array_component_association} (see
 (see @RefSecNum{Delta Aggregates})]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the @nt{qualified_expression} of an initialized allocator
 (see @RefSecNum{Allocators})]}
 
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the @nt{expression} of a return statement (see
 @RefSecNum{Return Statements})]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0177-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0157-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[3],Text=[the
 @Chg{Version=[4],New=[return expression],Old=[@nt{expression}]} of an
 @Chg{Version=[4],New=[expression function],Old=[@nt{expression_function_declaration}]}
@@ -3173,7 +3176,7 @@ or the @nt{expression} of an @nt{array_component_association} (see
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@ChgNote{Only because the paragraph number has changed}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just a paragraph number change}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the @nt{default_expression} or actual parameter for a
 formal object of mode @b{in} (see @RefSecNum{Formal Objects})]}
 
@@ -3578,6 +3581,11 @@ rather than being a subclause of
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
   @ChgAdded{Version=[5],Text=[Added the @Syni{base_}@nt{expression} of a
   @nt{delta_aggregate} as a limited context.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[Allowed @nt{declare_expression}s in limited
+  constructor contexts @em we want to treat these as closely to
+  @nt{conditional_expression}s as possible.]}
 @end{DiffWord2012}
 
 
@@ -5048,7 +5056,7 @@ Adjust operation:
   treat explicit calls to these routines specially.],Old=[]}
 @end{Ramification}
 @begin{Itemize}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For a Finalize invoked as part of an @nt<assignment_statement>,
 Program_Error is raised at that point.
 
@@ -5060,7 +5068,7 @@ Old=[the initialization of a controlled object]}, other adjustments due to be
 performed might or might not be performed, and then Program_Error is raised.
 During its propagation, finalization might or
 might not be applied to objects whose Adjust failed.],Old=[]}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For an Adjust invoked as part of an @Chg{Version=[2],New=[@nt{assignment_statement}],
 Old=[assignment @Chg{New=[statement],Old=[operation]}]}, any other adjustments
 due to be performed are performed, and then Program_Error is raised.
@@ -5093,7 +5101,7 @@ finalized. The permission above only applies to objects whose Adjust failed.
 Objects for which Adjust was never even invoked must not be finalized.]}
 @end{Ramification}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For a Finalize invoked as part of a call on an instance of
 Unchecked_Deallocation, any other finalizations due to
 be performed are performed, and then Program_Error is raised.
@@ -5108,13 +5116,13 @@ finalized).]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
 @ChgRef{Version=[3],Kind=[DeletedAdded],ARef=[AI05-0064-1]}
-@ChgDeleted{Version=[3],Text=[@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@ChgDeleted{Version=[3],Text=[@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For a Finalize invoked as part of the finalization of the anonymous
 object created by a function call or @nt{aggregate}, any other finalizations
 due to be performed are performed, and then Program_Error is raised.],Old=[]}]}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0023],ARef=[AI95-00169-01]}
-@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Chg{New=[@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For a Finalize invoked due to reaching the end of the execution of a
 master, any other finalizations associated with the master are performed, and
 Program_Error is raised immediately after leaving the master.],Old=[]}
@@ -5128,7 +5136,7 @@ are defined to be masters.]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failed finalization)}
 For a Finalize invoked by the transfer of control of
 an @Chg{Version=[2],
 New=[@nt{exit_statement}, return statement, @nt{goto_statement}],
@@ -5222,7 +5230,7 @@ any other finalizations due to be performed are performed.
 This case includes an asynchronous transfer of control.
 @end{Ramification}
 @begin{Honest}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 This violates the general principle that it is always possible for
 a bounded error to raise Program_Error
 (see @RefSec{Classification of Errors}).

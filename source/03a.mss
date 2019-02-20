@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/02/09 03:46:53 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.139 $}
+@Comment{$Revision: 1.140 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -71,16 +71,18 @@ declaration).>}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0255-1],ARef=[AI05-0277-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1],ARef=[AI12-0308-1]}
 @Defn{declaration}
 Each of the following is defined to be a declaration:
 any @nt{basic_@!declaration};
 an @nt{enumeration_@!literal_@!specification};
 a @nt{discriminant_@!specification};
 a @nt{component_@!declaration};@Chg{Version=[5],New=[
-an @nt{iterated_@!component_@!association};],Old=[]}
-a @nt{loop_@!parameter_@!specification};@Chg{Version=[3],New=[
-an @nt{iterator_@!specification};],Old=[]}
+a @nt{defining_identifier} of an @nt{iterated_@!component_@!association};],Old=[]}
+a @nt{loop_@!parameter_@!specification};@Chg{Version=[5],New=[
+a @nt{defining_identifier} of a @nt{chunk_@!specification};],Old=[]}@Chg{Version=[3],New=[
+an @nt{iterator_@!specification};],Old=[]}@Chg{Version=[5],New=[
+a @nt{defining_identifier} of an @nt{iterator_@!parameter_@!specification};],Old=[]}
 a @nt{parameter_@!specification};
 a @nt{subprogram_@!body};@Chg{Version=[3],New=[
 an @nt{extended_@!return_@!object_@!declaration};],Old=[]}
@@ -1317,7 +1319,7 @@ in the appropriate subclause. These rules are such that if a
 @nt<constraint> is @i(compatible) with a subtype,
 then the condition imposed by the @nt<constraint> cannot
 contradict any condition already imposed by the subtype on its values.
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
 The exception Constraint_Error is raised if any check of
 compatibility fails.
 @begin{Honest}
@@ -1840,7 +1842,7 @@ unit.@PDefn{generic contract issue}]}
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[4],Text=[If any of the above @LegalityTitle is violated in an
 instance of a generic unit, Program_Error is raised at the point of the
-violation.]}
+violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -1909,6 +1911,7 @@ given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2],ARef=[AI12-0071-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0301-1]}
   @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion,
   @Chg{Version=[4],New=[],Old=[the predicate of the target subtype
   is evaluated, and ]}a check is performed that
@@ -1922,7 +1925,9 @@ given subtype, then:]}
   the parameter satisfies the predicates of the subtype of the
   actual],Old=[predicate is True]}. For an object created
   by an @nt{object_declaration} with no explicit initialization @nt{expression},
-  or by an uninitialized @nt{allocator}, if any subcomponents have
+  or by an uninitialized @nt{allocator}, if @Chg{Version=[5],New=[the types of
+  any parts have specified Default_Value or Default_Component_Value aspects,
+  or ],Old=[]}any subcomponents have
   @nt{default_expression}s, @Chg{Version=[4],New=[],Old=[the predicate of the
   nominal subtype of the created object is evaluated, and ]}a check is performed
   that the @Chg{Version=[4],New=[value of
@@ -1933,7 +1938,7 @@ given subtype, then:]}
   Sec=[@nt{object_declaration}]}@Defn2{Term=[predicate check],
   Sec=[@nt{allocator}]}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}@Chg{Version=[4],New=[],
-  Old=[@Defn2{Term=(Assertion_Error), Sec=(raised by failure of run-time check)}]}]}
+  Old=[@Defn2{Term=(Assertion_Error), Sec=(raised by failure of runtime check)}]}]}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-2]}
   @ChgAdded{Version=[4],Text=[If any of the predicate checks fail,
@@ -1946,7 +1951,7 @@ given subtype, then:]}
   associated message string defined by the value of the Predicate_Failure
   @nt{expression}. In the absence of such a Predicate_Failure aspect, an
   implementation-defined message string is associated with the Assertion_Error
-  exception.@Defn2{Term=(Assertion_Error), Sec=(raised by failure of run-time check)}]}
+  exception.@Defn2{Term=(Assertion_Error), Sec=(raised by failure of runtime check)}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1977,7 +1982,7 @@ value.@PDefn2{Term=[satisfies], Sec=(a subtype predicate)}]}]}
 @ChgRef{Version=[4],Kind=[Deleted],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[4],New=[],Old=[If any of the above
 @LegalityTitle is violated in an instance of a generic unit, Program_Error is
-raised at the point of the violation.]}]}
+raised at the point of the violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2099,6 +2104,20 @@ common exceptional conditions as follows:}]}
   Predicate aspects are new in Ada 2012.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0301-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}
+  @b<Correction:> Predicate checks are now performed on default-initialized
+  objects with parts that have Default_Value or Default_Component_Value
+  specified. This is consistent with the handling of constraint checks for
+  such objects; it is thought that the omission was unintended. However,
+  a program that declares such an object and depends on there not being a
+  predicate check in original Ada 2012 will fail in Ada 2020. As these
+  attributes were new in Ada 2012, their use is uncommon, so we believe
+  that this inconsistency will be rare and more likely to catch a bug than
+  create one.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0054-2]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}
@@ -2168,6 +2187,9 @@ All of the following are objects:
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
   @ChgAdded{Version=[5],Text=[the index parameter of an @nt{iterated_component_association};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0308-1]}
+  @ChgAdded{Version=[5],Text=[the chunk parameter of a @nt{chunk_specification};]}
 
   a choice parameter of an @nt<exception_handler>;
 
@@ -2273,6 +2295,9 @@ The following (and no others) represent constants:
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
   @ChgAdded{Version=[5],Text=[the index parameter of an @nt{iterated_component_association};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0308-1]}
+  @ChgAdded{Version=[5],Text=[the chunk parameter of a @nt{chunk_specification};]}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1]}
   a @Chg{Version=[3],New=[],Old=[loop parameter, ]}choice
@@ -3011,7 +3036,7 @@ because if an object's nominal subtype is indefinite,
 an explicit initial value is required.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0255-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0061-1],ARef=[AI12-0308-1]}
 @Defn{stand-alone constant}
 @Defn{stand-alone variable}
 As indicated above,
@@ -3024,6 +3049,7 @@ An object declared by a
 @nt<loop_parameter_specification>,
 @Chg{Version=[3],New=[@nt{iterator_specification},
 ],Old=[]}@Chg{Version=[5],New=[@nt{iterated_component_association},
+@nt{chunk_specification},
 ],Old=[]}@nt<parameter_specification>,
 @nt<entry_index_specification>, @nt<choice_parameter_specification>,
 @Chg{Version=[3],New=[@nt{extended_return_statement}, ],Old=[]}or
@@ -4578,7 +4604,7 @@ Evaluating S'Last never raises Constraint_Error.@end{ramification}
   @b(return) S'Base
 @end(Descexample)
 
-     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      For an enumeration type, the function returns the value
      whose position number is one more than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -4608,7 +4634,7 @@ S'Succ for a modular integer subtype wraps around
   @b(return) S'Base
 @end(Descexample)
 
-     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      For an enumeration type, the function returns the value
      whose position number is one less than that of the value of @i(Arg);
      @IndexCheck{Range_Check}
@@ -4682,7 +4708,7 @@ S'Pred for a modular integer subtype wraps around
        @ChgAdded{Version=[2],Text=[
        For an enumeration type T that has @lquotes@;holes@rquotes@;
        (caused by an @nt{enumeration_@!representation_@!clause}),
-       @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+       @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
@@ -4818,7 +4844,7 @@ deleted if the paragraphs are ever renumbered.}
        @ChgDeleted{Version=[2],Text=[For an enumeration type T
        that has @lquotes@;holes@rquotes@;
        (caused by an @nt{enumeration_representation_clause}),
-       @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+       @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
@@ -4948,7 +4974,7 @@ deleted if the paragraphs are ever renumbered.}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@PDefn2{Term=[evaluation], Sec=(Wide_Wide_Value)}
-    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Wide_Wide_Value
     for an enumeration subtype S,
     if the sequence of characters of the parameter (ignoring
@@ -4981,7 +5007,7 @@ deleted if the paragraphs are ever renumbered.}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
-    Sec=(raised by failure of run-time check)}
+    Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Wide_Wide_Value for an integer
     subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
@@ -5036,7 +5062,7 @@ deleted if the paragraphs are ever renumbered.}
     @ChgRef{Version=[2],Kind=[Added]}
     @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0264-1]}
     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
-    Sec=(raised by failure of run-time check)}
+    Sec=(raised by failure of runtime check)}
     with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
@@ -5063,7 +5089,7 @@ deleted if the paragraphs are ever renumbered.}
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Wide_Value)}
-    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Wide_Value
     for an enumeration subtype S,
     if the sequence of characters of the parameter (ignoring
@@ -5117,7 +5143,7 @@ paragraphs are ever renumbered.}
 
     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
     @ChgDeleted{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
-    Sec=(raised by failure of run-time check)}
+    Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Wide_Value (or S'Value) for an integer
     subtype S, if the sequence of characters of the
     parameter (ignoring leading and trailing spaces)
@@ -5170,7 +5196,7 @@ paragraphs are ever renumbered.}
 
     @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
     @ChgDeleted{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=(Constraint_Error),
-    Sec=(raised by failure of run-time check)}
+    Sec=(raised by failure of runtime check)}
     with an optional leading sign character (plus or minus), and if the
     corresponding numeric value belongs to the base range of the
     type of S, then that value is the result;
@@ -5194,7 +5220,7 @@ paragraphs are ever renumbered.}
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Value)}
-    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+    @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Value
     for an enumeration subtype S,
     if the sequence of characters of the parameter (ignoring
@@ -6256,13 +6282,13 @@ modulo the modulus of the type to a value that is within the
 base range of the type.
 
 @IndexCheck{Overflow_Check}
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
 For a signed integer type,
 the exception Constraint_Error is raised by the execution of
 an operation that cannot deliver the correct result because
 it is outside the base range of the type.
 @redundant[@IndexCheck{Division_Check}
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
 For any integer type, Constraint_Error is raised by the operators
 "/", "@key(rem)", and "@key(mod)" if the right operand is zero.]
 
@@ -6538,7 +6564,7 @@ the following attributes are defined:
 @end(Descexample)
 
      @NoPrefix@PDefn2{Term=(evaluation), Sec=(Val)}
-     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
      This function returns a value of the type of S
      whose position number equals the value of @i(Arg).]}
      @IndexCheck{Range_Check}
@@ -6624,7 +6650,6 @@ to the internal code for any enumeration literal of its
 type
 @Redundant[(perhaps due to an uninitialized variable)],
 then the implementation should raise Program_Error.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 This is particularly important for enumeration types with
 noncontiguous internal codes specified by an
 @nt<enumeration_@!representation_@!clause>.
@@ -7396,7 +7421,7 @@ the bounds of the range are both in the range
 where @i(D) is the value of the (static)
 @Chg{Version=[4],New=[@nt<simple_expression>],Old=[@nt<expression>]}
 given after the reserved word @key(digits).
-@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
 If this check fails, Constraint_Error is raised.
 @end{RunTime}
 

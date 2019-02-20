@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.72 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.73 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -371,7 +371,7 @@ outside the domain of the corresponding mathematical function, when the value
 of the parameter Cycle is zero or negative.
 
 @IndexCheck{Division_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 The exception Constraint_Error is raised by the division operator when the
 value of the right operand is zero, and by the exponentiation operator when
 the value of the left operand is zero and the value of the exponent is
@@ -774,9 +774,8 @@ mathematical function, when the value of the left operand is zero and the real
 component of the exponent (or the exponent itself, when it is of real type) is
 zero.
 
-@Leading@IndexCheck{Division_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-The exception Constraint_Error is raised, signaling a pole of the mathematical
+@Leading@;The exception Constraint_Error is raised, signaling a pole of the
+mathematical
 function (analogous to dividing by zero), in the following cases, provided that
 Complex_Types.Real'Machine_Overflows is True:
 @begin{Itemize}
@@ -1492,7 +1491,7 @@ that belongs to the result interval when both bounds of the result interval are
 in the safe range of the result type T, as determined by the values of
 T'Safe_First and T'Safe_Last; otherwise,
 @begin(itemize)
-   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
    if T'Machine_Overflows is True, the implementation shall either deliver a
    value that belongs to the result interval or raise Constraint_Error;
 
@@ -1658,7 +1657,7 @@ to 10.0 @+[4 @Times @RI{d}], where d is the requested decimal
 precision of @i{T}. This attribute yields a value of the type
 @i{universal_real}.
 
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}S'@Attr{Model} @\Denotes a function (of a parameter @i{X}) whose specification
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}S'@Attr{Model} @\Denotes a function (of a parameter @i{X}) whose specification
 is given in
 @RefSecNum{Attributes of Floating Point Types}.
 If @i{X} is a model number of @i{T}, the
@@ -1923,9 +1922,12 @@ let @RI{s} be 1.0.
    result set}.}
 @end(itemize)
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0300-1]}
 A multiplication P * Q of an operand of a fixed point type F by an operand of
-an integer type I, or vice-versa, and a division P / Q of an operand of a
-fixed point type F by an operand of an integer type I, are also allowed.
+@Chg{Version=[5],New=[type Integer],Old=[an integer type I]}, or
+vice@Chg{Version=[5],New=[ ],Old=[-]}versa,
+and a division P / Q of an operand of a fixed point type F by an operand of
+@Chg{Version=[5],New=[type Integer],Old=[an integer type I]}, are also allowed.
 In these cases, the result has a type of F; explicit conversion of the
 result is never required. The accuracy required in these cases is the same as
 that required for a multiplication F(P * Q) or a division F(P / Q) obtained by
@@ -1949,7 +1951,7 @@ the safe range.
 If all of the permitted results belong to the base range of T,
 then the implementation shall deliver one of the permitted results; otherwise,
 @begin(itemize)
-   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
    if T'Machine_Overflows is True, the implementation shall either deliver one
    of the permitted results or raise Constraint_Error;
 
@@ -1994,6 +1996,14 @@ two cases:
 @end{Itemize}
 @end{DiffWord83}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0300-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Reworded the fixed*integer
+  accuracy requirements to clarify that the only allowed integer type in
+  such operations is Standard.Integer. We make this correction as readers of
+  the Standard have been confused on this point.]}
+@end{DiffWord2012}
+
 
 @LabeledSubClause{Accuracy Requirements for the Elementary Functions}
 
@@ -2018,7 +2028,7 @@ the function's @i{maximum relative error}.
 The function delivers a value that belongs to the result interval when both of
 its bounds belong to the safe range of @i{EF}.Float_Type; otherwise,
 @begin{Itemize}
-   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
    if @i{EF}.Float_Type'Machine_Overflows is True, the function either delivers
    a value that belongs to the result interval or raises Constraint_Error,
    signaling overflow;
@@ -2425,7 +2435,7 @@ otherwise,
    modulus of the mathematical result.
 @end{Ramification}
 @begin{itemize}
-   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+   @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
    if @i{CT}.Real'Machine_Overflows is True, the function either delivers a
    value that belongs to the result interval (or a value both of whose
    components belong to their respective result intervals) or raises

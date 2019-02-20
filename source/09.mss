@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.132 $}
+@Comment{$Revision: 1.133 $}
 
 @begin{Intro}
 
@@ -699,13 +699,14 @@ not initiated until after the function returns.],Old=[]}
   being suspended until all the new tasks complete their activation.]}
 @end{Discussion}
 
+@IndexCheck{Tasking_Check}
 @Defn2{Term=[activator], Sec=(of a task)}
 @PDefn2{term=[blocked], Sec=(waiting for activations to complete)}
 The task that created the new tasks and initiated their
 activations (the @i(activator)) is
 blocked until all of these activations complete (successfully
 or not).
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Tasking_Error],Sec=(raised by failure of runtime check)}
 Once all of these activations are complete,
 if the activation
 of any of the tasks has failed
@@ -1380,7 +1381,7 @@ either for concurrent read-only access, or for exclusive
 read-write access.]
 
 @PDefn2{Term=[finalization], Sec=(of a protected object)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by finalization of a protected object)}
 As the first step of the @i{finalization} of a protected object,
 each call remaining on any entry queue of the object
 is removed from its queue and
@@ -1436,7 +1437,7 @@ object for some useful purpose, so we didn't want to disallow this case.
 It is a bounded error to call an entry or subprogram of a
 protected object after that object is finalized. If the error is detected,
 Program_Error is raised. Otherwise, the call proceeds normally, which may leave
-a task queued forever.]}
+a task queued forever.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{Reason}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[This is very similar to the finalization rule. It
@@ -2921,7 +2922,7 @@ potentially blocking operation.]}
 @end(Reason)
 @end{itemize}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 If the bounded error is detected, Program_Error is raised.
 If not detected, the bounded error
 might result in deadlock or a (nested)
@@ -2940,7 +2941,7 @@ pragma Detect_Blocking (see @RefSecNum{Pragma Detect_Blocking}).]}
 @Chg{Version=[5],New=[During a protected action, a call on a subprogram whose
 body contains a potentially blocking operation is a bounded error.
 @PDefn2{Term=(bounded error),Sec=(cause)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 If the bounded error is detected, Program_Error is raised; otherwise, the call proceeds
 normally. ],Old=[Certain language-defined subprograms are potentially blocking.
 In particular, the subprograms of
@@ -3110,13 +3111,13 @@ tasks and protected objects.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0169-1]}
 @Syn{lhs=<entry_body>,rhs="
-  @key{entry} @Syn2{defining_identifier}  @Syn2{entry_body_formal_part}@Chg{Version=[5],New=<
-    [@Syn2{aspect_specification}]
-  >,Old=[]}@Syn2{entry_barrier} @key{is}
-    @Syn2{declarative_part}
-  @key{begin}
-    @Syn2{handled_sequence_of_statements}
-  @key{end} [@SynI{entry_}@Syn2{identifier}];"}
+    @key{entry} @Syn2{defining_identifier} @Syn2{entry_body_formal_part}@Chg{Version=[5],New=<
+       [@Syn2{aspect_specification}]
+    >,Old=[]}@Syn2{entry_barrier} @key{is}
+       @Syn2{declarative_part}
+    @key{begin}
+       @Syn2{handled_sequence_of_statements}
+    @key{end} [@SynI{entry_}@Syn2{identifier}];"}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00397-01]}
@@ -3693,7 +3694,7 @@ An entry of a protected object is open if
 the @nt<condition> of the @nt<entry_barrier> of the
 corresponding @nt<entry_body> evaluates to True;
 otherwise@Chg{Version=[3],New=[,],Old=[]} it is closed.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by barrier failure)}
 If the evaluation of the @nt<condition> propagates an exception, the
 exception Program_Error is propagated
 to all current callers of all entries of the protected object.
@@ -3861,7 +3862,8 @@ Like any protected action, it includes servicing of the entry queues
   initiating the abort.
 @end(ImplNote)
 
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
+@IndexCheck{Tasking_Check}
+@Defn2{Term=[Tasking_Error],Sec=(raised by failure of runtime check)}
 A call on an entry of a task that has already completed its execution
 raises the exception Tasking_Error at the point of the call;
 similarly, this exception is raised at the point of the call if the
@@ -4306,9 +4308,10 @@ of the @nt<requeue_statement>.
 
 @begin{Notes}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0300-1]}
 A requeue is permitted from a single entry to an entry of
-an entry family, or vice-versa. The entry index, if any,
-plays no part in the subtype conformance check between the
+an entry family, or vice@Chg{Version=[5],New=[ ],Old=[-]}versa. The entry
+index, if any, plays no part in the subtype conformance check between the
 profiles of the two entries; an entry index
 is part of the @i(entry_)@nt<name> for an entry of a family.
 @PDefn{subtype conformance}
@@ -5729,7 +5732,7 @@ are satisfied.
 
 @end{itemize}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by closed alternatives)}
 The exception Program_Error is raised if all alternatives are closed and
 there is no else part.
 
@@ -6344,7 +6347,7 @@ part of the execution of an abort-deferred operation is a bounded error.
 Similarly, an attempt to create a task that depends on a master
 that is included entirely within the execution of
 an abort-deferred operation is a bounded error.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 In both cases, Program_Error is raised if the error is detected
 by the implementation; otherwise@Chg{Version=[3],New=[,],Old=[]} the
 operations proceed as they would outside an abort-deferred operation, except
@@ -6737,7 +6740,7 @@ addressable).  The action comprising a call on a subprogram or an
 entry is defined to @i{potentially conflict} with another action if the
 Global aspect (or Global'Class aspect in the case of a dispatching
 call) of the called subprogram or entry is such that a conflicting
-action would be possible during the execution of the call. Similarly
+action would be possible during the execution of the call. Similarly,
 two calls are considered to potentially conflict if they each have
 Global (or Global'Class in the case of a dispatching call) aspects
 such that conflicting actions would be possible during the execution

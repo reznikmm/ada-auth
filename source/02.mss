@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:46 $}
+@Comment{$Date: 2019/02/09 03:46:53 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.91 $}
+@Comment{$Revision: 1.92 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1659,9 +1659,11 @@ precede any associations with a
 
 @Leading@keepnext@nt{Pragma}s are only allowed at the following places in a program:
 @begin{Itemize}
-After a semicolon delimiter, but not within a @nt{formal_part}
-or @nt{discriminant_part}.
-
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0236-1]}
+After a semicolon delimiter, but not within a
+@nt{formal_part}@Chg{Version=[5],New=[,],Old=[ or]}
+@nt{discriminant_part}@Chg{Version=[5],New=[, or
+@nt{declare_expression}],Old=[]}.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0100-1],ARef=[AI05-0163-1]}
 At any place where the syntax rules allow a construct defined by a
@@ -1989,6 +1991,16 @@ RM83), but it was not clear, because there was no definition of
   @ChgAdded{Version=[3],Text=[@b{Correction:} Clarified where @nt{pragma}s
   are (and are not) allowed.]}
 @end{DiffWord2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to ensure that @nt{pragma}s are not
+  allowed in @nt{declare_expression}s. We don't allow this as the definition
+  of most pragmas assume that they're given between entities. We also don't
+  want to answer questions about conformance of @nt{pragma}s, especially
+  unrecognized @nt{pragma}s and @nt{pragma}s whose state can change between
+  the specification and body.]}
+@end{DiffWord2012}
 
 
 @begin{Syntax}

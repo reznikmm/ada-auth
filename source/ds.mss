@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.78 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
+@comment{ $Revision: 1.79 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2018/09/05 05:22:38 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -181,7 +181,6 @@ the following attribute is defined:
 It is a bounded error for there to be cyclic elaboration dependences
 between the active partitions of a single distributed
 program.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The possible effects@Chg{Version=[2],New=[, in each of the partitions involved,],Old=[]}
 are deadlock during elaboration, or the raising of
 @Chg{Version=[2],New=[Communication_Error or ],Old=[]}Program_Error@Chg{Version=[2],
@@ -1517,7 +1516,6 @@ unit than
 that included in the partition to which the shared passive or
 RCI library unit
 was assigned.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 As a result of this error, Program_Error
 can be raised in one or both partitions during elaboration;
 in any case, the partitions
@@ -1721,7 +1719,7 @@ type, a check is made that the tag of the actual parameter identifies
 a tagged type declared in a declared-pure or shared passive library
 unit, or in the visible part of a remote types or remote call interface
 library unit.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 Program_Error is raised if this check fails.
 @Chg{New=[In a remote function call which returns a class-wide type, the same
 check is made on the function result.],Old=[]}
@@ -1758,7 +1756,7 @@ a check is made @Redundant[(in addition to the normal Tag_Check
 access-to-class-wide values originated from Access
 @nt<attribute_reference>s that were evaluated by tasks of the
 same active partition.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 Constraint_Error is raised if this check fails.
 @begin{ImplNote}
   When a remote access-to-class-wide value is created by
@@ -1897,7 +1895,7 @@ the target partition, etc. This approach has the advantage that
 less special-casing is required in the compiler. All access values
 can remain just a simple address.
 
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 For a call to Do_RPC or Do_APC: The partition ID of all controlling
 operands are checked for equality (a Constraint_Error is raised if this
 check fails). The partition ID value is used for the Partition parameter.
@@ -1914,7 +1912,7 @@ On the called partition (after the RPC-receiver has transferred control
 to the appropriate receiving stub) the parameters are first unmarshalled.
 Then, the tags of the controlling operands (obtained by dereferencing the
 pointer to the object) are checked for equality.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 If the check fails Constraint_Error is raised and propagated back to the
 calling partition, unless it is a result of an asynchronous call.
 Finally, a dispatching call to the specific subprogram (based on the

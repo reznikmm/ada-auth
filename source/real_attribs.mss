@@ -1,9 +1,9 @@
 @Part(realattribs, Root="ada.mss")
 
-@Comment{$Date: 2011/09/29 06:37:25 $}
+@Comment{$Date: 2019/02/09 03:46:56 $}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/real_attribs.mss,v $}
-@comment{$Revision: 1.27 $}
+@comment{$Revision: 1.28 $}
 
 @LabeledSubClause{Attributes of Floating Point Types}
 
@@ -220,7 +220,7 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    Let @RI{v} be the value @RI{Fraction} @Times
    @RI{T}@R('Machine_Radix)@+{@RI{Exponent}@en@RI{k}},
    where @RI{k} is the normalized exponent of @i{Fraction}.
@@ -252,7 +252,7 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    Let @RI{v} be the value @RI{X} @Times @RI{T}@R('Machine_Radix)@+{@RI{Adjustment}}.
    If @RI{v} is a machine number of the type @i{T}, or if
    @Abs{@RI{v}} @geq @RI{T}@R('Model_Small), the function yields @RI{v};
@@ -376,7 +376,7 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    For nonzero @i{Y}, let @RI{v} be the value
    @RI{X} @en @RI{n} @Times @RI{Y}, where @RI{n} is the integer nearest to
    the exact value of @RI{X}/@RI{Y}; if @Abs{@RI{n} @en @RI{X}/@RI{Y}} = 1/2,
@@ -403,7 +403,7 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@;@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    If @RI{Towards} = @RI{X}, the function yields @i{X}; otherwise, it
    yields the machine number of the type @i{T} adjacent to @i{X} in the
    direction of @i{Towards}, if that machine number exists.
@@ -424,7 +424,7 @@ S of a floating point type @i{T}.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    If the value of @i{Value} is nonzero, the function yields a result whose
    magnitude is that of @i{Value} and whose sign is that of @i{Sign};
    otherwise, it yields the value zero.
@@ -461,7 +461,7 @@ is outside the base range of S.
       when @i{X} is negative and @i{Radix_Digits} is positive.
    @end{Itemize}
 
-   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    @IndexCheck{Range_Check}Constraint_Error is raised when @i{Radix_Digits}
    is zero or negative.
    A zero result@Redundant{, which can only occur when @i{X} is zero,} has the
@@ -485,7 +485,7 @@ is outside the base range of S.
   @key(return) @RI{T}
 @end{DescExample}
 
-   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+   @NoPrefix@Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
    If @i{X} is a machine number of the type @i{T}, the function yields @i{X};
    otherwise, it yields the value obtained by rounding or truncating @i{X} to
    either one of the adjacent machine numbers of the type @i(T).

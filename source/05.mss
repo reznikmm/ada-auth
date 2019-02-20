@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -232,8 +232,7 @@ same construct initiate such a transfer of control concurrently, one of them is
 chosen arbitrarily and the others are canceled.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-When a logical thread of control is canceled, the
+@ChgAdded{Version=[5],Text=[When a logical thread of control is canceled, the
 cancellation causes it to complete as though it had performed a transfer of
 control to the point where it would have finished its execution. Such a
 cancellation is deferred while the logical thread of control is executing within
@@ -246,13 +245,14 @@ reaches an exception handler that is outside such an abort-deferred operation.]}
 
 @begin{Bounded}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-@ChgAdded{Version=[5],Text=[During the execution of a parallel construct, it is
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+During the execution of a parallel construct, it is
 a bounded error to invoke an operation that is potentially blocking (see
 @RefSecNum{Intertask Communication}). Program_Error is raised if the error is
 detected by the implementation; otherwise, the execution of the potentially
 blocking operation might proceed normally, or it might result in the indefinite
 blocking of some or all of the logical threads of control making up the current
-task.]}
+task.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{Notes}
@@ -468,7 +468,7 @@ are first evaluated in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[al
 @end{Ramification}
 
   @IndexCheck{Tag_Check}
-  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
   Otherwise @Redundant[(the @nt<expression> is dynamically tagged)],
   a check is made that the tag of
   the value of the @nt<expression>
@@ -1014,8 +1014,7 @@ is covered by the @nt{discrete_@!choice_@!list} of some
 @nt{case_@!statement_@!alternative}, then the
 @nt{sequence_of_@!statements} of the @ntf{_alternative} is executed.
 
-@IndexCheck{Overflow_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by case statement)}
 Otherwise (the value is not covered by any
 @nt{discrete_choice_list},
 perhaps due to being outside the base range),
@@ -1189,17 +1188,20 @@ running sequentially or concurrently with one another],Old=[]}.]
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
    | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
    | @key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=<
    | @key{for} @Syn2{procedural_iterator}
    | @key[parallel] [(@Syn2{chunk_specification})]
-     @key{for} @Syn2{loop_parameter_specification}>,Old=[]}"}
+     @key{for} @Syn2{loop_parameter_specification}
+   | @key[parallel] [(@Syn2{chunk_specification})]
+     @key{for} @Syn2{iterator_specification}>,Old=[]}"}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<chunk_specification>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<     @SynI{integer_}@Syn2{simple_expression}
+rhs="@Chg{Version=[5],New=<
+     @SynI{integer_}@Syn2{simple_expression}
    | @Syn2{defining_identifier} @key[in] @Syn2{discrete_subtype_definition}>,Old=<>}"}
 
 @Syn{lhs=<loop_parameter_specification>,rhs="
@@ -1260,7 +1262,7 @@ if False, the execution of the @nt{loop_@!statement} is complete.
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[If the reserved word @key[parallel] is present
-in a @nt{loop_statement} (a
+in the @nt{iteration_scheme} of a @nt{loop_statement} (a
 @i{parallel loop}),@Defn{parallel loop}@Defn2{Term=[loop],Sec=[parallel]}
 the iterations are partitioned into one or more @Defn{chunk}@i{chunks}, each
 with its own separate logical thread of control (see
@@ -1279,7 +1281,7 @@ elaborating the @nt{chunk_specification}, a check is made that the determined
 maximum number of chunks is greater than zero. If
 this check fails, Program_Error is raised.
 @Comment{@IndexCheck{Unknown_Check}}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
@@ -1386,9 +1388,10 @@ the total number of iterations of the loop represents an upper bound
 on the number of logical threads of control devoted to the loop.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Just because the paragraph number will change}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
-@nt{loop_statement} with the @nt{iteration_scheme} being @key[for]
+@nt{loop_statement} with the @nt{iteration_scheme}
+@Chg{Version=[5],New=[including an],Old=[being @key[for]]}
 @nt{iterator_specification}, see @RefSecNum{Generalized Loop Iteration}.]]}
 
 @end{RunTime}
@@ -1495,7 +1498,7 @@ The constant-ness of loop parameters is specified in
 @end{DiffWord2005}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel loops
   are new.]}
 @end{Extend2012}
@@ -1540,6 +1543,45 @@ language-defined generic library package exists:]}
    @key[function] @AdaSubDefn{Previous} (Object : Reversible_Iterator; Position : Cursor)
       @key[return] Cursor @key[is abstract];]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Parallel_Iterator} @key[is limited interface and] Forward_Iterator;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Chunk_Index],Of=[Positive]} @key[is] Positive;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Is_Split} (Object : Parallel_Iterator)
+      @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Split_Into_Chunks} (Object     : @key[in out] Parallel_Iterator;
+                                Max_Chunks : @key[in]     Chunk_Index) @key[is abstract]
+      @key[with] Pre'Class   => @key[not] Object.Is_Split @key[or else raise] Program_Error,
+           Post'Class  => Object.Is_Split @key[and then]
+              Object.Chunk_Count <= Max_Chunks;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Chunk_Count} (Object : Parallel_Iterator) @key[return] Chunk_Index
+      @key[is abstract]
+      @key[with] Pre'Class   => Object.Is_Split @key[or else raise] Program_Error;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{First} (Object : Parallel_Iterator;
+                   Chunk  : Chunk_Index) @key[return] Cursor @key[is abstract]
+      @key[with] Pre'Class   => (Object.Is_Split @key[and then] Chunk <= Object.Chunk_Count)
+                           @key[or else raise] Program_Error;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Next} (Object   : Parallel_Iterator;
+                  Position : Cursor;
+                  Chunk    : Chunk_Index) @key[return] Cursor @key[is abstract]
+      @key[with] Pre'Class   => (Object.Is_Split @key[and then] Chunk <= Object.Chunk_Count)
+                           @key[or else raise] Program_Error;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Parallel_Reversible_Iterator} @key[is limited interface]
+      @b[and] Parallel_Iterator @key[and] Reversible_Iterator;]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key[end] Ada.Iterator_Interfaces;]}
 @end{Example}
@@ -1555,15 +1597,24 @@ language-defined generic library package exists:]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[An @i<iterator type> is a type descended from
 the Forward_Iterator interface from some instance of
 Ada.Iterator_Interfaces.@Defn{iterator type}
 A @i<reversible iterator type> is a type descended from the Reversible_Iterator
 interface from some instance of Ada.Iterator_Interfaces.@Defn{reversible iterator type}
-An @i<iterator object> is an object of an iterator type.@Defn{iterator object}
+@Chg{Version=[5],New=[A @i{parallel iterator type}@Defn{parallel iterator type}
+is a type descended from the Parallel_Iterator interface from some instance
+of Ada.Iterator_Interfaces. A type descended from the
+Parallel_Reversible_Iterator interface from some
+instance of Ada.Iterator_Interfaces is both a parallel iterator type and a
+reversible iterator type. ],Old=[]}An @i<iterator object>
+is an object of an iterator type.@Defn{iterator object}
 A @i<reversible iterator object> is an object
 of a reversible iterator type.@Defn{reversible iterator object}
-The formal subtype Cursor from the associated
+@Chg{Version=[5],New=[A @i<parallel iterator object> is an object
+of a parallel iterator type.@Defn{parallel iterator object} ],Old=[]}The
+formal subtype Cursor from the associated
 instance of Ada.Iterator_Interfaces is the @i<iteration cursor subtype> for the
 iterator type.@Defn{iteration cursor subtype}]}
 
@@ -1605,13 +1656,19 @@ operational aspects may be specified for an indexable container type @i<T> (see
 type @i<T> (including @i<T>'Class).]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[An @i<iterable container type> is an indexable container type
 with specified Default_Iterator and Iterator_Element aspects.@Defn{iterable container type}
 A @i<reversible iterable container type> is an iterable container type with the default iterator type
 being a reversible iterator type.@Defn{reversible iterable container type}
-An @i<iterable container object> is an object of an iterable container type.@Defn{iterable container object}
+@Chg{Version=[5],New=[A @i{parallel iterable container type} is an iterable
+container type with the default iterator type being a parallel iterator
+type.@Defn{parallel iterable container type} ],Old=[]}An
+@i<iterable container object> is an object of an iterable container type.@Defn{iterable container object}
 A @i<reversible iterable container object> is an object of a reversible iterable container
-type.@Defn{reversible iterable container object}]}
+type.@Defn{reversible iterable container object}@Chg{Version=[5],New=[
+A @i<parallel iterable container object> is an object of a
+parallel iterable container type.@Defn{parallel iterable container object}],Old=[]}]}
 
 @ChgToGlossary{Version=[3],Kind=[Added],Term=<Iterable container type>,
 Text=<@ChgAdded{Version=[3],Text=[An iterable container type is one that has
@@ -1712,6 +1769,12 @@ properties:]}
   redefinition.]}
 @end{Incompatible2012}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel iterator
+  interfaces are new; they allow user-defined parallel loops to be defined.]}
+@end{Extend2012}
+
 
 
 @LabeledAddedSubClause{Version=[3],Name=[Generalized Loop Iteration]}
@@ -1734,6 +1797,10 @@ rhs="@Chg{Version=[3],New=<
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<loop_parameter_subtype_indication>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@Syn2{subtype_indication} | @Syn2{access_definition}>,Old=<>}"}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[If an @nt{iterator_specification} is for a parallel
+construct, the reserved word @key[reverse] shall not appear in the
+@nt{iterator_specification}.]}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1759,13 +1826,27 @@ loop over the elements of an array or container. Iterators may be user defined,
 and may perform arbitrary computations to access elements from a container.]}>}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[If the reserved word @key[reverse] appears,
-the @nt{iterator_specification} is a @i<reverse iterator>;@Defn{reverse iterator}@Defn2{Term=[iterator],Sec=[reverse]}
-otherwise it is a @i<forward iterator>.@Defn{forward iterator}@Defn2{Term=[iterator],Sec=[forward]}
-In a reverse generalized iterator, the
+the @nt{iterator_specification} is a
+@Defn{reverse iterator}@Defn2{Term=[iterator],Sec=[reverse]}@i<reverse iterator>@Chg{Version=[5],New=[.
+If the @nt{iterator_specification} is for a parallel construct, the
+@nt{iterator_specification} is a
+@i<parallel iterator>.@Defn{parallel iterator}@Defn2{Term=[iterator],Sec=[parallel]}
+Otherwise,],Old=[; otherwise]} it is a
+@i<forward iterator>.@Defn{forward iterator}@Defn2{Term=[iterator],Sec=[forward]}
+@Chg{Version=[5],New=[Forward and reverse iterators are collectively called
+@i<sequential>
+iterators.@Defn{sequential iterator}@Defn2{Term=[iterator],Sec=[sequential]} ],Old=[]}In a
+reverse generalized iterator, the
 @SynI<iterator_>@nt{name} shall be of a reversible iterator type.
-In a reverse container element iterator, the default iterator type for the type
-of the @SynI<iterable_>@nt{name} shall be a reversible iterator type.]}
+@Chg{Version=[5],New=[In a parallel generalized iterator, the
+@SynI<iterator_>@nt{name} shall be of a parallel iterator type. ],Old=[]}In
+a reverse container element iterator, the default iterator type for the type
+of the @SynI<iterable_>@nt{name} shall be a reversible iterator
+type.@Chg{Version=[5],New=[ In a parallel container element iterator, the
+default iterator type for the type of the @SynI<iterable_>@nt{name} shall be
+of a parallel iterator type.],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0151-1]}
@@ -1887,8 +1968,8 @@ the Variable_Indexing aspect is not specified for the type of the
   of a single iteration of the loop. More precisely, the function result (or
   the generalized reference thereof) is considered to be renamed in the
   declarative part of a notional block statement which immediately encloses
-  the loop's sequence_of_statements; the accessibility of the loop parameter
-  is that of the block statement.],Old=[]}]}
+  the loop's @nt{sequence_of_statements}; the accessibility of the loop
+  parameter is that of the block statement.],Old=[]}]}
 @end{Ramification}
 
 @end{StaticSem}
@@ -1902,20 +1983,21 @@ first elaborated. This elaboration elaborates the @nt{subtype_indication},
 if any.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgAdded{Version=[3],Text=[For a generalized iterator, the loop parameter is
-created, the @SynI{iterator_}@nt{name} is evaluated, and the denoted iterator
-object becomes the @i<loop iterator>.@Defn{loop iterator} In a forward
-generalized iterator, the operation First of the iterator type is called on the
-loop iterator, to produce the initial value for the loop parameter. If the
-result of calling Has_Element on the initial value is False, then the execution
-of the @nt{loop_statement} is complete. Otherwise, the
-@nt{sequence_of_statements} is executed and then the Next operation of the
-iterator type is called with the loop iterator and the current value of the loop
-parameter to produce the next value to be assigned to the loop parameter. This
-repeats until the result of calling Has_Element on the loop parameter is False,
-or the loop is left as a consequence of a transfer of control. For a reverse
-generalized iterator, the operations Last and Previous are called rather than
-First and Next.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[For a @Chg{Version=[5],New=[sequential
+],Old=[]}generalized iterator, the loop parameter is created, the
+@SynI{iterator_}@nt{name} is evaluated, and the denoted iterator object becomes
+the @i<loop iterator>.@Defn{loop iterator} In a forward generalized iterator,
+the operation First of the iterator type is called on the loop iterator, to
+produce the initial value for the loop parameter. If the result of calling
+Has_Element on the initial value is False, then the execution of the
+@nt{loop_statement} is complete. Otherwise, the @nt{sequence_of_statements} is
+executed and then the Next operation of the iterator type is called with the
+loop iterator and the current value of the loop parameter to produce the next
+value to be assigned to the loop parameter. This repeats until the result of
+calling Has_Element on the loop parameter is False, or the loop is left as a
+consequence of a transfer of control. For a reverse generalized iterator, the
+operations Last and Previous are called rather than First and Next.]}
 
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0093-1]}
@@ -1929,9 +2011,64 @@ First and Next.]}
   tag or constraint.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[For a parallel generalized iterator, the
+@nt{chunk_specification}, if any, of the associated parallel construct, is first
+elaborated, to determine the maximum number of chunks (see
+@RefSecNum{Loop Statements}), and then the operation Split_Into_Chunks of the
+iterator type is called, with the determined maximum passed as the Max_Chunks
+parameter, specifying the upper bound for the number of loop parameter objects
+(and the number of logical threads of control) to be associated with the
+iterator. In the absence of a @nt{chunk_specification}, the maximum number of
+chunks is determined in an implementation defined manner.]}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@ChgAdded{Version=[5],Text=[The maximum number of chunks for a parallel
+generalized iterator without a @nt{chunk_specification}.]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[Upon return from Split_Into_Chunks, the actual
+number of chunks for the loop is determined by calling the Chunk_Count operation
+of the iterator, at which point one logical thread of control is initiated for
+each chunk, with an associated chunk index in the range from one to the actual
+number of chunks. Within each logical thread of control, a loop parameter is
+created. If a @nt{chunk_specification} with a @nt{discrete_subtype_definition}
+is present in the associated parallel construct, then a chunk parameter is
+created, and initialized with a value from the discrete subtype defined by the
+@nt{discrete_subtype_definition}, so that the order of the chosen chunk
+parameter values correspond to the order of the chunk indices associated with
+the logical threads of control. The operation First of the iterator type having
+a Chunk parameter is called on the loop iterator, with Chunk initialized from
+the corresponding chunk index, to produce the initial value for the loop
+parameter. If the result of calling Has_Element on this initial value is False,
+then the execution of the logical thread of control is complete. Otherwise, the
+@nt{sequence_of_statements} is executed and then the Next operation of the
+iterator type having a Chunk parameter is called, with the loop iterator, the
+current value of the loop parameter, and the corresponding chunk index, to
+produce the next value to be assigned to the loop parameter. This repeats until
+the result of calling Has_Element on the loop parameter is False, or the
+associated parallel construct is left as a consequence of a transfer of control.
+In the absence of a transfer of control, the associated parallel construct of a
+parallel generalized iterator is complete when all of its logical threads of
+control are complete.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The Max_Chunks parameter of the Split_Into_Chunks
+    procedure is an upper bound for the number of chunks to be associated with a
+    loop. A container implementation may opt for a lower value for the number of
+    chunks if a more optimal split can be determined. For instance, a tree based
+    container might create the split based on the number of branches at the top
+    levels of the tree.]}
+@end{Discussion}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgAdded{Version=[3],Text=[For an array component iterator, the
-@SynI<iterable_>@nt{name} is evaluated and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[For an array component iterator,
+@Chg{Version=[5],New=[the @nt{chunk_specification} of the associated
+parallel construct, if any, is first elaborated to determine
+the maximum number of chunks (see @RefSecNum{Loop Statements}), and
+then ],Old=[]}the @SynI<iterable_>@nt{name} is evaluated and
 the denoted array object becomes the @i<array for the
 loop>.@Defn{array for a loop} If the array for the loop is a null array,
 then the execution of the @nt{loop_statement} is complete. Otherwise, the
@@ -1946,37 +2083,78 @@ component whose index values are each the first in their index range,
 and continues in the canonical order. For a reverse array component
 iterator, the iteration starts with the component whose index values
 are each the last in their index range, and continues in the reverse
-of the canonical order. The loop iteration proceeds until the
+of the canonical order.
+@Chg{Version=[5],New=[For a parallel array component iterator, the iteration is
+broken up into contiguous chunks of the canonical order, such that all
+components are covered with no overlaps; each chunk has its own logical thread
+of control with its own loop parameter and iteration within each chunk is in the
+canonical order. The number of chunks is implementation defined, but is limited
+in the presence of a @nt{chunk_specification} to the determined maximum.
+],Old=[]}The loop iteration proceeds until the
 @nt{sequence_of_statements} has been executed for each component of the
 array for the loop, or until the loop is left as a consequence of a
 transfer of control.]}
 
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@ChgAdded{Version=[5],Text=[The number of chunks for an array component
+iterator.]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{chunk_specification} with a
+@nt{discrete_subtype_definition} is present
+in the associated parallel construct, then the logical thread of
+control associated with a given chunk has a chunk parameter
+initialized with a distinct value from the discrete subtype defined by
+the @nt{discrete_subtype_definition}. The values of the chunk parameters
+are assigned such that they increase in the canonical order of the
+starting array components for the chunks.]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgAdded{Version=[3],Text=[For a container element iterator, the @SynI<iterable_>@nt{name} is evaluated
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[For a container element iterator,
+@Chg{Version=[5],New=[the @nt{chunk_specification} of the associated
+parallel construct, if any, is first elaborated to determine
+the maximum number of chunks (see @RefSecNum{Loop Statements}), and
+then ],Old=[]}the @SynI<iterable_>@nt{name} is evaluated
 and the denoted iterable container object becomes the @i<iterable
 container object for the loop>.@Defn{iterable container object for a loop}
 The default iterator function for the type of
 the iterable container object for the loop is called on the iterable container object
 and the result is the @i<loop iterator>.@Defn2{Term=[loop iterator],Sec=[container element iterator]}
-An object of the default cursor subtype is created (the @i<loop cursor>).@Defn{loop cursor}]}
+@Chg{Version=[5],New=[For a sequential container element
+iterator, an],Old=[An]} object of the default cursor subtype is created
+(the @i<loop cursor>).@Defn{loop cursor}@Chg{Version=[5],New=[ For a parallel
+container element iterator, each chunk of iterations
+will have its own loop cursor, again of the default cursor subtype.],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgAdded{Version=[3],Text=[For a forward container element iterator, the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[A],Old=[For a]} container
+element iterator@Chg{Version=[5],New=[ then proceeds as described above for a
+generalized iterator, except that each reference to a loop parameter
+is replaced by a reference to the corresponding loop cursor. For a
+ontainer element iterator, the loop parameter for each iteration
+instead denotes],Old=[, the
 operation First of the iterator type is called on the loop iterator, to produce
 the initial value for the loop cursor. If the result of calling Has_Element on
 the initial value is False, then the execution of the @nt{loop_statement} is
 complete. Otherwise, the @nt{sequence_of_statements} is executed with the loop
-parameter denoting an indexing (see @RefSecNum{User-Defined Indexing}) into the
-iterable container object for the loop, with the only parameter to the indexing being the
-current value of the loop cursor; then the Next operation of the iterator type
-is called with the loop iterator and the loop cursor to produce the next value
-to be assigned to the loop cursor. This repeats until the result of calling
-Has_Element on the loop cursor is False, or until the loop is left as a
-consequence of a transfer of control. For a reverse container element iterator,
-the operations Last and Previous are called rather than First and Next. If the
-loop parameter is a constant (see above), then the indexing uses the default
-constant indexing function for the type of the iterable container object for the
-loop; otherwise it uses the default variable indexing function.]}
+parameter denoting]} an indexing (see @RefSecNum{User-Defined Indexing})
+into the iterable container
+object for the loop, with the only parameter to the indexing being the
+@Chg{Version=[5],New=[],Old=[current ]}value of the loop
+cursor@Chg{Version=[5],New=[ for the given iteration],Old=[; then the Next
+operation of the iterator type is called with the loop iterator and the loop
+cursor to produce the next value to be assigned to the loop cursor. This repeats
+until the result of calling Has_Element on the loop cursor is False, or until
+the loop is left as a consequence of a transfer of control. For a reverse
+container element iterator, the operations Last and Previous are called rather
+than First and Next]}. If the loop parameter is a constant (see above), then the
+indexing uses the default constant indexing function for the type of the
+iterable container object for the loop; otherwise it uses the default variable
+indexing function.]}
+
+
 
 @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0120-1]}
 @ChgAdded{Version=[4],Text=[Any exception propagated by the execution of a
@@ -1995,7 +2173,8 @@ immediately enclosing loop statement.]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
 @ChgAdded{Version=[3],Text=[-- @Examcom{Array component iterator example:}
-@key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
+@Chg{Version=[5],New=[@key[parallel]
+],Old=[]}@key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
    Element := Element * 2.0; -- @Examcom{Double each element of Board, a two-dimensional array.}
 @key[end loop];]}
 @end{Example}
@@ -2065,6 +2244,10 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   the rest of Ada works, we consider it so unlikely that any Ada 2012
   implementation ever did anything else that we don't document this as a
   possible inconsistency.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to describe the execution of
+  parallel iterators.]}
 @end{DiffWord2012}
 
 
@@ -2085,11 +2268,11 @@ procedure.]}
 rhs="@Chg{Version=[5],New=<
      @Syn2{iterator_parameter_specification} @key[of] @Syn2{iterator_procedure_call}>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0308-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_parameter_specification>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
      @Syn2{formal_part}
-   | (@Syn2{identifier}{, @Syn2{identifier}})>,Old=<>}"}
+   | (@Syn2{defining_identifier}{, @Syn2{defining_identifier}})>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_procedure_call>,Old=<>}>,
@@ -2154,12 +2337,12 @@ anonymous access-to-procedure type @i<A>.]}
 
 @begin{Legality}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0308-1]}
 @ChgAdded{Version=[5],Text=[The anonymous access-to-procedure type @i<A> shall
 have at least one formal parameter in its parameter profile. If the
 @nt{iterator_parameter_specification} is a @nt{formal_part}, then this
-@nt{formal_part} shall be mode conformant with that of @i<A>.
-If the @nt{iterator_parameter_specification} is a list of @nt{identifier}s,
+@nt{formal_part} shall be mode conformant with that of @i<A>. If the
+@nt{iterator_parameter_specification} is a list of @nt{defining_identifier}s,
 the number of formal parameters of @i<A> shall be the same as the length of
 this list.]}
 
@@ -2172,17 +2355,17 @@ shall be a dispatching subprogram.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0308-1]}
 @ChgAdded{Version=[5],Text=[A @nt{loop_statement} with an @nt{iteration_scheme}
 that has a @nt{procedural_iterator} is equivalent to a local declaration of a
 procedure P followed by a @nt{procedure_call_statement} that is formed from the
-@nt{iterator_procedure_call}
-by replacing the <> of the @nt{parameter_association_with_box} with P'Access.
-The @nt{formal_part} of the locally declared procedure P is formed from the
-@nt{formal_part} of the anonymous access-to-procedure type @i<A>, by replacing
-the @nt{identifier} of each formal parameter of this @nt{formal_part} with the
-@nt{identifier} of the corresponding formal parameter or element of the list
-of @nt{identifier}s given in the @nt{iterator_parameter_specification}.]}
+@nt{iterator_procedure_call} by replacing the <> of the
+@nt{parameter_association_with_box} with P'Access. The @nt{formal_part} of the
+locally declared procedure P is formed from the @nt{formal_part} of the
+anonymous access-to-procedure type @i<A>, by replacing the @nt{identifier} of
+each formal parameter of this @nt{formal_part} with the @nt{identifier} of the
+corresponding formal parameter or element of the list of
+@nt{defining_identifier}s given in the @nt{iterator_parameter_specification}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following aspect may be specified

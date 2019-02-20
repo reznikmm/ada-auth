@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2018/04/14 05:32:20 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.110 $}
+@Comment{$Revision: 1.111 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -2923,7 +2923,7 @@ environment task terminates (normally or abnormally, respectively).
 
 @begin{Bounded}
 @PDefn2{Term=(bounded error),Sec=(cause)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 Once the environment task has awaited the termination of all other
 tasks of the partition, any further attempt to create a task
 (during finalization) is a bounded error, and may result in
@@ -3801,7 +3801,7 @@ streamable.],
 Old=[Furthermore, a named access-to-object type without a pool would be a new
 concept, adding complexity from the user's point of view. Finally, the
 prevention of @nt{allocator}s would have to be
-a run-time check, in order to avoid violations of the generic contract
+a runtime check, in order to avoid violations of the generic contract
 model.]}
 @end{Reason}
 

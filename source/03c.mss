@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/02/09 03:46:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -690,7 +690,7 @@ result type is a specific tagged type @i(T) identifies @i(T).
   @Chg{Version=[2],New=[For a limited tagged type, the return object is
   @lquotes@;built in place@rquotes in the ultimate result object with the
   appropriate tag.], Old=[This requires
-  a run-time check for limited tagged types, since they are
+  a runtime check for limited tagged types, since they are
   returned "by-reference."]}
   For a nonlimited
   type, a new anonymous object with the appropriate tag
@@ -1430,18 +1430,21 @@ the context can similarly control dispatching.],Old=[]}@Chg{Version=[3],New=[@De
   primitive; the thing being renamed is irrelevant.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0236-1]}
 @Leading@;A @nt<name> or expression of a tagged type
 is either @i(statically) tagged,
 @i(dynamically) tagged, or @i(tag indeterminate), according
 to whether, when used as a controlling operand, the tag
 that controls dispatching is determined statically by the operand's
-(specific) type,
-dynamically by its tag at run time,
-or from context.
-A @nt<qualified_expression> or parenthesized expression is
-statically, dynamically, or indeterminately tagged according
-to its operand. For other kinds of @nt<name>s and expressions, this
-is determined as follows:
+(specific) type, dynamically by its tag at run time, or from context. A
+@nt<qualified_expression> or parenthesized expression is statically,
+dynamically, or indeterminately tagged according to its
+operand.@Chg{Version=[5],New=[ A @nt{conditional_expression} is statically,
+dynamically, or indeterminately tagged according to rules given in
+@RefSecNum{Conditional Expressions}. A @nt{declare_expression} is statically,
+dynamically, or indeterminately tagged according to its
+@SynI{body_}@nt{expression}.],Old=[]} For other kinds of @nt<name>s and
+expressions, this is determined as follows:
 @begin(Itemize)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
   @Defn{statically tagged}
@@ -1697,7 +1700,7 @@ The controlling tag value is defined as follows:
   @IndexCheck{Tag_Check}
   If there is more than one dynamically tagged controlling operand,
   a check is made that they all have the same tag.
-  @Defn2{Term=(Constraint_Error),Sec=(raised by failure of run-time check)}
+  @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
   If this check fails, Constraint_Error is raised
   unless the call is a @nt<function_call> whose @nt<name> denotes
   the declaration of an equality operator (predefined or user defined) that
@@ -2048,6 +2051,14 @@ The concept of dispatching operations is new.
   definition of dynamic dispatching: the behavior for operations that are
   never declared and/or inherited from a progenitor were not specified.]}
 @end{Diffword2005}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[Added a special rule for taggedness of
+  @nt{declare_expression}s, and added a pointer to the existing special
+  rules for @nt{conditional_expression}s, as the list of exceptions to the
+  usual rules appear to be exhaustive.]}
+@end{Diffword2012}
 
 
 @LabeledSubClause{Abstract Types and Subprograms}
@@ -4692,6 +4703,12 @@ the operand.
 the accessibility level of the evaluated
 @Syni{dependent_}@nt{expression}.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0236-1]}
+@ChgAdded{Version=[5],Text=[The accessibility level of a
+@nt{declare_expression} @Chg{Version=[5],New=[(see
+@RefSecNum{Declare Expressions}) ],Old=[]}is
+the accessibility level of the @Syni{body_}@nt{expression}.]}
+
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0234-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0027-1]}
@@ -5127,6 +5144,7 @@ is the same as that of
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1]}
 @ChgAdded{Version=[2],Text=[In the above rules, the operand of a view
 conversion, parenthesized
 expression or @nt{qualified_expression} is considered to be used in a context
@@ -5134,7 +5152,9 @@ if the view conversion, parenthesized expression or @nt{qualified_expression}
 itself is used in that context.@Chg{Version=[3],New=[
 Similarly, a @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
 is considered to be used in a context if the @nt{conditional_expression} itself
-is used in that context.],Old=[]}]}
+is used in that context@Chg{Version=[5],New=[, and a @SynI{body_}@nt{expression}
+of a @nt{declare_expression} is considered to be used in a context if the
+@nt{declare_expression} itself is used in that context],Old=[]}.],Old=[]}]}
 
 @begin{WideAbove}
 @Leading@Defn{statically deeper}
@@ -5233,7 +5253,7 @@ body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
 @Redundant[For determining whether one level is statically deeper than another
 when within a generic package body, the generic package is presumed to be
 instantiated at the same level as where it was declared;
-run-time checks are needed in the case of more deeply nested instantiations.]
+runtime checks are needed in the case of more deeply nested instantiations.]
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0082-1]}
   @ChgAdded{Version=[3],Text=[A generic package does not introduce a new master,
@@ -5331,7 +5351,7 @@ is the library level.
   The former is determined by the type of X;
   the latter is determined either by the type of the @nt{allocator},
   or by the master in which the object was declared.
-  The former is used in several @LegalityTitle and run-time checks;
+  The former is used in several @LegalityTitle and runtime checks;
   the latter is used to define when X.@key[all] gets finalized.
   The level of a view reflects what we can conservatively @lquotes@;know@rquotes@;
   about the object of that view;
@@ -5384,7 +5404,7 @@ is the library level.
   @end{Itemize}
 
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0005-1]}
-  Note that run-time checks are not required
+  Note that runtime checks are not required
   for access discriminants@Chg{Version=[3],New=[ (except during
   function returns and @nt{allocator}s)],Old=[]}, because their accessibility is
   determined statically by the accessibility level of the enclosing object.
@@ -5403,10 +5423,10 @@ is the library level.
 @begin(ImplNote)
   @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02],ARef=[AI95-00344-01],ARef=[AI95-00416-01]}
   If an accessibility @LegalityName is satisfied,
-  then the corresponding run-time check (if any)
+  then the corresponding runtime check (if any)
   cannot fail (and a reasonable implementation will not
   generate any checking code)
-  unless @Chg{Version=[2],New=[one of the cases requiring run-time checks mentioned
+  unless @Chg{Version=[2],New=[one of the cases requiring runtime checks mentioned
   previously is],Old=[access parameters or shared generic bodies are]} involved.
 
   Accessibility levels are defined in terms of the relations
@@ -5422,7 +5442,7 @@ is the library level.
   @ChgRef{Version=[2],Kind=[Revised]}
   Accessibility is not enforced at compile time for access
   parameters@Chg{Version=[2],New=[ of an access-to-object type],Old=[]}.
-  The @lquotes@;obvious@rquotes@; implementation of the run-time checks would be
+  The @lquotes@;obvious@rquotes@; implementation of the runtime checks would be
   inefficient, and would involve distributed overhead;
   therefore, an efficient method is given below.
   The @lquotes@;obvious@rquotes@; implementation would be to pass
@@ -5803,7 +5823,7 @@ denotes an aliased view of an object}:
   instance of a generic unit.@PDefn{generic contract issue}]}
 @PDefn2{Term=[accessibility rule],Sec=(Access attribute)}
   @begin(Ramification)
-    In an instance body, a run-time check applies.
+    In an instance body, a runtime check applies.
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
     If @i(A) is an anonymous@Chg{Version=[2],New=[ access-to-object type of
@@ -5814,7 +5834,7 @@ denotes an aliased view of an object}:
     an access discriminant of an object created by an @nt<allocator>.
     The latter case is illegal if the accessibility level of X
     is statically deeper than that of the access type of the
-    @nt<allocator>; a run-time check is needed in the case where the
+    @nt<allocator>; a runtime check is needed in the case where the
     initial value comes from an access parameter.@Chg{Version=[2],New=[ Other
     anonymous access-to-object types have "normal" accessibility checks.],Old=[]}
   @end(Ramification)
@@ -5828,7 +5848,7 @@ denotes an aliased view of an object}:
   unit.@PDefn{generic contract issue}]}
 
   @NoPrefix@IndexCheck{Accessibility_Check}
-  @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
   A check is made that the accessibility level of X is not
   deeper than that of the access type @i(A).
   If this check fails, Program_Error is raised.
@@ -5936,18 +5956,26 @@ is@Defn{distributed accessibility}@Defn2{Term=[accessibility],Sec=[distributed]}
 @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} (see
 @RefSecNum{Conditional Expressions}); or]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0236-1]}
+@ChgAdded{Version=[5],Text=[a @nt{declare_expression} (see
+@RefSecNum{Declare Expressions}) whose @SynI{body_}@nt{expression} has
+distributed accessibility; or]}
+
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[3],Text=[a view conversion, @nt{qualified_expression},
 or parenthesized expression whose operand has distributed accessibility.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[3],Text=[The statically deeper relationship does not apply to
 the accessibility level of an @nt{expression} having distributed accessibility;
 that is, such an accessibility level is not considered to be statically deeper,
 nor statically shallower, than any other.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Paragraph number changed}
 @ChgAdded{Version=[3],Text=[Any static accessibility requirement that is imposed
 on an @nt{expression} that has distributed accessibility (or on its type) is
 instead imposed on the @SynI{dependent_}@nt{expression}s of the underlying
@@ -6300,13 +6328,17 @@ uses of anonymous access types.]}
   function. (Dynamic properties apply by equivalence, but static properties
   are handled separately.)]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgAdded{Version=[5],Text=[Added Nonblocking (see
+  @RefSecNum{Intertask Communication}) matching to P'Access.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0156-1]}
   @ChgAdded{Version=[5],Text=[Added text to define the accessibility of
   anonymous access types declaring a loop parameter.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-  @ChgAdded{Version=[5],Text=[Added Nonblocking (see
-  @RefSecNum{Intertask Communication}) matching to P'Access.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[Added @nt{declare_expression}s to the
+  accessibility rules.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0277-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the static level of
@@ -6446,7 +6478,7 @@ This check and the evaluation of any @nt{explicit_generic_actual_parameter}s
 of the instantiation are done in an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
 @end{Itemize}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 The exception Program_Error is raised if any of these checks fails.
 @end{RunTime}
 

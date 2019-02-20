@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:12 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 
 @LabeledClause{Type Conversions}
 
@@ -268,8 +268,8 @@ shall be an access-to-object type. Further:]}
   instance of a generic unit.]}
   @begin{Ramification}
   @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
-  @ChgDeleted{Version=[2],Text=[The access parameter case is handled by a run-time check.
-  Run-time checks are also done in instance bodies.]}
+  @ChgDeleted{Version=[2],Text=[The access parameter case is handled by a runtime check.
+  Runtime checks are also done in instance bodies.]}
   @end{Ramification}
 @end(itemize)
 
@@ -372,7 +372,7 @@ Further, if the target type is tagged, then either:]}
     interface ancestor, because some extension of T might have the needed
     ancestor. This is similar to a conversion of a class-wide type toward the
     leaves of the tree, and we need to be consistent. Of course, there is
-    a run-time check that the actual object has the needed interface.]}
+    a runtime check that the actual object has the needed interface.]}
   @end{Ramification}
 @end(itemize)
 
@@ -591,7 +591,7 @@ Further, if the operand type is not @i<universal_@!access>:]}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0148-1]}
     @ChgAdded{Version=[2],Text=[The access parameter case is handled by a run-time
-    check. Run-time checks are also done in instance bodies@Chg{Version=[3],
+    check. runtime checks are also done in instance bodies@Chg{Version=[3],
     New=[, and for stand-alone objects of anonymous access types],Old=[]}.]}
   @end{Ramification}
   @begin{Reason}
@@ -710,7 +710,7 @@ the operand is evaluated, and then
 the value of the operand is @i(converted) to a @i(corresponding)
 value of the target type, if any.
 @IndexCheck{Range_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 If there is no value
 of the target type that corresponds to the operand value,
 Constraint_Error is raised@Redundant[; this can only
@@ -1029,9 +1029,9 @@ performed as above for a value conversion.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0096-1]}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}@Chg{Version=[3],New=[
-@Defn2{Term=(Assertion_Error),Sec=(raised by failure of run-time check)}],Old=[]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}@Chg{Version=[3],New=[
+@Defn2{Term=(Assertion_Error),Sec=(raised by failure of runtime check)}],Old=[]}
 If an Accessibility_Check fails, Program_Error is raised.
 @Chg{Version=[3],New=[If a predicate check fails, @Chg{Version=[4],New=[the
 effect is as defined in subclause @RefSec{Subtype Predicates}],
@@ -1134,7 +1134,7 @@ tagged type is implicitly converted when the corresponding
 formal parameter is of a class-wide type.
 
 @NoPrefix@;@RootDefn{implicit subtype conversion}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 Even when the expected and actual types are the same,
 implicit subtype conversions are performed to adjust the array bounds (if any)
 of an operand to match the desired target subtype, or to
@@ -1471,7 +1471,7 @@ to the type determined by the @nt{subtype_mark})
 and checks that its value belongs to the subtype denoted by
 the @nt{subtype_mark}.
 @PDefn2{Term=[implicit subtype conversion],Sec=(qualified_expression)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 The exception Constraint_Error is raised if this check fails.@Chg{Version=[4],
 New=[ Furthermore, if predicate checks are enabled for the subtype
 denoted by the @nt{subtype_mark}, a check is performed as defined in
@@ -1842,7 +1842,7 @@ Sec=(during evaluation of an uninitialized allocator)}]}
   @IndexCheck{Discriminant_Check}
   A check is made that the value of the object belongs to the designated
   subtype.
-  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
   Constraint_Error is raised if this check fails.
   This check and the initialization of the object are performed in
   an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}
@@ -1872,7 +1872,7 @@ level of the anonymous access type of each access discriminant is
 not deeper than that of the type of the @nt{allocator}.
 Program_Error is raised
 if either such check fails.@IndexCheck{Accessibility_Check}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00344-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0024-1]}
@@ -1918,7 +1918,7 @@ if either such check fails.@IndexCheck{Accessibility_Check}
 controlled or protected part, and the finalization of the collection of the
 type of the @nt{allocator} (see @RefSecNum{Completion and Finalization}) has
 started, Program_Error is raised.@IndexCheck{Allocation_Check}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If the object has a controlled or protected part, its
@@ -1943,7 +1943,7 @@ contains any tasks, and the master of the type of the @nt<allocator> is
 completed, and all of the dependent tasks of the master are terminated
 (see @RefSecNum{Task Dependence - Termination of Tasks}), then
 Program_Error is raised.@IndexCheck{Allocation_Check}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}],Old=[]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}],Old=[]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[A task created after waiting for tasks has
@@ -1957,8 +1957,8 @@ Program_Error is raised.@IndexCheck{Allocation_Check}
 handle is @key[null]. Program_Error is raised if the subpool does not @i<belong>
 (see @RefSecNum{Storage Subpools}) to the storage pool of the access type of the
 @nt{allocator}.@IndexCheck{Access_Check}@IndexCheck{Allocation_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1989,7 +1989,7 @@ Finally, an access value that designates the created object is returned.
 bounded error if the finalization of the collection of the type (see
 @RefSecNum{Completion and Finalization}) of the @nt<allocator> has started. If
 the error is detected, Program_Error is raised. Otherwise, the allocation
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[This check is required in some cases; see above.]}
@@ -2007,7 +2007,6 @@ See @RefSecNum{Assignment and Finalization}.
 As explained in @RefSec{Storage Management},
 the storage for an object allocated by an @nt{allocator} comes from a
 storage pool (possibly user defined).
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
 The exception Storage_Error is raised by an @nt<allocator> if there
 is not enough storage.
 Instances of Unchecked_Deallocation may be used to explicitly reclaim

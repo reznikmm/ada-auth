@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.119 $}
+@Comment{$Revision: 1.120 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -459,9 +459,7 @@ Operations in System and its children should reflect the
 target environment semantics as closely as is reasonable.
 For example, on most machines, it makes sense for address arithmetic
 to @lquotes@;wrap around.@rquotes@;
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-Operations that do not make sense should raise
-Program_Error.
+Operations that do not make sense should raise Program_Error.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[Operations in System and its children should reflect the
 target environment; operations that do not make sense should raise Program_Error.]}]}
@@ -870,7 +868,7 @@ On the other hand, we have no advice to offer about
 discriminants and tag fields.
 @end{Ramification}
 
-The implementation should not generate unnecessary run-time checks
+The implementation should not generate unnecessary runtime checks
 to ensure that the representation of S is a representation of the target
 type.
 It should take advantage of the permission to return by reference
@@ -878,11 +876,11 @@ when possible.
 Restrictions on unchecked conversions should be avoided
 unless required by the target environment.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
-Text=[There should not be unnecessary run-time checks on the result of
+Text=[There should not be unnecessary runtime checks on the result of
 an Unchecked_Conversion; the result should be returned by reference when
 possible. Restrictions on Unchecked_Conversions should be avoided.]}]}
 @begin{ImplNote}
-  As an example of an unnecessary run-time check,
+  As an example of an unnecessary runtime check,
   consider a record type with gaps between components.
   The compiler might assume that such gaps are always zero bits.
   If a value is produced that does not obey that assumption,
@@ -1062,10 +1060,9 @@ the object's subtype
 the object is said to have an @i{invalid representation}.
 It is a bounded error to evaluate the value of such
 an object.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If the error is detected, either Constraint_Error or Program_Error is
-raised.
+raised.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
 Otherwise, execution continues using the invalid representation.
 The rules of the language outside this subclause assume that all objects
 have valid representations.
@@ -1767,7 +1764,7 @@ If Storage_Pool is not specified for a type defined by an
 then the implementation chooses a standard storage pool for it
 in an implementation-defined manner.
 @IndexCheck{Storage_Check}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 In this case,
 the exception Storage_Error is raised by an @nt{allocator}
 if there is not enough storage.
@@ -1808,7 +1805,7 @@ Storage_Size of @Chg{Version=[4],New=[@i<P>],Old=[this pool]} is at least
 that requested, and the storage for @Chg{Version=[4],New=[@i<P>],Old=[the pool]}
 is reclaimed when the master containing
 the declaration of the access type is left.
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 If the implementation cannot satisfy the request, Storage_Error is raised at the
 @Chg{Version=[4],New=[freezing ],Old=[]}point of @Chg{Version=[4],New=[type
 @i<T>. The storage pool @i<P> is used only for allocators returning type @i<T>
@@ -2610,13 +2607,10 @@ task object. The possible consequences are:
 @begin{Itemize}
 No exception is raised.
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 Program_Error or Tasking_Error is raised at the point of the
-deallocation.
+deallocation.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
+@Defn2{Term=[Tasking_Error],Sec=(raised by detection of a bounded error)}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 Program_Error or Tasking_Error is raised in the task the next time it
 references any of the discriminants.
 @begin{ImplNote}
@@ -2655,8 +2649,8 @@ no explicit or implicit dereference, then it is a bounded error
 @Leading@PDefn2{Term=(bounded error),Sec=(cause)}to evaluate an
 expression whose result is a dangling reference. If the error is detected,
 either Constraint_Error or Program_Error is raised.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
 Otherwise, execution
 proceeds normally, but with the possibility that the access value designates
 some other existing object.]}
@@ -3507,7 +3501,7 @@ following checks are made:]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0252-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Program_Error is raised if either
 of these checks
-fail.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+fail.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -3542,7 +3536,7 @@ fail.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Text=[An @nt{allocator} that allocates in a subpool raises
 Program_Error if the allocated object has task
-parts.@IndexCheck{Allocation_Check}@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+parts.@IndexCheck{Allocation_Check}@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5460,7 +5454,7 @@ has an implicit initial value],Old=[whose
 @nt{component_declaration} includes a @nt{default_expression}]},
 a check is made that the value returned by Read for the component
 belongs to its subtype.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 Constraint_Error is raised if this check fails.
 For other scalar components, no check is made.
 For each component that is of an access type, if the implementation can
@@ -5504,10 +5498,9 @@ Constraint_Error is raised due to the failure of one of these checks, it is
 unspecified how many stream elements have been read from the stream.]}
 
 @ChgRef{Version=[1],Kind=[AddedNormal],Ref=[8652/0045],ARef=[AI95-00132-01]}
-@ChgAdded{Version=[1],Text=[@Defn2{Term=[End_Error],Sec=(raised by failure of run-time check)}
-In the default implementation of Read and Input for a type, End_Error
-is raised if the end of the stream is reached before the reading of a value of
-the type is completed.]}
+@ChgAdded{Version=[1],Text=[In the default implementation of Read and Input
+for a type, End_Error is raised if the end of the stream is reached before the
+reading of a value of the type is completed.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Text=[The aspect Nonblocking is the Boolean literal False
@@ -6440,13 +6433,15 @@ frozen.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1],ARef=[AI05-0019-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0155-1],ARef=[AI12-0168-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1],ARef=[AI12-0155-1],ARef=[AI12-0168-1]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
 The end of a @nt{declarative_part}, @nt{protected_body},
 or a declaration of a library package or generic library package,
 causes @i(freezing) of each
-entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it@Chg{Version=[5],New=[],Old=[
+entity @Chg{Version=[3],New=[and profile ],Old=[]}declared within it@Chg{Version=[5],New=[,
+as well as the entity itself in the case of the declaration
+of a library unit],Old=[
 except for incomplete types]}.
 @Defn2{Term=[freezing], Sec=(entity caused by a body)}
 A @Chg{Version=[4],New=[@Chg{Version=[5],New=[noninstance ],Old=[]}@nt{proper_body},
@@ -6463,20 +6458,23 @@ incomplete type],Old=[]}]}.
   will be frozen by some containing construct.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0155-1]}
   An incomplete type declared in the private part of
   a library @nt{package_specification}
   can be completed in the body.@Chg{Version=[3],New=[ For other
   incomplete types (and in the bodies of library packages),
   the completion of the type will be frozen at the end of
-  the package or @nt{declarative_part}, and that will freeze the
-  incomplete view as well.],Old=[]}
+  the package or @nt{declarative_part}@Chg{Version=[5],New=[],Old=[, and
+  that will freeze the incomplete view as well]}.],Old=[]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0017-1]}
-@ChgAdded{Version=[3],Text=[The reason we have to worry about
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0155-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The reason
+  we have to worry about
   freezing of incomplete types is to prevent premature uses of
   the types in dispatching calls. Such uses may need access to
   the tag of the type, and the type has to be frozen to know
-  where the tag is stored.]}
+  where the tag is stored.]}]}
 @end{Discussion}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -6485,10 +6483,11 @@ incomplete type],Old=[]}]}.
   Nor does @Chg{Version=[3],New=[an imported body],Old=[a @nt{pragma} Import.]}
 @end{Ramification}
 @begin{Reason}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0300-1]}
   The reason bodies cause freezing is because we want
   @ntf{proper_bodies} and @nt{body_stub}s to be interchangeable @em one
   should be able to move a @nt{proper_body} to a @nt{subunit}, and
-  vice-versa, without changing the semantics.
+  vice@Chg{Version=[5],New=[ ],Old=[-]}versa, without changing the semantics.
   Clearly, anything that should cause freezing should do so even if
   it's inside a @nt{proper_body}.
   However, if we make it a @nt{body_stub}, then the compiler can't
@@ -6977,7 +6976,7 @@ freezing an incomplete view has no effect.]}
   @LegalityTitle prevent all problems for incomplete types themselves.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[In constrast, freezing a partial view does have an
+  @ChgAdded{Version=[5],Text=[In contrast, freezing a partial view does have an
   effect (the completion of the view is frozen and the program is illegal if it
   hasn't occurred yet).]}
 @end{Ramification}
@@ -7364,5 +7363,9 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   it didn't follow from the actual wording. Since the ACATS requires the
   AARM note to be true, no compiler could actually get this wrong, so no
   incompatibility is possible.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+  @ChgAdded{Version=[5],Text=[Added missing definition of freezing of library
+  units.]}
 @end{DiffWord2012}
 
