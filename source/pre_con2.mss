@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2018/04/07 06:16:40 $ $Author: randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -232,12 +232,14 @@ package Containers.Multiway_Trees has the following declaration:]}
       Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate} (Container : @key{in} Tree)
-      @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+      @key{return} Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate_Subtree} (Position : @key{in} Cursor)
-      @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+      @key{return} Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Child_Count} (Parent : Cursor) @key{return} Count_Type;]}
@@ -353,8 +355,9 @@ package Containers.Multiway_Trees has the following declaration:]}
       Process : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate_Children} (Container : @key[in] Tree; Parent : @key[in] Cursor)
-      @key[return] Tree_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}
@@ -1140,17 +1143,23 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate (Container : @key{in} Tree)
-   @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+   @key{return} Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
-  @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns an iterator object
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
+  @Chg{Version=[5],New=[a parallel],Old=[an]} iterator object
   (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
   designating each @Chg{Version=[4],New=[element],Old=[node]} in Container, starting
-  @Chg{Version=[4],New=[from],Old=[with]} the root node and proceeding in a depth-first order.
+  @Chg{Version=[4],New=[from],Old=[with]} the root node and proceeding in a depth-first
+  order@Chg{Version=[5],New=[ when used as a forward iterator,
+  and starting with all nodes concurrently when used as a parallel
+  iterator],Old=[]}.
   Tampering with the cursors of Container is prohibited while the iterator
   object exists (in particular, in the
   @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -1174,20 +1183,26 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate_Subtree (Position : @key{in} Cursor)
-   @key{return} Tree_Iterator_Interfaces.Forward_Iterator'Class;]}
+   @key{return} Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
-  then Constraint_Error is propagated. Otherwise, Iterate_Subtree returns an
+  then Constraint_Error is propagated. Otherwise, Iterate_Subtree returns
+  @Chg{Version=[5],New=[a parallel],Old=[an]}
   iterator object (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
   designating each element in the subtree rooted by the node designated by Position,
   starting @Chg{Version=[4],New=[from],Old=[with]} the
   node designated by Position and proceeding in a depth-first
-  order. If Position equals No_Element, then Constraint_Error is propagated.
+  order@Chg{Version=[5],New=[ when used as a forward iterator,
+  and starting with all nodes in the subtree concurrently when used
+  as a parallel iterator],Old=[]}.
+  If Position equals No_Element, then Constraint_Error is propagated.
   Tampering with the cursors of the container that contains the node
   designated by Position is prohibited while the iterator object exists
   (in particular, in the
@@ -1721,13 +1736,15 @@ Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Iterate_Children (Container : @key[in] Tree; Parent : @key[in] Cursor)
-   @key[return] Tree_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Children returns a
-reversible iterator object
+@Chg{Version=[5],New=[parallel and ],Old=[]}reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
 designating each child node of Parent. If Parent equals No_Element, then
@@ -1736,7 +1753,9 @@ Container, then Program_Error is propagated. Otherwise, when used as a forward
 iterator, the nodes are designated starting with the first child node and moving
 the cursor as per the function Next_Sibling; when used as a reverse iterator,
 the nodes are designated starting with the last child node and moving the cursor
-as per the function Previous_Sibling. Tampering with the cursors of Container is
+as per the function Previous_Sibling@Chg{Version=[5],New=[; when used as a
+parallel iterator, starting with all child nodes concurrently],Old=[]}.
+Tampering with the cursors of Container is
 prohibited while the iterator object exists (in particular, in the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
@@ -1754,7 +1773,8 @@ It is a bounded error for the actual function associated with a generic formal
 subprogram, when called as part of an operation of this package, to tamper with
 elements of any Tree parameter of the operation. Either Program_Error is raised,
 or the operation works as defined on the value of the Tree either prior to, or
-subsequent to, some or all of the modifications to the Tree.]}
+subsequent to, some or all of the modifications to the
+Tree.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
@@ -1762,7 +1782,9 @@ It is a bounded error to call any subprogram declared in the visible part of
 Containers.Multiway_Trees when the associated container has been finalized. If
 the operation takes Container as an @key[in out] parameter, then it raises
 Constraint_Error or Program_Error. Otherwise, the operation either proceeds as
-it would for an empty container, or it raises Constraint_Error or Program_Error.]}
+it would for an empty container, or it raises
+Constraint_Error@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
+or Program_Error.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{Erron}
@@ -2909,7 +2931,8 @@ generic formal subprogram, when called as part of an operation of
 this package, to tamper with the element of any Holder parameter of the
 operation. Either Program_Error is raised, or the operation works as
 defined on the value of the Holder either prior to, or subsequent to,
-some or all of the modifications to the Holder.]}
+some or all of the modifications to the
+Holder.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0027-1],ARef=[AI05-0069-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
@@ -2918,7 +2941,8 @@ of Containers.Indefinite_Holders when the associated container has been
 finalized. If the operation takes Container as an @key[in out] parameter,
 then it raises Constraint_Error or Program_Error. Otherwise, the operation
 either proceeds as it would for an empty container, or it raises
-Constraint_Error or Program_Error.]}
+Constraint_Error or@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
+Program_Error.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{Erron}
@@ -3088,7 +3112,7 @@ It is a bounded error to assign from a bounded vector object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -3258,7 +3282,7 @@ It is a bounded error to assign from a bounded list object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -3436,7 +3460,7 @@ It is a bounded error to assign from a bounded map object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -3595,7 +3619,7 @@ It is a bounded error to assign from a bounded map object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -3773,7 +3797,7 @@ It is a bounded error to assign from a bounded set object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -3928,7 +3952,7 @@ It is a bounded error to assign from a bounded set object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -4096,7 +4120,7 @@ It is a bounded error to assign from a bounded tree object while tampering
 with elements @Redundant[or cursors] of that object is prohibited. Either
 Program_Error is raised by the assignment, execution proceeds with the target
 object prohibiting tampering with elements @Redundant[or cursors], or execution
-proceeds normally.]}
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering
@@ -5024,7 +5048,8 @@ semantics as Containers.Indefinite_Holders except:]}
 It is a bounded error to assign from a bounded holder object while tampering
 with elements of that object is prohibited. Either Program_Error is raised by
 the assignment, execution proceeds with the target object prohibiting tampering
-with elements, or execution proceeds normally.]}
+with elements, or execution
+proceeds normally.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{ImplReq}

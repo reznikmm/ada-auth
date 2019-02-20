@@ -27,10 +27,10 @@ I probably ought to add a style just for this purpose)
 @end{Title}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2019/01/12 03:52:46 $}
+@Comment{$Date: 2019/02/09 03:46:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.94 $}
+@Comment{$Revision: 1.95 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -647,10 +647,10 @@ the partition starts running).
 A definition of the run-time effect of each construct.
 @begin{Discussion}
 This heading describes what happens at run time.
-Run-time checks,
+runtime checks,
 which raise exceptions upon failure,
 are described here.
-Each item that involves a run-time check is marked with the name
+Each item that involves a runtime check is marked with the name
 of the check @em these are the same check names that are used in a
 @nt{pragma} Suppress.
 Principle: Every check should have a name,
@@ -1641,7 +1641,6 @@ for a listing.]}]}
 @end{DocReq}
 
 @begin{ImplAdvice}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If an implementation detects the use of an unsupported
 Specialized Needs Annex feature at run time,
 it should raise Program_Error if feasible.
@@ -1901,7 +1900,7 @@ to occur in a way that is equivalent to some sequential order,
 following the rules that result from that sequential order.
 When evaluations are defined to happen in an arbitrary order,
 with conversion of the results to some subtypes,
-or with some run-time checks,
+or with some runtime checks,
 the evaluations, conversions, and checks may be arbitrarily
 interspersed, so long as each expression is evaluated before converting
 or checking its value.
@@ -2085,10 +2084,10 @@ different categories:
      the range of possible effects shall be bounded.
      @Defn{bounded error}
      The errors of this category are called @i{bounded errors}.
-     @Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
      The possible effects of a given bounded error are specified for
      each such error, but in any case one possible effect of a bounded
      error is the raising of the exception Program_Error.
+     @Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 
      @Keepnext@;Erroneous execution.
 
@@ -2156,7 +2155,6 @@ mode, all legal @nt<compilation_unit>s shall be accepted.]
 @end{ImplPerm}
 
 @begin{ImplAdvice}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If an implementation detects a bounded error or erroneous execution,
 it should raise Program_Error.
 @ChgImplAdvice{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
@@ -2174,11 +2172,9 @@ Other situations that are erroneous in Ada 83 are changed
 to be bounded errors.
 In particular, evaluating an uninitialized scalar variable is
 a bounded error.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The possible results are to raise Program_Error (as always), or to
 produce a machine-representable value (which might not be in the
 subtype of the variable).
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Violating a Range_Check or Overflow_Check raises
 Constraint_Error, even if the value came from an uninitialized
 variable.

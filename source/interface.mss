@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2018/09/05 05:22:38 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2018/09/05 05:22:38 $}
+@Comment{$Date: 2019/02/09 03:46:57 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1518,7 +1518,6 @@ of Target. If Append_Nul is True, nul
 is then assigned to the next
 element of Target. In either case, Count is set to the
 number of Target elements assigned.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Target is not long enough, Constraint_Error is propagated.
 
 @Trailing@;For procedure To_Ada, each element of Item (if Trim_Nul is False) or
@@ -1526,7 +1525,6 @@ each element of Item preceding the first nul (if Trim_Nul is True) is
 converted (via the To_Ada function) to a Character, which is
 assigned to the corresponding element of Target. Count
 is set to the number of Target elements assigned.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Target is not long enough, Constraint_Error is propagated.
 If Trim_Nul is True and Item does not contain nul,
 then Terminator_Error is propagated.
@@ -2869,7 +2867,7 @@ constrained subtype.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
 Text=[Program_Error is raised in the following
-cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Itemize}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3210,7 +3208,6 @@ Each of the procedures To_COBOL and To_Ada copies converted elements
 from Item to Target, using the appropriate mapping (Ada_To_COBOL or
 COBOL_To_Ada, respectively). The index in Target of the last element
 assigned is returned in Last (0 if Item is a null array).
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Item'Length exceeds Target'Length, Constraint_Error is propagated.
 
 Type Numeric corresponds to COBOL's numeric data category with
@@ -3713,7 +3710,7 @@ declaration:
 @ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Double_Complex} @key[is] @key[new] Double_Precision_Complex_Types.Complex;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0058-1]}
-@ChgAdded{Version=[5],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Double_Imaginary],Of=[Double_Imaginary]} @key[is] Double_Precision_Complex_Types.Imaginary;]}
+@ChgAdded{Version=[5],Text=[   @key[subtype] @AdaSubtypeDefn{Name=[Double_Imaginary],Of=[Imaginary]} @key[is] Double_Precision_Complex_Types.Imaginary;]}
 
    @key[type] @AdaTypeDefn{Character_Set} @key[is] @RI{implementation-defined character type};
 

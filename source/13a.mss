@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1615,10 +1615,11 @@ rhs=`@Chg{Version=[3],New="
 rhs="@Chg{Version=[3],New=<@SynI<aspect_>@Syn2<identifier>['Class]>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=[
-   ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[ | @Syn2<aggregate>],Old=[]}>,Old=<>}"}
+    ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[
+  | @Syn2<aggregate> | @Syn2<global_aspect_definition>],Old=[]}>,Old=<>}"}
 
 @end{Syntax}
 
@@ -1670,8 +1671,10 @@ rhs="@Chg{Version=[5],New=[
 @nt{enumeration_literal_specification}  --  NO
 @nt{discriminant_specification}  --  NO
 @nt{component_declaration}*
-@nt{loop_parameter_specification}  --  NO
-@nt{iterator_specification}  --  NO
+@nt{loop_parameter_specification}  --  NO@Chg{Version=[5],New=[
+@nt{chunk_specification}  -- NO],Old=[]}
+@nt{iterator_specification}  --  NO@Chg{Version=[5],New=[
+@nt{iterator_parameter_specification}  -- NO],Old=[]}
 @nt{parameter_specification}  --  NO
 @nt{subprogram_body}*  --  @Examcom{ - but language-defined aspects only if there is no explicit specification}
 @nt{entry_declaration}*
@@ -1783,9 +1786,12 @@ aspect.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1]}
 @ChgAdded{Version=[3],Text=[The usage names in an @nt{aspect_definition}
 @Redundant[ are not resolved at the point of the associated declaration, but
-rather] are resolved at the end of the immediately enclosing declaration list.]}
+rather] are resolved at the end of the immediately enclosing declaration
+list@Chg{Version=[5],New=[, or in the case of the declaration of a library
+unit, at the end of the visible part of the entity],Old=[]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0180-1],ARef=[AI12-0220-1]}
@@ -2232,6 +2238,9 @@ such aspects and the legality rules for such aspects.]}]}
   entities that don't have any language-defined aspects, since Nonblocking
   (see @RefSecNum{Intertask Communication}) is language-defined.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+  @ChgAdded{Version=[5],Text=[Added the missing definition for resolution of
+  entities found in aspects of library units.]}
 @end{Diffword2012}
 
 
@@ -2707,7 +2716,8 @@ The value of this attribute is of type System.Address.>}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0095-1]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[The prefix of X'Address shall not statically denote
 a subprogram that has convention Intrinsic. X'Address raises Program_Error if X
-denotes a subprogram that has convention Intrinsic.]}
+denotes a subprogram that has convention
+Intrinsic.@Defn2{Term=[Program_Error],Sec=(raised by Address of an intrinsic subprogram)}]}]}
 
 @NoPrefix@PDefn2{Term=[specifiable], Sec=(of Address for stand-alone
 objects and for program units)}
@@ -3224,7 +3234,7 @@ However, it might be taken as advice on some implementations.
 It is an error for an Address clause to disobey the object's Alignment.
 The error cannot be detected at compile time, in general, because the
 Address is not necessarily known at compile time (and is almost
-certainly not static). We do not require a run-time check, since
+certainly not static). We do not require a runtime check, since
 efficiency seems paramount here, and Address clauses are treading on
 thin ice anyway. Hence, this misuse of Address clauses is just like any
 other misuse of Address clauses @em it's erroneous.
@@ -4093,7 +4103,7 @@ is at least the value of the @nt<expression>.
 @end{Ramification}
 
 @IndexCheck{Storage_Check}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 At the point of task object creation, or upon task activation,
 Storage_Error is raised if there is insufficient free storage to
 accommodate the requested Storage_Size.
@@ -4289,7 +4299,7 @@ attribute is defined]}:
 @ChgAdded{Version=[3],Text=[If a user-specified external tag S'External_Tag is
 the same as T'External_Tag for some other tagged type declared by a different
 declaration in the partition, Program_Error is raised by the elaboration of the
-@nt{attribute_definition_clause}.]}
+@nt{attribute_definition_clause}.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4871,12 +4881,12 @@ negative offsets should be disallowed in
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0213-1]}
 @Syn{lhs=<record_representation_clause>,rhs="
     @key{for} @SynI{first_subtype_}@Syn2{local_name} @key{use}
-      @key{record} [@Syn2{mod_clause}]
-        {@Syn2{component_clause}}
-      @key{end} @key{record};"}
-
+       @key{record} [@Syn2{mod_clause}]
+          {@Syn2{component_clause}}
+       @key{end} @key{record}@Chg{Version=[5],New=< [@Syn2[local_name]]>,Old=<>};"}
 
 @Syn{lhs=<component_clause>,rhs="
     @SynI{component_}@Syn2{local_name} @key{at} @Syn2{position} @key{range} @Syn2{first_bit} .. @Syn2{last_bit};"}
@@ -4889,6 +4899,10 @@ negative offsets should be disallowed in
 instead of @nt{expression} for the same reason as in @nt{range}
 (see @RefSec{Scalar Types}).
 @end{Reason}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0213-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{local_name} appears at the end of
+the @nt{record_representation_clause}, it
+shall repeat the @Syni{first_subtype_}@nt{local_name}.]}
 @end{Syntax}
 
 @begin{Resolution}
@@ -5290,6 +5304,13 @@ We have corrected that oversight.
   likely unintentional) incompatibility with Ada 83 caused by not allowing
   @nt{record_representation_clause}s on limited record types is removed.]}
 @end{Extend95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0213-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The
+  @nt{local_name} following @key[end record] is new.]}
+@end{Extend2012}
+
 
 @LabeledSubClause{Storage Place Attributes}
 

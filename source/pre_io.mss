@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.73 $}
+@Comment{$Revision: 1.74 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -153,8 +153,6 @@ subprogram are defined in the package IO_Exceptions; the situations
 in which they can be propagated are described following the description of
 the subprogram (and in @Chg{Version=[3],New=[subclause],Old=[clause]}
 @RefSecNum{Exceptions in Input-Output}).
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 The exceptions Storage_Error and Program_Error may be propagated.
 (Program_Error can only be propagated due to errors made by the
 caller of the subprogram.) Finally, exceptions can be propagated

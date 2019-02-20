@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.84 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
+@comment{ $Revision: 1.85 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2019/02/09 03:46:57 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -951,7 +951,6 @@ satisfy the Test condition.
 If no such slice exists, then the value returned for Last is zero, and
 the value returned for First is Source'First@Chg{New=[; however, if
 Source'First is not in Positive then Constraint_Error
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 is raised],Old=[]}.]}
 
 @begin{Ramification}
@@ -1191,7 +1190,6 @@ Otherwise@Chg{Version=[3],New=[,],Old=[]} the pattern will not match.
 In the Insert subprograms, inserting at the end of a string is obtained
 by passing Source'Last+1 as the Before parameter.
 
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Character_Mapping_Function is passed to any of the
 string handling subprograms, Constraint_Error is propagated.
 @end{Notes}
@@ -2297,6 +2295,21 @@ the string or character given or represented by one of the parameters,
 with the string or character given or represented by the other parameter,
 and applying To_Unbounded_String to the concatenation result string.
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[If the resulting string is longer than
+  Natural'Last, Constraint_Error is raised as the upper bound of the underlying
+  String concatenation is outside of the range of the index subtype of Natural
+  (see @RefSecNum{Binary Adding Operators}). Note that the same is true for
+  other operations that can create an overlong string: either they are defined
+  in terms of this concatenation operation (as with Append) or they are defined
+  in terms of Ada.Strings.Fixed operations (as with Insert and Replace_Slice),
+  when themselves are defined in terms of String concatenation (which raises
+  Constraint_Error for overlong strings as described above). Therefore, it is
+  never possible to create an Unbounded_String with a length greater than
+  Natural'Last.]}
+@end{Ramification}
+
 The Element, Replace_Element, and Slice subprograms have the same effect
 as the corresponding bounded-length string subprograms.
 
@@ -2714,7 +2727,6 @@ Character portion of Wide_Character.]}
 @nt{pragma} Preelaborate in Strings.Wide_Maps.Wide_Constants.]}
 
 @begin{Notes}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Wide_Character_Mapping_Function is passed to any of the
 Wide_String handling subprograms, Constraint_Error is propagated.
 
@@ -3068,7 +3080,6 @@ Character portion of Wide_Wide_Character.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01]}
-@ChgAdded{Version=[2],Text=[@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If a null Wide_Wide_Character_Mapping_Function is passed to any of the
 Wide_Wide_String handling subprograms, Constraint_Error is propagated.]}
 @end{Notes}

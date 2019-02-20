@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.62 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
+@Comment{ $Revision: 1.63 $ $Date: 2019/02/09 03:46:56 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/02/09 03:46:56 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -291,7 +291,7 @@ intelligibility are not addressed.
 
 @end{Discussion}
 @begin{itemize}
-Where compiler-generated run-time checks remain;
+Where compiler-generated runtime checks remain;
 @begin{Discussion}
 
 A constraint check which is implemented via a check on the upper and lower
@@ -306,7 +306,7 @@ overflow.
 An identification of any construct with a language-defined check
 that is recognized prior to run time as certain to fail
 if executed
-(even if the generation of run-time checks has been suppressed);
+(even if the generation of runtime checks has been suppressed);
 @begin{Discussion}
 
 In this case, if the compiler determines that a check must fail, the user
@@ -786,8 +786,8 @@ call site.
 @Trailing@Defn2{Term=[restrictions],Sec=(No_Exceptions)}@Chg{Version=[3],New=[@Defn{No_Exceptions restriction}],
    Old=[]}No_Exceptions @\@nt{Raise_statement}s
 and @nt{exception_handler}s are not allowed.
-No language-defined run-time checks are generated;
-however, a run-time check performed automatically by the hardware
+No language-defined runtime checks are generated;
+however, a runtime check performed automatically by the hardware
 is permitted.
 @begin{Discussion}
 
@@ -1030,7 +1030,7 @@ mechanism enabled.
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 Program execution is erroneous if pragma Restrictions(No_Exceptions)
 has been specified and the conditions arise under which a generated
-language-defined run-time check would fail.
+language-defined runtime check would fail.
 @begin{Discussion}
 
 The situation here is very similar to the application of pragma Suppress.
@@ -1268,7 +1268,7 @@ potentially blocking operation @Chg{Version=[5],New=[that occurs during the
 execution of],Old=[within]}
 a protected operation@Chg{Version=[5],New=[ or a parallel construct defined
 within a compilation unit to which the pragma applies],Old=[]},
-and to raise
+and to raise@Defn2{Term=(Program_Error),Sec=(raised by failure of runtime check)}
 Program_Error (see @Chg{Version=[5],New=[@RefSecNum{Intertask Communication}],
 Old=[@RefSecNum{Protected Subprograms and Protected Actions}]}).]}
 @end{RunTime}

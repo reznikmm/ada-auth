@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:46 $}
+@Comment{$Date: 2019/02/09 03:46:53 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03b.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @LabeledClause{Array Types}
 
@@ -2010,10 +2010,12 @@ values of the components.
 
 @begin{Syntax}
 @Syn{lhs=<record_type_definition>,rhs="[[@key{abstract}] @key{tagged}] [@key{limited}] @Syn2{record_definition}"}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0213-1]}
 @Syn{lhs=<record_definition>,rhs="
     @key{record}
        @Syn2{component_list}
-    @key{end} @key{record}
+    @key{end} @key{record}@Chg{Version=[5],New=< [@SynI{record_}@Syn2{identifier}]>,Old=<>}
   | @key{null record}"}
 
 
@@ -2029,6 +2031,11 @@ values of the components.
 @Syn{lhs=<component_declaration>,rhs="
    @Syn2{defining_identifier_list} : @Syn2{component_definition} [:= @Syn2{default_expression}]@Chg{Version=[3],New=<
         [@Syn2{aspect_specification}]>,Old=[]};"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0213-1]}
+@ChgAdded{Version=[5],Text=[If a @SynI<record_>@nt<identifier> appears at the
+end of the @nt<record_definition>, it shall repeat the @nt<defining_identifier>
+of the enclosing @nt<full_type_declaration>.]}
 @end{Syntax}
 
 @begin{Resolution}
@@ -2304,11 +2311,12 @@ New=[],Old=[, unless the record type is limited]}.
       Year  : Integer @key(range) 0 .. 4000;
    @key(end) @key(record);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0213-1]}
 @key(type) Complex @key(is)
    @key(record)
       Re : Real := 0.0;
       Im : Real := 0.0;
-   @key(end) @key(record);
+   @key(end) @key(record)@Chg{Version=[5],New=[ Complex],Old=[]};
 @end(Example)
 
 @begin{WideAbove}
@@ -2392,6 +2400,11 @@ representation pragmas to be as similar as possible.
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0213-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The
+  @SynI{record_}@nt{identifier} following @key[end record] is new.]}
+@end{Extend2012}
 
 
 @LabeledSubClause{Variant Parts and Discrete Choices}
@@ -2615,7 +2628,8 @@ initialized by default, Constraint_Error is raised if no
 covers the value of the discriminant that governs the @nt{variant_part}. When a
 @nt{variant_part} appears in the @nt{component_list} of another @nt{variant}
 @i<V>, this test is only applied if the value of the discriminant governing
-@i<V> is covered by the @nt{discrete_choice_list} of @i<V>.]}
+@i<V> is covered by the @nt{discrete_choice_list}
+of @i<V>.@Defn2{Term=[Constraint_Error],Sec=(raised by object of discriminated type)}]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This is not a @ldquote@;check@rdquote; it cannot
