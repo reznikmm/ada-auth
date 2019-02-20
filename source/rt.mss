@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.125 $ $Date: 2018/12/08 03:20:13 $ $Author: randy $ }
+@comment{ $Revision: 1.126 $ $Date: 2019/02/09 03:46:56 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/02/09 03:46:56 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -684,8 +684,13 @@ is a nonpreemptible resource.
 When a higher-priority task is dispatched to the processor, and the previously
 running task is placed on the appropriate ready queue, the latter task
 is said to be @i{preempted}.]}
-@ChgAdded{Version=[3],Text=[A call of Yield is a task dispatching point.@Chg{Version=[5],New=[],Old=[ Yield
-is a potentially blocking operation (see @RefSecNum{Protected Subprograms and Protected Actions}).]}]}
+@ChgAdded{Version=[3],Text=[A call of Yield @Chg{Version=[5],New=[and a
+@nt{delay_statement} are],Old=[is a]} task dispatching
+@Chg{Version=[5],New=[points for all language-defined
+policies],Old=[point]}.@Chg{Version=[5],New=[],Old=[ Yield is a potentially
+blocking operation
+(see @RefSecNum{Protected Subprograms and Protected Actions}).]}]}
+
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[A processor that is executing a task is available
@@ -704,9 +709,10 @@ task, or when the task dispatching policy requires a
 running task to go back to a ready queue.
 @Redundant[These are also task dispatching points.]]}
 @ChgAdded{Version=[5],Text=[If the Yield aspect has the value True, then a call
-to Yield is included within the body of the associated callable entity, and
-invoked immediately prior to returning from the body if and only if no other
-task dispatching points were encountered during the execution of the body.]}
+to procedure Yield is included within the body of the associated callable
+entity, and invoked immediately prior to returning from the body if and only
+if no other task dispatching points were encountered during the execution of
+the body.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[Deleted]}
   @ChgDeleted{Version=[2],Text=[Thus, when a task becomes ready, this is a task
@@ -742,10 +748,29 @@ or via priority inheritance.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00321-01]}
 @ChgNote{This was moved up from the previous section.}
-@ChgAdded{Version=[2],Text=[@Redundant[For optimization purposes,]
-an implementation may alter the points at which task dispatching occurs, in an
-implementation-defined manner. However, a @nt{delay_statement} always
-corresponds to at least one task dispatching point.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0299-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[Unless otherwise specified
+for a task dispatching policy,],Old=[@Redundant[For optimization purposes,]]}
+an implementation may @Chg{Version=[5],New=[add additional],Old=[alter the]}
+points at which task dispatching @Chg{Version=[5],New=[may occur],Old=[occurs]},
+in an implementation-defined manner.@Chg{Version=[5],New=[],Old=[ However, a
+@nt{delay_statement} always corresponds to at least one task dispatching
+point.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0299-1]}
+  @ChgAdded{Version=[5],Text=[This permission is intended to allow the
+  implementation of Ada tasks in terms of target system threads, which may have
+  additional conditions that cause task dispatching. For instance, for Linux
+  threads, page faults are task dispatching points.]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0299-1]}
+  @ChgAdded{Version=[5],Text=[The Non_Preemptive_FIFO_Within_Priorities task
+  dispatching policy (see @RefSecNum{Non-Preemptive Dispatching}) does not allow
+  additional task dispatching points.]}
+@end{Discussion}
 
 @end{ImplPerm}
 
@@ -821,6 +846,18 @@ deferred while the affected task performs a protected action.]}
   Dispatching_Policy_Error and none of the child packages that could raise
   that exception are pure.]}
 @end{Incompatible2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0299-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Substantially reduced the @ImplPermName that used to allow @ldquote@;altering@rdquote
+  task dispatching points to only allow adding task dispatching points. If an
+  implementation was using this permission to remove task dispatching points,
+  and a program depended on that behavior to work, it could fail when used with
+  Ada 2012. We not aware of any such implementations, and such behavior was
+  never portable to other implementations, so we do not expect this to matter
+  in practice.]}
+@end{Inconsistent2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
@@ -1468,9 +1505,14 @@ task dispatching @Chg{Version=[3],New=[points],Old=[point]} (see
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0166-1]}
   @ChgAdded{Version=[3],Text=[A @nt{delay_statement} is always a task
   dispatching point even if it is not blocking. Similarly, a call to
-  Yield_To_Higher is never blocking, but it is a task dispatching point
-  In each of these cases, they can cause the current task to stop running (it is
-  still ready). Otherwise, the running task continues to run until it is blocked.]}
+  Yield_To_Higher is never blocking, but it is a task dispatching point In each
+  of these cases, they can cause the current task to stop running (it is still
+  ready). Otherwise, the running task continues to run until it is blocked.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0299-1]}
+  @ChgAdded{Version=[5],Text=[This rule supersedes the @ImplPermName of
+  @RefSecNum{The Task Dispatching Model}; an implementation that adds
+  additional task dispatching points to this policy is incorrect.]}
 @end{Ramification}
 @end{RunTime}
 
@@ -1727,21 +1769,29 @@ The deadline might affect how resources are allocated to the task.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[subclause],Old=[clause]}
-defines a package for representing the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[This
+@Chg{Version=[3],New=[subclause],Old=[clause]}
+@Chg{Version=[5],New=[presents Dispatching.EDF,],Old=[defines]}
+a package for representing the
 deadline of a task and a dispatching policy that defines Earliest Deadline
-First (EDF) dispatching. @Chg{Version=[3],New=[An aspect],Old=[A pragma]}
-is defined to assign an initial deadline to a task.]}
+First (EDF) dispatching. @Chg{Version=[5],New=[The Relative_Deadline aspect is
+provided],Old=[@Chg{Version=[3],New=[An aspect],Old=[A pragma]}
+is defined]} to assign an initial deadline to a task.@Chg{Version=[5],New=[
+A configuration pragma Generate_Deadlines is provided to specify that a
+task's deadline is recomputed whenever it is made runnable.],Old=[]}]]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-  @ChgAdded{Version=[2],Text=[This @Chg{Version=[3],New=[aspect],Old=[pragma]}
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[This
+  @Chg{Version=[3],New=[aspect],Old=[pragma]}
   is the only way of assigning an
   initial deadline to a task so that its activation can be controlled by EDF
   scheduling. This is similar to the way
   @Chg{Version=[3],New=[aspect],Old=[pragma]} Priority is used to give an
-  initial priority to a task.]}
+  initial priority to a task.]}]}
 @end{Discussion}
 
 @end{Intro}
@@ -1749,7 +1799,9 @@ is defined to assign an initial deadline to a task.]}
 @begin{MetaRules}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgAdded{Version=[2],Text=[To predict the behavior of a multi-tasking program
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}@Comment{I don't have a replacement.}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[To predict the
+behavior of a multi-tasking program
 it is necessary to control access to the processor which is preemptive, and
 shared objects which are usually non-preemptive and embodied in protected
 objects. Two common dispatching policies for the processor are fixed priority
@@ -1764,7 +1816,7 @@ earlier deadline and a higher preemption level than any currently
 @lquotes@;locked@rquotes protected object. The rules of this
 @Chg{Version=[3],New=[subclause],Old=[clause]} implement
 this scheme including the case where the newly released task should execute
-before some existing tasks but not preempt the currently executing task.]}
+before some existing tasks but not preempt the currently executing task.]}]}
 @end{MetaRules}
 
 @begin{NotIso}
@@ -1812,10 +1864,13 @@ shall appear within a given construct.],Old=[]}]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[The @SynI{policy_}@nt{identifier}
-EDF_Across_Priorities is a task dispatching
-policy.@Chg{Version=[3],New=[@Defn2{Term=[task dispatching policy],
-Sec=(EDF_Across_Priorities)}@Defn{EDF_Across_Priorities task dispatching policy}],
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]}
+is a task dispatching
+policy.@Chg{Version=[3],New=[@Chg{Version=[5],New=[@Defn2{Term=[task dispatching policy],
+Sec=(EDF_Within_Priorities)}@Defn{EDF_Within_Priorities task dispatching policy}],Old=[@Defn2{Term=[task dispatching policy],
+Sec=(EDF_Across_Priorities)}@Defn{EDF_Across_Priorities task dispatching policy}]}],
 Old=[]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -1823,29 +1878,54 @@ Old=[]}]}
 language-defined library package exists:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1],ARef=[AI12-0241-1]}
 @ChgAdded{Version=[2],Text=[@key{with} Ada.Real_Time;
 @key{with} Ada.Task_Identification;
 @key{package} Ada.Dispatching.EDF@Chg{Version=[5],New=[
   @key{with} Nonblocking],Old=[]} @key{is}@ChildUnit{Parent=[Ada.Dispatching],Child=[EDF]}
-  @key{subtype} @AdaSubtypeDefn{Name=[Deadline],Of=[Time]} @key{is} Ada.Real_Time.Time;
+  @key{subtype} @AdaSubtypeDefn{Name=[Deadline],Of=[Time]} @key{is} Ada.Real_Time.Time;@Chg{Version=[5],New=[
+  @key{subtype} @AdaSubtypeDefn{Name=[Relative_Deadline],Of=[Time_Span]} @key{is} Ada.Real_Time.Time_Span;],Old=[]}
   @AdaObjDefn{Default_Deadline} : @key{constant} Deadline :=
-              Ada.Real_Time.Time_Last;
-  @key{procedure} @AdaSubDefn{Set_Deadline} (D : @key{in} Deadline;
-              T : @key{in} Ada.Task_Identification.Task_Id :=
-              Ada.Task_Identification.Current_Task);
-  @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline} (
-              Delay_Until_Time : @key{in} Ada.Real_Time.Time;
-              Deadline_Offset : @key{in} Ada.Real_Time.Time_Span)@Chg{Version=[5],New=[
-     @key{with} Nonblocking => False],Old=[]};
+              Ada.Real_Time.Time_Last;@Chg{Version=[5],New=[
+  @AdaObjDefn{Default_Relative_Deadline} : @key{constant} Relative_Deadline :=
+              Ada.Real_Time.Time_Span_Last;],Old=[]}
+  @key{procedure} @AdaSubDefn{Set_Deadline}@Chg{Version=[5],New=[
+    ],Old=[]} (D : @key{in} Deadline;
+@Chg{Version=[5],New=[],Old=[        ]}      T : @key{in} Ada.Task_Identification.Task_Id :=
+@Chg{Version=[5],New=[],Old=[        ]}      Ada.Task_Identification.Current_Task);@Chg{Version=[5],New=[
+  @key{function} @AdaSubDefn{Get_Deadline}
+     (T : Ada.Task_Identification.Task_Id :=
+      Ada.Task_Identification.Current_Task) @key{return} Deadline;
+  @key{procedure} @AdaSubDefn{Set_Relative_Deadline}
+     (D : @key{in} Relative_Deadline;
+      T : @key{in} Ada.Task_Identification.Task_Id :=
+      Ada.Task_Identification.Current_Task);
+  @key{function} @AdaSubDefn{Get_Relative_Deadline}
+     (T : Ada.Task_Identification.Task_Id :=
+      Ada.Task_Identification.Current_Task)
+      @key{return} Relative_Deadline;],Old=[]}
+  @key{procedure} @AdaSubDefn{Delay_Until_And_Set_Deadline}@Chg{Version=[5],New=[
+     (],Old=[ (
+              ]}Delay_Until_Time : @key{in} Ada.Real_Time.Time;
+      @Chg{Version=[5],New=[],Old=[       ]}Deadline_Offset : @key{in} Ada.Real_Time.Time_Span)@Chg{Version=[5],New=[
+     @key{with} Nonblocking => False;
+  @key{function} @AdaSubDefn{Get_Last_Release_Time}
+     (T : Ada.Task_Identification.Task_Id :=
+      Ada.Task_Identification.Current_Task)
+      @key{return} Ada.Real_Time.Time;],Old=[;
   @key{function} @AdaSubDefn{Get_Deadline} (T : Ada.Task_Identification.Task_Id :=
-              Ada.Task_Identification.Current_Task) @key{return} Deadline;
+              Ada.Task_Identification.Current_Task) @key{return} Deadline;]}
 @key{end} Ada.Dispatching.EDF;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
-anonymous type of a @nt{single_task_declaration}) or subprogram, the following
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[For
+@Chg{Version=[5],New=[a subprogram, ],Old=[]}
+a task type (including the
+anonymous type of a @nt{single_task_declaration})@Chg{Version=[5],New=[,],Old=[]}
+or @Chg{Version=[5],New=[a protected type (including the anonymous
+type of a @nt{single_protected_declaration})],Old=[subprogram]}, the following
 language-defined representation aspect may be specified:]}
 
 @begin{Description}
@@ -1854,31 +1934,52 @@ language-defined representation aspect may be specified:]}
 Relative_Deadline is an @nt{expression}, which shall be of
 type Real_Time.Time_Span.@AspectDefn{Relative_Deadline}]}
 
-  @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Relative_Deadline],
-    Text=[@ChgAdded{Version=[3],Text=[Task parameter used in Earliest Deadline
-      First Dispatching.]}]}
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Relative_Deadline],
+    InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Task
+      @Chg{Version=[5],New=[or protected type ],Old=[]}parameter used
+      in Earliest Deadline First Dispatching.]}]}
 
 @end{Description}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The form
+of @nt{pragma} Generate_Deadlines is as follows:]}
+
+@ChgRef{Version=[5],Kind=[Added]}
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],Text=`@key{pragma} @prag<Generate_Deadlines>;'}>
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[The Generate_Deadlines @nt{pragma} is a
+configuration pragma.]}
 
 @end{StaticSem}
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[3],Text=[The Relative_Deadline aspect shall not be specified
-on a task interface type.]}
+on a task @Chg{Version=[5],New=[or protected ],Old=[]}interface
+type.@Chg{Version=[5],New=[ If the Relative_Deadline aspect is specified
+for a subprogram, the @nt{aspect_definition} shall be a static expression.],Old=[]}]}
+
 @end{Legality}
 
 @begin{LinkTime}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[If the EDF_Across_Priorities policy is specified
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[If the
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]}
+policy is specified
 for a partition, then the Ceiling_Locking policy (see
 @RefSecNum{Priority Ceiling Locking}) shall also be
 specified for the partition.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[If the EDF_Across_Priorities policy appears in a
-Priority_Specific_Dispatching pragma
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[If the
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]} policy
+appears in a Priority_Specific_Dispatching pragma
 (see @RefSecNum{Task Dispatching Pragmas})
 in a partition, then the
 Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) shall also
@@ -1886,8 +1987,10 @@ be specified for the partition.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised]}
   @ChgAdded{Version=[2],Text=[Unlike the other language-defined dispatching
-  policies, the semantic description of EDF_Across_Priorities assumes
+  policies, the semantic description of
+  @Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]} assumes
   Ceiling_Locking (and a ceiling priority) in order to make the mapping between
   deadlines and priorities work. Thus, we require both policies to be specified
   if EDF is used in the partition.]}
@@ -1905,21 +2008,36 @@ if it @Chg{Version=[3],New=[is specified for],
 Old=[occurs in the @nt{declarative_part} of the @nt{subprogram_body} of]} a
 subprogram other than the main subprogram.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[If pragma Generate_Deadlines is in effect, the
+deadline of a task is recomputed each time it becomes runnable. The new deadline
+is the value of Real_Time.Clock at the time the task is added to a ready queue
+plus the value returned by Get_Relative_Deadline.]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@ChgAdded{Version=[2],Text=[The initial absolute deadline of a task
-@Chg{Version=[3],New=[for which aspect],Old=[containing
-pragma]} Relative_Deadline@Chg{Version=[3],New=[ is specified],Old=[]} is
-the value of Real_Time.Clock +
-@Chg{Version=[3],New=[the @nt{expression} that is the value of the
-aspect],Old=[@SynI{relative_deadline_}@nt{expression}]}, where
-@Chg{Version=[3],New=[this entire expression, including ],Old=[]}the
-call of Real_Time.Clock@Chg{Version=[3],New=[, is evaluated],Old=[ is made]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[The initial absolute deadline
+@Chg{Version=[5],New=[for],Old=[of]} a task
+@Chg{Version=[5],New=[with a specified],Old=[@Chg{Version=[3],New=[for
+which aspect],Old=[containing pragma]}]}
+Relative_Deadline@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[ is
+specified]}],Old=[]} is @Chg{Version=[5],New=[the result of adding ],Old=[]}the
+value@Chg{Version=[5],New=[ returned by a call],Old=[]} of Real_Time.Clock
+@Chg{Version=[5],New=[to the value of],Old=[+]}
+@Chg{Version=[3],New=[the @nt{expression}
+@Chg{Version=[5],New=[specified as the Relative_Deadline],Old=[that is the
+value of the]} aspect],Old=[@SynI{relative_deadline_}@nt{expression}]}, where
+@Chg{Version=[3],New=[this entire
+@Chg{Version=[5],New=[computation],Old=[expression]}, including ],Old=[]}the
+call of Real_Time.Clock@Chg{Version=[3],New=[, is
+@Chg{Version=[5],New=[performed],Old=[evaluated]}],Old=[ is made]}
 between task creation and the start of its activation. If
 @Chg{Version=[3],New=[the aspect],Old=[there is no]}
 Relative_Deadline @Chg{Version=[3],New=[is not specified,],Old=[pragma]}
 then the initial absolute deadline of a task is the
-value of Default_Deadline. The environment task is also given
+value of Default_Deadline@Chg{Version=[5],New=[ (Ada.Real_Time.Time_Last)],Old=[]}.
+The environment task is also given
 an initial deadline by this rule@Chg{Version=[3],New=[, using the value of
 the Relative_Deadline aspect of the main subprogram (if any)],Old=[]}.]}
 
@@ -1929,15 +2047,40 @@ the Relative_Deadline aspect of the main subprogram (if any)],Old=[]}.]}
   @RefSecNum{Program Execution}, so of course this rule applies to it.]}
 @end{TheProof}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[The effect of specifying a Relative_Deadline aspect
+for a protected type or @nt{single_protected_declaration} is discussed in
+@RefSecNum{Priority Ceiling Locking}.]}
+
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[The procedure Set_Deadline changes the absolute
-deadline of the task to D. The function Get_Deadline returns the absolute
-deadline of the task.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[A task has both an
+@i<active>@Defn2{Term=[active],Sec=[absolute deadline]}@Defn2{Term=[deadline],Sec=[active]}@Defn2{Term=[absolute deadline],Sec=[active]}
+and a @i<base>@Defn2{Term=[base],Sec=[absolute deadline]}@Defn2{Term=[deadline],Sec=[base]}@Defn2{Term=[absolute deadline],Sec=[base]}
+absolute deadline. These are
+the same except when the task is inheriting a relative deadline during
+activation or a rendezvous (see below) or within a
+protected action (see @RefSecNum{Priority Ceiling Locking}). ],Old=[]}The
+procedure Set_Deadline changes the
+@Chg{Version=[5],New=[(base) ],Old=[]}absolute
+deadline of the task to D. The function Get_Deadline returns
+the @Chg{Version=[5],New=[(base) ],Old=[]}absolute deadline of the task.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[The procedure Set_Relative_Deadline changes the
+relative deadline of the task to D. The function Get_Relative_Deadline returns
+the relative deadline of the task.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[The function Get_Last_Release_Time returns the
+time, as provided by Real_Time.Clock, when the task was last made runnable (that
+is, was added to a ready queue).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[The procedure Delay_Until_And_Set_Deadline delays
 the calling task until time Delay_Until_Time. When the task becomes runnable
-again it will have deadline Delay_Until_Time + Deadline_Offset.]}
+again it will have deadline @exam{Delay_Until_Time + Deadline_Offset}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[On a system with a single processor, the setting of
@@ -1947,106 +2090,157 @@ on a ready queue it is removed and re-entered on to the ready queue determined
 by the rules defined below.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[When EDF_Across_Priorities is specified for
-priority range @i<Low>..@i<High> all ready queues in this range are ordered by
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[When
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]}
+is specified for
+@Chg{Version=[5],New=[a ],Old=[]}priority@Chg{Version=[5],New=[, the],Old=[
+range @i<Low>..@i<High> all]} ready @Chg{Version=[5],New=[queue
+for that priority is],Old=[queues in this range are]} ordered by
 deadline. The task at the head of a queue is the one with the earliest
 deadline.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[A task dispatching point occurs
-for the currently running task @i<T> to
-which policy EDF_Across_Priorities applies:]}
+for the currently running task @i<T> to which policy
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]}
+applies:]}
 
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[when a change to the deadline of @i<T> occurs;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[when a change to the
+@Chg{Version=[5],New=[base (absolute) ],Old=[]}deadline of @i<T> occurs;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[there is a task on the ready queue for the
-active priority of @i<T> with a deadline earlier than the deadline of @i<T>; or]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[there is a task on the
+ready queue for the
+active priority of @i<T> with a deadline earlier than the deadline of @i<T>; or]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[there is a nonempty ready queue for that processor
-with a higher priority than the active priority of the running task.]}
+with a higher priority than the active priority of the running
+task@Chg{Version=[5],New=[;],Old=[.]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[there is a runnable task with the same priority as
+@i<T> but with an earlier absolute deadline.]}
 
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[In these cases, the currently running task is said
-to be preempted and is returned to
-the ready queue for its active priority.]}
+to be preempted and is returned to the ready queue
+for its active priority@Chg{Version=[5],New=[, at a position
+determined by its active (absolute) deadline],Old=[]}.]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 23
+through 27 were deleted.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[For a task @i<T> to which policy
-EDF_Across_Priorities applies, the base priority is not a source of
-priority inheritance; the active priority when first activated or
-while it is blocked is defined as the maximum of the following:]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[],Old=[For a
+task @i<T> to which policy EDF_Across_Priorities applies, the base priority is
+not a source of priority inheritance; the active priority when first activated
+or while it is blocked is defined as the maximum of the following:]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[the lowest priority in the range specified as
-EDF_Across_Priorities that includes the base priority of @i<T>;]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[the lowest priority in
+the range specified as EDF_Across_Priorities that includes the base priority of
+@i<T>;]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[the priorities, if any, currently inherited by
-@i<T>;]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[the priorities, if any,
+currently inherited by @i<T>;]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised], ARef=[AI05-0055-1]}
-@ChgAdded{Version=[2],Text=[the highest priority @i<P>, if any, less than the
-base priority of @i<T> such that one or more tasks are executing within a
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[the highest priority
+@i<P>, if any, less than the base priority of @i<T> such that one or more tasks
+are executing within a
 protected object with ceiling priority @i<P> and task @i<T>
 has an earlier deadline than all such tasks@Chg{Version=[3],New=[;
 and furthermore @i<T> has an earlier deadline than all other tasks on
 ready queues with priorities in the given EDF_Across_Priorities range that
-are strictly less than @i<P>],Old=[]}.]}
+are strictly less than @i<P>],Old=[]}.]}]}
 @end{Itemize}
 
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[The active priority of @i<T> might be lower than
-its base priority.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The active priority of
+@i<T> might be lower than its base priority.]}]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[When a task @i<T> is first activated or becomes
-unblocked, it is added to the ready queue corresponding to this active
-priority. Until it becomes blocked again, the active priority of @i<T>
-remains no less than this value; it will exceed this value only while it is
-inheriting a higher priority.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[When a task @i<T> is
+first activated or becomes unblocked, it is added to the ready queue
+corresponding to this active priority. Until it becomes blocked again, the
+active priority of @i<T> remains no less than this value; it will exceed this
+value only while it is inheriting a higher priority.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[These rules ensure that a task executing in
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[These rules ensure
+  that a task executing in
   a protected object is preempted only by a task with a shorter deadline and a
   higher base priority. This matches the traditional preemption level
   description without the need to define a new kind of protected object
-  locking.]}
+  locking.]}]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[When the setting of the base priority of a ready
-task takes effect and the new priority is in a range specified as
-EDF_Across_Priorities, the task is added to the ready queue
-corresponding to its new active priority, as determined above.]}
+task takes effect and the new priority is
+@Chg{Version=[5],New=[],Old=[in a range ]}specified as
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]},
+the task is added to the ready
+queue@Chg{Version=[5],New=[, at a position determined by its active
+deadline],Old=[corresponding to its new active priority, as determined above]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgAdded{Version=[2],Text=[For all the operations defined in Dispatching.EDF,
 Tasking_Error is raised if the task identified by T has terminated.
 Program_Error is raised if the value of T is Null_Task_Id.]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[If two tasks with priority designated as
+EDF_Within_Priorities rendezvous then the deadline for the execution of the
+accept statement is the earlier of the deadlines of the two tasks.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Text=[During activation, a task being activated inherits
+the deadline that its activator (see @RefSecNum{Task Execution - Task Activation})
+had at the time the activation was initiated.]}
+
 @end{RunTime}
 
 @begin{Bounded}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@PDefn2{Term=(bounded error),Sec=(cause)}
 If EDF_Across_Priorities is specified for priority range @i<Low>..@i<High>, it
 is a bounded error to declare a protected object with ceiling priority
 @i<Low> or to assign the value @i<Low> to attribute 'Priority. In either case
 either Program_Error is raised or the ceiling of the protected
-object is assigned the value @i<Low>+1.]}
+object is assigned the value
+@i<Low>+1.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}]}
 
 @end{Bounded}
 
@@ -2074,18 +2268,24 @@ of a task to be delayed for a multiprocessor.]}]}
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Text=[If two adjacent priority ranges, @i<A>..@i<B> and
-@i<B>+1..@i<C> are specified to have policy
-EDF_Across_Priorities@Chg{Version=[3],New=[,],Old=[]} then
-this is not equivalent to this policy being
-specified for the single range, @i<A>..@i<C>.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[If two @Chg{Version=[5],New=[distinct
+priorities],Old=[adjacent priority ranges, @i<A>..@i<B> and
+@i<B>+1..@i<C>]} are specified to have policy
+@Chg{Version=[5],New=[EDF_Within_Priorities],Old=[EDF_Across_Priorities]}@Chg{Version=[3],New=[,],Old=[]} then
+@Chg{Version=[5],New=[tasks from the higher priority always run
+before tasks of the lower priority, regardless of deadlines],Old=[this
+is not equivalent to this policy being
+specified for the single range, @i<A>..@i<C>]}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
-@ChgAdded{Version=[2],Text=[The above rules implement the preemption-level
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The above rules
+implement the preemption-level
 protocol (also called Stack Resource Policy protocol) for resource sharing
 under EDF dispatching. The preemption-level for a task is denoted by its base
 priority. The definition of a ceiling preemption-level for a protected object
-follows the existing rules for ceiling locking.]}
+follows the existing rules for ceiling locking.]}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
@@ -2114,6 +2314,16 @@ follows the existing rules for ceiling locking.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Corrected definition
   of active priority to avoid deadline inversion in an unusual case.]}
 @end{Diffword2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0230-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatiblities with Ada 2012}The
+  policy EDF_Across_Priorities was replaced by EDF_Within_Priorities.
+  A program using EDF_Across_Priorities could fail to compile. However, we
+  not are aware of any implementations of EDF_Across_Priorities, so it
+  seems unlikely that any such programs exist outside of books and papers.]}
+@end{Incompatible2012}
+
 
 
 @LabeledClause{Priority Ceiling Locking}
@@ -2262,17 +2472,56 @@ While a task executes a protected action, it inherits the ceiling
 priority of the corresponding protected object.
 
 @IndexCheck{Ceiling_Check}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 When a task calls a protected operation, a check is made that its active
 priority is not higher than the ceiling of the corresponding protected object;
 Program_Error is raised if this check fails.
 
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If the ceiling priority of a
+protected object designates one with EDF_Within_Priorities, the following
+additional rules apply:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[Every protected object has a
+    @i<relative deadline>,@Defn2{Term=[relative deadline],Sec=[protected object]}@PDefn2{Term=[deadline],Sec=[relative]}
+    which is determined by a Relative_Deadline aspect as defined
+    in @RefSecNum{Earliest Deadline First Dispatching}, or by assignment to
+    the Relative_Deadline attribute as described in
+    @RefSecNum{Dynamic Priorities for Protected Objects}. The relative
+    deadline of a protected object represents a lower bound on the relative
+    deadline a task may have when it calls a protected operation of that
+    protected object.]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[If aspect Relative_Deadline is not specified for a
+    protected type then the initial relative deadline of the corresponding
+    protected object is Ada.Real_Time.Time_Span_Zero.]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[While a task executes a protected action, it
+    inherits the relative deadline of the corresponding protected object so that
+    its active deadline is reduced to (if it is currently greater than) 'now'
+    plus the deadline floor of the corresponding protected object; 'now' is
+    obtained via a call on Ada.Real_Time.Clock.]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[When a task calls a protected operation, a check
+    is made that its active deadline minus its last release time is not less
+    than the relative deadline of the corresponding protected object;
+    Program_Error is raised if this@IndexCheck{Ceiling_Check}
+    @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}check
+    fails.]}
+@end{Itemize}
+
 @end{RunTime}
 
 @begin{Bounded}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00327-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Type=[Leading],Text=[Following any change of priority,
 it is a bounded error for the active priority of any task with a call queued on
 an entry of a protected object to be higher than the ceiling priority of the
@@ -2283,21 +2532,23 @@ In this case one of the following applies:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Text=[at any time prior to executing the entry body
-Program_Error is raised in the calling task;
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+Program_Error is raised in the calling task;@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
 at the ceiling priority of the protected object;]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Text=[when the entry is open the entry body is executed
 at the ceiling priority of the protected object and then Program_Error is
-raised in the calling task; or
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+raised in the calling task; or]}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}@ChgNote{Just changed paragraph numbers}
 @ChgAdded{Version=[2],Text=[when the entry is open the entry body
 is executed at the ceiling priority of the protected object that was in effect
 when the entry call was queued.]}
@@ -2452,6 +2703,15 @@ calls another protected operation on the same protected object).
   Interrupt_Priority as @nt{pragma}s
   Priority and Interrupt_Priority are now obsolescent.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0230-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  All protected objects now have a relative deadline, which
+  is the value of the Relative_Deadline attribute of
+  @RefSecNum{Dynamic Priorities for Protected Objects}. How this value
+  is interpreted depends on the locking policy.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0051-1]}
@@ -2789,14 +3049,14 @@ than the value of the restriction.]}
 Max_Entry_Queue_Length for a type, and an entry call or requeue would cause the
 queue for any entry of the type to become longer than the specified value, then
 Program_Error is raised at the point of the call or
-requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0206-1]}
 @ChgAdded{Version=[5],Text=[If a nonconfirming value is specified for
 Max_Entry_Queue_Length for an entry,
 and an entry call or requeue would cause the queue for an entry to become longer
 than the specified value, then Program_Error is raised at the point of the call
-or requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+or requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 @end{Runtime}
 
 @begin{DiffWord95}
@@ -2990,7 +3250,6 @@ to the specified Priority value.
 Set_Priority has no effect if the task is terminated.
 
 The function Get_Priority returns T's current base priority.
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 Tasking_Error is raised if the task is terminated.
 @begin{Reason}
 There is no harm in setting the priority of a terminated task.
@@ -2999,7 +3258,7 @@ However, there is little difference between setting the priority of a
 terminated task, and setting the priority of a task that is about to
 terminate very soon;
 neither case should be an error.
-Furthermore, the run-time check is not necessarily feasible to implement
+Furthermore, the runtime check is not necessarily feasible to implement
 on all systems, since priority changes might be deferred due to
 inter-processor communication overhead,
 so the error might not be detected until after Set_Priority has
@@ -3012,7 +3271,6 @@ the implementation need not continue to store the priority of a task
 that has terminated.
 @end{Reason}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised by Set_Priority and Get_Priority if T is equal
 to Null_Task_Id.
 
@@ -3064,7 +3322,7 @@ inter-processor communication overhead.
 The calling task would continue to execute without finding out whether
 the operation succeeded or not.
 
-The run-time check would tend to cause intermittent system failures @em
+The runtime check would tend to cause intermittent system failures @em
 how is the caller supposed to know whether the other task happens to
 have a queued call at any given time? Consider for example an
 interrupt that needs to trigger a priority change in some task.
@@ -3089,11 +3347,10 @@ When an entry call is cancelled, it is a bounded error
 if the priority of the calling task is higher than
 the ceiling priority of the corresponding
 protected object.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 In either of these cases,
 either Program_Error is raised in the task that called the entry,
 or its priority is temporarily lowered,
-or both, or neither.]}
+or both, or neither.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{Ramification}
 @ChgRef{Version=[2],Kind=[DeletedNoDelMsg]}
 @ChgDeleted{Version=[2],Text=[Note that the error is @lquotes@;blamed@rquotes@; on the task that did the entry call,
@@ -3254,24 +3511,45 @@ queried at run time.]}
 @begin{StaticSem}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following attribute
-is defined for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],Text=[The following
+@Chg{Version=[5],New=[attributes are],Old=[attribute is]} defined
+for @PrefixType{a @nt{prefix} P that denotes a protected object}:]}
 
 @begin(Description)
 @ChgAttribute{Version=[2],Kind=[AddedNormal],ChginAnnex=[T],
   Leading=<F>, Prefix=<P>, AttrName=<Priority>, ARef=[AI95-00327-01],
-  Text=[@Chg{Version=[2],New=[Denotes a non-aliased component of the
+  InitialVersion=[2], Text=[@Chg{Version=[2],New=[Denotes a
+  non-aliased component of the
   protected object P. This component is of type System.Any_Priority and its
   value is the priority of P. P'Priority denotes a variable if and only if P
   denotes a variable. A reference to this attribute shall appear only
   within the body of P.],Old=[]}]}
+
+@ChgAttribute{Version=[5],Kind=[Added],ChginAnnex=[T],
+  Leading=<F>, Prefix=<P>, AttrName=<Relative_Deadline>, ARef=[AI12-0230-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes a
+  non-aliased component of the protected object P. This
+  component is of type Ada.Real_Time.Time_Span and its value is the
+  relative deadline of P. P'Relative_Deadline denotes a variable if and
+  only if P denotes a variable. A reference to this attribute shall
+  appear only within the body of P.],Old=[]}]}
 @EndPrefixType{}
 @end{Description}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00327-01]}
-@ChgAdded{Version=[2],Text=[The initial value of this attribute is
-the initial value of the priority of the protected object@Redundant[, and can
-be changed by an assignment].]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
+@ChgAdded{Version=[2],Text=[The initial value of
+@Chg{Version=[5],New=[the],Old=[this]} attribute@Chg{Version=[5],New=[ Priority],Old=[]}
+is @Chg{Version=[5],New=[determined by ],Old=[]}the initial
+value of the priority of the protected
+object@Chg{Version=[5],New=[ (see
+@RefSecNum{Priority Ceiling Locking})],Old=[]}@Redundant[,
+and can be changed by an assignment].@Chg{Version=[5],New=[ The initial value
+of the attribute Relative_Deadline
+is determined by the initial value of the relative deadline of the protected
+object (see @RefSecNum{Priority Ceiling Locking})@Redundant[,
+and can be changed by an assignment].],Old=[]}]}
 @end{StaticSem}
 
 @begin{Runtime}
@@ -3290,7 +3568,7 @@ Interrupt_Handler @Chg{Version=[3],New=[aspect specified
 for],Old=[pragma applying to]} one of its procedures, a check is made
 that the value to be assigned to @i<P>'Priority is in the range
 System.Interrupt_Priority. If the check fails, Program_Error is
-raised.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+raised.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 @end{Runtime}
 
 @begin{Metrics}
@@ -3342,6 +3620,13 @@ completion of the protected action in which it is executed.]}
   The ability to dynamically change and query the priority of a protected
   object is new.]}
 @end{Extend95}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0230-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The ability to dynamically change and query the relative deadline of
+  a protected object is new.]}
+@end{Extend2012}
 
 
 @RMNewPageVer{Version=[2]}@Comment{For printed RM Ada 2005}
@@ -3577,7 +3862,7 @@ Task_Identification.Abort_Task.
    @nt{allocator} of an access type whose designated type is class-wide and
    limited, a check is made that the specific type of the allocated object has
    no task subcomponents. Program_Error is raised if this check
-   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
    @Comment{We don't index this "check" as it doesn't have a name.}
 
 @Defn2{Term=[restrictions],Sec=(No_Implicit_Heap_Allocations)}@Chg{Version=[3],New=[@Defn{No_Implicit_Heap_Allocations restriction}],
@@ -3671,7 +3956,7 @@ Text=[When restriction No_Dynamic_CPU_Assignment applies to a partition,
    @nt{allocator} of an access type whose designated type is class-wide and
    limited, a check is made that the specific type of the allocated object has
    no protected subcomponents. Program_Error is raised if this check
-   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+   fails.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
    @Comment{We don't index this "check" as it doesn't have a name.}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
@@ -3771,7 +4056,7 @@ Old=[]}
 we get conditional Leading.}@Chg{Version=[1],New=[],Old=[If the following restrictions
 are violated, the behavior is implementation defined.
 @IndexCheck{Storage_Check}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 If an implementation chooses to detect such a violation,
 Storage_Error should be raised.]}
 
@@ -3799,7 +4084,7 @@ language defined:
   If an implementation chooses to detect a violation of this
   restriction, Storage_Error should be raised;
   @IndexCheck{Storage_Check}
-  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
   otherwise, the behavior is implementation defined],Old=[]}.
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
@@ -3815,7 +4100,7 @@ Text=[The behavior when restriction Max_Storage_At_Blocking is violated.]}]}
   If an implementation chooses to detect a violation of this
   restriction for values other than zero, Storage_Error should be raised;
   @IndexCheck{Storage_Check}
-  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
   otherwise, the behavior is implementation defined],Old=[]}.
 @ChgImplDef{Version=[2],Kind=[Added],Text=[@ChgAdded{Version=[2],
 Text=[The behavior when restriction Max_Asynchronous_Select_Nesting is violated.]}]}
@@ -3829,7 +4114,7 @@ Text=[The behavior when restriction Max_Asynchronous_Select_Nesting is violated.
   task creation, it is illegal. If an implementation chooses to detect a
   violation of this restriction, Storage_Error should be raised;
   @IndexCheck{Storage_Check}
-  @Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+  @Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
   otherwise, the behavior is implementation defined],Old=[]}.
   @begin{Ramification}
      Note that this is not a limit on the
@@ -3850,7 +4135,7 @@ Old=[]}Max_Entry_Queue_Length @\Max_Entry_Queue_Length
   defines the maximum number of calls
   that are queued on an entry. Violation of this restriction
   results in the raising of Program_Error at the point of the call or
-  requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+  requeue.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
 @ChgAdded{Version=[3],Text=[@Defn2{Term=[restrictions],
@@ -3866,7 +4151,7 @@ storage pool.]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[At run time, Storage_Error is raised if
 an @nt{allocator} using a standard storage pool is evaluated after the elaboration of
 the @nt{library_item}s of the partition has completed.@Defn2{Term=[Storage_Error],
-Sec=(raised by failure of run-time check)}]}
+Sec=(raised by failure of runtime check)}]}
 @end{Description}
 
 It is implementation defined whether the use of pragma Restrictions
@@ -4685,7 +4970,6 @@ and the state of the object becomes @Chg{Version=[2],New=[False],Old=[false]}.
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @Chg{Version=[5],New=[],Old=[@PDefn2{Term=[potentially blocking operation],Sec=(Suspend_Until_True)}
 @PDefn2{Term=[blocking, potentially],Sec=(Suspend_Until_True)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 ]}Program_Error is raised upon calling Suspend_Until_True if another
 task is already waiting on that suspension object.@Chg{Version=[5],New=[],Old=[
 Suspend_Until_True is a potentially blocking operation
@@ -4708,7 +4992,8 @@ is a potentially blocking operation.]}]}
 Suspend_Until_True on the same Suspension_Object concurrently. For each task,
 Program_Error might be raised, the task might proceed without suspending, or the
 task might suspend, potentially indefinitely. The state of the suspension object
-might end up either True or False.]}
+might end up either True or
+False.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{ImplReq}
@@ -4834,7 +5119,7 @@ a potentially blocking operation
 @ChgAdded{Version=[3],Text=[It is a bounded error to call Wait_For_Release on a
 Synchronous_Barrier object after that object is finalized. If the error is
 detected, Program_Error is raised. Otherwise, the call proceeds normally, which
-may leave a task blocked forever.]}
+may leave a task blocked forever.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 
@@ -4937,9 +5222,7 @@ Note that the state of T can be changed immediately after Is_Held returns.
 As part of these operations, a check is made that the task
 identified by
 T is not terminated.
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 Tasking_Error is raised if the check fails.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if the value of T is Null_Task_Id.
 
 @end{RunTime}

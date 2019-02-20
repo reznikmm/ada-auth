@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.45 $ $Date: 2017/12/20 04:30:56 $ $Author: randy $ }
+@comment{ $Revision: 1.46 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2017/12/20 04:30:56 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -229,8 +229,7 @@ in the following cases:
    of the parameter X is less than one.
 @end{Itemize}
 
-@Leading@IndexCheck{Division_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Leading
 The exception Constraint_Error is raised, signaling a pole of the mathematical
 function (analogous to dividing by zero), in the following cases, provided that
 Float_Type'Machine_Overflows is True:
@@ -251,7 +250,6 @@ Float_Type'Machine_Overflows is True:
    parameter X is one.
 @end{Itemize}
 
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @redundant[Constraint_Error can also be raised
 when a finite result overflows
 (see @RefSecNum{Accuracy Requirements for the Elementary Functions}); this may
@@ -643,7 +641,7 @@ algorithms for random number generation.]}]}
 random number from the given generator, relative to its current state, according
 to an implementation-defined algorithm. If the range First .. Last is a null
 range, Constraint_Error is
-raised.@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}]}
+raised.]}
 
 @begin{Example}
 @key[procedure] Reset (Gen       : @key[in] Generator;
@@ -689,24 +687,19 @@ obtained from a generator by invoking Save.
 @end{StaticSem}
 
 @begin{RunTime}
-@IndexCheck{Range_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 Instantiation of Numerics.Discrete_Random with a subtype having a null range
 raises Constraint_Error.
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0050],ARef=[AI95-00089]}
-@ChgDeleted{Version=[1],Text=[@IndexCheck{Range_Check}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-Invoking Value with a string that is not the image of any generator
-state raises Constraint_Error.]}
+@ChgDeleted{Version=[1],Text=[Invoking Value with a string that is not the
+image of any generator state raises Constraint_Error.]}
 @end{RunTime}
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0050],ARef=[AI95-00089]}
 @ChgAdded{Version=[1],Text=[It is a bounded error to invoke Value with a
-string that is not the image of any generator state.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+string that is not the image of any generator
+state.@PDefn2{Term=(bounded error),Sec=(cause)}
 If the error is detected, Constraint_Error or
 Program_Error is raised. Otherwise, a call to Reset with the resulting state
 will produce a generator such that calls to Random with this generator will

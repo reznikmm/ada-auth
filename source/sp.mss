@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2018/04/07 06:16:41 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2018/04/07 06:16:41 $}
+@Comment{$Date: 2019/02/09 03:46:57 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -548,7 +548,7 @@ procedure@Chg{Version=[3],New=[)],Old=[]}
 is attached to the @Chg{Version=[3],New=[identified],Old=[specified]} interrupt.
 @IndexCheck{Reserved_Check}
 A check is made that the corresponding interrupt is not reserved.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 Program_Error is raised if the check fails, and the existing treatment
 for the interrupt is not affected.
 
@@ -568,7 +568,7 @@ procedures]},
 a check is made that the @Chg{Version=[3],New=[initial ],Old=[]}ceiling
 priority @Chg{Version=[3],New=[of the object],Old=[defined in the
 @nt{protected_definition}]} is in the range of System.@!Interrupt_Priority.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 If the check fails, Program_Error is raised.
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0068],ARef=[AI95-00121-01]}
@@ -616,7 +616,7 @@ containing the handler.
 @ChgAdded{Version=[5],Text=[If restriction No_Dynamic_Attachment is in effect,
 then a check is made that the interrupt identified by an Attach_Handler aspect
 does not appear in any previously elaborated Attach_Handler aspect;
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 Program_Error is raised if this check fails.]}
 
 @begin{Reason}
@@ -914,7 +914,6 @@ The Attach_Handler procedure attaches the specified handler to the
 interrupt, overriding any existing treatment (including a user handler)
 in effect for that interrupt.
 If New_Handler is @key[null], the default treatment is restored.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 If New_Handler designates a protected procedure @Chg{Version=[3],New=[for],
 Old=[to]} which the @Chg{Version=[3],New=[aspect],
 Old=[pragma]}
@@ -946,7 +945,7 @@ specified interrupt.
 For all operations defined in this package that take a parameter of type
 Interrupt_Id, with the exception of Is_Reserved and Reference, a check is
 made that the specified interrupt is not reserved.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 Program_Error is raised if this check fails.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
@@ -956,7 +955,6 @@ detach a handler that was attached statically (using the
 @Chg{Version=[3],New=[aspect],Old=[pragma]}
 Attach_Handler), the handler is not detached and Program_Error is
 raised.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 The Reference function returns a value of type System.Address that can
@@ -964,7 +962,6 @@ be used to attach a task entry@Chg{Version=[2],New=[],Old=[,]} via an
 address clause (see @RefSecNum{Interrupt Entries}) to the interrupt
 specified by Interrupt. This function raises Program_Error if attaching
 task entries to interrupts (or to this particular interrupt) is not supported.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3]}
 @ChgAdded{Version=[3],Text=[The function Get_CPU returns the processor on which
@@ -2177,7 +2174,6 @@ the following attribute is defined:
 @EndPrefixType{}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0231-1]}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if a value of Null_Task_Id is passed
 as a parameter to Abort_Task,
 @Chg{Version=[5],New=[Activation_Is_Complete, ],Old=[]}Is_Terminated,
@@ -2197,9 +2193,8 @@ Abort_Task is a potentially blocking operation
 It is a bounded error to call the Current_Task function from
 an @Chg{Version=[3],New=[@nt{entry_body}],Old=[entry body]}@Chg{Version=[2],New=[,],Old=[ or an]}
 interrupt handler@Chg{Version=[2],New=[, or finalization of a task attribute],Old=[]}.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised, or an implementation-defined value of the type
-Task_Id is returned.
+Task_Id is returned.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
 @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],
 Text=[The value of Current_Task when in
 a protected entry@Chg{Version=[2],New=[,],Old=[ or]} interrupt handler@Chg{Version=[2],
@@ -2345,10 +2340,8 @@ the Val parameter is replaced with Initial_Value.
 In most cases, the attribute memory can be reclaimed at this point.
 @end{ImplNote}
 
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
 For all the operations declared in this package, Tasking_Error is raised
 if the task identified by T is terminated.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
 Program_Error is raised if the value of T is Null_Task_Id.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00237-01]}

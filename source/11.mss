@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.98 $}
+@Comment{$Revision: 1.99 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -128,10 +128,10 @@ program.
 @end{Ramification}
 
 @Defn{predefined exception}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Tasking_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
+@Defn2{Term=[Tasking_Error],Sec=(raised by failure of runtime check)}
 The @i{predefined} exceptions are the ones declared in the
 declaration of package Standard:
 Constraint_Error, Program_Error,
@@ -149,7 +149,7 @@ are not predefined.
 The elaboration of an @nt{exception_declaration} has no effect.
 
 @IndexCheck{Storage_Check}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 The execution of any construct raises Storage_Error if there is
 insufficient storage for that execution.
 @PDefn{unspecified}
@@ -995,7 +995,6 @@ about the exception occurrence.
 @Chg{Version=[2],New=[],Old=[Raise_Exception and ]}Reraise_Occurrence
 @Chg{Version=[2],New=[has],Old=[have]} no effect in the case of
 @Chg{Version=[2],New=[],Old=[Null_Id or ]}Null_Occurrence.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 @Chg{Version=[2],New=[Raise_Exception and Exception_Name raise Constraint_Error
 for a Null_Id. Exception_Message, Exception_Name, and Exception_Information
 raise Constraint_Error for a Null_Occurrence. Exception_Identity applied
@@ -1533,11 +1532,11 @@ Assertion_Policy.],Old=[]}]}
 @ChgAdded{Version=[2],Text=[A @nt{pragma} Assertion_Policy
 @Chg{Version=[3],New=[determines for each assertion aspect named in
 the @nt{pragma_argument_association}s whether assertions of the given aspect are to
-be enforced by a run-time check. The @SynI<policy_>@nt{identifier} Check
+be enforced by a runtime check. The @SynI<policy_>@nt{identifier} Check
 requires that assertion expressions of the given aspect be checked that they
 evaluate to True at the points specified for the given aspect; the
 @SynI<policy_>@nt{identifier} Ignore requires that the assertion expression not
-be evaluated at these points, and the run-time checks not be performed.
+be evaluated at these points, and the runtime checks not be performed.
 @Redundant[Note that for subtype predicate aspects (see @RefSecNum{Subtype Predicates}),
 even when the applicable Assertion_Policy is Ignore, the predicate will still be
 evaluated as part of membership tests and Valid @nt{attribute_reference}s, and
@@ -1673,7 +1672,8 @@ during the evaluation of an assertion expression associated with a call on, or
 return from, a protected operation. If the bounded error is
 detected, Program_Error is raised. If not detected, execution proceeds normally,
 but if it is invoked within a protected action, it might result in deadlock or a
-(nested) protected action.]}
+(nested) protected
+action.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{ImplReq}
@@ -1719,6 +1719,24 @@ the assertion expression.]}
   (which are invariably clearer than English prose would be) while keeping it
   clear that failing the assertion check (or any other run time check) is not
   conforming behavior.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Any precondition expression occurring in the
+specification of a
+language-defined unit is enabled (see @RefSecNum{Preconditions and Postconditions})
+unless suppressed (see @RefSecNum{Suppressing Checks}).
+Similarly, any predicate checks for a subtype occurring in the specification
+of a language-defined unit are enabled (see @RefSecNum{Subtype Predicates})
+unless suppressed.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This allows the Standard to express runtime
+  requirements on the client of a language-defined unit as preconditions or
+  predicates (which are invariably clearer than English prose would be). Some
+  such requirements can be Suppressed. Ada 2012 and before did not provide a
+  mechanism to suppress such code.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1829,6 +1847,13 @@ Pragmas Assert and Assertion_Policy, and package Assertions are new.]}
 @end{Extend2005}
 
 @begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added wording that preconditions and predicates
+  given on language-defined units are always checked unless suppressed (that
+  is, they act like language-defined checks). This is not considered an
+  inconsistency, since there are no such preconditions or predicates in
+  Ada 2012.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0179-1],ARef=[AI12-0265-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording that postconditions,
   type invariants, and default initial conditions given on language-defined
@@ -1971,7 +1996,7 @@ New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks.],Ol
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
-@IndexSee{Term=[run-time check],See=(language-defined check)}
+@IndexSee{Term=[runtime check],See=(language-defined check)}
 @Defn{run-time error}
 @Defn2{Term=[error], Sec=(run-time)}
 A @i{language-defined check} (or simply, a @lquotes@;check@rquotes@;) is
@@ -2075,7 +2100,7 @@ the check is said to be @i{suppressed}.
 @begin{Ramification}
 A check is suppressed even if the implementation chooses not to
 actually generate better code.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 This allows the implementation to raise Program_Error,
 for example, if the erroneousness is detected.
 @end{Ramification}
@@ -2091,7 +2116,7 @@ can renew the permission.]}
 
 @Leading@Keepnext@;The following are the language-defined checks:
 @begin{Itemize}
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Constraint_Error is raised upon failure.]
 
@@ -2166,7 +2191,7 @@ for an @nt{assignment_statement},
 and when returning a tagged limited object from a function.
 @end{Hang2List}
 
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 @Leading@Redundant[The following checks correspond to situations in which the
 exception Program_Error is raised upon failure.]
 @begin{Hang2List}
@@ -2200,7 +2225,7 @@ entity or view.]}
 exception Storage_Error is raised upon failure.]
 @begin{Hang2List}
 @RootDefn{Storage_Check}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
 Storage_Check @\Check that evaluation of an @nt{allocator}
 does not require
 more space than is available for a storage pool. Check
@@ -2225,7 +2250,7 @@ failure.]]}
 @begin{Hang2List}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[@RootDefn{Container_Check}
-@Defn2{Term=[Assertion_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}
 Container_Check@\Check the precondition of a routine declared in a
 descendant unit of Containers or in an instance of a generic unit that is
 declared in, or is, a descendant unit of Containers.]}

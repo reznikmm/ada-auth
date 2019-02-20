@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -340,6 +340,7 @@ An instance of a generic unit is declared by a
 
 @begin{MetaRules}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0300-1]}
 @Defn{generic contract model}
 @Defn{contract model of generics}
 The legality of an instance should be determinable without looking at
@@ -354,7 +355,7 @@ This is really a special case of the
 @MetaRulesName (see @Chg{Version=[3],New=[Clause],Old=[Section]}
 @RefSecNum{Program Structure and Compilation Issues}),
 given that a @nt{generic_instantiation} does not depend semantically
-upon the generic body, nor vice-versa.
+upon the generic body, nor vice@Chg{Version=[5],New=[ ],Old=[-]}versa.
 
 Run-time issues are another story.
 For example, whether parameter passing is by copy or by reference is
@@ -581,13 +582,13 @@ the instance.
 In the generic body, we have explicit rules that essentially
 assume the worst (in the cases of type extensions and
 access-to-subprogram types),
-and we have run-time checks
+and we have runtime checks
 (in the case of access-to-object types).
 See @RefSecNum{Type Extensions},
 @RefSecNum{Operations of Access Types},
 and @RefSecNum{Type Conversions}.
 
-@NoPrefix@;We considered run-time checks for access-to-subprogram types as well.
+@NoPrefix@;We considered runtime checks for access-to-subprogram types as well.
 However, this would present difficulties for
 implementations that share generic bodies.
 
@@ -1442,7 +1443,7 @@ instance of a generic unit.],Old=[:]}]}
   @Chg{Version=[5],New=[of mode @key[in out] ],Old=[]}excludes null
   implicitly. @Chg{Version=[5],New=[Since a generic formal object of mode
   @key[in] is like a constant initialized to the value of the actual,
-  the run-time check performed by the initialization is enough to prevent
+  the runtime check performed by the initialization is enough to prevent
   lying; thus we don't need a @LegalityName for such objects.],Old=[]}],
   Old=[Since a generic formal object is like a
   constant of mode @key{in} initialized to the value of the actual,
@@ -2193,7 +2194,7 @@ usage restrictions as any other incomplete type @em see @RefSecNum{Incomplete Ty
 @begin{Reason}
   This ensures that if a discriminant constraint is given on
   the formal subtype, the corresponding constraint in the instance
-  will make sense, without additional run-time checks.
+  will make sense, without additional runtime checks.
   This is not necessary for arrays, since the bounds cannot be overridden
   in a type extension. An @nt<unknown_discriminant_part> may be used
   to relax these matching requirements.
@@ -2406,7 +2407,7 @@ calls (see @RefSecNum{Dispatching Operations of Tagged Types} and
 statically determined to be that of the formal type, the call raises
 Program_Error. If such a function is renamed, any call on the
 renaming raises Program_Error.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @end{Itemize}
 
@@ -2504,7 +2505,7 @@ If that's the intent, then there can't be anything
 in the generic body that would require a definite subtype.
 
 The check for discriminant subtype matching is changed from a
-run-time check to a compile-time check.
+runtime check to a compile-time check.
 @end{Incompatible83}
 
 
@@ -2764,7 +2765,7 @@ then the actual's components can be either aliased or not.
 @Defn{incompatibilities with Ada 83}
 The check for matching of component subtypes and index subtypes or
 index ranges is changed from a
-run-time check to a compile-time check.
+runtime check to a compile-time check.
 The Ada 83 rule that @lquotes@;If the component type is not a scalar type,
 then the component subtypes shall be either both constrained or both
 unconstrained@rquotes@; is removed, since it is subsumed by static matching.
@@ -2887,7 +2888,7 @@ Old=[@Defn2{Term=[mode conformance],Sec=(required)}]}
 @begin{Incompatible83}
 @Defn{incompatibilities with Ada 83}
 The check for matching of designated subtypes is changed from a
-run-time check to a compile-time check.
+runtime check to a compile-time check.
 The Ada 83 rule that @lquotes@;If the
 designated type is other than a scalar type, then the designated
 subtypes shall be either both constrained or both unconstrained@rquotes@; is

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_cmdln.mss,v $ }
-@comment{ $Revision: 1.32 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
+@comment{ $Revision: 1.33 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
 @Part(predefcmdln, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/09 03:46:57 $}
 @LabeledClause{The Package Command_Line}
 @begin{Intro}
 The package Command_Line allows a program to obtain the values of its
@@ -59,7 +59,6 @@ a program, then
 Argument returns an implementation-defined value@Chg{Version=[5],New=[ with
 lower bound 1],Old=[]} corresponding to
 the argument at relative position Number.
-@Defn2{Term=[Constraint_Error],Sec=(raised by failure of run-time check)}
 If Number is outside the range 1..Argument_Count, then
 Constraint_Error is propagated.
 @begin{Ramification}

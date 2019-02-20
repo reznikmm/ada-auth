@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2019/02/09 03:46:57 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.60 $}
+@Comment{$Revision: 1.61 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -511,7 +511,7 @@ elaborated@Redundant[, which evaluates the
 @nt<expression> of the address clause].
 A check is made that the address specified is
 associated with some interrupt to which a task entry may be attached.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 If this check fails, Program_Error is raised.
 Otherwise, the interrupt entry
 is attached to the interrupt associated with the specified address.

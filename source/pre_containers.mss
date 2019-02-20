@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.103 $ $Date: 2019/01/30 04:59:33 $ $Author: randy $ }
+@comment{ $Revision: 1.104 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2019/01/30 04:59:33 $}
+@Comment{$Date: 2019/02/09 03:46:55 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -933,12 +933,14 @@ package Containers.Vectors has the following declaration:]}
       Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector)
-      @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-      @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -2453,19 +2455,24 @@ except that elements are traversed in reverse index order.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector)
-   @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
+@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
-reverse iterator. Tampering with the cursors of Container is prohibited while
+reverse iterator@Chg{Version=[5],New=[, and starting with all nodes
+concurrently when used as a parallel iterator],Old=[]}. Tampering with the
+cursors of Container is prohibited while
 the iterator object exists (in particular, in
 the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
@@ -2473,23 +2480,27 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-   @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a reversible iterator object
+returns a @Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
 designating each node in Container, starting with the node
 designated by Start and moving the cursor as per the Next function when used as
 a forward iterator, or moving the cursor as per the Previous function when used
-as a reverse iterator. Tampering with the cursors of Container is prohibited
-while the iterator object exists (in particular, in the
-@nt{sequence_of_statements} of the @nt{loop_statement} whose
+as a reverse iterator@Chg{Version=[5],New=[, or all nodes
+concurrently when used as a parallel iterator],Old=[]}. Tampering with the
+cursors of Container is prohibited while the iterator object exists (in
+particular, in the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
 finalization.]}
 
@@ -2615,8 +2626,10 @@ Element, Query_Element, Update_Element,@Chg{Version=[3],New=[
 Constant_Reference, Reference,],Old=[]} Swap, Is_Sorted, Sort, Merge,
 "=", Find, or Reverse_Find is a bounded error. The implementation may treat
 the element as having any normal value (see @RefSecNum{Data Validity}) of the
-element type, or raise Constraint_Error or Program_Error before modifying
-the vector.]}
+element type, or raise
+Constraint_Error@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
+or Program_Error@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
+before modifying the vector.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2642,23 +2655,27 @@ Calling Merge in an instance of Generic_Sorting
 with either Source or Target not ordered smallest first using the provided
 generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
-defined.]}
+defined.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error for the actual function
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}It
+is a bounded error for the actual function
 associated with a generic formal subprogram, when called as part of an
 operation of this package, to tamper with elements of any Vector parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the Vector either prior to, or subsequent to, some or
-all of the modifications to the Vector.]}
+all of the modifications to the Vector.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
-@ChgAdded{Version=[3],Text=[It is a bounded error to call any subprogram
+@ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}It
+is a bounded error to call any subprogram
 declared in the visible part of Containers.Vectors
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
 Program_Error. Otherwise, the operation either proceeds as it would
-for an empty container, or it raises Constraint_Error or Program_Error.]}
+for an empty container, or it raises
+Constraint_Error@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
+or Program_Error.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -2698,10 +2715,10 @@ invalid, see below) cursor parameter. Possible results are:]}
 (but not necessarily the element that it originally designated);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Constraint_Error may be raised; or]}
+@ChgAdded{Version=[2],Text=[Constraint_Error may be raised; or@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[Program_Error may be raised.]}
+@ChgAdded{Version=[2],Text=[Program_Error may be raised.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @end{Itemize}
 
@@ -3291,12 +3308,14 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] List)
-      @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-      @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+      @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -4241,44 +4260,51 @@ function.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] List)
-   @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a reversible
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
+@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
-reverse iterator. Tampering with the cursors of Container is prohibited while
-the iterator object exists (in particular, in
-the @nt{sequence_of_statements} of the @nt{loop_statement} whose
+reverse iterator@Chg{Version=[5],New=[, and starting with all nodes concurrently
+when used as a parallel iterator],Old=[]}. Tampering with the cursors of
+Container is prohibited while the iterator object exists (in particular, in the
+@nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
 finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-   @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a reversible iterator object
+returns a @Chg{Version=[5],New=[parallel and ],Old=[]}reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the node designated
 by Start and moving the cursor as per the Next function when used as a forward
 iterator, or moving the cursor as per the Previous function when used as a
-reverse iterator. Tampering with the cursors of Container is prohibited while
-the iterator object exists (in particular, in
-the @nt{sequence_of_statements} of the @nt{loop_statement} whose
+reverse iterator@Chg{Version=[5],New=[, or all nodes concurrently
+when used as a parallel iterator],Old=[]}. Tampering with the cursors of
+Container is prohibited while the iterator object exists (in particular, in the
+@nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
 finalization.]}
 
@@ -4386,7 +4412,7 @@ Calling Merge in an instance of Generic_Sorting
 with either Source or Target not ordered smallest first using the provided
 generic formal "<" operator is a bounded error. Either Program_Error is raised
 after Target is updated as described for Merge, or the operation works as
-defined.]}
+defined.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0022-1],ARef=[AI05-0248-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
@@ -4395,7 +4421,7 @@ associated with a generic formal subprogram, when called as part of an
 operation of this package, to tamper with elements of any List parameter of
 the operation. Either Program_Error is raised, or the operation works as
 defined on the value of the List either prior to, or subsequent to, some or
-all of the modifications to the List.]}
+all of the modifications to the List.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0027-1]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
@@ -4404,7 +4430,8 @@ declared in the visible part of Containers.Doubly_Linked_Lists
 when the associated container has been finalized. If the operation takes
 Container as an @key[in out] parameter, then it raises Constraint_Error or
 Program_Error. Otherwise, the operation either proceeds as it would
-for an empty container, or it raises Constraint_Error or Program_Error.]}
+for an empty container, or it raises Constraint_Error@Defn2{Term=[Constraint_Error],Sec=(raised by detection of a bounded error)}
+or Program_Error.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Bounded}
 
 @begin{Erron}

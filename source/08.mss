@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2018/12/08 03:20:13 $}
+@Comment{$Date: 2019/02/09 03:46:54 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.113 $}
+@Comment{$Revision: 1.114 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -65,20 +65,28 @@ called its @i{declarative region},
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0094-1]}
   @ChgAdded{Version=[4],Text=[an @nt{access_definition};]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
+  @ChgAdded{Version=[5],Text=[an @nt{iterated_component_association};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0308-1]}
+  @ChgAdded{Version=[5],Text=[an @nt{iterated_element_association};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0255-1],ARef=[AI12-0308-1]}
+  @ChgAdded{Version=[5],Text=[a @nt{quantified_expression};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[a @nt{declare_expression};]}
+
   a @nt{block_statement};
 
   a @nt{loop_statement};
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
-  @ChgAdded{Version=[5],Text=[an @nt{iterated_component_association};]}
-
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0255-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
-  @ChgAdded{Version=[3],Text=[a @nt{quantified_expression};]}
+@ChgRef{Version=[5],Kind=[DeletedAdded]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[a @nt{quantified_expression};]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}@Comment{Paragraph number changed}
   @ChgAdded{Version=[2],Text=[an @nt{extended_return_statement};]}
 
   an @nt{accept_statement};
@@ -318,6 +326,13 @@ of constructs that have a declarative region.]}
   this common sense interpretation, so this extension may in fact be used
   in existing code.]}
 @end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0236-1]}
+  @ChgAdded{Version=[5],Text=[Added @nt{iterated_component_association} and
+  @nt{declare_expression} are added to the rapidly expanding list of constructs
+  that have a declarative region.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Scope of Declarations}
@@ -1319,12 +1334,13 @@ instantiated. This is easier to understand with an example:]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0300-1]}
 @ChgAdded{Version=[2],NoPrefix=[T],Text=[The context clause for Bad is illegal
 as I1 has an implicit declaration of I1.G2 based on the generic child G1.G2,
 as well as the mention of the explicit child I1.G2. As in the previous cases,
 this is illegal only if the context clause makes both children visible; the
 explicit child can be mentioned as long as the generic child is not (and
-vice-versa).]}
+vice@Chg{Version=[5],New=[ ],Old=[-]}versa).]}
 @end{Itemize}
 
 Note that we need to be careful which things we make "hidden from all
@@ -2866,11 +2882,12 @@ predefined subprogram before later overriding it.@Defn{squirrel away}
 
 @begin{Bounded}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
-@ChgAdded{Version=[1],Text=[@Defn2{Term=[Program_Error],Sec=(raised by failure of run-time check)}
-@Defn2{Term=[Storage_Error],Sec=(raised by failure of run-time check)}
-If a subprogram directly or indirectly renames itself, then it is a bounded
+@ChgAdded{Version=[1],Text=[If a subprogram directly or indirectly renames
+itself, then it is a bounded
 error to call that subprogram. Possible consequences are that Program_Error or
-Storage_Error is raised, or that the call results in infinite recursion.]}
+Storage_Error is raised, or that the call results in infinite recursion.
+@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}
+@Defn2{Term=[Storage_Error],Sec=(raised by detection of a bounded error)}]}
 @begin{Reason}
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0027],ARef=[AI95-00135-01]}
 @ChgAdded{Version=[1],Text=[This has to be a bounded error, as it is possible
