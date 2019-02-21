@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:53 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.140 $}
+@Comment{$Revision: 1.141 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1842,7 +1842,7 @@ unit.@PDefn{generic contract issue}]}
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0071-1]}
 @ChgAdded{Version=[4],Text=[If any of the above @LegalityTitle is violated in an
 instance of a generic unit, Program_Error is raised at the point of the
-violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
+violation.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}@Indexcheck{Program_Error_Check}]}
 
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -4656,68 +4656,79 @@ S'Pred for a modular integer subtype wraps around
        S'Base'First, or it might return the out-of-base-range value
        S'Base'First@en@;1, as is permitted for all predefined numeric operations.@end{ramification}
 
-@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI95-00285-01],
-  Text=[@Chg{Version=[2],New=[S'Wide_Wide_Image denotes a function
-     with the following specification:],Old=[]}
+@ChgAttribute{Version=[5],Kind=[DeletedAddedNoDelMsg],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1],
+  InitialVersion=[2], OmitAnnex=[T],
+  Text=[@Chg{Version=[2],New=[@Chg{Version=[5],New=[],Old=[S'Wide_Wide_Image denotes a function
+     with the following specification:]}],Old=[]}
+
 @begin(Descexample)
 @ChgRef{Version=[2],Kind=[Added]}
-@ChgAdded{Version=[2],Text=[@b(function) S'Wide_Wide_Image(@RI(Arg) : S'Base)
-  @b(return) Wide_Wide_String]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@b(function) S'Wide_Wide_Image(@RI(Arg) : S'Base)
+  @b(return) Wide_Wide_String]}]}
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Added]}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn2{Term=[image], Sec=(of a value)}
-     The function returns an @i(image) of the value of @i(Arg),
+     @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0020-1]}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     @Defn2{Term=[image], Sec=(of a value)}function returns an @i(image)
+     of the value of @i(Arg),
      that is, a sequence of characters representing the value in display
-     form.]}]}@Comment{End of Annex text here.}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[The lower bound of the result is one.]}
+     form.]}]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     lower bound of the result is one.]}]}
 
      @ChgRef{Version=[2],Kind=[Added]}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[The image of an integer value is
+     @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     image of an integer value is
      the corresponding decimal literal,
      without underlines, leading zeros, exponent, or trailing spaces, but
      with a single leading character that is either a minus sign or
-     a space.]}
+     a space.]}]}
      @begin{ImplNote}
          @ChgRef{Version=[2],Kind=[AddedNormal]}
-         @ChgAdded{Version=[2],Text=[
-         If the machine supports negative zeros for signed integer types,
+         @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+         @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If
+         the machine supports negative zeros for signed integer types,
          it is not specified whether "@ 0" or "@en@;0" should be returned
          for negative zero. We don't have enough experience with
          such machines to know what is appropriate, and what other
          languages do. In any case, the implementation should be
-         consistent.]}
+         consistent.]}]}
      @end{implnote}
 
      @ChgRef{Version=[2],Kind=[Added]}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Defn{nongraphic character}
-     The image of an enumeration value is either the corresponding
-     identifier in upper case or the corresponding character literal
-     (including the two apostrophes); neither leading nor trailing
-     spaces are included.
+     @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     @Defn{nongraphic character}image of an enumeration value is either the
+     corresponding identifier in upper case or the corresponding
+     character literal (including the two apostrophes); neither leading
+     nor trailing spaces are included.
      For a @i(nongraphic character) (a value of
      a character type that has no
      enumeration literal associated with it), the
      result is a corresponding language-defined
      name in upper case (for example, the image
      of the nongraphic character identified as @i(nul) is @lquotes@;NUL@rquotes@; @em the
-     quotes are not part of the image).]}
+     quotes are not part of the image).]}]}
      @begin{ImplNote}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[
-       For an enumeration type T that has @lquotes@;holes@rquotes@;
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[For
+       an enumeration type T that has @lquotes@;holes@rquotes@;
        (caused by an @nt{enumeration_@!representation_@!clause}),
-       @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
-       similar things).]}
+       similar things).]}]}
      @end{ImplNote}
 
      @ChgRef{Version=[2],Kind=[Added]}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[The image of a
-     floating point value is a decimal real literal
+     @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     image of a floating point value is a decimal real literal
      best approximating the value (rounded away from zero if halfway between)
      with a single leading character that is either a minus sign
      or a space, a single digit (that is nonzero unless the value is zero),
@@ -4729,84 +4740,108 @@ S'Pred for a modular integer subtype wraps around
      (with leading zeros if necessary)
      representing the exponent.
      If S'Signed_Zeros is True, then the leading character is a minus
-     sign for a negatively signed zero.]}
+     sign for a negatively signed zero.]}]}
      @begin{Honest}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[
-       Leading zeros are present in the exponent only if necessary to make
-       the exponent at least two digits.]}
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Leading
+       zeros are present in the exponent only if necessary to make
+       the exponent at least two digits.]}]}
      @end{Honest}
      @begin{Reason}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[
-       This image is intended to conform to that produced by
-       Text_IO.Float_IO.Put in its default format.]}
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[This
+       image is intended to conform to that produced by
+       Text_IO.Float_IO.Put in its default format.]}]}
      @end{reason}
      @begin{ImplNote}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[The rounding direction is specified here
-       to ensure portability of output results.]}
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The
+       rounding direction is specified here
+       to ensure portability of output results.]}]}
      @end{implnote}
 
      @ChgRef{Version=[2],Kind=[Added]}
-     @ChgAdded{Version=[2],NoPrefix=[T],Text=[The image of a fixed point value
+     @ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+     @ChgAdded{Version=[2],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The
+     image of a fixed point value
      is a decimal real literal
      best approximating the value (rounded away from zero if halfway between)
      with a single leading character that is either a minus sign
      or a space, one or more digits before the decimal point
      (with no redundant leading zeros),
      a decimal point, and S'Aft (see @RefSecNum(Operations of Fixed Point Types))
-     digits after the decimal point.]}
+     digits after the decimal point.]}]}
      @begin{Reason}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[This image is intended to conform to
-       that produced by Text_IO.Fixed_IO.Put.]}
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[This
+       image is intended to conform to
+       that produced by Text_IO.Fixed_IO.Put.]}]}
      @end{reason}
      @begin{ImplNote}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[The rounding direction is specified here
-       to ensure portability of output results.]}
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[The
+       rounding direction is specified here
+       to ensure portability of output results.]}]}
      @end{implnote}
      @begin{ImplNote}
        @ChgRef{Version=[2],Kind=[AddedNormal]}
-       @ChgAdded{Version=[2],Text=[For a machine that supports negative zeros,
+       @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+       @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[For a machine
+       that supports negative zeros,
        it is not specified whether "@ 0.000" or "@en@;0.000" is returned.
        See corresponding comment above about integer types with
-       signed zeros.]}
+       signed zeros.]}]}
      @end{implnote}
 
-@AttributeLeading{Prefix=<S>, AttrName=<Wide_Image>,
-  Text=[S'Wide_Image denotes a function
-     with the following specification:
+@ChgAttribute{Version=[5],Kind=[DeletedNoDelMsg],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1],
+  InitialVersion=[0], OmitAnnex=[T],
+  Text=[@Chg{Version=[5],New=[],Old=[S'Wide_Image denotes a function with
+    the following specification:]}
+
 @begin(Descexample)
-@b(function) S'Wide_Image(@RI(Arg) : S'Base)
-  @b(return) Wide_String
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[5],Text=[@b(function) S'Wide_Image(@RI(Arg) : S'Base)
+  @b(return) Wide_String]}
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
      @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0262-1],ARef=[AI05-0264-1]}
-     @NoPrefix@Defn2{Term=[image], Sec=(of a value)}
+     @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0020-1]}
+     @ChgDeleted{Version=[5],NoPrefix=[T],Text=[@Defn2{Term=[image], Sec=(of a value)}
      The function returns an @Chg{Version=[2],New=[image],Old=[@i(image)]} of
      the value of @i(Arg)@Chg{Version=[2],New=[ as a Wide_String],Old=[,
      that is, a sequence of characters representing the value in display
-     form]}.]}
-     The lower bound of the result is one.@Chg{Version=[2],
+     form]}.]}]}@Comment{End of Attribute Annex text}
+     @ChgDeleted{Version=[5],Text=[The lower bound of the result is
+     one.@Chg{Version=[2],
      New=[ The image has the same sequence of @Chg{Version=[3],New=[graphic
      characters],Old=[character]} as
      defined for S'Wide_Wide_Image if all the graphic characters are defined in
      Wide_Character; otherwise@Chg{Version=[3],New=[,],Old=[]}
      the sequence of characters is
      implementation defined (but no shorter than that of S'Wide_Wide_Image for
-     the same value of Arg).],Old=[]}
-     @ChgImplDef{Version=[2],Kind=[AddedNormal],Text=[@ChgAdded{Version=[2],
-     Text=[The sequence of characters of the value returned by
-     S'Wide_Image when some of the graphic characters of S'Wide_Wide_Image
-     are not defined in Wide_Character.]}]}
+     the same value of Arg).],Old=[]}]}
+
+     @ChgImplDef{Version=[5],Kind=[DeletedNoDelMsg],
+     InitialVersion=[2],Text=[@ChgAdded{Version=[2],
+     Text=[@Chg{Version=[5],New=[],Old=[The
+     sequence of characters of the value returned by
+     S'Image when some of the graphic characters of
+     S'Wide_Wide_Image are not defined in Character.]}]}]}
+
 
 @begin{NotIso}
-@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 31
-through 34 were moved to Wide_Wide_Image.>}]}@Comment{This message should be
-deleted if the paragraphs are ever renumbered.}
+@ChgAdded{Version=[2],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs
+@Chg{Version=[5],New=[28],Old=[31]} through @Chg{Version=[5],New=[37],Old=[34]}
+were moved to
+@Chg{Version=[5],New=[@RefSec{Image Attributes}],Old=[Wide_Wide_Image]}.>}]}@Comment{This
+message should be deleted if the paragraphs are ever renumbered.}
 @end{NotIso}
 
      @ChgRef{Version=[2],Kind=[DeletedNoDelMsg],ARef=[AI95-00285-01]}
@@ -4844,7 +4879,6 @@ deleted if the paragraphs are ever renumbered.}
        @ChgDeleted{Version=[2],Text=[For an enumeration type T
        that has @lquotes@;holes@rquotes@;
        (caused by an @nt{enumeration_representation_clause}),
-       @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
        T'Wide_Image should raise Program_Error if the value
        is one of the holes (which is a bounded error anyway,
        since holes can be generated only via uninitialized variables and
@@ -4911,50 +4945,63 @@ deleted if the paragraphs are ever renumbered.}
        signed zeros.]}
     @end{implnote}
 
-@AttributeLeading{Prefix=<S>, AttrName=<Image>,
-  Text=[S'Image denotes a function with
-    the following specification:
+@ChgAttribute{Version=[5],Kind=[DeletedNoDelMsg],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1],
+  InitialVersion=[0], OmitAnnex=[T],
+  Text=[@Chg{Version=[5],New=[],Old=[S'Image denotes a function with
+    the following specification:]}
+
 @begin(Descexample)
-@b(function) S'Image(@RI(Arg) : S'Base)
-  @b(return) String
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgDeleted{Version=[5],Text=[@b(function) S'Image(@RI(Arg) : S'Base)
+  @b(return) String]}
 @end(Descexample)
 
      @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
      @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-     @NoPrefix@;The function returns an image of the value of @i(Arg)
-     as a String.]}
-     The lower bound of the result is one. The image has the
-     same sequence of graphic characters as that defined
+     @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0020-1]}
+     @ChgDeleted{Version=[5],NoPrefix=[T],Text=[The function returns an image of the value of @i(Arg)
+     as a String.]}]}@Comment{End of Attribute Annex text.}
+     @ChgDeleted{Version=[5],Text=[The lower bound of the result is one. The
+     image has the same sequence of graphic characters as that defined
      for S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]} if all
      the graphic characters are defined in Character;
      otherwise@Chg{Version=[3],New=[,],Old=[]}
      the sequence of characters is implementation defined (but
      no shorter than that of S'@Chg{Version=[2],New=[Wide_Wide_Image],
-     Old=[Wide_Image]} for the same value of @i(Arg)).
-     @ChgImplDef{Version=[2],Kind=[Revised],InitialVersion=[0],Text=[The
+     Old=[Wide_Image]} for the same value of @i(Arg)).]}
+
+     @ChgImplDef{Version=[5],Kind=[DeletedNoDelMsg],
+     InitialVersion=[0],Text=[@Chg{Version=[5],New=[],Old=[The
      sequence of characters of the value returned by
      S'Image when some of the graphic characters of
      S'@Chg{Version=[2],New=[Wide_Wide_Image],Old=[Wide_Image]} are not
-     defined in Character.]}
+     defined in Character.]}]}
 
-@ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Width>, ARef=[AI95-00285-01],
-  Text=[@Chg{Version=[2],New=[S'Wide_Wide_Width denotes the
+@ChgAttribute{Version=[5],Kind=[RevisedAdded],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Wide_Wide_Width>, ARef=[AI95-00285-01], ARef=[AI12-0020-1],
+  InitialVersion=[2], Text=[@Chg{Version=[2],New=[S'Wide_Wide_Width denotes the
      maximum length of a Wide_Wide_String
      returned by S'Wide_Wide_Image over all values of the
-     subtype S. It denotes zero for a subtype that has
+     subtype S@Chg{Version=[5],New=[, assuming a default implementation of
+     S'Put_Image],Old=[]}. It denotes zero for a subtype that has
      a null range. Its type is @i(universal_integer).],Old=[]}]}
 
-@Attribute{Prefix=<S>, AttrName=<Wide_Width>,
-  Text=[S'Wide_Width denotes the maximum length of a Wide_String
+@ChgAttribute{Version=[5],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Wide_Width>, ARef=[AI12-0020-1],
+  InitialVersion=[0], Text=[S'Wide_Width denotes the maximum length
+     of a Wide_String
      returned by S'Wide_Image over all values of the
-     subtype S. It denotes zero for a subtype that has
+     subtype S@Chg{Version=[5],New=[, assuming a default implementation of
+     S'Put_Image],Old=[]}. It denotes zero for a subtype that has
      a null range. Its type is @i(universal_integer).]}
 
-@Attribute{Prefix=<S>, AttrName=<Width>,
-  Text=[S'Width denotes the maximum length of a String
-     returned by S'Image over all values of the
-     subtype S. It denotes zero for a subtype that has
+@ChgAttribute{Version=[5],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<S>, AttrName=<Width>, ARef=[AI12-0020-1],
+  InitialVersion=[0], Text=[S'Width denotes the maximum length
+     of a String returned by S'Image over all values of the
+     subtype S@Chg{Version=[5],New=[, assuming a default implementation of
+     S'Put_Image],Old=[]}. It denotes zero for a subtype that has
      a null range. Its type is @i(universal_integer).]}
 
 @ChgAttribute{Version=[2],Kind=[Added],ChginAnnex=[T],
@@ -5088,6 +5135,7 @@ deleted if the paragraphs are ever renumbered.}
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0020-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Wide_Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Wide_Value
@@ -5096,8 +5144,9 @@ deleted if the paragraphs are ever renumbered.}
     leading and trailing spaces) has the syntax
     of an enumeration literal and if it corresponds to a literal of the
     type of S (or corresponds to the result of S'Wide_Image
-    for a @Chg{Version=[2],New=[value],Old=[nongraphic character]} of the type),
-    the result is the corresponding enumeration value;
+    for a @Chg{Version=[2],New=[value],Old=[nongraphic character]} of the
+    type@Chg{Version=[5],New=[, assuming a default implementation
+    of S'Put_Image],Old=[]}), the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
     otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
     @Chg{Version=[2],New=[For a numeric subtype S,
@@ -5219,6 +5268,7 @@ paragraphs are ever renumbered.}
 
     @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
     @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0020-1]}
     @NoPrefix@PDefn2{Term=[evaluation], Sec=(Value)}
     @Defn2{Term=(Constraint_Error),Sec=(raised by failure of runtime check)}
     For the evaluation of a call on S'Value
@@ -5227,7 +5277,8 @@ paragraphs are ever renumbered.}
     leading and trailing spaces) has the syntax
     of an enumeration literal and if it corresponds to a literal of the
     type of S (or corresponds to the result of S'Image
-    for a value of the type),
+    for a value of the type@Chg{Version=[5],New=[, assuming a
+    default implementation of S'Put_Image],Old=[]}),
     the result is the corresponding enumeration value;
     @IndexCheck{Range_Check}
     otherwise@Chg{Version=[3],New=[,],Old=[]} Constraint_Error is raised.
@@ -5252,47 +5303,40 @@ paragraphs are ever renumbered.}
 @end(description)
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0124-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0225-1]}
-@ChgAdded{Version=[4],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
-@nt{prefix} X @Chg{Version=[5],New=[],Old=[that denotes an object ]}of a scalar
-type@Chg{Version=[5],New=[ other than @i<universal_real> or
-@i<universal_fixed>],Old=[]}@Redundant[ (after
-any implicit dereference)]}, the following attributes are defined:]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0020-1],ARef=[AI12-0225-1]}
+@ChgAdded{Version=[4],Type=[Leading],Keepnext=[T],Text=[@Chg{Version=[5],New=[],Old=[For
+@PrefixType{a
+@nt{prefix} X that denotes an object of a scalar
+type@Redundant[ (after
+any implicit dereference)]}, the following attributes are defined:]}]}
 
 @begin(description)
-@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+@ChgAttribute{Version=[5],Kind=[DeletedAddedNoDelMsg],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Wide_Wide_Image>,
-  InitialVersion=[4], ARef=[AI12-0124-1],
-  Text=[@Chg{Version=[4],New=[X'Wide_Wide_Image denotes the result of
+  InitialVersion=[4], OmitAnnex=[T], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[X'Wide_Wide_Image
+  denotes the result of
   calling function S'Wide_Wide_Image with @i<Arg> being X, where S is the
-  nominal subtype of X.],Old=[]}]}
+  nominal subtype of X.]}],Old=[]}]}
 
-@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+@ChgAttribute{Version=[5],Kind=[DeletedAddedNoDelMsg],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Wide_Image>,
-  InitialVersion=[4], ARef=[AI12-0124-1],
-  Text=[@Chg{Version=[4],New=[X'Wide_Image denotes the result of
+  InitialVersion=[4], OmitAnnex=[T], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[X'Wide_Image
+  denotes the result of
   calling function S'Wide_Image with @i<Arg> being X, where S is the
-  nominal subtype of X.],Old=[]}]}
+  nominal subtype of X.]}],Old=[]}]}
 
-@ChgAttribute{Version=[4],Kind=[Added],ChginAnnex=[T],
+@ChgAttribute{Version=[5],Kind=[DeletedAddedNoDelMsg],ChginAnnex=[T],
   Leading=<F>, Prefix=<X>, AttrName=<Image>,
-  InitialVersion=[4], ARef=[AI12-0124-1],
-  Text=[@Chg{Version=[4],New=[X'Image denotes the result of
+  InitialVersion=[4], OmitAnnex=[T], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[X'Image
+  denotes the result of
   calling function S'Image with @i<Arg> being X, where S is the
-  nominal subtype of X.],Old=[]}]}
+  nominal subtype of X.]}],Old=[]}]}
 
 @EndPrefixType{}
 @end(description)
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0225-1]}
-  @ChgAdded{Version=[5],Text=[We do not allow universal real or fixed types as
-  the details of the result depends on the properties of the type, so a specific
-  nominal subtype is needed. On the other hand, the desired string for an
-  integer type does not depend upon the type, so we can allow any integer type,
-  including @i<universal_integer>. Such a type is evaluated as type
-  @i<root_integer> (as all universal integer runtime operations are), so
-  Constraint_Error may be raised if the magnitude of the value is too large.]}
-@end{Reason}
 @end{RunTime}
 
 @begin{ImplPerm}
@@ -5404,8 +5448,11 @@ Succ, Pred, and Value might not belong to the subtype; similarly,
 the actual parameters
 of the attributes Succ, Pred, and Image need not belong to the subtype.
 
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0020-1]}
 For any value V (including any nongraphic character) of an
-enumeration subtype S, S'Value(S'Image(V)) equals V,
+enumeration subtype S@Chg{Version=[5],New=[ without a specified Put_Image
+(see @RefSecNum{Image Attributes})],Old=[]}, S'Value(S'Image(V)) equals V,
 as @Chg{Version=[2],New=[do],Old=[does]} S'Wide_Value(S'Wide_Image(V))@Chg{Version=[2],
 New=[ and S'Wide_Wide_Value(S'Wide_Wide_Image(V))],Old=[]}.
 @Chg{Version=[2],New=[None of these
@@ -5543,10 +5590,9 @@ More explicit rules are provided for nongraphic characters.
   attribute (as well as Wide_Image and Wide_Wide_Image), a
   convenience feature already present in some implementations.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0225-1]}
-  @ChgAdded{Version=[5],Text=[@b<Correction:> Scalar values (as well as objects)
-  can be now used as the prefix of the Image attribute (as well as Wide_Image
-  and Wide_Wide_Image).]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+  @ChgAdded{Version=[5],Text=[All of the Image-family attributes have
+  been moved to @RefSecNum{Image Attributes}.]}
 @end{Extend2012}
 
 

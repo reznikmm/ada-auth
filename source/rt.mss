@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.126 $ $Date: 2019/02/09 03:46:56 $ $Author: randy $ }
+@comment{ $Revision: 1.127 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2019/02/09 03:46:56 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -5422,7 +5422,7 @@ Text=[The metrics for entry-less protected objects.]}]}
 
 
 @LabeledRevisedClause{Version=[5],InitialVersion=[3],New=[The Ravenscar and Jorvik Profiles],Old=[The Ravenscar Profile]}}
-@Comment{@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}}
+@Comment<@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}>
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00249-01]}
@@ -5520,10 +5520,12 @@ pragmas that is defined for each run-time profile.]}]}
 @ChgAdded{Version=[3],Text=[The Ravenscar profile is named for the location
 of the meeting that defined its initial version. The name is now in widespread
 use, so we stick with existing practice, rather than using a more descriptive
-name.@Comment{ This is another example of Ada's lousy marketing sense; casual
-readers, especially those outside of Ada, have no conception of what
-@lquotes@;Ravenscar@rquotes@; is, and thus are much less likely to investigate
-it to find out how it can help them.}]}
+name.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[The Jorvik profile is named for the city of York,
+UK, near where the Ravenscar profile was created. "Jorvik" (pronounced
+"Yorvick") was the Viking name for York.]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0291-1]}
@@ -5620,7 +5622,7 @@ will execute when the Ravenscar profile is in effect.]}]}}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0291-1]}
 @ChgAdded{Version=[3],Text=[On a multiprocessor system, an implementation should
-support a fully partitioned approach@Chg{Version=[5],New=[ if either of these
+support a fully partitioned approach@Chg{Version=[5],New=[ if one of these
 profiles is specified],Old=[]}. Each processor should have separate and
 disjoint ready queues.]}
 

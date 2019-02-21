@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.63 $ $Date: 2019/02/09 03:46:56 $ $Author: randy $ }
+@Comment{ $Revision: 1.64 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:56 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -915,23 +915,54 @@ task invokes the same subprogram.
 @end{description}
 @end{StaticSem}
 
+@begin{Runtime}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following
+@SynI{restriction_parameter_}@nt{identifier} is language defined:]}
+
+@begin{description}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],Sec=(Max_Image_Length)}
+    @Defn{Max_Image_Length restriction}Max_Image_Length@\Specifies the maximum
+    length for a Wide_Wide_Image attribute result. Violation of this restriction
+    results in the raising of Program_Error at the point of the invocation of an
+    image attribute.@Defn2{Term=(Program_Error),Sec=(raised by failure of runtime check)}
+    @IndexCheck{Program_Error_Check}]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[Image and Wide_Image are defined in terms of
+      Wide_Wide_Image, so this restriction also applies to evaluations of those
+      attributes.]}
+@end{Ramification}
+
+@end{description}
+
+@end{Runtime}
+
 @begin{ImplReq}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00394-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Type=[Leading],Text=[An implementation of this Annex
 shall support:]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the restrictions defined in this subclause; and]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0189-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the following restrictions defined in
 @RefSecNum{Tasking Restrictions}: No_Task_Hierarchy,
 No_Abort_Statement, No_Implicit_Heap_Allocation@Chg{Version=[3],New=[,
 No_Standard_Allocators_After_Elaboration], Old=[]}; and]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00347-01]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Text=[the @key{pragma} Profile(Ravenscar); and]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00347-01]}
@@ -942,21 +973,31 @@ No_Standard_Allocators_After_Elaboration], Old=[]}; and]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[2],Type=[Leading],Text=[the following uses of
 @SynI{restriction_parameter_}@nt{identifier}s defined in
 @RefSecNum{Tasking Restrictions}@Redundant[, which are checked
 prior to program execution]:]}
 @begin{InnerItemize}
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
   @ChgAdded{Version=[2],Text=[Max_Task_Entries => 0,]}
 
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
   @ChgAdded{Version=[2],Text=[Max_Asynchronous_Select_Nesting => 0, and]}
 
   @ChgRef{Version=[2],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
   @ChgAdded{Version=[2],Text=[Max_Tasks => 0.]}
 @end{InnerItemize}
 @end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[If a Max_Image_Length restriction applies to any
+compilation unit in the partition, then for any subtype S, S'Wide_Wide_Image
+shall be implemented within that partition without any dynamic allocation.]}
+
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1],ARef=[AI05-0272-1]}
 If an implementation supports @nt[pragma] Restrictions for a particular
@@ -997,6 +1038,7 @@ to @exam{No_Dependence => Ada.Unchecked_Conversion} and the like, not all
 uses of No_Dependence.]}
 
 @end{Discussion}
+
 @end{ImplReq}
 
 @begin{DocReq}
@@ -1173,6 +1215,13 @@ proscribed
   not what the user is trying to prevent anyway.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Restriction
+  Max_Image_Length is new.]}
+@end{Extend2012}
+
+
 
 @LabeledAddedSubClause{Version=[5],Name=[Aspect No_Controlled_Parts]}
 
@@ -1268,7 +1317,7 @@ potentially blocking operation @Chg{Version=[5],New=[that occurs during the
 execution of],Old=[within]}
 a protected operation@Chg{Version=[5],New=[ or a parallel construct defined
 within a compilation unit to which the pragma applies],Old=[]},
-and to raise@Defn2{Term=(Program_Error),Sec=(raised by failure of runtime check)}
+and to raise@Defn2{Term=(Program_Error),Sec=(raised by deteection of a bounded error)}
 Program_Error (see @Chg{Version=[5],New=[@RefSecNum{Intertask Communication}],
 Old=[@RefSecNum{Protected Subprograms and Protected Actions}]}).]}
 @end{RunTime}

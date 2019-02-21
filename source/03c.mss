@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:53 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4429,11 +4429,13 @@ not at all) for different designated subtypes.
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0137-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigndum:> Changed the wording to clarify
   that the class-wide type associated with a specific tagged type that has
   an incomplete view is also an incomplete view.
   While this was previously undefined, an interpretation where it is not
-  an incomplete view is leads to semantic nonsense, and thus we don't consider
+  an incomplete view @Chg{Version=[5],New=[],Old=[is ]}leads to semantic
+  nonsense, and thus we don't consider
   this a potential incompatibility, as compilers most likely are doing the
   right thing.]}
 

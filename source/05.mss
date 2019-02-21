@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1279,8 +1279,7 @@ defines the subtype of the chunk parameter, and the number
 of values in this subtype determines the maximum number of chunks. After
 elaborating the @nt{chunk_specification}, a check is made that the determined
 maximum number of chunks is greater than zero. If
-this check fails, Program_Error is raised.
-@Comment{@IndexCheck{Unknown_Check}}
+this check fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
@@ -1558,24 +1557,26 @@ language-defined generic library package exists:]}
                                 Max_Chunks : @key[in]     Chunk_Index) @key[is abstract]
       @key[with] Pre'Class   => @key[not] Object.Is_Split @key[or else raise] Program_Error,
            Post'Class  => Object.Is_Split @key[and then]
-              Object.Chunk_Count <= Max_Chunks;]}
+                          Object.Chunk_Count <= Max_Chunks;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Chunk_Count} (Object : Parallel_Iterator) @key[return] Chunk_Index
-      @key[is abstract]
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Chunk_Count} (Object : Parallel_Iterator)
+      @key[return] Chunk_Index @key[is abstract]
       @key[with] Pre'Class   => Object.Is_Split @key[or else raise] Program_Error;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{First} (Object : Parallel_Iterator;
                    Chunk  : Chunk_Index) @key[return] Cursor @key[is abstract]
-      @key[with] Pre'Class   => (Object.Is_Split @key[and then] Chunk <= Object.Chunk_Count)
+      @key[with] Pre'Class   => (Object.Is_Split @key[and then]
+                              Chunk <= Object.Chunk_Count)
                            @key[or else raise] Program_Error;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Next} (Object   : Parallel_Iterator;
                   Position : Cursor;
                   Chunk    : Chunk_Index) @key[return] Cursor @key[is abstract]
-      @key[with] Pre'Class   => (Object.Is_Split @key[and then] Chunk <= Object.Chunk_Count)
+      @key[with] Pre'Class   => (Object.Is_Split @key[and then]
+                              Chunk <= Object.Chunk_Count)
                            @key[or else raise] Program_Error;]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
@@ -1625,6 +1626,7 @@ operational aspects may be specified for an indexable container type @i<T> (see
 
 @begin{Description}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[3],Text=[Default_Iterator@\This aspect is specified
     by a @nt{name} that denotes exactly one function declared immediately within
     the same declaration list in which @i<T> is declared, whose first parameter
@@ -1635,25 +1637,79 @@ operational aspects may be specified for an indexable container type @i<T> (see
     Its result subtype is the @i<default iterator subtype> for
     @i<T>.@Defn{default iterator subtype} The iteration cursor subtype for
     the default iterator subtype is the @i<default cursor subtype>
-    for @i<T>.@Defn{default cursor subtype}@AspectDefn{Default_Iterator}]}
+    for
+    @i<T>.@Defn{default cursor subtype}@AspectDefn{Default_Iterator}@Chg{Version=[5],New=[
+    This aspect is inherited by descendants
+    of type @i<T> (including @i<T>'Class).],Old=[]}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Default_Iterator],
     Text=[@ChgAdded{Version=[3],Text=[Default iterator to be used in @key[for]
     loops.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[3],Text=[Iterator_Element@\This aspect is specified by a
     @nt{name} that denotes a subtype. This is the @i<default element subtype>
-    for @i<T>.@Defn{default element subtype}@AspectDefn{Iterator_Element}]}
+    for @i<T>.@Defn{default element subtype}@AspectDefn{Iterator_Element}@Chg{Version=[5],New=[
+    This aspect is inherited by descendants
+    of type @i<T> (including @i<T>'Class).],Old=[]}]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Iterator_Element],
     Text=[@ChgAdded{Version=[3],Text=[Element type to be used for user-defined
       iterators.]}]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[Iterator_View@\This aspect is
+    specified by a @nt{name} that denotes a type @i<T2> with the
+    following properties:@AspectDefn{Iterator_View}]}
+
+@begin{Itemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<T2> is declared in the same compilation
+      unit as @i<T>;]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<T2> is an iterable container type;]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[@i<T2> has a single discriminant which is an
+      access discriminant designating @i<T>; and]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[The default iterator subtypes for @i<T> and
+      @i<T2> statically match.]}
+@end{Itemize}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],NoPrefix=[T],Text=[This aspect is never
+    inherited@Redundant[, even by @i<T>'Class].]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Iterator_View allows specifying an alternative
+    type to be automatically used by container element iterators; see
+    @RefSecNum{Generalized Loop Iteration}. This allows setting state for
+    an iteration only once rather than for each individual reference.]}
+  @end{Reason}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Since Iterator_View is not inherited, it does
+    not apply to @i<T>'Class. Otherwise, the type of the iterator object would
+    not be known at compile-time (since it necessarily has to be different for
+    each descendant).]}
+  @end{Ramification}
+
+  @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Iterator_View],
+    Text=[@ChgAdded{Version=[5],Text=[An alternative type to used for container
+      element iterators.]}]}
+
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[These aspects are inherited by descendants of
-type @i<T> (including @i<T>'Class).]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[These aspects are
+inherited by descendants of type @i<T> (including @i<T>'Class).]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
@@ -1770,8 +1826,13 @@ properties:]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Aspect Iterator_View
+  is new; it allows container element iterators to set the tampering state
+  once rather than for each use of the element.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel iterator
+  @ChgAdded{Version=[5],Text=[Parallel iterator
   interfaces are new; they allow user-defined parallel loops to be defined.]}
 @end{Extend2012}
 
@@ -2020,7 +2081,7 @@ iterator type is called, with the determined maximum passed as the Max_Chunks
 parameter, specifying the upper bound for the number of loop parameter objects
 (and the number of logical threads of control) to be associated with the
 iterator. In the absence of a @nt{chunk_specification}, the maximum number of
-chunks is determined in an implementation defined manner.]}
+chunks is determined in an implementation-defined manner.]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
 Text=[@ChgAdded{Version=[5],Text=[The maximum number of chunks for a parallel
@@ -2057,7 +2118,7 @@ control are complete.]}
   @ChgAdded{Version=[5],Text=[The Max_Chunks parameter of the Split_Into_Chunks
     procedure is an upper bound for the number of chunks to be associated with a
     loop. A container implementation may opt for a lower value for the number of
-    chunks if a more optimal split can be determined. For instance, a tree based
+    chunks if a more optimal split can be determined. For instance, a tree-based
     container might create the split based on the number of branches at the top
     levels of the tree.]}
 @end{Discussion}
@@ -2110,14 +2171,20 @@ are assigned such that they increase in the canonical order of the
 starting array components for the chunks.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[For a container element iterator,
 @Chg{Version=[5],New=[the @nt{chunk_specification} of the associated
 parallel construct, if any, is first elaborated to determine
 the maximum number of chunks (see @RefSecNum{Loop Statements}), and
-then ],Old=[]}the @SynI<iterable_>@nt{name} is evaluated
-and the denoted iterable container object becomes the @i<iterable
-container object for the loop>.@Defn{iterable container object for a loop}
+then ],Old=[]}the @SynI<iterable_>@nt{name} is evaluated@Chg{Version=[5],New=[.
+If the container type has Iterator_View specified, an object of the
+Iterator_View type is created with the discriminant referencing the
+iterable container object denoted by the @SynI<iterable_>@nt{name}. This is
+the @i<iterable container object for the loop>. Otherwise,],Old=[and]}
+the iterable container object
+@Chg{Version=[5],New=[denoted by the @SynI<iterable_>@nt{name} becomes the
+iterable container object for the loop],Old=[becomes the @i<iterable
+container object for the loop>]}.@Defn{iterable container object for a loop}
 The default iterator function for the type of
 the iterable container object for the loop is called on the iterable container object
 and the result is the @i<loop iterator>.@Defn2{Term=[loop iterator],Sec=[container element iterator]}
@@ -2127,13 +2194,24 @@ iterator, an],Old=[An]} object of the default cursor subtype is created
 container element iterator, each chunk of iterations
 will have its own loop cursor, again of the default cursor subtype.],Old=[]}]}
 
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[If Iterator_View is specified, we add an extra
+  object and use that object for this iteration. This allows these iterators
+  to automatically use the stable view (defined in each of the language-defined
+  containers) to do the iteration. That eliminates the need to set and clear
+  the tampering with elements indication each time Reference is called; that
+  eliminates substantial overhead as finalization is typically used to
+  implement the tampering reset.]}
+@end{Reason}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[A],Old=[For a]} container
 element iterator@Chg{Version=[5],New=[ then proceeds as described above for a
 generalized iterator, except that each reference to a loop parameter
 is replaced by a reference to the corresponding loop cursor. For a
-ontainer element iterator, the loop parameter for each iteration
+container element iterator, the loop parameter for each iteration
 instead denotes],Old=[, the
 operation First of the iterator type is called on the loop iterator, to produce
 the initial value for the loop cursor. If the result of calling Has_Element on
@@ -2244,6 +2322,10 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   the rest of Ada works, we consider it so unlikely that any Ada 2012
   implementation ever did anything else that we don't document this as a
   possible inconsistency.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to include the use of the iterator
+  view in a container element iterator.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[5],Text=[Added wording to describe the execution of

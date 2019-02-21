@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1603,11 +1603,13 @@ itself.]]}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0045-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[@Defn{incompatibilities with Ada 2012}@b<Corrigendum:>
   Precondition and postcondition aspects cannot be specified on instances of
   generic subprograms (they should be specified on the generic subprogram
   instead). This was (unintentionally) allowed by the Ada 2012 standard.
-  These are not be allowed on instances as there is no corresponding way to add
+  These are not @Chg{Version=[5],New=[],Old=[be ]}allowed on instances as
+  there is no corresponding way to add
   preconditions and postconditions to subprograms declared within the instance
   of a generic package. Therefore, allowing specification on a subprogram
   instance could present a maintenance problem in the future if the entity
@@ -1737,7 +1739,7 @@ rhs="@Chg{Version=[5],New=<@key[all] | @key[null]>,Old=<>}"}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_name>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @SynI{object_}@Syn2{name}
-  | @SynI{package_}@Syn2{name} [ @key[private] ]
+  | [@key[private of]] @SynI{package_}@Syn2{name}
   | @Syni{access_}@Syn2{subtype_mark}
   | @key[access] @Syn2{subtype_mark}>,Old=<>}"}
 
@@ -1909,9 +1911,9 @@ given mode for the entities identified by the @nt{prefix}es of the
        of all variables declared within the declarative region of the package
        having the same accessibility level as the package, but not including
        those within the declarative region of a public child of the package; if
-       the reserved word @key[private] follows the @SynI<package_>@nt{name}, the
-       set is reduced to those variables declared in the private part or body of
-       the package or within a private descendant of the package;]}
+       the reserved words @key[private of] precede the @SynI<package_>@nt{name},
+       the set is reduced to those variables declared in the private part or
+       body of the package or within a private descendant of the package;]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[@Syni{access_}@nt{subtype_mark} identifies
@@ -2623,8 +2625,9 @@ and makes these Intrinsic, thus forbidding 'Access.],Old=[]}
     By_Protected_Procedure],Old=[]}.]}
   @begin{Reason}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
-    @ChgAdded{Version=[2],Text=[The profile of a prefixed view is
-    different than the @lquotes@;real@rquotes profile of the subprogram
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+    @ChgAdded{Version=[2],Text=[The profile of a prefixed view is different
+    @Chg{Version=[5],New=[from],Old=[than]} the @lquotes@;real@rquotes profile of the subprogram
     (it doesn't have the first parameter), so we don't want to be able
     to take 'Access of it, as that would require generating a wrapper of
     some sort.]}
@@ -4180,7 +4183,7 @@ parameter is a view conversion and either],Old=[;]}]}
   @end{Itemize}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0074-1]}
-@ChgAdded{Version=[4],NoPrefix=[T],Text=[then Program_Error
+@ChgAdded{Version=[4],NoPrefix=[T],Text=[then Program_Error@IndexCheck{Program_Error_Check}
 is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Reason}

@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/02/21 05:24:06 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.56 $}
+@comment{$Revision: 1.57 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -133,7 +133,7 @@ New=[Standard (@i{...continued})
 @Chg{Version=[2],New=(@\@\@\Timing_Events @em @RefSecNum{Timing Events}
 ), Old=()}@\@\Sequential_IO @em @RefSecNum{The Generic Package Sequential_IO}
 @\@\Storage_IO @em @RefSecNum{The Generic Package Storage_IO}
-@\@\Streams @em @RefSecNum{The Package Streams}
+@\@\Streams @em @RefSecNum{The Streams Subsystem}
 @\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
 >@NewColumnVer{Version=[0]}@NewColumnVer{Version=[1]}@NewColumnVer{Version=[2]}@Noparanum@shrink<@Chg{Version=[3],
 New=[],Old=[Standard (@i{...continued})

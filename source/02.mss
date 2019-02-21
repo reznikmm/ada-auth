@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:53 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.92 $}
+@Comment{$Revision: 1.93 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2315,8 +2315,8 @@ Replacements of Characters@rquotes@; has been moved to
 
 @begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2005}The
-  following word is not reserved in Ada 2012, but is reserved in Ada 2012:
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
+  following word is not reserved in Ada 2012, but is reserved in Ada 2020:
   @key{parallel}. Uses of this word as an identifier will need
   to be changed, but we do not expect them to be common.]}
 @end{Incompatible2012}
