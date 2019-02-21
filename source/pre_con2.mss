@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.33 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.34 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -86,11 +86,20 @@ package Containers.Multiway_Trees has the following declaration:]}
    @key{pragma} Remote_Types(Multiway_Trees);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{type} @AdaTypeDefn{Tree} @key{is tagged private}
       @key{with} Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type;
+           Iterator_Element  => Element_Type@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Tree,
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Tree) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (Tree)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Tree))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Tree);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -420,13 +429,15 @@ structure as was written by Tree'Write.]}
 
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
-have access-to-subprogram parameters. To ensure such operations are
-well-defined, they guard against certain actions by the designated subprogram.
-In particular, some operations check for "tampering with cursors" of a container
-because they depend on the set of elements of the container remaining constant,
-and others check for "tampering with elements" of a container because they
-depend on elements of the container not being replaced.]]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
+operations of this generic package have access-to-subprogram parameters. To
+ensure such operations are well-defined, they guard against certain actions by
+the designated subprogram. In particular, some operations check for "tampering
+with cursors" of a container because they depend on the set of elements of the
+container remaining constant, and others check for "tampering with elements" of
+a container because they depend on elements of the container not being
+replaced.]]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}
@@ -1152,13 +1163,12 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0069-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
-  @Chg{Version=[5],New=[a parallel],Old=[an]} iterator object
-  (see @RefSecNum{User-Defined Iterator Types}) that will
+  an iterator object (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
   designating each @Chg{Version=[4],New=[element],Old=[node]} in Container, starting
   @Chg{Version=[4],New=[from],Old=[with]} the root node and proceeding in a depth-first
   order@Chg{Version=[5],New=[ when used as a forward iterator,
-  and starting with all nodes concurrently when used as a parallel
+  and processing all nodes concurrently when used as a parallel
   iterator],Old=[]}.
   Tampering with the cursors of Container is prohibited while the iterator
   object exists (in particular, in the
@@ -1193,14 +1203,13 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[If Position equals No_Element,
   then Constraint_Error is propagated. Otherwise, Iterate_Subtree returns
-  @Chg{Version=[5],New=[a parallel],Old=[an]}
-  iterator object (see @RefSecNum{User-Defined Iterator Types}) that will
+  an iterator object (see @RefSecNum{User-Defined Iterator Types}) that will
   generate a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
   designating each element in the subtree rooted by the node designated by Position,
   starting @Chg{Version=[4],New=[from],Old=[with]} the
   node designated by Position and proceeding in a depth-first
   order@Chg{Version=[5],New=[ when used as a forward iterator,
-  and starting with all nodes in the subtree concurrently when used
+  and processing all nodes in the subtree concurrently when used
   as a parallel iterator],Old=[]}.
   If Position equals No_Element, then Constraint_Error is propagated.
   Tampering with the cursors of the container that contains the node
@@ -1743,8 +1752,8 @@ Any exception raised by Process.@key{all} is propagated.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Children returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible iterator object
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate_Children returns
+@Chg{Version=[5],New=[an],Old=[a reversible]} iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
 designating each child node of Parent. If Parent equals No_Element, then
@@ -1754,7 +1763,7 @@ iterator, the nodes are designated starting with the first child node and moving
 the cursor as per the function Next_Sibling; when used as a reverse iterator,
 the nodes are designated starting with the last child node and moving the cursor
 as per the function Previous_Sibling@Chg{Version=[5],New=[; when used as a
-parallel iterator, starting with all child nodes concurrently],Old=[]}.
+parallel iterator, processing all child nodes concurrently],Old=[]}.
 Tampering with the cursors of Container is
 prohibited while the iterator object exists (in particular, in the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -1949,6 +1958,16 @@ unless specified by the operation.]}]}
   The generic package Containers.Multiway_Trees is new.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for regular containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
@@ -1956,6 +1975,10 @@ unless specified by the operation.]}]}
   concurrently so long as it operates on different elements. This allows
   some container operations to be used in parallel without separate
   synchronization.]}
+
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[Most iterators can now return parallel
+  iterators, to be used in parallel constructs.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -1971,6 +1994,12 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
 
 
@@ -2034,6 +2063,35 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @ChgAdded{Version=[4],Text=[The operations "&", Append, Insert, Prepend,
 Replace_Element, and To_Vector that have a formal parameter of type
 Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The description of
+Tampering_With_Elements_Prohibited is replaced by:]}
+
+@begin{Indent}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Returns True if tampering with elements is
+  prohibited for Container, and False otherwise.]}
+@end{Indent}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Complete replacement of an element can cause its
+      memory to be deallocated while another operation is holding onto a
+      reference to it. That can't be allowed. However, a simple modification of
+      (part of) an element is not a problem, so Update_Element does not cause a
+      problem.]}
+  @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited is replaced by
+Tampering_With_Elements_Prohibited in the postcondition for the operations
+Reference and Constant_Reference.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations Replace_Element,
+Reverse_Elements, and Swap, and the nested generic unit Generic_Sorting are
+omitted from the nested package Stable.]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2056,6 +2114,21 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
   went out of scope. All known implementations are implemented in Ada, so we
   believe there is no practical incompatibility. As such, we
   mention this only for completeness.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This means that tampering
+  with elements is prohibited during the entire loop, rather than tampering
+  with cursors being prohibited during the loop, and tampering with elements
+  being prohibited only during the lifetimes of references to the loop
+  parameter. Thus, if a container element iterator does an operation that
+  tampers with elements on the iterated container, that operation will fail a
+  tampering check in Ada 2020 (and thus raise Program_Error), while it would
+  have worked in Ada 2012 so long as the loop parameter is not involved.
+  We believe this to be a dubious loop structure that should be rare. Note
+  that this issue only occurs for the indefinite container form, the regular
+  and bounded containers allow such operations at ay time in Ada 2020.]}
+
 @end{Inconsistent2012}
 
 
@@ -2134,6 +2207,13 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
@@ -2224,6 +2304,13 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2312,6 +2399,13 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2372,6 +2466,13 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2431,6 +2532,13 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
@@ -2511,6 +2619,13 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 
@@ -2540,74 +2655,137 @@ An empty holder does not contain an element.@Defn{empty holder}]}
 package Containers.Indefinite_Holders has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],Aref=[AI05-0069-1],Aref=[AI05-0084-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[type] Element_Type (<>) @key[is private];
    @key[with function] "=" (Left, Right : Element_Type) @key[return] Boolean @key[is] <>;
-@key[package] Ada.Containers.Indefinite_Holders @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}
+@key[package] Ada.Containers.Indefinite_Holders@Chg{Version=[5],New=[
+   @key[with] Preelaborate, Remote_Types,
+        Nonblocking => Equal_Element'Nonblocking,
+        Global => Equal_Element'Global &
+                  Element_Type'Global &
+                  @key[in out synchronized] Ada.Containers.Indefinite_Holders ],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
    @key[pragma] Preelaborate(Indefinite_Holders);
-   @key[pragma] Remote_Types(Indefinite_Holders);]}
+   @key[pragma] Remote_Types(Indefinite_Holders);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private];
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Holder} @key[is tagged private] @Chg{Version=[5],New=[
+      @key[with] Stable_Properties => (Is_Empty,
+                                 Tampering_With_The_Element_Prohibited),
+           Default_Initial_Condition => Is_Empty (Holder)],Old=[]};
    @key[pragma] Preelaborable_Initialization (Holder);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{Empty_Holder} : @key[constant] Holder;]}
 
+@ChgRef{Version=[5],Kind=[Added],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Equal_Element} (Left, Right : Element_Type) @key[return] Boolean
+      @key[renames] "=";]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[function] "=" (Left, Right : Holder) @key[return] Boolean;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Holder} (New_Item : Element_Type) @key[return] Holder;]}
+@ChgRef{Version=[5],Kind=[Added],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Tampering_With_The_Element_Prohibited} (Container : Holder)
+      @key[return] Boolean
+      @key[with] Nonblocking => True,
+           Global => @key[null];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Empty} (Container : Holder) @key[return] Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{To_Holder} (New_Item : Element_Type) @key[return] Holder@Chg{Version=[5],New=[
+      @key[with] Post => @key[not] Is_Empty (To_Holder'Result)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Clear} (Container : @key[in out] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Is_Empty} (Container : Holder) @key[return] Boolean@Chg{Version=[5],New=[
+      @key[with] Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Element} (Container : Holder) @key[return] Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Clear} (Container : @key[in out] Holder)@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                    @key[then raise] Program_Error),
+           Post => Is_Empty (Container)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Element} (Container : Holder) @key[return] Element_Type@Chg{Version=[5],New=[
+      @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+           Global => Element_Type'Global],Old=[]};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Replace_Element} (Container : @key[in out] Holder;
-                              New_Item  : @key[in]     Element_Type);]}
+                              New_Item  : @key[in]     Element_Type)@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                    @key[then raise] Program_Error),
+           Post => @key[not] Is_Empty (Container)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Query_Element}
-  (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+     (Container : @key[in] Holder;
+      Process   : @key[not null access procedure] (Element : @key[in] Element_Type))@Chg{Version=[5],New=[
+      @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+           Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Update_Element}
-  (Container : @key[in out] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+     (Container : @key[in out] Holder;
+      Process   : @key[not null access procedure] (Element : @key[in out] Element_Type))@Chg{Version=[5],New=[
+      @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Constant_Reference_Type}
-      (Element : @key[not null access constant] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+         (Element : @key[not null access constant] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+           Global => @key[in out access] Holder,
+           Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+           Global => @key[in out access] Holder,
+           Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] Holder)
-   @key[return] Constant_Reference_Type;]}
+      @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+           Post   => Tampering_With_The_Element_Prohibited (Container),
+           Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] Holder)
-   @key[return] Reference_Type;]}
+      @key[return] Reference_Type@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+           Post   => Tampering_With_The_Element_Prohibited (Container),
+           Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Holder; Source : @key[in] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Assign} (Target : @key[in out] Holder; Source : @key[in] Holder)@Chg{Version=[5],New=[
+      @key[with] Post => (Is_Empty (Source) = Is_Empty (Target))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Holder) @key[return] Holder;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Copy} (Source : Holder) @key[return] Holder@Chg{Version=[5],New=[
+      @key[with] Post => (Is_Empty (Source) = Is_Empty (Copy'Result))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Move} (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Move} (Target : @key[in out] Holder; Source : @key[in out] Holder)@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                    @key[then raise] Program_Error),
+            Post => (@key[if] Target /= Source @key[then]
+                       Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
@@ -2652,31 +2830,54 @@ an object of type Holder is not otherwise initialized, it is initialized to the
 same value as Empty_Holder.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Text=[@Redundant[Some operations of this generic package
-have access-to-subprogram parameters. To ensure such operations are
-well-defined, they guard against certain actions by the designated subprogram.
-In particular, some operations check for @ldquote@;tampering with
-the element@rdquote of a container because they depend on the element of the
-container not being replaced.]]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Redundant[Some operations
+@Chg{Version=[5],New=[],Old=[of this generic package have access-to-subprogram
+parameters. To
+ensure such operations are well-defined, they guard against certain actions by
+the designated subprogram. In particular, some operations]} check for
+@ldquote@;tampering with the element@rdquote of a container because they depend
+@Defn2{Term=[tamper with elements],Sec=[of a holder]}on the element
+of the container not being replaced.]@Chg{Version=[5],New=[When
+tampering with the element is @i<prohibited>@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
+@Defn2{Term=[tampering],Sec=[prohibited for a holder]}for a particular
+holder object @i<H>, Program_Error is propagated by the finalization of
+@i<H>@Redundant[, as well as by a call that passes @i<H> to certain of the
+operations of this package, as indicated by the precondition of such an
+operation].],Old=[]}]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noprefix=[T],Noparanum=[T],Text=[@Shrink{@i<Paragraphs
+30 through 35 are removed as preconditions now describe these rules.>}]}@Comment{This
+message should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0262-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a holder]}
-A subprogram is said to @i{tamper with the element} of a holder object @i<H> if:]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Defn2{Term=[tamper with elements],Sec=[of a holder]}
+A subprogram is said to @i{tamper with the element} of a
+holder object @i<H> if:]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It clears the element contained by @i<H>, that is,
-it calls the Clear procedure with @i<H> as a parameter;]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[It clears the element
+contained by @i<H>, that is, it calls the Clear procedure with @i<H> as
+a parameter;]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It replaces the element contained by @i<H>, that is,
-it calls the Replace_Element procedure with @i<H> as a parameter;]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[It replaces the
+element contained by @i<H>, that is,
+it calls the Replace_Element procedure with @i<H> as a parameter;]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It calls the Move procedure with @i<H> as a parameter;]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[It calls the Move procedure with @i<H> as a parameter;]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[It finalizes @i<H>.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[It finalizes @i<H>.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2689,13 +2890,14 @@ it calls the Replace_Element procedure with @i<H> as a parameter;]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
-@ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Defn2{Term=[prohibited],Sec=[tampering with a holder]}
 @Defn2{Term=[tampering],Sec=[prohibited for a holder]}
 When tampering with the element is @i<prohibited> for a particular holder object
 @i<H>, Program_Error is propagated by a call of any language-defined subprogram
 that is defined to tamper with the element of @i<H>, leaving @i<H>
 unmodified.@Chg{Version=[4],New=[ These checks are made before any other
-defined behavior of the body of the language-defined subprogram.],Old=[]}]}
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 
 @begin{DescribeCode}
 
@@ -2720,8 +2922,22 @@ exception raised during the evaluation of element equality is propagated.]}
 @end{ImplNote}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key[function] Tampering_With_The_Element_Prohibited (Container : Holder) @key[return] Boolean
+   @key[with] Nonblocking => True,
+        Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if tampering with the
+element is currently prohibited for Container, and
+returns False otherwise.]}
+
+@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] To_Holder (New_Item : Element_Type) @key[return] Holder;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] To_Holder (New_Item : Element_Type) @key[return] Holder@Chg{Version=[5],New=[
+   @key[with] Post => @key[not] Is_Empty (To_Holder'Result)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -2732,7 +2948,9 @@ To_Holder performs indefinite insertion (see @RefSecNum{Containers}).],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Is_Empty (Container : Holder) @key[return] Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Is_Empty (Container : Holder) @key[return] Boolean@Chg{Version=[5],New=[
+   @key[with] Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
@@ -2741,48 +2959,67 @@ empty, and False if it contains an element.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Clear (Container : @key[in out] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Clear (Container : @key[in out] Holder)@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                 @key[then raise] Program_Error),
+        Post => Is_Empty (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Removes the element from Container.
-Container is empty after a successful Clear operation.]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Removes the element from
+Container.@Chg{Version=[5],New=[],Old=[ Container is empty after a
+successful Clear operation.]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Element (Container : Holder) @key[return] Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@key[function] Element (Container : Holder) @key[return] Element_Type@Chg{Version=[5],New=[
+   @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+        Global => Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, returns the element stored in
-Container.]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[Returns],Old=[If
+Container is empty, Constraint_Error is propagated. Otherwise, returns]} the
+element stored in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Replace_Element (Container : @key[in out] Holder;
-                           New_Item  : @key[in]     Element_Type);]}
+                           New_Item  : @key[in]     Element_Type)@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                 @key[then raise] Program_Error),
+        Post => @key[not] Is_Empty (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0035-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Replace_Element assigns the value
 New_Item into Container, replacing any preexisting content of
 Container@Chg{Version=[4],New=[; Replace_Element performs indefinite insertion
-(see @RefSecNum{Containers})],Old=[]}.
-Container is not empty after a successful call to Replace_Element.]}
+(see @RefSecNum{Containers})],Old=[]}.@Chg{Version=[5],New=[],Old=[ Container
+is not empty after a successful call to Replace_Element.]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Query_Element
   (Container : @key[in] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in] Element_Type));]}
+   Process   : @key[not null access procedure] (Element : @key[in] Element_Type))@Chg{Version=[5],New=[
+   @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+        Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, Query_Element calls
-Process.@key[all] with the contained element as the argument.
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Container is empty, Constraint_Error is propagated. Otherwise, ]}Query_Element
+calls Process.@key[all] with the contained element as the argument.
 Tampering with the element
 of Container is prohibited during the execution of the call on
 Process.@key[all]. Any exception raised by Process.@key[all] is propagated.]}
@@ -2798,17 +3035,20 @@ Process.@key[all]. Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Update_Element
   (Container : @key[in out] Holder;
-   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type));]}
+   Process   : @key[not null access procedure] (Element : @key[in out] Element_Type))@Chg{Version=[5],New=[
+   @key[with] Pre => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Container is empty,
-Constraint_Error is propagated. Otherwise, Update_Element calls
-Process.@key[all] with the contained element as the argument.
-Tampering with the element
-of Container is prohibited during the execution of the call on Process.@key[all].
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Container is empty, Constraint_Error is propagated. Otherwise, ]}Update_Element
+calls Process.@key[all] with the contained element as the argument.
+Tampering with the element of Container is prohibited during the execution
+of the call on Process.@key[all].
 Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{ImplNote}
@@ -2819,22 +3059,31 @@ Any exception raised by Process.@key[all] is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
       (Element : @key[not null access constant] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+        Global => @key[in out access] Holder,
+        Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+        Global => @key[in out access] Holder,
+        Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type and Reference_Type
+@ChgAdded{Version=[3],Type=[Trailing],Text=[The types Constant_Reference_Type
+and Reference_Type
 need finalization.@PDefn2{Term=<needs finalization>,Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[The default initialization of an object of type
-Constant_Reference_Type or Reference_Type propagates Program_Error.]}
+@ChgRef{Version=[5],Kind=[Deleted],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The default
+initialization of an object of type
+Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -2848,8 +3097,12 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] Holder)
-   @key[return] Constant_Reference_Type;]}
+   @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+        Post   => Tampering_With_The_Element_Prohibited (Container),
+        Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -2858,16 +3111,22 @@ Implicit_Dereference aspect) provides a convenient way to gain read access to
 the contained element of a holder container.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Text=[If Container is empty, Constraint_Error is
-propagated. Otherwise, Constant_Reference returns an object whose discriminant
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If Container is
+empty, Constraint_Error is propagated. Otherwise, ]}Constant_Reference
+returns an object whose discriminant
 is an access value that designates the contained element. Tampering with the
-elements of Container is prohibited while the object returned by
+element of Container is prohibited while the object returned by
 Constant_Reference exists and has not been finalized.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] Holder)
-   @key[return] Reference_Type;]}
+   @key[return] Reference_Type@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
+        Post   => Tampering_With_The_Element_Prohibited (Container),
+        Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -2876,14 +3135,19 @@ Implicit_Dereference aspects) provides a convenient way to gain read and write
 access to the contained element of a holder container.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Text=[If Container is empty, Constraint_Error is
-propagated. Otherwise, Reference returns an object whose discriminant is an
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If Container is
+empty, Constraint_Error is propagated. Otherwise, ]}Reference returns
+an object whose discriminant is an
 access value that designates the contained element. Tampering with the
-elements of Container is prohibited while the object returned by
+element of Container is prohibited while the object returned by
 Reference exists and has not been finalized.]}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Holder; Source : @key[in] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Assign (Target : @key[in out] Holder; Source : @key[in] Holder)@Chg{Version=[5],New=[
+   @key[with] Post => (Is_Empty (Source) = Is_Empty (Target))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -2900,7 +3164,9 @@ called. Otherwise, Replace_Element (Target, Element (Source)) is called.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Holder) @key[return] Holder;]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Copy (Source : Holder) @key[return] Holder@Chg{Version=[5],New=[
+   @key[with] Post => (Is_Empty (Source) = Is_Empty (Copy'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
@@ -2909,14 +3175,21 @@ holder container; otherwise, returns To_Holder (Element (Source)).]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Move (Target : @key[in out] Holder; Source : @key[in out] Holder);]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Move (Target : @key[in out] Holder; Source : @key[in out] Holder)@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
+                 @key[then raise] Program_Error),
+        Post => (@key[if] Target /= Source @key[then]
+                    Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0248-1]}
+@ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Target denotes the same object
 as Source, then the operation has no effect. Otherwise, the element contained
 by Source (if any) is removed from Source and inserted into Target, replacing
-any preexisting content. Source is empty after a successful call to Move.]}
+any preexisting content.@Chg{Version=[5],New=[],Old=[ Source is empty after a
+successful call to Move.]}]}
 
 @end{DescribeCode}
 
@@ -3037,6 +3310,13 @@ holder container unless specified by the operation.]}]}
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
+  stable view is used for container element iterators. This leads to a rare
+  situation where Program_Error will be raised in Ada 2020 for code that
+  would have worked in Ada 2012. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
 @begin{DiffWord2012}
@@ -3044,7 +3324,14 @@ holder container unless specified by the operation.]}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
+
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Vectors]}
 
@@ -3191,6 +3478,17 @@ minimize copying does not apply to bounded vectors.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Vectors is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Doubly_Linked_Lists]}
@@ -3359,6 +3657,17 @@ minimize copying does not apply to bounded lists.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Doubly_Linked_Lists is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Maps]}
@@ -3540,6 +3849,16 @@ minimize copying does not apply to bounded hashed maps.]}]}
   Containers.Bounded_Hashed_Maps is new.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Maps]}
 
@@ -3698,6 +4017,16 @@ minimize copying does not apply to bounded ordered maps.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Ordered_Maps is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Hashed_Sets]}
@@ -3873,6 +4202,16 @@ minimize copying does not apply to bounded hashed sets.]}]}
   Containers.Bounded_Hashed_Sets is new.]}
 @end{Extend2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Sets]}
 
@@ -4027,6 +4366,16 @@ minimize copying does not apply to bounded ordered sets.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Ordered_Sets is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Multiway_Trees]}
@@ -4195,6 +4544,16 @@ minimize copying does not apply to bounded trees.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The generic package Containers.Bounded_Multiway_Trees is new.]}
 @end{Extend2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for bounded containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
 
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
@@ -5325,6 +5684,7 @@ Constant_Indexing aspect (on type Vector) and the Implicit_Dereference aspect
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
   @ChgAdded{Version=[3],Text=[This example of container use is new.]}
 @end{DiffWord2005}
+
 
 
 

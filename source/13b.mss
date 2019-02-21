@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.120 $}
+@Comment{$Revision: 1.121 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -419,7 +419,7 @@ make sense in some situations.
 subprograms that fill part of a Storage_Array, and return the index of the
 last element filled as a Storage_Offset.
 The Read procedures in
-Streams (see @RefSecNum{The Package Streams}),
+Streams (see @RefSecNum{The Streams Subsystem}),
 Streams.Stream_IO (see @RefSecNum{The Package Streams.Stream_IO}),
 and System.RPC (see @RefSecNum{Partition Communication Subsystem})
 behave in this manner.
@@ -4591,7 +4591,9 @@ unmarshalling of values of most types.]}>}
 Streams are new in Ada 95.
 @end{Extend83}
 
-@LabeledSubClause{The Package Streams}
+
+@LabeledRevisedSubClause{Version=[5],InitialVersion=[0],
+New=[The Streams Subsystem],Old=[The Package Streams]}
 
 @begin{StaticSem}
 The abstract type Root_Stream_Type is the root type of the class of

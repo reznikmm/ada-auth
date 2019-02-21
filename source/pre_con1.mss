@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.2 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.3 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -74,14 +74,16 @@ once until the last node is reached. The exact definition of these terms is
 different for hashed maps and ordered maps.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
+operations of these generic packages
 have access-to-subprogram parameters. To ensure such operations are
 well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with
 elements@rquotes of a container because they depend on elements of the
-container not being replaced.]]}
+container not being replaced.]]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[
@@ -1012,8 +1014,18 @@ unless specified by the operation.]}]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for regular containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
   Replace_Element is now defined such that it can be used
   concurrently so long as it operates on different elements. This allows
@@ -1026,6 +1038,12 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
 
 
@@ -1054,11 +1072,22 @@ package Containers.Hashed_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Map,
+           Aggregate         => (Empty     => Empty_Map,
+                                 Add_Named => Insert),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Map) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (Map)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Map))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Map);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1627,13 +1656,12 @@ in the cursor in order to implement this function.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
-@Chg{Version=[5],New=[a parallel],Old=[an]}
-iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+an iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor
 according to the successor relation@Chg{Version=[5],New=[ when used as a forward
-iterator, and starting with all nodes concurrently when used as a parallel
+iterator, and processing all nodes concurrently when used as a parallel
 iterator],Old=[]}. Tampering with the cursors of Container is prohibited while
 the iterator object exists (in particular, in the @nt{sequence_of_statements} of
 the @nt{loop_statement} whose @nt{iterator_specification} denotes this object).
@@ -1702,6 +1730,21 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
   Remote_Types so that containers can be used in distributed programs.]}
 @end{Diffword2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
+@end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Ordered_Maps]}
 
@@ -1728,11 +1771,22 @@ package Containers.Ordered_Maps has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Map} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Map,
+           Aggregate         => (Empty     => Empty_Map,
+                                 Add_Named => Insert),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Map) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (Map)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Map))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Map);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1962,9 +2016,8 @@ package Containers.Ordered_Maps has the following declaration:]}
       @key[return] Map_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Map; Start : @key[in] Cursor)
-      @key[return] Map_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+      @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
@@ -2257,16 +2310,16 @@ predecessor order, starting with the last node.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
+@Chg{Version=[5],New=[an],Old=[a reversible]}
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter
 (see @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor
 according to the successor relation when used as a forward iterator, and
 starting with the last node and moving the cursor according to the predecessor
-relation when used as a reverse iterator@Chg{Version=[5],New=[, and starting
-with all nodes concurrently when used as a parallel iterator],Old=[]}.
+relation when used as a reverse iterator@Chg{Version=[5],New=[, and processing
+all nodes concurrently when used as a parallel iterator],Old=[]}.
 Tampering with the cursors of Container is prohibited while
 the iterator object exists (in particular, in
 the @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -2275,24 +2328,20 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Map; Start : @key[in] Cursor)
-   @key[return] Map_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] Map_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does not designate an item in Container,
 then Program_Error is propagated. If Start is No_Element, then Constraint_Error
-is propagated. Otherwise, Iterate returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible iterator object
+is propagated. Otherwise, Iterate returns a reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
 designating each node in Container, starting with
 the node designated by Start and moving the cursor according to the successor
 relation when used as a forward iterator, or moving the cursor according to the
-predecessor relation when used as a reverse iterator@Chg{Version=[5],New=[, and
-starting with all nodes concurrently when used as a parallel iterator],Old=[]}.
+predecessor relation when used as a reverse iterator.
 Tampering with the cursors of Container is prohibited while the iterator object
 exists (in particular, in the @nt{sequence_of_statements} of the
 @nt{loop_statement} whose @nt{iterator_specification} denotes this object). The
@@ -2387,6 +2436,21 @@ a cursor parameter should be @i{O}(1).]}]}
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  entire container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
+@end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[Sets]}
 
@@ -2458,14 +2522,16 @@ last element is reached. The exact definition of these terms is different for
 hashed sets and ordered sets.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Redundant[Some operations of these generic packages
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
+operations of these generic packages
 have access-to-subprogram parameters. To ensure such operations are
 well-defined, they guard against certain actions by the designated
 subprogram. In particular, some operations check for @lquotes@;tampering with
 cursors@rquotes of a container because they depend on the set of elements of
 the container remaining constant, and others check for @lquotes@;tampering with
 elements@rquotes of a container because they depend on elements of the
-container not being replaced.]]}
+container not being replaced.]]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a set]}
@@ -3569,8 +3635,18 @@ unless specified by the operation.]}]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for regular containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
   Replace_Element is now defined such that it can be used
   concurrently so long as it operates on different elements. This allows
@@ -3583,6 +3659,12 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
 
 
@@ -3609,10 +3691,21 @@ package Containers.Hashed_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Set,
+           Aggregate         => (Empty       => Empty_Set,
+                                 Add_Unnamed => Include),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Set) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (Set)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Set))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Set);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4085,13 +4178,12 @@ first hashed element in Container.]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
-@Chg{Version=[5],New=[a parallel],Old=[an]}
-iterator object (see @RefSecNum{User-Defined Iterator Types}) that
+an iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter
 (see @RefSecNum{Generalized Loop Iteration}) designating
 each element in Container, starting with the first element and moving the cursor
 according to the successor relation@Chg{Version=[5],New=[ when used as a forward
-iterator, and starting with all nodes concurrently when used as a parallel
+iterator, and processing all nodes concurrently when used as a parallel
 iterator],Old=[]}.
 Tampering with the cursors of Container is prohibited while
 the iterator object exists (in particular, in
@@ -4177,6 +4269,21 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
+@end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
+@end{DiffWord2012}
+
 
 @LabeledAddedSubclause{Version=[2],Name=[The Generic Package Containers.Ordered_Sets]}
 
@@ -4202,10 +4309,21 @@ package Containers.Ordered_Sets has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Set} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Set,
+           Aggregate         => (Empty       => Empty_Set,
+                                 Add_Unnamed => Include),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Set) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (Set)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Set))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Set);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4446,9 +4564,8 @@ package Containers.Ordered_Sets has the following declaration:]}
       @key[return] Set_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Set; Start : @key[in] Cursor)
-      @key[return] Set_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+      @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -4779,8 +4896,8 @@ in predecessor order, starting with the last element.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
+@Chg{Version=[5],New=[an],Old=[a reversible]}
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter
 (see @RefSecNum{Generalized Loop Iteration}) designating
@@ -4788,7 +4905,7 @@ each element in Container, starting with the first element and moving the cursor
 according to the successor relation when used as a forward iterator, and
 starting with the last element and moving the cursor according to the
 predecessor relation when used as a reverse iterator@Chg{Version=[5],New=[, and
-starting with all nodes concurrently when used as a parallel iterator],Old=[]}.
+processing all nodes concurrently when used as a parallel iterator],Old=[]}.
 Tampering with the cursors of Container is prohibited while
 the iterator object exists (in particular, in
 the @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -4797,25 +4914,22 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set; Start : @key[in] Cursor)
-   @key[return] Set_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] Set_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate returns
-a @Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+a reversible
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter
 (see @RefSecNum{Generalized Loop Iteration}) designating
 each element in Container, starting with the element designated by Start and
 moving the cursor according to the successor relation when used as a forward
 iterator, or moving the cursor according to the predecessor relation when used
-as a reverse iterator@Chg{Version=[5],New=[, or all nodes
-concurrently when used as a parallel iterator],Old=[]}. Tampering with the
+as a reverse iterator. Tampering with the
 cursors of Container is prohibited while the iterator object exists (in
 particular, in the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
@@ -4918,5 +5032,19 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   Remote_Types so that containers can be used in distributed programs.]}
 @end{DiffWord2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  entire container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
+@end{Extend2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
+@end{DiffWord2012}
 
 

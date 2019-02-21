@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.104 $}
+@Comment{$Revision: 1.105 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2407,7 +2407,7 @@ calls (see @RefSecNum{Dispatching Operations of Tagged Types} and
 statically determined to be that of the formal type, the call raises
 Program_Error. If such a function is renamed, any call on the
 renaming raises Program_Error.
-@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
+@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}@IndexCheck{Program_Error_Check}]}
 
 @end{Itemize}
 
