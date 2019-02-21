@@ -17,7 +17,7 @@ procedure ARM_Formatter is
     -- reference manual files (in various formats).
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017, 2019
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -304,7 +304,8 @@ procedure ARM_Formatter is
 
 begin
     Ada.Text_IO.Put_Line ("Ada Manual formatter");
-    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, 2017  AXE Consultants");
+    Ada.Text_IO.Put_Line ("  Copyright 2000, 2002, 2004, 2005, 2006, 2011, 2012, 2016, ");
+    Ada.Text_IO.Put_Line ("            2017, 2019  AXE Consultants");
     Ada.Text_IO.Put_Line ("  P.O. Box 1512, Madison WI  53701");
 
     Get_Commands;
