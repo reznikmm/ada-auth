@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -4299,7 +4299,7 @@ attribute is defined]}:
 @ChgAdded{Version=[3],Text=[If a user-specified external tag S'External_Tag is
 the same as T'External_Tag for some other tagged type declared by a different
 declaration in the partition, Program_Error is raised by the elaboration of the
-@nt{attribute_definition_clause}.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
+@nt{attribute_definition_clause}.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}@IndexCheck{Program_Error_Check}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4319,7 +4319,7 @@ declaration in the partition, Program_Error is raised by the elaboration of the
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Note that while there is a race condition inherent
-  in this definition (which attribute_definition_clause raises Program_Error
+  in this definition (which @nt{attribute_definition_clause} raises Program_Error
   depends on the order of elaboration), it doesn't matter as a program with two
   such clauses is simply wrong. Two types that both come from the same
   declaration are allowed, as noted previously.]}

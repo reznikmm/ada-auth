@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.91 $ $Date: 2018/12/08 03:20:13 $}
+@comment{$Revision: 1.92 $ $Date: 2019/02/21 05:24:05 $}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
@@ -94,7 +94,7 @@ on demand.],Old=[]}
 @Chg{New=[This version of the Ada Reference Manual is what the project editor would
 provide to ISO in response to such a request. It incorporates the changes
 specified in the Technical Corrigendum @Chg{Version=[4],New=[@Chg{Version=[5],New=[
-and Ada 202x],Old=[]}],Old=[@Chg{Version=[2],New=[and
+and Ada 202x ],Old=[]}],Old=[@Chg{Version=[2],New=[and
 @Chg{Version=[3],New=[Amendments 1 and 2],Old=[Amendment]} ],Old=[]}]}into
 the text of @Chg{Version=[4],New=[ISO/IEC 8652:2012(E)],Old=[ISO/IEC 8652:1995(E)]}.
 It should be understood that the publication of any ISO document involves

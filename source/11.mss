@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.99 $}
+@Comment{$Revision: 1.100 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2116,9 +2116,11 @@ can renew the permission.]}
 
 @Leading@Keepnext@;The following are the language-defined checks:
 @begin{Itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
 @Leading@Redundant[The following checks correspond to situations in which the
-exception Constraint_Error is raised upon failure.]
+exception Constraint_Error is raised upon failure@Chg{Version=[5],New=[ of a
+language-defined check],Old=[]}.]
 
 @begin{Hang2List}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0036],ARef=[AI95-00176-01]}
@@ -2191,9 +2193,11 @@ for an @nt{assignment_statement},
 and when returning a tagged limited object from a function.
 @end{Hang2List}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
 @Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}
 @Leading@Redundant[The following checks correspond to situations in which the
-exception Program_Error is raised upon failure.]
+exception Program_Error is raised upon failure@Chg{Version=[5],New=[ of a
+language-defined check],Old=[]}.]
 @begin{Hang2List}
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00280]}
 @ChgAdded{Version=[2],Text=[@RootDefn{Accessibility_Check}
@@ -2213,16 +2217,27 @@ called, a task activation is accomplished,
 or a generic instantiation is elaborated, check that the body
 of the corresponding unit has already been elaborated.
 
-@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00280]}
-@ChgNote{This item is not in alphabetical order}
-@ChgDeleted{Version=[2],Text=[@RootDefn{Accessibility_Check}
-Accessibility_Check @\Check the accessibility level of an
-entity or view.]}
+@ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00280]}@ChgNote{This item was not in alphabetical order}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0309-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Program_Error_Check}
+Program_Error_Check @\Other language-defined checks that raise Program_Error:
+that subtypes with predicates are not used to index an array in a generic unit;
+that the maximum number of chunks is greater than zero; that the
+default value of an out parameter is convertible; that there is no misuse
+of functions in a generic with an class-wide actual type; that there are
+not colliding External_Tag values; that there is no misuse of
+operations of unchecked union types.]}@ChgDeleted{Version=[2],NoPrefix=[T],Text=[@RootDefn{Accessibility_Check}
+Accessibility_Check @em Check the accessibility level of an entity or view.]}
+@Comment{We had to eliminate the hanging term from this text to avoid having two
+separate hangs in one paragraph. The "em" should be replaced by "\" to generate
+Ada 95.}
 
 @end{Hang2List}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
 @Leading@Redundant[The following check corresponds to situations in which the
-exception Storage_Error is raised upon failure.]
+exception Storage_Error is raised upon failure@Chg{Version=[5],New=[ of a
+language-defined check],Old=[]}.]
 @begin{Hang2List}
 @RootDefn{Storage_Check}
 @Defn2{Term=[Storage_Error],Sec=(raised by failure of runtime check)}
@@ -2242,16 +2257,29 @@ given that it is not feasible to split Storage_Error.
 @end{Reason}
 @end{Hang2List}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0309-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@Redundant[The following check
+corresponds to situations in which the exception Tasking_Error is raised upon
+failure of a language-defined check.]@Defn2{Term=[Tasking_Error],Sec=(raised by failure of runtime check)}]}
+
+@begin{Hang2List}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0309-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Tasking_Check}
+Tasking_Check@\ Check that all tasks activated successfully. Check that a called
+task has not yet terminated.]}
+
+@end{Hang2List}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@Redundant[The following check
 corresponds to situations in which the exception Assertion_Error is raised upon
-failure.]]}
+failure of a language-defined check.]@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Hang2List}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
-@ChgAdded{Version=[5],Text=[@RootDefn{Container_Check}
-@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}
-Container_Check@\Check the precondition of a routine declared in a
+@ChgAdded{Version=[5],Text=[@RootDefn{Containers_Assertion_Check}
+Containers_Assertion_Check@\Check the precondition of a routine declared in a
 descendant unit of Containers or in an instance of a generic unit that is
 declared in, or is, a descendant unit of Containers.]}
 @begin{Reason}
@@ -2267,8 +2295,10 @@ declared in, or is, a descendant unit of Containers.]}
 @end{Reason}
 @end{Hang2List}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
 @Leading@Redundant[The following check corresponds to all situations in which
-any predefined exception is raised.]
+any predefined exception is raised@Chg{Version=[5],New=[ upon failure of a
+check],Old=[]}.]
 @begin{Hang2List}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0290-1]}
 @RootDefn{All_Checks}
@@ -2280,8 +2310,12 @@ pragma Assertion_Policy(Ignore) applies to any region to which
 pragma Suppress(All_Checks) applies],Old=[]}.
 
 @begin{Ramification}
-All_Checks includes both language-defined and implementation-defined
-checks.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
+  All_Checks @Chg{Version=[5],New=[may include],Old=[includes both
+  language-defined and]} implementation-defined
+  checks.@Chg{Version=[5],New=[ It does not include, however, explicit
+  raises of predefined exceptions (including those mandated for language
+  constructs), nor those propagated from language-defined subprograms.],Old=[]}
 @end{Ramification}
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0005-1]}
@@ -2504,8 +2538,12 @@ Program_Error checks was corrected to be alphabetical.]}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Container_Check
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Containers_Assertion_Check
   is new.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0309-1]}
+  @ChgAdded{Version=[5],Text=[Program_Error_Check and Tasking_Check are new;
+  all core language-defined checks are now covered with check names.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}

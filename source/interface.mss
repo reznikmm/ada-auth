@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:57 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2866,7 +2866,7 @@ constrained subtype.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00216-01]}
 @ChgAdded{Version=[2],Type=[Leading],Keepnext=[T],
-Text=[Program_Error is raised in the following
+Text=[Program_Error is raised in the following@IndexCheck{Program_Error_Check}
 cases:@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Itemize}

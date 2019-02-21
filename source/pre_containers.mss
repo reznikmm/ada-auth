@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.104 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.105 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -50,6 +50,29 @@ itself.@PDefn2{Term=[cursor],Sec=[for a container]}
   of cursors each operating on mutually exclusive sets of elements from the same
   container are expected to work.]}
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[Some operations of the language-defined child units
+of Ada.Containers have access-to-subprogram parameters. To ensure such
+operations are well-defined, they guard against certain actions by the
+designated subprogram. An action on a container that might add or remove an
+element is considered to @i{tamper with cursors},@PDefn{tamper with cursors} and
+these are prohibited during all such operations. An action on a container that
+might replace an element with one of a different size is considered to @i{tamper
+with elements}, and these are prohibited during certain of such
+operations.@PDefn{tamper with elements} The details of the specific actions that
+are considered to tamper with cursors or elements are defined for each child
+unit of Ada.Containers.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[Several of the language-defined child units of
+Ada.Containers include a nested package named Stable, which provides a view of a
+container that prohibits any operations that would tamper with elements. By
+using a Stable view for manipulating a container, the number of tampering checks
+performed while performing the operations can be reduced. The details of the
+Stable subpackage are defined separately for each child unit of Ada.Containers
+that includes such a nested package.]}
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Text=[Within this clause we provide Implementation Advice
@@ -431,6 +454,11 @@ operations of that specific type, shall be nonblocking.]}
   other subclauses and any resulting inconsistencies are documented
   there.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Moved the basic description of tampering
+  checks here, to cut duplication in description of the individual containers.
+  Added a description of stable views of containers.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[Added a global requirement that iterators
   returned from containers are nonblocking if the instance is nonblocking.]}
@@ -576,15 +604,21 @@ package Containers.Vectors has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[@key[with] Ada.Iterator_Interfaces;
 ],Old=[]}@key{generic}
    @key{type} Index_Type @key{is range} <>;
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
-@key{package} Ada.Containers.Vectors @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Vectors]}
+@key{package} Ada.Containers.Vectors@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Vectors]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate, Remote_Types,
+        Nonblocking => Equal_Element'Nonblocking,
+        Global => Equal_Element'Global &
+                  Element_Type'Global &
+                  @key[in out synchronized] Ada.Containers.Vectors @key[is]],Old=[
    @key{pragma} Preelaborate(Vectors);@Chg{Version=[3],New=[
-   @key{pragma} Remote_Types(Vectors);],Old=[]}]}
+   @key{pragma} Remote_Types(Vectors);],Old=[]}]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{subtype} @AdaSubtypeDefn{Name=[Extended_Index],Of=[Index_Type'Base]} @key{is}
@@ -595,11 +629,24 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{Vector} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.Vector,
+           Aggregate         => (Empty          => Empty_Vector,
+                                 Add_Unnamed    => Append_One,
+                                 New_Indexed    => New_Vector,
+                                 Assign_Indexed => Replace_Element),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (Vector) = 0 @key{and then}
+              (@b{not} Tampering_With_Cursors_Prohibited (Vector)) @key{and then}
+              (@b{not} Tampering_With_Elements_Prohibited (Vector))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Vector);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -612,23 +659,73 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Equal_Element} (Left, Right : Element_Type)
+      @key{renames} "=";]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking => True,
+           Global => @key[access] Vector],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Vector; Position : Cursor)
+      @key{return} Boolean
+      @key[with] Nonblocking => True,
+           Global => @key[null];]}
+
+@ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}@ChgNote{Just a paragraph number change}
 @ChgAdded{Version=[3],Text=[   @key[package] @AdaPackDefn{Vector_Iterator_Interfaces} @key[is new]
        Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : Vector) @key{return} Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Vector} (Length : Count_Type) @key{return} Vector;]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Cursors_Prohibited}
+      (Container : Vector) @key{return} Boolean
+      @key[with] Nonblocking => True,
+           Global => @key[null];]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Elements_Prohibited}
+      (Container : Vector) @key{return} Boolean
+      @key[with] Nonblocking => True,
+           Global => @key[null];]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Maximum_Length} @key{return} Count_Type
+      @key[with] Nonblocking => True,
+           Global => @key[null];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Vector} (Length : Count_Type) @key{return} Vector@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Length > Maximum_Length @key[then raise] Constraint_Error),
+        Post =>
+           To_Vector'Result.Length = Length @key[and then]
+           @key[not] Tampering_With_Elements_Prohibited (To_Vector'Result) @key[and then]
+           @key[not] Tampering_With_Cursors_Prohibited (To_Vector'Result) @key[and then]
+           To_Vector'Result.Capacity >= Length],Old=[]};]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{To_Vector}
      (New_Item : Element_Type;
-      Length   : Count_Type) @key{return} Vector;]}
+      Length   : Count_Type) @key{return} Vector@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Length > Maximum_Length @key[then raise] Constraint_Error),
+        Post =>
+           To_Vector'Result.Length = Length @key[and then]
+           @key[not] Tampering_With_Elements_Prohibited (To_Vector'Result) @key[and then]
+           @key[not] Tampering_With_Cursors_Prohibited (To_Vector'Result) @key[and then]
+           To_Vector'Result.Capacity >= Length],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{New_Vector} (First, Last : Index_Type) @key{return} Vector @key{is}
+        (To_Vector (Count_Type (Last - First + 1)))
+     @key{with} Pre => First = Index_Type'First;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "&" (Left, Right : Vector) @key{return} Vector;]}
@@ -818,6 +915,10 @@ package Containers.Vectors has the following declaration:]}
                      New_Item  : @key{in}     Element_Type;
                      Count     : @key{in}     Count_Type := 1);]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Append_One} (Container : @key{in out} Vector;
+                         New_Item  : @key{in}     Element_Type);]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert_Space} (Container : @key{in out} Vector;
                            Before    : @key{in}     Extended_Index;
@@ -938,9 +1039,8 @@ package Containers.Vectors has the following declaration:]}
       @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-      @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+      @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -1074,52 +1174,80 @@ to the Index_Type'Last.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[If an operation attempts to modify the vector such
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If an operation attempts to modify the vector such
 that the position of the last element would be greater than Index_Type'Last,
-then the operation propagates Constraint_Error.]}
+then the operation propagates Constraint_Error.]}]}@ChgNote{Covered by preconditions.}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[We don't want to require an implementation to
-  go to heroic efforts to handle index values larger than the base type of
-  the index subtype.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[We don't want to
+  require an implementation to go to heroic efforts to handle index values
+  larger than the base type of the index subtype.]}]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
-have access-to-subprogram parameters. To ensure such operations are
-well-defined, they guard against certain actions by the designated
-subprogram. In particular, some operations check for @lquotes@;tampering with
-cursors@rquotes of a container because they depend on the set of elements of
-the container remaining constant, and others check for @lquotes@;tampering with
-elements@rquotes of a container because they depend on elements of the
-container not being replaced.]]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some
+operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}@Defn2{Term=[tamper with elements],Sec=[of a vector]}],Old=[of this generic package have
+access-to-subprogram parameters. To
+ensure such operations are well-defined, they guard against certain actions by
+the designated subprogram. In particular, some operations]} check for
+@lquotes@;tampering with cursors@rquotes of a container because they depend on
+the set of elements of the container remaining constant, and others check for
+@lquotes@;tampering with elements@rquotes of a container because they depend on
+elements of the container not being replaced.]@Chg{Version=[5],New=[ When
+tampering with cursors is @i<prohibited>@Defn2{Term=[prohibited],Sec=[tampering with a vector]}
+@Defn2{Term=[tampering],Sec=[prohibited for a vector]}for a particular
+vector object @i<V>, Program_Error is propagated by the finalization
+of @i<V>@Redundant[, as well as by a call that passes @i<V> to
+certain of the operations of this package, as indicated by the precondition
+of such an operation]. Similarly, when tampering with elements is @i<prohibited>
+for @i<V>, Program_Error is by a call that passes @i<V> to
+certain of other operations of this package, as indicated by the precondition
+of such an operation.],Old=[]}]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 91 through 97
+are removed as preconditions now describe these rules.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[2],New=[@Defn2{Term=[tamper with cursors],Sec=[of a vector]}
 A subprogram is said to
-@i{tamper with cursors} of a vector object @i<V> if:]}
+@i{tamper with cursors} of a vector object @i<V> if:],Old=[]}]}
 
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it inserts or deletes elements of @i<V>, that is,
-it calls the Insert, Insert_Space, Clear, Delete, or Set_Length procedures with
-@i<V> as a parameter; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it inserts or deletes
+elements of @i<V>, that is,
+it calls the Insert, Insert_Space, Clear, Delete, or Set_Length
+procedures with @i<V> as a parameter; or]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Operations which are defined to be equivalent to
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Operations which
+  are defined to be equivalent to
   a call on one of these operations also are included. Similarly, operations
-  which call one of these as part of their definition are included.]}
+  which call one of these as part of their definition are included.]}]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it finalizes @i<V>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it finalizes @i<V>;
+or]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<V> as the Target parameter;
-or]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it calls the Assign
+procedure with @i<V> as the Target parameter; or]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -1130,45 +1258,57 @@ or]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<V> as
-a parameter.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it calls the Move
+procedure with @i<V> as a parameter.]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Swap, Sort, and Merge copy elements rather
-  than reordering them, so they don't tamper with cursors.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Swap,
+  Sort, and Merge copy elements rather than reordering them, so they don't
+  tamper with cursors.]}]}
 @end{Discussion}
 
 @end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
-A subprogram is said to @i{tamper with elements} of a vector object @i<V> if:]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[2],New=[@Defn2{Term=[tamper with elements],Sec=[of a vector]}
+A subprogram is said to @i{tamper with elements} of a vector object @i<V>
+if:],Old=[]}]}
 
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it tampers with cursors of @i<V>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it tampers with
+cursors of @i<V>; or]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<V>, that is,
-it calls the Replace_Element, Reverse_Elements, or Swap procedures or the Sort
-or Merge procedures of an instance of Generic_Sorting with @i<V> as a
-parameter.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it replaces one or more
+elements of @i<V>, that is, it calls the Replace_Element, Reverse_Elements, or
+Swap procedures or the Sort or Merge procedures of an instance of
+Generic_Sorting with @i<V> as a parameter.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause its
-  memory to be deallocated while another operation is holding onto a reference
-  to it. That can't be allowed. However, a simple modification of (part of) an
-  element is not a problem, so Update_Element does not cause a problem.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Complete replacement
+  of an element can cause its memory to be deallocated while another operation
+  is holding onto a reference to it. That can't be allowed. However, a simple
+  modification of (part of) an element is not a problem, so Update_Element does
+  not cause a problem.]}]}
 @end{Reason}
 
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
-@ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a vector]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Defn2{Term=[prohibited],Sec=[tampering with a vector]}
 @Defn2{Term=[tampering],Sec=[prohibited for a vector]}
 When tampering with cursors is @i<prohibited> for a particular vector object
 @i<V>, Program_Error is propagated by a call of any language-defined subprogram
@@ -1178,7 +1318,7 @@ object @i<V>, Program_Error is propagated by a call of any language-defined
 subprogram that is defined to tamper with the elements of @i<V> @Redundant[(or
 tamper with the cursors of @i<V>)], leaving @i<V>
 unmodified.@Chg{Version=[4],New=[ These checks are made before any other
-defined behavior of the body of the language-defined subprogram.],Old=[]}]}
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
@@ -1189,7 +1329,10 @@ defined behavior of the body of the language-defined subprogram.],Old=[]}]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking => True,
+        Global => @key[access] Vector],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -1203,6 +1346,24 @@ an element, and returns False otherwise.]}
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
 @end{Honest}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} @AdaSubDefn{Has_Element} (Container : Vector; Position : Cursor)
+   @key{return} Boolean
+   @key[with] Nonblocking => True,
+        Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if Position designates
+an element in Container, and returns False otherwise.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If Position is No_Element, Has_Element returns False.]}
+@end{Ramification}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1232,8 +1393,82 @@ equality additional times once the answer has been determined.]}
 @end{ImplNote}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Tampering_With_Cursors_Prohibited
+   (Container : Vector) @key{return} Boolean
+   @key[with] Nonblocking => True,
+        Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if tampering with
+cursors or tampering with elements is currently prohibited for Container, and
+returns False otherwise.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Prohibiting tampering with elements also
+  needs to prohibit tampering with cursors, as deleting an element is similar
+  to replacing it.]}
+@end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Tampering_With_Elements_Prohibited
+   (Container : Vector) @key{return} Boolean
+   @key[with] Nonblocking => True,
+        Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Always returns False@Redundant[,
+regardless of whether tampering with elements is prohibited].]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[A definite element cannot
+  change size, so we allow operations that tampering with elements even when
+  tampering with elements is prohibited. That's not true for the indefinite
+  containers, which is why this kind of tampering exists.]}
+@end{Reason}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Maximum_Length @key{return} Count_Type
+   @key[with] Nonblocking => True,
+        Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns the maximum Length of a Vector, based on the
+index type.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[This is just:]}
+
+@begin{Example}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Count_Type (Index_Type'Last - Index_Type'First + 1)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Trailing],Text=[but since the inner calculation
+  can overflow or the type conversion can fail, this can't be evaluated in
+  general with an expression function. Note that if this expression raises
+  Constraint_Error, then the result is Count_Type'Last, since the Capacity of
+  a Vector cannot exceed Count_Type'Last.]}
+@end{ImplNote}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Vector (Length : Count_Type) @key{return} Vector;]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Vector (Length : Count_Type) @key{return} Vector@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Length > Maximum_Length @key[then raise] Constraint_Error),
+        Post =>
+           To_Vector'Result.Length = Length @key[and then]
+           @key[not] Tampering_With_Elements_Prohibited (To_Vector'Result) @key[and then]
+           @key[not] Tampering_With_Cursors_Prohibited (To_Vector'Result) @key[and then]
+           To_Vector'Result.Capacity >= Length],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -1242,9 +1477,16 @@ Length, filled with empty elements.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} To_Vector
   (New_Item : Element_Type;
-   Length   : Count_Type) @key{return} Vector;]}
+   Length   : Count_Type) @key{return} Vector@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Length > Maximum_Length @key[then raise] Constraint_Error),
+        Post =>
+           To_Vector'Result.Length = Length @key[and then]
+           @key[not] Tampering_With_Elements_Prohibited (To_Vector'Result) @key[and then]
+           @key[not] Tampering_With_Cursors_Prohibited (To_Vector'Result) @key[and then]
+        To_Vector'Result.Capacity >= Length],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2030,6 +2272,16 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Insert (Container, Last_Index (Container) + 1, New_Item, Count).]}
 
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Append_One (Container : @key{in out} Vector;
+                      New_Item  : @key{in}     Element_Type);]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Insert (Container, Last_Index (Container) + 1, New_Item, 1).]}
+
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert_Space (Container : @key{in out} Vector;
@@ -2462,15 +2714,15 @@ except that elements are traversed in reverse index order.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
+@Chg{Version=[5],New=[an],Old=[a reversible]}
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
-reverse iterator@Chg{Version=[5],New=[, and starting with all nodes
+reverse iterator@Chg{Version=[5],New=[, and processing all nodes
 concurrently when used as a parallel iterator],Old=[]}. Tampering with the
 cursors of Container is prohibited while
 the iterator object exists (in particular, in
@@ -2480,25 +2732,21 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-   @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a @Chg{Version=[5],New=[parallel and ],Old=[]}reversible
-iterator object
+returns a reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
 designating each node in Container, starting with the node
 designated by Start and moving the cursor as per the Next function when used as
 a forward iterator, or moving the cursor as per the Previous function when used
-as a reverse iterator@Chg{Version=[5],New=[, or all nodes
-concurrently when used as a parallel iterator],Old=[]}. Tampering with the
+as a reverse iterator. Tampering with the
 cursors of Container is prohibited while the iterator object exists (in
 particular, in the @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
@@ -3038,6 +3286,28 @@ value of Last_Index.]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}Tampering
+  with elements is now defined to be equivalent to tampering with
+  cursors for regular containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Specifically, if a program requires
+  Program_Error to be raised by a routine that (only) tampers with elements
+  in Ada 2012 (such as Replace_Element) when called in a context that does not
+  allow tampering with elements (such as Update_Element), the routine will
+  work as defined instead of raising Program_Error in Ada 2020. Needless to say,
+  this shouldn't happen outside of test programs. Note that such contexts still
+  prohibit tampering with cursors, so routines like Insert and Delete will
+  still raise Program_Error in this case.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Trying to insert or concatenate more than
+  Count_Type'Last elements will now raise Constraint_Error rather than
+  Capacity_Error. This is extremely unlikely to happen, as Count_Type'Last
+  is typically at least 2**31-1, so most such vectors will exceed memory
+  before reaching this error.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
@@ -3045,6 +3315,11 @@ value of Last_Index.]}
   concurrently so long as they operate on different elements. This allows
   some container operations to be used in parallel without separate
   synchronization.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[The iterator for the
+  entire container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -3052,6 +3327,12 @@ value of Last_Index.]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
 
 
@@ -3096,11 +3377,22 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[2],Text=[   @key{type} @AdaTypeDefn{List} @key{is tagged private}@Chg{Version=[3],New=[
       @key[with] Constant_Indexing => Constant_Reference,
            Variable_Indexing => Reference,
            Default_Iterator  => Iterate,
-           Iterator_Element  => Element_Type],Old=[]};
+           Iterator_Element  => Element_Type],Old=[]}@Chg{Version=[5],New=[,
+           Iterator_View     => Stable.List,
+           Aggregate         => (Empty       => Empty_List,
+                                 Add_Unnamed => Append),
+           Stable_Properties => (Length, Capacity,
+                                 Tampering_With_Cursors_Prohibited,
+                                 Tampering_With_Elements_Prohibited),
+           Default_Initial_Condition =>
+              Length (List) = 0 @key{and then}
+              (@key{not} Tampering_With_Cursors_Prohibited (List)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (List))],Old=[]};
    @key{pragma} Preelaborable_Initialization(List);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3313,9 +3605,8 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
       @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-      @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+      @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
@@ -3420,14 +3711,15 @@ elements as was written by List'Write.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Text=[@Redundant[Some operations of this generic package
-have access-to-subprogram parameters. To ensure such operations are
-well-defined, they guard against certain actions by the designated
-subprogram. In particular, some operations check for @lquotes@;tampering with
-cursors@rquotes of a container because they depend on the set of elements of
-the container remaining constant, and others check for @lquotes@;tampering with
-elements@rquotes of a container because they depend on elements of the
-container not being replaced.]]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
+operations of this generic package have access-to-subprogram parameters. To
+ensure such operations are well-defined, they guard against certain actions by
+the designated subprogram. In particular, some operations check for
+@lquotes@;tampering with cursors@rquotes of a container because they depend on
+the set of elements of the container remaining constant, and others check for
+@lquotes@;tampering with elements@rquotes of a container because they depend on
+elements of the container not being replaced.]]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}
@@ -4267,15 +4559,15 @@ function.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns a
-@Chg{Version=[5],New=[parallel and ],Old=[]}reversible
+@ChgAdded{Version=[3],Type=[Trailing],Text=[Iterate returns
+@Chg{Version=[5],New=[an],Old=[a reversible]}
 iterator object (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the first node and moving the cursor as
 per the Next function when used as a forward iterator, and starting with the
 last node and moving the cursor as per the Previous function when used as a
-reverse iterator@Chg{Version=[5],New=[, and starting with all nodes concurrently
+reverse iterator@Chg{Version=[5],New=[, and processing all nodes concurrently
 when used as a parallel iterator],Old=[]}. Tampering with the cursors of
 Container is prohibited while the iterator object exists (in particular, in the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
@@ -4284,25 +4576,22 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-   @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
 is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
-returns a @Chg{Version=[5],New=[parallel and ],Old=[]}reversible iterator object
+returns a reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
 @RefSecNum{Generalized Loop Iteration}) designating
 each node in Container, starting with the node designated
 by Start and moving the cursor as per the Next function when used as a forward
 iterator, or moving the cursor as per the Previous function when used as a
-reverse iterator@Chg{Version=[5],New=[, or all nodes concurrently
-when used as a parallel iterator],Old=[]}. Tampering with the cursors of
+reverse iterator. Tampering with the cursors of
 Container is prohibited while the iterator object exists (in particular, in the
 @nt{sequence_of_statements} of the @nt{loop_statement} whose
 @nt{iterator_specification} denotes this object). The iterator object needs
@@ -4699,13 +4988,28 @@ probably not a stable sort.]}
   made and the exception raised.]}
 @end{DiffWord2005}
 
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
+  Tampering with elements is now defined to be equivalent to tampering with
+  cursors for regular containers. If a program requires tampering detection
+  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  outside of test programs. See @Inconsistent2012Title in
+  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
+@end{Inconsistent2012}
+
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Replace_Element is now defined such that it can be used
   concurrently so long as it operates on different elements. This allows
   some container operations to be used in parallel without separate
   synchronization.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[The iterator for the
+  entire container now can return a parallel iterator which can be used to
+  process the container in parallel.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -4713,5 +5017,11 @@ probably not a stable sort.]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
   precede all other checks made by a subprogram (but come after those associated
   with the call).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
+  describing some of the semantics with pre- and postconditions, rather than
+  English text. Note that the preconditions can be Suppressed (see
+  @RefSecNum{Suppressing Checks}.]}
 @end{DiffWord2012}
 

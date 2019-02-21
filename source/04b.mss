@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 
 @LabeledClause{Type Conversions}
 
@@ -3252,3 +3252,606 @@ This subclause is new to Ada 95.
   @ChgAdded{Version=[5],Text=[Updated wording to take nonconfirming values of
   Object_Size into account.]}
 @end{Diffword2012}
+
+
+
+@LabeledAddedClause{Version=[5],Name=[Image Attributes]}
+
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
+@ChgAdded{Version=[5],Text=[An @i{image} of a value is a string representing
+  the value in display form.@Defn2{Term=[image], Sec=(of a value)}
+  The attributes Image, Wide_Image, and Wide_Wide_Image are available
+  to produce the image of a value as a String, Wide_String, or
+  Wide_Wide_String (respectively). User-defined images for a given type
+  can be implemented by overriding the default implementation of the
+  attribute Put_Image.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{every
+  subtype S of a type T other than @i{universal_real} or @i{universal_fixed}},
+  the following type-related operational attribute is defined:]}
+
+@begin(description)
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Put_Image>, ARef=[AI12-0020-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[S'Put_Image denotes a
+     procedure with the following specification:],Old=[]}
+@begin(Descexample)
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@b(procedure) S'Put_Image
+   (@RI(Arg)    : @key[in] T;
+    @RI(Stream) : @key[not null access] Ada.Streams.Root_Stream_Type'Class);]}
+@end(Descexample)
+@Comment{These two paragraphs have to be Added rather than AddedNormal so that
+the paragraphs in thee Annex have the correct paragraph numbers.}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],NoPrefix=[T],Text=[The
+      default implementation of S'Put_Image writes
+      (using Wide_Wide_String'Write) an @i<image> of the value of
+      @i<Arg>.]}]}@Comment{End of Annex text here.}
+
+@EndPrefixType{}
+@end{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],NoPrefix=[T],Text=[The Put_Image attribute may be
+specified for any specific type T either via an @nt{attribute_definition_clause}
+or via an @nt{aspect_specification} specifying the Put_Image aspect of the
+type.@AspectDefn{Put_Image}]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Put_Image],
+  Text=[@ChgAdded{Version=[5],Text=[Procedure to define the image of a
+    given type.]}]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[In contrast, the Image, Wide_Image, and
+     Wide_Wide_Image attributes and their associated aspects may not be
+     specified. The behavior of any of these attributes is defined in terms of
+     calls to the corresponding Put_Image procedure, so changes in their
+     behavior may be accomplished via a Put_Image specification.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[In earlier versions of Ada, Image and related
+     attributes were defined only for scalar types. The definition of these
+     attributes is now very different, but it is intended that there should be
+     no change in the behavior of existing programs as a result of these
+     changes.]}
+@end{Discussion}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The behavior of the default
+  implementation of S'Put_Image depends on the class of T. For
+  an elementary type, the implementation is equivalent to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[procedure] Scalar_Type'Put_Image
+  (Arg : Scalar_Type; Stream : @key[access] Ada.Streams.Root_Stream_Type'Class) @key[is]
+@key[begin]
+   Wide_Wide_String'Write (@i{<described below>}, Stream);
+@key[end] Scalar_Type'Put_Image;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[where the Wide_Wide_String value
+  written out to the stream is defined as follows:]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For an integer type, the image written out is the
+  corresponding decimal literal, without underlines, leading zeros, exponent, or
+  trailing spaces, but with a single leading character that is either a minus
+  sign or a space.]}
+
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[If the machine supports negative zeros for signed
+     integer types, it is not specified whether " 0" or "-0" should be returned
+     for negative zero. We don't have enough experience with such machines to
+     know what is appropriate, and what other languages do. In any case, the
+     implementation should be consistent.]}
+@end{ImplNote}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[We allow S'Put_Image when S is
+   @i{universal_integer} or @i{root_integer}, because the details of the
+   desired string do not depend on properties of an integer type. While
+   S'Put_Image cannot be called directly for these types (as they cannot be
+   named), it can be called as part of evaluating an Image attribute. Note
+   that other rules of the language ensure that an implementation can evaluate
+   any @i{universal_integer} attribute using type @i{root_integer}; therefore,
+   Constraint_Error could be raised by the evaluation of an Image attribute
+   if the static value of the prefix is outside of the range of
+   @i{root_integer}.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For an enumeration type, the image written out is
+  either the corresponding identifier in upper case or the corresponding
+  character literal (including the two apostrophes); neither leading nor
+  trailing spaces are included. For a @i{nongraphic character} (a value of a
+  character type that has no enumeration literal associated with it), the value
+  is a corresponding language-defined name in upper case (for example, the image
+  of the nongraphic character identified as @i{nul} is @exam{"NUL"} @em the
+  quotes are not part of the image).@Defn{nongraphic character}]}
+
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[For an enumeration type T that has "holes"
+     (caused by an enumeration_representation_clause), T'Put_Image should raise
+     Program_Error if the value is one of the holes (which is a bounded error
+     anyway, since holes can be generated only via uninitialized variables and
+     similar things).]}
+@end{ImplNote}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For a floating point type, the image written out is
+  a decimal real literal best approximating the value (rounded away from zero
+  if halfway between) with a single leading character that is either a minus
+  sign or a space, a single digit (that is nonzero unless the value is zero), a
+  decimal point, S'Digits-1 (see @RefSecNum{Operations of Floating Point Types})
+  digits  after the decimal point (but one if
+  S'Digits is one), an upper case E, the sign of the exponent (either + or -),
+  and two or more digits (with leading zeros if necessary) representing the
+  exponent. If S'Signed_Zeros is True, then the leading character is a minus sign
+  for a negatively signed zero.]}
+
+@begin{Honest}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[Leading zeros are present in the exponent only
+     if necessary to make the exponent at least two digits.]}
+@end{Honest}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This image is intended to conform to that
+     produced by Text_IO.Float_IO.Put in its default format.]}
+@end{Reason}
+
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[The rounding direction is specified here to
+      ensure portability of output results.]}
+@end{ImplNote}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
+   @ChgAdded{Version=[5],Text=[We do not allow S'Put_Image when S is
+   @i{universal_real}, as the details of the desired string depend on the
+   properties of the (specific) type of S. Specifically, @i{universal_real}
+   does not have a defined value for S'Digits.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For a fixed point type, the image written out is a
+  decimal real literal best approximating the value (rounded away from zero if
+  halfway between) with a single leading character that is either a minus sign
+  or a space, one or more digits before the decimal point (with no redundant
+  leading zeros), a decimal point, and
+  S'Aft (see @RefSecNum{Operations of Fixed Point Types}) digits after the
+  decimal point.]}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This image is intended to conform to that produced by
+      Text_IO.Fixed_IO.Put.]}
+@end{Reason}
+
+@begin{ImplNote}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[The rounding direction is specified here to
+      ensure portability of output results.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[For a machine that supports negative zeros,
+      it is not specified whether " 0.000" or "-0.000" is returned. See
+      corresponding comment above about integer types with signed zeros.]}
+@end{ImplNote}
+
+@begin{Reason}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
+   @ChgAdded{Version=[5],Text=[We do not allow S'Put_Image when S is
+   @i{universal_fixed}, as the details of the desired string depend on the
+   properties of the (specific) type of S. Specifically, @i{universal_fixed}
+   does not have a defined value for S'Aft.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For an access type (named or anonymous), the image
+  written out depends on whether the value is @key[null]. If it is @key[null],
+  then the image is @exam{"NULL"}. Otherwise the image is a left parenthesis
+  followed by @exam{"ACCESS"}, a space, and a sequence of graphic characters,
+  other than space or right parenthesis, representing the location of the
+  designated object, followed by a right parenthesis, as in @exam{"(ACCESS
+  FF0012AC)"}.]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[In general, the default implementation of
+     T'Put_Image for a composite type will involve some sequence of calls to
+     Wide_Wide_String'Write and calls to the Put_Image procedures of component
+     types and, in the case of an array type, index types. The
+     Wide_Wide_String'Write calls may pass in either literal values (e.g., "(",
+     ")", "'(", " => ", or ", "), or other things (such as component names for
+     record values, task_id images for tasks, or the Wide_Wide_Expanded_Name of
+     the tag in the class-wide case).]}
+@end{Discussion}
+
+@begin{Honest}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
+   @ChgAdded{Version=[5],Text=[S'Put_Image is defined for @i{universal_access},
+   but it can never be called (as no legal @nt{prefix} of Image has that type,
+   and that type cannot be named preventing direct calls).]}
+@end{Honest}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=<For an array type T, the default implementation of
+  T'Put_Image generates an image based on (named, not positional) array
+  aggregate syntax (with '[' and ']' as the delimiters) using calls to the
+  Put_Image procedures of the index type(s) and the element type to generate
+  images for values of those types.>}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={[ 1 => [ 1 => [ 123 => True,  124 => False]
+         2 => [ 123 => False,  124 => False]],
+  2 => [ 1 => [ 123 => True,  124 => True],
+         2 => [ 123 => True,  124 => False]]]}}
+@end{example}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[although perhaps with different white space
+      and/or line breaking.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[The case of a null array is handled specially, using
+  ranges for index bounds and @exam{"<>"} as a syntactic component-value
+  placeholder.]}
+
+@begin{Discussion}
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[This might generate an image such as
+     @exam{"[ 1 ..  3 => [ 1 ..  0 => [ 1 .. 5 => <>]]]"}, where the use
+     of "<>" (among other things) indicates that the overall array is a
+     null array and has no actual elements.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[The order in which components are written for a
+  composite type is the same canonical order in which components of a composite
+  type T are written out by the default implementation of T'Write.
+  @Redundant[This is also the order that is used in determining the meaning of a
+  positional aggregate of type T.]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For a class-wide type, the default implementation of
+  T'Put_Image generates an image based on qualified expression syntax.
+  Wide_Wide_String'Write is called with Wide_Wide_Expanded_Name of @i{Arg}'Tag.
+  Then S'Put_Image is called, where S is the specific type identified by
+  @i{Arg}'Tag.]}
+
+@begin{ImplNote}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This will typically require a dispatching
+      call.]}
+@end{ImplNote}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={SOME_PACKAGE.SOME_TAGGED_TYPE'
+   (COMPONENT_1 =>  123, COMPONENT_2 => 456)}}
+@end{Example}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The parentheses in this case are generated by
+      the call to Some_Tagged_Type'Put_Image.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For a type extension, the default implementation of
+  T'Put_Image depends on whether there exists a noninterface ancestor of T
+  (other than T itself) for which the Put_Image aspect has been
+  @Redundant[explicitly] specified. If so, then T'Put_Image will generate an
+  image based on extension aggregate syntax where the ancestor type of the
+  extension aggregate is the nearest ancestor type whose Put_Image aspect has
+  been specified.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This might generate an image such as
+       @exam{"(This Text Was User-Generated with C1 =>  123, C2 =>  456)"}
+       where the "This Text was User-Generated" portion of the text was
+       generated by the call to the user-specified Put_Image routine.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[If no such ancestor exists, then the default
+  implementation of T'Put_Image is the same as described below for an untagged
+  record type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For an untagged record type, a specific tagged
+  record type other than a type extension which meets the criteria described in
+  the previous paragraph, or a protected type, the default implementation of
+  T'Put_Image generates an image based on (named, not positional) record
+  aggregate syntax (except that for a protected type, the initial left
+  parenthesis is followed by @exam{"PROTECTED with "}). Component names are
+  displayed in upper case, following the rules for the image of an enumeration
+  value. Component values are displayed via calls to the component type's
+  Put_Image procedure.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={"(FOO => [1 => 'c',  2 => 'a',  3 => 't'], BAR => TRUE)"}}
+@end{Example}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[The image written out for a record having no
+  components (including any interface type) is @exam{"(NULL@ RECORD)"}. The
+  image written out for a componentless protected type is
+  @exam{"(PROTECTED@ NULL@ RECORD)"}. In the case of a protected type T, a call to the default
+  implementation of T'Put_Image begins only one protected (read-only) action.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The expected, but not required, implementation
+    model for generating the image of a protected record involves the compiler
+    producing a "helper" protected function which T'Put_Image would call. The
+    result type of this function might be a null record; it is only a function
+    because it does not need a write-lock, not because it returns a meaningful
+    result.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The assertion in the following example
+    should succeed:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] T1 (D1, D2 : Positive) @key[is record] ... @key[end record]; -- @examcom{untagged}
+@key[type] T2 (D : Positive) @key[is new] T1 (D1 => D, D2 => D);
+X : T2 (D => 123) := ... ;
+@key[pragma] Assert (X'Image /= T1(X)'Image);]}
+@end{Example}
+@end{ImplNote}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=[For an undiscriminated task type, the default
+  implementation of T'Put_Image generates an image of the form @exam{"(TASK
+  <task_id_image>)"} where <task_id_image> is the result obtained by calling
+  Task_Identification.Image with the id of the given task and then passing that
+  String to Characters.Conversions.To_Wide_Wide_String.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a discriminated task type, the
+default implementation of T'Put_Image also includes discriminant values, as in:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=["(TASK <task_id_image> with D1 =>  123, D2 =>  456)"]}
+@end{Example}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[If T is an unchecked union type, then the
+      default implementation of T'Put_Image will raise Program_Error.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{every
+  subtype S of a type T}, the following attributes are defined:]}
+
+@begin{Description}
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1],
+  InitialVersion=[2], Text=[@Chg{Version=[5],New=[S'Wide_Wide_Image
+     denotes a function with the following specification:],Old=[]}
+@begin(Descexample)
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Wide_Image(@RI(Arg) : S'Base)
+  @b(return) Wide_Wide_String]}
+@end(Descexample)
+@Comment{We have to use "Added" on these two so that the annex paragraph
+numbers come out correctly. Only the initial text gets overridden.}
+     @ChgRef{Version=[5],Kind=[Added]}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Wide_Image calls
+      S'Put_Image passing @i<Arg>
+      (which will typically write a sequence of Wide_Wide_Character values
+      out to a stream) and then returns the result of reading the contents
+      of that stream via Wide_Wide_String'Read.]}]}@Comment{End of Annex text here.}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Text=[The lower bound of the
+      result is 1.]}
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1],
+  InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Wide_Image denotes a
+     function with the following specification:],Old=[]}
+@Comment{We use an InitialVersion of 0 here so this item uses the existing
+paragraph numbers in the Annex. It will leave the prefix uninserted, but that
+will save a vast amount of messing around.}
+@begin(Descexample)
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@b(function) S'Wide_Image(@RI(Arg) : S'Base)
+  @b(return) Wide_String]}
+@end(Descexample)
+
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns the result of
+     a call on S'Wide_Wide_Image with a parameter of @i<Arg> as a
+     Wide_String.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
+     result has the same sequence of
+     graphic characters as that returned by S'Wide_Wide_Image if all the graphic
+     characters are defined in Wide_Character; otherwise, the sequence of
+     characters is implementation defined (but no shorter than that of
+     S'Wide_Wide_Image for the same value of @i<Arg>).]}
+
+     @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+     Text=[@ChgAdded{Version=[5],Text=[The
+     sequence of characters of the value returned by
+     S'Wide_Image when some of the graphic characters of
+     S'Wide_Wide_Image are not defined in Wide_Character.]}]}
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1],
+  InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Image denotes a function
+     with the following specification:],Old=[]}
+@Comment{We use an InitialVersion of 0 here so this item uses the existing
+paragraph numbers in the Annex. It will leave the prefix uninserted, but that
+will save a vast amount of messing around.}
+@begin(Descexample)
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@b(function) S'Image(@RI(Arg) : S'Base)
+  @b(return) String]}
+@end(Descexample)
+
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns the result of
+     a call on S'Wide_Wide_Image with a parameter of @i<Arg> as a
+     String.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
+     result has the same sequence of
+     graphic characters as that returned by S'Wide_Wide_Image if all the graphic
+     characters are defined in Character; otherwise, the sequence of characters
+     is implementation defined (but no shorter than that of S'Wide_Wide_Image
+     for the same value of @i<Arg>).]}
+
+     @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+     Text=[@ChgAdded{Version=[5],Text=[The
+     sequence of characters of the value returned by
+     S'Image when some of the graphic characters of
+     S'Wide_Wide_Image are not defined in Character.]}]}
+
+@EndPrefixType{}
+@end(description)
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0124-1],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}
+@ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
+  @nt{prefix} X of a type T other than @i{universal_real} or
+  @i{universal_fixed}}, the following attributes are defined:]}
+
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Wide_Wide_Image>,
+  InitialVersion=[5], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[5],New=[X'Wide_Wide_Image denotes the result of
+  calling function S'Wide_Wide_Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Wide_Image>,
+  InitialVersion=[5], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[5],New=[X'Wide_Image denotes the result of
+  calling function S'Wide_Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Image>,
+  InitialVersion=[5], ARef=[AI12-0124-1], ARef=[AI12-0020-1],
+  Text=[@Chg{Version=[5],New=[X'Image denotes the result of
+  calling function S'Image with @i<Arg> being X, where S is the
+  nominal subtype of X.],Old=[]}]}
+@EndPrefixType{}
+@end(description)
+
+@end{StaticSem}
+
+@begin{ImplPerm}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[An implementation may transform the
+image generated by the default implementation of S'Put_Image for a composite
+subtype S in the following ways:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If S is a composite subtype, the leading character
+  of the image of a component value or index value is a space, and the
+  immediately preceding character is an open parenthesis or bracket, then the
+  space may be omitted. The same transformation is also permitted if the leading
+  character of the component image is a space (in which case one of the two
+  spaces may be omitted).]}
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text={This means that it is permitted to generate
+      @exam{"[1 => 123, 2 => 456]"} instead of @exam{"[ 1 =>  123,  2 =>  456]"}.}}
+@end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If S is an array subtype, the low bound of the
+    array in each dimension equals the low bound of the corresponding index
+    subtype, and the array value is not a null array value, then positional
+    array aggregate syntax may be used.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text={This means that it is permitted to
+       generate @exam{"[TRUE, TRUE, FALSE]"} instead of
+       @exam{"[ 1 => TRUE,  2 => TRUE,  3 => FALSE]"} if the low bound of the
+       index subtype is one.}}
+@end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If S is an array subtype and the given value can
+    be displayed using @nt{named_array_aggregate} syntax where some
+    @nt{discrete_choice_list} identifies more than one index value by
+    identifying a sequence of one or more ranges and values separated by
+    vertical bars, then this image may be generated instead; this may involve
+    the reordering of component values.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text={This means that it is permitted to
+       generate @exam{"[ 1 ..  2 |  5 => TRUE,  3 ..  4 => FALSE]"} instead of
+       @exam{"[ 1 => TRUE,  2 => TRUE,  3 => FALSE,  4 => FALSE,  5 => TRUE]"}.}}
+@end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Similarly, if S is a record subtype (or a
+    discriminated type) and the given value can be displayed using named
+    component association syntax where the length of some component_choice_list
+    is greater than one, then this image may be generated instead; this may
+    involve the reordering of component values.]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This means that it is permitted to generate
+       @exam{"(F1 | F2 => TRUE)"} instead of
+       @exam{"(F1 => TRUE, F2 => TRUE)"}.]}
+@end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Additional spaces, carriage returns, and line
+    feeds (Wide_Wide_Characters with positions 32, 10, and 13), may be inserted
+    to improve readability of the generated image.]}
+
+@end{Itemize}
+
+@end{ImplPerm}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Attribute
+    Put_Image is new. Attributes Image, Wide_Image, and Wide_Wide_Image
+    now can be used with any type, and are defined in terms of Put_Image so
+    that they can be redefined.]}
+@end{Extend2012}
+

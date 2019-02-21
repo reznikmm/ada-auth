@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:53 $}
+@Comment{$Date: 2019/02/21 05:24:04 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1981,17 +1981,13 @@ into a composite value of an array type, record type, or record extension.]
 
 @begin{Resolution}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1],ARef=[AI12-0212-1],ARef=[AI12-0307-1]}
 @PDefn2{Term=[expected type],Sec=(aggregate)}
-@Chg{Version=[5],New=[The expected type for a @nt{delta_aggregate} shall be a
-single array type, or a single descendant of a record type or of a record
-extension. ],Old=[]}The expected type for
-@Chg{Version=[5],New=[an @nt{array_aggregate}, a @nt{record_aggregate}, or an
-@nt{extension_aggregate}],Old=[an @nt{aggregate}]} shall be a single
-@Chg{Version=[2],New=[],Old=[nonlimited ]}array type, record type, or
-record extension.@Chg{Version=[5],New=[ The expected type for a
-@nt{container_aggregate} shall be a single array type or a single type with
-the Aggregate aspect specified.],Old=[]}
+The expected type for an @nt{aggregate} shall be a single
+@Chg{Version=[2],New=[],Old=[nonlimited ]}array type,
+@Chg{Version=[5],New=[a single type with the Aggregate aspect specified,
+or a single descendant of a ],Old=[]}record type@Chg{Version=[5],New=[],Old=[,]} or
+@Chg{Version=[5],New=[of a ],Old=[]}record extension.
 @begin{Discussion}
   See @RefSec{The Context of Overload Resolution}
   for the meaning of @lquotes@;shall be a single ... type.@rquotes@;
@@ -2005,14 +2001,15 @@ the Aggregate aspect specified.],Old=[]}
   of aggregate is being used.]}
 @end{Ramification}
 @begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0212-1]}
-  @ChgAdded{Version=[5],Text=[The messiness here is needed to allow any record
-  type with any visible components to be used in a @nt{delta_aggregate} while
-  keeping exact compatibility for existing kinds of aggregates. Similarly,
-  we need to allow @nt{container_aggregate}s to match container types (duh!).
-  It would have been cleaner to use a single rule for all @nt{aggregate}s, but
-  that would have caused a few unlikely @nt{aggregate}s that are legal in Ada
-  95, Ada 2005, and Ada 2012 to fail to resolve in Ada 2020.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0212-1],ARef=[AI12-0307-1]}
+  @ChgAdded{Version=[5],Text=[Generally, we don't want to look in
+  @nt{aggregate}s to resolve them. For instance, Ada 95 allowed array types
+  to match @nt{extension_aggregate}s, even though those have to be record
+  types. Thus, we allow any record type with any visible
+  (non-discriminant) components to match an @nt{aggregate}, even though
+  only @nt{delta_aggregate}s allow private types or extensions. Similarly,
+  we allow any container type to match an @nt{aggregate}, even though
+  only @nt{container_aggregate}s allow container types. ]}
 @end{Reason}
 @end{Resolution}
 
@@ -2159,11 +2156,24 @@ will work (see @RefSecNum{Assignment and Finalization}).
   be of a limited type.]}
 @end{Extend95}
 
-@begin{DiffWord2012}
+@begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0212-1]}
-  @ChgAdded{Version=[5],Text=[Made wording changes for @nt{delta_aggregate}s
-    and @nt{container_aggregate}s.]}
-@end{DiffWord2012}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}
+  We now allow types with the Aggregate aspect specified ("container types"),
+  as well as private types and extensions descended from a record type or
+  extension, to match all forms of @nt{aggregate}. These types are only allowed
+  for new types of @nt{aggregate} (@nt{container_aggregate}s for the Aggregate
+  aspect, and @nt{delta_aggregate}s for private types), but, consistent with
+  other forms of @nt{aggregate}, we do not look at the form of the
+  @nt{aggregate} to determine resolution. This can be incompatible in unlikely
+  cases, where overloading of a container or private type with a type that
+  was previously allowed in @nt{aggregate}s makes an existing call ambiguous.
+  (For an example, replace type Lim in the example given above under
+  @Incompatible95Title with a Vector from an instance of
+  Ada.Containers.Vector. The call of P in that case will be illegal in Ada 2020
+  and legal in Ada 2012.) This can easily be fixed by qualifying the
+  @nt{aggregate} with the correct type.]}
+@end{Incompatible2012}
 
 
 @LabeledSubClause{Record Aggregates}
@@ -3049,19 +3059,23 @@ we answer it explicitly.}
 @end{MetaRules}
 
 @begin{Syntax}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 @Syn{lhs=<array_aggregate>,rhs="
-  @Syn2{positional_array_aggregate} | @Syn2{named_array_aggregate}"}
+    @Syn2{positional_array_aggregate} | @Chg{Version=[5],New="@Syn2{null_array_aggregate} | ",Old=[]}@Syn2{named_array_aggregate}"}
 
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1],ARef=[AI12-0306-1]}
 @Syn{lhs=<positional_array_aggregate>,rhs="
     (@Syn2{expression}, @Syn2{expression} {, @Syn2{expression}})
   | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => @Syn2{expression})@Chg{Version=[2],New=[
   | (@Syn2{expression} {, @Syn2{expression}}, @key(others) => <>)@Chg{Version=[5],New="
   | '[' @Syn2{expression} {, @Syn2{expression}}[, @key(others) => @Syn2{expression}] ']'
-  | '[' @Syn2{expression} {, @Syn2{expression}}, @key(others) => <> ']'
-  | '[' ']'",Old=[]}],Old=[]}"}
+  | '[' @Syn2{expression} {, @Syn2{expression}}, @key(others) => <> ']'",Old=[]}],Old=[]}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0306-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<null_array_aggregate>,Old=<>}>,
+rhs="@Chg{Version=[5],New="'[' ']'",Old=[]}"}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0127-1],ARef=[AI12-0212-1]}
 @Syn{lhs=<named_array_aggregate>,rhs="
@@ -3166,7 +3180,7 @@ the corresponding index is the index in position m+1.
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 An @nt<array_aggregate> of an n-dimensional array type shall be
 written as an n-dimensional @nt<array_aggregate>@Chg{Version=[5],New=<, or as
-a @i<null aggregate>@Defn{null aggregate} @em [ ]>,Old=<>}.
+a @nt{null_array_aggregate}>,Old=<>}.
 @begin(Ramification)
 In an m-dimensional @nt<array_aggregate> @Redundant[(including a subaggregate)],
 where m >= 2, each of the @nt<expression>s
@@ -3333,6 +3347,12 @@ to one that is a @nt<positional_array_aggregate> of the same length,
 with each @nt<expression> being the @nt<character_literal>
 for the corresponding character of the @nt<string_literal>.
 
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0306-1]}
+  @ChgAdded{Version=[5],Text=[This is true even in cases where there is no
+  corresponding legal @nt{positional_array_aggregate}.]}
+@end{Honest}
+
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0061-1]}
 @ChgAdded{Version=[5],Text=[The subtype (and nominal subtype) of
 an index parameter is the corresponding index subtype.]}
@@ -3434,7 +3454,7 @@ of the @nt{iterator_specification} is the value produced by the iteration
   an arbitrary order@rdquote, this implies that an index parameter of an
   @nt{iterated_component_association} can take on its values in an
   arbitrary order. This is different than in other constructs, such as a
-  @nt{loop_statement}. In contrast, an loop parameter of an
+  @nt{loop_statement}. In contrast, a loop parameter of an
   @nt{iterated_component_association} takes its values in the order defined
   by the iteration, the same as a @nt{loop_statement}.]}
 @end{Ramification}
@@ -3449,27 +3469,26 @@ are determined as follows:
   those of the corresponding index range from the applicable
   index constraint;
 
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
   For a @nt{positional_array_aggregate} @Redundant[(or equivalent
   @nt<string_literal>)]
-  without an @key(others)
-  choice@Chg{Version=[5],New=[ that is not a null aggregate],Old=[]}, the
+  without an @key(others) choice, the
   lower bound is that of the corresponding index range in the
   applicable index constraint, if defined, or that of the corresponding
   index subtype, if not; in either case, the upper bound is
   determined from the lower bound and the number of @nt<expression>s
   @Redundant[(or the length of the @nt<string_literal>)];
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
-  @ChgAdded{Version=[5],Text=[For a null aggregate, bounds for each
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0306-1]}
+  @ChgAdded{Version=[5],Text=[For a @nt{null_array_aggregate}, bounds for each
   dimension are determined as for a @nt{positional_array_aggregate} without
   an @key(others) choice with zero expressions for each dimension;]}
 
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[We need a separate rule to describe what happens
-    for a multidimensional null aggregate; the single dimension case directly
-    follows from the @nt{positional_array_aggregate} definition.]}
+    @ChgAdded{Version=[5],Text=[We need a separate rule to describe what
+    happens for a multidimensional @nt{null_array_aggregate}; we could've
+    combined the single dimension case with the @nt{positional_array_aggregate}
+    rule.]}
 @end{Reason}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
@@ -3560,11 +3579,14 @@ checks fail.
 
 @begin{Notes}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
-In an @nt<array_aggregate>, positional notation may only be used
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
+In an @nt<array_aggregate>@Chg{Version=[5],New=[ delimited by
+parentheses],Old=[]}, positional notation may only be used
 with two or more @nt<expression>s; a single @nt<expression>
 in parentheses is interpreted as a
 @Chg{Version=[3],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
-A @nt<named_array_aggregate>, such as (1 => X), may be used to specify
+@Chg{Version=[5],New=[An @nt{array_aggregate} delimited by brackets],Old=[A
+@nt<named_array_aggregate>, such as (1 => X),]} may be used to specify
 an array with a single component.
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
@@ -3583,12 +3605,14 @@ Table'(5, 8, 4, 1, @key(others) => 0)  --@RI[  see @RefSecNum{Array Types} ]
 @leading@keepnext@i(Examples of array aggregates with named associations:)
 @end{WideAbove}
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 (1 .. 5 => (1 .. 8 => 0.0))      --@RI[  two-dimensional]
-(1 .. N => @key(new) Cell)             --@RI[  N new cells, in particular for N = 0]
+@Chg{Version=[5],New=<[>,Old=<(>}1 .. N => @key(new) Cell@Chg{Version=[5],New=<]>,Old=<)>}             --@RI[  N new cells, in particular for N = 0]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 Table'(2 | 4 | 10 => 1, @key(others) => 0)
 Schedule'(Mon .. Fri => True,  @key(others) => False)  --@RI[  see @RefSecNum{Array Types}]
-Schedule'(Wed | Sun  => False, @key(others) => True)
+Schedule'@Chg{Version=[5],New=<[>,Old=<(>}Wed | Sun  => False, @key(others) => True@Chg{Version=[5],New=<]>,Old=<)>}
 Vector'(1 => 2.5)                                --@RI[  single-component vector]
 @end{Example}
 
@@ -3598,9 +3622,12 @@ Vector'(1 => 2.5)                                --@RI[  single-component vector
 @begin{Example}
 --@RI[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
+@Chg{Version=[5],New=<[>,Old=<(>}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
-(1 => (1.1, 1.2, 1.3), 2 => (2.1, 2.2, 2.3))
-(1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3))
+(1 => @Chg{Version=[5],New=<[>,Old=<(>}1.1, 1.2, 1.3@Chg{Version=[5],New=<]>,Old=<)>}, 2 => @Chg{Version=[5],New=<[>,Old=<(>}2.1, 2.2, 2.3@Chg{Version=[5],New=<]>,Old=<)>})
+@Chg{Version=[5],New=<[>,Old=<(>}1 => (1 => 1.1, 2 => 1.2, 3 => 1.3), 2 => (1 => 2.1, 2 => 2.2, 3 => 2.3)@Chg{Version=[5],New=<]>,Old=<)>}
 @end{Example}
 
 @begin{WideAbove}
@@ -3746,6 +3773,9 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
   brackets rather than parentheses. This allows consistent writing of zero
   and one component positional arrays, and is consistent with the syntax
   for writing container aggregates.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0306-1]}
+  @ChgAdded{Version=[5],Text=[A @nt{null_array_aggregate} is new.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -4183,7 +4213,7 @@ rhs="@Chg<Version=[5],New="@Syn2<key_choice> {'|' @Syn2<key_choice>}",Old=<>>">
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @AddedSyn<Version=[5],lhs=<@Chg{Version=[5],New=<key_choice>,Old=<>}>,
-rhs="@Chg{Version=[5],New="@SynI{key_}@Syn2<expression> | @Syn2<discrete_range>}",Old=<>}">
+rhs="@Chg{Version=[5],New="@SynI{key_}@Syn2<expression> | @Syn2<discrete_range>",Old=<>}">
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterated_element_association>,Old=<>}>,
@@ -7610,21 +7640,21 @@ a @SynI{discrete_}@nt{subtype_indication} or a @nt{range}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[In the remainder of this subclause,
-we will refer to nonlimited subtypes @i<Val_Type> and @i<Acc_Type> of a
+we will refer to nonlimited subtypes @i<Value_Type> and @i<Accum_Type> of a
 @nt{reduction_attribute_reference}. These subtypes and interpretations of
 the @nt{name}s and @nt{expression}s of a @nt{reduction_attribute_reference} are
 determined by the following rules:]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[@i<Acc_Type> is short for accumulator type (the
-    result of the reduction), and @i<Val_Type> is short for value type (the type
-    of the input values to the reduction).]}
+  @ChgAdded{Version=[5],Text=[@i<Accum_Type> represents the result of the
+     reduction (the @i<accumulator> type), and @i<Value_Type> represents the
+     type of the input values to the reduction.]}
 @end{Discussion}
 
 @begin{Itemize}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[@i<Acc_Type> is a subtype of the expected type of
+@ChgAdded{Version=[5],Text=[@i<Accum_Type> is a subtype of the expected type of
 the @nt{reduction_attribute_reference}.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
@@ -7633,7 +7663,7 @@ is either subtype conformant with the following specification:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Reducer(Accumulator : @i<Acc_Type>; Value : @i<Val_Type>) @key[return] @i<Acc_Type>;]}
+@ChgAdded{Version=[5],Text=[   @key[function] Reducer(Accumulator : @i<Accum_Type>; Value : @i<Value_Type>) @key[return] @i<Accum_Type>;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7642,12 +7672,12 @@ subtype conformant with the following specification:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Reducer(Accumulator : @key[in out] @i<Acc_Type>; Value : @key[in] @i<Val_Type>);]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] Reducer(Accumulator : @key[in out] @i<Accum_Type>; Value : @key[in] @i<Value_Type>);]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[A @i<combiner subprogram>@Defn{combiner subprogram}
-is a reducer subprogram where both parameters are of subtype @i<Acc_Type>.]}
+is a reducer subprogram where both parameters are of subtype @i<Accum_Type>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{reducer_}@nt{name} of a @nt{reduction_specification}
@@ -7660,11 +7690,11 @@ denotes a reducer subprogram.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The expected type of an
 @SynI{initial_value_}@nt{expression} of a @nt{reduction_specification}
-is that of subtype @i<Acc_Type>.]}
+is that of subtype @i<Accum_Type>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The expected type of the @nt{expression} of a
-@nt{value_sequence} is that of subtype @i<Val_Type>.]}
+@nt{value_sequence} is that of subtype @i<Value_Type>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[For an @nt{iterated_component_association}
@@ -7760,7 +7790,7 @@ For the evaluation of a @nt{value_sequence}:]}
     @RefSecNum{Generalized Loop Iteration}), and for each value produced by
     the iterator, the associated @nt{expression} is evaluated with the loop
     parameter having this value, to
-    produce a result that is converted to Val_Type, and used to define the next
+    produce a result that is converted to Value_Type, and used to define the next
     value in the sequence;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -7769,7 +7799,7 @@ For the evaluation of a @nt{value_sequence}:]}
     is evaluated, and for each value, in increasing order, of the
     discrete subtype or range defined by the @nt{discrete_choice_list}, the
     associated @nt{expression} is evaluated with the index parameter having
-    this value, to produce a result that is converted to Val_Type, and
+    this value, to produce a result that is converted to Value_Type, and
     used to define the next value in the sequence.]}
 
 @end{Itemize}
@@ -7811,8 +7841,8 @@ reduction expression without a @nt{chunk_specification}.]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[@PDefn2{Term=[evaluation], Sec=(reduction_attribute_reference)}
-    The evaluation of a use of this attribute begins by evaluating the
-    @nt{value_sequence} V and the parts of the
+    The evaluation of a use of this attribute begins by evaluating the parts
+    of the
     @nt{reduction_attribute_designator} (the @SynI{reducer_}@nt{name} Reducer,
     the @SynI{initial_value_}@nt{expression} Initial_Value, and the
     @SynI{combiner_}@nt{name} Combiner, if any), in
@@ -7820,7 +7850,8 @@ reduction expression without a @nt{chunk_specification}.]}]}
     initializes the @i<accumulator> of the reduction expression to the value of
     the @SynI{initial_value_}@nt{expression} (the @i<initial
     value>).@Defn2{Term=[accumulator],Sec=[reduction attribute]}
-    @Defn2{Term=[initial value],Sec=[reduction attribute]}]}
+    @Defn2{Term=[initial value],Sec=[reduction attribute]} The
+    @nt{value_sequence} V is then evaluated.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[If the @nt{value_sequence} does not
@@ -7944,7 +7975,7 @@ If a parallel reduction expression has a combiner subprogram
 specified, then it is a bounded error if the initial value is not the
 (left) identity of the combiner subprogram. That is, the result of
 calling the combiner subprogram with the Accumulator being the initial
-value and the Value being any arbitrary value of subtype @i<Acc_Type> should
+value and the Value being any arbitrary value of subtype @i<Accum_Type> should
 produce a result equal to the Value parameter. The possible consequences
 are Program_Error, or a result that does not match the equivalent
 sequential reduction expression due to multiple uses of the
@@ -7954,18 +7985,26 @@ reduction.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded erro
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[There is no way to do the individual subsequence
-    reductions when the @i<Acc_Type> and the @i<Val_Type> are not the same, unless we
+    reductions when the @i<Accum_Type> and the @i<Value_Type> are not the same, unless we
     can initialize the local accumulator with an initial-value that is presumed
     to be the identity. If the initial value is not the identity, and there is
     more than one chunk, it will be included more than once in the overall
     reduction. We associate this bounded error with there being a combiner
-    subprogram specified, since that is necessary only when @i<Acc_Type> and
-    @i<Val_Type> are different, and because the dynamic semantics above specify the
+    subprogram specified, since that is necessary only when @i<Accum_Type> and
+    @i<Value_Type> are different, and because the dynamic semantics above specify the
     use of the initial value multiple times whenever a combiner is specified. We
     chose to base the dynamic semantics rules on the presence of a separate
-    combiner, rather than on the matching between @i<Acc_Type> and @i<Val_Type>, since
+    combiner, rather than on the matching between @i<Accum_Type> and @i<Value_Type>, since
     the presence of the combiner is more visible in the source.]}
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In this rule, @ldquote@;equal@rdquote means
+    semantically equal. We don't care if the bit patterns differ but the results
+    mean the same thing. In particular, if the primitive equal is user-defined,
+    that equality would be the one used to determine if this rule is violated.]}
+@end{Honest}
 @end{Bounded}
 
 @begin{Examples}

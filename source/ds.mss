@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.79 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.80 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/02/21 05:24:05 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -1638,7 +1638,7 @@ access-to-class-wide type.]}
 For the execution of a remote subprogram call, subprogram parameters
 (and later the results, if any) are passed using a stream-oriented
 representation
-(see @RefSecNum{The Package Streams}) @Redundant[which is
+(see @RefSecNum{The Streams Subsystem}) @Redundant[which is
 suitable for transmission between partitions]. This action is called
 @i{marshalling}. @i{Unmarshalling} is the reverse action of
 reconstructing the parameters or results from the stream-oriented
@@ -2239,7 +2239,7 @@ and its acronym are more familiar.
 @leading@keepnext@;The following language-defined library package exists:
 @begin{example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
-@b(with) Ada.Streams; -- @Examcom{see @RefSecNum[The Package Streams]}
+@b(with) Ada.Streams; -- @Examcom{see @RefSecNum[The Streams Subsystem]}
 @key(package) System.RPC@Chg{Version=[5],New=[
    @key(with) Nonblocking => False],Old=[]} @key(is)@ChildUnit{Parent=[System],Child=[RPC]}
 
