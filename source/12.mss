@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.105 $}
+@Comment{$Revision: 1.106 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -1433,11 +1433,12 @@ instance of a generic unit.],Old=[:]}]}
 @end{Itemize}
 
 @begin{Reason}
-  @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00287-01],ARef=[AI95-00423-01]}
-  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0287-1]}
+  @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00287-01],ARef=[AI95-00423-01]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1]}
   @Chg{Version=[2],New=[This rule prevents @lquotes@;lying@rquotes.
   @b<Null> must never be the value of an object with an explicit
-  @nt{null_exclusion}. The first bullet is an assume-the-worst rule
+  @nt{null_exclusion}. The @Chg{Version=[5],New=[@ldquote@;in addition@rdquote
+  part],Old=[first bullet]} is an assume-the-worst rule
   which prevents trouble in generic bodies (including bodies of child
   units) when the subtype of the formal object
   @Chg{Version=[5],New=[of mode @key[in out] ],Old=[]}excludes null
@@ -2141,8 +2142,10 @@ type shall be a synchronized tagged type.]}
   ban this case.]}
 
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0036-1]}
-  @ChgAdded{Version=[4],Text=[If we allowed actual types that differ from
-  the kind of the formal derived type, we could allow type conversions that
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[If we allowed actual types
+  @Chg{Version=[5],New=[whose kind differs from that],Old=[that differ from
+  the kind]} of the formal derived type, we could allow type conversions that
   would not be allowed outside of the generic. That would be particularly
   problematical if the actual is a tagged type with extension components;
   we could have created an object of the type that is missing those components
@@ -3236,9 +3239,9 @@ type or of the actual type corresponding to the controlling type.]}]}
   operation of the controlling type, an abstract formal subprogram, or the
   implicitly available primitive operation for a class-wide type.]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0165-1],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[5],Text=[An explicit class-wide operation cannot be
-  used for the actual of an formal abstract subprogram. Such an operation is
+  used for the actual of a formal abstract subprogram. Such an operation is
   never primitive (only specific types have primitive subprograms).]}
 
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3574,7 +3577,7 @@ so it has convention Intrinsic as defined in @RefSecNum{Conformance Rules}.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
   Added a rule to ensure that for an actual subprogram that is a prefixed
-  view, that the prefix continues to exist during the life of the instantiation.
+  view, the prefix continues to exist during the life of the instantiation.
   If the prefix is a subcomponent that depends on discriminants, Ada 2005 and
   2012 would have allowed the prefix while Ada 202x would not. Without this
   change, explicit forms (renaming the object and then using that in

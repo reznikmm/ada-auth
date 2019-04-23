@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -677,66 +677,52 @@ is a complete context. The target name is a
 constant view of @i<V>, having the nominal subtype of @i<V>.]]}
 
 @begin{TheProof}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1]}
   @ChgAdded{Version=[5],Text=[The complete context rule is formally given in
   @RefSecNum{The Context of Overload Resolution}. The constant view rule is
   formally given in @RefSecNum{Objects and Named Numbers}; the nominal subtype
-  follows from the equivalence given below in @StaticSemTitle.]}
+  is a property taken from the target object as described below
+  in @RunTimeTitle.]}
 @end{TheProof}
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-@ChgAdded{Version=[5],Text=[A @nt{target_name} shall only appear in the
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1]}
+@ChgAdded{Version=[5],Text=[A @nt{target_name} shall appear only in the
 @nt{expression} of an @nt{assignment_statement}.]}
 @end{Legality}
 
-@begin{StaticSem}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-@ChgAdded{Version=[5],Text=[@Redundant[The @SynI<variable_>@nt{name} is
-evaluated only once.] In particular, if a @nt{target_name} with nominal subtype
-@i<S> appears in the @nt{expression} of an @nt{assignment_statement} @i<A>,
-then @i<A> is equivalent to a call on a local anonymous procedure with the
-actual parameter being the @SynI<variable_>@nt{name} of @i<A>, where the local
-anonymous procedure has an @key[in out] parameter with unique name @i<P> of
-subtype @i<S>, with a body being @i<A> with the @i<variable_>@nt{name} being
-replaced by @i<P>, and any @nt<target_name>s being replaced by the qualified
-expression @i<S>'(@i<P>).]}
+@begin{RunTime}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1]}
+@ChgAdded{Version=[5],Text=[For the execution of an @nt{assignment_statement}
+with one or more @nt{target_name}s appearing in its @nt{expression}, the
+@SynI{variable_}@nt{name} @i{V} of the @nt{assignment_statement}
+is evaluated first to determine the object denoted by @i{V}, and then the
+@nt{expression} of the @nt{assignment_statement} is evaluated with the evaluation of
+each @nt{target_name} yielding a constant view of the the target whose
+properties are otherwise identical to those of the view provided by @i{V}. The
+remainder of the execution of the @nt{assignment_statement} is as given in
+subclause @RefSecNum{Assignment Statements}.]}
 
-@begin{Reason}
+@begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This equivalence defines all of the
-  @RuntimeTitle for these assignment statements.]}
-@end{Reason}
+  @ChgAdded{Version=[5],Text=[The properties here include static properties
+  like whether the @nt{target_name} is aliased and the nominal subtype of
+  the @nt{target_name}. It was too weird to give separate rules for static
+  and dynamic properties that said almost the same thing.]}
+@end{Honest}
 
-@begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Type=[Leading],Text=[For example, the expression]}
-@begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[My_Array(I) := @@*2 + @@/2;]}
-@end{Example}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Type=[Leading],Text=[would be equivalent to]}
-@begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=<@key[declare]
-   @key[procedure] [Anon] ([Target] : @key[in out] [Target_Subtype]) @key[is]
-   @key[begin]
-      [Target] := [Target_Subtype]'([Target])*2 +
-                  [Target_Subtype]'([Target])/2;
-   @key[end] [Anon];>}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text={@key[begin]
-   [Anon] ([Target] => My_Array(I));
-@key[end];}}
-@end{Example}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[where all of the identifiers in square brackets
-  are anonymous placeholders.]}
-@end{Discussion}
-@end{StaticSem}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0322-1]}
+  @ChgAdded{Version=[5],Text=[Use of a @nt{target_name} can be erroneous if the
+   @SynI{variable_}@nt{name} @i{V} is a discriminant-dependent component, and
+   some other constituent of the @nt{expression} modifies the discriminant
+   governing the component @i<V>. The assignment probably would be erroneous
+   anyway, but the use of a @nt{target_name} eliminates the possibility that
+   a later evaluation of @i<V> raises an exception before any erroneous
+   execution occurs. See @RefSecNum{Operations of Discriminated Types}.]}
+@end{Ramification}
+@end{RunTime}
 
 @begin{Examples}
 @begin{Example}
@@ -755,7 +741,7 @@ My_Complex_Array (Count) := (Re => @@.Re**2 - @@.Im**2,
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0322-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The target name symbol @@ is new.]}
 @end{Extend2012}
@@ -1204,8 +1190,14 @@ rhs="@Chg{Version=[5],New=<
      @SynI{integer_}@Syn2{simple_expression}
    | @Syn2{defining_identifier} @key[in] @Syn2{discrete_subtype_definition}>,Old=<>}"}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1]}
 @Syn{lhs=<loop_parameter_specification>,rhs="
-   @Syn2{defining_identifier} @key{in} [@key{reverse}] @Syn2{discrete_subtype_definition}"}
+   @Syn2{defining_identifier} @key{in} [@key{reverse}] @Syn2{discrete_subtype_definition}@Chg{Version=[5],New=<
+     [@Syn2{iterator_filter}]>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_filter>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<@key[when] @Syn2{condition}>,Old=<>}"}
 
 @begin(SyntaxText)
 If a @nt{loop_statement} has a @SynI{loop_}@nt{statement_identifier},
@@ -1242,6 +1234,23 @@ subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 @end{StaticSem}
 
 @begin{RunTime}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1]}
+@ChgAdded{Version=[5],Text=[An @nt{iterator_filter} is defined to be
+@i<satisfied>@Defn2{Term=[satisfied],Sec=[iterator filter]} when the
+@nt{condition} evaluates to True for a given iteration of a
+@nt{loop_parameter_specification}, @nt{iterator_specification}, or
+@nt{procedural_iterator}. The term
+@i{conditionally executed}@Defn{conditionally executed}
+when referring
+to the @nt{sequence_of_statements} of a @nt{loop_statement} means that the
+statements are executed only when there is no @nt{iterator_filter}, or the
+@nt{iterator_filter} is satisfied. In contexts where a
+@nt{loop_parameter_specification} or @nt{iterator_specification} is used to
+produce a sequence of values (see @RefSecNum{Array Aggregates} and
+@RefSecNum{Container Aggregates}), if an
+@nt{iterator_filter} is present, the sequence of values will contain only
+the values for which the @nt{iterator_filter} is satisfied.]}
+
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @PDefn2{Term=[execution], Sec=(loop_statement)}
 For the execution of a @nt{loop_statement},
@@ -1284,7 +1293,7 @@ this check fails, Program_Error is raised.@IndexCheck{Program_Error_Check}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2],ARef=[AI05-0262-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0250-1],ARef=[AI12-0251-1],ARef=[AI12-0294-1]}
 @Chg{Version=[5],New=[@PDefn2{Term=[execution],
   Sec=(loop_statement with a for loop_parameter_specification)}],
 Old=[@PDefn2{Term=[execution],
@@ -1298,15 +1307,15 @@ a],Old=[being @key[for]]} @nt{loop_@!parameter_@!specification}],Old=[]},
 elaborating the @nt{chunk_specification}, if any, ],Old=[]}the
 @nt{loop_@!parameter_@!specification} is
 @Chg{Version=[5],New=[],Old=[first ]}elaborated. This
-elaboration @Chg{Version=[5],New=[],Old=[creates the loop parameter
+@Chg{Version=[5],New=[],Old=[elaboration creates the loop parameter
 and ]}elaborates the @nt{discrete_@!subtype_@!definition}@Chg{Version=[5],New=[,
 which defines the subtype of the loop parameter],Old=[]}.
 If the @nt{discrete_@!subtype_@!definition} defines a subtype
 with a null range,
 the execution of the
 @nt{loop_statement} is complete. Otherwise, the
-@nt{sequence_of_@!statements} is executed once for each value of the
-discrete subtype defined by the
+@nt{sequence_of_@!statements} is@Chg{Version=[5],New=[ conditionally],Old=[]}
+executed once for each value of the discrete subtype defined by the
 @nt{discrete_@!subtype_@!definition}
 @Chg{Version=[3],New=[that satisfies the
 @Chg{Version=[4],New=[predicates],Old=[predicate]} of the subtype ],Old=[]}(or
@@ -1387,16 +1396,20 @@ the total number of iterations of the loop represents an upper bound
 on the number of logical threads of control devoted to the loop.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[@Redundant[For details about the execution of a
 @nt{loop_statement} with the @nt{iteration_scheme}
 @Chg{Version=[5],New=[including an],Old=[being @key[for]]}
-@nt{iterator_specification}, see @RefSecNum{Generalized Loop Iteration}.]]}
+@nt{iterator_specification}, see @RefSecNum{Generalized Loop Iteration}.@Chg{Version=[5],New=[
+For details relating to a @nt{procedural_iterator}, see
+@RefSecNum{Procedural Iterators}.],Old=[]}]]}
 
 @end{RunTime}
 
 @begin{Notes}
-A loop parameter is a constant;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1]}
+A loop parameter@Chg{Version=[5],New=[ declared by a
+@nt{loop_parameter_specification}],Old=[]} is a constant;
 it cannot be updated within the
 @nt{sequence_of_statements} of the loop
 (see @RefSecNum{Objects and Named Numbers}).
@@ -1478,7 +1491,8 @@ Text=[@i{Example of a parallel loop:}]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
 @ChgAdded{Version=[5],Text=[-- @ExamCom{see @RefSecNum{Array Types}}
-@key[parallel for] I @key[in] Grid'Range(1) @key[loop]
+@key[parallel]
+@key[for] I @key[in] Grid'Range(1) @key[loop]
    Grid(I, 1) := (@key[for all] J @key[in] Grid'Range(2) => Grid(I,J) = True);
 @key[end loop];]}
 @end{Example}
@@ -1500,6 +1514,12 @@ The constant-ness of loop parameters is specified in
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Parallel loops
   are new.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1]}
+  @ChgAdded{Version=[5],Text=[An @nt{iterator_filter} is now allowed on
+  @nt{loop_parameter_specification}s. This is mainly for consistency with
+  aggregate and reduction iterators, where it eliminates the need for
+  temporary objects.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -1848,11 +1868,13 @@ an @nt{iterator_specification}.]}
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0156-1],ARef=[AI12-0250-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
-    @Syn2{defining_identifier} @Chg{Version=[5],New=<[: @Syn2{loop_parameter_subtype_indication}] >,Old=<>}@key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}
-  | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}"}
+    @Syn2{defining_identifier} @Chg{Version=[5],New=<[: @Syn2{loop_parameter_subtype_indication}] >,Old=<>}@key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}@Chg{Version=[5],New=<
+      [@Syn2{iterator_filter}]>,Old=<>}"}
+  | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}@Chg{Version=[5],New=<
+      [@Syn2{iterator_filter}]>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0156-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<loop_parameter_subtype_indication>,Old=<>}>,
@@ -2044,7 +2066,7 @@ first elaborated. This elaboration elaborates the @nt{subtype_indication},
 if any.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[For a @Chg{Version=[5],New=[sequential
 ],Old=[]}generalized iterator, the loop parameter is created, the
 @SynI{iterator_}@nt{name} is evaluated, and the denoted iterator object becomes
@@ -2053,7 +2075,8 @@ the operation First of the iterator type is called on the loop iterator, to
 produce the initial value for the loop parameter. If the result of calling
 Has_Element on the initial value is False, then the execution of the
 @nt{loop_statement} is complete. Otherwise, the @nt{sequence_of_statements} is
-executed and then the Next operation of the iterator type is called with the
+@Chg{Version=[5],New=[conditionally ],Old=[]}executed and then the
+Next operation of the iterator type is called with the
 loop iterator and the current value of the loop parameter to produce the next
 value to be assigned to the loop parameter. This repeats until the result of
 calling Has_Element on the loop parameter is False, or the loop is left as a
@@ -2087,7 +2110,7 @@ chunks is determined in an implementation-defined manner.]}
 Text=[@ChgAdded{Version=[5],Text=[The maximum number of chunks for a parallel
 generalized iterator without a @nt{chunk_specification}.]}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[5],Text=[Upon return from Split_Into_Chunks, the actual
 number of chunks for the loop is determined by calling the Chunk_Count operation
 of the iterator, at which point one logical thread of control is initiated for
@@ -2103,15 +2126,15 @@ a Chunk parameter is called on the loop iterator, with Chunk initialized from
 the corresponding chunk index, to produce the initial value for the loop
 parameter. If the result of calling Has_Element on this initial value is False,
 then the execution of the logical thread of control is complete. Otherwise, the
-@nt{sequence_of_statements} is executed and then the Next operation of the
-iterator type having a Chunk parameter is called, with the loop iterator, the
-current value of the loop parameter, and the corresponding chunk index, to
-produce the next value to be assigned to the loop parameter. This repeats until
-the result of calling Has_Element on the loop parameter is False, or the
-associated parallel construct is left as a consequence of a transfer of control.
-In the absence of a transfer of control, the associated parallel construct of a
-parallel generalized iterator is complete when all of its logical threads of
-control are complete.]}
+@nt{sequence_of_statements} is conditionally executed and then the Next
+operation of the iterator type having a Chunk parameter is called, with the loop
+iterator, the current value of the loop parameter, and the corresponding chunk
+index, to produce the next value to be assigned to the loop parameter. This
+repeats until the result of calling Has_Element on the loop parameter is False,
+or the associated parallel construct is left as a consequence of a transfer of
+control. In the absence of a transfer of control, the associated parallel
+construct of a parallel generalized iterator is complete when all of its logical
+threads of control are complete.]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[Added]}
@@ -2124,7 +2147,7 @@ control are complete.]}
 @end{Discussion}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0250-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[For an array component iterator,
 @Chg{Version=[5],New=[the @nt{chunk_specification} of the associated
 parallel construct, if any, is first elaborated to determine
@@ -2133,8 +2156,9 @@ then ],Old=[]}the @SynI<iterable_>@nt{name} is evaluated and
 the denoted array object becomes the @i<array for the
 loop>.@Defn{array for a loop} If the array for the loop is a null array,
 then the execution of the @nt{loop_statement} is complete. Otherwise, the
-@nt{sequence_of_statements} is executed with the loop parameter denoting
-each component of the array for the loop, using a @i<canonical> order
+@nt{sequence_of_statements} is
+@Chg{Version=[5],New=[conditionally ],Old=[]}executed with the loop parameter
+denoting each component of the array for the loop, using a @i<canonical> order
 of components,@Defn{canonical order of array components}
 which is last dimension varying fastest (unless the
 array has convention Fortran, in which case it is first dimension
@@ -2152,7 +2176,8 @@ of control with its own loop parameter and iteration within each chunk is in the
 canonical order. The number of chunks is implementation defined, but is limited
 in the presence of a @nt{chunk_specification} to the determined maximum.
 ],Old=[]}The loop iteration proceeds until the
-@nt{sequence_of_statements} has been executed for each component of the
+@nt{sequence_of_statements} has been
+@Chg{Version=[5],New=[conditionally ],Old=[]}executed for each component of the
 array for the loop, or until the loop is left as a consequence of a
 transfer of control.]}
 
@@ -2250,6 +2275,7 @@ immediately enclosing loop statement.]}
 @begin{Examples}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],Text=[-- @Examcom{Array component iterator example:}
 @Chg{Version=[5],New=[@key[parallel]
 ],Old=[]}@key[for] Element @key[of] Board @key[loop]  -- @Examcom{See @RefSecNum{Index Constraints and Discrete Ranges}.}
@@ -2311,6 +2337,12 @@ packages in @RefSecNum{The Generic Package Containers.Vectors} and
   now allow a @nt{subtype_indication} on a generalized iterator, and anonymous
   access types on all forms of iterator. We introduced a new syntax
   non-terminal, @nt{loop_parameter_subtype_indication} to simplfy the wording.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1]}
+  @ChgAdded{Version=[5],Text=[An @nt{iterator_filter} is now allowed on
+  @nt{iterator_specification}s. This is mainly for consistency with
+  aggregate and reduction iterators, where it eliminates the need for
+  temporary objects.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
@@ -2345,10 +2377,11 @@ procedure.]}
 @end{Intro}
 
 @begin{Syntax}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0250-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<procedural_iterator>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-     @Syn2{iterator_parameter_specification} @key[of] @Syn2{iterator_procedure_call}>,Old=<>}"}
+     @Syn2{iterator_parameter_specification} @key[of] @Syn2{iterator_procedure_call}
+       [@Syn2{iterator_filter}]>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0308-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<iterator_parameter_specification>,Old=<>}>,
@@ -2401,14 +2434,13 @@ additional @nt{parameter_association_with_box} at the end, with the
 @SynI{formal_parameter_}@nt{selector_name} identifying the last formal
 parameter of the callable entity denoted by the @nt{name} or @nt{prefix}.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0320-1]}
 @ChgAdded{Version=[5],Text=[An @nt{iterator_procedure_call} shall contain at
 most one @nt{iterator_parameter_association} for each formal parameter of the
 callable entity @i<C>. Each formal parameter without an
 @nt{iterator_parameter_association} shall have a
 @nt{default_expression} (in the profile of the view of @i<C> denoted by the
-@nt{name} or @nt{prefix}).@Redundant[ This rule is an overloading
-rule (see @RefSecNum{The Context of Overload Resolution}).]]}
+@nt{name} or @nt{prefix}).]]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @ChgAdded{Version=[5],Text=[The formal parameter of the callable entity @i<C>
@@ -2429,15 +2461,21 @@ the number of formal parameters of @i<A> shall be the same as the length of
 this list.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1]}
-@ChgAdded{Version=[5],Text=[If the @nt{name} or @nt{prefix} given in an
+@ChgAdded{Version=[5],Text=[@Redundant[If the @nt{name} or @nt{prefix} given in an
 @nt{iterator_procedure_call} denotes an abstract subprogram, the subprogram
-shall be a dispatching subprogram.]}
+shall be a dispatching subprogram.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0320-1]}
+  @ChgAdded{Version=[5],Text=[This is stated normatively in
+  @RefSecNum{Abstract Types and Subprograms}.]}
+@end{TheProof}
 
 @end{Legality}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0308-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0250-1],ARef=[AI12-0308-1]}
 @ChgAdded{Version=[5],Text=[A @nt{loop_statement} with an @nt{iteration_scheme}
 that has a @nt{procedural_iterator} is equivalent to a local declaration of a
 procedure P followed by a @nt{procedure_call_statement} that is formed from the
@@ -2447,7 +2485,25 @@ locally declared procedure P is formed from the @nt{formal_part} of the
 anonymous access-to-procedure type @i<A>, by replacing the @nt{identifier} of
 each formal parameter of this @nt{formal_part} with the @nt{identifier} of the
 corresponding formal parameter or element of the list of
-@nt{defining_identifier}s given in the @nt{iterator_parameter_specification}.]}
+@nt{defining_identifier}s given in the @nt{iterator_parameter_specification}.
+The body of @i<P> consists of the conditionally executed
+@nt{sequence_of_statements}.]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For a @nt{procedural_iterator}
+  with an @nt{iterator_filter}, the body of the routine would be something like:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{procedure} @i<P> ... @key{is}
+@key{begin}
+   @key{if} @nt{iterator_filter} @key{then}
+      @nt{sequence_of_statements}
+   @key{end if};
+@key{end} @i<P>;]}
+@end{Example}
+@end{ImplNote}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following aspect may be specified
@@ -2580,7 +2636,7 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):]}
   @ChgRef{Version=[5],Kind=[AddedNormal],
     ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
-  iterators are new in Ada 2020.]}
+  iterators are new in Ada 202x.]}
 @end{Extend2012}
 
 

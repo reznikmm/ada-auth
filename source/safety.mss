@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.64 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@Comment{ $Revision: 1.65 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:05 $}
+@Comment{$Date: 2019/04/09 04:56:53 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -877,11 +877,13 @@ Old=[]}No_Dispatch @\Occurrences of T'Class are not allowed, for any
 subtype T.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0318-1]}
 @Defn2{Term=[restrictions],Sec=(No_IO)}@Chg{Version=[3],New=[@Defn{No_IO restriction}],
    Old=[]}No_IO @\Semantic dependence on
 any of the library units
 Sequential_IO, Direct_IO, Text_IO, Wide_Text_IO, @Chg{Version=[2],
-New=[Wide_Wide_Text_IO, ],Old=[]}or Stream_IO is not allowed.
+New=[Wide_Wide_Text_IO, ],Old=[]}@Chg{Version=[5],New=[],Old=[or ]}Stream_IO@Chg{Version=[5],New=[,
+or Directories],Old=[]} is not allowed.
 @begin{Discussion}
 
 Excluding the input-output facilities of an implementation may be needed
@@ -1000,13 +1002,18 @@ shall be implemented within that partition without any dynamic allocation.]}
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1],ARef=[AI05-0272-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0308-1]}
 If an implementation supports @nt[pragma] Restrictions for a particular
-argument, then except for the restrictions No_Unchecked_Deallocation,
-No_Unchecked_Conversion, No_Access_Subprograms,
+argument, then except for the restrictions
+@Chg{Version=[5],New=[],Old=[No_Unchecked_Deallocation,
+No_Unchecked_Conversion, ]}No_Access_Subprograms,
 @Chg{Version=[3],New=[],Old=[and ]}No_Unchecked_Access,
 @Chg{Version=[3],New=[No_Specification_of_Aspect, No_Use_of_Attribute,
-No_Use_of_Pragma, and the equivalent use of No_Dependence, ],Old=[]}the
-associated restriction applies to the run-time system.
+No_Use_of_Pragma, @Chg{Version=[5],New=[No_Dependence =>
+Ada.Unchecked_Conversion, ],Old=[]}and
+@Chg{Version=[5],New=[],Old=[the equivalent use of]}
+No_Dependence@Chg{Version=[5],New=[ => Ada.Unchecked_Deallocation],Old=[]},
+],Old=[]}the associated restriction applies to the run-time system.
 @begin[reason]
 Permission is granted for the run-time system to use the specified
 otherwise-restricted features, since the use of these features may
@@ -1032,10 +1039,11 @@ could be envisaged.
 If the run-time system is not written in Ada, then the wording needs to be
 applied in an appropriate fashion.
 
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1]}
-@ChgAdded{Version=[3],Text=["the equivalent use of No_Dependence" refers
-to @exam{No_Dependence => Ada.Unchecked_Conversion} and the like, not all
-uses of No_Dependence.]}
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0263-1]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0308-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=["the equivalent use
+of No_Dependence" refers to @exam{No_Dependence => Ada.Unchecked_Conversion} and
+the like, not all uses of No_Dependence.]}]}
 
 @end{Discussion}
 
@@ -1214,6 +1222,17 @@ proscribed
   that does not use the Import aspect would be very difficult and probably is
   not what the user is trying to prevent anyway.]}
 @end{DiffWord2005}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-3183-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
+  Restriction No_IO now excludes use of Ada.Directories. If a program using
+  No_IO used Ada.Directories, it would be legal in Ada 2012 and illegal
+  in Ada 202x. However, given the role of Ada.Directories as a support package
+  for the other packages that are excluded by No_IO, it seems unlikely that
+  any use of the restriction would use this package (and it's possible that
+  implementations wouldn't support its use with No_IO anyway).]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}

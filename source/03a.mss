@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:50 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.141 $}
+@Comment{$Revision: 1.142 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2112,7 +2112,7 @@ common exceptional conditions as follows:}]}
   specified. This is consistent with the handling of constraint checks for
   such objects; it is thought that the omission was unintended. However,
   a program that declares such an object and depends on there not being a
-  predicate check in original Ada 2012 will fail in Ada 2020. As these
+  predicate check in original Ada 2012 will fail in Ada 202x. As these
   attributes were new in Ada 2012, their use is uncommon, so we believe
   that this inconsistency will be rare and more likely to catch a bug than
   create one.]}
@@ -4244,9 +4244,14 @@ The integer and real numeric classes each have a specific root type in
 addition to their universal type, named respectively @i(root_integer)
 and @i(root_real).
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0325-1]}
 @Defn2{Term=[cover], Sec=(a type)}
 A class-wide or universal type is said to @i(cover) all of the types
-in its class. A specific type covers only itself.
+in its class.@Chg{Version=[5],New=[ In addition, @i{universal_integer} covers
+a type that has a specified Integer_Literal aspect, while @i{universal_real}
+covers a type that has a specified Real_Literal aspect (see
+@RefSecNum{User-Defined Literals}).],Old=[]} A specific type covers only
+itself.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01],ARef=[AI95-00251-01]}
 @Defn2{Term=[descendant], Sec=(of a type)}
@@ -4357,6 +4362,13 @@ of other specific integer types, thereby resolving the ambiguity.
   @ChgAdded{Version=[2],Text=[The definitions of ancestors and descendants
   were updated to allow multiple ancestors (necessary to support interfaces).]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0325-1]}
+  @ChgAdded{Version=[5],Text=[Updated the wording to say that
+  universal types cover the types with the appropriate user-defined
+  literal.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Scalar Types}

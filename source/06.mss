@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.149 $}
+@Comment{$Revision: 1.150 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1506,7 +1506,7 @@ associated with the access-to-subprogram type is performed.],Old=[]}]}
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1]}
   @ChgAdded{Version=[5],Text=[A call via an access-to-subprogram value can be
-  considered equivalent (with respect to dynamic semantics) to call to a
+  considered equivalent (with respect to dynamic semantics) to a call to a
   notional "wrapper" subprogram which has the Pre and Post aspects and the
   profile of the access-to-subprogram type and whose body contains (and
   returns, in the case of a function) only a call to the designated
@@ -1735,7 +1735,7 @@ rhs="@Chg{Version=[5],New=<
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_designator>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@key[all] | @key[null]>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0310-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_name>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
     @SynI{object_}@Syn2{name}
@@ -1830,7 +1830,7 @@ rules apply to all of the above kinds of entities.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
 @ChgAdded{Version=[5],Text=[The sets of global variables associated with a
 Global aspect can be defined explicitly with a
-@nt{primitive_global_aspect_definition} or can be defined by combining with the
+@nt{primitive_global_aspect_definition} or can be defined by combining the
 sets specified for other entities by referring to their Global attribute.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
@@ -1906,7 +1906,7 @@ given mode for the entities identified by the @nt{prefix}es of the
     @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} identifies the
        specified global variable (or nonpreelaborable constant);]}
 
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0310-1]}
     @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set
        of all variables declared within the declarative region of the package
        having the same accessibility level as the package, but not including
@@ -2049,16 +2049,16 @@ subprogram produces other side effects when called.]]}
     special permission, implementations can also use similar optimizations that
     go beyond the permission above. For instance, if there are two calls with
     the same parameters on a subprogram whose Global aspect only indicates
-    reading of a global object @i<G>, then the second call be omitted and reuse
-    the result of the first call if the compiler can prove (with the help of the
-    Global aspect of any subprograms called) that @i<G> is not written to
+    reading of a global object @i<G>, then the second call can be omitted and
+    reuse the result of the first call if the compiler can prove (with the help
+    of the Global aspect of any subprograms called) that @i<G> is not written to
     between the calls.]}
 
 @end{Discussion}
 @end{ImplPerm}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0310-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The Global and Global'Class aspects are new.]}
 @end{Extend2012}
@@ -2122,21 +2122,23 @@ is a descendant of one of the following:
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0188-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0027-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0236-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0236-1],ARef=[AI12-0317-1]}
 A parameter of a by-reference type is passed by reference@Chg{Version=[3],New=[, as is an explicitly aliased parameter
 of any type],Old=[]}.
 @Defn2{Term=[associated object], Sec=(of a value of a by-reference type)}
-Each value of a by-reference type has an associated object.
-For a parenthesized expression, @nt{qualified_expression},
+Each value of a by-reference type has an associated
+object.@Chg{Version=[5],New=[],Old=[ For a parenthesized expression,
+@nt{qualified_expression},
 or @Chg{Version=[4],New=[view conversion],Old=[@nt{type_conversion}]}, this
-object is the one associated with the operand.@Chg{Version=[4],New=[ For a value
+object is the one associated with the operand.]}@Chg{Version=[4],New=[ For a value
 conversion, the associated object is the anonymous result object if such an
 object is created (see @RefSecNum{Type Conversions}); otherwise it is the
-associated object of the operand.],Old=[]}@Chg{Version=[3],New=[ For a
+associated object of the operand.],Old=[]}@Chg{Version=[5],New=[  In
+other cases, the object associated with the evaluated operative constituent of
+the @nt{name} or @nt{expression} (see @RefSecNum{Expressions}) determines its
+associated object.],Old=[@Chg{Version=[3],New=[ For a
 @nt{conditional_expression}, this object is the one associated with the
-evaluated @SynI{dependent_}@nt{expression}.],Old=[]}@Chg{Version=[5],New=[ For
-a @nt{declare_expression}, this object is the one associated with the
-@SynI{body_}@nt{expression}.],Old=[]}
+evaluated @SynI{dependent_}@nt{expression}.],Old=[]}]}
 
 @begin{Ramification}
 By-reference parameter passing makes sense only if there is an
@@ -2148,6 +2150,13 @@ of a tagged type has an associated object. This simplifies things,
 because we can define the tag to be a property of the object, and not of
 the value of the object, which makes it clearer that object tags never
 change.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[5],Text=[A construct like parenthesized expression or
+@nt{qualified_expression} is ignored for the purposes of determining the
+associated object; for a @nt{conditional_expression}, it is relevant only
+in that it determines which @SynI{dependent_}@nt{expression} defines
+the associated object.]}
 
 We considered simplifying things even more by making every value (and
 therefore every expression) have an associated object. After all,
@@ -4009,10 +4018,10 @@ are of an elementary type, then the call is legal only if:]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0216-1]}
-@ChgAdded{Version=[3],Text=[For each @nt{name} @i<N> that
-@Chg{Version=[5],New=[denotes an object of an elementary type
-and ],Old=[]}is passed as a parameter of mode @key[in out] or
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0216-1],ARef=[AI12-0324-1]}
+@ChgAdded{Version=[3],Text=[For each @nt{name} @i<N>
+@Chg{Version=[5],New=[denoting an object of an elementary
+type ],Old=[]}that is passed as a parameter of mode @key[in out] or
 @key[out] to the call @i<C>, there is no other @nt{name} among the other
 parameters of mode @key[in out] or @key[out] to @i<C> that is known to denote
 the same object.]}
@@ -5523,7 +5532,7 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   commonly used before the @nt{extended_return_object_declaration} was split
   into a separate syntax production, leaving the @nt{extended_return_statement}
   without any @nt{expression} of its own. Moreover, the wording often just
-  uses @lquotes@;@nt{expression} a return statement@rquotes to cover both
+  uses @lquotes@;@nt{expression} of a return statement@rquotes to cover both
   kinds of return statement. Changing the wording in more than a
   dozen places was unappealing, and some of the changes would be awkward to
   read, so we defined the term and letf the majority of the wording unchanged.]}

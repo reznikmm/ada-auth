@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.74 $}
+@Comment{$Revision: 1.75 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -654,10 +654,11 @@ external file.]}
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0021-1]}
   @ChgAdded{Version=[5],Text=[The expectation is that if one opens a file with
-    this package and then requests the name with Name, the result will include
-  the same wide_characters that were used to open the file (rather than some
+  this subpackage and then requests the name with Name from this subpackage,
+  the result will include
+  the same Wide_Characters that were used to open the file (rather than some
   encoded form). Since file names are completely implementation-defined, we
-  can't say this normatively. We have no expectations when retrieving the name
+  cannot say this normatively. We have no expectations when retrieving the name
   of a file opened with this package using the String Name. Similar
   considerations apply to the nested package Wide_Wide_File_Names (see below).]}
 @end{ImplNote}

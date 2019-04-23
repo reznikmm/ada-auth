@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:50 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1688,9 +1688,11 @@ In either case, the @nt{character_literal} denotes the
   @nt<selector_name> that is a @nt<character_literal>.
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0325-1]}
 @PDefn2{Term=[expected type],Sec=(string_literal)}
 The expected type for a @nt{primary} that is a @nt<string_literal>
-shall be a single string type.
+shall be a single string type@Chg{Version=[5],New=[ or a type with a
+specified String_Literal aspect (see @RefSecNum{User-Defined Literals}).],Old=[]}.
 @end{Resolution}
 
 @begin{Legality}
@@ -1698,14 +1700,13 @@ A @nt{character_literal} that is a @nt<name> shall correspond to a
 @nt<defining_character_literal> of the expected type, or
 of the result type of the expected profile.
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
 @Chg{Version=[5],New=[If the expected type for a string_literal is a
-one-dimensional array type with a component type that is an enumeration type,
-then for],Old=[For]} each character of @Chg{Version=[5],New=[the],Old=[a]}
+string type, then for],Old=[For]} each character
+of @Chg{Version=[5],New=[the],Old=[a]}
 @nt{string_literal} @Chg{Version=[5],New=[],Old=[with a given expected string
 type, ]}there shall be a corresponding @nt<defining_character_literal> of the
-@Chg{Version=[5],New=[enumeration type],Old=[component type of the expected
-string type]}.
+component type of the expected string type.
 
 @ChgRef{Version=[2],Kind=[Deleted],ARef=[AI95-00230-01],ARef=[AI95-00231-01]}
 @ChgDeleted{Version=[2],Text=[A literal @s<null>@ChgNote{We use @S since this
@@ -1736,34 +1737,41 @@ New=[@PDefn{universal_integer}@PDefn{universal_real}@PDefn{universal_access}],Ol
 @IndexSee{Term=[null pointer],See=(null access value)}
 @Chg{Version=[5],New=[If its expected type is a numeric type, the],Old=[The]}
 evaluation of a numeric literal@Chg{Version=[5],New=[],Old=[, or the literal
-@key(null),]} yields the represented value.@Chg{Version=[5],New=[ The evaluation
-of the literal @key(null) yields the null value of the
-expected type. In other cases, the effect of evaluating a numeric
-literal is determined by the Integer_Literal or Real_Literal aspect
-that applies (see @RefSecNum{User-Defined Literals}).],Old=[]}
+@key(null),]} yields the represented value.@Chg{Version=[5],New=[ @Redundant[In
+other cases, the effect of evaluating a numeric literal is determined by the
+Integer_Literal or Real_Literal aspect that applies
+(see @RefSecNum{User-Defined Literals}).]],Old=[]}
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0249-1]}
+@ChgAdded{Version=[5],Text=[The evaluation
+of the literal @key(null) yields the null value of the
+expected type.]}
+
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
 @PDefn2{Term=[evaluation], Sec=(string_literal)}
 The evaluation of a @nt{string_literal} that is a @nt<primary>
-@Chg{Version=[5],New=[and has an expected type that is a one-dimensional array
-type with a character type as its component type, ],Old=[]}yields
+@Chg{Version=[5],New=[and has an expected type that is a string
+type, ],Old=[]}yields
 an array value containing the value of each character of the
 sequence of characters of the @nt<string_literal>,
 as defined in @RefSecNum{String Literals}.
 The bounds of this array value are determined according to the rules for
 @nt<positional_array_aggregate>s (see @RefSecNum{Array Aggregates}),
 except that for a null string literal, the upper bound is the predecessor
-of the lower bound.
+of the lower bound.@Chg{Version=[5],New=[ @Redundant[In
+other cases, the effect of evaluating a @nt{string_literal} is determined
+by the String_Literal aspect that applies
+(see @RefSecNum{User-Defined Literals}).]],Old=[]}
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
 @IndexCheck{Range_Check}
-For the evaluation of a @nt<string_literal> of type @i(T),
-@Chg{Version=[5],New=[if its expected type is a one-dimensional array type
-with a component subtype that is a constrained subtype of a character
-type, ],Old=[]}a check is made that the value of each
+For the evaluation of a @nt<string_literal> of
+@Chg{Version=[5],New=[a string ],Old=[]}type @i(T),
+a check is made that the value of each
 character of the @nt<string_literal> belongs to the component
 subtype of @i(T).
-For the evaluation of a null string literal, a check is made that its
+For the evaluation of a null string literal@Chg{Version=[5],New=[ of a string
+type],Old=[]}, a check is made that its
 lower bound is greater than the lower bound of the base range
 of the index type.
 @Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}
@@ -1878,21 +1886,16 @@ parameter of type Wide_Wide_String and a result type of @i<T>.@AspectDefn{String
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined string literals.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[@Redundant[A type with a specified
-String_Literal aspect is considered a @i<string type>.]@PDefn{string type}]}
-
 @end{Description}
 
 @end{StaticSem}
 
 @begin{Legality}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
 @ChgAdded{Version=[5],Text=[The Integer_Literal or Real_Literal aspect shall not
 be specified for a type @i<T> if the full view of @i<T> is a numeric type.
 The String_Literal aspect shall not be specified for a type @i<T> if the
-full view of @i<T> is a string type (in the absence of the
-String_Literal aspect specification).
+full view of @i<T> is a string type.
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -1901,27 +1904,34 @@ these rules also apply in the private part of an instance of a generic unit.]}
 
 @begin{Runtime}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
-@ChgAdded{Version=[5],Text=[For the evaluation of an integer (or real) literal
-with expected type having an Integer_Literal (or Real_Literal) aspect specified,
-the value is the result of a call on the function specified by the aspect, with
-the parameter being a string with lower bound one whose value corresponds to the
-textual representation of the integer (or real) literal.]}
+@ChgAdded{Version=[5],Text=[For the evaluation of an integer literal that
+has an expected type with a specified Integer_Literal aspect, the value is the
+result of a call on the function specified by the aspect, with the parameter
+being a String with lower bound one whose value corresponds to the textual
+representation of the integer literal. Similarly, the evaluation of a real
+literal that has an expected type with a specified Real_Literal aspect, the
+value is the result of a call on the function specified by the aspect, with the
+parameter being a String with lower bound one whose value corresponds to the
+textual representation of the real literal.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1]}
-@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{string_literal} with
-expected type having a String_Literal aspect specified, the value is the result
-of a call on the function specified by the aspect, with the parameter being the
-Wide_Wide_String with lower bound one that corresponds to the literal.]}
+@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{string_literal} that
+has an expected type with a specified String_Literal aspect, the value is the
+result of a call on the function specified by the aspect, with the parameter
+being a Wide_Wide_String with lower bound one that corresponds to the literal.]}
 @end{Runtime}
 
 @begin{Bounded}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
-@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-It is a bounded error if the evaluation of a literal with expected type having a
-corresponding _Literal aspect specified, propagates an exception. The possible
-effect is that an error is reported prior to run time, or Program_Error or the
-exception propagated by the evaluation is raised at the point of use of the
-value of the literal.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0325-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}It
+is a bounded error if the evaluation of a literal that has an expected
+type with a specified Integer_Literal, Real_Literal, or String_Literal
+aspect, propagates an exception. Either Program_Error or the exception
+propagated by the evaluation is raised at the point of use of the value
+of the literal. If it is recognized prior to run time that evaluation
+of such a literal will inevitably (if executed) result in such a
+bounded error, then this may be reported as an error prior to run
+time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
@@ -1957,7 +1967,7 @@ value of the literal.@Defn2{Term=[Program_Error],Sec=(raised by detection of a b
 @end{Bounded}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The user-defined
   literal aspects Integer_Literal, Real_Literal, and String_Literal are new.]}
 @end{Extend2012}
@@ -2006,7 +2016,7 @@ or a single descendant of a ],Old=[]}record type@Chg{Version=[5],New=[],Old=[,]}
   @nt{aggregate}s to resolve them. For instance, Ada 95 allowed array types
   to match @nt{extension_aggregate}s, even though those have to be record
   types. Thus, we allow any record type with any visible
-  (non-discriminant) components to match an @nt{aggregate}, even though
+  (nondiscriminant) components to match an @nt{aggregate}, even though
   only @nt{delta_aggregate}s allow private types or extensions. Similarly,
   we allow any container type to match an @nt{aggregate}, even though
   only @nt{container_aggregate}s allow container types. ]}
@@ -2038,7 +2048,7 @@ shall not be of a class-wide type.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
   @ChgAdded{Version=[5],Text=[We don't mention @nt{delta_aggregate}s, as those
   can get the specific type from the object represented by the
-  @Syni{base_}@nt{expression} (possibly at runtime). We don't mention
+  @Syni{base_}@nt{expression} (possibly at run time). We don't mention
   @nt{array_aggregate}s, as those cannot even be of a tagged type, so
   being class-wide is impossible.]}
 @end{Reason}
@@ -2170,7 +2180,7 @@ will work (see @RefSecNum{Assignment and Finalization}).
   was previously allowed in @nt{aggregate}s makes an existing call ambiguous.
   (For an example, replace type Lim in the example given above under
   @Incompatible95Title with a Vector from an instance of
-  Ada.Containers.Vector. The call of P in that case will be illegal in Ada 2020
+  Ada.Containers.Vector. The call of P in that case will be illegal in Ada 202x
   and legal in Ada 2012.) This can easily be fixed by qualifying the
   @nt{aggregate} with the correct type.]}
 @end{Incompatible2012}
@@ -2843,30 +2853,31 @@ shall not have unknown discriminants.],Old=[]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0067-1],ARef=[AI05-0244-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[If the type of the @nt{ancestor_part}
-is limited and at least one component is needed
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[3],Text=[If the type of@Comment{Version 3 and 4 need "Type=[Leading]"}
+the @nt{ancestor_part} is limited and at least one component is needed
 in the @nt{record_component_association_list}, then the @nt{ancestor_part}
-shall not be:]}
+shall not @Chg{Version=[5],New=[have an operative constituent expression (see
+@RefSecNum{Expressions}) that is a call to a function with an
+unconstrained result subtype.],Old=[be:]}]}
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[a call to a function with an unconstrained result
-  subtype; nor]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[a call to a
+  function with an unconstrained result subtype; nor]}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[a parenthesized or qualified expression whose
-  operand would violate this rule; nor]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[a parenthesized
+  or qualified expression whose operand would violate this rule; nor]}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0236-1]}
-  @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} (see
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[a
+  @nt{conditional_expression} (see
   @RefSecNum{Conditional Expressions}) having at least one
   @SynI{dependent_}@nt{expression} that would violate this
-  rule@Chg{Version=[5],New=[; nor],Old=[.]}]}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0236-1]}
-  @ChgAdded{Version=[5],Text=[a @nt{declare_expression} (see
-  @RefSecNum{Declare Expressions}) whose @SynI{body_}@nt{expression}
-  would violate this rule.]}
+  rule.]}]}
 @end{Itemize}
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0067-1],ARef=[AI05-0244-1]}
@@ -2883,6 +2894,12 @@ shall not be:]}
   null-extension types @em we can't very well make those illegal. Moreover, we
   don't need the rule for null extensions, as the result can simply use
   the space returned by the function call.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[5],Text=[The mention of @ldquote@;operative
+  constituents@rdquote means that constructs like parenthesized expressions,
+  @nt{qualified_expression}s, and @nt{conditional_expression}s are ignored
+  when enforcing this rule.]}
 @end{Reason}
 @end{Legality}
 
@@ -3029,6 +3046,15 @@ The extension aggregate syntax is new.
   is possible that code exists that uses such an ancestor, but this should
   be rare.]}
 @end{Incompatible2005}
+
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[5],Text=[Rewrote a @LegalityName to use the new term
+  @ldquote@;operative constituent@rdquote in order to reduce duplication of text
+  about ignoring parenthesized expressions and similar constructs.]}
+@end{DiffWord2012}
+
 
 
 @LabeledSubClause{Array Aggregates}
@@ -3365,29 +3391,30 @@ contains only @nt{array_component_association}s that are
 @nt{iterated_component_association}s with @nt{iterator_specification}s,
 evaluation proceeds in two steps:]}
 @begin(enumerate)
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
   @ChgAdded{Version=[5],Text=[Each @nt{iterator_specification} is elaborated
   (in an arbitrary order)@PDefn2{Term=[arbitrary order],Sec=[allowed]}
-  and an iteration is performed solely to determine
-  a count of the number of values produced by the iteration; all of these
+  and an iteration is performed solely to determine a maximum count
+  for the number of values produced by the iteration; all of these
   counts are combined to determine the overall length of the array, and
-  ultimately the bounds of the array (defined below);]}
+  ultimately the limits on the bounds of the array (defined below);]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
   @ChgAdded{Version=[5],Text=[A second iteration is performed for each of the
   @nt{iterator_specification}s, in the order given in the @nt{aggregate},
   and for each value produced, the associated @nt{expression} is evaluated,
   its value is converted to the component subtype of the array type, and used
   to define the value of the next component of the array starting at the
   low bound and proceeding sequentially toward the high bound. A check is made
-  that the second iteration results in the same array length;
+  that the second iteration results in an array length no greater than the
+  maximum determined by the first iteration;
   Constraint_Error is raised if this check@IndexCheck{Index_Check}
   fails.@Defn2{Term=[Constraint_Error],Sec=(raised by failure of runtime check)}]}
 
 @begin{Honest}
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
     @ChgAdded{Version=[5],Text=[Constraint_Error should be raised no later than
-    when the iterations exceed the expected array length; memory that
+    when the iterations exceed the maximum array length; memory that
     doesn't belong to the aggregate temporary should not be overwritten.]}
 @end{Honest}
 @end{enumerate}
@@ -3453,7 +3480,7 @@ of the @nt{iterator_specification} is the value produced by the iteration
   @ldquote@;The array component expressions of the aggregate are evaluated in
   an arbitrary order@rdquote, this implies that an index parameter of an
   @nt{iterated_component_association} can take on its values in an
-  arbitrary order. This is different than in other constructs, such as a
+  arbitrary order. This is different from other constructs, such as a
   @nt{loop_statement}. In contrast, a loop parameter of an
   @nt{iterated_component_association} takes its values in the order defined
   by the iteration, the same as a @nt{loop_statement}.]}
@@ -3481,22 +3508,23 @@ are determined as follows:
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0306-1]}
   @ChgAdded{Version=[5],Text=[For a @nt{null_array_aggregate}, bounds for each
   dimension are determined as for a @nt{positional_array_aggregate} without
-  an @key(others) choice with zero expressions for each dimension;]}
+  an @key(others) choice that has no expressions for each dimension;]}
 
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[We need a separate rule to describe what
     happens for a multidimensional @nt{null_array_aggregate}; we could've
-    combined the single dimension case with the @nt{positional_array_aggregate}
+    combined the single-dimension case with the @nt{positional_array_aggregate}
     rule.]}
 @end{Reason}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
   @ChgAdded{Version=[5],Text=[For a @nt{named_array_aggregate} containing only
   @nt{iterated_component_association}s with an @nt{iterator_specification}, the
   lower bound is determined as for a @nt{positional_array_aggregate} without
   an @b<others> choice, and the upper bound is determined from the lower
-  bound and the total number of values produced by the iteration(s);]}
+  bound and the total number of values produced by the second set of
+  iterations;]}
 
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
   For @Chg{Version=[5],New=[any other],Old=[a]} @nt{named_array_aggregate}
@@ -3561,13 +3589,13 @@ checks fail.
 @end{RunTime}
 
 @begin{ImplPerm}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
   @ChgAdded{Version=[5],Text=[When evaluating
   @nt{iterated_component_association}s for an @nt{array_aggregate}
   that contains only @nt{iterated_component_association}s with
-  @nt{iterator_specification}s, the first step of evaluating a
+  @nt{iterator_specification}s, the first step of evaluating an
   @nt{iterated_component_association} can be omitted if the implementation can
-  determine the number of values by some other means.]}
+  determine the maximum number of values by some other means.]}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3585,9 +3613,9 @@ parentheses],Old=[]}, positional notation may only be used
 with two or more @nt<expression>s; a single @nt<expression>
 in parentheses is interpreted as a
 @Chg{Version=[3],New=[parenthesized expression],Old=[@ntf{parenthesized_expression}]}.
-@Chg{Version=[5],New=[An @nt{array_aggregate} delimited by brackets],Old=[A
-@nt<named_array_aggregate>, such as (1 => X),]} may be used to specify
-an array with a single component.
+@Chg{Version=[5],New=[An @nt{array_aggregate} delimited by square
+brackets],Old=[A @nt<named_array_aggregate>, such as (1 => X),]} may be used to
+specify an array with a single component.
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1]}
 @ChgAdded{Version=[5],Text=[An index parameter is a constant object (see
@@ -3763,16 +3791,17 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @end{Inconsistent2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0212-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The
   @nt{iterated_component_association} is new (more than 25 years after it
-  was originally proposed).]}
+  was originally proposed). It has been extended to allow container iterators
+  as well as the basic index iterators.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
   @ChgAdded{Version=[5],Text=[An @nt{array_aggregate} can be surrounded by
-  brackets rather than parentheses. This allows consistent writing of zero
-  and one component positional arrays, and is consistent with the syntax
-  for writing container aggregates.]}
+  brackets rather than parentheses. This allows consistent writing of zero-
+  and one-component positional array aggregates, and is consistent with the
+  syntax for writing container aggregates.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0306-1]}
   @ChgAdded{Version=[5],Text=[A @nt{null_array_aggregate} is new.]}
@@ -3799,10 +3828,10 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 @LabeledAddedSubClause{Version=[5],Name=[Delta Aggregates]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Text=[A (record or array) delta aggregate yields a
-composite value resulting from starting with a copy of another value of the same
-type and then subsequently assigning to some (but typically not all) components
+composite value that starts with a copy of another value of the same
+type and then assigns to some (but typically not all) components
 of the copy.@Defn{delta aggregate}]}
 @end{Intro}
 
@@ -3882,18 +3911,18 @@ every @nt{array_component_association} shall be of a nonlimited type.]}
   @RefSecNum{Record Aggregates} ensures that we do not assign to a limited
   component. We do not allow any part of an @nt{array_delta_aggregate} to be
   of a limited type, even the @SynI{base_}@nt{expression}, as this is a useless
-  construct (you would not be able to update anything as the components
+  construct (you would not be able to update anything because the components
   necessarily are also limited except in pathological cases).]}
 @end(Ramification)
 @end{Legality}
 
 @begin{Runtime}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Text=[The evaluation of a @nt{delta_aggregate} begins with
-the evaluation of the @SynI<base_>@nt{expression} of the @nt{delta_aggregate}
-and using that value to create and initialize the anonymous object of the
-@nt{aggregate}. The bounds of the anonymous object of an
+the evaluation of the @SynI<base_>@nt{expression} of the @nt{delta_aggregate};
+then that value is used to create and initialize the anonymous object of
+the @nt{aggregate}. The bounds of the anonymous object of an
 @nt{array_delta_aggregate} and the discriminants and tag (if any) of the
 anonymous object of a @nt{record_delta_aggregate} are those of the
 @SynI{base_}@nt{expression}.]}
@@ -3999,7 +4028,7 @@ postcondition:]}
    @key[with] Post => V = (V'Old @key[with delta] A .. B => 42.0, V'First => 0.0);]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
 be nontrivial:]}
 
@@ -4009,7 +4038,8 @@ be nontrivial:]}
    --@Examcom{ see @RefSecNum{Incomplete Type Declarations} for Cell and Link; @RefSecNum{Subprogram Declarations} for Min_Cell}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[A1 : Vector := ((1.0, 2.0, 3.0) @key[with delta] Integer (Random * 3.0) => 14.2);
+@ChgAdded{Version=[5],Text=[A1 : Vector := ((0 => 1.0, 1 => 2.0, 2 => 3.0)
+       @key[with delta] Integer(Random * 2.0) => 14.2);
    --@Examcom{ see @RefSecNum{Array Types} for declaration of type Vector}
    --@Examcom{ see @RefSecNum{Subprogram Declarations} for declaration of Random}]}
 
@@ -4144,8 +4174,8 @@ type.@PDefn2{Term=[key type],Sec=[container aggregate]}@PDefn2{Term=[element typ
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Text=[If the container type of an Aggregate aspect is a
 private type, the full type of the container type shall not be an array type. If
-container type is limited, the name specified for Empty shall denote a function
-rather than a constant object.]}
+the container type is limited, the name specified for Empty shall denote a
+function rather than a constant object.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Text=[For an Aggregate aspect, the key type of
@@ -4187,10 +4217,11 @@ rhs="@Chg{Version=[5],New=<'[' @Syn2<container_element_association_list> ']'>,Ol
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
   @ChgAdded{Version=[5],Text=[Unlike other @nt{aggregate}s, container aggregates
   have to be surrounded with brackets rather than parentheses. Using brackets
-  allows writing zero and one element positional @nt{aggregate}s. (A one
-  element positional aggregate would look the same as and is always interpreted
+  allows writing zero- and one-element positional @nt{aggregate}s. (Were we to
+  use parentheses, a one-element positional aggregate would look the same as
+  and would always be interpreted
   as a parenthesized expression.) Unlike the case for arrays, where it is
-  always possible to give bounds to work around this gap, such a @nt{aggregate}
+  always possible to give bounds to work around this gap, such an @nt{aggregate}
   could not be written at all for a sequence type (such as a list) where there
   is no index or key to use.]}
 @end{Reason}
@@ -4277,7 +4308,7 @@ rather than an @nt{expression}, or with a @nt{key_choice} that is a
   aggregates, there are no operations that add an element without giving
   it a value. We could have defined such (optional) operations, but they would
   have added significant complication to an already complex feature without
-  adding much additional expressive power. Note that to be consistent with
+  adding much additional expressive power. Note that, to be consistent with
   array aggregates, we do not support specifying <> in an
   @nt{iterated_element_association}.]}
 @end{Reason}
@@ -4298,12 +4329,12 @@ be the same as the key type of the @nt{aggregate}.]}
   @SynI[key_]@nt{expression}, the loop parameter itself is used as the key.]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a @nt{named_container_aggregate}
 that is an indexed aggregate, all @nt{container_element_association}s shall
 contain either a @nt{key_choice_list}, or a @nt{loop_parameter_specification}
-without a @Syni{key_}@nt{expression}. Furthermore, for such an aggregate,
-either:]}
+without a @Syni{key_}@nt{expression} or @nt{iterator_filter}. Furthermore,
+for such an aggregate, either:]}
 @begin{Itemize}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[all @nt{key_choice}s shall be static expressions
@@ -4456,7 +4487,7 @@ follows:]}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Type=[Leading],Text=[for a
       @nt{container_element_association} with an
-      @nt{iterated_element_association}, the @nt{iterated_element_association}
+      @nt{iterated_element_association}, first the @nt{iterated_element_association}
       is elaborated, then an iteration is performed as described in
       @RefSecNum{Loop Statements} or @RefSecNum{Generalized Loop Iteration}, and
       for each value of the loop parameter of the iteration the Add_Named
@@ -4569,8 +4600,8 @@ Set_Type, Map_Type, and Vector_Type:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[   @key[function] New_Vector (First, Last : Positive) @key[return] Vector_Type
       @key[with] Pre => First = Positive'First;
-      --  @examcom<Vectors of are always indexed starting at the>
-      --  @examcom<low bound of their index subtype.>]}
+      --  @examcom<Vectors are always indexed starting at the>
+      --  @examcom<lower bound of their index subtype.>]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[private]]}
@@ -4616,7 +4647,7 @@ container aggregates for Set_Type, Map_Type, and Vector_Type:]}
 S : Set_Type;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=<--  @examcom<Assign S to be the empty set:>
+@ChgAdded{Version=[5],Text=<--  @examcom<Assign the empty set to S:>
 S := [];>}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4927,6 +4958,56 @@ have such a thing).
 @begin{StaticSem}
 Each expression has a type; it specifies the
 computation or retrieval of a value of that type.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[5],Text=[A @nt{primary} that is an @nt{expression}
+surrounded by ( and ) is known as a
+@i{parenthesized expression}.@Defn{parenthesized expression}@Defn2{Term=[expression],Sec=[parenthesized]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Every @nt{name} or @nt{expression}
+consists of one or more @i<operative constituent> @nt{name}s or @nt{expression}s, only
+one of which is evaluated as part of evaluating the @nt{name} or
+@nt{expression} (the @i<evaluated operative constituent>). The operative
+constituents are determined as follows, according to the form of the @nt{expression}
+(or@Defn{operative constituent}@Defn{evaluated operative constituent}
+@Defn2{Term=[constituent],Sec=[operative]}@nt{name}):]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if the @nt{expression} is a
+  @nt{conditional_expression}, the operative constituents of its
+  @SynI{dependent_}@nt{expression}s;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if the @nt{expression} (or @nt{name}) is a
+  parenthesized expression, a @nt{qualified_expression}, or a view conversion,
+  the operative constituent(s) of its operand;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[if the @nt{expression} is a
+  @nt{declare_expression}, the operative constituent(s) of its
+  @Syni{body_}@nt{expression};]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[otherwise, the @nt{expression} (or @nt{name})
+  itself.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[5],Text=[In certain contexts, we specify that an operative
+constituent
+shall (or shall not) be @i{newly constructed}.@Defn{newly constructed} This
+means the operative constituent shall (or shall not) be an @nt{aggregate} or a
+@nt{function_call}; in either case, a @nt{raise_expression} is permitted.]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If an @nt{if_expression} does not have an
+  @key[else] clause, "True" is a opertive constituent of the @nt{expression} and
+  it can be the evaluated operative constituent.]}
+@end{Honest}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -4953,11 +5034,11 @@ which case that type is used).]}
   @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[This rule means that implementations don't have
-    to support unlimited range math at runtime for universal expressions. Note
+    to support unlimited range math at run time for universal expressions. Note
     that universal expressions for which the context doesn't specify a specific
     type are quite rare; attribute prefixes and results are the only known
     cases. (For operators, @RefSecNum{The Context of Overload Resolution}
-    already specifies that the operator of a root type get used, which provides
+    already specifies that the operator of a root type be used, which provides
     a specific type.)]}
   @end{Reason}
 @end{RunTime}
@@ -5105,9 +5186,9 @@ still have to be parenthesized when used in a bound of a range.
 @begin{Diffword2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0227-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Added wording so that universal
-  expressions evaluated at runtime can raise Constraint_Error if the value is
+  expressions evaluated at run time can raise Constraint_Error if the value is
   outside of the range of @i<root_integer> or @i<root_real>. We don't document
-  this as an inconsistency as the rule requires no implementation to change
+  this as an inconsistency because the rule requires no implementation to change
   (as Constraint_Error is not required); it just allows implementations that
   already raise Constraint_Error (which is all of them surveyed) to be
   considered correct.]}
@@ -5115,6 +5196,16 @@ still have to be parenthesized when used in a bound of a range.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
   @ChgAdded{Version=[5],Text=[Added @nt{declare_expression} to @nt{primary}.
   It shares the rules about parentheses with @nt{conditional_expression}s.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0317-1]}
+  @ChgAdded{Version=[5],Text=[Added the definitions of
+  @ldquote@;operative constituent@rdquote and @ldquote@;newly constructed@rdquote
+  to centralize definitions that are needed for various rules and definitions
+  across the Standard. In particular, @i<operative constituent> is often used
+  when we want the semantics or legality to be unchanged by the presence
+  of parens, qualification, or view conversions. Examples are found in
+  @RefSecNum{Extension Aggregates}, @RefSecNum{Formal Parameter Modes},
+  and @RefSecNum{Limited Types}.]}
 @end{Diffword2012}
 
 
@@ -7482,22 +7573,19 @@ as it is immediately surrounded by parentheses.]}
   complexities and the need to activate tasks found in a @nt{declare_item}.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1],ARef=[AI12-0317-1]}
 @ChgAdded{Version=[5],Text=[A @nt{declare_item} that is an
 @nt{object_renaming_declaration} (see @RefSecNum{Object Renaming Declarations})
-shall not rename an object of a limited type that is a @nt{function_call},
-@nt{aggregate}, a parenthesized expression, @nt{qualified_expression}, or
-@nt{type_conversion} with an operand of one of these, a
-@nt{conditional_expression} that has at least one
-@SynI{dependent_}@nt{expression} that is one of these, or a
-@nt{declare_expression} whose @Syni{body_}@nt{expression} is one of these.]}
+shall not rename an object of a limited type if any operative constituent
+of the @SynI{object_}@nt{name} is a value conversion or is newly constructed
+(see @RefSecNum{Expressions}).]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[We disallow renaming limited temporary objects
   (like the result of a function call) for the same reasons as for stand-alone
-  objects. We do allow renaming existing limited objects as these don't cause
-  any problems. Note that one cannot directly rename an @nt{aggregate},
+  objects. We do allow renaming existing limited objects because these don't
+  cause any problems. Note that one cannot directly rename an @nt{aggregate},
   parenthesized expression, @nt{conditional_expression}, or
   @nt{declare_expression} (these are not @nt{name}s), but any of these can
   appear inside of a @nt{qualified_expression} or @nt{type_conversion} (which
@@ -7566,7 +7654,7 @@ Ada.Containers.Vectors."&" (see
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Declare
-  expressions attributes are new.]}
+  expressions are new.]}
 @end{Extend2012}
 
 
@@ -7592,7 +7680,7 @@ rhs="@Chg{Version=[5],New=<
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<value_sequence>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-    '[' [@key[parallel][(@Syn2{chunk_specification})]] @Syn2{iterated_component_association} ']'>,Old=<>}"}
+    '[' [@key[parallel][(@Syn2{chunk_specification})]] @Syn2{iterated_element_association} ']'>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_attribute_designator>,Old=<>}>,
@@ -7602,30 +7690,19 @@ rhs="@Chg{Version=[5],New=<@SynI{reduction_}@Syn2{identifier}(@Syn2{reduction_sp
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_specification>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@SynI{reducer_}@Syn2{name}, @SynI{initial_value_}@Syn2{expression}[, @SynI{combiner_}@Syn2{name}]>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[For the case of an
-@nt{iterated_component_association} of a @nt{value_sequence}
-having a @nt{discrete_choice_list}, there shall be exactly one
-@nt{discrete_choice} in the @nt{discrete_choice_list}, which shall be
-a @SynI{discrete_}@nt{subtype_indication} or a @nt{range}.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1]}
+@ChgAdded{Version=[5],Text=[The @nt{iterated_element_association} of a
+@nt{value_sequence} shall not have a @SynI{key_}@nt{expression},
+nor shall it have a @nt{loop_parameter_specification} that has the reserved
+word @key{reverse}.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[If we allow multiple choices, we would have a new
-  overload resolution challenge, where you could have multiple ranges requiring
-  resolution across them. We disallow single values because that would be
-  useless, and we disallow @key[others] because there is no applicable index
-  constraint. The user can use a qualified expression if they really need to
-  use the full flexibility of array-aggregate notation.]}
+  @ChgAdded{Version=[5],Text=[The intent is that the syntax matches as closely
+    as possible array or container aggregate notation. Syntax that matches a
+    @nt{loop_parameter_specification} with the @key{reverse} reserved word would
+    not be permitted in an array aggregate, so we disallow that here.]}
 @end{Reason}
-@begin{Ramification}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[There is no rule against the
-  @nt{discrete_choice_list} of a @nt{value_sequence} having a
-  @nt{discrete_choice} that is a @nt{subtype_indication} or @nt{range} that
-  defines a nonstatic or null range. If the choice is a @nt{subtype_indication},
-  the denoted subtype might have a static or dynamic predicate.]}
-@end{Ramification}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The @nt{chunk_specification}, if any, of a
@@ -7677,7 +7754,8 @@ subtype conformant with the following specification:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[A @i<combiner subprogram>@Defn{combiner subprogram}
-is a reducer subprogram where both parameters are of subtype @i<Accum_Type>.]}
+is a reducer subprogram where the Value parameter is of subtype @i<Accum_Type>
+rather than subtype @i<Value_Type>.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{reducer_}@nt{name} of a @nt{reduction_specification}
@@ -7692,30 +7770,10 @@ denotes a reducer subprogram.]}
 @SynI{initial_value_}@nt{expression} of a @nt{reduction_specification}
 is that of subtype @i<Accum_Type>.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[The expected type of the @nt{expression} of a
-@nt{value_sequence} is that of subtype @i<Value_Type>.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[For an @nt{iterated_component_association}
-of a @nt{value_sequence} that has a @nt{discrete_choice_list}
-comprising a single @nt{range}, the @nt{range}
-shall resolve to some discrete type@Redundant[; which discrete type shall
-be determined without using any context other than the bounds of the
-range itself (plus the preference for @i<root_integer> -
-see @RefSecNum{The Context of Overload Resolution})]. If the range
-resolves to @i<root_integer>; the type of the index parameter of the
-@nt{iterated_component_association} (the
-@i<index type>@Defn2{Term=[index type],Sec=[value sequence]}
-of the @nt{value_sequence}) is
-Integer; otherwise the index type is the resolved type of the
-@SynI{discrete_}@nt{subtype_indication} or @nt{range} of the
-@nt{discrete_choice_list}.
-For an @nt{iterated_component_association} of a @nt{value_sequence} that has an
-@nt{iterator_specification}, the index type of the @nt{value_sequence} is
-Integer@Redundant[ and the type of the loop parameter of the
-@nt{iterator_specification} is as defined
-in @RefSecNum{Generalized Loop Iteration}].]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1]}
+@ChgAdded{Version=[5],Text=[The expected type of the @nt{expression} of the
+@nt{iterated_element_association} of a @nt{value_sequence} is that of
+subtype @i<Value_Type>.]}
 @end{Itemize}
 
 @end{Resolution}
@@ -7751,12 +7809,6 @@ match.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[The nominal subtype of the index parameter of a
-@nt{value_sequence} is that of the @nt{discrete_choice}. The nominal subtype of
-the loop parameter of a @nt{value_sequence} is as defined for an
-@nt{iterator_specification} (see @RefSecNum{Generalized Loop Iteration}).]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[A @nt{reduction_attribute_reference} denotes a
 value, with nominal subtype being the subtype of the first parameter of the
 subprogram denoted by the @SynI{reducer_}@nt{name}.]}
@@ -7778,31 +7830,15 @@ combiner subprogram.]}
 @end{StaticSem}
 
 @begin{Runtime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@PDefn2{Term=[evaluation], Sec=(value_sequence)}
-For the evaluation of a @nt{value_sequence}:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[if the @nt{iterated_component_association} has an
-    @nt{iterator_specification}, an iteration is performed for that
-    @nt{iterator_specification} (as described in
-    @RefSecNum{Generalized Loop Iteration}), and for each value produced by
-    the iterator, the associated @nt{expression} is evaluated with the loop
-    parameter having this value, to
-    produce a result that is converted to Value_Type, and used to define the next
-    value in the sequence;]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[otherwise, the @nt{discrete_choice_list}
-    of the @nt{iterated_component_association}
-    is evaluated, and for each value, in increasing order, of the
-    discrete subtype or range defined by the @nt{discrete_choice_list}, the
-    associated @nt{expression} is evaluated with the index parameter having
-    this value, to produce a result that is converted to Value_Type, and
-    used to define the next value in the sequence.]}
-
-@end{Itemize}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=[evaluation], Sec=(value_sequence)}
+For the evaluation of a @nt{value_sequence}, the
+@nt{iterated_element_association} is elaborated, then an iteration is
+performed as described in @RefSecNum{Loop Statements} or
+@RefSecNum{Generalized Loop Iteration}, and for each value produced by the
+iterator, the associated @nt{expression} is evaluated with the loop parameter
+having this value, to produce a result that is converted to Value_Type, and used
+to define the next value in the sequence.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[If the @nt{value_sequence} does not have the

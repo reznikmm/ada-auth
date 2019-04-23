@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.52 $ $Date: 2019/01/12 03:52:47 $ $Author: randy $ }
+@comment{ $Revision: 1.53 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2019/01/12 03:52:47 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -808,13 +808,13 @@ altered while a search is in progress.],Old=[]}]}
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0286-1]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} Search (
-      Directory : @key{in} String;
-      Pattern   : @key{in} String;
-      Filter    : @key{in} Filter_Type := (@key{others} => True);
-      Process   : @key{not null access procedure} (
-          Directory_Entry : @key{in} Directory_Entry_Type))@Chg{Version=[5],New=[
-      @key[with] Allows_Exit],Old=[]};]}
+@ChgAdded{Version=[2],Text=[@key{procedure} Search (
+   Directory : @key{in} String;
+   Pattern   : @key{in} String;
+   Filter    : @key{in} Filter_Type := (@key{others} => True);
+   Process   : @key{not null access procedure} (
+       Directory_Entry : @key{in} Directory_Entry_Type))@Chg{Version=[5],New=[
+   @key[with] Allows_Exit],Old=[]};]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1],ARef=[AI05-0262-1]}

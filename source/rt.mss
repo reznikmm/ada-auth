@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.127 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@comment{ $Revision: 1.128 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2019/02/21 05:24:05 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -854,7 +854,7 @@ deferred while the affected task performs a protected action.]}
   task dispatching points to only allow adding task dispatching points. If an
   implementation was using this permission to remove task dispatching points,
   and a program depended on that behavior to work, it could fail when used with
-  Ada 2012. We not aware of any such implementations, and such behavior was
+  Ada 2012. We are not aware of any such implementations, and such behavior was
   never portable to other implementations, so we do not expect this to matter
   in practice.]}
 @end{Inconsistent2012}
@@ -1779,7 +1779,7 @@ First (EDF) dispatching. @Chg{Version=[5],New=[The Relative_Deadline aspect is
 provided],Old=[@Chg{Version=[3],New=[An aspect],Old=[A pragma]}
 is defined]} to assign an initial deadline to a task.@Chg{Version=[5],New=[
 A configuration pragma Generate_Deadlines is provided to specify that a
-task's deadline is recomputed whenever it is made runnable.],Old=[]}]]}
+task's deadline is recomputed whenever it is made ready.],Old=[]}]]}
 
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2010,7 +2010,7 @@ subprogram other than the main subprogram.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[5],Text=[If pragma Generate_Deadlines is in effect, the
-deadline of a task is recomputed each time it becomes runnable. The new deadline
+deadline of a task is recomputed each time it becomes ready. The new deadline
 is the value of Real_Time.Clock at the time the task is added to a ready queue
 plus the value returned by Get_Relative_Deadline.]}
 
@@ -2074,20 +2074,23 @@ the relative deadline of the task.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[5],Text=[The function Get_Last_Release_Time returns the
-time, as provided by Real_Time.Clock, when the task was last made runnable (that
+time, as provided by Real_Time.Clock, when the task was last made ready (that
 is, was added to a ready queue).]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[The procedure Delay_Until_And_Set_Deadline delays
-the calling task until time Delay_Until_Time. When the task becomes runnable
+the calling task until time Delay_Until_Time. When the task becomes
+@Chg{Version=[5],New=[ready],Old=[runnable]}
 again it will have deadline @exam{Delay_Until_Time + Deadline_Offset}.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
 @ChgAdded{Version=[2],Text=[On a system with a single processor, the setting of
 the deadline of a task to the new value occurs immediately at the first point
-that is outside the execution of a protected action. If the task is currently
-on a ready queue it is removed and re-entered on to the ready queue determined
-by the rules defined below.]}
+that is outside the execution of a protected action. If the task is currently on
+a ready queue it is removed and re-entered @Chg{Version=[5],New=[onto],Old=[on
+to]} the ready queue determined by the rules defined below.]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00357-01]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0230-1]}
@@ -2127,7 +2130,7 @@ with a higher priority than the active priority of the running
 task@Chg{Version=[5],New=[;],Old=[.]}]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0230-1]}
-@ChgAdded{Version=[5],Text=[there is a runnable task with the same priority as
+@ChgAdded{Version=[5],Text=[there is a ready task with the same priority as
 @i<T> but with an earlier absolute deadline.]}
 
 @end{Itemize}
@@ -2727,11 +2730,13 @@ calls another protected operation on the same protected object).
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0074],ARef=[AI95-00068-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0324-1]}
 @Redundant[@Defn{queuing policy}
 This @Chg{Version=[3],New=[subclause],Old=[clause]} specifies
 a mechanism for a user to choose an entry
-@i{queuing policy}. It also defines @Chg{New=[two],Old=[one]}
-such polic@Chg{New=[ies],Old=[y]}. Other policies are implementation defined.]
+@i{queuing policy}. It also defines
+@Chg{New=[@Chg{Version=[5],New=[three],Old=[two]}],Old=[one]}
+such @Chg{New=[policies],Old=[policy]}. Other policies are implementation defined.]
 @ImplDef{Implementation-defined queuing policies.}
 @end{Intro}
 
@@ -7042,8 +7047,12 @@ processors available to the program. Within a given partition, each call on
 Number_Of_CPUs will return the same value.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a task type (including the
-anonymous type of a @nt{single_task_declaration}) or subprogram, the following
+anonymous type of a
+@nt{single_task_declaration})@Chg{Version=[5],New=[, protected type (including
+the anonymous type of a @nt{single_protected_declaration}),],Old=[]}
+or subprogram, the following
 language-defined representation aspect may be specified:]}
 
 @begin{Description}
@@ -7051,9 +7060,10 @@ language-defined representation aspect may be specified:]}
 @ChgAdded{Version=[3],Text=[CPU@\The aspect CPU is an @nt{expression},
 which shall be of type System.Multiprocessors.CPU_Range.@AspectDefn{CPU}]}
 
-@ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[CPU],
-  Text=[@ChgAdded{Version=[3],Text=[Processor on which a given task should
-    run.]}]}
+@ChgAspectDesc{Version=[5],Kind=[Revised],Aspect=[CPU],
+  InitialVersion=[3],Text=[@ChgAdded{Version=[3],Text=[Processor on which a
+    given task@Chg{Version=[5],New=[, or calling task for a protected
+    operation,],Old=[]} should run.]}]}
 
 @end{Description}
 @end{StaticSem}
@@ -7065,8 +7075,9 @@ which shall be of type System.Multiprocessors.CPU_Range.@AspectDefn{CPU}]}
 the @nt{expression} shall be static.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
 @ChgAdded{Version=[3],Text=[The CPU aspect shall not be specified on a task
-interface type.]}
+@Chg{Version=[5],New=[or protected ],Old=[]}interface type.]}
 
 @end{Legality}
 
@@ -7074,14 +7085,19 @@ interface type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0081-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
 @ChgAdded{Version=[3],Text=[The @nt{expression} specified for the CPU aspect
-of a task@Chg{Version=[4],New=[ type],Old=[]} is evaluated
+of a task@Chg{Version=[4],New=[@Chg{Version=[5],New=[ or protected],Old=[]}
+type],Old=[]} is evaluated
 @Chg{Version=[4],New=[],Old=[for ]}each
 @Chg{Version=[4],New=[time an],Old=[task]} object
-@Chg{Version=[4],New=[of the task type is created ],Old=[]}(see
-@RefSecNum{Task Units and Task Objects}). The CPU value is then associated with
-the task object@Chg{Version=[4],New=[],Old=[ whose task declaration specifies
-the aspect]}.]}
+@Chg{Version=[4],New=[of the @Chg{Version=[5],New=[corresponding],Old=[task]}
+type is created ],Old=[]}(see
+@RefSecNum{Task Units and Task Objects}@Chg{Version=[5],New=[ and
+@RefSecNum{Protected Units and Protected Objects}],Old=[]}). The CPU value is
+then associated with
+the @Chg{Version=[5],New=[],Old=[task ]}object@Chg{Version=[4],New=[],Old=[ whose
+task declaration specifies the aspect]}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[The CPU aspect has no effect if it is specified for
@@ -7098,7 +7114,9 @@ Text=[The processor on which the environment task executes in the absence of a
 value for the aspect CPU.]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[3],Text=[The CPU value determines the processor on which the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For a task, the],Old=[The]}
+CPU value determines the processor on which the
 task will activate and execute; the task is said to be assigned to that
 processor. If the CPU value is Not_A_Specific_CPU, then the task is not assigned
 to a processor. A task without a CPU aspect specified will activate and execute on the
@@ -7108,13 +7126,49 @@ System.Multiprocessors.CPU_Range or is greater than Number_Of_CPUs the task is
 defined to have failed, and it becomes a completed task (see
 @RefSecNum{Task Execution - Task Activation}).]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0281-1]}
+@ChgAdded{Version=[5],Text=[For a protected type, the CPU value determines the
+processor on which calling tasks will execute; the protected object is said to
+be assigned to that processor. If the CPU value is Not_A_Specific_CPU, then the
+protected object is not assigned to a processor. A call to a protected object
+that is assigned to a processor from a task that is not assigned a processor or
+is assigned a different processor raises Program_Error.]}
+
 @end{Runtime}
+
+@begin{ImplAdvice}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0281-1],ARef=[AI12-0323-1]}
+@ChgAdded{Version=[5],Text=[Starting a protected action on a protected object
+statically assigned to a processor should be implemented without
+busy-waiting.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Busy-waiting is a form of lock and can be a source
+  of deadlock. Busy-waiting is typically needed for starting protected actions
+  on multiprocessors, but if all tasks calling a protected object execute on the
+  same CPU, this locking isn't needed and the source of deadlock and associated
+  overhead can be eliminated.]}
+@end{Reason}
+
+@ChgImplAdvice{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
+Text=[Starting a protected action on a protected object statically assigned
+to a processor should not use busy-waiting.]}]}
+
+@end{ImplAdvice}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0171-1],ARef=[AI05-0229-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
   The package System.Multiprocessors and the CPU aspect are new.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0281-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Aspect CPU can now be applied to protected types, in order to avoid the
+  overhead and deadlock potential of multiprocessor execution.]}
+@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0081-1]}

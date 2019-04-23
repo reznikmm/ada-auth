@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.133 $}
+@Comment{$Revision: 1.134 $}
 
 @begin{Intro}
 
@@ -2255,14 +2255,44 @@ denotes a subtype (including formal subtypes)}:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<S>, AttrName=<Nonblocking>, ARef=[AI12-0064-2],
-  InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes whether predefined
-    operators (and in the case of
+  Leading=<F>, Prefix=<S>, AttrName=<Nonblocking>, ARef=[AI12-0064-2], ARef=[AI12-0319-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes whether
+    default initialization, finalization, assignment, predefined
+    operators, and (in the case of
     access-to-subprogram subtypes) a subprogram designated by a value of
     type S are considered nonblocking; the type of this attribute is the
     predefined type Boolean.],Old=[]}]}@Comment{End of Annex text here.}
     @Chg{Version=[5],New=[S'Nonblocking represents the nonblocking expression of
     S; evaluation of S'Nonblocking evaluates that expression.],Old=[]}
+@end(description)
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes an object}:]}
+
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Nonblocking>, ARef=[AI12-0319-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes whether
+    the type of X is considered nonblocking; the type of this
+    attribute is the predefined type Boolean. X'Nonblocking represents the
+    nonblocking expression of X; evaluation of X'Nonblocking evaluates that
+    expression.],Old=[]}]}@Comment{End of Annex text here.}
+    @Chg{Version=[5],New=[S'Nonblocking represents the nonblocking expression of
+    S; evaluation of S'Nonblocking evaluates that expression.],Old=[]}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In the case when the @nt{prefix} represents the
+  Storage_Pool of some type, this is the specific type of the associated pool
+  object, if known.]}
+@end{Honest}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This attribute, combined with rules found in
+  @RefSecNum{Storage Management}, allow Acc'Storage_Pool'Nonblocking to
+  describe whether the storage pool of an access type allows blocking.]}
+@end{Reason}
 @end(description)
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0247-1]}
@@ -2476,6 +2506,38 @@ the reference shall occur within the declarative region of @i<G>.]}
     units and entities declared within them.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a composite type that is
+nonblocking:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[All component subtypes shall be nonblocking;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For a record type or extension, every call in the
+    @nt{default_expression} of a component (including discriminants) shall
+    call an operation that is nonblocking;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For a controlled type, the Initialize, Finalize,
+    and Adjust (if any) subprograms shall be nonblocking.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[These rules ensure that if a type is nonblocking, the
+    default initialization, finalization, and assignment of the type
+    are also nonblocking. This allows the use of the nonblocking attribute
+    of a generic formal type to describe whether these operations of the type
+    allow blocking.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Default initialization, finalization, and
+    assignment of elementary types are always nonblocking, so we don't need any
+    rules for those.]}
+@end{Reason}
+@end{Itemize}
+
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The predefined equality operator for
 a composite type is illegal if it is nonblocking and, for a record type, it is
@@ -2644,6 +2706,24 @@ a call to a subprogram is considered to allow blocking unless:]}
     @ldquote@;assume-the-worst@rdquote checking.]}
 @end{Reason}
 
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+  @ChgAdded{Version=[5],Text=[For checking in @i{P}, default initialization,
+   finalization, or assignment of a composite formal type @i{F} is considered
+   to call subprograms that have the nonblocking aspect of @i{F}'Nonblocking,
+   and this is checked for conformance against that of @i{P} as described above.
+   These operations of an elementary formal type are considered nonblocking,
+   and thus require no checks.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+  @ChgAdded{Version=[5],Text=[Similarly, for checking in @i{P}, the implicit
+   calls associated with an @nt{allocator} of an access type @i{A} or a use
+   of attribute @i{A}'Storage_Size are
+   considered to call subprograms that have the nonblocking aspect of
+   @i{A}'Storage_Pool'Nonblocking, and this is checked for conformance against
+   that of @i{P} as described above.]}
+@end{Honest}
+
 @end{Legality}
 
 @begin{Notes}
@@ -2702,10 +2782,11 @@ implies that the operation will not block.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0319-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Aspect Nonblocking is new; it allows compile-time checks to prevent
-  calling potentially blocking operations.]}
+  using potentially blocking operations in contexts where that is not
+  allowed.]}
 @end{Extend2012}
 
 
@@ -4448,7 +4529,8 @@ represents a time as reported by a corresponding clock.
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
 @ChildUnit{Parent=[Ada],Child=[Calendar]}
-@key(package) Ada.Calendar @Chg{Version=[5],New=[@key(with) Nonblocking ],Old=[]}@key(is)
+@key(package) Ada.Calendar @Chg{Version=[5],New=[
+  @key(with) Nonblocking ],Old=[]}@key(is)
   @key(type) @AdaTypeDefn{Time} @key(is) @key(private);
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00351-01]}
@@ -6640,7 +6722,7 @@ circumstances:
   If A1 signals some action that in turn signals A2.
 @end(Itemize)
 
-@ChgNote{Prior to Ada 2020 (by AI12-0267-1) these two section changes where here
+@ChgNote{Prior to Ada 202x (by AI12-0267-1) these two section changes where here
 @end{RunTime}
 
 @begin{Erron} -- end ChgNote}
@@ -6755,17 +6837,17 @@ is an object of a task or protected type, an atomic object (see
 necessarily sequential with respect to one another, and hence are never
 considered to conflict.]]}
 
-@ChgNote{Prior to Ada 2020 (by AI12-0267-1) this was end{Erron}}
+@ChgNote{Prior to Ada 202x (by AI12-0267-1) this was end{Erron}}
 @end{Runtime}
 
-@begin{Erron}@ChgNote{New for Ada 2020}
+@begin{Erron}@ChgNote{New for Ada 202x}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[The execution of two concurrent actions is
 erroneous@PDefn2{Term=(erroneous execution),Sec=(cause)} if the actions make
 conflicting uses of a shared variable (or neighboring variables that are not
 independently addressable).]}
 
-@end{Erron}@ChgNote{New for Ada 2020}
+@end{Erron}@ChgNote{New for Ada 202x}
 
 @begin{DiffWord95}
   @ChgRef{Version=[2],Kind=[AddedNormal],Ref=[8652/0031],ARef=[AI95-00118-01]}
@@ -6901,7 +6983,7 @@ place where the action or actions occur, as follows:]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[When the applicable conflict check policy is
 Known_Conflict_Checks, the implementation may disallow two concurrent actions if
-the implementation can prove they will at run-time denote the same object with
+the implementation can prove they will at run time denote the same object with
 uses that potentially conflict.]}
 
 @begin{Ramification}

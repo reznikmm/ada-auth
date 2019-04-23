@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.34 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@comment{ $Revision: 1.35 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -1963,7 +1963,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for regular containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -1999,7 +1999,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -2123,11 +2123,11 @@ omitted from the nested package Stable.]}
   being prohibited only during the lifetimes of references to the loop
   parameter. Thus, if a container element iterator does an operation that
   tampers with elements on the iterated container, that operation will fail a
-  tampering check in Ada 2020 (and thus raise Program_Error), while it would
+  tampering check in Ada 202x (and thus raise Program_Error), while it would
   have worked in Ada 2012 so long as the loop parameter is not involved.
   We believe this to be a dubious loop structure that should be rare. Note
   that this issue only occurs for the indefinite container form, the regular
-  and bounded containers allow such operations at ay time in Ada 2020.]}
+  and bounded containers allow such operations at ay time in Ada 202x.]}
 
 @end{Inconsistent2012}
 
@@ -2212,7 +2212,7 @@ The generic package Containers.Indefinite_Doubly_Linked_Lists is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2308,7 +2308,7 @@ The generic package Containers.Indefinite_Hashed_Maps is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2403,7 +2403,7 @@ The generic package Containers.Indefinite_Ordered_Maps is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2470,7 +2470,7 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2537,7 +2537,7 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2623,7 +2623,7 @@ Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -2743,14 +2743,14 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Constant_Reference_Type}
          (Element : @key[not null access constant] Element_Type) @key[is private]
       @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
-           Global => @key[in out access] Holder,
+           Global => @key[synchronized in out access] Holder,
            Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
       @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
-           Global => @key[in out access] Holder,
+           Global => @key[synchronized in out access] Holder,
            Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -3063,14 +3063,14 @@ Any exception raised by Process.@key[all] is propagated.]}
 @ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
       (Element : @key[not null access constant] Element_Type) @key[is private]
    @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
-        Global => @key[in out access] Holder,
+        Global => @key[synchronized in out access] Holder,
         Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
    @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
-        Global => @key[in out access] Holder,
+        Global => @key[synchronized in out access] Holder,
         Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 @end{Example}
 
@@ -3314,7 +3314,7 @@ holder container unless specified by the operation.]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
   stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 2020 for code that
+  situation where Program_Error will be raised in Ada 202x for code that
   would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
@@ -3329,7 +3329,7 @@ holder container unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -3352,7 +3352,25 @@ as Containers.Vectors except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global &
+             Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Vector is declared with a
@@ -3375,20 +3393,78 @@ as Containers.Vectors except:]}
     avoid use of those functions and their associated types.]}
   @end{ImplNote}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Capacity is omitted from the Stable_Properties
+  of type Vector.]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The capacity is a discriminant here, so it can't
+      be changed by most routines; thus including it in the stable properties
+      adds no information.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In function Copy, if the Capacity parameter is
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[In function Copy, @Chg{Version=[5],New=[the
+    postcondition is altered to:],Old=[if the Capacity parameter is
     equal to or greater than the length of Source, the vector capacity exactly equals
-    the value of the Capacity parameter.]}
+    the value of the Capacity parameter.]}]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Post => Length (Copy'Result) = Length (Source) @key[and then]
+           (@key[if] Capacity > Length (Source) @key[then]
+              Copy'Result.Capacity = Capacity
+            @key[else] Copy'Result.Capacity >= Length (Source));]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
   is replaced with:]}
-@begin{Indent}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[procedure] Reserve_Capacity (Container : @key[in out] Vector;
+                               Capacity  : @key[in]     Count_Type)
+      @key[with] Pre => (@key[if] Capacity > Container.Capacity @key[then raise] Capacity_Error);]}
+@end{Example}
+
+  @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[This],Old=[If the specified Capacity is larger
     than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
+    Otherwise, the]} operation has no effect@Chg{Version=[5],New=[,
+    @Redundant[other than checking the precondition]],Old=[]}.]}
+  @end{Indent}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[The portion of the postcondition checking the
+    capacity is omitted from subprograms Set_Length, Assign, Insert,
+    Insert_Space, Prepend, Append, and Delete.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For procedures Insert,
+    Insert_Space, Prepend, and Append, the part of the precondition reading:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length expression}> > Maximum_Length
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length expression}> > Maximum_Length
+      @key[then raise] Constraint_Error) @key[and then]
+     (@key[if] <@examcom{some length expression}> > Container.Capacity
+      @key[then raise] Capacity_Error)]}
+@end{Example}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -3484,7 +3560,7 @@ minimize copying does not apply to bounded vectors.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -3511,7 +3587,10 @@ as Containers.Doubly_Linked_Lists except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type List is declared with a
@@ -3663,7 +3742,7 @@ minimize copying does not apply to bounded lists.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -3690,7 +3769,10 @@ as Containers.Hashed_Maps except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with
@@ -3854,7 +3936,7 @@ minimize copying does not apply to bounded hashed maps.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -3879,7 +3961,10 @@ as Containers.Ordered_Maps except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with a
@@ -4023,7 +4108,7 @@ minimize copying does not apply to bounded ordered maps.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -4048,7 +4133,10 @@ as Containers.Hashed_Sets except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with
@@ -4207,7 +4295,7 @@ minimize copying does not apply to bounded hashed sets.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -4232,7 +4320,10 @@ as Containers.Ordered_Sets except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with a
@@ -4372,7 +4463,7 @@ minimize copying does not apply to bounded ordered sets.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -4400,7 +4491,10 @@ semantics as Containers.Multiway_Trees except:]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The @nt{pragma} Preelaborate is replaced with @nt{pragma} Pure.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[The
+  @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
+  with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Tree is declared with a
@@ -4550,7 +4644,7 @@ minimize copying does not apply to bounded trees.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -5332,8 +5426,7 @@ implicit pointers or dynamic allocation.]}]}
 
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0254-1]}
-@ChgAdded{Version=[5],Text=[For each instance of
-The language-defined generic package
+@ChgAdded{Version=[5],Text=[The language-defined generic package
 Containers.Bounded_Indefinite_Holders@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Indefinite_Holders]}
 provides a private type Holder and a set of operations for that type. It
 provides the same operations as the package Containers.Indefinite_Holders

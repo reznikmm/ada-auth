@@ -1,10 +1,10 @@
 @Part(02, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:50 $}
 @LabeledSection{Lexical Elements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/02.mss,v $}
-@Comment{$Revision: 1.93 $}
+@Comment{$Revision: 1.94 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -143,11 +143,11 @@ semantics of an Ada program whose text is not in Normalization Form
   @ChgAdded{Version=[5],Text=[Normalization Form C ensures that all source is in
   a unique format; it eliminates ambiguities and security issues potentially
   caused by source using unusual sequences of characters. Note that WC3
-  recommends that all Internet content be in Normalization Form C. We don't
-  require this as there is a potentially significant cost to checking this
-  (just rejecting unallowed code points is not enough), and some
-  implementations may need to be interoperable with tools
-  that produce unnormalized text.]}
+  (the Internet standards group) recommends that all Internet content be
+  in Normalization Form C. We don't require this as there is a potentially
+  significant cost to checking this (just rejecting unallowed code points
+  is not enough), and some implementations may need to be interoperable
+  with tools that produce unnormalized text.]}
 @end{Reason}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -545,7 +545,7 @@ plus sign@*
 comma@*
 hyphen-minus, minus@*
 full stop, dot, point@*
-@Chg{Version=[2],New=[@Chg<Version=[5],New=[commerical at, at sign],Old=<>>],Old=[@*]}@Chg{Version=[2],New=[],Old=[solidus, divide]}@ChgNote{Funny layout so HTML and RTF look right}
+@Chg{Version=[2],New=[@Chg<Version=[5],New=[commercial at, at sign],Old=<>>],Old=[@*]}@Chg{Version=[2],New=[],Old=[solidus, divide]}@ChgNote{Funny layout so HTML and RTF look right}
 
 @NewColumn
 @NoParanum@;@ @ @Chg{Version=[2],New=[graphic ],Old=[@ @ @ @ ]}symbol
@@ -988,11 +988,11 @@ be present in Normalization Form KC (as defined by Clause 21 of ISO/IEC
 10646:2017).]}
 
   @begin{ImplNote}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0004-1],ARef=[AI12-0005-1]}
     @ChgAdded{Version=[5],Text=[An implementation can usually detect this during
     lexical processing. The code points not allowed are those for which Unicode
     property NFKC_QC (Normalization Form KC Quick_Check) has the value No. We
-    say "might be allowed" so that characters for which the value is Maybe
+    say "may be present" so that characters for which the value is Maybe
     (really, one of the possible values is Maybe) are allowed (these are mainly
     combining marks). The necessary tables can be found in
     @URLLink{URL=[http://www.unicode.org/Public/UCD/latest/ucd/DerivedNormalizationProps.txt],
@@ -2316,7 +2316,7 @@ Replacements of Characters@rquotes@; has been moved to
 @begin{Incompatible2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}The
-  following word is not reserved in Ada 2012, but is reserved in Ada 2020:
+  following word is not reserved in Ada 2012, but is reserved in Ada 202x:
   @key{parallel}. Uses of this word as an identifier will need
   to be changed, but we do not expect them to be common.]}
 @end{Incompatible2012}

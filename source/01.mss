@@ -2,6 +2,7 @@
 
 @PrefaceSection{} @Comment{Go to odd page.}
 
+@begin{ISOOnly}
 @begin{Comment}
 The following stuff is to get the "INTERNATIONAL STANDARD" title between
 two horizontal rules at the top of page 1. (RLB-The following is a hack:
@@ -25,12 +26,13 @@ I probably ought to add a style just for this purpose)
 
 @noparanum@ @*@comment{Some vertical whitespace}
 @end{Title}
+@end{ISOOnly}
 
 @LabeledSectionNoBreak{General}
-@Comment{$Date: 2019/02/09 03:46:53 $}
+@Comment{$Date: 2019/04/09 04:56:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/01.mss,v $}
-@Comment{$Revision: 1.95 $}
+@Comment{$Revision: 1.96 $}
 
 @begin{Intro}
 @Chgref{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
@@ -1721,20 +1723,21 @@ denote syntactic categories, for example:
 @nt<case_statement>
 @end(Display)
 
-@leading@keepnext@;Boldface words are used to denote reserved words, for example:
+@leading@keepnext@;Boldface words are used to denote reserved words,
+for example:
 @begin(Display)
 @key(array)
 @end(Display)
 
-@leading@keepnext@;Square brackets enclose optional items. Thus the two following
-rules are equivalent.
+@leading@keepnext@;Square brackets enclose optional items. Thus the two
+following rules are equivalent.
 @begin(Display)
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}@Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return) [@nt<expression>];
 @Chg{Version=[2],New=[@nt<simple_return_statement>],Old=[@nt<return_statement>]} ::= @key(return); | @key(return) @nt<expression>;
 @end(Display)
 
-@leading@keepnext@;Curly brackets enclose a repeated item. The item may appear zero
-or more times; the repetitions occur from left to right as with an
+@leading@keepnext@;Curly brackets enclose a repeated item. The item may
+appear zero or more times; the repetitions occur from left to right as with an
 equivalent left-recursive rule. Thus the two following rules are
 equivalent.
 @begin(Display)
@@ -1744,7 +1747,7 @@ equivalent.
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0212-1]}
 @leading@keepnext@;A vertical line separates
-alternative items@Chg{Version=[5],New=[],Old=[ unless it occurs
+alternative items@Chg{Version=[5],New=[, for example],Old=[ unless it occurs
 immediately after an opening curly bracket,
 in which case it stands for itself]}:
 @begin(Display)
@@ -1755,7 +1758,7 @@ in which case it stands for itself]}:
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For symbols used in this
 notation (square brackets, curly brackets, and the vertical line), the symbols
-when surrounded by ' represent themselves:]}
+when surrounded by ' represent themselves, for example:]}
 @begin(Display)
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1]}@ChgAdded{Version=[5],Text=<@nt<discrete_choice_list> ::= @nt<discrete_choice> {'|' @nt<discrete_choice>}
 @nt<named_container_aggregate> ::= '[' @nt<container_element_association_list> ']'>}
@@ -1989,7 +1992,8 @@ The preferred places for other line breaks are after semicolons.
   @ChgAdded{Version=[5],Text=[Changed the syntax description to quote
   symbols used in the notation when they appear as themselves. We made this
   change to allow square brackets in Ada syntax, but the change also allowed
-  us to get rid of an old hack for vertical lines.]}
+  us to get rid of an old hack which allowed vertical lines to stand for
+  themselves in limited circumstances.]}
 @end{DiffWord2012}
 
 
@@ -2038,7 +2042,7 @@ different categories:
 
        @begin{Reason}
          @Chgref{Version=[5],Kind=[AddedNormal],ARef=[AI12-0204-1]}
-         @ChgAdded{Version=[5],Text=[We don't want to infer @LegalityTitle
+         @ChgAdded{Version=[5],Text=[We do not want to infer @LegalityTitle
          from @RuntimeTitle rules.]}
        @end{Reason}
 

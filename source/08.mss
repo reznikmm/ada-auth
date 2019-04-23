@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.114 $}
+@Comment{$Revision: 1.115 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -82,7 +82,7 @@ called its @i{declarative region},
   a @nt{loop_statement};
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0255-1]}
-@ChgRef{Version=[5],Kind=[DeletedAdded]}
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0308-1]}
   @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[a @nt{quantified_expression};]}]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00318-02]}
@@ -319,18 +319,20 @@ of constructs that have a declarative region.]}
 @key[end record];]}
 @end{Example}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[This is now legal, as one would expect; it
   was illegal in previous versions of Ada as the parameter A and the
   component A were homographs in the same declarative region
   (see @RefSecNum{Visibility}). Note that some implementations already allow
-  this common sense interpretation, so this extension may in fact be used
-  in existing code.]}
+  this common sense interpretation, so this extension
+  @Chg{Version=[5],New=[might],Old=[may]} in fact
+  @Chg{Version=[5],New=[already ],Old=[]}be used in existing code.]}
 @end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0061-1],ARef=[AI12-0236-1]}
   @ChgAdded{Version=[5],Text=[Added @nt{iterated_component_association} and
-  @nt{declare_expression} are added to the rapidly expanding list of constructs
+  @nt{declare_expression} to the rapidly expanding list of constructs
   that have a declarative region.]}
 @end{DiffWord2012}
 
@@ -2223,8 +2225,9 @@ instance of a generic unit.]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1]}
-  @ChgAdded{Version=[2],Type=[Leading],Text=[This rule prevents
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0287-1],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[2],Type=[Leading],Text=[@Chg{Version=[5],New=[These rules
+  prevent],Old=[This rule prevents]}
   @lquotes@;lying@rquotes.
   @b<Null> must never be the value of an object with an explicit
   @nt{null_exclusion}. The @Chg{Version=[5],New=[bullets are],Old=[first
@@ -3349,14 +3352,16 @@ and all of the views declared by those declarations.
   @end{Discussion}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0068-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0324-1]}
   @ChgAdded{Version=[4],NoPrefix=[T],Text=[Within an @nt{aspect_specification}
   for a type or subtype, the current instance represents a value of the type;
   it is not an object. The nominal subtype of this value is given by the
   subtype itself (the first subtype in the case of a @nt{type_declaration}),
   prior to applying any predicate specified directly on the type or subtype. If
-  the type or subtype is by-reference, the associated object with the value
-  is the object associated (see @RefSecNum{Formal Parameter Modes}) with the
-  execution of the usage name.]}
+  the type or subtype is by-reference, the associated object
+  @Chg{Version=[5],New=[of],Old=[with]} the value is the object associated (see
+  @RefSecNum{Formal Parameter Modes}) with the
+  @Chg{Version=[5],New=[evaluation],Old=[execution]} of the usage name.]}
 
   @begin{Ramification}
     @ChgRef{Version=[4],Kind=[AddedNormal]}

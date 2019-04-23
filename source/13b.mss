@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:05 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.121 $}
+@Comment{$Revision: 1.122 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -1689,6 +1689,7 @@ for their pools, if so desired.
 @end{Ramification}
 @end{Description}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0319-1]}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Size for
 a nonderived access-to-object type)}
 @PDefn2{Term=[specifiable], Sec=(of Storage_Pool for
@@ -1700,7 +1701,14 @@ a nonderived access-to-object type
 via an @nt{attribute_@!definition_@!clause};
 the @nt{name} in a Storage_Pool clause shall denote a
 variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size (access)}
-@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}],Old=[]}
+@Defn2{Term=[variable],Sec=(required)}@Defn2{Term=[object],Sec=(required)}],Old=[]}@Chg{Version=[5],New=[
+If the nominal subtype of the @nt{name} specified for Storage_Pool is
+nonblocking (see @RefSecNum{Intertask Communication}),
+then the primitive Allocate, Deallocate, and Storage_Size subprograms of that
+type shall be nonblocking. Additionally, if the pool that is one that supports
+subpools (see @RefSecNum{Storage Subpools}), the primitive Default_Subpool_for_Pool,
+Allocate_From_Subpool, and Deallocate_Subpool subprograms shall be
+nonblocking.],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Storage_Pool],
     Text=[@ChgAdded{Version=[3],Text=[Pool of memory from which @key[new] will
@@ -1710,7 +1718,15 @@ variable.@Chg{Version=[3],New=[@AspectDefn{Storage_Pool}@AspectDefn{Storage_Size
     Text=[@ChgAdded{Version=[3],Text=[Sets memory size for allocations for an
       access type.]}]}
 
-
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+  @ChgAdded{Version=[5],Text=[ We need to be able to describe in contracts
+    (especially for generic units) whether the operations of a storage pool
+    allow blocking, and we do that with the nonblocking status of the type. We
+    make the check when the pool is specified so we can avoid adding a special
+    check to the declaration of a pool type @en we want pool types to
+    follow the same rules as any other type.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0107-1],ARef=[AI05-0111-3],ARef=[AI05-0116-1]}
 An @nt{allocator} of @Chg{Version=[3],New=[a ],Old=[]}type @i<T>
@@ -1798,7 +1814,23 @@ contiguous block of memory (although each allocation returns
 a pointer to a contiguous block of memory).
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0319-1]}
+@ChgAdded{Version=[5],Text=[The type(s) of the standard pool(s), and the
+primitive Allocate, Deallocate, and Storage_Size subprograms for the standard
+pool(s) are nonblocking.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We need to specify that the type is nonblocking
+    so that an instance of Unchecked_Deallocation is nonblocking if the
+    object type is nonblocking (as the type is used in the contract). Ada 95
+    did not declare standard allocation/deallocation as potentially blocking,
+    so these things can be used in protected types, and we want that to remain
+    true (with static checking).]}
+@end{Reason}
+
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0043-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0319-1]}
 If Storage_Size is specified for an access type@Chg{Version=[4],New=[ @i<T>,
 an implementation-defined pool @i<P> is used for the type. The],Old=[, then the]}
 Storage_Size of @Chg{Version=[4],New=[@i<P>],Old=[this pool]} is at least
@@ -1813,7 +1845,10 @@ or other access types specified to use @i<T>'Storage_Pool. Storage_Error is
 raised by an @nt{allocator} returning such a type if the storage space of @i<P>
 is exhausted (additional memory is not allocated).],Old=[the
 @nt{attribute_@!definition_@!clause}. If neither Storage_Pool nor Storage_Size
-are specified, then the meaning of Storage_Size is implementation defined.]}
+are specified, then the meaning of Storage_Size is
+implementation defined.]}@Chg{Version=[5],New=[ The type of @i{P}, and
+the primitive Allocate, Deallocate, and Storage_Size subprograms of
+@i{P} are nonblocking.],Old=[]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0043-1]}
 @ChgAdded{Version=[4],Text=[If neither Storage_Pool nor Storage_Size are
@@ -2393,6 +2428,14 @@ objects incorrectly by missing various cases.
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Tightened up the description of
   the implementation-defined pool used when Storage_Size is specified. This
   is not intended to change any implementation.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
+  @ChgAdded{Version=[5],Text=[Specified that the standard pool(s), and the
+  pool(s) used to implement a specified Storage_Size, are nonblocking.
+  This was always true (which is why this is not documented as an
+  incompatibility), but it never was explicitly stated before. In the past,
+  the absence of wording defining something to be potentially blocking
+  determined if blocking was not allowed.]}
 @end{DiffWord2012}
 
 
@@ -2496,12 +2539,14 @@ the generic procedure Unchecked_Deallocation.]
 @leading@keepnext@;The following language-defined generic library procedure exists:
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0241-1],ARef=[AI12-0319-1]}
 @key[generic]
    @key[type] Object(<>) @key[is] @key[limited] @key[private];
    @key[type] Name   @key[is] @key[access]  Object;
 @SubChildUnit{Parent=[Ada],Child=[Unchecked_Deallocation]}@key[procedure] Ada.Unchecked_Deallocation(X : @key[in] @key[out] Name)@Chg{Version=[3],New=[
-   @key(with) @Chg{Version=[5],New=[Preelaborate, Nonblocking, ],Old=[]}Convention => Intrinsic;],Old=[;
+   @key(with) @Chg{Version=[5],New=[Preelaborate,
+        Nonblocking => Object'Nonblocking @key(and) Name'Storage_Pool'Nonblocking,
+        ],Old=[]}Convention => Intrinsic;],Old=[;
 @key[pragma] Convention(Intrinsic, Ada.Unchecked_Deallocation);]}@Chg{Version=[5],New=[],Old=[
 @key[pragma] Preelaborate(Ada.Unchecked_Deallocation);]}
 @end{Example}
@@ -3415,7 +3460,7 @@ and are the run-time representation of a subpool.]]}
 @end{TheProof}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
-@ChgRef{Version=[4],Kind=[Revised],ARef=[AI05-0145-1]}
+@ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0145-1]}
 @ChgAdded{Version=[3],Text=[Each subpool @i<belongs>@Defn2{Term=[belongs],Sec=[subpool to a pool]}
 to a single storage pool @Redundant[(which will always be a pool
 that supports subpools)]. An access to the pool that a subpool belongs to can
@@ -4692,8 +4737,8 @@ A better choice of lower bound is @Chg{Version=[3],New=[0 or ],Old=[]}1.]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0293-1]}
-@ChgAdded{Version=[5],Text=[In addition, three packages provide stream
-implementations which do not make use of any file operations. These three
+@ChgAdded{Version=[5],Text=[Three additional packages provide stream
+implementations that do not make use of any file operations. These
 packages provide the same operations, with Streams.FIFO_Streams providing an
 abstract interface, and two child packages providing implementations of that
 interface. The difference is that for Streams.FIFO_Streams.Bounded, the maximum
@@ -6520,7 +6565,9 @@ incomplete type],Old=[]}]}.
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0103-1]}
-  @ChgAdded{Version=[4],Text=[Note that the rule about proper bodies being
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[4],Text=[Note that the rule about proper bodies
+  @Chg{Version=[5],New=[causing],Old=[being]}
   freezing only applies in @nt{declarative_part}s. All of the kinds of bodies
   (see @RefSecNum{Completions of Declarations} @en keep in mind the
   difference from @nt{body}s) that are allowed in a package specification have
