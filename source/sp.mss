@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2019/02/09 03:46:57 $}
+@Comment{$Date: 2019/04/09 04:56:53 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -35,12 +35,23 @@ Old=[Support for access to machine instructions]}.]}
 @end{Intro}
 
 @begin{ImplReq}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0320-1]}
 @Defn{machine code insertion}
 The implementation shall support machine code insertions
 (see @RefSecNum{Machine Code Insertions}) or intrinsic subprograms
 (see @RefSecNum{Conformance Rules}) (or both).
-Implementation-defined attributes shall be provided to
-allow the use of Ada entities as operands.
+@Chg{Version=[5],New=[The implementation],Old=[Implementation-defined
+attributes]} shall @Chg{Version=[5],New=[],Old=[be provided to ]}allow
+the use of Ada entities as operands@Chg{Version=[5],New=[ for such
+machine code insertions or intrinsic subprograms],Old=[]}.
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0320-1]}
+  @ChgAdded{Version=[5],Text=[Ada entities could be used as operands in machine
+  code insertions and/or intrinsic subprograms using language-defined attributes
+  (such as address), implementation-defined attributes, or could be directly
+  allowed.]}
+@end{Discussion}
 @end{ImplReq}
 
 @begin{ImplAdvice}
@@ -981,9 +992,11 @@ of the corresponding interrupt be undefined.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-If the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
-in effect@Chg{Version=[2],New=[,],Old=[]} the implementation shall document
-the default ceiling priority
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0320-1]}
+@Chg{Version=[5],New=[The implementation shall document, when],Old=[If]}
+the Ceiling_Locking policy (see @RefSecNum{Priority Ceiling Locking}) is
+in effect@Chg{Version=[2],New=[,],Old=[]}@Chg{Version=[5],New=[],Old=[
+the implementation shall document]} the default ceiling priority
 assigned to a protected object that contains
 @Chg{Version=[3],New=[a protected procedure that specifies ],Old=[]}either
 the Attach_Handler or
@@ -1449,8 +1462,11 @@ Text=[@key{pragma} @prag(Volatile_Components)(@SynI{array_}@Syn2{local_name});]}
 @begin{StaticSem}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For an @nt{object_declaration}, a
-@nt{component_declaration}, or a @nt{full_type_declaration}, the following
+@nt{component_declaration}, @Chg{Version=[5],New=[],Old=[or ]}a
+@nt{full_type_declaration}, @Chg{Version=[5],New=[or a
+@nt{formal_complete_type_declaration}, ],Old=[]}the following
 representation aspects may be specified:]}
 
 @begin{Description}
@@ -1481,9 +1497,13 @@ Boolean.@AspectDefn{Volatile}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a @nt{full_type_declaration} of
-an array type (including the anonymous type of an @nt{object_declaration}
-of an anonymous array object), the following representation aspects may be
+an array type@Chg{Version=[5],New=[,],Old=[ (including the anonymous type of]}
+an @nt{object_declaration}
+@Chg{Version=[5],New=[for an object of an anonymous array type, or the
+@nt{formal_complete_type_declaration} of a formal array type],Old=[of an
+anonymous array object)]}, the following representation aspects may be
 specified:]}
 
 @begin{Description}
@@ -1506,9 +1526,14 @@ Volatile_Components is Boolean.@AspectDefn{Volatile_Components}]}
 @end{Description}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For a @nt{full_type_declaration}
-(including the anonymous type of an @nt{object_declaration} of an anonymous
-array object), the following representation aspect may be specified:]}
+@Chg{Version=[5],New=[of a composite type,],Old=[ (including the anonymous type of]}
+an @nt{object_declaration}
+@Chg{Version=[5],New=[for an object of an anonymous composite type, or the
+@nt{formal_complete_type_declaration} of a formal composite type],Old=[of an
+anonymous array object)]}, the following representation aspect may be
+specified:]}
 
 @begin{Description}
 @ChgRef{Version=[3],Kind=[Added]}
@@ -1638,6 +1663,7 @@ from performing the required indivisible
 @Chg{Version=[4],New=[and independent ],Old=[]}reads and updates.
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0142-4],ARef=[AI05-0218-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0282-1]}
 If an atomic object is passed as a parameter, then
 @Chg{Version=[3],New=[],Old=[the type of ]}the formal
 parameter shall either @Chg{Version=[3],New=[have an],Old=[be]} atomic
@@ -1649,9 +1675,14 @@ type of the generic formal object shall be atomic. If the @nt<prefix> of
 an @nt<attribute_reference> for an Access attribute denotes an atomic
 object @Redundant[(including a component)], then the designated type of
 the resulting access type shall be atomic. If an atomic type is used as
-an actual for a generic formal derived type, then the ancestor of the
+an actual for a generic formal @Chg{Version=[5],New=[],Old=[derived ]}type,
+then @Chg{Version=[5],New=[],Old=[the ancestor of ]}the
 formal type shall be atomic@Chg{Version=[3],New=[],Old=[ or allow pass by copy]}.
-Corresponding rules apply to volatile objects and types.
+@Chg{Version=[5],New=[If the aspect Atomic_Components is True for a type used
+as an actual for a generic formal array type, the aspect shall be True for
+the formal type. ],Old=[]}Corresponding rules apply to volatile
+objects@Chg{Version=[5],New=[,],Old=[]} and types@Chg{Version=[5],New=[
+for which the Volatile or Volatile_Components aspect is True],Old=[]}.
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
@@ -1661,9 +1692,13 @@ Corresponding rules apply to volatile objects and types.
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0218-1]}
-@ChgAdded{Version=[3],Text=[If a volatile type is used as an actual for a
-generic formal array type, then the element type of the formal type shall be
-volatile.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0282-1]}
+@ChgAdded{Version=[3],Text=[If @Chg{Version=[5],New=[the Atomic,
+Atomic_Components, Volatile, Volatile_Components, Independent, or
+Independent_Components aspect is True for a generic formal type, then that
+aspect shall be True for the actual type],Old=[a volatile type is used as an
+actual for a generic formal array type, then the element type of the formal type
+shall be volatile]}.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If @Chg{Version=[3],New=[an aspect],Old=[a pragma]} Volatile,
@@ -2041,12 +2076,396 @@ because the pragma was not used to mark variables as shared.
   restore the previous behavior.]}
 @end{Inconsistent2012}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0282-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These aspects now can be specified for generic formal types.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0001-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that aliased objects
   are considered to be specified as independently addressable, and also
   eliminated an unnecessary rule.]}
 @end{DiffWord2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[The language-defined package
+The language-defined generic package System.Atomic_Operations.Exchange provides
+The library package System.Atomic_Operations is the parent of a set of child
+units that provide facilities for manipulating objects of atomic types and for
+supporting lock-free synchronization. The subprograms of this subsystem are
+Intrinsic subprograms (see @RefSecNum{Conformance Rules}) in order to provide
+convenient access to machine operations that can provide these capabilities if
+they are available in the target environment.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The library package
+System.Atomic_Operations has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{package} System.Atomic_Operations@ChildUnit{Parent=[System],Child=[Atomic_Operations]}
+   @key{with} Pure, Nonblocking @key{is}
+@key{end} System.Atomic_Operations;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[System.Atomic_Operations serves as the parent of
+other language-defined library units that manipulate atomic objects; its
+declaration is empty.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[A call to a subprogram is said to be @i<lock-free>
+@Defn{lock-free} if the subprogram is guaranteed to return from the call while
+keeping the processor of the logical thread of control busy for the duration of
+the call.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[In each child package, a function Is_Lock_Free(...)
+is provided to check whether the operations of the child package can all be
+provided lock-free for a given object. Is_Lock_Free returns True if operations
+defined in the child package are lock-free when applied to the object denoted by
+Item, and Is_Lock_Free returns False otherwise.]}
+
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  This package is new.]}
+@end{Extend2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Exchange]}
+
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The language-defined generic package
+System.Atomic_Operations.Exchange provides the following operations:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[To atomically compare the value of two
+    atomic objects, and update the first atomic object with a desired value if
+    both objects were found to be equal, or otherwise update the second object
+    with the value of the first object.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[To atomically update the value of an atomic
+    object, and then return the value that the atomic object had just prior to
+    the update.]}
+
+@end{Itemize}
+
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The generic library
+package System.Atomic_Operations.Exchange has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{generic}
+   @key{type} Atomic_Type @key{is private with} Atomic;
+@key{package} System.Atomic_Operations.Exchange@ChildUnit{Parent=[System.Atomic_Operations],Child=[Exchange]}
+   @key{with} Pure, Nonblocking @key{is}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Exchange} (Item  : @key{aliased in out} Atomic_Type;
+                             Value : Atomic_Type) @key{return} Atomic_Type
+     @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Compare_And_Exchange} (Item    : @key{aliased in out} Atomic_Type;
+                                         Prior   : @key{aliased in out} Atomic_Type;
+                                         Desired : Atomic_Type) @key{return} Boolean
+     @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Lock_Free} (Item : @key{aliased} Atomic_Type) @key{return} Boolean
+     @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Exchange;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[Atomic_Exchange atomically assigns the value of
+Value to Item, and returns the previous value of Item.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Atomic_Compare_And_Exchange first
+evaluates the value of Prior.
+Atomic_Compare_And_Exchange then performs the following steps
+as part of a single indivisible operation:]}
+
+@begin{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[evaluates the value of Item;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[compares the value of Item with the value of Prior;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[if equal, assigns Item the value of Desired;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[otherwise, makes no change to the value of Item.]}
+
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Text=[After these steps, if the value of Item and Prior
+did not match, Prior is assigned the original value of Item, and the function
+returns False. Otherwise, Prior is unaffected and the function returns True.]}
+
+@end{StaticSem}
+
+@begin{Examples}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@i{Example of a spin
+lock using Atomic_Exchange:}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{type} Atomic_Boolean @key{is new} Boolean @key{with} Atomic;
+@key{package} Exchange @key{is new}
+   Atomic_Operations.Exchange (Atomic_Type => Atomic_Boolean);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Lock : @key{aliased} Atomic_Boolean := False;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[...]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{begin} -- @examcom{Some critical section, trying to get the lock:}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   -- @examcom{Obtain the lock}
+   @key{while} Exchange.Atomic_Exchange (Item => Lock, Value => True) @key{loop}
+      @key{null};
+   @key{end loop};]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   ... -- @examcom{Do stuff}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   Lock := False; -- @examcom{Release the lock}
+@key{end};]}
+@end{Example}
+@end{Examples}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0234-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  This package is new.]}
+@end{Extend2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Test_and_Set]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[The language-defined package
+System.Atomic_Operations.Test_And_Set provides an operation to atomically set
+and clear an atomic flag object.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The library
+package System.Atomic_Operations.Test_And_Set has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{package} System.Atomic_Operations.Test_And_Set@ChildUnit{Parent=[System.Atomic_Operations],Child=[Test_And_Set]}
+   @key{with} Pure, Nonblocking @key{is}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{type} @AdaTypeDefn{Test_And_Set_Flag} @key{is mod} @examcom<implementation-defined>
+      @key{with} Atomic, Default_Value => 0, Size => @examcom<implementation-defined>;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Test_And_Set}
+     (Item : @key{aliased in out} Test_And_Set_Flag) @key{return} Boolean
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Atomic_Clear}
+     (Item : @key{aliased in out} Test_And_Set_Flag)
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Lock_Free}
+     (Item : @key{aliased} Test_And_Set_Flag) @key{return} Boolean
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Test_And_Set;]}
+@end{Example}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@Chg{Version=[5],New=[The modulus and size of Test_and_Set_Flag.],Old=[]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[Test_And_Set_Flag represents the state of an
+atomic flag object. An atomic flag object can either be considered to be set or
+cleared.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[Atomic_Test_And_Set performs an atomic
+test-and-set operation on Item. Item is set to some implementation-defined
+nonzero value. The function returns True if the previous contents were nonzero,
+and otherwise returns False.]}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@Chg{Version=[5],New=[The value used to represent the set value for
+Atomic_Test_and_Set.],Old=[]}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[Atomic_Clear performs an atomic clear
+operation on Item. After the operation, Item contains 0. This call should be
+used in conjunction with Atomic_Test_And_Set.]}
+
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  This package is new.]}
+@end{Extend2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Arithmetic]}
+
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[The language-defined generic package
+System.Atomic_Operations.Arithmetic provides operations to perform arithmetic
+atomically on objects of integer types.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The generic library
+package System.Atomic_Operations.Arithmetic has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{generic}
+   @key{type} Atomic_Type @key{is range }<> @key{with} Atomic;
+@key{package} System.Atomic_Operations.Arithmetic@ChildUnit{Parent=[System.Atomic_Operations],Child=[Arithmetic]}
+   @key{with} Pure, Nonblocking @key{is}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Atomic_Add} (Item  : @key{aliased in out} Atomic_Type;
+                         Value : Atomic_Type)
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Atomic_Subtract} (Item  : @key{aliased in out} Atomic_Type;
+                              Value : Atomic_Type)
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Fetch_And_Add}
+     (Item  : @key{aliased in out} Atomic_Type;
+      Value : Atomic_Type) @key{return} Atomic_Type
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Fetch_And_Subtract}
+     (Item  : @key{aliased in out} Atomic_Type;
+      Value : Atomic_Type) @key{return} Atomic_Type
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Lock_Free} (Item : @key{aliased} Atomic_Type) @key{return} Boolean
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Arithmetic;]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Text=[The operations of this package are defined
+as follows:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Atomic_Add (Item  : @key[aliased in out] Atomic_Type;
+                      Value : Atomic_Type)
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Item := Item + Value;}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Atomic_Subtract (Item  : @key[aliased in out] Atomic_Type;
+                           Value : Atomic_Type)
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Item := Item - Value;}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Add
+   (Item  : @key[aliased in out] Atomic_Type;
+    Value : Atomic_Type) @key[return] Atomic_Type
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Tmp := Item; Item := Item + Value; @key[return] Tmp;}]}
+
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Subtract
+   (Item  : @key[aliased in out] Atomic_Type;
+    Value : Atomic_Type) @key[return] Atomic_Type
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Tmp := Item; Item := Item - Value; @key[return] Tmp;}]}
+
+@end{DescribeCode}
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  This package is new.]}
+@end{Extend2012}
 
 
 @LabeledRevisedClause{Version=[2],New=[Task Information],

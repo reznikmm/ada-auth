@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/numerics.mss,v $ }
-@comment{ $Revision: 1.73 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.74 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 @Part(numerics, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @LabeledNormativeAnnex{Numerics}
 @begin{Intro}
@@ -231,6 +231,14 @@ Numerics.@!Short_@!Complex_@!Types, Numerics.@!Long_@!Complex_@!Types, etc.
    change the precision of an application globally by changing a single
    context clause.
 @end{Reason}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0241-1]}
+  @Chg{Version=[5],New=[A nongeneric pure unit is always nonblocking, so we
+  don't need to talk about the Nonblocking aspect of these packages. Similarly,
+  a nongeneric pure unit always has the Global aspect set to @key[null], so we
+  don't need to talk about that, either.],Old=[]}
+@end{Ramification}
+
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00434-01]}
 @Redundant{Complex is a visible type with
@@ -1928,11 +1936,11 @@ A multiplication P * Q of an operand of a fixed point type F by an operand of
 vice@Chg{Version=[5],New=[ ],Old=[-]}versa,
 and a division P / Q of an operand of a fixed point type F by an operand of
 @Chg{Version=[5],New=[type Integer],Old=[an integer type I]}, are also allowed.
-In these cases, the result has a type of F; explicit conversion of the
-result is never required. The accuracy required in these cases is the same as
-that required for a multiplication F(P * Q) or a division F(P / Q) obtained by
-interpreting the operand of the integer type to have a fixed point type with a
-@i(small) of 1.0.
+In these cases, the result has @Chg{Version=[5],New=[the],Old=[a]} type of F;
+explicit conversion of the result is never required. The accuracy required in
+these cases is the same as that required for a multiplication F(P * Q) or a
+division F(P / Q) obtained by interpreting the operand of the integer type to
+have a fixed point type with a @i(small) of 1.0.
 
 The accuracy of the result of a conversion from an integer or fixed point type
 to a fixed point type, or from a fixed point type to an integer

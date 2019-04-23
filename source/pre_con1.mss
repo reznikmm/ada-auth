@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.3 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@comment{ $Revision: 1.4 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -1019,7 +1019,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for regular containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -1043,7 +1043,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -1731,8 +1731,13 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
 @end{Diffword2005}
 
 @begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Maps now support
+  named container aggregates, so @nt{aggregate} syntax can be used to
+  create Maps.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  @ChgAdded{Version=[5],Text=[The iterator for the
   container now can return a parallel iterator which can be used to
   process the container in parallel.]}
 @end{Extend2012}
@@ -1742,7 +1747,7 @@ Containers.Hashed_Maps.Reserve_Capacity should be @i{O}(@i<N>).]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -2303,7 +2308,7 @@ predecessor order, starting with the last node.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Map)
    @key[return] Map_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
@@ -2437,8 +2442,13 @@ a cursor parameter should be @i{O}(1).]}]}
 @end{DiffWord2005}
 
 @begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Maps now support
+  named container aggregates, so @nt{aggregate} syntax can be used to
+  create Maps.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  @ChgAdded{Version=[5],Text=[The iterator for the
   entire container now can return a parallel iterator which can be used to
   process the container in parallel.]}
 @end{Extend2012}
@@ -2448,7 +2458,7 @@ a cursor parameter should be @i{O}(1).]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -3640,7 +3650,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
   Tampering with elements is now defined to be equivalent to tampering with
   cursors for regular containers. If a program requires tampering detection
-  to work, it might fail in Ada 2020. Needless to say, this shouldn't happen
+  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
@@ -3664,7 +3674,7 @@ unless specified by the operation.]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -4170,7 +4180,7 @@ first hashed element in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set)
    @key[return] Set_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Iterator],Old=[Forward_Iterator]}'Class;]}
 @end{Example}
@@ -4270,8 +4280,13 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
 @end{DiffWord2005}
 
 @begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Sets now support
+  positional container aggregates, so @nt{aggregate} syntax can be used to
+  create Sets.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  @ChgAdded{Version=[5],Text=[The iterator for the
   container now can return a parallel iterator which can be used to
   process the container in parallel.]}
 @end{Extend2012}
@@ -4281,7 +4296,7 @@ average time complexity of Containers.@!Hashed_Sets.@!Reserve_Capacity should be
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 
@@ -4889,7 +4904,7 @@ in predecessor order, starting with the last element.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Set)
    @key[return] Set_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 @end{Example}
@@ -5033,8 +5048,13 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
 @end{DiffWord2005}
 
 @begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Sets now support
+  positional container aggregates, so @nt{aggregate} syntax can be used to
+  create Sets.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The iterator for the
+  @ChgAdded{Version=[5],Text=[The iterator for the
   entire container now can return a parallel iterator which can be used to
   process the container in parallel.]}
 @end{Extend2012}
@@ -5044,7 +5064,7 @@ of Containers.Ordered_Sets that take a cursor parameter should be @i{O}(1).]}]}
   @ChgAdded{Version=[5],Text=[Added contracts to this container. This includes
   describing some of the semantics with pre- and postconditions, rather than
   English text. Note that the preconditions can be Suppressed (see
-  @RefSecNum{Suppressing Checks}.]}
+  @RefSecNum{Suppressing Checks}).]}
 @end{DiffWord2012}
 
 

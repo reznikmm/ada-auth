@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -1938,12 +1938,13 @@ multiple ancestors, the value of the aspect inherited from any given ancestor
 shall be confirming of the values inherited from all other ancestors.]}
 
 @begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1],ARef=[AI12-0211-1]}
   @ChgAdded{Version=[5],Text=[If more than one progenitor of a type @i<T>
     specifies a nonoverridable aspect, they all have to specify the same
-    primitive of @i<T>. Otherwise, we'd have two different values for the
-    aspect that depend on the view of the type; that would violate the
-    definition of type aspects being the same for all views of a type.]}
+    or matching values for that aspect. Otherwise, we'd have two different
+    values for the aspect that depend on the view of the type; that would
+    violate the definition of type aspects being the same for all views of
+    a type.]}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}

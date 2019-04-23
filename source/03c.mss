@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:50 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -481,7 +481,7 @@ is a @i<descendant> of
 a type T1 if it is the same as T1, or if its parent type or one of its
 progenitor types is a descendant of type T1 by this rule@Redundant[,
 even if at the point of the declaration of T2, one of the derivations
-in the chain is not visible].@Defn2{Term=[descendant],Sec=[at run-time]}]}
+in the chain is not visible].@Defn2{Term=[descendant],Sec=[at run time]}]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -2376,6 +2376,11 @@ allowed.]
   even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0320-1]}
+@ChgAdded{Version=[5],Text=[If the @nt{name} or @nt{prefix} given in an
+@nt{iterator_procedure_call} (see @RefSecNum{Procedural Iterators}) denotes
+an abstract subprogram, the subprogram shall be a dispatching subprogram.]}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0073-1],ARef=[AI05-0203-1]}
 The type of an @nt{aggregate}, or of an object created by an
 @nt{object_declaration} or an @nt{allocator},
@@ -3160,7 +3165,7 @@ and aliased subcomponents of other objects.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00225-01],ARef=[AI95-00363-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0053-1],ARef=[AI05-0142-4],ARef=[AI05-0277-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0228-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0228-1],ARef=[AI12-0324-1]}
 @Defn{aliased}
 A view of an object is defined to be @i(aliased) if
 it is defined by an @nt<object_@!declaration>@Chg{Version=[3],New=[,],Old=[ or]}
@@ -3171,7 +3176,7 @@ with the reserved word @key(aliased), or by a renaming of an aliased view.
 In addition, the dereference of an access-to-object
 value denotes an aliased view, as does a view conversion
 (see @RefSecNum{Type Conversions}) of an aliased view.@Chg{Version=[5],New=[
-A @nt{qualified_expression} is an aliased view when the
+A @nt{qualified_expression} denotes an aliased view when the
 operand denotes an aliased view.],Old=[]}
 @Chg{Version=[2],New=[The],Old=[Finally, the]} current instance of
 @Chg{Version=[3],New=[an immutably limited type (see @RefSecNum{Limited Types})
@@ -3745,7 +3750,8 @@ The syntax rules for @nt{general_access_modifier} and
   @ChgAdded{Version=[5],Text=[@B[Correction:] Static matching (see
   @RefSecNum{Statically Matching Constraints and Subtypes}) requires that both
   anonymous access types exclude null; and full conformance requires statically
-  matching subtypes. Therefore, an access parameter that designates an untagged
+  matching subtypes. Because of the definition of @ldquote@;excludes null@rdquote
+  given in this subclause, an access parameter that designates an untagged
   private type P (which does not exclude null) does not match its completion if
   P is completed with a tagged type (in that case, the parameter is controlling
   and thus excludes null, regardless of whether there is an explicit null
@@ -4430,7 +4436,7 @@ not at all) for different designated subtypes.
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0137-1]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
-  @ChgAdded{Version=[4],Text=[@b<Corrigndum:> Changed the wording to clarify
+  @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Changed the wording to clarify
   that the class-wide type associated with a specific tagged type that has
   an incomplete view is also an incomplete view.
   While this was previously undefined, an interpretation where it is not
@@ -4638,10 +4644,12 @@ invocation of the entity],Old=[]}.
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00416-01]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[2],Text=[This rule defines the accessibility of all
   named access types, as well as the accessibility level of
-  @Chg{Version=[4],New=[],Old=[all ]}anonymous
-  access types @Chg{Version=[4],New=[in a @nt{component_definition}],Old=[other
+  @Chg{Version=[4],New=[],Old=[all ]}anonymous access
+  types @Chg{Version=[4],New=[@Chg{Version=[5],New=[defined by],Old=[in]}
+  a @nt{component_definition}],Old=[other
   than those for access parameters and access discriminants.]} Special rules
   exist for the accessibility level of @Chg{Version=[4],New=[other],Old=[such]}
   anonymous types. Components@Chg{Version=[4],New=[],Old=[,
@@ -5146,17 +5154,27 @@ is the same as that of
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0262-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1]}
-@ChgAdded{Version=[2],Text=[In the above rules, the operand of a view
-conversion, parenthesized
-expression or @nt{qualified_expression} is considered to be used in a context
-if the view conversion, parenthesized expression or @nt{qualified_expression}
-itself is used in that context.@Chg{Version=[3],New=[
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0236-1],ARef=[AI12-0317-1]}
+@ChgAdded{Version=[2],Text=[In the above rules, the
+@Chg{Version=[5],New=[operative constituents of a @nt{name} or @nt{expression}
+(see @RefSecNum{Expressions}) are],Old=[operand of a view
+conversion, parenthesized expression or @nt{qualified_expression} is]}
+considered to be used in a@Chg{Version=[5],New=[ given],Old=[]} context if the
+@Chg{Version=[5],New=[enclosing @nt{name} or
+@nt{expression}],Old=[view conversion, parenthesized
+expression or @nt{qualified_expression}
+itself]} is used in that context.@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[
 Similarly, a @SynI{dependent_}@nt{expression} of a @nt{conditional_expression}
 is considered to be used in a context if the @nt{conditional_expression} itself
-is used in that context@Chg{Version=[5],New=[, and a @SynI{body_}@nt{expression}
-of a @nt{declare_expression} is considered to be used in a context if the
-@nt{declare_expression} itself is used in that context],Old=[]}.],Old=[]}]}
+is used in that context.],Old=[]}]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This means that constructs like parenthesized
+  expressions, @nt{qualified_expression}s, and @nt{conditional_expression}s
+  are ignored for the purposes of calculating accessibility levels,
+  determining the master of a function call, and so on.]}
+@end{Discussion}
 
 @begin{WideAbove}
 @Leading@Defn{statically deeper}
@@ -5218,10 +5236,11 @@ checks.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0277-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0277-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
 @Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>,
-@Chg{Version=[4],New=[or the return expression of an expression function
+@Chg{Version=[4],New=[or @Chg{Version=[5],New=[inside ],Old=[]}the
+return expression of an expression function
 @i<F>, ],Old=[]}when determining
 whether the accessibility level of an explicitly aliased
 parameter of @i<F> is statically deeper than the level of the return object of
@@ -5248,6 +5267,11 @@ body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
   @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
   also applies (that is, the @ldquote@;a level@rdquote is of
   an explicitly aliased parameter).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[For an expression function @i{F}, the
+    @ldquote@;body of @i{F}@rdquote is the
+    @nt{expression_function_declaration} of @i{F}.]}
 @end{Honest}
 
 
@@ -5731,7 +5755,7 @@ denotes an aliased view of an object}:
      this change because a reasonable implementation strategy was identified
      to avoid such problems, as follows:
      @begin(Itemize)
-       Place non-discriminant-dependent components with any aliased parts
+       Place nondiscriminant-dependent components with any aliased parts
        at offsets preceding any discriminant-dependent components
        in a discriminated record type with defaulted discriminants.
 
@@ -6280,7 +6304,7 @@ uses of anonymous access types.]}
   access type is the same for implicit and explicit conversions to a named
   access type. This could cause code that is legal and does not raise an
   exception in original Ada 2012 to become illegal or raise
-  Program_Error because of an accessibility failure in Ada 2020. This is more
+  Program_Error because of an accessibility failure in Ada 202x. This is more
   likely to prevent a dangling pointer bug than to prevent something useful.]}
 @end{Inconsistent2012}
 

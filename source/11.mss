@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.100 $}
+@Comment{$Revision: 1.101 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1399,7 +1399,7 @@ can be used to represent non-ASCII characters in exception messages.]}
 @Chg{Version=[3],New=[a],Old=[any]} point within a sequence of declarations or
 statements.@Chg{Version=[3],New=[],Old=[ Pragma Assertion_Policy is used to
 control whether such assertions@Defn{Assertions} are to be ignored by the
-implementation, checked at run-time, or handled in some implementation-defined
+implementation, checked at run time, or handled in some implementation-defined
 manner.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0274-1]}
@@ -1735,8 +1735,8 @@ unless suppressed.]}
   @ChgAdded{Version=[5],Text=[This allows the Standard to express runtime
   requirements on the client of a language-defined unit as preconditions or
   predicates (which are invariably clearer than English prose would be). Some
-  such requirements can be Suppressed. Ada 2012 and before did not provide a
-  mechanism to suppress such code.]}
+  such requirements can be Suppressed. Ada 2012 and earlier version did not
+  provide a mechanism to suppress such code.]}
 @end{Reason}
 @end{ImplReq}
 
@@ -1802,7 +1802,7 @@ would if the first expression had not been evaluated.]}
   violates this @ImplPermName is considered pathological. We definitely want
   compilers to be able to assume that if you evaluate an assertion expression
   once and it is True, you don't need to evaluate it again if all you are
-  doing in the mean time is evaluating assertion expressions. We were unable
+  doing in the meantime is evaluating assertion expressions. We were unable
   to find wording that had this effect that didn't throw out important other
   cases (logging, memo functions), so we settled for a strong warning that
   compilers can reject such pathologies. Perhaps in a future version of
@@ -2224,7 +2224,7 @@ Program_Error_Check @\Other language-defined checks that raise Program_Error:
 that subtypes with predicates are not used to index an array in a generic unit;
 that the maximum number of chunks is greater than zero; that the
 default value of an out parameter is convertible; that there is no misuse
-of functions in a generic with an class-wide actual type; that there are
+of functions in a generic with a class-wide actual type; that there are
 not colliding External_Tag values; that there is no misuse of
 operations of unchecked union types.]}@ChgDeleted{Version=[2],NoPrefix=[T],Text=[@RootDefn{Accessibility_Check}
 Accessibility_Check @em Check the accessibility level of an entity or view.]}
@@ -2272,27 +2272,79 @@ task has not yet terminated.]}
 @end{Hang2List}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@Redundant[The following check
-corresponds to situations in which the exception Assertion_Error is raised upon
-failure of a language-defined check.]@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@Redundant[The following checks
+correspond to situations in which the exception Assertion_Error is raised upon
+failure of a language-defined check.]@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}
+For a language-defined unit @i{U} associated with one of these
+checks in the list below, the check refers to performance of checks
+associated with the Pre, Static_Predicate, and Dynamic_Predicate
+aspects associated with any entity declared in a descendant of @i{U}, or
+in an instance of a generic unit which is, or is declared in, a
+descendant of @i{U}. Each check is associated with one or more units:]}
 
 @begin{Hang2List}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Calendar_Assertion_Check}
+Calendar_Assertion_Check@\Calendar.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Characters_Assertion_Check}
+Characters_Assertion_Check@\Characters, Wide_Characters, and
+Wide_Wide_Characters.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
 @ChgAdded{Version=[5],Text=[@RootDefn{Containers_Assertion_Check}
-Containers_Assertion_Check@\Check the precondition of a routine declared in a
-descendant unit of Containers or in an instance of a generic unit that is
-declared in, or is, a descendant unit of Containers.]}
+Containers_Assertion_Check@\Containers.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Interfaces_Assertion_Check}
+Interfaces_Assertion_Check@\Interfaces.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{IO_Assertion_Check}
+IO_Assertion_Check@\Sequential_IO, Direct_IO, Text_IO,
+Wide_Text_IO, Wide_Wide_Text_IO, Storage_IO,
+Streams.Stream_IO, and Directories.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Numerics_Assertion_Check}
+Numerics_Assertion_Check@\Numerics.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{Strings_Assertion_Check}
+Strings_Assertion_Check@\Strings.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0311-1]}
+@ChgAdded{Version=[5],Text=[@RootDefn{System_Assertion_Check}
+System_Assertion_Check@\System.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0311-1]}
+  @ChgAdded{Version=[5],Text=[Any unit @i{U} is a descendant of itself.]}
+@end{Ramification}
+
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[5],Text=[One could use @key[pragma] Assertion_Policy to
-  eliminate such checks, but that would require recompiling the Ada.Containers
-  packages (the assertion policy that determines whether the checks are made is
-  that used to compile the unit). In addition, we do not want to specify the
-  behavior of the Ada.Containers operations if the precondition fails; that is
-  different than the usual behavior of Assertion_Policy. By using Suppress for
-  this purpose, we make it clear that a failed check that is suppressed means
-  erroneous execution.]}
+  eliminate such checks, but that would require recompiling the language
+  defined packages (the assertion policy that determines whether the assertion
+  checks are made is that used to compile the unit). In addition, we do not
+  want to specify the behavior of language-defined operations if the
+  precondition fails; that is different than the usual behavior of
+  Assertion_Policy. By using Suppress for this purpose, we make it clear that
+  a failed check that is suppressed means erroneous execution.]}
 @end{Reason}
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0311-1]}
+  @ChgAdded{Version=[5],Text=[The preceding rule about an instance of a generic
+  where the generic is declared in @i{U} really extends recursively to
+  handle the case of a generic package @exam{G1} which declares another
+  generic package @exam{G1.G2},  which declares another generic package
+  @exam{G1.G2.G3}, and so on. So if @exam{G1} is declared in some predefined
+  unit @i{U} then, for purposes of defining these checks,
+  @exam{Some_Instance_Of_G1.G2} is also considered to be declared in @i{U}.]}
+@end{Honest}
 @end{Hang2List}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0309-1]}
@@ -2338,7 +2390,7 @@ pragma Suppress(All_Checks) applies],Old=[]}.
 @end{StaticSem}
 
 @begin{Erron}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
 @PDefn2{Term=(erroneous execution),Sec=(cause)}
 If a given check has been suppressed,
 and the corresponding error situation occurs,
@@ -2537,9 +2589,9 @@ Program_Error checks was corrected to be alphabetical.]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Containers_Assertion_Check
-  is new.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1],ARef=[AI12-0311-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The various assertion
+  checks for language-defined packages are new.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0309-1]}
   @ChgAdded{Version=[5],Text=[Program_Error_Check and Tasking_Check are new;

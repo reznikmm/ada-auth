@@ -1,10 +1,10 @@
 @Part(obsolescent, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:57 $}
+@Comment{$Date: 2019/04/09 04:56:54 $}
 @LabeledNormativeAnnex{Obsolescent Features}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/obsolescent.mss,v $}
-@Comment{$Revision: 1.61 $}
+@Comment{$Revision: 1.62 $}
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00368-01]}
@@ -1625,8 +1625,10 @@ System.Multiprocessors.CPU_Range.@PDefn2{Term=[expected type], Sec=(CPU pragma a
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
 @ChgAdded{Version=[3],Text=[A CPU pragma is allowed only immediately within a
-@nt{task_definition}, or the @nt{declarative_part} of a @nt{subprogram_body}.]}
+@nt{task_definition}, @Chg{Version=[5],New=[@nt{protected_definition},
+],Old=[]}or the @nt{declarative_part} of a @nt{subprogram_body}.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
 @ChgAdded{Version=[3],Text=[For a CPU pragma that appears in the
@@ -1636,13 +1638,17 @@ static.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0281-1]}
 @ChgAdded{Version=[3],Text=[For an implementation that supports Annex D, a
 @nt{pragma} CPU specifies the value of the CPU aspect (see
 @RefSecNum{Multiprocessor Implementation}). If the @nt{pragma} appears in a
 @nt{task_definition}, the @nt{expression} is associated with the aspect for the
-task type or @nt{single_task_declaration} that contains the @nt{pragma};
-otherwise, the @nt{expression} is associated with the aspect for the subprogram
-that contains the @nt{pragma}.]}
+task type or @nt{single_task_declaration} that contains the
+@nt{pragma}@Chg{Version=[5],New=[. If the pragma appears in
+a @nt{protected_definition}, the @nt{expression} is associated with the
+aspect for the protected type or @nt{single_protected_declaration} that contains
+the @nt{pragma}. Otherwise],Old=[; otherwise]}, the @nt{expression} is
+associated with the aspect for the subprogram that contains the @nt{pragma}.]}
 @end{StaticSem}
 
 @begin{Extend2005}

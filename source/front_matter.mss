@@ -1,12 +1,103 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.92 $ $Date: 2019/02/21 05:24:05 $}
+@comment{$Revision: 1.93 $ $Date: 2019/04/09 04:56:53 $}
+
+@UnNumberedSection(Foreword)
+
+@begin{Intro}
+@begin{ISOOnly}@Comment{This is ISO boilerplate, we don't want it in the RM}
+
+@ChgRef{Version=[3],Kind=[Revised]}@ChgNote{Updated boilerplate}
+ISO (the International Organization for Standardization)
+and IEC (the International Electrotechnical Commission)
+form the specialized system for worldwide standardization.
+National bodies that are members of ISO or IEC
+participate in the development of International Standards through
+technical committees established by the respective organization to deal
+with particular fields of technical activity.
+ISO and IEC technical committees collaborate in fields of mutual
+interest.
+Other international organizations, governmental and non-governmental,
+in liaison with ISO and IEC, also take part in the work.@Chg{Version=[3],New=[ In
+the field of information technology,
+ISO and IEC have established a joint technical committee, ISO/IEC JTC 1.],Old=[]}
+
+@ChgRef{Version=[3],Kind=[Added]}@ChgNote{Updated boilerplate}
+@ChgAdded{Version=[3],Text=[International Standards are drafted in accordance
+with the rules given in the ISO/IEC Directives, Part 2.]}
+
+@ChgRef{Version=[3],Kind=[Revised]}@ChgNote{Updated boilerplate}
+@Chg{Version=[3],New=[The main task of the],Old=[In the field of information
+technology, ISO and IEC have established a]} joint technical
+committee@Chg{Version=[3],New=[ is to prepare
+International Standards],Old=[, ISO/IEC JTC 1]}.
+Draft International Standards adopted by the joint technical committee
+are circulated to national bodies for voting.
+Publication as an International Standard requires approval by
+at least 75 % of the national bodies casting a vote.
+
+@ChgRef{Version=[3],Kind=[Added]}@ChgNote{Updated boilerplate}
+@ChgAdded{Version=[3],Text=[Attention is drawn to the possibility that some of
+the elements of this document may be the subject of patent rights. ISO and IEC
+shall not be held responsible for identifying any or all such patent rights.]}
+
+@ChgRef{Version=[3],Kind=[Revised]}
+International Standard ISO/IEC 8652 was prepared by
+Joint Technical Committee ISO/IEC JTC 1,
+@i{Information Technology}@Chg{Version=[3],New=[ Subcommittee SC22, @i{Programming
+languages, their environments and system software interfaces}],Old=[]}.
+
+@ChgRef{Version=[2],Kind=[Revised]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
+@ChgRef{Version=[4],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised]}
+This @Chg{Version=[4],New=[consolidated edition updates the third edition
+(ISO/IEC 8652:2012).],Old=[@Chg{Version=[3],New=[third],Old=[@Chg{Version=[2],New=[consolidated],Old=[second]}]}
+edition @Chg{Version=[3],New=[cancels and replaces],Old=[@Chg{Version=[2],
+New=[updates],Old=[cancels and replaces]}]} the @Chg{Version=[2],New=[second],Old=[first]}
+edition (ISO@Chg{Version=[3],New=[/IEC],Old=[]} 8652:@Chg{Version=[2],New=[1995)],Old=[1987), of which it constitutes
+a technical revision]}@Chg{Version=[3],New=[, which has been technically revised.
+It also incorporates the Technical Corrigendum ISO/IEC 8652:1995:COR.1:2001
+and Amendment ISO/IEC 8652:1995:AMD 1:2007],Old=[]}.]}
+@Chg{Version=[5],New=[@Red{@b{This version includes corrections and improvements
+intended for a future version of Ada, herein named Ada 202x. Besides the
+corrections included in Technical Corrigendum 1, additional corrections and
+improvements are expected for Ada 202x; the timing and form (Corrigendum,
+Amendment, Revision) of future improvements has not yet been finalized.
+Thus, any proposed feature or correction may be substantially changed or withdrawn
+before an updated language begins standardization. These draft documents are not
+an official publication or work product of the ARG, but rather are provided by
+the Ada Resource Association
+(@URLLink{URL=[http://www.adaresource.org],Text=[www.adaresource.org]})
+as a service to the Ada community.}}],Old=[]}
+
+@Comment{Old text: At this time, no decisions
+have been made as to when, if, or in what form (Corrigendum, Amendment, Revision)
+these corrections and improvements will be added to Ada.}
+
+@begin{Discussion}
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The above is
+unofficial wording added just to avoid confusion. If ISO decides
+to publish a new standard, the above would be replaced by @ldquote@;This third
+edition cancels and replaces the second edition (ISO 8652:1995), of which it
+constitutes a technical revision@rdquote. The first three paragraphs in this
+section also would be replaced by the current ISO boilerplate.]}]}
+@end{Discussion}
+
+
+@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00440-01]}
+@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
+@ChgDeleted{Version=[3],Text=[Annexes A to J form an integral part of this
+International Standard.
+Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.]}
+
+@end{ISOOnly}@Comment{End ISO boilerplate}
+@end{Intro}
 
 @comment{(*Removed the below for Ada 2012, which was a revision*)}
 @ChgNote{Following is a foreword for the consolidated edition of the RM/AARM.}
-@UnNumberedSection(Foreword to this version of the Ada Reference Manual)
-@ChgNote{The above has to be manually commented out if creating "original" RMs.
-We shouldn't need to do that again.}
 @ChgNote{We needed boilerplate like this to avoid objections from various
 outside parties. It seems unlikely that the same objections won't be raised
 again.}
@@ -142,114 +233,13 @@ Manual is made available to the public.],Old=[]}
 
 @end{NotISO}
 @end{Intro}
-@Comment{(*End of Foreword Foreword, not needed for Ada 2012*)}
+@Comment{(*End of Non-ISO Foreword, not needed for Ada 2012*)}
 
 
-@UnNumberedSection(Foreword)
-@begin{Intro}
-
-@ChgRef{Version=[3],Kind=[Revised]}@ChgNote{Updated boilerplate}
-ISO (the International Organization for Standardization)
-and IEC (the International Electrotechnical Commission)
-form the specialized system for worldwide standardization.
-National bodies that are members of ISO or IEC
-participate in the development of International Standards through
-technical committees established by the respective organization to deal
-with particular fields of technical activity.
-ISO and IEC technical committees collaborate in fields of mutual
-interest.
-Other international organizations, governmental and non-governmental,
-in liaison with ISO and IEC, also take part in the work.@Chg{Version=[3],New=[ In
-the field of information technology,
-ISO and IEC have established a joint technical committee, ISO/IEC JTC 1.],Old=[]}
-
-@ChgRef{Version=[3],Kind=[Added]}@ChgNote{Updated boilerplate}
-@ChgAdded{Version=[3],Text=[International Standards are drafted in accordance
-with the rules given in the ISO/IEC Directives, Part 2.]}
-
-@ChgRef{Version=[3],Kind=[Revised]}@ChgNote{Updated boilerplate}
-@Chg{Version=[3],New=[The main task of the],Old=[In the field of information
-technology, ISO and IEC have established a]} joint technical
-committee@Chg{Version=[3],New=[ is to prepare
-International Standards],Old=[, ISO/IEC JTC 1]}.
-Draft International Standards adopted by the joint technical committee
-are circulated to national bodies for voting.
-Publication as an International Standard requires approval by
-at least 75 % of the national bodies casting a vote.
-
-@ChgRef{Version=[3],Kind=[Added]}@ChgNote{Updated boilerplate}
-@ChgAdded{Version=[3],Text=[Attention is drawn to the possibility that some of
-the elements of this document may be the subject of patent rights. ISO and IEC
-shall not be held responsible for identifying any or all such patent rights.]}
-
-@ChgRef{Version=[3],Kind=[Revised]}
-International Standard ISO/IEC 8652 was prepared by
-Joint Technical Committee ISO/IEC JTC 1,
-@i{Information Technology}@Chg{Version=[3],New=[ Subcommittee SC22, @i{Programming
-languages, their environments and system software interfaces}],Old=[]}.
-
-@ChgRef{Version=[2],Kind=[Revised]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgRef{Version=[4],Kind=[Revised]}
-@ChgRef{Version=[5],Kind=[Revised]}
-This @Chg{Version=[4],New=[consolidated edition updates the third edition
-(ISO/IEC 8652:2012).],Old=[@Chg{Version=[3],New=[third],Old=[@Chg{Version=[2],New=[consolidated],Old=[second]}]}
-edition @Chg{Version=[3],New=[cancels and replaces],Old=[@Chg{Version=[2],
-New=[updates],Old=[cancels and replaces]}]} the @Chg{Version=[2],New=[second],Old=[first]}
-edition (ISO@Chg{Version=[3],New=[/IEC],Old=[]} 8652:@Chg{Version=[2],New=[1995)],Old=[1987), of which it constitutes
-a technical revision]}@Chg{Version=[3],New=[, which has been technically revised.
-It also incorporates the Technical Corrigendum ISO/IEC 8652:1995:COR.1:2001
-and Amendment ISO/IEC 8652:1995:AMD 1:2007],Old=[]}.]}
-@Chg{Version=[5],New=[@Red{@b{This version includes corrections and improvements
-intended for a future version of Ada, herein named Ada 202x. Besides the
-corrections included in Technical Corrigendum 1, additional corrections and
-improvements are expected for Ada 202x; the timing and form (Corrigendum,
-Amendment, Revision) of future improvements has not yet been finalized.
-Thus, any proposed feature or correction may be substantially changed or withdrawn
-before an updated language begins standardization. These draft documents are not
-an official publication or work product of the ARG, but rather are provided by
-the Ada Resource Association
-(@URLLink{URL=[http://www.adaresource.org],Text=[www.adaresource.org]})
-as a service to the Ada community.}}],Old=[]}
-
-@Comment{Old text: At this time, no decisions
-have been made as to when, if, or in what form (Corrigendum, Amendment, Revision)
-these corrections and improvements will be added to Ada.}
-
-@begin{Discussion}
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[The above is
-unofficial wording added just to avoid confusion. If ISO decides
-to publish a new standard, the above would be replaced by @ldquote@;This third
-edition cancels and replaces the second edition (ISO 8652:1995), of which it
-constitutes a technical revision@rdquote. The first three paragraphs in this
-section also would be replaced by the current ISO boilerplate.]}]}
-@end{Discussion}
 
 
-@ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00440-01]}
-@ChgRef{Version=[3],Kind=[DeletedNoDelMsg],ARef=[AI05-0299-1]}
-@ChgDeleted{Version=[3],Text=[Annexes A to J form an integral part of this
-International Standard.
-Annexes K to @Chg{Version=[2],New=[Q],Old=[P]} are for information only.]}
 
 
-@begin{Discussion}
-@ChgRef{Version=[3],Kind=[Revised]}
-@ChgRef{Version=[5],Kind=[Revised]}
-This document is the Annotated Ada Reference Manual (AARM).
-It contains the entire text of the Ada
-@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[95]} standard
-(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}),
-plus various annotations.
-It is intended primarily for compiler writers,
-validation test writers, and other language lawyers.
-The annotations include detailed rationale for individual rules
-and explanations of some of the more arcane interactions among the
-rules.
-@end{Discussion}
-@end{Intro}
 @begin{Comment} (*Was Syntax9XOnly - We don't generate this document anymore*)
 This document lists the syntax rules of Ada 95.
 @end{Comment}
@@ -268,6 +258,19 @@ with respect to the first (Ada 83) edition (ISO 8652:1987).
 @begin{NotISO}
 @begin{AARMOnly}
 This is the Annotated Ada Reference Manual.
+@begin{Discussion}
+@ChgRef{Version=[3],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised]}
+This document is the Annotated Ada Reference Manual (AARM).
+It contains the entire text of the Ada
+@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[95]} standard
+(ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}),
+plus various annotations.
+It is intended primarily for compiler writers,
+validation test writers, and other language lawyers.
+The annotations include detailed rationale for individual rules
+and explanations of some of the more arcane interactions among the rules.
+@end{Discussion}
 @end{AARMOnly}
 @begin{RMOnly}
 This is the Ada Reference Manual.
@@ -315,7 +318,7 @@ lists in detail the changes made to the 1987 edition of the standard.]}
 
 @ChgRef{Version=[3],Kind=[Revised]}
 The Ada Reference Manual (RM).
-This is the International Standard @em ISO/IEC 8652:@Chg{Version=[3],New=[2012],Old=[1995]}.
+This directly corresponds to the International Standard @em ISO/IEC 8652:@Chg{Version=[3],New=[2012],Old=[1995]}.
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAddedNoDelMsg]}
@@ -1410,6 +1413,7 @@ wanted to remain anonymous, so they are not mentioned here.}
 @ChgAdded{Version=[5],Text=<The editor [R. Brukardt (USA)] would like to thank the many
 people whose hard work and assistance has made this update possible.>}
 
+@ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=<But it's too early to thank people for a project
 that's just barely started.>}@Comment{Probably should thank the "Gang of Four",
 if the parallel stuff goes anywhere.}
@@ -1439,9 +1443,10 @@ thus, the page breaks are in different places.
 
 @ChgRef{Version=[1],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[DeletedAdded]}
-@ChgDeleted{Version=[3],Text=[@Chg{New=[The @lquotes@;Foreword to this version
-of the Ada Reference Manual@rquotes clause is not included in the International Standard.],Old=[]}]}
-@Comment{This subclause is not used in this revision.}
+@ChgRef{Version=[4],Kind=[Added]}
+@ChgAdded{Version=[1],Text=[@Chg{Version=[4],New=[The @lquotes@;Foreword
+@rquotes clause is different in the International Standard.],Old=[@Chg{Version=[3],New=[],Old=[The @lquotes@;Foreword to this version
+of the Ada Reference Manual@rquotes clause is not included in the International Standard.]}]}]}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0299-1]}

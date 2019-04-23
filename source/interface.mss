@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.83 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@comment{ $Revision: 1.84 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:05 $}
+@Comment{$Date: 2019/04/09 04:56:53 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -2983,7 +2983,7 @@ Y : Integer := X.F2; -- @RI[erroneous]]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0174-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Adjusted the wording to allow
-  named aggregates of an unchecked union type; it it clearly madness to
+  named aggregates of an unchecked union type; it is clearly madness to
   allow positional record components in an @nt{aggregate} but not named
   component associations.]}
 @end{DiffWord2012}

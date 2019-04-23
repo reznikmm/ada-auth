@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -1817,7 +1817,7 @@ Old=[the invariant expression applies to all descendants of @i<T>.]}]}
 
 @begin{Itemize}
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0199-1]}
-  @ChgAdded{Version=[5],Text=[References to non-discriminant components of @i{T}
+  @ChgAdded{Version=[5],Text=[References to nondiscriminant components of @i{T}
   (or to @i{T} itself) are replaced with references to the corresponding
   components of @i{T1} (or to @i{T1} as a whole).]}
 
@@ -2424,7 +2424,7 @@ descendants of T.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1]}
 @ChgAdded{Version=[5],Text=[If one or more default initial condition expressions
 apply to a type T, then a default initial condition check is performed after
-successful default initialization of an object of type T by default (see
+successful initialization of an object of type T by default (see
 @RefSecNum{Object Declarations}).
 In the case of a controlled type, the check is performed after the call to the
 type's Initialize procedure (see @RefSecNum{Assignment and Finalization}).]}
@@ -2470,9 +2470,9 @@ with any default initial condition of the formal type itself.]]}
 @LabeledAddedSubClause{Version=[5],Name=[Stable Properties of a Type]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
-@ChgAdded{Version=[5],Text=[It is usual that some of the characteristics of a
-data type are unchanged by most of the primitive operations on the type. Such
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0324-1]}
+@ChgAdded{Version=[5],Text=[Certain characteristics of an object of a given
+type are unchanged by most of the primitive operations of the type. Such
 characteristics are called @i{stable properties} of the
 type.@Defn{stable property}@Defn2{Term=[property],Sec=[stable]}]}
 @end{Intro}
@@ -2490,12 +2490,12 @@ with a single parameter of type @i<T> or of a class-wide type that covers
   overloaded functions can be used as a stable property function.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0285-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0285-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Text=[A @i<type property aspect definition> is
 @Defn{type property aspect definition}a list of @nt{name}s written in the syntax
 of a @nt{positional_array_aggregate}. A @i<subprogram property aspect
 definition>@Defn{subprogram property aspect definition} is a list of @nt{name}s
-preceded by an optional @key[not] written in the syntax of a
+preceded by an optional @key[not], also written in the syntax of a
 @nt{positional_array_aggregate}.]}
 
 @begin{Honest}
@@ -2659,7 +2659,7 @@ subprogram property aspect definition for a subprogram @i<S>:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a primitive subprogram @i<S> of
-a type @i<T>, the stable property functions for @i<S> for type @i<T> are:]}
+a type @i<T>, the stable property functions of @i<S> for type @i<T> are:]}
 
 @begin{Itemize}
 
@@ -2701,24 +2701,24 @@ the Post aspect. Similarly, the @i<explicit> class-wide postcondition expression
 for a subprogram @i<S> is the @nt{expression} directly specified for @i<S> with
 the Post'Class aspect.@Defn{explicit specific postcondition expression}@Defn{explicit class-wide postcondition expression}@Defn2{Term=[postcondition expression],Sec=(explicit)}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T>
 that is not a stable property function of @i<T>, the specific postcondition
 expression of @i<S> is modified to include expressions of the
 form @exam{@i<F>(@i<P>) = @i<F>(@i<P>)'Old}, all @key[and]ed with each other
-and any explicit specific postcondition expression, where @i<F> is each stable
-property function of @i<S> for type @i<T> that does not occur in the explicit
-specific postcondition expression of @i<S>, and @i<P> is each parameter of @i<S>
-that has type @i<T>. The resulting specific postcondition expression of @i<S>
-is used in place of the explicit specific postcondition expression of @i<S>
-@Redundant[when interpreting the meaning of the postcondition as defined
-in @RefSecNum{Preconditions and Postconditions}].]}
+and any explicit specific postcondition expression, with one such equality
+included for each stable property function @i<F> of @i<S> for type @i<T> that
+does not occur in the explicit specific postcondition expression of @i<S>, and
+@i<P> is each parameter of @i<S> that has type @i<T>. The resulting specific
+postcondition expression of @i<S> is used in place of the explicit specific
+postcondition expression of @i<S> @Redundant[when interpreting the meaning of
+the postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
 
 @begin{Ramification}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[There is one @exam{F(P) = F(P)'Old}
     subexpression for every combination of a stable expression function of
-    type @i<T> and a parameter of type @i<T>. For instance, if there is three
+    type @i<T> and a parameter of type @i<T>. For instance, if there are three
     stable property functions for type @i<T> and two parameters of type @i<T>,
     then there are six such subexpressions appended to the postcondition.]}
 
@@ -2729,18 +2729,19 @@ in @RefSecNum{Preconditions and Postconditions}].]}
     postcondition subexpressions cannot fail, but that is not required here.]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0187-1],ARef=[AI12-0324-1]}
 @ChgAdded{Version=[5],Text=[For every primitive subprogram @i<S> of a type @i<T>
 that is not a stable property function of @i<T>, the class-wide postcondition
 expression of @i<S> is modified to include expressions of the form
 @exam{@i<F>(@i<P>) = @i<F>(@i<P>)'Old}, all @key[and]ed with each other and any
-explicit class-wide postcondition expression, where @i<F> is each class-wide
-stable property function of @i<S> for type @i<T> that does not occur in any
-class-wide postcondition expression that applies to @i<S>, and @i<P> is each
-parameter of @i<S> that has type @i<T>. The resulting class-wide postcondition
-expression of @i<S> is used in place of the explicit class-wide postcondition
-expression of @i<S> @Redundant[when interpreting the meaning of the
-postcondition as defined in @RefSecNum{Preconditions and Postconditions}].]}
+explicit class-wide postcondition expression, with one such equality included
+for each class-wide stable property function @i<F> of @i<S> for type @i<T> that
+does not occur in any class-wide postcondition expression that applies to @i<S>,
+and @i<P> is each parameter of @i<S> that has type @i<T>. The resulting
+class-wide postcondition expression of @i<S> is used in place of the explicit
+class-wide postcondition expression of @i<S> @Redundant[when interpreting the
+meaning of the postcondition as defined in
+@RefSecNum{Preconditions and Postconditions}].]}
 
 @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3118,18 +3119,18 @@ and ]}the task.
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00287-01],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0147-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0172-1],ARef=[AI12-0236-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0172-1],ARef=[AI12-0236-1],ARef=[AI12-0317-1]}
 @ChgAdded{Version=[2],Type=[Leading],Text=[In the following contexts,
 an @nt{expression} of a limited
-type is not permitted unless it is an @nt{aggregate}, a @nt{function_call},
-@Chg{Version=[5],New=[a @nt{raise_expression},
-],Old=[]}@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
+type is @Chg{Version=[5],New=[],Old=[not ]}permitted
+@Chg{Version=[5],New=[only if each of its operative constituents is newly constructed
+(see @RefSecNum{Expressions})],Old=[unless it is an @nt{aggregate}, a @nt{function_call},
+@Chg{Version=[3],New=[],Old=[or ]}a parenthesized @nt{expression} or
 @nt{qualified_expression} whose operand
 is permitted by this rule@Chg{Version=[3],New=[,
-@Chg{Version=[5],New=[],Old=[or ]}a @nt{conditional_expression}
+or a @nt{conditional_expression}
 all of whose @Syni{dependent_}@nt{expression}s are permitted by this
-rule],Old=[]}@Chg{Version=[5],New=[, or a @nt{declare_expression} whose
-@SynI<body_>@nt{expression} is permitted by this rule],Old=[]}:]}
+rule],Old=[]}]}:]}
 @begin{Itemize}
 
 @ChgRef{Version=[2],Kind=[Added]}
@@ -3581,11 +3582,6 @@ rather than being a subclause of
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
   @ChgAdded{Version=[5],Text=[Added the @Syni{base_}@nt{expression} of a
   @nt{delta_aggregate} as a limited context.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0236-1]}
-  @ChgAdded{Version=[5],Text=[Allowed @nt{declare_expression}s in limited
-  constructor contexts @em we want to treat these as closely to
-  @nt{conditional_expression}s as possible.]}
 @end{DiffWord2012}
 
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.80 $ $Date: 2019/02/21 05:24:05 $ $Author: randy $ }
+@comment{ $Revision: 1.81 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2019/02/21 05:24:05 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -505,7 +505,10 @@ it shall depend semantically only upon declared pure or shared passive
 
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0080],ARef=[AI95-00003-01]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0038-1]}
-it shall not contain a library-level declaration of an access type
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0320-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional "Leading"}
+it shall not contain a library-level declaration@Chg{Version=[5],New=[:],Old=[
+of an access type
 that designates a class-wide type,@Chg{Version=[4],New=[ nor a type
 with a part that is of a],Old=[]}
 task type@Chg{Version=[4],New=[],Old=[,]} or protected type with
@@ -513,7 +516,12 @@ task type@Chg{Version=[4],New=[],Old=[,]} or protected type with
 Old=[; if the shared passive library unit is generic, it shall
 not contain a declaration for such an access type unless the
 declaration is nested within a body other than
-a @nt<package_body>]}.]}
+a @nt<package_body>]}.]}]}
+
+@begin{Itemize}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0320-1]}
+    @ChgAdded{Version=[5],Text=[of an access type
+    that designates a class-wide type;]}
 @begin{Reason}
   These kinds of access types are disallowed because the object
   designated by an access value of such a type could
@@ -522,12 +530,21 @@ a @nt<package_body>]}.]}
   created.
 @end{Reason}
 
-@ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0038-1]}
-@ChgAdded{Version=[4],Text=[it shall not contain a library-level declaration
-that contains a name that denotes a type declared within a declared-pure
-package, if that type has a part that is of an access type; for the purposes of
-this rule, the parts considered include those of the full views of any private
-types or private extensions.]}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0320-1]}
+    @ChgAdded{Version=[5],Text=[of a type with a part that is of a task type;]}
+
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0320-1]}
+    @ChgAdded{Version=[5],Text=[of a type with a part that is of
+    a protected type with @nt{entry_declaration}s; nor]}
+
+    @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0038-1]}
+    @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0320-1]}
+    @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[],Old=[it shall not contain
+    a library-level declaration ]}that contains a name that denotes a type
+    declared within a declared-pure
+    package, if that type has a part that is of an access type; for the purposes of
+    this rule, the parts considered include those of the full views of any private
+    types or private extensions.]}
 
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
@@ -537,6 +554,7 @@ types or private extensions.]}
   declared in a declared-pure package, which would have been severely
   incompatible.]}
 @end{Reason}
+@end{Itemize}
 
 @end{itemize}
 
@@ -855,7 +873,7 @@ shall not be specified for a remote access-to-class-wide type.],Old=[]}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0085-1]}
   @ChgAdded{Version=[4],Text=[The prohibition against specifying the
   Storage_Size aspect for an access-to-class-wide type applies to any
-  method of doing that, including via either a @nt{aspect_specification} or
+  method of doing that, including via either an @nt{aspect_specification} or
   an @nt{attribute_definition_clause}.]}
 @end{Ramification}
 @end{Itemize}
@@ -967,8 +985,9 @@ synchronized, protected, or task interface type.]}
 @begin{Incompatible2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0101-1]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[@Defn{incompatibilities with Ada 2005}@b<Correction:>
-  Added rules for returning of remote
+  Added rules @Chg{Version=[5],New=[about the],Old=[for]} returning of remote
   @Chg{Version=[4],New=[access-to-class-wide],Old=[access-to-classwide]} types;
   this had been missed in the past. While programs that returned unstreamable
   types from RCI
@@ -1223,7 +1242,7 @@ unit.@PDefn{generic contract issue}]}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[This applies whether the stream-oriented
   attribute is specified with an @nt{attribute_definition_clause} or with
-  a @nt{aspect_specification}.]}
+  an @nt{aspect_specification}.]}
 @end{Ramification}
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1243,8 +1262,9 @@ Old=[]}, the library unit shall be a remote call interface.
 
   @ChgAspectDesc{Version=[4],Kind=[Revised],InitialVersion=[3],Aspect=[All_Calls_Remote],
     Text=[@ChgAdded{Version=[3],Text=[All @Chg{Version=[4],New=[indirect or
-      dispatching remote subprogram calls and all direct],Old=[]}
-      remote @Chg{Version=[4],New=[subprogram],Old=[procedure]} calls
+      dispatching remote subprogram calls, and all direct],Old=[]}
+      remote @Chg{Version=[4],New=[subprogram],Old=[procedure]}
+      calls@Chg{Version=[4],New=[,],Old=[]}
       should use the Partition Communication
       Subsystem@Chg{Version=[4],New=[],Old=[, even if they are local]}.]}]}
 
@@ -1316,6 +1336,7 @@ not go through the PCS.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0078],ARef=[AI95-00048-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0031-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @Chg{Version=[3],New=[When this aspect is False (or not used)],Old=[Without
 this pragma]}, it is presumed
 that most implementations will@Chg{Version=[4],New=[ not],Old=[]}
@@ -1323,16 +1344,19 @@ make@Chg{Version=[4],New=[],Old=[ direct]} calls@Chg{Version=[4],New=[ through
 the PCS],Old=[]} if the call originates in the same partition
 as that of the RCI @Chg{New=[unit],Old=[package]}. @Chg{Version=[3],New=[When
 this aspect is True],Old=[With this pragma]}, all @Chg{Version=[4],New=[indirect
-or dispatching remote subprogram calls to the RCI unit and all
-direct ],Old=[]}calls
-from outside the subsystem rooted at the RCI @Chg{New=[unit],Old=[package]} are
+or dispatching remote subprogram calls to the RCI
+unit@Chg{Version=[5],New=[,],Old=[]} and all direct ],Old=[]}calls
+from outside the subsystem rooted at the RCI
+@Chg{New=[unit],Old=[package]}@Chg{Version=[5],New=[,],Old=[]} are
 treated like calls from outside the
 partition, ensuring that the PCS is involved in all such calls
 (for debugging, redundancy, etc.).
 @end{Discussion}
 @begin{Reason}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0031-1]}
-There is no point to force local @Chg{Version=[4],New=[direct ],Old=[]}calls
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
+There is no point @Chg{Version=[5],New=[in forcing],Old=[to force]} local
+@Chg{Version=[4],New=[direct ],Old=[]}calls
 (@Chg{Version=[4],New=[including],Old=[or]} calls from children) to go through
 the PCS, since on the target system@Chg{Version=[4],New=[],Old=[,]} these calls
 are always local, and all the units are in the same active partition.
@@ -1421,8 +1445,10 @@ be supported as an alternative to RPC.]
   the PCS, while that was not necessarily true in earlier Ada. If a program
   depended on local targets not being routed through the PCS even when
   All_Calls_Remote is used, then it might behave differently or fail in
-  corrected Ada 2012. This is highly unlikely as PCS is going to be able to
-  communicate with any partition of the program, including the local partition.]}
+  Chg{Version=[5],New=[],Old=[corrected ]}Ada
+  2012@Chg{Version=[5],New=[ as corrected with this refinement],Old=[]}. This
+  is highly unlikely as PCS is going to be able to communicate with any
+  partition of the program, including the local partition.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -1431,7 +1457,7 @@ be supported as an alternative to RPC.]
   Specifying user-defined stream-oriented attributes is now illegal in an
   RCI unit. If a program contains such attributes, they and their associated
   type will need to be moved to a remote types package (which is then
-  imported intot he RCI unit).]}
+  imported into the RCI unit).]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}
