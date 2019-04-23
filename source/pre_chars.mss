@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_chars.mss,v $ }
-@comment{ $Revision: 1.51 $ $Date: 2018/04/07 06:16:42 $ $Author: randy $ }
+@comment{ $Revision: 1.52 $ $Date: 2019/04/09 04:56:54 $ $Author: randy $ }
 @Part(predefchars, Root="ada.mss")
 
-@Comment{$Date: 2018/04/07 06:16:42 $}
+@Comment{$Date: 2019/04/09 04:56:54 $}
 
 @LabeledClause{Character Handling}
 @begin{Intro}
@@ -1337,8 +1337,8 @@ returned.]}
   ISO/IEC 10646:@Chg{Version=[5],New=[2017],Old=[2011]}
   does not include @Chg{Version=[5],New=[complete ],Old=[]}case
   mappings@Chg{Version=[5],New=[. See the Implementation Notes in
-  @RefSecNum{Method of Description and Syntax Notation} for machine-readable
-  versions of both Uppercase and Lowercase mappings],Old=[ (but
+  subclause @RefSecNum{Method of Description and Syntax Notation} for
+  machine-readable versions of both Uppercase and Lowercase mappings],Old=[ (but
   rather references the Unicode ones as above)]}.]}
 @end{Discussion}
 

@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.85 $ $Date: 2019/02/09 03:46:57 $ $Author: randy $ }
+@comment{ $Revision: 1.86 $ $Date: 2019/04/09 04:56:54 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2019/02/09 03:46:57 $}
+@Comment{$Date: 2019/04/09 04:56:54 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -2301,10 +2301,10 @@ and applying To_Unbounded_String to the concatenation result string.
   Natural'Last, Constraint_Error is raised as the upper bound of the underlying
   String concatenation is outside of the range of the index subtype of Natural
   (see @RefSecNum{Binary Adding Operators}). Note that the same is true for
-  other operations that can create an overlong string: either they are defined
+  other operations that attempt to create an overlong string: either they are defined
   in terms of this concatenation operation (as with Append) or they are defined
   in terms of Ada.Strings.Fixed operations (as with Insert and Replace_Slice),
-  when themselves are defined in terms of String concatenation (which raises
+  which themselves are defined in terms of String concatenation (which raises
   Constraint_Error for overlong strings as described above). Therefore, it is
   never possible to create an Unbounded_String with a length greater than
   Natural'Last.]}
@@ -3358,8 +3358,8 @@ used to determine whether two identifiers are the same.]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0263-1]}
   @ChgAdded{Version=[5],Text=[The @ldquote@;documents
   referenced@rdquote means Unicode, Chapter 4 (specifically, section 4.2 @em
-  Case). See the Implementation Notes in @RefSecNum{Identifiers} for a source
-  for machine-readable definitions of this properties.]}
+  Case). See the Implementation Notes in subclause @RefSecNum{Identifiers} for
+  a source for machine-readable definitions of these properties.]}
 @end{Discussion}
 @end{DescribeCode}
 

@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:04 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 
 @LabeledClause{Type Conversions}
 
@@ -100,10 +100,12 @@ the operand of a value conversion
 is interpreted as an @nt<expression>.
 @begin{Reason}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0005-1]}
+  @ChgRef{Version=[5],Kind=[Revised]}@ChgNote{This is also in AI12-0005-1, don't want a duplicate reference}
   This formally resolves the syntactic ambiguity between
   the two forms of @nt<type_conversion>@Chg{Version=[4],New=[.
-  This matters as an @nt{expression} that is a @nt{name} is evaluated and
-  represents a value while a @nt{name} by itself can be an object; we want
+  This matters @Chg{Version=[5],New=[because],Old=[as]} an @nt{expression} that
+  is a @nt{name} is evaluated and represents a value while a @nt{name} by
+  itself can be an object; we want
   a view conversion to be an object],Old=[, not that it really matters]}.
 @end{Reason}
 @begin{Ramification}
@@ -673,9 +675,11 @@ these rules apply also in the private part of an
 instance of a generic unit.]}
 @begin{Discussion}
   @ChgRef{Version=[4],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[This applies to @i<all> of the @LegalityTitle
   in this section. It won't matter for the majority of these rules, but
-  in any case that it does, we want to apply the same recheck in the private
+  in any case that it does, we want to apply the same
+  @Chg{Version=[5],New=[rules],Old=[recheck]} in the private
   part. (Ada got the default wrong for these, as there is only one known case
   where we don't want to recheck in the private part,
   see derivations without record extensions in
@@ -1370,11 +1374,13 @@ as a @nt<name>.
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Because of a rule added in
   @RefSecNum{Formal Private and Derived Types}, the checks for the
   legality of an access type conversion in a generic body were strengthened
-  to use an assume the worst rule. This case is rather unlikely as a formal
-  private or derived type with discriminants is required along with a
+  to use an @Chg{Version=[5],New=[assume-the-worst],Old=[assume the worst]}
+  rule. This case is rather unlikely @Chg{Version=[5],New=[because],Old=[as]}
+  a formal private or derived type with discriminants is required along with a
   conversion between two access types whose designated types don't statically
   match, and any such programs were at risk having objects disappear while
   valid access values still pointed at them.]}
@@ -1441,10 +1447,24 @@ or an @nt<aggregate>.
 @end{Syntax}
 
 @begin{Resolution}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0325-1]}
 @PDefn2{Term=[operand], Sec=(of a @nt{qualified_expression})}
-The @i(operand) (the @nt{expression} or @nt{aggregate})
-shall resolve to be of the type determined by the @nt{subtype_@!mark},
-or a universal type that covers it.
+The @Chg{Version=[5],New=[expected type for the ],Old=[]}@i(operand) (the
+@nt{expression} or @nt{aggregate})
+@Chg{Version=[5],New=[is],Old=[shall resolve to be of the type]} determined
+by the @nt{subtype_@!mark}@Chg{Version=[5],New=[],Old=[,
+or a universal type that covers it]}.@Chg{Version=[5],New=[ Furthermore, the
+operand shall resolve to be either the specified expected type or a universal
+type that covers it.],Old=[]}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0325-1]}
+  @ChgAdded{Version=[5],Text=[The first sentence defines the expected type for
+  rules that assume one is defined. The second sentence prevents the use of the
+  various implicit conversions that are usually allowed for expected
+  types (except the one for numeric literals). The intent is that a qualified
+  expression is similar to an assertion about the subtype of the operand, and
+  thus implicit conversions would interfere with that intent.]}
+@end{Reason}
 @end{Resolution}
 
 @begin{StaticSem}
@@ -1544,6 +1564,13 @@ Dozen'(1 | 3 | 5 | 7 => 2, @key(others) => 0) @RI[-- see @RefSecNum{Type Convers
   to have a stricter subtype than the following usage) and the check is more
   likely to detect bugs than be unexpected.]}
 @end{Inconsistent2012}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0325-1]}
+  @ChgAdded{Version=[5],Text=[Reworded the resolution rule so that the
+  operand of a @nt{qualified_expression} has an expected type. This eliminates
+  an annoying inconsistency in the language definition.]}
+@end{DiffWord2012}
 
 
 @LabeledClause{Allocators}
@@ -2369,6 +2396,11 @@ denotes the entity and:
   It is an @nt{attribute_reference} whose @nt{prefix} statically denotes
   some entity; or
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0322-1]}
+  @ChgAdded{Version=[5],Text=[It is a @nt{target_name} (see
+  @RefSecNum{Target Name Symbols}) in an @nt{assignment_statement} whose
+  @SynI{variable_}@nt{name} statically denotes some entity; or]}
+
   It denotes a @nt<renaming_declaration> with a @nt<name> that
   statically denotes the renamed entity.
 @end(itemize)
@@ -2459,7 +2491,6 @@ type is a descendant of a formal scalar type.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00263-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0295-1]}
 @Defn2{Term=[static], Sec=(subtype)}
 A @i(static subtype) is either a @i(static scalar subtype) or a
 @i(static string subtype).
@@ -2470,13 +2501,11 @@ formal @Chg{Version=[2],New=[],Old=[scalar ]}type, or
 a constrained scalar subtype formed by imposing a compatible
 static constraint on a static scalar subtype.
 @Defn2{Term=[static], Sec=(string subtype)}
-A static string subtype is @Chg{Version=[5],New=[a string subtype that does not
-have a specified String_Literal aspect, and that is ],Old=[]}an unconstrained
-@Chg{Version=[5],New=[array],Old=[string]} subtype
+A static string subtype is an unconstrained string subtype
 whose index subtype and component subtype are
 static@Chg{Version=[2],New=[],Old=[ (and whose type is not a descendant
 of a formal array type)]},
-or a constrained @Chg{Version=[5],New=[array],Old=[string]} subtype formed by imposing a compatible static
+or a constrained string subtype formed by imposing a compatible static
 constraint on a static string subtype.
 In any case, the subtype of a generic formal object of mode @key[in out],
 and the result subtype of a generic formal function, are not static.@Chg{Version=[3],
@@ -2979,7 +3008,7 @@ raising.
   differences in programs. However, the original Ada 95 rule required rounding
   that (probably) differed from the target processor, thus creating anomalies
   where the value of a static expression was required to be different than the
-  same expression evaluated at run-time.]}
+  same expression evaluated at run time.]}
 @end{Inconsistent95}
 
 @begin{DiffWord95}
@@ -3043,11 +3072,16 @@ raising.
   @ChgAdded{Version=[5],Text=[Expression functions can be static if declared
   correctly; this is documented as an extension in @RefSecNum{Expression Functions}.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
   @ChgAdded{Version=[5],Text=[A @nt{numeric_literal} can be non-static if
   they are defined by an Integer_Literal or Real_Literal aspect
-  (see @RefSecNum{User-Defined Literals}). Similarly, a string subtype cannot
-  be a static string subtype if the type has a String_Literal aspect.]}
+  (see @RefSecNum{User-Defined Literals}).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0322-1]}
+  @ChgAdded{Version=[5],Text=[Clarified that a target name symbol can statically
+  denote an entity if the associated @SynI{variable_}@nt{name} statically
+  denotes an entity. This is necessary so that target names participate in
+  the anti-order-dependence checks of @RefSecNum{Parameter Associations}.]}
 @end{Diffword2012}
 
 
@@ -3279,18 +3313,18 @@ This subclause is new to Ada 95.
 @begin(description)
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Put_Image>, ARef=[AI12-0020-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Put_Image>, ARef=[AI12-0020-1], ARef=[AI12-0320-1],
   InitialVersion=[5], Text=[@Chg{Version=[5],New=[S'Put_Image denotes a
      procedure with the following specification:],Old=[]}
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[@b(procedure) S'Put_Image
-   (@RI(Arg)    : @key[in] T;
-    @RI(Stream) : @key[not null access] Ada.Streams.Root_Stream_Type'Class);]}
+   (@RI(Stream) : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+    @RI(Arg)    : @key[in] T);]}
 @end(Descexample)
 @Comment{These two paragraphs have to be Added rather than AddedNormal so that
 the paragraphs in thee Annex have the correct paragraph numbers.}
-    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0315-1]}
     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The
       default implementation of S'Put_Image writes
       (using Wide_Wide_String'Write) an @i<image> of the value of
@@ -3312,7 +3346,7 @@ type.@AspectDefn{Put_Image}]}
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[In contrast, the Image, Wide_Image, and
-     Wide_Wide_Image attributes and their associated aspects may not be
+     Wide_Wide_Image attributes and their associated aspects can not be
      specified. The behavior of any of these attributes is defined in terms of
      calls to the corresponding Put_Image procedure, so changes in their
      behavior may be accomplished via a Put_Image specification.]}
@@ -3320,7 +3354,7 @@ type.@AspectDefn{Put_Image}]}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[In earlier versions of Ada, Image and related
      attributes were defined only for scalar types. The definition of these
-     attributes is now very different, but it is intended that there should be
+     attributes is now very different, but there should be
      no change in the behavior of existing programs as a result of these
      changes.]}
 @end{Discussion}
@@ -3333,9 +3367,9 @@ type.@AspectDefn{Put_Image}]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[procedure] Scalar_Type'Put_Image
-  (Arg : Scalar_Type; Stream : @key[access] Ada.Streams.Root_Stream_Type'Class) @key[is]
+  (Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Arg : Scalar_Type) @key[is]
 @key[begin]
-   Wide_Wide_String'Write (@i{<described below>}, Stream);
+   Wide_Wide_String'Write (Stream, @i{<described below>});
 @key[end] Scalar_Type'Put_Image;]}
 @end{Example}
 
@@ -3368,7 +3402,7 @@ type.@AspectDefn{Put_Image}]}
    that other rules of the language ensure that an implementation can evaluate
    any @i{universal_integer} attribute using type @i{root_integer}; therefore,
    Constraint_Error could be raised by the evaluation of an Image attribute
-   if the static value of the prefix is outside of the range of
+   if the value of the prefix is outside of the range of
    @i{root_integer}.]}
 @end{Discussion}
 
@@ -3472,6 +3506,20 @@ type.@AspectDefn{Put_Image}]}
   designated object, followed by a right parenthesis, as in @exam{"(ACCESS
   FF0012AC)"}.]}
 
+@begin{Honest}
+   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
+   @ChgAdded{Version=[5],Text=[S'Put_Image is defined for @i{universal_access},
+   but it can never be called (as no legal @nt{prefix} of Image has that type,
+   and that type cannot be named preventing direct calls).]}
+@end{Honest}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgAdded{Version=[5],Text=<For an array type T, the default implementation of
+  T'Put_Image generates an image based on (named, not positional) array
+  aggregate syntax (with '[' and ']' as the delimiters) using calls to the
+  Put_Image procedures of the index type(s) and the element type to generate
+  images for values of those types.>}
+
 @begin{Discussion}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],Text=[In general, the default implementation of
@@ -3484,24 +3532,10 @@ type.@AspectDefn{Put_Image}]}
      the tag in the class-wide case).]}
 @end{Discussion}
 
-@begin{Honest}
-   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0315-1]}
-   @ChgAdded{Version=[5],Text=[S'Put_Image is defined for @i{universal_access},
-   but it can never be called (as no legal @nt{prefix} of Image has that type,
-   and that type cannot be named preventing direct calls).]}
-@end{Honest}
-
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
-@ChgAdded{Version=[5],Text=<For an array type T, the default implementation of
-  T'Put_Image generates an image based on (named, not positional) array
-  aggregate syntax (with '[' and ']' as the delimiters) using calls to the
-  Put_Image procedures of the index type(s) and the element type to generate
-  images for values of those types.>}
-
 @begin{Discussion}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Type=[Leading],Text=[This might generate an image such as:]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[An array type might generate
+    an image such as:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={[ 1 => [ 1 => [ 123 => True,  124 => False]
@@ -3692,9 +3726,9 @@ will save a vast amount of messing around.}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
-     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns the result of
-     a call on S'Wide_Wide_Image with a parameter of @i<Arg> as a
-     Wide_String.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns a
+     Wide_String corresponding to the result of a call on S'Wide_Wide_Image
+     with a parameter of @i<Arg>.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
      result has the same sequence of
      graphic characters as that returned by S'Wide_Wide_Image if all the graphic
@@ -3722,9 +3756,9 @@ will save a vast amount of messing around.}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
-     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns the result of
-     a call on S'Wide_Wide_Image with a parameter of @i<Arg> as a
-     String.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns a
+     String corresponding to the result of a call on S'Wide_Wide_Image with
+     a parameter of @i<Arg>.]}]}@Comment{End of Annex text here.}
      @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
      result has the same sequence of
      graphic characters as that returned by S'Wide_Wide_Image if all the graphic

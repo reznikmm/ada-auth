@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:54 $}
+@Comment{$Date: 2019/04/09 04:56:51 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.111 $}
+@Comment{$Revision: 1.112 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -3260,8 +3260,8 @@ call to a subprogram other than@Chg{Version=[5],New=[:],Old=[ a static function.
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0175-1]}
   @ChgAdded{Version=[5],Text=[The parameters of any such function have to pass
-  the preelaborability rules, so they typically have to be a static
-  expression. The extra allowed functions are all forms of conversion that the
+  the preelaborability rules, so they typically have to be static
+  expressions. The extra allowed functions are all forms of conversion that the
   compiler understands, so there should be little implementation burden. Note
   that such a call might raise an exception; preelaborable is not the same as
   elaborable with no code.]}
@@ -3326,7 +3326,7 @@ instance would perform one of the above actions.]}
    there is no instance that could be declared preelaborated. For instance,
    a generic package declaration that directly contains a variable initialized
    by a non-static function that is not a formal function is not preelaborable
-   (and thus would be illegal if pragma Preelaborate is applied to it).]}
+   (and thus would be illegal if pragma Preelaborate were applied to it).]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00403-01]}
@@ -4172,7 +4172,7 @@ required to appear last.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0175-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Added some intrinsic
   conversion functions to those allowed to be called during the elaboration of
-  a preelaborated unit. This is necessary to allow a portable address aspect
+  a preelaborated unit. This is necessary to allow a portable Address aspect
   in a preelaborated unit, important on small embedded systems.]}
 @end{Extend2012}
 

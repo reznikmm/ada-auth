@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_math.mss,v $ }
-@comment{ $Revision: 1.46 $ $Date: 2019/02/09 03:46:55 $ $Author: randy $ }
+@comment{ $Revision: 1.47 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
 @Part(predefmath, Root="ada.mss")
 
-@Comment{$Date: 2019/02/09 03:46:55 $}
+@Comment{$Date: 2019/04/09 04:56:52 $}
 
 @LabeledClause{The Numerics Packages}
 
@@ -730,7 +730,7 @@ the result subtype]}.
   no intervening explicit calls involving the same generator. This restricts
   the rule to only applying to cases where just the Random function changes
   the generator. We don't mean to impose a requirement if there are
-  intervening calls to Reset, to Random with same generator but a different
+  intervening calls to Reset, to Random with the same generator but a different
   result range, or any other case that would affect the sequence of values
   returned. Operations which use the resulting random values (for instance,
   to store them somewhere) are not considered in determining if calls are

@@ -84,6 +84,7 @@
 @Source{Name=<PRE_Strings.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Math.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<Real_Attribs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
+@Source{Name=<PRE_Big.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_IO.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Cmdln.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
 @Source{Name=<PRE_Dirs.MSS>,SectionName=<A>,SectionNumber=[A],NewSection=[F]}
