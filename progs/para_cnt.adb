@@ -17,11 +17,13 @@ end Para_Cnt_Pkg;
 
 
 with Ada.Strings.Fixed;
+with Ada.Strings.Maps.Constants;
 package body Para_Cnt_Pkg is
 
     procedure Count_File (Item : in Ada.Directories.Directory_Entry_Type) is
 	Cnts : array ('0'..'9') of Natural := (others => 0);
 	Total : Natural := 0;
+	Inserted : Natural := 0;
         The_File : Ada.Text_IO.File_Type;
 
 	Buffer : String (1..1024);
@@ -44,7 +46,11 @@ package body Para_Cnt_Pkg is
 		-- In the absence of a bug, there should be only one
 		-- paragraph per line. A paragraph number looks like:
 		--    <div class="paranum"><a name="p20">20/5</a></div>
-		-- Older files are missing the anchor (the "a" command).
+		-- Older files are missing the anchor (the "a" command),
+		-- and they sometimes have the markup in upper case.
+
+		Ada.Strings.Fixed.Translate (Buffer(1..BLen),
+		    Ada.Strings.Maps.Constants.Lower_Case_Map);
 
 		PStart := Ada.Strings.Fixed.Index (Buffer(1..BLen),
 			"<div class=""paranum"">");
@@ -58,6 +64,11 @@ package body Para_Cnt_Pkg is
 			Ada.Text_IO.Put_Line ("** Multiple paranums on line" & LCnt'Image);
 		    else
 			Total := Total + 1;
+			if Ada.Strings.Fixed.Index (Buffer(PStart+22..PEnd+4),
+				".") /= 0 then
+			    Inserted := Inserted + 1;
+			-- else not inserted.
+			end if;
 			if Ada.Strings.Fixed.Index (Buffer(PStart+22..PEnd+4),
 				"/1<") /= 0 then
 			    Cnts('1') := Cnts('1') + 1;
@@ -103,12 +114,14 @@ package body Para_Cnt_Pkg is
 	-- Write the results:
         Ada.Text_IO.Put (Result_File, Ada.Directories.Simple_Name (Item));
         Ada.Text_IO.Put (Result_File, "," & Total'Image);
+        Ada.Text_IO.Put (Result_File, "," & Inserted'Image);
         for I in Cnts'Range loop
 	    Ada.Text_IO.Put (Result_File, "," & Cnts(I)'Image);
 	end loop;
 	Ada.Text_IO.New_Line (Result_File);
 
-        Ada.Text_IO.Put_Line ("    Saw" & Total'Image & " paragraphs");
+        Ada.Text_IO.Put_Line ("    Saw" & Total'Image & " paragraphs, with" &
+				Inserted'Image & " inserted paragraphs");
     end Count_File;
 
 end Para_Cnt_Pkg;
@@ -133,7 +146,7 @@ begin
 			Ada.Command_Line.Argument(1) & ".csv");
 
     -- Put a CVS header:
-    Ada.Text_IO.Put_Line (Para_Cnt_Pkg.Result_File, "File, Total, Org, '/1, '/2, '/3, '/4, '/5, '/6, '/7, '/8, '/9");
+    Ada.Text_IO.Put_Line (Para_Cnt_Pkg.Result_File, "File, Total, Inserted, Org, '/1, '/2, '/3, '/4, '/5, '/6, '/7, '/8, '/9");
 
     Ada.Directories.Search (Directory => ".",
 			    Pattern => "RM-*.html",
