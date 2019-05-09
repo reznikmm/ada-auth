@@ -287,6 +287,8 @@ package body ARM_Format is
     --  1/27/19 - RLB - Added code to deal with attribute references where
     --			the paragraph is closed.
     --  2/15/19 - RLB - Improved handling os deleted attribute references.
+    --  4/23/19 - RLB - Added Line info to the nesting stack so we can find
+    --			out where the problems lie.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -983,6 +985,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
         Name : ARM_Input.Command_Name_Type;
         Command : Data.Command_Type;
         Close_Char : Character; -- Ought to be }, ], >, or ).
+        Open_Line : String(1..12);
 	Text_Format : ARM_Output.Format_Type;
 	    -- Format at the start of the command.
 
@@ -1040,6 +1043,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 	        (Name => Name,
 		 Kind => Kind,
 		 Command => Data.Command (Name),
+		 Open_Line => (1..12 => ' '), -- Set below.
 		 Close_Char => ' ', -- Set below.
 		 Text_Format => Format_Object.Text_Format, -- Save the current format.
 		 -- Other things next necessarily used:
@@ -1055,6 +1059,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		 Prev_Change_Version => '0', -- Not used.
 		 Prev_Added_Change_Version => '0'); -- Not used.
 	    Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Close_Char := ARM_Input.Get_Close_Char (Param_Ch);
+	    Ada.Strings.Fixed.Move (Target => Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Open_Line,
+		Source => ARM_Input.Line_String (Input_Object),
+		Drop   => Ada.Strings.Right);
 --Ada.Text_IO.Put_Line (" &Stack (" & Name & "); Close-Char=" &
 --  Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Close_Char);
 	end Set_Nesting_for_Command;
@@ -1070,6 +1077,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		 Kind => Parameter,
 		 Command => Command,
 		 Close_Char => Close_Ch,
+		 Open_Line => (1..12 => ' '), -- Set below.
 		 Text_Format => Format_Object.Text_Format, -- Save the current
 			-- format (not really used here).
 		 Old_Last_Subhead_Paragraph => Plain, -- Not used.
@@ -1083,6 +1091,9 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find end of item chg new command, line " &
 		 Prev_Change => ARM_Output.None, -- Not used.
 		 Prev_Change_Version => '0', -- Not used.
 		 Prev_Added_Change_Version => '0'); -- Not used.
+	    Ada.Strings.Fixed.Move (Target => Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Open_Line,
+		Source => ARM_Input.Line_String (Input_Object),
+		Drop   => Ada.Strings.Right);
 --Ada.Text_IO.Put_Line (" &Stack (Parameter)");
 	end Set_Nesting_for_Parameter;
 
@@ -4852,6 +4863,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			         Kind => Begin_Word,
 			         Command => Text_Begin,
 			         Close_Char => ' ',-- No close character.
+			         Open_Line => (1..12 => ' '),
 				 Text_Format => Format_Object.Text_Format,
 					-- Save the current format.
 				 Old_Last_Subhead_Paragraph => Format_Object.Last_Paragraph_Subhead_Type,
@@ -4865,6 +4877,9 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 				 Prev_Change => ARM_Output.None, -- Not used.
 				 Prev_Change_Version => '0', -- Not used.
 				 Prev_Added_Change_Version => '0'); -- Not used.
+			    Ada.Strings.Fixed.Move (Target => Format_State.Nesting_Stack (Format_State.Nesting_Stack_Ptr).Open_Line,
+				Source => ARM_Input.Line_String (Input_Object),
+				Drop   => Ada.Strings.Right);
 
 		            Process_Begin;
 
@@ -11096,7 +11111,8 @@ Ada.Text_IO.Put_Line ("** Unimplemented disposition on line " & ARM_Input.Line_S
 				    for I in reverse Start_Depth+2 .. Format_State.Nesting_Stack_Ptr loop
 				        Ada.Text_IO.Put_Line ("      Open command=" &
 					    Format_State.Nesting_Stack(I).Name & " Class=" &
-					    Data.Command_Type'Image(Format_State.Nesting_Stack(I).Command));
+					    Data.Command_Type'Image(Format_State.Nesting_Stack(I).Command) & " Line=" &
+					    Format_State.Nesting_Stack(I).Open_Line);
 				    end loop;
 				end;
 
@@ -11298,7 +11314,8 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 	    Ada.Text_IO.Put_Line ("   ** Unfinished commands detected.");
 	    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
 	        Ada.Text_IO.Put_Line ("      Open command=" &
-		    Format_State.Nesting_Stack(I).Name);
+		    Format_State.Nesting_Stack(I).Name & "; Line=" &
+		    Format_State.Nesting_Stack(I).Open_Line);
 	    end loop;
 	end if;
     end Process;
