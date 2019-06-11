@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.87 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
+@comment{ $Revision: 1.88 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2019/04/09 04:56:53 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2280,7 +2280,7 @@ lock using Atomic_Exchange:}]}
 @LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Test_and_Set]}
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[The language-defined package
 System.Atomic_Operations.Test_And_Set provides an operation to atomically set
 and clear an atomic flag object.]}
@@ -2323,12 +2323,12 @@ package System.Atomic_Operations.Test_And_Set has the following declaration:]}
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
 Text=[@Chg{Version=[5],New=[The modulus and size of Test_and_Set_Flag.],Old=[]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[Test_And_Set_Flag represents the state of an
 atomic flag object. An atomic flag object can either be considered to be set or
 cleared.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[Atomic_Test_And_Set performs an atomic
 test-and-set operation on Item. Item is set to some implementation-defined
 nonzero value. The function returns True if the previous contents were nonzero,
@@ -2338,7 +2338,7 @@ and otherwise returns False.]}
 Text=[@Chg{Version=[5],New=[The value used to represent the set value for
 Atomic_Test_and_Set.],Old=[]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[Atomic_Clear performs an atomic clear
 operation on Item. After the operation, Item contains 0. This call should be
 used in conjunction with Atomic_Test_And_Set.]}
@@ -2356,7 +2356,7 @@ used in conjunction with Atomic_Test_And_Set.]}
 
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[The language-defined generic package
 System.Atomic_Operations.Arithmetic provides operations to perform arithmetic
 atomically on objects of integer types.]}
@@ -2407,7 +2407,7 @@ package System.Atomic_Operations.Arithmetic has the following declaration:]}
 
 @begin{DescribeCode}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Text=[The operations of this package are defined
 as follows:]}
 
@@ -2418,7 +2418,7 @@ as follows:]}
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
 @exam{Item := Item + Value;}]}
 
@@ -2429,7 +2429,7 @@ as follows:]}
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
 @exam{Item := Item - Value;}]}
 
@@ -2441,7 +2441,7 @@ as follows:]}
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
 @exam{Tmp := Item; Item := Item + Value; @key[return] Tmp;}]}
 
@@ -2454,7 +2454,7 @@ as follows:]}
    @key[with] Convention => Intrinsic;]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
 @exam{Tmp := Item; Item := Item - Value; @key[return] Tmp;}]}
 

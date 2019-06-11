@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2019/05/08 22:01:12 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.152 $}
+@Comment{$Revision: 1.153 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -3399,10 +3399,12 @@ evaluation proceeds in two steps:]}
   counts are combined to determine the overall length of the array, and
   ultimately the limits on the bounds of the array (defined below);]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0250-1]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0212-1],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
   @ChgAdded{Version=[5],Text=[A second iteration is performed for each of the
   @nt{iterator_specification}s, in the order given in the @nt{aggregate},
-  and for each value produced, the associated @nt{expression} is evaluated,
+  and for each value conditionally produced by the iteration (see
+  @RefSecNum{Loop Statements} and @RefSecNum{Generalized Loop Iteration}), the
+  associated @nt{expression} is evaluated,
   its value is converted to the component subtype of the array type, and used
   to define the value of the next component of the array starting at the
   low bound and proceeding sequentially toward the high bound. A check is made
@@ -3829,8 +3831,8 @@ and to incorporate the rulings of AI83-00019, AI83-00309, etc.
 
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
-@ChgAdded{Version=[5],Text=[A (record or array) delta aggregate yields a
-composite value that starts with a copy of another value of the same
+@ChgAdded{Version=[5],Text=[Evaluating a (record or array) delta aggregate
+yields a composite value that starts with a copy of another value of the same
 type and then assigns to some (but typically not all) components
 of the copy.@Defn{delta aggregate}]}
 @end{Intro}
@@ -4484,16 +4486,16 @@ follows:]}
       parameter, and the result of evaluating the @nt{expression} as the third
       parameter;]}
 
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0327-1]}
     @ChgAdded{Version=[5],Type=[Leading],Text=[for a
       @nt{container_element_association} with an
       @nt{iterated_element_association}, first the @nt{iterated_element_association}
-      is elaborated, then an iteration is performed as described in
-      @RefSecNum{Loop Statements} or @RefSecNum{Generalized Loop Iteration}, and
-      for each value of the loop parameter of the iteration the Add_Named
-      procedure is invoked with the anonymous object @i<A> as the first
-      parameter, the result of evaluating the @nt{expression} as the third
-      parameter, and:]}
+      is elaborated, then an iteration is performed, and for each value
+      conditionally produced by the iteration (see
+      @RefSecNum{Loop Statements} and @RefSecNum{Generalized Loop Iteration})
+      the Add_Named rocedure is invoked with the anonymous object @i<A> as
+      the first parameter, the result of evaluating the @nt{expression} as
+      the third parameter, and:]}
 
 @begin{Itemize} @Comment{3rd level}
       @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -4525,10 +4527,11 @@ follows:]}
     @ChgAdded{Version=[5],Text=[the @nt{iterated_element_association} is
       elaborated;]}
 
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[an iteration is performed as described in
-    @RefSecNum{Loop Statements} or @RefSecNum{Generalized Loop Iteration},
-      and for each value of the loop parameter of the iteration, the Add_Unnamed
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1],ARef=[AI12-0327-1]}
+    @ChgAdded{Version=[5],Text=[an iteration is performed, and for each value
+      conditionally produced by the iteration (see
+      @RefSecNum{Loop Statements} and @RefSecNum{Generalized Loop Iteration})
+      the Add_Unnamed
       procedure is invoked, with the anonymous object @i<A> as the first
       parameter and the result of evaluating the @nt{expression} as the second
       parameter.]}
@@ -7423,14 +7426,24 @@ expected to be of the same type.]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0158-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[3],Text=[For the evaluation of a @nt{quantified_expression},
 the @nt{loop_parameter_specification} or @nt{iterator_specification} is first elaborated. The evaluation of a
-@nt{quantified_expression} then evaluates the @nt{predicate} for
-@Chg{Version=[4],New=[the values],Old=[each value]} of the loop
+@nt{quantified_expression} then @Chg{Version=[5],New=[performs an iteration,
+and ],Old=[]}evaluates the @nt{predicate} for @Chg{Version=[5],New=[each value
+conditionally produced by the iteration],Old=[@Chg{Version=[4],New=[the
+values],Old=[each value]} of the loop
 parameter@Chg{Version=[4],New=[],Old=[. These values are examined]} in the
-order specified by the
-@nt{loop_parameter_specification} (see @RefSecNum{Loop Statements}) or
-@nt{iterator_specification} (see @RefSecNum{Generalized Loop Iteration}).@PDefn2{Term=[evaluation],Sec=[quantified_expression]}]}
+order specified by the @nt{loop_parameter_specification}]} (see
+@RefSecNum{Loop Statements}@Chg{Version=[5],New=[ and],Old=[) or
+@nt{iterator_specification} (see]} @RefSecNum{Generalized Loop Iteration}).@PDefn2{Term=[evaluation],Sec=[quantified_expression]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0327-1]}
+  @ChgAdded{Version=[5],Text=[The order of evaluation of the predicates is
+  that in which the values are produced, as specified in
+  @RefSecNum{Loop Statements} or @RefSecNum{Generalized Loop Iteration}.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0176-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[The value of the
@@ -7830,15 +7843,15 @@ combiner subprogram.]}
 @end{StaticSem}
 
 @begin{Runtime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[5],Text=[@PDefn2{Term=[evaluation], Sec=(value_sequence)}
 For the evaluation of a @nt{value_sequence}, the
 @nt{iterated_element_association} is elaborated, then an iteration is
-performed as described in @RefSecNum{Loop Statements} or
-@RefSecNum{Generalized Loop Iteration}, and for each value produced by the
-iterator, the associated @nt{expression} is evaluated with the loop parameter
-having this value, to produce a result that is converted to Value_Type, and used
-to define the next value in the sequence.]}
+performed, and for each value conditionally produced by the iteration (see
+@RefSecNum{Loop Statements} and @RefSecNum{Generalized Loop Iteration}),
+the associated @nt{expression} is evaluated with the loop parameter
+having this value, to produce a result that is converted to Value_Type,
+and used to define the next value in the sequence.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[If the @nt{value_sequence} does not have the
@@ -7972,7 +7985,7 @@ reduction expression without a @nt{chunk_specification}.]}]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[For @PrefixType{a
 @nt{prefix} X of an array type@Redundant[ (after
-any implicit dereference)], or denotes an iterable container
+any implicit dereference)], or that denotes an iterable container
 object (see @RefSecNum{User-Defined Iterator Types})}, the following attributes
 are defined:]}
 

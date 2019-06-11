@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1234,22 +1234,33 @@ subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 @end{StaticSem}
 
 @begin{RunTime}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1]}
-@ChgAdded{Version=[5],Text=[An @nt{iterator_filter} is defined to be
-@i<satisfied>@Defn2{Term=[satisfied],Sec=[iterator filter]} when the
-@nt{condition} evaluates to True for a given iteration of a
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
+@ChgAdded{Version=[5],Text=[The @i<filter> of an @i{iterator construct}
+@Defn{iterator construct}@Defn2{Term=[filter],Sec={iterator construct}} (a
 @nt{loop_parameter_specification}, @nt{iterator_specification}, or
-@nt{procedural_iterator}. The term
-@i{conditionally executed}@Defn{conditionally executed}
-when referring
-to the @nt{sequence_of_statements} of a @nt{loop_statement} means that the
-statements are executed only when there is no @nt{iterator_filter}, or the
-@nt{iterator_filter} is satisfied. In contexts where a
-@nt{loop_parameter_specification} or @nt{iterator_specification} is used to
-produce a sequence of values (see @RefSecNum{Array Aggregates} and
-@RefSecNum{Container Aggregates}), if an
-@nt{iterator_filter} is present, the sequence of values will contain only
-the values for which the @nt{iterator_filter} is satisfied.]}
+@nt{procedural_iterator}) is defined to be
+@i{satisfied}@Defn2{Term=[satisfied],Sec=[filter]} when there is no
+@nt{iterator_filter} for the iterator construct, or when the @nt{condition}
+of the @nt{iterator_filter} evaluates to True for a given iteration of the
+iterator construct.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
+@ChgAdded{Version=[5],Text=[If a @nt{sequence_of_statements} of a
+@nt{loop_statement} with an iterator construct is said to be
+@i{conditionally executed},@Defn{conditionally executed} then the @nt{statement}s
+are executed only when the filter of the iterator construct is satisfied.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
+@ChgAdded{Version=[5],Text=[The loop iterators @nt{loop_parameter_specification}
+and @nt{iterator_specification} can also be used in contexts other than
+@nt{loop_statement}s (for example, see @RefSecNum{Container Aggregates} and
+@RefSecNum{Quantified Expressions}). In such a context,
+the iterator @i{conditionally produces}@Defn2{Term=[conditionally produces],
+Sec=[iteration]} values in the order specified for
+the associated construct below or in @RefSecNum{Generalized Loop Iteration}.
+The values produced are the values given to the loop parameter when the filter
+of the iterator construct is satisfied for that value. @Redundant[No value is
+produced when the @nt{condition} of an @nt{iterator_filter} evaluates to False.]]}
 
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
 @PDefn2{Term=[execution], Sec=(loop_statement)}
@@ -1872,7 +1883,7 @@ an @nt{iterator_specification}.]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<iterator_specification>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
     @Syn2{defining_identifier} @Chg{Version=[5],New=<[: @Syn2{loop_parameter_subtype_indication}] >,Old=<>}@key[in] [@key{reverse}] @SynI{iterator_}@Syn2{name}@Chg{Version=[5],New=<
-      [@Syn2{iterator_filter}]>,Old=<>}"}
+      [@Syn2{iterator_filter}]>,Old=<>}
   | @Syn2{defining_identifier} [: @Chg{Version=[5],New=<@Syn2{loop_parameter_subtype_indication}>,Old=<@Syn2{subtype_indication}>}] @key[of] [@key{reverse}] @SynI{iterable_}@Syn2{name}>,Old=<>}@Chg{Version=[5],New=<
       [@Syn2{iterator_filter}]>,Old=<>}"}
 

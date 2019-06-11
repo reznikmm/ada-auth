@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.65 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
+@Comment{ $Revision: 1.66 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:53 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -1224,7 +1224,7 @@ proscribed
 @end{DiffWord2005}
 
 @begin{Incompatible2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-3183-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0318-1]}
   @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}@b<Correction:>
   Restriction No_IO now excludes use of Ada.Directories. If a program using
   No_IO used Ada.Directories, it would be legal in Ada 2012 and illegal
