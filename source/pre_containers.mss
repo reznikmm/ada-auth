@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.106 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.107 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -456,6 +456,19 @@ access to fewer global objects.]}
   strict weak ordering.]}
 @end{DiffWord2005}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
+  new subprograms, types, and even a nested package were added to
+  Containers.Hashed_Maps to better support contracts and stable views. If an
+  instance of Containers.Hashed_Maps
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
@@ -630,10 +643,9 @@ package Containers.Vectors has the following declaration:]}
       @key{return} Boolean @key{is} <>;
 @key{package} Ada.Containers.Vectors@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Vectors]}@Chg{Version=[5],New=[
    @key[with] Preelaborate, Remote_Types,
-        Nonblocking => Equal_Element'Nonblocking,
-        Global => Equal_Element'Global &
-                  Element_Type'Global &
-                  @key[in out synchronized] Ada.Containers.Vectors @key[is]],Old=[
+        Nonblocking => Element_Type'Nonblocking @key{and} Equal_Element'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Vectors &
+                  Element_Type'Global & Equal_Element'Global @key[is]],Old=[
    @key{pragma} Preelaborate(Vectors);@Chg{Version=[3],New=[
    @key{pragma} Remote_Types(Vectors);],Old=[]}]}]}
 
@@ -662,8 +674,8 @@ package Containers.Vectors has the following declaration:]}
                                  Tampering_With_Elements_Prohibited),
            Default_Initial_Condition =>
               Length (Vector) = 0 @key{and then}
-              (@b{not} Tampering_With_Cursors_Prohibited (Vector)) @key{and then}
-              (@b{not} Tampering_With_Elements_Prohibited (Vector))],Old=[]};
+              (@key{not} Tampering_With_Cursors_Prohibited (Vector)) @key{and then}
+              (@key{not} Tampering_With_Elements_Prohibited (Vector))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Vector);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -678,7 +690,7 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Equal_Element} (Left, Right : Element_Type)
-      @key{renames} "=";]}
+      @key{return} Boolean @key{renames} "=";]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
@@ -789,7 +801,9 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reserve_Capacity} (Container : @key{in out} Vector;
                                Capacity  : @key{in}     Count_Type)@Chg{Version=[5],New=[
-      @key[with] Post => Container.Capacity >= Capacity],Old=[]};]}
+      @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
+                    @key[then raise] Program_Error),
+           Post => Container.Capacity >= Capacity],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -810,14 +824,14 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Vector) @key{return} Boolean@Chg{Version=[5],New=[
       @key[with] Nonblocking, Global => @key[null],
-           Post => Is_Empty'Result = Length (Container) = 0],Old=[]};]}
+           Post => Is_Empty'Result = (Length (Container) = 0)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} Vector)@Chg{Version=[5],New=[
       @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
                        @key[then raise] Program_Error),
-           Post => Length (Container) = 0;],Old=[]};]}
+           Post => Length (Container) = 0],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -851,14 +865,15 @@ package Containers.Vectors has the following declaration:]}
       @key{return} Element_Type@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{if} Index @key{not in} First_Index (Container) .. Last_Index (Container)
                     @key{then raise} Constraint_Error),
-           Nonblocking, Global => Element_Type'Global],Old=[]};]}
+           Nonblocking => Element_Type'Nonblocking,
+           Global => Element_Type'Global],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
            Nonblocking => True,
-           Global => Element_Type'Global & @key{in access} Vector],Old=[]};]}
+           Global => @key{in access} Vector & Element_Type'Global],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Element} (Container : Vector;
@@ -866,7 +881,8 @@ package Containers.Vectors has the following declaration:]}
       @key{with} Pre => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
                   (@key{if not} Has_Element (Container, Position)
                    @key{then raise} Program_Error),
-           Nonblocking, Global => Element_Type'Global;]}
+           Nonblocking => Element_Type'Nonblocking,
+           Global => Element_Type'Global;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -896,7 +912,7 @@ package Containers.Vectors has the following declaration:]}
       Index     : @key{in} Index_Type;
       Process   : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{if} Index @key{not in} First_Index (Container) .. Last_Index (Container)
-                    @key{then raise} Constraint_Error).
+                    @key{then raise} Constraint_Error),
            Global => Element_Type'Global],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -904,16 +920,17 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
       Process  : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
-      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error);
-           Global => Element_Type'Global & @key{in access} Vector],Old=[]};]}
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+           Global => @key{in access} Vector & Element_Type'Global],Old=[]};]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Container : @key{in} Vector;
       Position  : @key{in} Cursor;
       Process   : @key{not null access procedure} (Element : @key{in} Element_Type))
-      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{or else}
-                   (@key{not} Has_Element (Container, Position) @key{then raise} Program_Error)
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error
+                    @key{elsif not} Has_Element (Container, Position)
+                    @key{then raise} Program_Error),
            Global => Element_Type'Global;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -948,7 +965,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
-      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
            Global => @key[synchronized in out access] Vector,
            Nonblocking => True,
            Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
@@ -961,7 +978,7 @@ package Containers.Vectors has the following declaration:]}
       @key[with] Pre    => (@key[if] Index @key[not in] First_Index (Container) .. Last_Index (Container)
                      @key[then raise] Constraint_Error),
           Post   => Tampering_With_Cursors_Prohibited (Container),
-          Global => @key[null]],Old=[]};]}
+          Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
@@ -971,7 +988,7 @@ package Containers.Vectors has the following declaration:]}
       @key[with] Pre    => (@key[if] Index @key[not in] First_Index (Container) .. Last_Index (Container)
                      @key[then raise] Constraint_Error),
           Post   => Tampering_With_Cursors_Prohibited (Container),
-          Global => @key[null]],Old=[]};]}
+          Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
@@ -982,7 +999,7 @@ package Containers.Vectors has the following declaration:]}
                      (@key[if not] Has_Element (Container, Position)
                       @key[then raise] Program_Error),
            Post   => Tampering_With_Cursors_Prohibited (Container),
-           Global => @key[null]],Old=[]};]}
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
@@ -993,14 +1010,14 @@ package Containers.Vectors has the following declaration:]}
                      (@key[if not] Has_Element (Container, Position)
                       @key[then raise] Program_Error),
            Post   => Tampering_With_Cursors_Prohibited (Container),
-           Global => @key[null]],Old=[]};]}
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vector; Source : @key{in} Vector)@Chg{Version=[5],New=[
       @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Target)
                     @key[then raise] Program_Error),
-           Post => Length (Source) = Length (Target),
+           Post => Length (Source) = Length (Target) @key{and then}
                    Capacity (Target) >= Length (Target)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
@@ -1056,7 +1073,7 @@ package Containers.Vectors has the following declaration:]}
                     @key{then raise} Program_Error) @key{and then}
                    (@key{if} Length (Container) > Maximum_Length - Length (New_Item)
                     @key{then raise} Constraint_Error),
-           Post => Length (Container)'Old + Length (New_Item) = Length (Container),
+           Post => Length (Container)'Old + Length (New_Item) = Length (Container) @key{and then}
                    Capacity (Container) >= Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1150,7 +1167,7 @@ package Containers.Vectors has the following declaration:]}
                     @key{then raise} Program_Error) @key{and then}
                    (@key{if} Before /= No_Element @key{and then}
                        (@key{not} Has_Element (Container, Before))
-                    @key{then raise} Program_Error) and
+                    @key{then raise} Program_Error) @key{and then}
                    (@key{if} Length (Container) > Maximum_Length - Count
                     @key{then raise} Constraint_Error),
            Post => Length (Container)'Old + Count = Length (Container) @key{and then}
@@ -1219,11 +1236,11 @@ package Containers.Vectors has the following declaration:]}
                            Before    : @key{in}     Extended_Index;
                            Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
-                    @key{then raise} Program_Error) @key{and then}
-                   (@key{if} Before @key{not in} First_Index (Container) .. Last_Index (Container) + 1
-                    @key{then raise} Constraint_Error),
-                   (@key{if} Length (Container) > Maximum_Length - Count
-                    @key{then raise} Constraint_Error),
+                       @key{then raise} Program_Error
+                    @key{elsif} Before @key{not in} First_Index (Container) .. Last_Index (Container) + 1
+                       @key{then raise} Constraint_Error
+                    @key{elsif} Length (Container) > Maximum_Length - Count
+                       @key{then raise} Constraint_Error),
            Post => Length (Container)'Old + Count = Length (Container) @key{and then}
                    Capacity (Container) >= Length (Container)],Old=[]};]}
 
@@ -1234,12 +1251,12 @@ package Containers.Vectors has the following declaration:]}
                            Position  :    @key{out} Cursor;
                            Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
       @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
-                    @key{then raise} Program_Error) @key{and then}
-                   (@key{if} Before /= No_Element @key{and then}
+                       @key{then raise} Program_Error
+                    @key{elsif} Before /= No_Element @key{and then}
                        (@key{not} Has_Element (Container, Before))
-                    @key{then raise} Program_Error) @key{and then}
-                   (@key{if} Length (Container) > Maximum_Length - Count
-                    @key{then raise} Constraint_Error),
+                       @key{then raise} Program_Error
+                    @key{elsif} Length (Container) > Maximum_Length - Count
+                       @key{then raise} Constraint_Error),
            Post => Length (Container)'Old + Count = Length (Container) @key{and then}
                    Has_Element (Container, Position) @key{and then}
                    Capacity (Container) >= Length (Container)],Old=[]};]}
@@ -1255,8 +1272,7 @@ package Containers.Vectors has the following declaration:]}
                     @key{then raise} Constraint_Error) @key{and then}
                    (@key{if} Length (Container) + Count > Maximum_Length
                     @key{then raise} Constraint_Error),
-           Post => Length (Container)'Old - Count <= Length (Container) @key{and then}
-                   Position = No_Element],Old=[]};]}
+           Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -1268,7 +1284,8 @@ package Containers.Vectors has the following declaration:]}
                    (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
                    (@key{if not} Has_Element (Container, Position)
                     @key{then raise} Program_Error),
-           Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
+           Post => Length (Container)'Old - Count <= Length (Container) @key{and then}
+                   Position = No_Element],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
@@ -1287,47 +1304,153 @@ package Containers.Vectors has the following declaration:]}
            Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Elements} (Container : @key{in out} Vector);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Elements} (Container : @key{in out} Vector)@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                   @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (Container : @key{in out} Vector;
-                   I, J      : @key{in}     Index_Type);]}
+                   I, J      : @key{in}     Index_Type)@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                   @key{then raise} Program_Error) @key{and then}
+                  (@key{if} I @key{not in} First_Index (Container) .. Last_Index (Container)
+                   @key{then raise} Constraint_Error) @key{and then}
+                  (@key{if} J @key{not in} First_Index (Container) .. Last_Index (Container)
+                   @key{then raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (Container : @key{in out} Vector;
-                   I, J      : @key{in}     Cursor);]}
+                   I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} I = No_Element or else J = No_Element
+                    @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, I)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, J)
+                    @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Index} (Container : Vector) @key{return} Index_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Index} (Container : Vector) @key{return} Index_Type@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => First_Index'Result = Index_Type'First],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : Vector) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : Vector) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => (@key{if not} Is_Empty (Container)
+                    @key{then} Has_Element (Container, First'Result)
+                    @key{else} First'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : Vector)
-      @key{return} Element_Type;]}
+      @key{return} Element_Type@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Index} (Container : Vector) @key{return} Extended_Index;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Index} (Container : Vector) @key{return} Extended_Index@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => (@key{if} Length (Container) = 0 @key{then} Last_Index'Result = No_Index
+                    @key{else} Count_Type(Last_Index'Result - Index_Type'First) =
+                         Length (Container) - 1)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : Vector) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : Vector) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => (@key{if} not Is_Empty (Container)
+                    @key{then} Has_Element (Container, Last'Result)
+                    @key{else} Last'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : Vector)
-      @key{return} Element_Type;]}
+      @key{return} Element_Type@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} Vector,
+           Nonblocking => True,
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                    @key{else} True)],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : Vector; Position : Cursor) @key{return} Cursor
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                    @key{elsif} Has_Element (Container, Next'Result) @key{then}
+                       To_Index (Container, Next'Result) =
+                       To_Index (Container, Position) + 1
+                    @key{elsif} Next'Result = No_Element @key{then}
+                       Position = Last (Container)
+                    @key{else} False);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} Vector,
+           Nonblocking => True],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     Vector;
+                   Position  : @key{in out} Cursor)
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position /= No_Element
+                    @key{then} Has_Element (Container, Position));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} Vector,
+           Nonblocking => True,
+           Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                    @key{else} True)],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Previous} (Container : Vector;
+                      Position  : Cursor) @key{return} Cursor
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                    @key{elsif} Has_Element (Container, Previous'Result) @key{then}
+                       To_Index (Container, Previous'Result) =
+                       To_Index (Container, Position) - 1
+                    @key{elsif} Previous'Result = No_Element @key{then}
+                       Position = First (Container)
+                    @key{else} False);]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} Vector,
+           Nonblocking => True],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Previous} (Container : @key{in}     Vector;
+                       Position  : @key{in out} Cursor)
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position /= No_Element
+                    @key{then} Has_Element (Container, Position));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find_Index} (Container : Vector;
@@ -1336,10 +1459,16 @@ package Containers.Vectors has the following declaration:]}
       @key{return} Extended_Index;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : Vector;
                   Item      : Element_Type;
                   Position  : Cursor := No_Element)
-      @key{return} Cursor;]}
+      @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                      (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Find'Result = No_Element @key{then} True
+                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find_Index} (Container : Vector;
@@ -1348,10 +1477,16 @@ package Containers.Vectors has the following declaration:]}
       @key{return} Extended_Index;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find} (Container : Vector;
                           Item      : Element_Type;
                           Position  : Cursor := No_Element)
-      @key{return} Cursor;]}
+      @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                      (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Reverse_Find'Result = No_Element @key{then} True
+                    @key{else} Has_Element (Container, Reverse_Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : Vector;
@@ -1362,39 +1497,75 @@ package Containers.Vectors has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure}  @AdaSubDefn{Iterate}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
      (Container : @key{in} Vector;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+      @key{with} Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} Vector;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+      @key{with} Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector)
-      @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Iterate} (Container : @key[in] Vector)
+      @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class@Chg{Version=[5],New=[
+      @key[with] Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-      @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Iterate} (Container : @key[in] Vector; Start : @key[in] Cursor)
+      @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Start = No_Element
+                            @key[then raise] Constraint_Error) @key[and then]
+                        (@key[if not] Has_Element (Container, Start)
+                         @key[then raise] Program_Error),
+           Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{package} @AdaPackDefn{Generic_Sorting} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Sorting}@Chg{Version=[5],New=[
+   @key{with} Nonblocking => Vectors'Nonblocking @key{and} Less_Element'Nonblocking,
+         Global => Vectors'Global & Less_Element'Global],Old=[]} @key{is}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Less_Element} (Left, Right : Element_Type) @key{return} Boolean
+         @key{renames} "<";]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : Vector) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} Vector);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} Vector)@Chg{Version=[5],New=[
+         @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                       @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Merge} (Target  : @key{in out} Vector;
-                       Source  : @key{in out} Vector);]}
+                       Source  : @key{in out} Vector)@Chg{Version=[5],New=[
+         @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                       @key{then raise} Program_Error) @key{and then}
+                      (@key{if} Tampering_With_Cursors_Prohibited (Source)
+                       @key{then raise} Program_Error) @key{and then}
+                      (@key{if} Length (Target) > Maximum_Length - Length (Source)
+                       @key{then raise} Constraint_Error),
+              Post => (@key{declare}
+                         Result_Length : @key{constant} Count_Type :=
+                            Length (Source)'Old + Length (Target)'Old;
+                       @key{begin}
+                          (@key{if} Target = Source @key{then} True
+                           @key{else} Length (Source) = 0 @key{and then}
+                              Length (Target) = Result_Length @key{and then}
+                              Capacity (Target) >= Result_Length))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
@@ -1408,7 +1579,7 @@ package Containers.Vectors has the following declaration:]}
          @key{with} Constant_Indexing => Constant_Reference,
               Variable_Indexing => Reference,
               Default_Iterator  => Iterate,
-              Iterator_Element  => Element_Type;
+              Iterator_Element  => Element_Type,
               Aggregate         => (Empty          => Empty_Vector,
                                     Add_Unnamed    => Append_One,
                                     New_Indexed    => New_Vector,
@@ -1434,16 +1605,16 @@ package Containers.Vectors has the following declaration:]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Vector_Iterator_Interfaces} @key[is new]
-          Ada.Iterator_Interfaces (Cursor, Has_Element);]}
+         Ada.Iterator_Interfaces (Cursor, Has_Element);]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Vectors.Vector;
                         Source : @key{in} Vector)
-         @key{with} Post => Length (Source) = Length (Target),
+         @key{with} Post => Length (Source) = Length (Target) @key{and then}
                      Capacity (Target) >= Length (Target);]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
-@ChgAdded{Version=[5],Text=[      function @AdaSubDefn{Copy} (Source : Vectors.Vector) @key{return} Vector
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Vectors.Vector) @key{return} Vector
          @key{with} Post => Length (Copy'Result) = Length (Source);]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
@@ -1709,7 +1880,6 @@ Generic_Sorting with @i<V> as a parameter.]}]}
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1]}
   @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Complete replacement
   of an element can cause its memory to be deallocated while another operation
   is holding onto a reference to it. That can't be allowed. However, a simple
@@ -1735,8 +1905,10 @@ unmodified.@Chg{Version=[4],New=[ These checks are made before any other
 defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
-  cursors, so we mention it only from completeness in the second sentence.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Tampering with
+  elements includes tampering with cursors, so we mention it only from
+  completeness in the second sentence.]}]}
 @end{TheProof}
 
 @begin{DescribeCode}
@@ -1831,7 +2003,7 @@ returns False otherwise.]}
     (sequentiually or in parallel). Therefore, tampering needs to be
     implemented with an atomic or protected counter. The counter is initialized
     to zero, and is incremented when tampering is prohibited, and decremented
-    when an area that prohibited tampering is left. Function
+    when leaving an area that prohibited tampering. Function
     Tampering_With_Cursors_Prohibited returns True if the counter is nonzero.
     (Note that any case where the result is not well-defined for one task
     is incorrect use of shared variables and would be erroneous by the rules
@@ -1986,7 +2158,7 @@ element Left followed by the element Right.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Capacity (Container : Vector) @key{return} Count_Type@Chg{Version=[5],New=[
    @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
@@ -1996,10 +2168,12 @@ element Left followed by the element Right.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgRef{Version=[5],Kind=[Revised]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reserve_Capacity (Container : @key{in out} Vector;
                             Capacity  : @key{in}     Count_Type)@Chg{Version=[5],New=[
-   @key[with] Post => Container.Capacity >= Capacity],Old=[]};]}
+   @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
+                 @key[then raise] Program_Error),
+        Post => Container.Capacity >= Capacity],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2088,7 +2262,7 @@ elements are removed from Container.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Empty (Container : Vector) @key{return} Boolean@Chg{Version=[5],New=[
    @key[with] Nonblocking, Global => @key[null],
-        Post => Is_Empty'Result = Length (Container) = 0],Old=[]};]}
+        Post => Is_Empty'Result = (Length (Container) = 0)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2102,7 +2276,7 @@ if Container is empty],Old=[Equivalent to Length (Container) = 0]}.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Clear (Container : @key{in out} Vector)@Chg{Version=[5],New=[
    @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
                    @key[then raise] Program_Error),
-        Post => Length (Container) = 0;],Old=[]};]}
+        Post => Length (Container) = 0],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2194,7 +2368,8 @@ Container parameter is not considered to overlap with any object
    @key{return} Element_Type@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{if} Index @key{not in} First_Index (Container) .. Last_Index (Container)
                  @key{then raise} Constraint_Error),
-        Nonblocking, Global => Element_Type'Global],Old=[]};]}
+        Nonblocking => Element_Type'Nonblocking,
+        Global => Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2209,8 +2384,8 @@ element at position Index.]}
 @ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position  : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
-        Nonblocking => True,
-        Global => Element_Type'Global & @key{in access} Vector],Old=[]};]}
+        Nonblocking => Element_Type'Nonblocking,
+        Global => @key{in access} Vector & Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2227,7 +2402,8 @@ designated by Position.]}
    @key{with} Pre => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
                (@key{if not} Has_Element (Container, Position)
                 @key{then raise} Program_Error),
-        Nonblocking, Global => Element_Type'Global;]}
+        Nonblocking => Element_Type'Nonblocking,
+        Global => Element_Type'Global;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
@@ -2308,7 +2484,7 @@ Container parameter is not considered to overlap with any object
    Index     : @key{in} Index_Type;
    Process   : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{if} Index @key{not in} First_Index (Container) .. Last_Index (Container)
-                 @key{then raise} Constraint_Error).
+                 @key{then raise} Constraint_Error),
         Global => Element_Type'Global],Old=[]};]}
 @end{Example}
 
@@ -2342,8 +2518,8 @@ Process.@key{all} is propagated.]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Query_Element
   (Position : @key{in} Cursor;
    Process  : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
-   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error);
-        Global => Element_Type'Global & @key{in access} Vector],Old=[]};]}
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+        Global => @key{in access} Vector & Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -2366,17 +2542,18 @@ exception raised by Process.@key{all} is propagated.]}
   (Container : @key{in} Vector;
    Position  : @key{in} Cursor;
    Process   : @key{not null access procedure} (Element : @key{in} Element_Type))
-   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{or else}
-                (@key{not} Has_Element (Container, Position) @key{then raise} Program_Error)
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error
+                 @key{elsif not} Has_Element (Container, Position)
+                 @key{then raise} Program_Error),
         Global => Element_Type'Global;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Query_Element calls Process.@key{all}
 with the element designated by Position as the
-argument. Tampering with the elements of the vector that contains the element
-designated by Position is prohibited during the execution of the call on
-Process.all. Any exception raised by Process.all is propagated.]}
+argument. Tampering with the elements of Container
+is prohibited during the execution of the call on
+Process.@key{all}. Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2474,7 +2651,7 @@ is not an empty element after successful completion of this operation.]}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
         Global => @key[synchronized in out access] Vector,
         Nonblocking => True,
         Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
@@ -2510,7 +2687,7 @@ propagates Program_Error.]}]}
    @key[with] Pre    => (@key[if] Index @key[not in] First_Index (Container) .. Last_Index (Container)
                   @key[then raise] Constraint_Error),
        Post   => Tampering_With_Cursors_Prohibited (Container),
-       Global => @key[null]],Old=[]};]}
+       Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
@@ -2569,7 +2746,7 @@ element after successful completion of this operation.]}
                   (@key[if not] Has_Element (Container, Position)
                    @key[then raise] Program_Error),
         Post   => Tampering_With_Cursors_Prohibited (Container),
-        Global => @key[null]],Old=[]};]}
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
@@ -2597,7 +2774,7 @@ object returned by Constant_Reference exists and has not been finalized.]}
                   (@key[if not] Has_Element (Container, Position)
                    @key[then raise] Program_Error),
         Post   => Tampering_With_Cursors_Prohibited (Container),
-        Global => @key[null]],Old=[]};]}
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
@@ -2625,7 +2802,7 @@ element after successful completion of this operation.]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} Vector; Source : @key{in} Vector)@Chg{Version=[5],New=[
    @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Target)
                  @key[then raise] Program_Error),
-        Post => Length (Source) = Length (Target),
+        Post => Length (Source) = Length (Target) @key{and then}
                 Capacity (Target) >= Length (Target)],Old=[]};]}
 @end{Example}
 
@@ -2662,7 +2839,7 @@ setting the length of Target to be that of Source).]}
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Type=[Trailing],Text=[Returns a vector whose elements are
-initialized from the corresponding elements of Source.@Chg{Version=[5],New=[],Old=[If
+initialized from the corresponding elements of Source.@Chg{Version=[5],New=[],Old=[ If
 Capacity is 0, then the vector capacity is the length of Source; if Capacity is
 equal to or greater than the length of Source, the vector capacity is at least
 the specified value. Otherwise, the operation propagates Capacity_Error.]}]}
@@ -2763,7 +2940,7 @@ exception raised during the copying is propagated.]}
                  @key{then raise} Program_Error) @key{and then}
                 (@key{if} Length (Container) > Maximum_Length - Length (New_Item)
                  @key{then raise} Constraint_Error),
-        Post => Length (Container)'Old + Length (New_Item) = Length (Container),
+        Post => Length (Container)'Old + Length (New_Item) = Length (Container) @key{and then}
                 Capacity (Container) >= Length (Container)],Old=[]};]}
 @end{Example}
 
@@ -3063,11 +3240,11 @@ and then Position is set to To_Cursor (Container, @i<T>).]}
                         Before    : @key{in}     Extended_Index;
                         Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
-                 @key{then raise} Program_Error) @key{and then}
-                (@key{if} Before @key{not in} First_Index (Container) .. Last_Index (Container) + 1
-                 @key{then raise} Constraint_Error),
-                (@key{if} Length (Container) > Maximum_Length - Count
-                 @key{then raise} Constraint_Error),
+                    @key{then raise} Program_Error
+                 @key{elsif} Before @key{not in} First_Index (Container) .. Last_Index (Container) + 1
+                    @key{then raise} Constraint_Error
+                 @key{elsif} Length (Container) > Maximum_Length - Count
+                    @key{then raise} Constraint_Error),
         Post => Length (Container)'Old + Count = Length (Container) @key{and then}
                 Capacity (Container) >= Length (Container)],Old=[]};]}
 @end{Example}
@@ -3099,12 +3276,12 @@ empty elements in the positions starting at Before.]}
                         Position  :    @key{out} Cursor;
                         Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
    @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
-                 @key{then raise} Program_Error) @key{and then}
-                (@key{if} Before /= No_Element @key{and then}
+                    @key{then raise} Program_Error
+                 @key{elsif} Before /= No_Element @key{and then}
                     (@key{not} Has_Element (Container, Before))
-                 @key{then raise} Program_Error) @key{and then}
-                (@key{if} Length (Container) > Maximum_Length - Count
-                 @key{then raise} Constraint_Error),
+                    @key{then raise} Program_Error
+                 @key{elsif} Length (Container) > Maximum_Length - Count
+                    @key{then raise} Constraint_Error),
         Post => Length (Container)'Old + Count = Length (Container) @key{and then}
                 Has_Element (Container, Position) @key{and then}
                 Capacity (Container) >= Length (Container)],Old=[]};]}
@@ -3209,9 +3386,13 @@ Delete (Container, Index_Type'Val(Index_Type'Pos(Last_Index (Container)) @en
 Count + 1), Count).]}
 
 @begin{Example}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} @Chg{Version=[3],New=[Vector],Old=[List]});]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0092-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} @Chg{Version=[3],New=[Vector],Old=[List]})@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                @key{then raise} Program_Error)],Old=[]};]}
+
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3227,15 +3408,23 @@ in reverse order.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Swap (Container : @key{in out} Vector;
-                I, J      : @key{in}     Index_Type);]}
+                I, J      : @key{in}     Index_Type)@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                @key{then raise} Program_Error) @key{and then}
+               (@key{if} I @key{not in} First_Index (Container) .. Last_Index (Container)
+                @key{then raise} Constraint_Error) @key{and then}
+               (@key{if} J @key{not in} First_Index (Container) .. Last_Index (Container)
+                @key{then raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is not in the range
-First_Index (Container) .. Last_Index (Container), then Constraint_Error is
-propagated. Otherwise, Swap exchanges the values of the elements at positions I
-and J.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+either I or J is not in the range First_Index (Container) .. Last_Index
+(Container), then Constraint_Error is propagated. Otherwise, ]}Swap exchanges
+the values of the elements at positions I and J.]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3246,15 +3435,25 @@ and J.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Swap (Container : @key{in out} Vector;
-                I, J      : @key{in}     Cursor);]}
+                I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} I = No_Element or else J = No_Element
+                 @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, I)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if not} Has_Element (Container, J)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
-then Constraint_Error is propagated. If either I or J do not designate an
-element in Container, then Program_Error is propagated. Otherwise, Swap
-exchanges the values of the elements designated by I and J.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+either I or J is No_Element, then Constraint_Error is propagated. If either I or
+J do not designate an element in Container, then Program_Error is propagated.
+Otherwise, ]}Swap exchanges the values of the elements designated by I and J.]}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3273,7 +3472,10 @@ exchanges the values of the elements designated by I and J.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Index (Container : Vector) @key{return} Index_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Index (Container : Vector) @key{return} Index_Type@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => First_Index'Result = Index_Type'First],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3288,7 +3490,12 @@ exchanges the values of the elements designated by I and J.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First (Container : Vector) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First (Container : Vector) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => (@key{if not} Is_Empty (Container)
+                 @key{then} Has_Element (Container, First'Result)
+                 @key{else} First'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3298,7 +3505,10 @@ element in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : Vector) @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : Vector)
+   @key{return} Element_Type@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3306,7 +3516,12 @@ element in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Index (Container : Vector) @key{return} Extended_Index;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Index (Container : Vector) @key{return} Extended_Index@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => (@key{if} Length (Container) = 0 @key{then} Last_Index'Result = No_Index
+                 @key{else} Count_Type(Last_Index'Result - Index_Type'First) =
+                      Length (Container) - 1)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3316,7 +3531,12 @@ Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last (Container : Vector) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last (Container : Vector) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => (@key{if} not Is_Empty (Container)
+                 @key{then} Has_Element (Container, Last'Result)
+                 @key{else} Last'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3326,7 +3546,10 @@ Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : Vector) @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : Vector)
+   @key{return} Element_Type@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3335,7 +3558,12 @@ Last_Index (Container)).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} Vector,
+        Nonblocking => True,
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                 @key{else} True)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3345,16 +3573,61 @@ No_Element. Otherwise, it returns a cursor that designates the element with inde
 To_Index (Position) + 1 in the same vector as Position.]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Next (Container : Vector;
+               Position : Cursor) @key{return} Cursor
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                 @key{elsif} Has_Element (Container, Next'Result) @key{then}
+                    To_Index (Container, Next'Result) =
+                    To_Index (Container, Position) + 1
+                 @key{elsif} Next'Result = No_Element @key{then}
+                    Position = Last (Container)
+                 @key{else} False);]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns a cursor designating the
+next element in Container, if any.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} Vector,
+        Nonblocking => True],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Next (Position).]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Next (Container : @key{in}     Vector;
+                Position  : @key{in out} Cursor)
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position /= No_Element
+                 @key{then} Has_Element (Container, Position));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Position := Next
+(Container, Position).]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} Vector,
+        Nonblocking => True,
+        Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                 @key{else} True)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3364,12 +3637,52 @@ No_Element. Otherwise, it returns a cursor that designates the element with inde
 To_Index (Position) @en 1 in the same vector as Position.]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Previous (Container : Vector;
+                   Position  : Cursor) @key{return} Cursor
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                 @key{elsif} Has_Element (Container, Previous'Result) @key{then}
+                    To_Index (Container, Previous'Result) =
+                    To_Index (Container, Position) - 1
+                 @key{elsif} Previous'Result = No_Element @key{then}
+                    Position = First (Container)
+                 @key{else} False);]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns a cursor designating the
+previous element in Container, if any.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} Vector,
+        Nonblocking => True],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Previous (Position).]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Previous (Container : @key{in}     Vector;
+                    Position  : @key{in out} Cursor)
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position /= No_Element
+                 @key{then} Has_Element (Container, Position));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Position :=
+Previous (Container, Position).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3388,18 +3701,26 @@ Otherwise, it returns the index of the first equal element encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Find (Container : Vector;
                Item      : Element_Type;
                Position  : Cursor := No_Element)
-   @key{return} Cursor;]}
+   @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                   (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+              Post => (@key{if} Find'Result = No_Element @key{then} True
+                 @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise@Chg{Version=[3],New=[,],Old=[]}
-Find searches the elements of Container for an element equal to Item
+]}Find searches the elements of Container for an element equal to Item
 (using the generic formal equality operator). The search starts at
 the first element if Position equals No_Element, and at the element designated by
 Position otherwise. It proceeds towards the last element of Container. If no
@@ -3425,18 +3746,26 @@ encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Reverse_Find (Container : Vector;
                        Item      : Element_Type;
                        Position  : Cursor := No_Element)
-   @key{return} Cursor;]}
+   @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                   (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+              Post => (@key{if} Reverse_Find'Result = No_Element @key{then} True
+                 @key{else} Has_Element (Container, Reverse_Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
 Otherwise@Chg{Version=[3],New=[,],Old=[]}
-Reverse_Find searches the elements of Container for an element equal
+]}Reverse_Find searches the elements of Container for an element equal
 to Item (using the generic formal equality operator). The search
 starts at the last element if Position equals No_Element, and at the element
 designated by Position otherwise. It proceeds towards the first element of
@@ -3480,9 +3809,11 @@ deleted if the paragraphs are ever renumbered.}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Iterate
   (Container : @key{in} Vector;
-   Process   : @key{not null access} @key{procedure} (Position : @key{in} Cursor));]}
+   Process   : @key{not null access} @key{procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+   @key{with} Allows_Exit],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3520,9 +3851,11 @@ Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Iterate
   (Container : @key{in} Vector;
-   Process   : @key{not null access} @key{procedure} (Position : @key{in} Cursor));]}
+   Process   : @key{not null access} @key{procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+   @key{with} Allows_Exit],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3533,9 +3866,10 @@ except that elements are traversed in reverse index order.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0212-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector)
-   @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] Vector_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class@Chg{Version=[5],New=[
+   @key[with] Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
@@ -3558,14 +3892,22 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] Vector; Start : @key[in] Cursor)
-   @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] Vector_Iterator_Interfaces.Reversible_Iterator'Class@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Start = No_Element
+                         @key[then raise] Constraint_Error) @key[and then]
+                     (@key[if not] Has_Element (Container, Start)
+                      @key[then raise] Program_Error),
+        Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0212-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
-is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
+is No_Element, then Constraint_Error is propagated. Otherwise, ]}Iterate
 returns a reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that will generate
 a value for a loop parameter (see @RefSecNum{Generalized Loop Iteration})
@@ -3624,7 +3966,10 @@ Any exception raised during evaluation of "<" is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} Vector);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} Vector)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3653,8 +3998,23 @@ provided. Any exception raised during evaluation of "<" is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} Vector;
-                 Source  : @key{in out} Vector);]}
+                    Source  : @key{in out} Vector)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Tampering_With_Cursors_Prohibited (Source)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Target) > Maximum_Length - Length (Source)
+                 @key{then raise} Constraint_Error),
+        Post => (@key{declare}
+                   Result_Length : @key{constant} Count_Type :=
+                      Length (Source)'Old + Length (Target)'Old;
+                 @key{begin}
+                    (@key{if} Target = Source @key{then} True
+                     @key{else} Length (Source) = 0 @key{and then}
+                        Length (Target) = Result_Length @key{and then}
+                        Capacity (Target) >= Result_Length))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -3691,10 +4051,10 @@ exception raised during evaluation of "<" is propagated.]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Text=[The nested package Vectors.Stable
 provides a type Stable.Vector that represents
-a @i<stable> vector,@Defn2{Term=(stable),Sec=(Vector)} which is one that
+a @i<stable> vector,@Defn2{Term=(stable),Sec=(vector)} which is one that
 cannot grow and shrink. Such a vector can be created by calling the
 To_Vector or Copy functions, or by establishing a
-@i<stabilized view> of a regular Vector.@Defn2{Term=[stabilized view],Sec=[Vector]}]}
+@i<stabilized view> of a regular Vector.@Defn2{Term=[stabilized view],Sec=[vector]}]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The subprograms of package
@@ -3705,8 +4065,9 @@ following are omitted:]}
 @begin{Indent}
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited,
-Tampering_With_Elements_Prohibited, Assign, Move, Insert, Insert_Space,
-Clear, Delete, and Set_Length]}
+Tampering_With_Elements_Prohibited, Reserve_Capacity, Assign, Move,
+Insert, Insert_Space, Clear, Delete, Delete_First, Delete_Last, and
+Set_Length]}
 @end{Indent}
 
 @ChgRef{Version=[5],Kind=[Added]}
@@ -4198,6 +4559,19 @@ value of Last_Index.]}
   before reaching this error.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
+  new subprograms, types, and even a nested package were added to
+  Containers.Vectors to better support contracts and stable views. If an
+  instance of Containers.Vectors
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
@@ -4265,9 +4639,13 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
-@key{package} Ada.Containers.Doubly_Linked_Lists @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Doubly_@!Linked_@!Lists]}
+@key{package} Ada.Containers.Doubly_Linked_Lists@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Doubly_@!Linked_@!Lists]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate, Remote_Types,
+        Nonblocking => Element_Type'Nonblocking @key{and} Equal_Element'Nonblocking,
+        Global => @key[in out synchronized] Ada.Containers.Doubly_Linked_Lists &
+                  Element_Type'Global & Equal_Element'Global @key[is]],Old=[
    @key{pragma} Preelaborate(Doubly_Linked_Lists);@Chg{Version=[3],New=[
-   @key{pragma} Remote_Types(Doubly_Linked_Lists);],Old=[]}]}
+   @key{pragma} Remote_Types(Doubly_Linked_Lists);],Old=[]}]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0212-1]}
@@ -4280,7 +4658,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
            Iterator_View     => Stable.List,
            Aggregate         => (Empty       => Empty_List,
                                  Add_Unnamed => Append),
-           Stable_Properties => (Length, Capacity,
+           Stable_Properties => (Length,
                                  Tampering_With_Cursors_Prohibited,
                                  Tampering_With_Elements_Prohibited),
            Default_Initial_Condition =>
@@ -4299,8 +4677,19 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Equal_Element} (Left, Right : Element_Type)
+      @key{return} Boolean @key{renames} "=";]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[in access] List],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : List; Position : Cursor)
+      @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[   @key[package] @AdaPackDefn{List_Iterator_Interfaces} @key[is new]
@@ -4309,171 +4698,481 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} "=" (Left, Right : List) @key{return} Boolean;]}
 
-@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Length} (Container : List) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Cursors_Prohibited}
+      (Container : List) @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Elements_Prohibited}
+      (Container : List) @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : List) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Length} (Container : List) @key{return} Count_Type@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : List) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null],
+           Post => Is_Empty'Result = (Length (Container) = 0)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor)
-      @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Clear} (Container : @key{in out} List)@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
+                       @key[then raise] Program_Error),
+           Post => Length (Container) = 0],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Element} (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+           Nonblocking => Element_Type'Nonblocking,
+           Global => @key{in access} List & Element_Type'Global],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Element} (Container : List;
+                     Position  : Cursor) @key{return} Element_Type
+      @key{with} Pre => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                  (@key{if not} Has_Element (Container, Position)
+                   @key{then raise} Program_Error),
+           Nonblocking => Element_Type'Nonblocking,
+           Global => Element_Type'Global;]}
+
+@ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Replace_Element} (Container : @key{in out} List;
                               Position  : @key{in}     Cursor;
-                              New_Item  : @key{in}     Element_Type);]}
+                              New_item  : @key{in}     Element_Type)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, Position)
+                    @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
      (Position : @key{in} Cursor;
-      Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+      Process  : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+           Global => @key{in access} List & Element_Type'Global],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Query_Element}
+     (Container : @key{in} List;
+      Position  : @key{in} Cursor;
+      Process   : @key{not null access procedure} (Element : @key{in} Element_Type))
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error
+                    @key{elsif not} Has_Element (Container, Position)
+                    @key{then raise} Program_Error),
+           Global => Element_Type'Global;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Update_Element}
      (Container : @key{in out} List;
       Position  : @key{in}     Cursor;
       Process   : @key{not null access procedure}
-                      (Element : @key{in out} Element_Type));]}
+                      (Element : @key{in out} Element_Type))@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, Position) @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] Constant_Reference_Type
          (Element : @key[not null access constant] Element_Type) @key[is private]
-      @key[with] Implicit_Dereference => Element;]}
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
+           Global => @key[synchronized in out access] List,
+           Nonblocking => True,
+           Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
-      @key[with] Implicit_Dereference => Element;]}
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
+           Global => @key[synchronized in out access] List,
+           Nonblocking => True,
+           Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Constant_Reference} (Container : @key[aliased in] List;
                                 Position  : @key[in] Cursor)
-      @key[return] Constant_Reference_Type;]}
+      @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Position = No_Element @key[then raise] Constraint_Error) @key[and then]
+                     (@key[if not] Has_Element (Container, Position)
+                      @key[then raise] Program_Error),
+           Post   => Tampering_With_Cursors_Prohibited (Container),
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Reference} (Container : @key[aliased in out] List;
                        Position  : @key[in] Cursor)
-      @key[return] Reference_Type;]}
+      @key[return] Reference_Type@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Position = No_Element @key[then raise] Constraint_Error) @key[and then]
+                     (@key[if not] Has_Element (Container, Position)
+                      @key[then raise] Program_Error),
+           Post   => Tampering_With_Cursors_Prohibited (Container),
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} List; Source : @key{in} List);]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} List; Source : @key{in} List)@Chg{Version=[5],New=[
+      @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Target)
+                    @key[then raise] Program_Error),
+           Post => Length (Source) = Length (Target)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Copy} (Source : List) @key[return] List;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Copy} (Source : List)
+      @key[return] List@Chg{Version=[5],New=[
+      @key[with] Post => Length (Copy'Result) = Length (Source) @key[and then]
+                   @key[not] Tampering_With_Elements_Prohibited (Copy'Result) @key[and then]
+                   @key[not] Tampering_With_Cursors_Prohibited (Copy'Result)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Move} (Target : @key{in out} List;
-                   Source : @key{in out} List);]}
+                   Source : @key{in out} List)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Tampering_With_Cursors_Prohibited (Source)
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Target = Source @key{then} True
+                    @key{else}
+                       Length (Target) = Length (Source'Old) @key{and then}
+                       Length (Source) = 0)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);]}
+                     Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Count /= 0 @key{and then}
+                       Before /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Before))
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Length (Container) > Count_Type'Last - Count
+                    @key{then raise} Constraint_Error),
+           Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      New_Item  : @key{in}     Element_Type;
                      Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);]}
+                     Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Before /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Before))
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Length (Container) > Count_Type'Last - Count
+                    @key{then raise} Constraint_Error),
+           Post => Length (Container)'Old + Count = Length (Container) @key{and then}
+                   Has_Element (Container, Position)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Insert} (Container : @key{in out} List;
                      Before    : @key{in}     Cursor;
                      Position  :    @key{out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);]}
+                     Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Before /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Before))
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Length (Container) > Count_Type'Last - Count
+                    @key{then raise} Constraint_Error),
+           Post => Length (Container)'Old + Count = Length (Container) @key{and then}
+                   Has_Element (Container, Position)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Prepend} (Container : @key{in out} List;
                       New_Item  : @key{in}     Element_Type;
-                      Count     : @key{in}     Count_Type := 1);]}
+                      Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Length (Container) > Count_Type'Last - Count
+                    @key{then raise} Constraint_Error),
+           Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Append} (Container : @key{in out} List;
                      New_Item  : @key{in}     Element_Type;
-                     Count     : @key{in}     Count_Type := 1);]}
+                     Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Length (Container) > Count_Type'Last - Count
+                    @key{then raise} Constraint_Error),
+           Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete} (Container : @key{in out} List;
                      Position  : @key{in out} Cursor;
-                     Count     : @key{in}     Count_Type := 1);]}
+                     Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, Position)
+                    @key{then raise} Program_Error),
+           Post => Length (Container)'Old - Count <= Length (Container) @key{and then}
+                   Position = No_Element],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_First} (Container : @key{in out} List;
-                           Count     : @key{in}     Count_Type := 1);]}
+                           Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error),
+           Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Delete_Last} (Container : @key{in out} List;
-                          Count     : @key{in}     Count_Type := 1);]}
+                          Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error),
+           Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Elements} (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Elements} (Container : @key{in out} List)@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                   @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap} (Container : @key{in out} List;
-                   I, J      : @key{in}     Cursor);]}
+                   I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} I = No_Element or else J = No_Element
+                    @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, I)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, J)
+                    @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Swap_Links} (Container : @key{in out} List;
-                         I, J      : @key{in}     Cursor);]}
+                         I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if} I = No_Element or else J = No_Element
+                    @key{then raise} Constraint_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, I)
+                    @key{then raise} Program_Error) @key{and then}
+                   (@key{if not} Has_Element (Container, J)
+                    @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Source   : @key{in out} List);]}
+                     Source   : @key{in out} List)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                       @key{then raise} Program_Error
+                    @key{elsif} Tampering_With_Cursors_Prohibited (Source)
+                       @key{then raise} Program_Error
+                    @key{elsif} Before /= No_Element @key{and then}
+                       @key{not} Has_Element (Target, Before)
+                       @key{then raise} Program_Error
+                    @key{elsif} Target = Source @key{then} True
+                    @key{elsif} Length (Target) > Count_Type'Last - Length (Source)
+                       @key{then raise} Constraint_Error),
+           Post => (@key{declare}
+                      Result_Length : @key{constant} Count_Type :=
+                         Length (Source)'Old + Length (Target)'Old;
+                    @key{begin}
+                       (@key{if} Target = Source @key{then} True
+                        @key{else} Length (Source) = 0 @key{and then}
+                           Length (Target) = Result_Length))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Target   : @key{in out} List;
                      Before   : @key{in}     Cursor;
                      Source   : @key{in out} List;
-                     Position : @key{in out} Cursor);]}
+                     Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                       @key{then raise} Program_Error
+                    @key{elsif} Tampering_With_Cursors_Prohibited (Source)
+                       @key{then raise} Program_Error
+                    @key{elsif} Position = No_Element
+                       @key{then raise} Constraint_Error
+                    @key{elsif not} Has_Element (Source, Position)
+                       @key{then raise} Program_Error
+                    @key{elsif} Before /= No_Element @key{and then}
+                       @key{not} Has_Element (Target, Before)
+                       @key{then raise} Program_Error
+                    @key{elsif} Target = Source @key{then} True
+                    @key{elsif} Length (Target) = Count_Type'Last
+                       @key{then raise} Constraint_Error),
+           Post => (@key{declare}
+                      Org_Target_Length : @key{constant} Count_Type :=
+                         Length (Target)'Old;
+                      Org_Source_Length : @key{constant} Count_Type :=
+                         Length (Source)'Old;
+                    @key{begin}
+                       (@key{if} Target = Source @key{then}
+                           Position = Position'Old
+                        @key{else} Length (Source) = Org_Source_Length - 1 @key{and then}
+                           Length (Target) = Org_Target_Length + 1 @key{and then}
+                           Has_Element (Target, Position)))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Splice} (Container: @key{in out} List;
                      Before   : @key{in}     Cursor;
-                     Position : @key{in}     Cursor);]}
+                     Position : @key{in}     Cursor)@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                       @key{then raise} Program_Error
+                    @key{elsif} Position = No_Element
+                       @key{then raise} Constraint_Error
+                    @key{elsif not} Has_Element (Container, Position)
+                       @key{then raise} Program_Error
+                    @key{elsif} Before /= No_Element @key{and then}
+                       @key{not} Has_Element (Container, Before)
+                       @key{then raise} Program_Error),
+           Post =>  Length (Container) = Length (Container)'Old],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : List) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First} (Container : List) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => (@key{if not} Is_Empty (Container)
+                    @key{then} Has_Element (Container, First'Result)
+                    @key{else} First'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{First_Element} (Container : List)
-      @key{return} Element_Type;]}
+      @key{return} Element_Type@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : List) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last} (Container : List) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Nonblocking, Global => @key{null},
+           Post => (@key{if} not Is_Empty (Container)
+                    @key{then} Has_Element (Container, Last'Result)
+                    @key{else} Last'Result = No_Element)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Last_Element} (Container : List)
-      @key{return} Element_Type;]}
+      @key{return} Element_Type@Chg{Version=[5],New=[
+      @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Next} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} List,
+           Nonblocking => True,
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                    @key{else} True)],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Next} (Container : List;
+                  Position : Cursor) @key{return} Cursor
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                    @key{elsif} Next'Result = No_Element @key{then}
+                       Position = Last (Container)
+                    @key{else} Has_Element (Container, Next'Result));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} List,
+           Nonblocking => True],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Next} (Container : @key{in}     List;
+                   Position  : @key{in out} Cursor)
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position /= No_Element
+                    @key{then} Has_Element (Container, Position));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Next} (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Previous} (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} List,
+           Nonblocking => True,
+           Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                    @key{else} True)],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Previous} (Container : List;
+                      Position  : Cursor) @key{return} Cursor
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                    @key{elsif} Previous'Result = No_Element @key{then}
+                       Position = First (Container)
+                    @key{else} Has_Element (Container, Previous'Result));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Previous} (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+      @key{with} Global => @key{in access} List,
+           Nonblocking => True],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Previous} (Container : @key{in}     List;
+                       Position  : @key{in out} Cursor)
+      @key{with} Nonblocking, Global => @key{null},
+           Pre  => (@key{if} Position /= No_Element @key{and then}
+                       (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+           Post => (@key{if} Position /= No_Element
+                    @key{then} Has_Element (Container, Position));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Find} (Container : List;
                   Item      : Element_Type;
                   Position  : Cursor := No_Element)
-      @key{return} Cursor;]}
+      @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                      (@key{not} Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+                 Post => (@key{if} Find'Result = No_Element @key{then} True
+                    @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Reverse_Find} (Container : List;
                           Item      : Element_Type;
                           Position  : Cursor := No_Element)
-      @key{return} Cursor;]}
+      @key{return} Cursor@Chg{Version=[5],New=[
+      @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                      (not Has_Element (Container, Position))
+                    @key{then raise} Program_Error),
+                 Post => (@key{if} Reverse_Find'Result = No_Element @key{then} True
+                    @key{else} Has_Element (Container, Reverse_Find'Result))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{function} @AdaSubDefn{Contains} (Container : List;
@@ -4484,42 +5183,150 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[],Old=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Iterate}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[   @key{procedure}  @AdaSubDefn{Iterate}
      (Container : @key{in} List;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+      @key{with} Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} @AdaSubDefn{Reverse_Iterate}
      (Container : @key{in} List;
-      Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+      Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+      @key{with} Allows_Exit],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0266-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] List)
-      @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1],ARef=[AI12-0266-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Iterate} (Container : @key[in] List)
+      @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class@Chg{Version=[5],New=[
+      @key[with] Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
-@ChgAdded{Version=[3],Text=[   @key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-      @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Iterate} (Container : @key[in] List; Start : @key[in] Cursor)
+      @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class@Chg{Version=[5],New=[
+      @key[with] Pre    => (@key[if] Start = No_Element
+                            @key[then raise] Constraint_Error) @key[and then]
+                        (@key[if not] Has_Element (Container, Start)
+                         @key[then raise] Program_Error),
+           Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[   @key{generic}
       @key{with function} "<" (Left, Right : Element_Type)
          @key{return} Boolean is <>;
-   @key{package} @AdaPackDefn{Generic_Sorting} @key{is}]}
+   @key{package} @AdaPackDefn{Generic_Sorting}@Chg{Version=[5],New=[
+   @key{with} Nonblocking => Doubly_Linked_Lists'Nonblocking @key{and} Less_Element'Nonblocking,
+         Global => Doubly_Linked_Lists'Global & Less_Element'Global],Old=[]} @key{is}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Less_Element} (Left, Right : Element_Type) @key{return} Boolean
+         @key{renames} "<";]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[      @key{function} @AdaSubDefn{Is_Sorted} (Container : List) @key{return} Boolean;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Sort} (Container : @key{in out} List)@Chg{Version=[5],New=[
+         @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                       @key{then raise} Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[      @key{procedure} @AdaSubDefn{Merge} (Target  : @key{in out} List;
-                       Source  : @key{in out} List);]}
+                       Source  : @key{in out} List)@Chg{Version=[5],New=[
+         @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                       @key{then raise} Program_Error) @key{and then}
+                      (@key{if} Tampering_With_Elements_Prohibited (Source)
+                       @key{then raise} Program_Error) @key{and then}
+                      (@key{if} Length (Target) > Maximum_Length - Length (Source)
+                       @key{then raise} Constraint_Error),
+              Post => (@key{declare}
+                         Result_Length : @key{constant} Count_Type :=
+                            Length (Source)'Old + Length (Target)'Old;
+                       @key{begin}
+                          (@key{if} Target = Source @key{then} True
+                           @key{else} Length (Source) = 0 @key{and then}
+                              Length (Target) = Result_Length))],Old=[]};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key{end} Generic_Sorting;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{List} (Base : @key{not null access} Doubly_Linked_Lists.List) @key{is}
+         @key{tagged limited private}
+         @key{with} Constant_Indexing => Constant_Reference,
+              Variable_Indexing => Reference,
+              Default_Iterator  => Iterate,
+              Iterator_Element  => Element_Type,
+              Aggregate         => (Empty          => Empty_List,
+                                    Add_Unnamed    => Append),
+              Stable_Properties => (Length),
+              Global => (@key[in] List.Base.@key[all], @key[synchronized out] List.Base.@key[all]),
+              Default_Initial_Condition => Length (List) = 0;
+      @key{pragma} Preelaborable_Initialization(List);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
+      @key{pragma} Preelaborable_Initialization(Cursor);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_List} : @key{constant} List;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
+         @key{with} Nonblocking, Global => @key{in access} List;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{List_Iterator_Interfaces} @key[is new]
+         Ada.Iterator_Interfaces (Cursor, Has_Element);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Doubly_Linked_Lists.List;
+                        Source : @key{in} List)
+         @key{with} Post => Length (Source) = Length (Target);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Doubly_Linked_Lists.List) @key{return} List
+         @key{with} Post => Length (Copy'Result) = Length (Source);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
+            (Element : @key{not null access constant} Element_Type) @key{is private}
+         @key{with} Implicit_Dereference => Element,
+              Global => @key{null},
+              Nonblocking => @key{null},
+              Default_Initial_Condition => (@key{raise} Program_Error);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
+            (Element : @key{not null access} Element_Type) @key{is private}
+         @key{with} Implicit_Dereference => Element,
+              Global => @key{null},
+              Nonblocking => @key{null},
+              Default_Initial_Condition => (@key{raise} Program_Error);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
+      -- @examcom{are declared here.}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{private}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key{private}]}
@@ -4605,45 +5412,72 @@ elements as was written by List'Write.]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
-@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
-operations of this generic package have access-to-subprogram parameters. To
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some
+operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}@Defn2{Term=[tamper with elements],Sec=[of a list]}],Old=[of
+this generic package have access-to-subprogram parameters. To
 ensure such operations are well-defined, they guard against certain actions by
-the designated subprogram. In particular, some operations check for
+the designated subprogram. In particular, some operations]} check for
 @lquotes@;tampering with cursors@rquotes of a container because they depend on
 the set of elements of the container remaining constant, and others check for
 @lquotes@;tampering with elements@rquotes of a container because they depend on
-elements of the container not being replaced.]]}]}
+elements of the container not being replaced.]@Chg{Version=[5],New=[ When
+tampering with cursors is @i<prohibited>@Defn2{Term=[prohibited],Sec=[tampering with a list]}
+@Defn2{Term=[tampering],Sec=[prohibited for a list]}for a particular
+list object @i<L>, Program_Error is propagated by the finalization
+of @i<L>@Redundant[, as well as by a call that passes @i<L> to
+certain of the operations of this package, as indicated by the precondition
+of such an operation]. Similarly, when tampering with elements is @i<prohibited>
+for @i<L>, Program_Error is by a call that passes @i<L> to
+certain of other operations of this package, as indicated by the precondition
+of such an operation.],Old=[]}]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 62 through 69
+are removed as preconditions now describe these rules.>}]}@Comment{This message should be
+deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}
-A subprogram is said to @i{tamper with cursors} of a list object
-@i<L> if:]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[2],New=[@Defn2{Term=[tamper with cursors],Sec=[of a list]}
+A subprogram is said to
+@i{tamper with cursors} of a list object @i<L> if:],Old=[]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it inserts or deletes elements of @i<L>, that is,
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+inserts or deletes elements of @i<L>, that is,
 it calls the Insert, Clear, Delete, or Delete_Last procedures with @i<L> as a
-parameter; or]}
+parameter; or]}]}
 
 @begin{Honest}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Operations which are defined to be equivalent to
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Operations which
+  are defined to be equivalent to
   a call on one of these operations also are included. Similarly, operations
-  which call one of these as part of their definition are included.]}
+  which call one of these as part of their definition are included.]}]}
 @end{Honest}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it reorders the elements of @i<L>, that is, it
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+reorders the elements of @i<L>, that is, it
 calls the Splice, Swap_Links, or Reverse_Elements procedures or the Sort or
-Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter; or]}
+Merge procedures of an instance of Generic_Sorting with @i<L> as a parameter;
+or]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it finalizes @i<L>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+finalizes @i<L>; or]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
-@ChgAdded{Version=[3],Text=[it calls the Assign procedure with @i<L> as the
-Target parameter; or]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+calls the Assign procedure with @i<L> as the Target parameter; or]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -4654,45 +5488,52 @@ Target parameter; or]}
 @end{Ramification}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it calls the Move procedure with @i<L> as a
-parameter.]}
-@end{Itemize}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+calls the Move procedure with @i<L> as a parameter.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Swap copies elements rather than reordering them,
-  so it doesn't tamper with cursors.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Swap copies
+  elements rather than reordering them, so it doesn't tamper with cursors.]}]}
 @end{Reason}
+@end{Itemize}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[2],New=[@Defn2{Term=[tamper with elements],Sec=[of a list]}
 A subprogram is said to @i{tamper with elements} of a list
-object @i<L> if:]}
+object @i<L> if:],Old=[]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it tampers with cursors of @i<L>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+tampers with cursors of @i<L>; or]}]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[it replaces one or more elements of @i<L>, that is,
-it calls the Replace_Element or Swap procedures with @i<L> as
-a parameter.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[it
+replaces one or more elements of @i<L>, that is, it calls the Replace_Element or
+Swap procedures with @i<L> as a parameter.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
-  @ChgAdded{Version=[2],Text=[Complete replacement of an element can cause
-  its memory to be deallocated while another operation is holding onto a
-  reference to it. That can't be allowed. However, a simple modification of
-  (part of) an element is not a problem, so Update_Element does not cause a
-  problem.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[Complete
+  replacement of an element can cause its memory to be deallocated while another
+  operation is holding onto a reference to it. That can't be allowed. However, a
+  simple modification of (part of) an element is not a problem, so
+  Update_Element does not cause a problem.]}]}
 @end{Reason}
-
 
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0265-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0110-1]}
-@ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a list]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Defn2{Term=[prohibited],Sec=[tampering with a list]}
 @Defn2{Term=[tampering],Sec=[prohibited for a list]}
 When tampering with cursors is @i<prohibited> for a particular list object
 @i<L>, Program_Error is propagated by a call of any language-defined subprogram
@@ -4702,18 +5543,22 @@ object @i<L>, Program_Error is propagated by a call of any language-defined
 subprogram that is defined to tamper with the elements of @i<L> @Redundant[(or
 tamper with the cursors of @i<L>)], leaving @i<L>
 unmodified.@Chg{Version=[4],New=[ These checks are made before any other
-defined behavior of the body of the language-defined subprogram.],Old=[]}]}
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
-  cursors, so we mention it only from completeness in the second sentence.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Tampering
+  with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}]}
 @end{TheProof}
 
 @begin{DescribeCode}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[in access] List],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -4727,6 +5572,22 @@ an element, and returns False otherwise.]}
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
 @end{Honest}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} @AdaSubDefn{Has_Element} (Container : List; Position : Cursor)
+   @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if Position designates
+an element in Container, and returns False otherwise.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[If Position is No_Element, Has_Element returns False.]}
+@end{Ramification}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -4755,8 +5616,64 @@ equality additional times once the answer has been determined.]}
 @end{ImplNote}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Tampering_With_Cursors_Prohibited
+   (Container : List) @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if tampering with
+cursors or tampering with elements is currently prohibited for Container, and
+returns False otherwise.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Prohibiting tampering with elements also
+  needs to prohibit tampering with cursors, as deleting an element is similar
+  to replacing it.]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Various contracts elsewhere in this specification
+    require that this function is implemented with synchronized data. Moreover,
+    it is possible for tampering to be prohibited by multiple operations
+    (sequentiually or in parallel). Therefore, tampering needs to be
+    implemented with an atomic or protected counter. The counter is initialized
+    to zero, and is incremented when tampering is prohibited, and decremented
+    when leaving an area that prohibited tampering. Function
+    Tampering_With_Cursors_Prohibited returns True if the counter is nonzero.
+    (Note that any case where the result is not well-defined for one task
+    is incorrect use of shared variables and would be erroneous by the rules
+    of @RefSecNum{Shared Variables}, so no special protection is needed to
+    read the counter.)]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Tampering_With_Elements_Prohibited
+   (Container : List) @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Always returns False@Redundant[,
+regardless of whether tampering with elements is prohibited].]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[A definite element cannot
+  change size, so we allow operations that tamper with elements even when
+  tampering with elements is prohibited. That's not true for the indefinite
+  containers, which is why this kind of tampering exists.]}
+@end{Reason}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Length (Container : List) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Length (Container : List) @key{return} Count_Type@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4765,44 +5682,81 @@ Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Empty (Container : List) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Is_Empty (Container : List) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null],
+        Post => Is_Empty'Result = (Length (Container) = 0)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Length (Container) = 0.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[Returns True
+if Container is empty],Old=[Equivalent to Length (Container) = 0]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Clear (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Clear (Container : @key{in out} List)@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Container)
+                   @key[then raise] Program_Error),
+        Post => Length (Container) = 0],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Removes all the elements from Container.]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Removes all the elements from
+Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position : Cursor) @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Element (Position : Cursor) @key{return} Element_Type@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+        Nonblocking => Element_Type'Nonblocking,
+        Global => @key{in access} List & Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Constraint_Error is propagated. Otherwise, Element returns the element
-designated by Position.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then Constraint_Error is propagated. Otherwise,
+]}Element returns the element designated by Position.]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Element (Container : List;
+                  Position  : Cursor) @key{return} Element_Type
+   @key{with} Pre => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+               (@key{if not} Has_Element (Container, Position)
+                @key{then raise} Program_Error),
+        Nonblocking => Element_Type'Nonblocking,
+        Global => Element_Type'Global;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Element returns the element
+designated by Position in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Replace_Element (Container : @key{in out} List;
-                           Position  : @b{in}     Cursor;
-                           New_Item  : @b{in}     Element_Type);]}
+                           Position  : @key{in}     Cursor;
+                           New_item  : @key{in}     Element_Type)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, Position)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1],ARef=[AI12-0196-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element,
 then Constraint_Error is propagated; if Position does not designate an element
 in Container, then Program_Error is propagated.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} Replace_Element
+Otherwise@Chg{Version=[3],New=[,],Old=[]} ]}Replace_Element
 assigns the value New_Item to the element designated by
 Position.@Chg{Version=[5],New=[ For the purposes of
 determining whether the parameters overlap in a call to Replace_Element, the
@@ -4811,37 +5765,67 @@ Container parameter is not considered to overlap with any object
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Query_Element
   (Position : @key{in} Cursor;
-   Process  : @key{not null access procedure} (Element : @key{in} Element_Type));]}
+   Process  : @key{not null access procedure} (Element : @key{in} Element_Type))@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error),
+        Global => @key{in access} List & Element_Type'Global],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
-Constraint_Error is propagated. Otherwise, Query_Element calls
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then
+Constraint_Error is propagated. Otherwise, ]}Query_Element calls
 Process.@key{all} with the element designated by Position as the argument.
 @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
 with the elements of @Chg{Version=[3],New=[the list that contains the
 element designated by Position is prohibited during the
-execution of the call on Process.@key{all}],Old=[Container]}. Any exception raised by
-Process.@key{all} is propagated.]}
+execution of the call on Process.@key{all}],Old=[Container]}. Any exception
+raised by Process.@key{all} is propagated.]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[@key{procedure} Query_Element
+  (Container : @key{in} List;
+   Position  : @key{in} Cursor;
+   Process   : @key{not null access procedure} (Element : @key{in} Element_Type))
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error
+                 @key{elsif not} Has_Element (Container, Position)
+                 @key{then raise} Program_Error),
+        Global => Element_Type'Global;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Query_Element calls Process.@key{all}
+with the element designated by Position as the
+argument. Tampering with the elements of Container
+is prohibited during the execution of the call on
+Process.@key{all}. Any exception raised by Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Update_Element
   (Container : @key{in out} List;
    Position  : @key{in}     Cursor;
-   Process   : @key{not null access procedure} (Element : @key{in out} Element_Type));]}
+   Process   : @key{not null access procedure}
+                   (Element : @key{in out} Element_Type))@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, Position) @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[2],Text=[If Position equals No_Element, then
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then
 Constraint_Error is propagated; if Position does not designate an element in
 Container, then Program_Error is propagated.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} Update_Element calls
+Otherwise@Chg{Version=[3],New=[,],Old=[]} ]}Update_Element calls
 Process.@key{all} with the element designated by Position as the
 argument. @Chg{Version=[3],New=[Tampering],Old=[Program_Error
 is propagated if Process.@key{all} tampers]}
@@ -4863,13 +5847,21 @@ unconstrained.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
       (Element : @key[not null access constant] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
+        Global => @key[synchronized in out access] List,
+        Nonblocking => True,
+        Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element;]}
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
+        Global => @key[synchronized in out access] List,
+        Nonblocking => True,
+        Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1]}
@@ -4878,8 +5870,10 @@ and Reference_Type need finalization.@PDefn2{Term=<needs finalization>,
 Sec=<language-defined type>}]}
 
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],Text=[The default initialization of an object of type
-Constant_Reference_Type or Reference_Type propagates Program_Error.]}
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The default
+initialization of an object of type
+Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
 
 @begin{Reason}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -4893,9 +5887,15 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Constant_Reference (Container : @key[aliased in] List;
                              Position  : @key[in] Cursor)
-   @key[return] Constant_Reference_Type;]}
+   @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Position = No_Element @key[then raise] Constraint_Error) @key[and then]
+                  (@key[if not] Has_Element (Container, Position)
+                   @key[then raise] Program_Error),
+        Post   => Tampering_With_Cursors_Prohibited (Container),
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
@@ -4905,18 +5905,26 @@ gain read access to an individual element of a list given a
 cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then Constraint_Error
 is propagated; if Position does not designate an element in Container, then
-Program_Error is propagated. Otherwise, Constant_Reference returns an object
+Program_Error is propagated. Otherwise, ]}Constant_Reference returns an object
 whose discriminant is an access value that designates the element designated by
 Position. Tampering with the elements of Container is prohibited while the
 object returned by Constant_Reference exists and has not been finalized.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Reference (Container : @key[aliased in out] List;
                     Position  : @key[in] Cursor)
-   @key[return] Reference_Type;]}
+   @key[return] Reference_Type@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Position = No_Element @key[then raise] Constraint_Error) @key[and then]
+                  (@key[if not] Has_Element (Container, Position)
+                   @key[then raise] Program_Error),
+        Post   => Tampering_With_Cursors_Prohibited (Container),
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0269-1]}
@@ -4926,16 +5934,22 @@ gain read and write access to an individual element of a list given
 a cursor.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1]}
-@ChgAdded{Version=[3],Text=[If Position equals No_Element, then Constraint_Error
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then Constraint_Error
 is propagated; if Position does not designate an element in Container, then
-Program_Error is propagated. Otherwise, Reference returns an object whose
+Program_Error is propagated. Otherwise, ]}Reference returns an object whose
 discriminant is an access value that designates the element designated by
 Position. Tampering with the elements of Container is prohibited while the
 object returned by Reference exists and has not been finalized.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} List; Source : @key{in} List);]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{procedure} Assign (Target : @key{in out} List; Source : @key{in} List)@Chg{Version=[5],New=[
+   @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Target)
+                 @key[then raise] Program_Error),
+        Post => Length (Source) = Length (Target)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1],ARef=[AI05-0248-1]}
@@ -4954,7 +5968,12 @@ Target.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Copy (Source : List) @key[return] List;]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Copy (Source : List)
+   @key[return] List@Chg{Version=[5],New=[
+   @key[with] Post => Length (Copy'Result) = Length (Source) @key[and then]
+                @key[not] Tampering_With_Elements_Prohibited (Copy'Result) @key[and then]
+                @key[not] Tampering_With_Cursors_Prohibited (Copy'Result)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0001-1]}
@@ -4963,8 +5982,17 @@ the elements of Source.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Move (Target : @key{in out} List;
-                Source : @key{in out} List);]}
+                Source : @key{in out} List)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Tampering_With_Cursors_Prohibited (Source)
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Target = Source @key{then} True
+                 @key{else}
+                    Length (Target) = Length (Source'Old) @key{and then}
+                    Length (Source) = 0)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -4979,17 +6007,28 @@ set to 0]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   New_Item  : @key{in}     Element_Type;
-                  Count     : @key{in}     Count_Type := 1);]}
+                  Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Count /= 0 @key{and then}
+                    Before /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Before))
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Container) > Count_Type'Last - Count
+                 @key{then raise} Constraint_Error),
+        Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Container, then Program_Error is propagated.
-Otherwise,
-Insert inserts Count copies of New_Item prior to the element designated by
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Before is not No_Element, and does not designate an element in Container,
+then Program_Error is propagated. Otherwise,
+]}Insert inserts Count copies of New_Item prior to the element designated by
 Before. If Before equals No_Element, the new elements are inserted after the
 last node (if any). Any exception raised during allocation of internal storage
 is propagated, and Container is not modified.]}
@@ -5006,19 +6045,30 @@ is propagated, and Container is not modified.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   New_Item  : @key{in}     Element_Type;
                   Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);]}
+                  Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Before /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Before))
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Container) > Count_Type'Last - Count
+                 @key{then raise} Constraint_Error),
+        Post => Length (Container)'Old + Count = Length (Container) @key{and then}
+                Has_Element (Container, Position)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0257-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Container, then Program_Error is
-propagated. Otherwise,
-Insert allocates Count copies of New_Item, and inserts them prior to the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Before is not No_Element, and does not designate an element in Container,
+then Program_Error is propagated. Otherwise,
+]}Insert allocates Count copies of New_Item, and inserts them prior to the
 element designated by Before. If Before equals No_Element, the new elements are
 inserted after the last element (if any). Position designates the first
 newly-inserted element@Chg{Version=[3],New=[, or if Count equals 0,
@@ -5028,20 +6078,31 @@ storage is propagated, and Container is not modified.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Insert (Container : @key{in out} List;
                   Before    : @key{in}     Cursor;
                   Position  :    @key{out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);]}
+                  Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Before /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Before))
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Container) > Count_Type'Last - Count
+                 @key{then raise} Constraint_Error),
+        Post => Length (Container)'Old + Count = Length (Container) @key{and then}
+                Has_Element (Container, Position)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0257-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Container, then Program_Error is
-propagated. Otherwise,
-Insert inserts Count new elements prior to the element designated by Before. If
-Before equals No_Element, the new elements are inserted after the last node (if
-any). The new elements are initialized by default (see
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Before is not No_Element, and does not designate an element in Container,
+then Program_Error is propagated. Otherwise,
+]}Insert inserts Count new elements prior to the element designated by Before.
+If Before equals No_Element, the new elements are inserted after the last node
+(if any). The new elements are initialized by default (see
 @RefSecNum{Object Declarations}). @Chg{Version=[3],New=[Position designates the
 first newly-inserted element, or if Count equals 0,
 then Position is assigned the value of Before],Old=[]}. Any exception raised
@@ -5050,9 +6111,15 @@ modified.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Prepend (Container : @key{in out} List;
                    New_Item  : @key{in}     Element_Type;
-                   Count     : @key{in}     Count_Type := 1);]}
+                   Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Container) > Count_Type'Last - Count
+                 @key{then raise} Constraint_Error),
+        Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5061,9 +6128,15 @@ First (Container), New_Item, Count).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Append (Container : @key{in out} List;
                   New_Item  : @key{in}     Element_Type;
-                  Count     : @key{in}     Count_Type := 1);]}
+                  Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Container) > Count_Type'Last - Count
+                 @key{then raise} Constraint_Error),
+        Post => Length (Container)'Old + Count = Length (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5072,25 +6145,39 @@ No_Element, New_Item, Count).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete (Container : @key{in out} List;
                   Position  : @key{in out} Cursor;
-                  Count     : @key{in}     Count_Type := 1);]}
+                  Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Position = No_Element @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, Position)
+                 @key{then raise} Program_Error),
+        Post => Length (Container)'Old - Count <= Length (Container) @key{and then}
+                Position = No_Element],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position equals No_Element, then
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position equals No_Element, then
 Constraint_Error is propagated. If Position does not designate an element in
 Container, then Program_Error is propagated.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} Delete removes (from
+Otherwise@Chg{Version=[3],New=[,],Old=[]} ]}Delete removes (from
 Container) Count elements starting at the element designated by Position (or
 all of the elements starting at Position if there are fewer than Count elements
 starting at Position). Finally, Position is set to No_Element.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_First (Container : @key{in out} List;
-                        Count     : @key{in}     Count_Type := 1);]}
+                        Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error),
+        Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5102,8 +6189,12 @@ Delete (Container, First (Container), Count)]}.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Delete_Last (Container : @key{in out} List;
-                       Count     : @key{in}     Count_Type := 1);]}
+                       Count     : @key{in}     Count_Type := 1)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error),
+        Post => Length (Container)'Old - Count <= Length (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5117,7 +6208,10 @@ Count nodes from Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Elements (Container : @key{in out} List)@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5134,14 +6228,25 @@ in reverse order.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Swap (Container : @key{in out} List;
-                I, J      : @key{in}     Cursor);]}
+                I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Elements_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} I = No_Element or else J = No_Element
+                 @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, I)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if not} Has_Element (Container, J)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+either I or J is No_Element,
 then Constraint_Error is propagated. If either I or J do not designate an
-element in Container, then Program_Error is propagated. Otherwise, Swap
+element in Container, then Program_Error is propagated. Otherwise, ]}Swap
 exchanges the values of the elements designated by I and J.]}
 
 @begin{Ramification}
@@ -5161,14 +6266,25 @@ exchanges the values of the elements designated by I and J.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Swap_Links (Container : @key{in out} List;
-                      I, J      : @key{in}     Cursor);]}
+                      I, J      : @key{in}     Cursor)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} I = No_Element or else J = No_Element
+                 @key{then raise} Constraint_Error) @key{and then}
+                (@key{if not} Has_Element (Container, I)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if not} Has_Element (Container, J)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If either I or J is No_Element,
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+either I or J is No_Element,
 then Constraint_Error is propagated. If either I or J do not designate an
-element in Container, then Program_Error is propagated. Otherwise, Swap_Links
+element in Container, then Program_Error is propagated. Otherwise, ]}Swap_Links
 exchanges the nodes designated by I and J.]}
 
 @begin{Ramification}
@@ -5179,49 +6295,98 @@ exchanges the nodes designated by I and J.]}
   than Swap if the element size is large.]}
 @end{Ramification}
 
+
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Target   : @key{in out} List;
                   Before   : @key{in}     Cursor;
-                  Source   : @key{in out} List);]}
+                  Source   : @key{in out} List)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                    @key{then raise} Program_Error
+                 @key{elsif} Tampering_With_Cursors_Prohibited (Source)
+                    @key{then raise} Program_Error
+                 @key{elsif} Before /= No_Element @key{and then}
+                    @key{not} Has_Element (Target, Before)
+                    @key{then raise} Program_Error
+                 @key{elsif} Target = Source @key{then} True
+                 @key{elsif} Length (Target) > Count_Type'Last - Length (Source)
+                    @key{then raise} Constraint_Error),
+        Post => (@key{declare}
+                   Result_Length : @key{constant} Count_Type :=
+                      Length (Source)'Old + Length (Target)'Old;
+                 @key{begin}
+                    (@key{if} Target = Source @key{then} True
+                     @key{else} Length (Source) = 0 @key{and then}
+                        Length (Target) = Result_Length))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Before is not No_Element, and
-does not designate an element in Target, then Program_Error is propagated.
-Otherwise, if
-Source denotes the same object as Target, the operation has no effect.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If @Chg{Version=[5],New=[],Old=[Before is not
+No_Element, and does not designate an element in Target, then Program_Error
+is propagated. Otherwise, if
+]}Source denotes the same object as Target, the operation has no effect.
 Otherwise, Splice reorders elements such that they are removed from Source and
 moved to Target, immediately prior to Before. If Before equals No_Element, the
-nodes of Source are spliced after the last node of Target. The length of Target
+nodes of Source are spliced after the last node of
+Target.@Chg{Version=[5],New=[],Old=[ The length of Target
 is incremented by the number of nodes in Source, and the length of Source is
-set to 0.]}
+set to 0.]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Target   : @key{in out} List;
                   Before   : @key{in}     Cursor;
                   Source   : @key{in out} List;
-                  Position : @key{in out} Cursor);]}
+                  Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                    @key{then raise} Program_Error
+                 @key{elsif} Tampering_With_Cursors_Prohibited (Source)
+                    @key{then raise} Program_Error
+                 @key{elsif} Position = No_Element
+                    @key{then raise} Constraint_Error
+                 @key{elsif not} Has_Element (Source, Position)
+                    @key{then raise} Program_Error
+                 @key{elsif} Before /= No_Element @key{and then}
+                    @key{not} Has_Element (Target, Before)
+                    @key{then raise} Program_Error
+                 @key{elsif} Target = Source @key{then} True
+                 @key{elsif} Length (Target) = Count_Type'Last
+                    @key{then raise} Constraint_Error),
+        Post => (@key{declare}
+                   Org_Target_Length : @key{constant} Count_Type :=
+                      Length (Target)'Old;
+                   Org_Source_Length : @key{constant} Count_Type :=
+                      Length (Source)'Old;
+                 @key{begin}
+                    (@key{if} Target = Source @key{then}
+                        Position = Position'Old
+                     @key{else} Length (Source) = Org_Source_Length - 1 @key{and then}
+                        Length (Target) = Org_Target_Length + 1 @key{and then}
+                        Has_Element (Target, Position)))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If @Chg{Version=[5],New=[],Old=[Position is
 No_Element@Chg{Version=[3],New=[,],Old=[]} then
 Constraint_Error is propagated. If Before does not equal No_Element, and does
 not designate an element in Target, then Program_Error is propagated. If
 Position does not equal No_Element, and does not designate a node in Source,
-then Program_Error is propagated. If Source denotes the same object as Target,
+then Program_Error is propagated. If ]}Source denotes the same object as Target,
 then there is no effect if Position equals Before, else the element
 designated by Position is moved immediately prior to Before, or, if Before
 equals No_Element, after the last element.
-In both cases, Position and the length of Target are unchanged.
-Otherwise@Chg{Version=[3],New=[,],Old=[]} the element
+@Chg{Version=[5],New=[],Old=[In both cases, Position and the length of Target
+are unchanged. ]}Otherwise@Chg{Version=[3],New=[,],Old=[]} the element
 designated by Position is removed from Source and moved to Target, immediately
 prior to Before, or, if Before equals No_Element, after the last element of
-Target. The length of Target is incremented, the length of Source is
-decremented, and Position is updated to represent an element in Target.]}
+Target.@Chg{Version=[5],New=[],Old=[ The length of Target is incremented, the
+length of Source is decremented, and]} Position is updated to represent
+an element in Target.]}
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
   @ChgAdded{Version=[2],Text=[If Source is the same as Target, and
@@ -5231,57 +6396,82 @@ decremented, and Position is updated to represent an element in Target.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Splice (Container: @key{in out} List;
                   Before   : @key{in}     Cursor;
-                  Position : @key{in}     Cursor);]}
+                  Position : @key{in}     Cursor)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                    @key{then raise} Program_Error
+                 @key{elsif} Position = No_Element
+                    @key{then raise} Constraint_Error
+                 @key{elsif not} Has_Element (Container, Position)
+                    @key{then raise} Program_Error
+                 @key{elsif} Before /= No_Element @key{and then}
+                    @key{not} Has_Element (Container, Before)
+                    @key{then raise} Program_Error),
+        Post =>  Length (Container) = Length (Container)'Old],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[If @Chg{Version=[5],New=[],Old=[Position is
 No_Element@Chg{Version=[3],New=[,],Old=[]} then
 Constraint_Error is propagated. If Before does not equal No_Element, and does
 not designate an element in Container, then Program_Error is propagated. If
 Position does not equal No_Element, and does not designate a node in Container,
-then Program_Error is propagated. If Position equals Before there is no effect.
+then Program_Error is propagated. If ]}Position equals Before there is no effect.
 Otherwise, the element designated by Position is moved immediately prior to
-Before, or, if Before equals No_Element, after the last element. The length of
-Container is unchanged.]}
+Before, or, if Before equals No_Element, after the last
+element.@Chg{Version=[5],New=[],Old=[ The length of Container is unchanged.]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First (Container : List) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First (Container : List) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => (@key{if not} Is_Empty (Container)
+                 @key{then} Has_Element (Container, First'Result)
+                 @key{else} First'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, First
-returns the value No_Element.
-Otherwise@Chg{Version=[3],New=[,],Old=[]}
-it returns a cursor that designates the first node in Container.]}
+returns No_Element. Otherwise, it returns a cursor that designates the first
+node in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : List) @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} First_Element (Container : List)
+   @key{return} Element_Type@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (First (Container)).]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Element (Container, First_Index (Container)).]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last (Container : List) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last (Container : List) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Nonblocking, Global => @key{null},
+        Post => (@key{if} not Is_Empty (Container)
+                 @key{then} Has_Element (Container, Last'Result)
+                 @key{else} Last'Result = No_Element)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[If Container is empty, Last returns
-the value No_Element. Otherwise@Chg{Version=[3],New=[,],Old=[]}
-it returns a cursor that designates the last node in Container.]}
+No_Element. Otherwise, it returns a cursor that designates the last node in
+Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : List) @key{return} Element_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Last_Element (Container : List)
+   @key{return} Element_Type@Chg{Version=[5],New=[
+   @key{with} Pre => (@key{if} Is_Empty (Container) @key{then raise} Constraint_Error)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5289,7 +6479,12 @@ it returns a cursor that designates the last node in Container.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Next (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} List,
+        Nonblocking => True,
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                 @key{else} True)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5299,8 +6494,31 @@ No_Element. Otherwise, it returns a cursor that designates the successor of the
 element designated by Position.]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Next (Container : List;
+               Position  : Cursor) @key{return} Cursor
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position = No_Element @key{then} Next'Result = No_Element
+                 @key{elsif} Next'Result = No_Element @key{then}
+                    Position = Last (Container)
+                 @key{else} Has_Element (Container, Next'Result));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns a cursor designating the
+successor of the element designated by Position in Container.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Previous (Position : Cursor) @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} List,
+        Nonblocking => True,
+        Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                 @key{else} True)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5310,33 +6528,99 @@ No_Element. Otherwise, it returns a cursor that designates the predecessor of
 the element designated by Position.]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Previous (Container : List;
+                   Position : Cursor) @key{return} Cursor
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position = No_Element @key{then} Previous'Result = No_Element
+                 @key{elsif} Previous'Result = No_Element @key{then}
+                    Position = First (Container)
+                 @key{else} Has_Element (Container, Previous'Result));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns a cursor designating the
+predecessor of the element designated by Position in Container, if any.]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Next (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} List,
+        Nonblocking => True],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Next (Position).]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Next (Container : @key{in}     List;
+                Position  : @key{in out} Cursor)
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position /= No_Element
+                 @key{then} Has_Element (Container, Position));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Position := Next
+(Container, Position).]}
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Previous (Position : @key{in out} Cursor)@Chg{Version=[5],New=[
+   @key{with} Global => @key{in access} List,
+        Nonblocking => True],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Equivalent to Position := Previous (Position).]}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Previous (Container : @key{in}     List;
+                    Position  : @key{in out} Cursor)
+   @key{with} Nonblocking, Global => @key{null},
+        Pre  => (@key{if} Position /= No_Element @key{and then}
+                    (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Position /= No_Element
+                 @key{then} Has_Element (Container, Position));]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Equivalent to Position :=
+Previous (Container, Position).]}
+
+
+
+@begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Find (Container : List;
                Item      : Element_Type;
                Position  : Cursor := No_Element)
-  @key{return} Cursor;]}
+   @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                   (@key{not} Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Find'Result = No_Element @key{then} True
+                 @key{else} Has_Element (Container, Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Find searches the elements of Container for an element equal to Item (using
+]}Find searches the elements of Container for an element equal to Item (using
 the generic formal equality operator). The search starts at the
 element designated by Position, or at the first element if Position equals
 No_Element. It proceeds towards Last (Container). If no equal element is found,
@@ -5345,21 +6629,30 @@ first equal element encountered.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{function} Reverse_Find (Container : List;
                        Item      : Element_Type;
                        Position  : Cursor := No_Element)
-   @key{return} Cursor;]}
+   @key{return} Cursor@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Position /= No_Element @key{and then}
+                   (not Has_Element (Container, Position))
+                 @key{then raise} Program_Error),
+        Post => (@key{if} Reverse_Find'Result = No_Element @key{then} True
+                 @key{else} Has_Element (Container, Reverse_Find'Result))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
-@ChgAdded{Version=[2],Type=[Trailing],Text=[If Position is not No_Element, and
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Position is not No_Element, and
 does not designate an element in Container, then Program_Error is propagated.
-Find searches the elements of Container for an element equal to Item (using
+]}Find searches the elements of Container for an element equal to Item (using
 the generic formal equality operator). The search starts at the
 element designated by Position, or at the last element if Position equals
 No_Element. It proceeds towards First (Container). If no equal element is
 found, then Reverse_Find returns No_Element. Otherwise, it returns a cursor
 designating the first equal element encountered.]}
+
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -5397,9 +6690,11 @@ deleted if the paragraphs are ever renumbered.}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Iterate
   (Container : @key{in} List;
-   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+   Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+   @key{with} Allows_Exit],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5431,9 +6726,11 @@ Process.@key{all} is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Reverse_Iterate
   (Container : @key{in} List;
-   Process   : @key{not null access procedure} (Position : @key{in} Cursor));]}
+   Process   : @key{not null access procedure} (Position : @key{in} Cursor))@Chg{Version=[5],New=[
+   @key{with} Allows_Exit],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
@@ -5446,9 +6743,10 @@ function.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
-@ChgRef{Version=[5],Kind=[RevisedAdded]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1],ARef=[AI12-0266-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] List)
-   @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
+   @key[return] List_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class@Chg{Version=[5],New=[
+   @key[with] Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
@@ -5470,14 +6768,22 @@ finalization.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[RevisedAdded]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Iterate (Container : @key[in] List; Start : @key[in] Cursor)
-   @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class;]}
+   @key[return] List_Iterator_Interfaces.Reversible_Iterator'Class@Chg{Version=[5],New=[
+   @key[with] Pre    => (@key[if] Start = No_Element
+                         @key[then raise] Constraint_Error) @key[and then]
+                     (@key[if not] Has_Element (Container, Start)
+                      @key[then raise] Program_Error),
+        Post   => Tampering_With_Cursors_Prohibited (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0212-1],ARef=[AI05-0262-1],ARef=[AI05-0265-1],ARef=[AI05-0269-1]}
-@ChgAdded{Version=[3],Type=[Trailing],Text=[If Start is not No_Element and does
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[],Old=[If
+Start is not No_Element and does
 not designate an item in Container, then Program_Error is propagated. If Start
-is No_Element, then Constraint_Error is propagated. Otherwise, Iterate
+is No_Element, then Constraint_Error is propagated. Otherwise, ]}Iterate
 returns a reversible iterator object
 (see @RefSecNum{User-Defined Iterator Types}) that
 will generate a value for a loop parameter (see
@@ -5536,8 +6842,12 @@ otherwise, Is_Sorted returns False. Any exception raised during evaluation of
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} List);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Sort (Container : @key{in out} List)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Container)
+                 @key{then raise} Program_Error)],Old=[]};]}
 @end{Example}
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Reorders the nodes of Container
@@ -5559,9 +6869,26 @@ evaluation of "<" is propagated.]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],KeepNext=[T],Text=[@key{procedure} Merge (Target  : @key{in out} List;
-                 Source  : @key{in out} List);]}
+                    Source  : @key{in out} List)@Chg{Version=[5],New=[
+   @key{with} Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Tampering_With_Elements_Prohibited (Source)
+                 @key{then raise} Program_Error) @key{and then}
+                (@key{if} Length (Target) > Maximum_Length - Length (Source)
+                 @key{then raise} Constraint_Error),
+        Post => (@key{declare}
+                   Result_Length : @key{constant} Count_Type :=
+                      Length (Source)'Old + Length (Target)'Old;
+                 @key{begin}
+                    (@key{if} Target = Source @key{then} True
+                     @key{else} Length (Source) = 0 @key{and then}
+                        Length (Target) = Result_Length))],Old=[]};]}
 @end{Example}
+
+
+
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00302-03]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0021-1]}
@@ -5585,6 +6912,72 @@ Any exception raised during evaluation of "<" is propagated.]}
 @end{Ramification}
 
 @end{DescribeCode}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The nested package Doubly_Linked_Lists.Stable
+provides a type Stable.List that represents
+a @i<stable> list,@Defn2{Term=(stable),Sec=(list)} which is one that
+cannot grow and shrink. Such a list can be created by calling the
+Copy function, or by establishing a
+@i<stabilized view> of a regular List.@Defn2{Term=[stabilized view],Sec=[list]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The subprograms of package
+Containers.Doubly_Linked_Lists that have a parameter or result of type List
+are included in the nested package Stable with the same specification, except
+that the following are omitted:]}
+
+@begin{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited,
+Tampering_With_Elements_Prohibited, Assign, Move,
+Insert, Clear, Delete, Delete_First, Delete_Last, Splice, Swap_Links,
+and Reverse_Elements]}
+@end{Indent}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The names List and Cursor mean the types
+    declared in the nested package in these subprogram specifications.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The omitted routines are those that tamper with
+    cursors or elements (or test that state). The model is that it is
+    impossible to tamper with cursors or elements of a stable view since no
+    such operations are included. Thus tampering checks are not needed for
+    a stable view, and we omit the operations associated with those checks.]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The Generic_Sorting generic is omitted entirely,
+    as only function Is_Sorting does not tamper with cursors. It isn't useful
+    enough by itself to include.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations of this package are equivalent
+to those for regular lists, except that the calls to
+Tampering_With_Cursors_Prohibited and
+Tampering_With_Elements_Prohibited that occur in preconditions are replaced
+by False, and any that occur in postconditions are replaced by True.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[If a stable list is declared with the Base
+discriminant designating a pre-existing regular list, the stable list
+represents a stabilized view of the underlying regular list, and any operation
+on the stable list is reflected on the underlying regular list. While a
+stabilized view exists, any operation that tampers with elements performed on
+the underlying list is prohibited. The finalization of a stable list that
+provides such a view removes this restriction on the underlying regular list
+@Redundant[(though some other restriction might exist due to other concurrent
+iterations or stabilized views)].]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[If a stable list is declared without specifying
+Base, the object must be initialized. The initializing expression of the stable
+list, @Redundant[typically a call on Copy], determines the Length
+of the list. The Length of a stable list never changes after
+initialization.]}
 
 @end{StaticSem}
 
@@ -5891,6 +7284,19 @@ probably not a stable sort.]}
   outside of test programs. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
+  new subprograms, types, and even a nested package were added to
+  Containers.Doubly_Linked_Lists to better support contracts and stable views. If an
+  instance of Containers.Doubly_Linked_Lists
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0196-1]}

@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.134 $}
+@Comment{$Revision: 1.135 $}
 
 @begin{Intro}
 
@@ -6722,7 +6722,14 @@ circumstances:
   If A1 signals some action that in turn signals A2.
 @end(Itemize)
 
-@ChgNote{Prior to Ada 202x (by AI12-0267-1) these two section changes where here
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0298-1]}
+@ChgAdded{Version=[5],Text=[Action A1 is defined to @i{potentially signal}
+action A2 if A1 signals A2, if action A1 and A2 occur as part of the execution
+of the same logical thread of control, and the language rules permit
+action A1 to precede action A2, or if action A1 potentially signals some
+action that in turn potentially signals A2.@Defn{potentially signal}]}
+
+@ChgNote{Prior to Ada 202x (by AI12-0267-1) these two section changes were here
 @end{RunTime}
 
 @begin{Erron} -- end ChgNote}
@@ -6813,7 +6820,7 @@ see @RefSecNum(Shared Variable Control).
 @ChgAdded{Version=[5],Text=[Two actions that are not sequential are defined
 to be @i<concurrent> actions.@Defn2{Term=[concurrent], Sec=(actions)}@Defn2{Term=(actions),Sec=(concurrent)}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Text=[Two actions are defined to @i<conflict> if one
 action@Defn{conflict}@Defn2{Term=[actions], Sec=(conflicting)} assigns to an
 object, and the other action reads or assigns to a part of the same
@@ -6822,11 +6829,13 @@ addressable).  The action comprising a call on a subprogram or an
 entry is defined to @i{potentially conflict} with another action if the
 Global aspect (or Global'Class aspect in the case of a dispatching
 call) of the called subprogram or entry is such that a conflicting
-action would be possible during the execution of the call. Similarly,
+action@Defn2{Term=[potentially conflict], Sec=(actions)}@Defn2{Term=[actions], Sec=(potentially conflicting)}@Defn2{Term=[conflict], Sec=(potentially)}
+would be possible during the execution of the call. Similarly,
 two calls are considered to potentially conflict if they each have
 Global (or Global'Class in the case of a dispatching call) aspects
 such that conflicting actions would be possible during the execution
-of the calls.@Defn2{Term=[potentially conflict], Sec=(actions)}@Defn2{Term=[actions], Sec=(potentially conflicting)}@Defn2{Term=[conflict], Sec=(potentially)}]}
+of the calls. Finally, two actions that conflict are also considered
+to potentially conflict.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[A @i<synchronized> object@Defn{synchronized object}
@@ -6875,9 +6884,9 @@ independently addressable).]}
   parallel constructs with tasks by changing various wording to talk about
   logical threads of control rather than purely about tasks.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
-  @ChgAdded{Version=[5],Text=[Added wording to define conflicting actions;
-  this is used to define conflict policies.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to define potentially signalling
+  actions and conflicting actions; these are used to define conflict policies.]}
 @end{Diffword2012}
 
 
@@ -6886,16 +6895,16 @@ independently addressable).]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[This subclause determines what checks are performed
 relating to possible concurrent conflicting actions
-(see @RefSecNum{Shared Variables}).]}
+(see @RefSecNum{Shared Variables}).@Defn{conflict check policy}]}
 
 @begin{Syntax}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The form of a
 @nt{pragma} Conflict_Check_Policy is as follows:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],Text=`@key{pragma} @prag<Conflict_Check_Policy> (@SynI{policy_}@Syn2{identifier});'}>
+@AddedPragmaSyn<Version=[5],@ChgAdded{Version=[5],Text=`@key{pragma} @prag<Conflict_Check_Policy> (@SynI{policy_}@Syn2{identifier}[, @SynI{policy_}@Syn2{identifier}]);'}>
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[A @nt{pragma} Conflict_Check_Policy is allowed only
@@ -6907,9 +6916,18 @@ a configuration pragma.]}
 @begin{Legality}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
-@ChgAdded{Version=[5],Text=[The @SynI{policy_}@nt{identifier} shall be one of
-Unchecked, Known_Conflict_Checks, Parallel_Conflict_Checks, All_Conflict_Checks,
-or an implementation-defined conflict check policy.]}
+@ChgAdded{Version=[5],Text=[Each @SynI{policy_}@nt{identifier} shall be one of
+No_Parallel_Conflict_Checks, Known_Parallel_Conflict_Checks,
+All_Parallel_Conflict_Checks, No_Tasking_Conflict_Checks,
+Known_Tasking_Conflict_Checks, All_Tasking_Conflict_Checks, No_Conflict_Checks,
+Known_Conflict_Checks, All_Conflict_Checks, or an implementation-defined
+conflict check policy. If two @SynI{policy_}@nt{identifier}s are given, one
+shall include the word Parallel and one shall include the word Tasking. If only
+one @SynI{policy_}@nt{identifier} is given, it shall not include the word
+Parallel or Tasking.]}
+
+@ChgImplDef{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[Implementation-defined conflict check policies.]}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
 @ChgAdded{Version=[5],Text=[A @nt{pragma} Conflict_Check_Policy given in a
@@ -6924,11 +6942,12 @@ which it applies.]}
 @nt{generic_instantiation}, then the @nt{pragma} Conflict_Check_Policy applies
 to the entire instance.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0294-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0294-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Text=[If multiple Conflict_Check_Policy pragmas apply to a
 given construct, the conflict check policy is determined by the one in the
-innermost enclosing region. If no Conflict_Check_Policy pragma applies to
-a construct, the policy is Parallel_Conflict_Checks (see below).]}
+innermost enclosing region. If no Conflict_Check_Policy pragma applies to a
+construct, the policy is (All_Parallel_Conflict_Checks,
+No_Tasking_Conflict_Checks) (see below).]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
@@ -6938,7 +6957,7 @@ a construct, the policy is Parallel_Conflict_Checks (see below).]}
   pragmas in a single declarative region.]}
 @end{Honest}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[Certain potentially conflicting
 actions are disallowed according to which conflict check policies apply at the
 place where the action or actions occur, as follows:]}
@@ -6946,33 +6965,119 @@ place where the action or actions occur, as follows:]}
 @begin{Description}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Unchecked@\This policy imposes no restrictions.]}
+@ChgAdded{Version=[5],Text=[No_Parallel_Conflict_Checks@\This policy
+imposes no restrictions on concurrent actions arising from
+@Defn{No_Parallel_Conflict_Checks conflict check policy}parallel constructs.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Known_Conflict_Checks@\If this policy applies to two
-  concurrent actions occuring within the same compilation unit, they are
-  disallowed if they are known to denote the same object (see
-  @RefSecNum{Parameter Associations}) with uses that potentially conflict. For
-  the purposes of this check, any parallel loop may be presumed to involve
-  multiple concurrent iterations, and any named task type may be presumed to
-  have multiple instances.]}
+@ChgAdded{Version=[5],Text=[No_Tasking_Conflict_Checks@\This policy
+imposes no restrictions on concurrent actions arising from tasking
+@Defn{No_Tasking_Conflict_Checks conflict check policy}constructs.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Parallel_Conflict_Checks@\This policy includes the
-  restrictions imposed by the Known_Conflict_Checks policy, and in addition
-  disallows a parallel construct from reading or updating a variable that is
-  global to the construct, unless it is a synchronized object, or unless the
-  construct is a parallel loop, and the global variable is a part of a component
-  of an array denoted by an indexed component with at least one index expression
-  that statically denotes the loop parameter of the
-  @nt{loop_parameter_specification} or the chunk parameter of the parallel
-  loop.]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Known_Parallel_Conflict_Checks@\If
+this policy applies to two concurrent actions appearing within parallel constructs,
+@Defn{Known_Parallel_Conflict_Checks conflict check policy}they are disallowed
+if they are known to denote the same object (see @RefSecNum{Parameter Associations})
+with uses that conflict. For the purposes of this check, any parallel loop may
+be presumed to involve multiple concurrent iterations. Also, for the purposes of
+deciding whether two actions are concurrent, it is enough for the logical
+threads of control in which they occur to be concurrent at any point in their
+execution, unless all of the following are true:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the shared object is volatile;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the two logical threads of control are both known
+    to also refer to a shared synchronized object; and]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[each thread whose potentially conflicting action
+    updates the shared volatile object, also updates this shared synchronized
+    object.]}
+
+    @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[To properly synchronize two actions to prevent
+      concurrency, a thread that does an update of a volatile object must update
+      a synchronized object afterward to indicate it has completed its update,
+      and the other thread needs to test the value of the synchronized object
+      before it reads the updated volatile object. In a parallel construct,
+      @ldquote@;signaling@rdquote cannot be used to prevent concurrency,
+      since that generally requires some blocking, so testing the value of the
+      synchronized object would probably need to use a busy-wait loop.]}
+    @end{Reason}
+@end{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[All_Conflict_Checks@\This policy includes the
-  restrictions imposed by the Parallel_Conflict_Checks policy, and in addition
-  disallows a task body from reading or updating a variable that is global to
-  the task body, unless it is a synchronized object.]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Known_Tasking_Conflict_Checks@\If
+this policy applies to two concurrent actions appearing within
+@Defn{Known_Tasking_Conflict_Checks conflict check policy}the same compilation
+unit, at least one of which appears within a task body but not within a parallel
+construct, they are disallowed if they are known to denote the same object (see
+@RefSecNum{Parameter Associations}) with uses that conflict, and neither
+potentially signals the other (see @RefSecNum{Shared Variables}). For the
+purposes of this check, any named task type may be presumed to have multiple
+instances. Also, for the purposes of deciding whether two actions are
+concurrent, it is enough for the tasks in which they occur to be concurrent at
+any point in their execution, unless all of the following are true:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the shared object is volatile;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the two tasks are both known to also refer to a
+    shared synchronized object; and]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[each task whose potentially conflicting action
+    updates the shared volatile object, also updates this shared synchronized
+    object.]}
+
+    @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[To properly synchronize two actions to prevent
+      concurrency, a task that does an update of a @i{non}volatile object must
+      use signaling via a synchronized object to indicate it has completed its
+      update, and the other task needs to be signaled by this action on the
+      synchronized object before it reads the updated nonvolatile object. In
+      other words, to synchronize communication via a nonvolatile object,
+      signaling must be used. To synchronize communication via a volatile
+      object, an update of a shared synchronized object followed by a read of
+      the synchronized object in the other task can be sufficient.]}
+    @end{Reason}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[All_Parallel_Conflict_Checks@\This policy includes
+the restrictions imposed by the Known_Parallel_Conflict_Checks policy, and in
+@Defn{All_Parallel_Conflict_Checks conflict check policy}addition
+disallows a parallel construct from reading or updating a variable that
+is global to the construct, unless it is a synchronized object, or unless the
+construct is a parallel loop, and the global variable is a part of a component
+of an array denoted by an indexed component with at least one index expression
+that statically denotes the loop parameter of the
+@nt{loop_parameter_specification} or the chunk parameter of the parallel loop.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[All_Tasking_Conflict_Checks@\This policy includes
+@Defn{All_Tasking_Conflict_Checks conflict check policy}the restrictions
+imposed by the Known_Tasking_Conflict_Checks policy, and in
+addition disallows a task body from reading or updating a variable that is
+global to the task body, unless it is a synchronized object.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[No_Conflict_Checks, Known_Conflict_Checks,
+All_Conflict_Checks@\These are short hands for (No_Parallel_Conflict_Checks,
+@Defn{No_Conflict_Checks conflict check policy}No_Tasking_Conflict_Checks),
+(Known_Parallel_Conflict_Checks,
+@Defn{Known_Conflict_Checks conflict check policy}Known_Tasking_Conflict_Checks),
+and (All_Parallel_Conflict_Checks,
+@Defn{All_Conflict_Checks conflict check policy}All_Tasking_Conflict_Checks),
+respectively.]}
 
 @end{Description}
 
@@ -6980,11 +7085,16 @@ place where the action or actions occur, as follows:]}
 
 @begin{ImplPerm}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1]}
-@ChgAdded{Version=[5],Text=[When the applicable conflict check policy is
-Known_Conflict_Checks, the implementation may disallow two concurrent actions if
-the implementation can prove they will at run time denote the same object with
-uses that potentially conflict.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0267-1],ARef=[AI12-0298-1]}
+@ChgAdded{Version=[5],Text=[When the conflict check policy
+Known_Parallel_Conflict_Checks applies, the implementation may disallow two
+concurrent actions appearing within parallel constructs if the implementation
+can prove they will at run-time denote the same object with uses that conflict.
+Similarly, when the conflict check policy Known_Tasking_Conflict_Checks applies,
+the implementation may disallow two concurrent actions, at least one of which
+appears within a task body but not within a parallel construct, if the
+implementation can prove they will at run-time denote the same object with uses
+that conflict.]}
 
 @begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}

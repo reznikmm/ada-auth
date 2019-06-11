@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.35 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.36 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -93,7 +93,7 @@ package Containers.Multiway_Trees has the following declaration:]}
            Default_Iterator  => Iterate,
            Iterator_Element  => Element_Type@Chg{Version=[5],New=[,
            Iterator_View     => Stable.Tree,
-           Stable_Properties => (Length, Capacity,
+           Stable_Properties => (Length,
                                  Tampering_With_Cursors_Prohibited,
                                  Tampering_With_Elements_Prohibited),
            Default_Initial_Condition =>
@@ -1968,6 +1968,19 @@ unless specified by the operation.]}]}
   @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
+  new subprograms, types, and even a nested package were to
+  Containers.Multiway_Trees to better support contracts and stable views. If an
+  instance of Containers.Hashed_Maps
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0196-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}@b{Correction:}
@@ -2191,6 +2204,33 @@ of Update_Element may be constrained even if Element_Type is unconstrained.]}
 @ChgAdded{Version=[4],Text=[The operations Append, Insert, Prepend, and
 Replace_Element that have a formal parameter of type Element_Type perform
 indefinite insertion (see @RefSecNum{Containers}).]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The description of
+Tampering_With_Elements_Prohibited is replaced by:]}
+
+@begin{Indent}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Returns True if tampering with elements is
+  prohibited for Container, and False otherwise.]}
+@end{Indent}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Complete replacement of an element can cause its
+      memory to be deallocated while another operation is holding onto a
+      reference to it. That can't be allowed. However, a simple modification of
+      (part of) an element is not a problem.]}
+  @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited is replaced by
+Tampering_With_Elements_Prohibited in the postcondition for the operations
+Reference and Constant_Reference.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations Replace_Element and Swap are
+omitted from the nested package Stable.]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2287,6 +2327,32 @@ indefinite insertion (see @RefSecNum{Containers}).]}
   to cover those.]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The description of
+Tampering_With_Elements_Prohibited is replaced by:]}
+
+@begin{Indent}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Returns True if tampering with elements is
+  prohibited for Container, and False otherwise.]}
+@end{Indent}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Complete replacement of an element can cause its
+      memory to be deallocated while another operation is holding onto a
+      reference to it. That can't be allowed. However, a simple modification of
+      (part of) an element is not a problem.]}
+  @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited is replaced by
+Tampering_With_Elements_Prohibited in the postcondition for the operations
+Reference and Constant_Reference.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations Replace and Replace_Element are
+omitted from the nested package Stable.]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2382,6 +2448,32 @@ indefinite insertion (see @RefSecNum{Containers}).]}
   to cover those.]}
 @end{Discussion}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The description of
+Tampering_With_Elements_Prohibited is replaced by:]}
+
+@begin{Indent}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Returns True if tampering with elements is
+  prohibited for Container, and False otherwise.]}
+@end{Indent}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Complete replacement of an element can cause its
+      memory to be deallocated while another operation is holding onto a
+      reference to it. That can't be allowed. However, a simple modification of
+      (part of) an element is not a problem.]}
+  @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited is replaced by
+Tampering_With_Elements_Prohibited in the postcondition for the operations
+Reference and Constant_Reference.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations Replace and Replace_Element are
+omitted from the nested package Stable.]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2449,6 +2541,21 @@ perform indefinite insertion (see @RefSecNum{Containers}).]}
   the nested generic package Generic_Keys, as well as the routines declared
   directly in the Containers.Indefinite_Hashed_Sets package.]}
 @end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Unlike the other containers, a Hashed_Set has no
+  operations that tamper with elements without tampering with cursors.
+  Modifying the contents of a element of a set can change its position in the
+  set, so those operations tamper with cursors.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Because of this characteristic, this subclause
+  is missing the rules that other indefinite containers have modifying the
+  definition and use of Tampering_with_Elements, and the definition of the
+  Stable subpackaage is the same as the definite version.]}
+@end{Discussion}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2465,13 +2572,6 @@ The generic package Containers.Indefinite_Hashed_Sets is new.]}
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
-  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
-  stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
-  would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
@@ -2516,6 +2616,21 @@ perform indefinite insertion (see @RefSecNum{Containers}).]}
   the nested generic package Generic_Keys, as well as the routines declared
   directly in the Containers.Indefinite_Ordered_Sets package.]}
 @end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Unlike the other containers, a Ordered_Set has no
+  operations that tamper with elements without tampering with cursors.
+  Modifying the contents of a element of a set can change its position in the
+  set, so those operations tamper with cursors.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[Because of this characteristic, this subclause
+  is missing the rules that other indefinite containers have modifying the
+  definition and use of Tampering_with_Elements, and the definition of the
+  Stable subpackaage is the same as the definite version.]}
+@end{Discussion}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2532,13 +2647,6 @@ The generic package Containers.Indefinite_Ordered_Sets is new.]}
   This could mean that some calls to those routines would now raise
   Program_Error where they previously worked. However, this is extremely
   unlikely; see @Inconsistent2012Title in
-  @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[Defined the Iterator_View aspect, so that the
-  stable view is used for container element iterators. This leads to a rare
-  situation where Program_Error will be raised in Ada 202x for code that
-  would have worked in Ada 2012. See @Inconsistent2012Title in
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
@@ -2602,6 +2710,32 @@ unconstrained.]}
 Prepend_Child, and Replace_Element that have a formal parameter of type
 Element_Type perform indefinite insertion (see @RefSecNum{Containers}).]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The description of
+Tampering_With_Elements_Prohibited is replaced by:]}
+
+@begin{Indent}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Returns True if tampering with elements is
+  prohibited for Container, and False otherwise.]}
+@end{Indent}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Complete replacement of an element can cause its
+      memory to be deallocated while another operation is holding onto a
+      reference to it. That can't be allowed. However, a simple modification of
+      (part of) an element is not a problem.]}
+  @end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited is replaced by
+Tampering_With_Elements_Prohibited in the postcondition for the operations
+Reference and Constant_Reference.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations Replace and Replace_Element are
+omitted from the nested package Stable.]}
+
 @end{Itemize}
 @end{StaticSem}
 
@@ -2662,9 +2796,8 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @key[package] Ada.Containers.Indefinite_Holders@Chg{Version=[5],New=[
    @key[with] Preelaborate, Remote_Types,
         Nonblocking => Equal_Element'Nonblocking,
-        Global => Equal_Element'Global &
-                  Element_Type'Global &
-                  @key[in out synchronized] Ada.Containers.Indefinite_Holders ],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
+        Global => @key[synchronized in out] Ada.Containers.Indefinite_Holders &
+                  Equal_Element'Global & Element_Type'Global],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
    @key[pragma] Preelaborate(Indefinite_Holders);
    @key[pragma] Remote_Types(Indefinite_Holders);]}]}
 
@@ -2742,14 +2875,15 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Constant_Reference_Type}
          (Element : @key[not null access constant] Element_Type) @key[is private]
-      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
            Global => @key[synchronized in out access] Holder,
            Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type} (Element : @key[not null access] Element_Type) @key[is private]
-      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Reference_Type}
+         (Element : @key[not null access] Element_Type) @key[is private]
+      @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
            Global => @key[synchronized in out access] Holder,
            Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
@@ -2759,7 +2893,7 @@ package Containers.Indefinite_Holders has the following declaration:]}
       @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
       @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
            Post   => Tampering_With_The_Element_Prohibited (Container),
-           Global => @key[null]],Old=[]};]}
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
@@ -2767,7 +2901,7 @@ package Containers.Indefinite_Holders has the following declaration:]}
       @key[return] Reference_Type@Chg{Version=[5],New=[
       @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
            Post   => Tampering_With_The_Element_Prohibited (Container),
-           Global => @key[null]],Old=[]};]}
+           Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0001-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
@@ -2782,10 +2916,12 @@ package Containers.Indefinite_Holders has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Move} (Target : @key[in out] Holder; Source : @key[in out] Holder)@Chg{Version=[5],New=[
-      @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
-                    @key[then raise] Program_Error),
-            Post => (@key[if] Target /= Source @key[then]
-                       Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target))],Old=[]};]}
+      @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Target)
+                       @key[then raise] Program_Error
+                    @key[elsif] Tampering_With_The_Element_Prohibited (Source)
+                       @key[then raise] Program_Error),
+           Post => (@key[if] Target /= Source @key[then]
+                      Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target)))],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}]}
@@ -3062,14 +3198,14 @@ Any exception raised by Process.@key[all] is propagated.]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[type] Constant_Reference_Type
       (Element : @key[not null access constant] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
         Global => @key[synchronized in out access] Holder,
         Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[type] Reference_Type (Element : @key[not null access] Element_Type) @key[is private]
-   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[
+   @key[with] Implicit_Dereference => Element@Chg{Version=[5],New=[,
         Global => @key[synchronized in out access] Holder,
         Default_Initial_Condition => (@key[raise] Program_Error)],Old=[]};]}
 @end{Example}
@@ -3102,7 +3238,7 @@ Constant_Reference_Type or Reference_Type propagates Program_Error.]}]}
    @key[return] Constant_Reference_Type@Chg{Version=[5],New=[
    @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
         Post   => Tampering_With_The_Element_Prohibited (Container),
-        Global => @key[null]],Old=[]};]}
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -3126,7 +3262,7 @@ Constant_Reference exists and has not been finalized.]}
    @key[return] Reference_Type@Chg{Version=[5],New=[
    @key[with] Pre    => (@key[if] Is_Empty (Container) @key[then raise] Constraint_Error),
         Post   => Tampering_With_The_Element_Prohibited (Container),
-        Global => @key[null]],Old=[]};]}
+        Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
@@ -3177,10 +3313,12 @@ holder container; otherwise, returns To_Holder (Element (Source)).]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgRef{Version=[5],Kind=[Revised],Aref=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Move (Target : @key[in out] Holder; Source : @key[in out] Holder)@Chg{Version=[5],New=[
-   @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Container)
-                 @key[then raise] Program_Error),
+   @key[with] Pre  => (@key[if] Tampering_With_The_Element_Prohibited (Target)
+                    @key[then raise] Program_Error
+                 @key[elsif] Tampering_With_The_Element_Prohibited (Source)
+                    @key[then raise] Program_Error),
         Post => (@key[if] Target /= Source @key[then]
-                    Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target))],Old=[]};]}
+                    Is_Empty (Source) @key[and then] (@key[not] Is_Empty (Target)))],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0069-1],ARef=[AI05-0248-1]}
@@ -3319,6 +3457,19 @@ holder container unless specified by the operation.]}]}
   @RefSecNum{The Generic Package Containers.Indefinite_Vectors} for details.]}
 @end{Inconsistent2012}
 
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A number of
+  new subprograms and types were added to
+  Containers.Indefinite_Holders to better support contracts and stable
+  views. If an instance of Containers.Indefinite_Holders
+  is referenced in a @nt{use_clause}, and an entity @i<E> with the same
+  @nt{defining_identifier} as a new entity in Containers.Hashed_Maps is
+  defined in a package that is also referenced in a @nt{use_clause}, the
+  entity @i<E> may no longer be use-visible, resulting in errors. This should
+  be rare and is easily fixed if it does occur.]}
+@end{Incompatible2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0110-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that tampering checks
@@ -3450,7 +3601,7 @@ as Containers.Vectors except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length expression}> > Maximum_Length
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Maximum_Length - <@examcom{some other length}>
       @key[then raise] Constraint_Error)]}
 @end{Example}
 
@@ -3459,11 +3610,12 @@ as Containers.Vectors except:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length expression}> > Maximum_Length
-      @key[then raise] Constraint_Error) @key[and then]
-     (@key[if] <@examcom{some length expression}> > Container.Capacity
-      @key[then raise] Capacity_Error)]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Maximum_Length - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
 @end{Example}
+
 
 @end{Itemize}
 @end{StaticSem}
@@ -3592,6 +3744,21 @@ as Containers.Doubly_Linked_Lists except:]}
   @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
   with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global &
+             Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type List is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -3615,39 +3782,106 @@ as Containers.Doubly_Linked_Lists except:]}
   @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The allocation of internal storage includes a
-    check that the capacity is not exceeded, and Capacity_Error is raised
-    if this check fails.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For procedures Insert,
+    Prepend, Append, Merge, and the three-parameter Splice whose parameter
+    Source has type List, the part of the precondition reading:],Old=[The
+    allocation of internal storage includes a check that the capacity is not
+    exceeded, and Capacity_Error is raised if this check fails.]}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, @Chg{Version=[5],New=[the
+    precondition is altered to:],Old=[if Source length is greater
+    than Target capacity, then Capacity_Error is
+    propagated.]}]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+           @key{elsif}  Length (Source) > Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source : List; Capacity : Count_Type := 0)
-     @key[return] List;]}
+     @key[return] List@Chg{Version=[5],New=[
+     @key[with] Pre  => (@key[if] Capacity /= 0 @key[and then] Capacity < Length (Source)
+                  @key[then raise] Capacity_Error),
+          Post => Length (Copy'Result) = Length (Source) @key[and then]
+                  @key[not] Tampering_With_Elements_Prohibited (Copy'Result) @key[and then]
+                  @key[not] Tampering_With_Cursors_Prohibited (Copy'Result) @key[and then]
+                  Copy'Result.Capacity = (@key[if] Capacity = 0 @key[then]
+                     Length (Source) @key[else] Capacity)],Old=[]};]}
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[If Capacity is 0, then the list capacity is the length of
+  @ChgRef{Version=[5],Kind=[Revised]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[@Chg{Version=[5],New=[Returns a
+    list whose elements have the same values as the elements of Source.],Old=[If
+    Capacity is 0, then the list capacity is the length of
     Source; if Capacity is equal to or greater than the length of Source,
     the list capacity equals the value of the Capacity parameter;
-    otherwise, the operation propagates Capacity_Error.]}
+    otherwise, the operation propagates Capacity_Error]}.]}
 @end{Indent}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In the three-parameter procedure Splice whose
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[In the
+    three-parameter procedure Splice whose
     Source has type List, if the sum of the length of Target and the length
     of Source is greater than the capacity of Target, then Splice propagates
-    Capacity_Error.]}
+    Capacity_Error.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice, if
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[In the four-parameter procedure Splice,
+    @Chg{Version=[5],New=[the precondition is altered to:],Old=[if
     the length of Target equals the capacity of Target, then Splice
-    propagates Capacity_Error.]}
+    propagates Capacity_Error.]}]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre  => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+            @key{elsif} Tampering_With_Cursors_Prohibited (Source)
+               @key{then raise} Program_Error
+            @key{elsif} Position = No_Element
+               @key{then raise} Constraint_Error
+            @key{elsif not} Has_Element (Source, Position)
+               @key{then raise} Program_Error
+            @key{elsif} Before /= No_Element @key{and then}
+               @key{not} Has_Element (Target, Before)
+               @key{then raise} Program_Error
+            @key{elsif} Target = Source @key{then} True
+            @key{elsif} Length (Target) = Count_Type'Last
+              @key{then raise} Constraint_Error
+            @key{elsif} Length (Target) = Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
 
 @end{Itemize}
 @end{StaticSem}
@@ -3774,6 +4008,21 @@ as Containers.Hashed_Maps except:]}
   @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
   with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global & Equivalent_Keys'Global &
+             Hash'Global & Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with
     discriminants that specify both the capacity (number of elements) and
@@ -3800,13 +4049,22 @@ as Containers.Hashed_Maps except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
   is replaced with:]}
-@begin{Indent}
-    @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
-    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
 
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[procedure] Reserve_Capacity (Container : @key[in out] Map;
+                               Capacity  : @key[in]     Count_Type)
+      @key[with] Pre => (@key[if] Capacity > Container.Capacity @key[then raise] Capacity_Error);]}
+@end{Example}
+
+  @begin{Indent}
+    @ChgRef{Version=[3],Kind=[AddedNormal]}
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[This],Old=[If the specified Capacity is larger
+    than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
+    Otherwise, the]} operation has no effect@Chg{Version=[5],New=[,
+    @Redundant[other than checking the precondition]],Old=[]}.]}
+  @end{Indent}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
@@ -3821,24 +4079,68 @@ as Containers.Hashed_Maps except:]}
     used for the given capacity (maximum number of elements).]}
 @end{Indent}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For procedures Insert
+    and Include, the part of the precondition reading:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[In procedure Assign,
+    the precondition is altered to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+           @key{elsif}  Length (Source) > Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Map;
                  Capacity : Count_Type := 0;
-                 Modulus  : Hash_Type := 0) @key[return] Map;]}
+                 Modulus  : Hash_Type := 0) @key[return] Map@Chg{Version=[5],New=[
+     @key[with] Pre  => (@key[if] Capacity /= 0 @key[and then] Capacity < Length (Source)
+                  @key[then raise] Capacity_Error),
+          Post => Length (Copy'Result) = Length (Source) @key[and then]
+                  @key[not] Tampering_With_Elements_Prohibited (Copy'Result) @key[and then]
+                  @key[not] Tampering_With_Cursors_Prohibited (Copy'Result) @key[and then]
+                  Copy'Result.Capacity = (@key[if] Capacity = 0 @key[then]
+                     Length (Source) @key[else] Capacity) @key[and then]
+                  Copy'Result.Modulus = (@key[if] Modulus = 0 @key[then]
+                     Default_Modulus (Capacity) @key[else] Modulus)],Old=[]};]}
 @end{Example}
+
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0264-1]}
+  @ChgRef{Version=[5],Kind=[Revised]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs initialized from the values
-    in Source. If Capacity is 0, then the map capacity is the
-    length of Source; if Capacity is equal to or greater than
+    in Source.@Chg{Version=[5],New=[],Old=[ If Capacity is 0, then the map
+    capacity is the length of Source; if Capacity is equal to or greater than
     the length of Source, the map capacity is the value of the Capacity
     parameter; otherwise, the operation propagates Capacity_Error.  If
     the Modulus argument is 0, then the map modulus is the value
     returned by a call to Default_Modulus with the map capacity as its
-    argument; otherwise, the map modulus is the value of the Modulus parameter.]}
+    argument; otherwise, the map modulus is the value of the Modulus parameter.]}]}
 @end{Indent}
 
 @end{Itemize}
@@ -3966,6 +4268,21 @@ as Containers.Ordered_Maps except:]}
   @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
   with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global & Less_Element'Global &
+             Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Map is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -3989,28 +4306,71 @@ as Containers.Ordered_Maps except:]}
   @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[The allocation of a new node includes a check that
-    the capacity is not exceeded, and Capacity_Error is raised if this check
-    fails.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For procedures Insert
+    and Include, the part of the precondition reading:],Old=[The
+    allocation of internal storage includes a check that the capacity is not
+    exceeded, and Capacity_Error is raised if this check fails.]}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
+@end{Example}
+
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, @Chg{Version=[5],New=[the
+    precondition is altered to:],Old=[if Source length is greater
+    than Target capacity, then Capacity_Error is propagated.]}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+           @key{elsif}  Length (Source) > Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Map;
-                 Capacity : Count_Type := 0) @key[return] Map;]}
+                 Capacity : Count_Type := 0) @key[return] Map@Chg{Version=[5],New=[
+     @key[with] Pre  => (@key[if] Capacity /= 0 @key[and then] Capacity < Length (Source)
+                  @key[then raise] Capacity_Error),
+          Post => Length (Copy'Result) = Length (Source) @key[and then]
+                  @key[not] Tampering_With_Elements_Prohibited (Copy'Result) @key[and then]
+                  @key[not] Tampering_With_Cursors_Prohibited (Copy'Result) @key[and then]
+                  Copy'Result.Capacity = (@key[if] Capacity = 0 @key[then]
+                     Length (Source) @key[else] Capacity)],Old=[]};]}
+
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
   @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a map with key/element pairs
-    initialized from the values in Source. If Capacity is 0, then the map
+    initialized from the values in Source.@Chg{Version=[5],New=[],Old=[ If
+    Capacity is 0, then the map
     capacity is the length of Source; if Capacity is equal to or greater than
     the length of Source, the map capacity is the specified value; otherwise, the
-    operation propagates Capacity_Error.]}
+    operation propagates Capacity_Error.]}]}
 @end{Indent}
 
 @end{Itemize}
@@ -4670,14 +5030,19 @@ provide sorting on arbitrary array types.]}
 procedure Containers.Generic_Array_Sort has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Index_Type @key{is} (<>);
    @key{type} Element_Type @key{is private};
    @key{type} Array_Type @key{is array} (Index_Type @key{range} <>) @key{of} Element_Type;
    @key{with function} "<" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
-@key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type);@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}
-@key{pragma} Pure(Ada.Containers.Generic_Array_Sort);]}
+@key{procedure} Ada.Containers.Generic_Array_Sort (Container : @key{in out} Array_Type)@Chg{Version=[5],New=[],Old=[;]}@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Array_Sort]}@Chg{Version=[5],New=[
+   @key{with} Pure,
+        Global => Element_Type'Global & Array_Type'Global &
+                  Ada.Containers.Generic_Array_Sort."<"'Global,
+        Nonblocking => Element_Type'Nonblocking @key{and} Array_Type'Nonblocking @key{and}
+                       Ada.Containers.Generic_Array_Sort."<"'Nonblocking],Old=[@key{pragma} Pure(Ada.Containers.Generic_Array_Sort)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -4724,6 +5089,7 @@ procedure Containers.@!Generic_@!Constrained_@!Array_Sort has the following
 declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} Index_Type @key{is} (<>);
    @key{type} Element_Type @key{is private};
@@ -4731,8 +5097,12 @@ declaration:]}
    @key{with function} "<" (Left, Right : Element_Type)
       @key{return} Boolean @key{is} <>;
 @key{procedure} Ada.Containers.Generic_Constrained_Array_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Constrained_Array_Sort]}
-      (Container : @key{in out} Array_Type);
-@key{pragma} Pure(Ada.Containers.Generic_Constrained_Array_Sort);]}
+      (Container : @key{in out} Array_Type)@Chg{Version=[5],New=[
+   @key{with} Pure,
+        Global => Element_Type'Global & Array_Type'Global &
+                  Ada.Containers.Generic_Constrained_Array_Sort."<"'Global,
+        Nonblocking => Element_Type'Nonblocking @key{and} Array_Type'Nonblocking @key{and}
+                       Ada.Containers.Generic_Constrained_Array_Sort."<"'Nonblocking],Old=[@key{pragma} Pure(Ada.Containers.Generic_Constrained_Array_Sort)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -4763,13 +5133,16 @@ procedure Containers.@!Generic_@!Sort has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[Added]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0056-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key{generic}
    @key{type} Index_Type @key{is} (<>);
    @key{with function} Before (Left, Right : Index_Type) @key{return} Boolean;
    @key{with procedure} Swap (Left, Right : @Chg{Version=[4],New=[@key[in] ],Old=[]}Index_Type);
 @key{procedure} Ada.Containers.Generic_Sort@SubChildUnit{Parent=[Ada.Containers],Child=[Generic_Sort]}
-      (First, Last : Index_Type'Base);
-@key{pragma} Pure(Ada.Containers.Generic_Sort);]}
+      (First, Last : Index_Type'Base)@Chg{Version=[5],New=[
+   @key{with} Pure,
+        Global => Before'Global & Swap'Global,
+        Nonblocking => Before'Nonblocking @key{and} Swap'Nonblocking],Old=[@key{pragma} Pure(Ada.Containers.Generic_Sort)]};]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -4874,6 +5247,10 @@ Text=[Containers.Generic_Sort should minimize calls to the generic formal Swap.]
   indeterminant comparisons that would not have worked in a sort.]}
 @end{DiffWord2005}
 
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Added contracts to these procedures.]}
+@end{DiffWord2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Synchronized_Queue_Interfaces]}

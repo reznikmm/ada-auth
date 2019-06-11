@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/05/08 22:01:13 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.76 $}
+@Comment{$Revision: 1.77 $}
 
 @LabeledClause{Type Conversions}
 
@@ -3879,7 +3879,123 @@ subtype S in the following ways:]}
 
 @end{Itemize}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0304-1]}
+@ChgAdded{Version=[5],Text=[For each language-defined nonscalar type T,
+T'Put_Image may be specified.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This permission applies, in particular, to
+    nonscalar types declared in language-defined generic packages,
+    and to any language-defined private type, even if an implementation
+    chooses to complete it as a scalar type.]}
+@end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For any language-defined scalar type T, T'Put_Image should
+    not be specified; the Image attribute needs to return the language-defined
+    image for such types. This is important for compatibility: the Image
+    attribute have been available for scalar types for many Ada revisions,
+    and programs can (and do!) depend on its behavior.]}
+@end{Ramification}
+
 @end{ImplPerm}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0304-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=<For each language-defined container
+  type T (that is, each of the Vector, List, Map, Set, Tree, and Holder types
+  defined in the various children of Ada.Containers), T'Put_Image should be
+  specified so that T'Image produces a result consistent with array aggregate
+  syntax (using '[' and ']' as delimiters) as follows:>}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Vector images should be consistent with the
+    default image of an array type with the same index and component types.]}
+
+    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+      Text=[The image of a language-defined vector container should be
+      consistent with default image of an array type with same index and
+      component types.]}]}
+
+    @begin{Discussion}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[In particular, this means that the format is
+	that of a named array aggregate. We have no recommendation on how to
+	handle empty elements; if the implementation can identify them, it may
+	wish to display them specially, but otherwise, they're just
+	uninitialized elements.]}
+    @end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Map images should be consistent with named array
+    aggregate syntax, using key value images in place of discrete choice names.
+    For example, @exam{[Key1 => Value1, Key2 => Value2]}.]}
+
+    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+      Text=[The image of a language-defined map container should be
+      consistent with the syntax of a named array aggregate.]}]}
+
+    @begin{Discussion}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[There is no recommendation about the order
+        in which key/element pairs occur within a map image. In the case of
+        multiple key values whose corresponding element values have the same
+        image, there is no recommendation about factoring (that is,
+        generating @exam{Key1 | Key2 => Some_Value} instead of @exam{Key1 =>
+        Some_Value, Key2 => Some_Value}).]}
+    @end{Discussion}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Set, List, and Holder images should be consistent
+    with positional array aggregate syntax. List elements should occur in order
+    within an image of a list. The image of an empty holder should be @exam{[]}.]}
+
+    @begin{Discussion}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[There is no recommendation about the order
+        in which set elements occur within the image of a set.]}
+    @end{Discussion}
+
+    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+      Text=[The image of a language-defined set, list, or holder container
+        should be consistent with the syntax of a positional array
+        aggregate.]}]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Tree images (and images of subtrees of trees)
+    should be consistent with positional array aggregate syntax.
+    For example, @exam{[[1, 2], [111, 222, 333]]}.]}
+
+    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+      Text=[The image of a language-defined tree container should be consistent
+	with the syntax of a positional array aggregate.]}]}
+
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0304-1]}
+@ChgAdded{Version=[5],Text=[For each language-defined nonscalar type T that has
+a primitive language-defined Image function whose profile is type conformant
+with that of T'Image (for example, Ada.Numerics.Float_Random.State has such an
+Image function), T'Put_Image should be specified so that T'Image yields the same
+result as that Image function.]}
+
+@ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+Text=[For language-defined nonscalar types with an Image function, T'Put_Image
+should be defined to yield the same result as Image.]}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For each language-defined private type T,
+    implementations are encouraged to ensure that T'Image generates images that
+    would be meaningful based only on the relevant public interfaces, as opposed
+    to requiring knowledge of the implementation of the private type.]}
+@end{ImplNote}
+
+@end{ImplAdvice}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}
