@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2019/06/11 04:31:36 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.142 $}
+@Comment{$Revision: 1.143 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -171,6 +171,17 @@ Sec=[of a type (implied)]}@Defn2{Term=[view],Sec=[of a subtype (implied)]}]}
   @ChgAdded{Version=[3],Text=[On the other hand, run-time rules can work
   either way, so @ldquote@;view of@rdquote should not be assumed
   in @RunTimeTitle rules.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Text=[For example, a reference to the components of
+  an object in a rule that is interpreted at compile-time would not apply to
+  components that are not visible. On the other hand, a reference
+  to the components of an object in a dynamic semantics rule would
+  apply to all components of the object, visible or not, including
+  (for tagged objects) components which are not components of the nominal
+  type of the object (see @RefSecNum{Type Extensions}). Other terms, such
+  as @ldquote@;subcomponent@rdquote and @ldquote@;part@rdquote, are
+  interpreted analogously.]}
 @end{Discussion}
 
 @PDefn2{Term=[scope], Sec=(informal definition)}
@@ -2343,11 +2354,12 @@ The following (and no others) represent constants:
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI05-0294-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0191-1],ARef=[AI12-0294-1]}
 @Defn{nominal subtype}
 At the place where a view of an
 object is defined, a @i(nominal subtype) is associated
-with the view.
+with the view.@Chg{Version=[5],New=[ The @i<nominal type>@Defn{nominal type}
+of a view is the type of the nominal subtype of the view.],Old=[]}
 @Defn{actual subtype}
 @IndexSee{Term=[subtype (of an object)],See=(actual subtype of an object)}
 The object's @i(actual subtype) (that is, its

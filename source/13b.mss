@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.123 $}
+@Comment{$Revision: 1.124 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3723,12 +3723,15 @@ Unchecked_Deallocate_Subpool has no effect. Otherwise, the subpool is
 finalized, and Subpool is set to @key[null].]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0331-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[Finalization of a subpool has the
-following effects:]}
+following effects@Chg{Version=[5],New=[ in the given order],Old=[]}:]}
 
-@begin{Itemize}
+@Comment{@begin{Itemize} - in Ada 2012}
+@begin{Enumerate}@Comment{ - in Ada 2020 and later}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[The subpool no longer belongs to any pool;]}
+@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0331-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The subpool no longer belongs to any pool;]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[Any of the objects allocated from the subpool that
@@ -3744,7 +3747,12 @@ cease to exist;@PDefn2{Term=[exist],Sec=[cease to]}]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],NoPrefix=[T],Text=[   Deallocate_Subpool(Pool_of_Subpool(Subpool).@key[all], Subpool);]}
 @end{Example}
-@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0331-1]}
+@ChgAdded{Version=[5],Text=[The subpool ceases to belong to any pool.]}
+
+@Comment{@end{Itemize} - in Ada 2012}
+@end{Enumerate}@Comment{ - in Ada 2020 and later}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0111-3]}
 @ChgAdded{Version=[3],Text=[Finalization of a Root_Storage_Pool_With_Subpools
@@ -3797,6 +3805,12 @@ happen when the collection of the access type is finalized).]}
   fact that objects finalized by Unchecked_Deallocate_Subpool still exist),
   but that violates every sane expectation for a procedure called
   "Deallocate" something.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0331-1]}
+  @ChgAdded{Version=[5],Text=[Clarified that the steps of deallocating a
+  subpool occur in a specific order. This shouldn't change any implementation;
+  no implementation is going to finalize deallocated objects or implement
+  Unchecked_Deallocate_Subpool so it is certain to raise Constraint_Error.]}
 @end{DiffWord2012}
 
 
@@ -5173,11 +5187,14 @@ the Write and Read attributes, where available, execute as follows:]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0040],ARef=[AI95-00108-01]}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00195-01],ARef=[AI95-00251-01],ARef=[AI95-00270-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
+@ChgRef{Version=[3],Kind=[Revised],ARef=[AI12-0191-1]}
 For elementary types, @Chg{Version=[2],New=[Read reads (and Write writes) the
 number of stream elements implied by the Stream_Size for the type @i<T>;],
 Old=[]} the representation @Chg{Version=[2],New=[],Old=[in terms ]}of@Chg{Version=[2],
 New=[ those],Old=[]} stream elements is implementation defined.
-For composite types, the Write or Read attribute for each component is
+For composite types, the Write or Read attribute for each component
+@Chg{Version=[5],New=[(excluding those, if any, that are not components of the
+nominal type of the object) ],Old=[]}is
 called in @Chg{New=[],Old=[a ]}canonical order@Chg{New=[, which],
 Old=[. The canonical order of components]} is last dimension varying
 fastest for an array@Chg{Version=[3],New=[ (unless the convention of the array is

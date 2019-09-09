@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.101 $}
+@Comment{$Revision: 1.102 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1993,6 +1993,10 @@ A @nt{pragma} Suppress gives permission to an
 implementation to omit certain language-defined checks@Chg{Version=[2],
 New=[, while a @nt<pragma> Unsuppress revokes the permission to omit checks.],Old=[]}.
 
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Suppress>,
+Text=<@ChgAdded{Version=[5],Text=[A request to the implementation to disable a
+run-time check for a portion of the text of a program.]}>}
+
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
 @Defn{language-defined check}
 @Defn2{Term=[check], Sec=(language-defined)}
@@ -2011,6 +2015,10 @@ causing an exception to be raised.
 All such checks are defined under @lquotes@;@RunTimeTitle@rquotes@;
 in clauses and subclauses throughout the standard.
 @end{Discussion}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Check>,
+Text=<@ChgAdded{Version=[5],Text=[A test made during execution to determine
+whether a language rule has been violated.]}>}
 @end{Intro}
 
 @begin{Syntax}
