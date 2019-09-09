@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.126 $}
+@Comment{$Revision: 1.127 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -37,6 +37,19 @@ New=[ aspects],Old=[]} and operational aspects. Representation
 how the types and other entities of the language are to be mapped onto
 the underlying machine. Operational @Chg{Version=[3],New=[aspects determine],
 Old=[items specify]} other properties of entities.]]}
+
+@Comment{The index entries for these glossary items are found later in this
+subclause}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Operational Aspect>,
+Text=<@ChgAdded{Version=[5],Text=[An aspect that indicates a logical property of
+an entity, such as the precondition of a subprogram, or the procedure used to
+write a given type of object to a stream.]}>}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Representation Aspect>,
+Text=<@ChgAdded{Version=[5],Text=[An aspect that indicates how an entity is
+mapped onto the underlying hardware, for example the size or alignment of an
+object.]}>}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0295-1]}
 @ChgAdded{Version=[1],Text=[@Redundant[Either kind of aspect of an entity may be

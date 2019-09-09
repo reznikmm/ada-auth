@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:12 $}
+@Comment{$Date: 2019/06/11 04:31:36 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.153 $}
+@Comment{$Revision: 1.154 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -813,6 +813,9 @@ My_Object.Do_Something_Else (Flag => True);]}
 @Redundant[An @i(attribute) is a characteristic of an entity that can be
 queried via an @nt{attribute_@!reference}
 or a @nt<range_@!attribute_@!reference>.]
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Attribute>,
+Text=<@ChgAdded{Version=[5],Text=[A characteristic or property of an entity that
+can be queried, and in some cases specified.]}>}
 @end{Intro}
 
 @begin{Syntax}
@@ -1980,6 +1983,11 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 An @i(aggregate) combines component values
 into a composite value of an array type, record type, or record extension.]
 @IndexSeeAlso{Term={literal},See=(aggregate)}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Aggregate>,
+Text=<@ChgAdded{Version=[5],Text=[A construct used to define a value of
+a composite type by specifying the values of the components of the
+type.]}>}
 @end{Intro}
 
 @begin{Syntax}
@@ -4079,6 +4087,11 @@ sequentially; for a @nt{named_container_aggregate}, the elements are
 specified by a sequence of key/value pairs, or using an iterator.
 The Aggregate aspect of the type of the @nt{aggregate} determines how the
 elements are combined to form the container.@Defn{container aggregate}]}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Container Aggregate>,
+Text=<@ChgAdded{Version=[5],Text=[A construct used to define a value of a
+type that represents a collection of elements, by explicitly specifying the
+elements in the collection.]}>}
 @end{Intro}
 
 @Comment{@begin{StaticSem} - This is not in any section, weird,
@@ -5671,16 +5684,26 @@ Untagged types covered by the tagged class-wide type
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0328-1]}
 @ChgAdded{Version=[3],Text=[If a membership test includes one or more
 @Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}s],Old=[@nt{choice_expression}s]}
 and the tested type of the membership test is limited, then the
 tested type of the membership test shall have a visible primitive equality
-operator.]}
+operator@Chg{Version=[5],New=[; if the tested type of the membership test is
+nonlimited with a user-defined primitive equality operator that is defined
+at a point where the type is limited, the tested type shall be a record type or
+record extension],Old=[]}.]}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0158-1]}
 @ChgAdded{Version=[3],Text=[A visible equality operator is required in order
 to avoid breaking privacy; that is, we don't want to depend on a hidden
 equality operator.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0328-1]}
+@ChgAdded{Version=[5],Text=[We make the membership test on the nonlimited
+view of a type illegal if it would use a different equality operator than what
+ould be used for a limited view of the same type (and such a limited view is
+known to exist).]}
 @end{Reason}
 @end{Legality}
 
@@ -5907,8 +5930,10 @@ user-defined) equals operator of the parent type.]}
 @end{Reason}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0123-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0328-1]}
 For a private type, if its full type is
-@Chg{Version=[3],New=[a record type],Old=[tagged]}, predefined
+@Chg{Version=[3],New=[a record type@Chg{Version=[5],New=[ or a record
+extension],Old=[]}],Old=[tagged]}, predefined
 equality is defined in terms of the primitive equals operator of the
 full type; @Chg{Version=[3],New=[otherwise],Old=[if the full type is untagged]},
 predefined equality for the private type is that of its full type.
@@ -6100,13 +6125,24 @@ membership test using @key(in)]} yields the result True if:
 @begin(itemize)
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1],ARef=[AI05-0264-1]}
   @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0328-1]}
   @ChgAdded{Version=[3],Text=[The @nt{membership_choice} is a
   @Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}],Old=[@nt{choice_expression}]},
   and the
   @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
   is equal to the value of the @nt{membership_choice}.
-  If the tested type is a record type or a limited type, the test uses the
+  If the tested type is a record type or a @Chg{Version=[5],New=[record
+  extension, or is ],Old=[]}limited @Chg{Version=[5],New=[at the point where
+  the membership test occurs],Old=[type]}, the test uses the
   primitive equality for the type; otherwise, the test uses predefined equality.]}
+
+  @begin{Reason}
+    @ChgAdded{Version=[5],Text=[We use the predefined equality operator
+    if the membership test occurs where the type is nonlimited if the type
+    is not a record type or record extension. However, to avoid confusion,
+    cases where a membership test could use different equality operators
+    based on the view are illegal.]}
+  @end{Reason}
 
   @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0153-3],ARef=[AI05-0158-1]}
   @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
@@ -6377,6 +6413,34 @@ conversions.],Old=[]}
   them (who defines an "=" with a presumably different result and does not want
   clients to use it?).]}
 @end{Inconsistent2012}
+
+@begin{Incompatible2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0328-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{incompatibilities with Ada 2012}A membership
+  test is now illegal if all of the following are True:]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The membership test has one or more @SynI{choice_}@nt{simple_expression}s;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The membership test occurs in a place where the tested type is nonlimited;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The tested type has a limited view with a primitive "=" operator;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The full type of the tested type is not a record type or a record extension.]}
+@end{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[In such a case, the limited and nonlimited views
+  would use different equality operators, which would be confusing and would
+  various semantic difficulties. We believe such cases to be quite rare,
+  especially as such membership tests are new to Ada 2012. The workaround is
+  to replace such memberships with equality tests (assuming that the
+  primitive "=" is intended; the predefined "=" is hidden in such cases and
+  an extra type is needed to make it accessible).]}
+@end{Incompatible2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0039-1]}
@@ -7681,6 +7745,11 @@ values, and then summarize the values produced by applying an operation to
 reduce the set to a single value result. A reduction expression is represented
 as an @nt{attribute_reference} of the reduction attributes Reduce or
 Parallel_Reduce.]}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Reduction Expression>,
+Text=<@ChgAdded{Version=[5],Text=[An expression that defines how to map or
+transform a collection of values into a new set of values, and then summarize
+the values by applying an operation to reduce the set to a single value.]}>}
 @end{Intro}
 
 @begin{Syntax}

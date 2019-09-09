@@ -1,15 +1,15 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.135 $}
+@Comment{$Revision: 1.136 $}
 
 @begin{Intro}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0330-1]}
 @PDefn2{Term=[execution], Sec=(Ada program)}
 The execution of an Ada program consists of the execution of one
 or more @i(tasks).
@@ -20,8 +20,9 @@ thread of control]} that proceeds independently and concurrently
 between the points where it @i(interacts) with other tasks.
 @Chg{Version=[5],New=[A single
 task, when within the context of a parallel construct, can represent
-multiple logical threads of control which can proceed in parallel; in
-other contexts, each task represents one logical thread of control.],Old=[The
+multiple @i<logical threads of control> which can proceed in parallel; in
+other contexts, each task represents one logical thread of
+control.@defn{logical thread of control}@defn2{Term=[thread],Sec=[logical]}],Old=[The
 various forms of task interaction are
 described in this @Chg{Version=[3],New=[clause],Old=[section]}, and include:]}
 @Defn{synchronization}
@@ -34,6 +35,12 @@ described in this @Chg{Version=[3],New=[clause],Old=[section]}, and include:]}
   each of which in turn consists of the execution of an environment task
   and zero or more subtasks.
 @end(Honest)
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Logical Thread of Control>,
+Text=<@ChgAdded{Version=[5],Text=[An activity within the execution of a program
+that can proceed in parallel with other activities of the same task, or of
+separate tasks.]}>}
+
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0119-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The
 various forms of task interaction are described in this clause, and include:]}

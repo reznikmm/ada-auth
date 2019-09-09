@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.77 $}
+@Comment{$Revision: 1.78 $}
 
 @LabeledClause{Type Conversions}
 
@@ -3896,30 +3896,25 @@ T'Put_Image may be specified.]}
   @ChgAdded{Version=[5],Text=[For any language-defined scalar type T, T'Put_Image should
     not be specified; the Image attribute needs to return the language-defined
     image for such types. This is important for compatibility: the Image
-    attribute have been available for scalar types for many Ada revisions,
+    attribute has been available for scalar types for many Ada revisions,
     and programs can (and do!) depend on its behavior.]}
 @end{Ramification}
 
 @end{ImplPerm}
 
-@begin{ImplAdvice}
+@begin{ImplReq}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0304-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=<For each language-defined container
   type T (that is, each of the Vector, List, Map, Set, Tree, and Holder types
-  defined in the various children of Ada.Containers), T'Put_Image should be
+  defined in the various children of Ada.Containers), T'Put_Image shall be
   specified so that T'Image produces a result consistent with array aggregate
   syntax (using '[' and ']' as delimiters) as follows:>}
 
 @begin{Itemize}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Vector images should be consistent with the
+  @ChgAdded{Version=[5],Text=[Vector images shall be consistent with the
     default image of an array type with the same index and component types.]}
-
-    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-      Text=[The image of a language-defined vector container should be
-      consistent with default image of an array type with same index and
-      component types.]}]}
 
     @begin{Discussion}
       @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3931,13 +3926,9 @@ T'Put_Image may be specified.]}
     @end{Discussion}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Map images should be consistent with named array
+  @ChgAdded{Version=[5],Text=[Map images shall be consistent with named array
     aggregate syntax, using key value images in place of discrete choice names.
     For example, @exam{[Key1 => Value1, Key2 => Value2]}.]}
-
-    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-      Text=[The image of a language-defined map container should be
-      consistent with the syntax of a named array aggregate.]}]}
 
     @begin{Discussion}
       @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3950,9 +3941,9 @@ T'Put_Image may be specified.]}
     @end{Discussion}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Set, List, and Holder images should be consistent
-    with positional array aggregate syntax. List elements should occur in order
-    within an image of a list. The image of an empty holder should be @exam{[]}.]}
+  @ChgAdded{Version=[5],Text=[Set, List, and Holder images shall be consistent
+    with positional array aggregate syntax. List elements shall occur in order
+    within an image of a list. The image of an empty holder shall be @exam{[]}.]}
 
     @begin{Discussion}
       @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -3960,19 +3951,10 @@ T'Put_Image may be specified.]}
         in which set elements occur within the image of a set.]}
     @end{Discussion}
 
-    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-      Text=[The image of a language-defined set, list, or holder container
-        should be consistent with the syntax of a positional array
-        aggregate.]}]}
-
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[Tree images (and images of subtrees of trees)
-    should be consistent with positional array aggregate syntax.
+    shall be consistent with positional array aggregate syntax.
     For example, @exam{[[1, 2], [111, 222, 333]]}.]}
-
-    @ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-      Text=[The image of a language-defined tree container should be consistent
-	with the syntax of a positional array aggregate.]}]}
 
 @end{Itemize}
 
@@ -3980,22 +3962,26 @@ T'Put_Image may be specified.]}
 @ChgAdded{Version=[5],Text=[For each language-defined nonscalar type T that has
 a primitive language-defined Image function whose profile is type conformant
 with that of T'Image (for example, Ada.Numerics.Float_Random.State has such an
-Image function), T'Put_Image should be specified so that T'Image yields the same
+Image function), T'Put_Image shall be specified so that T'Image yields the same
 result as that Image function.]}
 
-@ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
-Text=[For language-defined nonscalar types with an Image function, T'Put_Image
-should be defined to yield the same result as Image.]}]}
+@end{ImplReq}
 
-@begin{ImplNote}
+@begin{ImplAdvice}
+
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[For each language-defined private type T,
-    implementations are encouraged to ensure that T'Image generates images that
-    would be meaningful based only on the relevant public interfaces, as opposed
-    to requiring knowledge of the implementation of the private type.]}
-@end{ImplNote}
+    T'Image should generate an image that would be meaningful based only on the
+    relevant public interfaces, as opposed to requiring knowledge of the
+    implementation of the private type.]}
+
+@ChgImplAdvice{Version=[5],Kind=[AddedNormal],InitialVersion=[5],Text=[@ChgAdded{Version=[5],
+Text=[each language-defined private type T, T'Image should generate an image
+that would be meaningful based only on the relevant public interfaces.]}]}
+
 
 @end{ImplAdvice}
+
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}

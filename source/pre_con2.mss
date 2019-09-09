@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.36 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
+@comment{ $Revision: 1.37 $ $Date: 2019/06/11 04:31:38 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -77,13 +77,18 @@ visited in natural order (first child to last child).@Defn{depth-first order}]}
 package Containers.Multiway_Trees has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key{with} Ada.Iterator_Interfaces;
 @key{generic}
    @key{type} Element_Type @key{is private};
    @key{with function} "=" (Left, Right : Element_Type) @key{return} Boolean @key{is} <>;
-@key{package} Ada.Containers.Multiway_Trees @key{is}@ChildUnit{Parent=[Ada.Containers],Child=[Multiway_Trees]}
-   @key{pragma} Preelaborate(Multiway_Trees);
-   @key{pragma} Remote_Types(Multiway_Trees);]}
+@key{package} Ada.Containers.Multiway_Trees@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Multiway_Trees]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate, Remote_Types,
+        Nonblocking => Element_Type'Nonblocking @key{and} Equal_Element'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Multiway_Trees &
+                  Element_Type'Global & Equal_Element'Global @key[is]],Old=[
+   @key{pragma} Preelaborate(Multiway_Trees);@Chg{Version=[3],New=[
+   @key{pragma} Remote_Types(Multiway_Trees);],Old=[]}]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0212-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
@@ -93,11 +98,11 @@ package Containers.Multiway_Trees has the following declaration:]}
            Default_Iterator  => Iterate,
            Iterator_Element  => Element_Type@Chg{Version=[5],New=[,
            Iterator_View     => Stable.Tree,
-           Stable_Properties => (Length,
+           Stable_Properties => (Node_Count,
                                  Tampering_With_Cursors_Prohibited,
                                  Tampering_With_Elements_Prohibited),
            Default_Initial_Condition =>
-              Length (Tree) = 0 @key{and then}
+              Node_Count (Tree) = 1 @key{and then}
               (@key{not} Tampering_With_Cursors_Prohibited (Tree)) @key{and then}
               (@key{not} Tampering_With_Elements_Prohibited (Tree))],Old=[]};
    @key{pragma} Preelaborable_Initialization(Tree);]}
@@ -112,8 +117,19 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Equal_Element} (Left, Right : Element_Type)
+      @key{return} Boolean @key{renames} "=";]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[in access] Tree],Old=[]};]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Has_Element} (Container : Tree; Position : Cursor)
+      @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0212-1]}
 @ChgAdded{Version=[3],Text=[   @key{package} @AdaPackDefn{Tree_Iterator_Interfaces} @key{is new}
@@ -126,23 +142,46 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} "=" (Left, Right : Tree) @key{return} Boolean;]}
 
-@ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Tree) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Cursors_Prohibited}
+      (Container : Tree) @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Tampering_With_Elements_Prohibited}
+      (Container : Tree) @key{return} Boolean
+      @key[with] Nonblocking, Global => @key[null];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Node_Count} (Container : Tree) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Empty} (Container : Tree) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null],
+           Post => Is_Empty'Result = (Node_Count (Container) = 1)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Subtree_Node_Count} (Position : Cursor) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Node_Count} (Container : Tree) @key{return} Count_Type@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Depth} (Position : Cursor) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Subtree_Node_Count} (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Root} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Depth} (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Leaf} (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Root} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
+
+@ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Is_Leaf} (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+      @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Root} (Container : Tree) @key{return} Cursor;]}
@@ -368,6 +407,77 @@ package Containers.Multiway_Trees has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{function} @AdaSubDefn{Iterate_Children} (Container : @key[in] Tree; Parent : @key[in] Cursor)
       @key[return] Tree_Iterator_Interfaces.@Chg{Version=[5],New=[Parallel_Reversible_Iterator],Old=[Reversible_Iterator]}'Class;]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Tree} (Base : @key{not null access} Multiway_Trees.Tree) @key{is}
+         @key{tagged limited private}
+         @key{with} Constant_Indexing => Constant_Reference,
+              Variable_Indexing => Reference,
+              Default_Iterator  => Iterate,
+              Iterator_Element  => Element_Type,
+              Stable_Properties => (Node_Count),
+              Global => (@key[in] Tree.Base.@key[all], @key[synchronized out] Tree.Base.@key[all]),
+              Default_Initial_Condition => Node_Count (Tree) = 1;
+      @key{pragma} Preelaborable_Initialization(Tree);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Cursor} @key{is private};
+      @key{pragma} Preelaborable_Initialization(Cursor);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @AdaObjDefn{Empty_Tree} : @key{constant} Tree;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @AdaObjDefn{No_Element} : @key{constant} Cursor;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Has_Element} (Position : Cursor) @key{return} Boolean
+         @key{with} Nonblocking, Global => @key{in access} Tree;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{package} @AdaPackDefn{Tree_Iterator_Interfaces} @key[is new]
+         Ada.Iterator_Interfaces (Cursor, Has_Element);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Doubly_Linked_Trees.Tree;
+                        Source : @key{in} Tree)
+         @key{with} Post => Node_Count (Source) = Node_Count (Target);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{function} @AdaSubDefn{Copy} (Source : Doubly_Linked_Trees.Tree) @key{return} Tree
+         @key{with} Post => Node_Count (Copy'Result) = Node_Count (Source);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Constant_Reference_Type}
+            (Element : @key{not null access constant} Element_Type) @key{is private}
+         @key{with} Implicit_Dereference => Element,
+              Global => @key{null},
+              Nonblocking => @key{null},
+              Default_Initial_Condition => (@key{raise} Program_Error);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Reference_Type}
+            (Element : @key{not null access} Element_Type) @key{is private}
+         @key{with} Implicit_Dereference => Element,
+              Global => @key{null},
+              Nonblocking => @key{null},
+              Default_Initial_Condition => (@key{raise} Program_Error);]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      -- @examcom{Additional subprograms as described in the text}
+      -- @examcom{are declared here.}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{private}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[      ... -- @Examcom{not specified by the language}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
+@ChgAdded{Version=[5],Text=[   @key{end} Stable;]}
+
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{private}
    ... -- @Examcom[not specified by the language]
@@ -426,48 +536,75 @@ structure as was written by Tree'Write.]}
   @RefSecNum{The Generic Package Containers.Vectors}.]}
 @end{Ramification}
 
-
-
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0111-1]}
-@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Redundant[Some
-operations of this generic package have access-to-subprogram parameters. To
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[2],Text=[@Redundant[Some
+operations @Chg{Version=[5],New=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}@Defn2{Term=[tamper with elements],Sec=[of a tree]}],Old=[of
+this generic package have access-to-subprogram parameters. To
 ensure such operations are well-defined, they guard against certain actions by
-the designated subprogram. In particular, some operations check for "tampering
-with cursors" of a container because they depend on the set of elements of the
-container remaining constant, and others check for "tampering with elements" of
-a container because they depend on elements of the container not being
-replaced.]]}]}
+the designated subprogram. In particular, some operations]} check for
+@lquotes@;tampering with cursors@rquotes of a container because they depend on
+the set of elements of the container remaining constant, and others check for
+@lquotes@;tampering with elements@rquotes of a container because they depend on
+elements of the container not being replaced.]@Chg{Version=[5],New=[ When
+tampering with cursors is @i<prohibited>@Defn2{Term=[prohibited],Sec=[tampering with a tree]}
+@Defn2{Term=[tampering],Sec=[prohibited for a tree]}for a particular
+tree object @i<T>, Program_Error is propagated by the finalization
+of @i<T>@Redundant[, as well as by a call that passes @i<T> to
+certain of the operations of this package, as indicated by the precondition
+of such an operation]. Similarly, when tampering with elements is @i<prohibited>
+for @i<T>, Program_Error is propagated by a call that passes @i<T> to
+certain of other operations of this package, as indicated by the precondition
+of such an operation.],Old=[]}]}
+
+@begin{NotIso}
+@ChgAdded{Version=[5],Noparanum=[T],Text=[@Shrink{@i<Paragraphs 81 through 90
+are removed as preconditions now describe these rules.>}]}@Comment{This message
+should be deleted if the paragraphs are ever renumbered.}
+@end{NotIso}
+
+
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[3],New=[@Defn2{Term=[tamper with cursors],Sec=[of a tree]}
 A subprogram is said to
-@i{tamper with cursors} of a tree object @i<T> if:]}
+@i{tamper with cursors} of a tree object @i<L> if:],Old=[]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it inserts or deletes elements of @i<T>, that is,
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  inserts or deletes elements of @i<T>, that is,
   it calls the Clear, Delete_Leaf, Insert_Child, Delete_Children,
   Delete_Subtree, or Copy_Subtree procedures
-  with @i<T> as a parameter; or]}
+  with @i<T> as a parameter; or]}]}
 
 @begin{Honest}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Operations which are defined to be equivalent to
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Operations which
+    are defined to be equivalent to
     a call on one of these operations also are included. Similarly, operations
-    which call one of these as part of their definition are included.]}
+    which call one of these as part of their definition are included.]}]}
 @end{Honest}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
-  @ChgAdded{Version=[3],Text=[it reorders the elements of @i<T>, that is, it
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  reorders the elements of @i<T>, that is, it
   calls the Splice_Subtree or Splice_Children procedures with @i<T> as a
-  parameter; or]}
+  parameter; or]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it finalizes @i<T>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  finalizes @i<T>; or]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it calls Assign with @i<T> as the Target parameter; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  calls Assign with @i<T> as the Target parameter; or]}]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added]}
@@ -478,48 +615,61 @@ A subprogram is said to
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it calls the Move procedure with @i<T> as a parameter.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  calls the Move procedure with @i<T> as a parameter.]}]}
 
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Swap copies elements rather than reordering
-    them, so it doesn't tamper with cursors.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Swap
+    copies elements rather than reordering
+    them, so it doesn't tamper with cursors.]}]}
 @end{Reason}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[@Defn2{Term=[tamper with elements],Sec=[of a tree]}
-A subprogram is said to
-@i{tamper with elements} of a tree object @i<T> if:]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgDeleted{Version=[5],Type=[Leading],Text=[@Chg{Version=[3],New=[@Defn2{Term=[tamper with elements],Sec=[of a tree]}
+A subprogram is said to @i{tamper with elements} of a tree
+object @i<T> if:],Old=[]}]}
 
 @begin{Itemize}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it tampers with cursors of @i<T>; or]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+tampers with cursors of @i<T>; or]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[it replaces one or more elements of @i<T>, that is, it calls the Replace_Element or Swap
-  procedures with @i<T> as a parameter.]}
+@ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[it
+  replaces one or more elements of @i<T>, that is, it calls the Replace_Element or Swap
+  procedures with @i<T> as a parameter.]}]}
 
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],Text=[Complete replacement of an element can cause its
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Complete
+    replacement of an element can cause its
     memory to be deallocated while another operation is holding onto a reference
     to it. That can't be allowed. However, a simple modification of (part of) an
-    element is not a problem, so Update_Element does not cause a problem.]}
+    element is not a problem, so Update_Element does not cause a problem.]}]}
 @end{Reason}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[Assign is defined in terms of Clear and Replace_Element,
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Assign
+  is defined in terms of Clear and Replace_Element,
   so we don't need to mention it explicitly. Similarly, we don't need to
   explicitly mention @nt{assignment_statement}, because that finalizes the
   target object as part of the operation, and finalization of an object is
-  already defined as tampering with the element.]}
+  already defined as tampering with the element.]}]}
 @end{Ramification}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0265-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0110-1]}
-@ChgAdded{Version=[3],Text=[@Defn2{Term=[prohibited],Sec=[tampering with a tree]}
+@ChgRef{Version=[5],Kind=[DeletedAddedNoDelMsg],ARef=[AI12-0111-1],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[@Defn2{Term=[prohibited],Sec=[tampering with a tree]}
 @Defn2{Term=[tampering],Sec=[prohibited for a tree]}
 When tampering with cursors is @i<prohibited> for a particular tree object
 @i<T>, Program_Error is propagated by a call of any language-defined subprogram
@@ -529,18 +679,23 @@ object @i<T>, Program_Error is propagated by a call of any language-defined
 subprogram that is defined to tamper with the elements of @i<T> @Redundant[(or
 tamper with the cursors of @i<T>)], leaving @i<T>
 unmodified.@Chg{Version=[4],New=[ These checks are made before any other
-defined behavior of the body of the language-defined subprogram.],Old=[]}]}
+defined behavior of the body of the language-defined subprogram.],Old=[]}]}]}
 @begin{TheProof}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Tampering with elements includes tampering with
-  cursors, so we mention it only from completeness in the second sentence.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Tampering
+  with elements includes tampering with
+  cursors, so we mention it only from completeness in the second sentence.]}]}
 @end{TheProof}
 
 @begin{DescribeCode}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Has_Element (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[in access] Tree],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -555,6 +710,19 @@ returns False if the cursor designates a root node or equals No_Element.]]}
   result of calling Has_Element with an invalid cursor is unspecified (but
   not erroneous).]}
 @end{Honest}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} @AdaSubDefn{Has_Element} (Container : Tree; Position : Cursor)
+   @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if Position designates
+an element in Container, and returns False otherwise. @Redundant[In particular, Has_Element
+returns False if the cursor designates a root node or equals No_Element.]]}
+
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -621,8 +789,64 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 @end{ImplNote}
 
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Tampering_With_Cursors_Prohibited
+   (Container : Tree) @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Returns True if tampering with
+cursors or tampering with elements is currently prohibited for Container, and
+returns False otherwise.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Prohibiting tampering with elements also
+  needs to prohibit tampering with cursors, as deleting an element is similar
+  to replacing it.]}
+@end{Reason}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Text=[Various contracts elsewhere in this specification
+    require that this function is implemented with synchronized data. Moreover,
+    it is possible for tampering to be prohibited by multiple operations
+    (sequentiually or in parallel). Therefore, tampering needs to be
+    implemented with an atomic or protected counter. The counter is initialized
+    to zero, and is incremented when tampering is prohibited, and decremented
+    when leaving an area that prohibited tampering. Function
+    Tampering_With_Cursors_Prohibited returns True if the counter is nonzero.
+    (Note that any case where the result is not well-defined for one task
+    is incorrect use of shared variables and would be erroneous by the rules
+    of @RefSecNum{Shared Variables}, so no special protection is needed to
+    read the counter.)]}
+@end{ImplNote}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Tampering_With_Elements_Prohibited
+   (Container : Tree) @key{return} Boolean
+   @key[with] Nonblocking, Global => @key[null];]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Always returns False@Redundant[,
+regardless of whether tampering with elements is prohibited].]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
+  @ChgAdded{Version=[5],Text=[A definite element cannot
+  change size, so we allow operations that tamper with elements even when
+  tampering with elements is prohibited. That's not true for the indefinite
+  containers, which is why this kind of tampering exists.]}
+@end{Reason}
+
+@begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Node_Count (Container : Tree) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Node_Count (Container : Tree) @key{return} Count_Type@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -638,7 +862,9 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Subtree_Node_Count (Position : Cursor) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Subtree_Node_Count (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -646,13 +872,19 @@ returns False if the cursor designates a root node or equals No_Element.]]}
   Subtree_Node_Count returns 0; otherwise, Subtree_Node_Count returns the number of
   nodes in the subtree that is rooted by Position.]}
 
+@end{Example}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Empty (Container : Tree) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Empty (Container : Tree) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null],
+        Post => Is_Empty'Result = (Node_Count (Container) = 1)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
-  @ChgAdded{Version=[3],Type=[Trailing],Text=[Equivalent to Node_Count (Container) = 1.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Type=[Trailing],Text=[@Chg{Version=[5],New=[Returns True
+if Container is empty],Old=[Equivalent to Node_Count (Container) = 1]}.]}
 
 @begin{Ramification}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -661,7 +893,9 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Depth (Position : Cursor) @key{return} Count_Type;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Depth (Position : Cursor) @key{return} Count_Type@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -677,7 +911,9 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Root (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Root (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1],ARef=[AI05-0248-1]}
@@ -686,7 +922,9 @@ returns False if the cursor designates a root node or equals No_Element.]]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Leaf (Position : Cursor) @key{return} Boolean;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key{function} Is_Leaf (Position : Cursor) @key{return} Boolean@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global => @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0136-1]}
@@ -1772,6 +2010,67 @@ finalization.]}
 
 @end{DescribeCode}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The nested package Multiway_Trees.Stable
+provides a type Stable.tree that represents
+a @i<stable> tree,@Defn2{Term=(stable),Sec=(tree)} which is one that
+cannot grow and shrink. Such a tree can be created by calling the
+Copy function, or by establishing a
+@i<stabilized view> of a regular tree.@Defn2{Term=[stabilized view],Sec=[tree]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The subprograms of package
+Containers.Multiway_Trees that have a parameter or result of type tree
+are included in the nested package Stable with the same specification, except
+that the following are omitted:]}
+
+@begin{Indent}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[Tampering_With_Cursors_Prohibited,
+Tampering_With_Elements_Prohibited, Assign, Move,
+Clear, Delete_Leaf, Insert_Child, Delete_Children, Delete_Subtree,
+Copy_Subtree, Splice_Subtree, and Splice_Children]}
+@end{Indent}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The names Tree and Cursor mean the types
+    declared in the nested package in these subprogram specifications.]}
+@end{Ramification}
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The omitted routines are those that tamper with
+    cursors or elements (or test that state). The model is that it is
+    impossible to tamper with cursors or elements of a stable view since no
+    such operations are included. Thus tampering checks are not needed for
+    a stable view, and we omit the operations associated with those checks.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[The operations of this package are equivalent
+to those for regular trees, except that the calls to
+Tampering_With_Cursors_Prohibited and
+Tampering_With_Elements_Prohibited that occur in preconditions are replaced
+by False, and any that occur in postconditions are replaced by True.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[If a stable tree is declared with the Base
+discriminant designating a pre-existing regular tree, the stable tree
+represents a stabilized view of the underlying regular tree, and any operation
+on the stable tree is reflected on the underlying regular tree. While a
+stabilized view exists, any operation that tampers with elements performed on
+the underlying tree is prohibited. The finalization of a stable tree that
+provides such a view removes this restriction on the underlying regular tree
+@Redundant[(though some other restriction might exist due to other concurrent
+iterations or stabilized views)].]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0111-1]}
+@ChgAdded{Version=[5],Text=[If a stable tree is declared without specifying
+Base, the object must be initialized. The initializing expression of the stable
+tree, @Redundant[typically a call on Copy], determines the Node_Count
+of the tree. The Node_Count of a stable tree never changes after
+initialization.]}
+
 @end{StaticSem}
 
 @begin{Bounded}
@@ -2733,7 +3032,7 @@ Tampering_With_Elements_Prohibited in the postcondition for the operations
 Reference and Constant_Reference.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-@ChgAdded{Version=[5],Text=[The operations Replace and Replace_Element are
+@ChgAdded{Version=[5],Text=[The operations Replace_Element and Swap are
 omitted from the nested package Stable.]}
 
 @end{Itemize}
@@ -2797,7 +3096,7 @@ package Containers.Indefinite_Holders has the following declaration:]}
    @key[with] Preelaborate, Remote_Types,
         Nonblocking => Equal_Element'Nonblocking,
         Global => @key[synchronized in out] Ada.Containers.Indefinite_Holders &
-                  Equal_Element'Global & Element_Type'Global],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
+                  Equal_Element'Global & Element_Type'Global ],Old=[]}@key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Indefinite_Holders]}@Chg{Version=[5],New=[],Old=[
    @key[pragma] Preelaborate(Indefinite_Holders);
    @key[pragma] Remote_Types(Indefinite_Holders);]}]}
 
@@ -4137,7 +4436,7 @@ as Containers.Hashed_Maps except:]}
     in Source.@Chg{Version=[5],New=[],Old=[ If Capacity is 0, then the map
     capacity is the length of Source; if Capacity is equal to or greater than
     the length of Source, the map capacity is the value of the Capacity
-    parameter; otherwise, the operation propagates Capacity_Error.  If
+    parameter; otherwise, the operation propagates Capacity_Error. If
     the Modulus argument is 0, then the map modulus is the value
     returned by a call to Default_Modulus with the map capacity as its
     argument; otherwise, the map modulus is the value of the Modulus parameter.]}]}
@@ -4498,6 +4797,21 @@ as Containers.Hashed_Sets except:]}
   @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
   with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global & Equivalent_Keys'Global &
+             Hash'Global & Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with
     discriminants that specify both the capacity (number of elements) and
@@ -4524,12 +4838,21 @@ as Containers.Hashed_Sets except:]}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The description of Reserve_Capacity
   is replaced with:]}
-@begin{Indent}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   @key[procedure] Reserve_Capacity (Container : @key[in out] Set;
+                               Capacity  : @key[in]     Count_Type)
+      @key[with] Pre => (@key[if] Capacity > Container.Capacity @key[then raise] Capacity_Error);]}
+@end{Example}
+
+  @begin{Indent}
     @ChgRef{Version=[3],Kind=[AddedNormal]}
-    @ChgAdded{Version=[3],NoPrefix=[T],Text=[If the specified Capacity is larger
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+    @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[This],Old=[If the specified Capacity is larger
     than the capacity of Container, then Reserve_Capacity propagates Capacity_Error.
-    Otherwise, the operation has no effect.]}
-@end{Indent}
+    Otherwise, the]} operation has no effect@Chg{Version=[5],New=[,
+    @Redundant[other than checking the precondition]],Old=[]}.]}
+  @end{Indent}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[An additional operation is added immediately following Reserve_Capacity:]}
@@ -4544,24 +4867,67 @@ as Containers.Hashed_Sets except:]}
     used for the given capacity (maximum number of elements).]}
 @end{Indent}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For procedures Insert
+    and Include, the part of the precondition reading:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[In procedure Assign,
+    the precondition is altered to:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+           @key{elsif}  Length (Source) > Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Set;
                  Capacity : Count_Type := 0;
-                 Modulus  : Hash_Type := 0) @key[return] Set;]}
+                 Modulus  : Hash_Type := 0) @key[return] Map@Chg{Version=[5],New=[
+     @key[with] Pre  => (@key[if] Capacity /= 0 @key[and then] Capacity < Length (Source)
+                  @key[then raise] Capacity_Error),
+          Post => Length (Copy'Result) = Length (Source) @key[and then]
+                  @key[not] Tampering_With_Cursors_Prohibited (Copy'Result) @key[and then]
+                  Copy'Result.Capacity = (@key[if] Capacity = 0 @key[then]
+                     Length (Source) @key[else] Capacity) @key[and then]
+                  Copy'Result.Modulus = (@key[if] Modulus = 0 @key[then]
+                     Default_Modulus (Capacity) @key[else] Modulus)],Old=[]};]}
 @end{Example}
+
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0264-1]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements are
-    initialized from the values in Source. If Capacity is 0, then the set
+  @ChgRef{Version=[5],Kind=[Revised]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set with key/element pairs initialized from the values
+    in Source.@Chg{Version=[5],New=[],Old=[ If Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
-    the length of Source, the set capacity is the value of the Capacity parameter;
-    otherwise, the operation propagates Capacity_Error. If the Modulus argument is
-    0, then the set modulus is the value returned by a call to Default_Modulus
-    with the set capacity as its argument; otherwise, the set modulus is the
-    value of the Modulus parameter.]}
+    the length of Source, the set capacity is the value of the Capacity
+    parameter; otherwise, the operation propagates Capacity_Error. If
+    the Modulus argument is 0, then the set modulus is the value
+    returned by a call to Default_Modulus with the set capacity as its
+    argument; otherwise, the set modulus is the value of the Modulus parameter.]}]}
 @end{Indent}
 
 @end{Itemize}
@@ -4650,16 +5016,6 @@ minimize copying does not apply to bounded hashed sets.]}]}
   Containers.Bounded_Hashed_Sets is new.]}
 @end{Extend2005}
 
-@begin{Inconsistent2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
-  Tampering with elements is now defined to be equivalent to tampering with
-  cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
-  outside of test programs. See @Inconsistent2012Title in
-  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
-@end{Inconsistent2012}
-
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Ordered_Sets]}
 
@@ -4685,6 +5041,21 @@ as Containers.Ordered_Sets except:]}
   @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Preelaborate is replaced
   with @Chg{Version=[5],New=[aspect],Old=[@nt{pragma}]} Pure.]}
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The Global aspect of the package
+    is replaced by:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Global => Equal_Element'Global & Less_Element'Global &
+             Element_Type'Global,]}
+@end{Example}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This package is pure, and thus it cannot have or
+      depend upon any other packages that have state. Thus we require no global
+      uses whatsoever other than those of the formals.]}
+  @end{Reason}
+
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The type Set is declared with a
     discriminant that specifies the capacity (maximum number of elements)
@@ -4708,28 +5079,70 @@ as Containers.Ordered_Sets except:]}
   @end{ImplNote}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[If Insert (or Include) adds an element, a check is
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For procedures Insert
+    and Include, the part of the precondition reading:],Old=[If Insert (or Include) adds an element, a check is
     made that the capacity is not exceeded, and Capacity_Error is raised
-    if this check fails.]}
+    if this check fails.]}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+      @key[then raise] Constraint_Error)]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Type=[Leading],Noprefix=[T],Text=[is replaced by:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[     (@key[if] <@examcom{some length}> > Count_Type'Last - <@examcom{some other length}>
+         @key[then raise] Constraint_Error
+      @key[elsif] <@examcom{some length}> > Container.Capacity - <@examcom{some other length}>
+         @key[then raise] Capacity_Error)]}
+@end{Example}
+
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[In procedure Assign, if Source length is greater
-    than Target capacity, then Capacity_Error is propagated.]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional leading format.}
+  @ChgAdded{Version=[3],Text=[In procedure Assign, @Chg{Version=[5],New=[the
+    precondition is altered to:],Old=[if Source length is greater
+    than Target capacity, then Capacity_Error is propagated.]}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[   Pre => (@key{if} Tampering_With_Cursors_Prohibited (Target)
+              @key{then raise} Program_Error
+           @key{elsif}  Length (Source) > Target.Capacity
+              @key{then raise} Capacity_Error),]}
+@end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[The function Copy is replaced with:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[function] @AdaSubDefn{Copy} (Source   : Set;
-                 Capacity : Count_Type := 0) @key[return] Set;]}
+                 Capacity : Count_Type := 0) @key[return] Map@Chg{Version=[5],New=[
+     @key[with] Pre  => (@key[if] Capacity /= 0 @key[and then] Capacity < Length (Source)
+                  @key[then raise] Capacity_Error),
+          Post => Length (Copy'Result) = Length (Source) @key[and then]
+                  @key[not] Tampering_With_Cursors_Prohibited (Copy'Result) @key[and then]
+                  Copy'Result.Capacity = (@key[if] Capacity = 0 @key[then]
+                     Length (Source) @key[else] Capacity)],Old=[]};]}
+
 @end{Example}
 @begin{Indent}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set whose elements
-    are initialized from the values in Source. If Capacity is 0, then the set
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+  @ChgAdded{Version=[3],Noprefix=[T],Text=[Returns a set with key/element pairs
+    initialized from the values in Source.@Chg{Version=[5],New=[],Old=[ If
+    Capacity is 0, then the set
     capacity is the length of Source; if Capacity is equal to or greater than
     the length of Source, the set capacity is the specified value; otherwise, the
-    operation propagates Capacity_Error.]}
+    operation propagates Capacity_Error.]}]}
 @end{Indent}
 
 @end{Itemize}
@@ -4817,16 +5230,6 @@ minimize copying does not apply to bounded ordered sets.]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005} The generic package
   Containers.Bounded_Ordered_Sets is new.]}
 @end{Extend2005}
-
-@begin{Inconsistent2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0111-1]}
-  @ChgAdded{Version=[5],Text=[@Defn{inconsistencies with Ada 2012}@b<Corrigendum:>
-  Tampering with elements is now defined to be equivalent to tampering with
-  cursors for bounded containers. If a program requires tampering detection
-  to work, it might fail in Ada 202x. Needless to say, this shouldn't happen
-  outside of test programs. See @Inconsistent2012Title in
-  @RefSecNum{The Generic Package Containers.Vectors} for more details.]}
-@end{Inconsistent2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Bounded_Multiway_Trees]}
@@ -5269,41 +5672,66 @@ queue.]}
 package Containers.Synchronized_Queue_Interfaces has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[generic]
    @key[type] Element_Type @key[is private];
-@key[package] Ada.Containers.Synchronized_Queue_Interfaces @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Synchronized_Queue_Interfaces]}
-   @key[pragma] Pure(Synchronized_Queue_Interfaces);]}
+@key[package] Ada.Containers.Synchronized_Queue_Interfaces@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Synchronized_Queue_Interfaces]}@Chg{Version=[5],New=[
+   @key[with] Pure,
+        Nonblocking => Element_Type'Nonblocking,
+        Global => Element_Type'Global @key[is]],Old=[
+   @key{pragma} Pure(Synchronized_Queue_Interfaces);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Queue} @key[is synchronized interface];]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Enqueue}
      (Container : @key[in out] Queue;
       New_Item  : @key[in]     Element_Type) @key[is abstract]
-       @key[with] Synchronization => By_Entry;]}
+       @key[with] Synchronization => By_Entry@Chg{Version=[5],New=[
+           Nonblocking => False,
+           Global'Class=> @key[synchronized in out all]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[   @key[procedure] @AdaSubDefn{Dequeue}
      (Container : @key[in out] Queue;
       Element   :    @key[out] Element_Type) @key[is abstract]
-       @key[with] Synchronization => By_Entry;]}
+       @key[with] Synchronization => By_Entry@Chg{Version=[5],New=[
+           Nonblocking => False,
+           Global'Class=> @key[synchronized in out all]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Current_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];
-   @key[function] @AdaSubDefn{Peak_Use} (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Text=[   @key[function] @AdaSubDefn{Current_Use} (Container : Queue) @key[return] Count_Type @key[is abstract]@Chg{Version=[5],New=[
+       @key[with] Nonblocking, Global'Class=> @key[null]],Old=[]};
+   @key[function] @AdaSubDefn{Peak_Use} (Container : Queue) @key[return] Count_Type @key[is abstract]@Chg{Version=[5],New=[
+       @key[with] Nonblocking, Global'Class=> @key[null],
+            Post'Class => Peak_Use'Result >= Current_Use (Container)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Synchronized_Queue_Interfaces;]}
+@ChgAdded{Version=[3],Text=[@key{end} Ada.Containers.Synchronized_Queue_Interfaces]}
 @end{Example}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[5],Text=[The subprogram behavior descriptions given below
+are the semantics for the corresponding callable entities found in the
+language-defined generic packages that have a formal package named
+Queue_Interfaces.]}
+
 
 @begin{DescribeCode}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Enqueue
   (Container : @key[in out] Queue;
-   New_Item  : @key[in]     Element_Type) @key[is abstract];]}
+   New_Item  : @key[in]     Element_Type) @key[is abstract]@Chg{Version=[5],New=[
+   @key[with] Synchronization => By_Entry
+        Nonblocking => False,
+        Global'Class=> @key[synchronized in out all]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0262-1],ARef=[AI05-0264-1]}
@@ -5316,9 +5744,13 @@ case, it then copies New_Item onto the queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],KeepNext=[T],Text=[@key[procedure] Dequeue
   (Container : @key[in out] Queue;
-   Element   :    @key[out] Element_Type) @key[is abstract];]}
+   Element   :    @key[out] Element_Type) @key[is abstract]@Chg{Version=[5],New=[
+   @key[with] Synchronization => By_Entry
+        Nonblocking => False,
+        Global'Class=> @key[synchronized in out all]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1],ARef=[AI05-0251-1]}
@@ -5328,7 +5760,9 @@ element at the head of the queue to Element, and removes it from the queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Current_Use (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Current_Use (Container : Queue) @key[return] Count_Type @key[is abstract]@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global'Class=> @key[null]],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
@@ -5337,7 +5771,10 @@ currently in the queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Peak_Use (Container : Queue) @key[return] Count_Type @key[is abstract];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],KeepNext=[T],Text=[@key[function] Peak_Use (Container : Queue) @key[return] Count_Type @key[is abstract]@Chg{Version=[5],New=[
+   @key[with] Nonblocking, Global'Class=> @key[null],
+         Post'Class => Peak_Use'Result >= Current_Use (Container)],Old=[]};]}
 @end{Example}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0159-1]}
@@ -5387,13 +5824,18 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[with] System;
 @key[with] Ada.Containers.Synchronized_Queue_Interfaces;
 @key[generic]
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
    Default_Ceiling : System.Any_Priority := System.Priority'Last;
-@key[package] Ada.Containers.Unbounded_Synchronized_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Synchronized_Queues]}
-   @key[pragma] Preelaborate(Unbounded_Synchronized_Queues);]}
+@key[package] Ada.Containers.Unbounded_Synchronized_Queues@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Synchronized_Queues]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate,
+        Nonblocking => Queue_Interfaces'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Unbounded_Synchronized_Queues &
+                  Queue_Interfaces'Global @key[is]],Old=[
+   @key[pragma] Preelaborate(Unbounded_Synchronized_Queues);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
@@ -5413,10 +5855,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
       @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};
       @key[overriding]
-      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
@@ -5479,14 +5924,19 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[with] System;
 @key[with] Ada.Containers.Synchronized_Queue_Interfaces;
 @key[generic]
    @key[with package] Queue_Interfaces @key[is new] Ada.Containers.Synchronized_Queue_Interfaces (<>);
    Default_Capacity : Count_Type;
    Default_Ceiling  : System.Any_Priority := System.Priority'Last;
-@key[package] Ada.Containers.Bounded_Synchronized_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Synchronized_Queues]}
-   @key[pragma] Preelaborate(Bounded_Synchronized_Queues);]}
+@key[package] Ada.Containers.Bounded_Synchronized_Queues@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Synchronized_Queues]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate,
+        Nonblocking => Queue_Interfaces'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Unbounded_Synchronized_Queues &
+                  Queue_Interfaces'Global @key[is]],Old=[
+   @key[pragma] Preelaborate(Bounded_Synchronized_Queues);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
@@ -5507,10 +5957,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
       @key[entry] @AdaSubDefn{Dequeue} (Element : @key[out] Queue_Interfaces.Element_Type);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};
       @key[overriding]
-      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
@@ -5573,6 +6026,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[with] System;
 @key[with] Ada.Containers.Synchronized_Queue_Interfaces;
 @key[generic]
@@ -5583,8 +6037,15 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
    @key[with] @key[function] Before
      (Left, Right : Queue_Priority) @key[return] Boolean @key[is] <>;
    Default_Ceiling : System.Any_Priority := System.Priority'Last;
-@key[package] Ada.Containers.Unbounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Priority_Queues]}
-   @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}
+@key[package] Ada.Containers.Unbounded_Priority_Queues@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Unbounded_Priority_Queues]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate,
+        Nonblocking => Queue_Interfaces'Nonblocking @key{and}
+                       Queue_Priority'Nonblocking @key{and}
+                       Get_Priority'Nonblocking @key{and} Before'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Unbounded_Priority_Queues &
+                  Queue_Interfaces'Global & Queue_Priority'Global &
+                  Get_Priority'Global & Before'Global @key[is]],Old=[
+   @key[pragma] Preelaborate(Unbounded_Priority_Queues);]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[package] Implementation @key[is]
@@ -5611,10 +6072,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
          Success  :    @key[out] Boolean);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};
       @key[overriding]
-      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
@@ -5705,6 +6169,7 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[@key[with] System;
 @key[with] Ada.Containers.Synchronized_Queue_Interfaces;
 @key[generic]
@@ -5716,6 +6181,16 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
      (Left, Right : Queue_Priority) @key[return] Boolean @key[is] <>;
    Default_Capacity : Count_Type;
    Default_Ceiling  : System.Any_Priority := System.Priority'Last;
+@key[package] Ada.Containers.Bounded_Priority_Queues@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Priority_Queues]}@Chg{Version=[5],New=[
+   @key[with] Preelaborate,
+        Nonblocking => Queue_Interfaces'Nonblocking @key{and}
+                       Queue_Priority'Nonblocking @key{and}
+                       Get_Priority'Nonblocking @key{and} Before'Nonblocking,
+        Global => @key[synchronized in out] Ada.Containers.Bounded_Priority_Queues &
+                  Queue_Interfaces'Global & Queue_Priority'Global &
+                  Get_Priority'Global & Before'Global @key[is]],Old=[
+   @key[pragma] Preelaborate(Bounded_Priority_Queues);]}]}
+
 @key[package] Ada.Containers.Bounded_Priority_Queues @key[is]@ChildUnit{Parent=[Ada.Containers],Child=[Bounded_Priority_Queues]}
    @key[pragma] Preelaborate(Bounded_Priority_Queues);]}
 
@@ -5745,10 +6220,13 @@ the interface type Containers.Synchronized_Queue_Interfaces.Queue.]}
          Success  :    @key[out] Boolean);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Text=[      @key[overriding]
-      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type;
+      @key[function] @AdaSubDefn{Current_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};
       @key[overriding]
-      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type;]}
+      @key[function] @AdaSubDefn{Peak_Use} @key[return] Count_Type@Chg{Version=[5],New=[
+         @key[with] Global => @key[null]],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[private]
