@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.88 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
+@comment{ $Revision: 1.89 $ $Date: 2019/06/11 04:31:38 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:38 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2536,6 +2536,15 @@ T. If T equals Null_Task_Id, Image returns an empty string.
 @ImplDef{The result of the Task_Identification.Image attribute.}
 
 The function Current_Task returns a value that identifies the calling task.
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+  @ChgAdded{Version=[5],Text=[The logical threads of control associated with the
+    execution of a given parallel construct all execute as part of the execution
+    of one task (see @RefSec{Tasks and Synchronization}). Thus, the result
+    returned by a call to Task_Identification.Current_Task is independent of
+    whether the call takes place during the execution of a parallel construct.]}
+@end{Ramification}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0189-1]}
 @ChgAdded{Version=[3],Text=[The function Environment_Task returns a value that

@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:50 $}
+@Comment{$Date: 2019/06/11 04:31:36 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1210,6 +1210,60 @@ formal derived private types whose ancestor type is tagged
 A record extension is a @i{null extension} if its declaration
 has no @nt{known_discriminant_part} and its @nt{record_extension_part}
 includes no @nt{component_declaration}s.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0191-1]}
+@ChgAdded{Version=[5],Text=[@defn2{Term=<component>,Sec=(of the nominal subtype)}
+@defn2{Term=<subcomponent>,Sec=(of the nominal subtype)}@defn2{Term=<part>,Sec=(of the nominal subtype)}
+In the case where the (compile-time) view of an object @i<X> is of a
+tagged type T1 or T1'Class and the (run-time) tag of @i<X> is T2'Tag,
+only the components (if any) of @i<X> that are components of T1
+(or that are discriminants which correspond to a discriminant
+of T1) are said to be @i<components of the nominal type> of @i<X>.
+Similarly, only parts (respectively, subcomponents) of T1 are parts
+(respectively, subcomponents) of the nominal type of @i<X>.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Text=[For example, if T2 is an
+  undiscriminated extension of T1 which declares a component named Comp,
+  then @i<X>.Comp is not a component of the nominal type of @i<X>.]}
+@end{Ramification}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[For example, there is a
+  @RunTimeTitle rule that finalization of an object includes finalization of
+  its components (see @RefSecNum{Completion and Finalization}). In the
+  following case:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] T1 @key[is tagged null record];
+@key[type] T2 @key[is new] T1 @key[with record]
+   Comp : Some_Controlled_Type;
+@key[end record];
+@key[function] Func @key[return] T1'Class @key[is] (T2'(@key[others] => <>));
+X : T1'Class := Func;]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the rule that @ldquote@;every component of the
+  object is finalized@rdquote (as opposed to something like @ldquote@;every
+  component of the nominal type of the object is finalized@rdquote) means that
+  the finalization of X will include finalization of X.Comp. For another
+  example, see the rule about accessibility checking of access discriminants of
+  parts of function results in @RefSecNum{Return Statements}. In contrast, the
+  rules in @RefSecNum{Type Invariants} explicitly state that type invariant
+  checks are only performed for parts which are of the type-invariant bearing
+  type and which are parts of the nominal type of the object (as opposed to for
+  all parts, whether part of the nominal type or not, which are of the
+  invariant-bearing type). Similarly, the rule in
+  @RefSecNum{Stream-Oriented Attributes} governing which components of a
+  composite value are read and written by the default implementations of Read
+  and Write for a composite type states that only the components of the object
+  which are components of the nominal type of the object are read or written.]}
+
+@end{Discussion}
+
 @end{StaticSem}
 
 @begin{RunTime}
@@ -1331,6 +1385,13 @@ Type extension is a new concept.
   @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00391-01]}
   @ChgAdded{Version=[2],Text=[Defined null extension for use elsewhere.]}
 @end{DiffWord95}
+
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Text=[Defined the term @ldquote@;components of
+  the nominal type@rdquote to remove a confusion as to how components are
+  described in @RunTimeTitle rules.]}
+@end{Diffword2012}
 
 
 @LabeledSubClause{Dispatching Operations of Tagged Types}

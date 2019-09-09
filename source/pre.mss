@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2019/02/21 05:24:06 $}
+@Comment{$Date: 2019/06/11 04:31:38 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.57 $}
+@comment{$Revision: 1.58 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -21,6 +21,7 @@ other library units are children of these:]
 @ChgRef{Version=(1),Kind=(Revised),Ref=(8652/0047),ARef=(AI95-00081-01)}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00424-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0001-1],ARef=[AI05-0049-1],ARef=[AI05-0069-1],ARef=[AI05-0111-3],ARef=[AI05-0136-1],ARef=[AI05-0137-1],ARef=[AI05-0166-1],ARef=[AI05-0168-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0021-1],ARef=[AI12-0208-1],ARef=[AI12-0234-1],ARef=[AI12-0254-1],ARef=[AI12-0293-1],ARef=[AI12-0321-1]}
 @ @*@ @;@comment{paragraph number here, paragraph numbers seem to intrude on
 the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @begin{Display}
@@ -45,7 +46,8 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @\@\@\@\@\@\@em @RefSecNum{The Generic Package Containers.Bounded_Doubly_Linked_Lists}
 @\@\@\Bounded_Hashed_Maps @em @RefSecNum{The Generic Package Containers.Bounded_Hashed_Maps}
 @\@\@\Bounded_Hashed_Sets @em @RefSecNum{The Generic Package Containers.Bounded_Hashed_Sets}
-@\@\@\Bounded_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Bounded_Multiway_Trees}
+@Chg{Version=[5],New=(@\@\@\Bounded_Indefinite_Holders @em @RefSecNum{The Generic Package Containers.Bounded_Indefinite_Holders}
+), Old=()}@\@\@\Bounded_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Bounded_Multiway_Trees}
 @\@\@\Bounded_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Maps}
 @\@\@\Bounded_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Bounded_Ordered_Sets}
 @\@\@\Bounded_Priority_Queues @em @RefSecNum{The Generic Package Containers.Bounded_Priority_Queues}
@@ -116,7 +118,10 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ],Old=[]}@\@\Numerics @em @RefSecNum{The Numerics Packages}
-@Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
+@Chg{Version=[5],New=(@\@\@\Big_Numbers @em @RefSecNum{Big Numbers}
+@\@\@\@\Big_Integers @em @RefSecNum{Big Integers}
+@\@\@\@\Big_Reals @em @RefSecNum{Big Reals}
+), Old=()}@Chg{Version=[2],New=(@\@\@\Complex_Arrays @em @RefSecNum{Complex Vectors and Matrices}
 ), Old=()}@\@\@\Complex_Elementary_Functions @em @RefSecNum{Complex Elementary Functions}
 @\@\@\Complex_Types @em @RefSecNum{Complex Types}
 @\@\@\Discrete_Random @em @RefSecNum{Random Number Generation}
@@ -134,7 +139,10 @@ New=[Standard (@i{...continued})
 ), Old=()}@\@\Sequential_IO @em @RefSecNum{The Generic Package Sequential_IO}
 @\@\Storage_IO @em @RefSecNum{The Generic Package Storage_IO}
 @\@\Streams @em @RefSecNum{The Streams Subsystem}
-@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
+@Chg{Version=[5],New=(@\@\@\Storage_Streams @em @RefSecNum{The Streams Subsystem}
+@\@\@\@\Bounded_FIFO_Streams @em @RefSecNum{The Streams Subsystem}
+@\@\@\@\FIFO_Streams @em @RefSecNum{The Streams Subsystem}
+), Old=()}@\@\@\Stream_IO @em @RefSecNum{The Package Streams.Stream_IO}
 >@NewColumnVer{Version=[0]}@NewColumnVer{Version=[1]}@NewColumnVer{Version=[2]}@Noparanum@shrink<@Chg{Version=[3],
 New=[],Old=[Standard (@i{...continued})
 @\Ada (@i{...continued})
@@ -144,12 +152,12 @@ New=[],Old=[Standard (@i{...continued})
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
 @Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
+@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}), Old=()}@\@\@\Fixed @em @RefSecNum{Fixed-Length String Handling}
 @Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
 @Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
-@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}), Old=()}@\@\@\Hash @em @RefSecNum{String Hashing}
 @Chg{Version=[3],New=(@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
@@ -239,7 +247,10 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 ), Old=()}@\@\Unchecked_Deallocation @em @RefSecNum{Unchecked Storage Deallocation}
 @Chg{Version=[2],New=(@\@\Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Characters.Handling}
-),Old=()}),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
+),Old=()}),Old=()}@Chg{Version=[5],New=(@\@\Wide_Command_Line @em @RefSecNum{The Packages Wide_Command_Line and Wide_Wide_Command_Line}
+@\@\Wide_Directories @em @RefSecNum{The Packages Wide_Directories and Wide_Wide_Directories}
+@\@\Wide_Environment_Variables @em @RefSecNum{The Packages Wide_Environment_Variables and Wide_Wide_Environment_Variables}
+),Old=()}@\@\Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
@@ -247,6 +258,9 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\@\@\Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Wide_Characters.Handling}
+),Old=()}@Chg{Version=[5],New=(@\@\Wide_Wide_Command_Line @em @RefSecNum{The Packages Wide_Command_Line and Wide_Wide_Command_Line}
+@\@\Wide_Wide_Directories @em @RefSecNum{The Packages Wide_Directories and Wide_Wide_Directories}
+@\@\Wide_Wide_Environment_Variables @em @RefSecNum{The Packages Wide_Environment_Variables and Wide_Wide_Environment_Variables}
 ),Old=()}@\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Wide_Text_IO.Editing}
@@ -263,7 +277,11 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 
 @Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
-@\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
+@Chg{Version=[5],New=(@\@\Atomic_Operations @em @RefSecNum{The Package System.Atomic_Operations}
+@\@\@\Arithmetic @em @RefSecNum{The Package System.Atomic_Operations.Arithmetic}
+@\@\@\Exchange @em @RefSecNum{The Package System.Atomic_Operations.Exchange}
+@\@\@\Test_And_Set @em @RefSecNum{The Package System.Atomic_Operations.Test_And_Set}
+),Old=()}@\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}
 @\@\@\Dispatching_Domains @em @RefSecNum{Multiprocessor Dispatching Domains}
 ),Old=()}@\@\RPC @em @RefSecNum{Partition Communication Subsystem}

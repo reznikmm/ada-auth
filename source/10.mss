@@ -1,10 +1,10 @@
 @Part(10, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Program Structure and Compilation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/10.mss,v $}
-@Comment{$Revision: 1.112 $}
+@Comment{$Revision: 1.113 $}
 @Comment{Corrigendum changes added, 2000/04/24, RLB}
 
 @begin{Intro}
@@ -1706,6 +1706,10 @@ Sec=(of a program unit)}>,Old=[]}
 @ChgAdded{Version=[2],Text=[We want any rule that applies to a subunit to apply
 to a subunit of a subunit as well.]}
 @end{Reason}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Subunit>,
+Text=<@ChgAdded{Version=[5],Text=[A body of a program unit that can be compiled
+separately from its enclosing program unit.]}>}
 
 The parent body of a subunit shall be present in the current environment,
 and shall contain a corresponding @nt{body_stub}

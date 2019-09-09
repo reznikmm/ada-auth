@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.107 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
+@comment{ $Revision: 1.108 $ $Date: 2019/06/11 04:31:38 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:38 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1789,7 +1789,7 @@ vector object @i<V>, Program_Error is propagated by the finalization
 of @i<V>@Redundant[, as well as by a call that passes @i<V> to
 certain of the operations of this package, as indicated by the precondition
 of such an operation]. Similarly, when tampering with elements is @i<prohibited>
-for @i<V>, Program_Error is by a call that passes @i<V> to
+for @i<V>, Program_Error is propagated by a call that passes @i<V> to
 certain of other operations of this package, as indicated by the precondition
 of such an operation.],Old=[]}]}
 
@@ -4634,6 +4634,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0084-1],ARef=[AI05-0212-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[2],Text=[@Chg{Version=[3],New=[@key[with] Ada.Iterator_Interfaces;
 ],Old=[]}@key{generic}
    @key{type} Element_Type @key{is private};
@@ -4642,7 +4643,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @key{package} Ada.Containers.Doubly_Linked_Lists@Chg{Version=[5],New=[],Old=[ @key{is}]}@ChildUnit{Parent=[Ada.Containers],Child=[Doubly_@!Linked_@!Lists]}@Chg{Version=[5],New=[
    @key[with] Preelaborate, Remote_Types,
         Nonblocking => Element_Type'Nonblocking @key{and} Equal_Element'Nonblocking,
-        Global => @key[in out synchronized] Ada.Containers.Doubly_Linked_Lists &
+        Global => @key[synchronized in out] Ada.Containers.Doubly_Linked_Lists &
                   Element_Type'Global & Equal_Element'Global @key[is]],Old=[
    @key{pragma} Preelaborate(Doubly_Linked_Lists);@Chg{Version=[3],New=[
    @key{pragma} Remote_Types(Doubly_Linked_Lists);],Old=[]}]}]}
@@ -5428,7 +5429,7 @@ list object @i<L>, Program_Error is propagated by the finalization
 of @i<L>@Redundant[, as well as by a call that passes @i<L> to
 certain of the operations of this package, as indicated by the precondition
 of such an operation]. Similarly, when tampering with elements is @i<prohibited>
-for @i<L>, Program_Error is by a call that passes @i<L> to
+for @i<L>, Program_Error is propagated by a call that passes @i<L> to
 certain of other operations of this package, as indicated by the precondition
 of such an operation.],Old=[]}]}
 

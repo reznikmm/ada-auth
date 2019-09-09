@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1750,13 +1750,15 @@ rhs="@Chg{Version=[5],New=<
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set of
-variables (which, for the purposes of this clause includes all task objects)
-global to a callable entity that are potentially read or updated as part of the
-execution of a call on the entity. If not specified, the aspect defaults to the
-Global aspect for the nearest enclosing program unit. If not specified for a
-library unit, the aspect defaults to @exam{Global => @key[null]} for a nongeneric
-library unit that is declared Pure, and to @exam{Global => @key[in out all]}
-otherwise.]}
+variables (which, for the purposes of this clause includes all constants with
+some part being immutably limited, or of a controlled type, private type, or
+private extension) global to a callable entity that are potentially read or
+updated as part of the execution of a call on the entity. Constants of any type
+may also be mentioned in a Global aspect. If not specified, the aspect defaults
+to the Global aspect for the nearest enclosing program unit. If not specified
+for a library unit, the aspect defaults to @exam{Global => @key[null]} for a
+nongeneric library unit that is declared Pure, and to @exam{Global => @key[in
+out all]} otherwise.]}
 
 @end{Description}
 
@@ -1904,7 +1906,7 @@ given mode for the entities identified by the @nt{prefix}es of the
 @begin{Itemize}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} identifies the
-       specified global variable (or nonpreelaborable constant);]}
+       specified global variable (or constant);]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0310-1]}
     @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set
@@ -2055,6 +2057,25 @@ subprogram produces other side effects when called.]]}
     between the calls.]}
 
 @end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0303-1]}
+@ChgAdded{Version=[5],Text=[Implementations may extend the syntax or semantics
+of the Global aspect in an implementation-defined manner.]}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
+Text=[@ChgAdded{Version=[5],Text=[Any extensions of the
+Global aspect.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is intended to allow preexisting usages
+  from SPARK 2014 to remain acceptable in conforming implementations, as well
+  as to provide flexibility for future enhancements. Note the word
+  @ldquote@;extend@rdquote in this permission; we expect that any aspect usage
+  that conforms with the (other) rules of this clause will be accepted by
+  any Ada implementation, regardless of any implementation-defined extensions.]}
+@end{Reason}
+
 @end{ImplPerm}
 
 @begin{Extend2012}
@@ -6166,9 +6187,11 @@ to have the value True only if the associated
   @ChgAdded{Version=[5],Text=[has no applicable precondition or postcondition
     expression; and]}
 
-  @ChgRef{Version=[5],Kind=[Added]}
-  @ChgAdded{Version=[5],Text=[is not type-invariant preserving for any type
-    (see @RefSecNum{Type Invariants}).]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0075-1],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Text=[for result type @i<R>, if the function is a
+  boundary entity for type @i<R> (see @RefSecNum{Type Invariants}), no type
+  invariant applies to type @i<R>; if @i<R> has a component type @i<C>, a
+  similar rule applies to @i<C>.]}
 @end{Itemize}
 
 @begin{Ramification}

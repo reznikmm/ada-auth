@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/06/11 04:31:37 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -55,6 +55,11 @@ Parallel loops (see @RefSecNum{Loop Statements}) and
 @RefSecNum{Parallel Block Statements}) are parallel
 constructs.@IndexSee{Term=[parallel processing],See=(parallel construct)}
 @IndexSee{Term=[concurrent processing],See=(parallel construct)}],Old=[]}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Parallel Construct>,
+Text=<@ChgAdded{Version=[5],Text=[An executable construct that defines multiple
+activities of a single task that can proceed in parallel, via the execution of
+multiple logical threads of control.]}>}
 @end{Intro}
 
 @begin{Syntax}
@@ -1242,7 +1247,12 @@ subtype) is that defined by the @nt{discrete_subtype_definition}.]}
 @i{satisfied}@Defn2{Term=[satisfied],Sec=[filter]} when there is no
 @nt{iterator_filter} for the iterator construct, or when the @nt{condition}
 of the @nt{iterator_filter} evaluates to True for a given iteration of the
-iterator construct.]}
+iterator construct.@Defn{iterator filter}]}
+
+@ChgToGlossary{Version=[5],Kind=[Added],Term=<Iterator Filter>,
+Text=<@ChgAdded{Version=[5],Text=[A construct that is used to restrict the
+elements produced by an iteration to those for which a boolean condition
+evaluates to True.]}>}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0250-1],ARef=[AI12-0327-1]}
 @ChgAdded{Version=[5],Text=[If a @nt{sequence_of_statements} of a
@@ -1854,6 +1864,14 @@ properties:]}
   some program could violate one of these new restrictions, but in most cases
   this can easily be worked around by using overriding rather than
   redefinition.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0266-1]}
+  @ChgAdded{Version=[5],Text=[Various new types and subprograms are newly added
+  to Ada.Iterator_Interfaces. If an instance of Ada.Iterator_Interfaces is
+  referenced in a @nt{use_clause}, and an entity with one of the new names
+  is defined in some other package that is also referenced in a @nt{use_clause},
+  the user-defined entity may no longer be use-visible,
+  resulting in errors. This should be rare and is easily fixed if it does occur.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
