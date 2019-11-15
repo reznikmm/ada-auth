@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:36 $}
+@Comment{$Date: 2019/09/09 02:53:18 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.154 $}
+@Comment{$Revision: 1.155 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -5702,7 +5702,7 @@ equality operator.]}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0328-1]}
 @ChgAdded{Version=[5],Text=[We make the membership test on the nonlimited
 view of a type illegal if it would use a different equality operator than what
-ould be used for a limited view of the same type (and such a limited view is
+would be used for a limited view of the same type (and such a limited view is
 known to exist).]}
 @end{Reason}
 @end{Legality}
@@ -7169,17 +7169,35 @@ rhs="@Chg{Version=[3],New=<@SynI{boolean_}@Syn2{expression}>,Old=<>}"}
 @Comment{Moved from "If Statements"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2],ARef=[AI12-0341-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
     @key[case] @SynI{selecting_}@Syn2{expression} @key[is]
     @Syn2[case_expression_alternative] {,
-    @Syn2[case_expression_alternative]}>,Old=<>}"}
+    @Syn2[case_expression_alternative]}@Chg{Version=[5],New=<
+  | @key[case select]
+    @Syn2[conditional_case_expression_alternative] {,
+    @Syn2[conditional_case_expression_alternative]}>,Old=<>}>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression_alternative>,Old=<>}>,
 rhs="@Chg{Version=[3],New=[
     @key[when] @Syn2{discrete_choice_list} =>
         @SynI{dependent_}@Syn2{expression}],Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<conditional_case_expression_alternative>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[
+    @key[when] @Syn2{choice_condition_list} =>
+        @SynI{dependent_}@Syn2{expression}],Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<choice_condition>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[@Syn2{choice_expression}],Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<choice_condition_list>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[@Syn2{choice_condition} {'|' @Syn2{choice_condition}}],Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
 @ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an @nt{expression},
@@ -7332,9 +7350,19 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type], Sec=(condition)}
-A @nt{condition} is expected to be of any boolean type.]}
-@Comment{Moved from "If Statements"}
+A @nt{condition} is expected to be of any boolean type.@Chg{Version=[5],New=[ A
+@nt{choice_condition} is expected to be of type
+Boolean.@PDefn2{Term=[expected type], Sec=(choice_condition)}],Old=[]}]}
+@Comment{First sentence moved from "If Statements"}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+  @ChgAdded{Version=[5],Text=[We required a @nt{choice_condition} to have type
+  Boolean because we want all of the choices of a @nt{case_expression} or
+  @nt{case_statement} to be of the same type.]}
+@end{Reason}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the
@@ -7419,8 +7447,10 @@ the value of the @nt{if_expression} is True.@PDefn2{Term=[evaluation],Sec=[if_ex
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
-@ChgAdded{Version=[3],Text=[For the evaluation of a @nt{case_expression}, the
-@SynI<selecting_>@nt{expression} is first evaluated.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
+@ChgAdded{Version=[3],Text=[For the evaluation of a
+@nt{case_expression}@Chg{Version=[5],New=[ with a @SynI<selecting_>@nt{expression}],Old=[]},
+the @SynI<selecting_>@nt{expression} is first evaluated.
 If the value of the @SynI<selecting_>@nt{expression}
 is covered by the @nt{discrete_choice_list} of some
 @nt{case_expression_alternative}, then the @SynI<dependent_>@nt{expression} of
@@ -7431,6 +7461,24 @@ Otherwise (the value is not covered by any
 @nt{discrete_choice_list}, perhaps due to being outside the base range),
 Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{case_expression}
+without a @SynI<selecting_>@nt{expression}, all
+of the @nt{choice_condition}s are evaluated. If exactly one
+@nt{choice_condition} is True, the @SynI<dependent_>@nt{expression} of the
+@nt{conditional_case_expression_alternative} containing this
+@nt{choice_condition} is evaluated, converted to the type of the
+@nt{case_expression}, and the resulting value is the value of the
+@nt{case_expression}. Otherwise (no @nt{choice_condition} is True, or multiple
+@nt{choice_condition}s are True), Program_Error is raised.]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+    @ChgAdded{Version=[5],Text=[This is not a check! It cannot be suppressed
+      as we would not know what value to return in such a case. This is
+      consistent with other case exceptions.]}
+  @end{Ramification}
+
 @end{Runtime}
 
 
@@ -7439,6 +7487,12 @@ Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}If expressions
   and case expressions are new.]}
 @end{Extend2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Case expressions
+  without a @SynI<selecting_>@nt{expression} are new.]}
+@end{Extend2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}

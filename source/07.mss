@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/09/09 02:53:19 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -2098,10 +2098,15 @@ on the specified object(s):@Defn{invariant check}]}
     @end{Itemize}
   @end{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0269-1]}
-  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0075-1]}
-  @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[],Old=[The check
-  is performed on each such
-  part of type @i<T>.]}]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0075-1],ARef=[AI12-0338-1]}
+  @ChgAdded{Version=[3],NoPrefix=[T],Text=[@Chg{Version=[5],New=[If the nominal
+  type of a formal parameter (or the designated nominal type of an
+  access-to-object parameter or result) is incomplete at the point of the
+  declaration of the callable entity, and if the completion of that incomplete
+  type does not occur in the same declaration list as the incomplete
+  declaration, then  for purposes of the preceding rules the nominal type is
+  considered to have no parts],Old=[The check is performed on
+  each such part]} of type @i<T>.]}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0042-1]}
   @ChgAdded{Version=[4],Text=[For a view conversion to a class-wide type
@@ -2176,8 +2181,19 @@ value.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0149-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0167-1]}
-  @ChgAdded{Version=[3],Text=[Invariant checks on subprogram return are not
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0167-1],ARef=[AI12-0210-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[Type invariant checks are
+  intended to prevent invariant-violating values from inadvertently "leaking
+  out"; that is, code which cannot see the completion of the private type should
+  not be able to reference invariant-violating values of the type (assuming the
+  type invariant condition itself is well behaved - for example, no uses of
+  global variables during evaluation of the invariant expression). This goal is
+  not completely achieved; such leaking is possible but, importantly, it
+  requires assistance (deliberate or not) of some form from the package that
+  declares the invariant-bearing private type (or a child unit thereof); a
+  client of a well-crafted package cannot use these holes to obtain an
+  invariant-violating value without help.],Old=[Invariant checks on
+  subprogram return are not
   performed on objects that are accessible only through access
   values@Chg{Version=[4],New=[ that are subcomponents of some other object],Old=[]}.
   It is also possible to call through an access-to-subprogram value and reach a
@@ -2192,12 +2208,83 @@ value.]}
   access-to-subprogram value representing a private operation of the package.
   In the absence of such things, all values that the client can see will be
   checked for a private type or extension],Old=[ without help for the
-  designer of the package containing @i<T>]}.@Chg{Version=[5],New=[
-  Similar holes exist for class-wide objects as discussed above.],Old=[]}]}
+  designer of the package containing @i<T>]}.]}]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0210-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The list of known techniques
+  whereby this kind of leak can occur (ignoring things like erroneous execution
+  and the various forms of unchecked type conversion) consists of:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A boundary entity might assign an
+    invariant-violating value to a global variable that is visible to client
+    code.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0149-1]}
+  @ChgAdded{Version=[5],Text=[Invariant checks on subprogram return are not
+    performed on objects that are accessible only through access-valued
+    components of other objects. This can only cause a leak if there is a type
+    with access-valued components that is used as a parameter or result type of
+    a boundary entity. For a type @i<T> that has a type invariant, avoiding the
+    declaration of types with access-valued components designating objects with
+    parts of @i<T> in the package that contains @i<T> is sufficient to prevent
+    this leak.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A client could call through an
+    access-to-subprogram value and reach a subprogram body that has visibility
+    on the full declaration of a type; no invariant checks will be performed if
+    the designated subprogram is not itself a boundary subprogram. This leak can
+    only happen if an access-to-subprogram value of a subprogram that is not
+    visible to clients is passed out to clients.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0167-1],ARef=[AI12-0191-1]}
+  @ChgAdded{Version=[5],Text=[Invariant checks are only performed for parts of
+    the nominal type for tagged parameters and function results. This means that
+    components of extensions are not checked (these would be very expensive to
+    check as any tagged type @i<might> have such an extension in the future,
+    even though that would be very unlikely). For this leak to occur for a type
+    @i<T> that has a type invariant, the body of a boundary entity of @i<T>
+    needs to have visibility on a type extension that has components of @i<T> or
+    access-to-@i<T> and also has an ancestor type (or class) as a parameter or
+    result of the subprogram.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0338-1]}
+  @ChgAdded{Version=[5],Text=[Invariant checks are not performed for parts of
+    incomplete types when the completion is not available. For this leak to
+    occur for a type @i<T> that has a type invariant and is declared in a
+    package @i<P>, one has to use a @key{limited with} on a package that has
+    @i<P> in its semantic closure, and then use a type from that package as a
+    parameter or result of a boundary subprogram for @i<T> (or as the designated
+    type of a parameter or result of such a subprogram).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0210-1]}
+  @ChgAdded{Version=[5],Text=[Consider a package @i<P> which declares an
+    invariant-bearing private type @i<T> and a generic package @i<P.G1>, which
+    in turn declares another generic package @i<P.G1.G2>. Outside of package
+    @i<P>, there are declarations of an instantiation @i<I1> of @i<P.G1> and an
+    instantiation @i<I2> of @i<I1.G2>. @i<I2> can declare visible subprograms
+    whose bodies see the full view of @i<T> and yet these subprograms are not
+    boundary subprograms (because the generic @i<I1.G2> is not declared within
+    the immediate scope of @i<T> - @i<G1.G2> is, but that's irrelevant). So a
+    call to one of these subprograms from outside of @i<P> could yield an
+    invariant-violating value. So long as a nested generic of a nested generic
+    unit of @i<P> is not declared, no such leaks are possible.]}
+
+@end{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0210-1]}
+  @ChgAdded{Version=[5],Text=[All of these leaks require cooperation of some
+  form (as detailed above) from within the immediate scope of the
+  invariant-bearing type.]}
+
 @end{Ramification}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised]}@Comment{Paragraph number changed by above}
   @ChgAdded{Version=[3],Text=[The implementation might want to produce a warning
   if a private extension has an ancestor type that is a visible extension, and
   an invariant expression depends on the value of one of the components from a
@@ -2343,6 +2430,11 @@ value.]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified when type invariant
   checks happen for protected actions and entry calls.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0338-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that type invariant
+  checks do not occur for parts of incomplete types unless the completion
+  is available.]}
 @end{DiffWord2012}
 
 

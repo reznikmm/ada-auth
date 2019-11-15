@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.53 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.54 $ $Date: 2019/09/09 02:53:20 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2019/09/09 02:53:20 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -272,6 +272,16 @@ or any other form of name supported by the implementation.
     "../parent/myfile" is neither a full name nor a simple name.]}
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0337-1]}
+@ChgAdded{Version=[5],Text=[A @i<root directory> is a directory that has no
+containing directory.@Defn{root directory}]}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For Unix and Unix-like systems, "/" is the root.
+  For Windows@latin1(174), "C:\" and "\\Computer\Share" are roots.]}
+@end{ImplNote}
+
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00248-01]}
 @ChgAdded{Version=[2],Text=[The @i<default directory> is the directory that is
 used if a directory or
@@ -488,11 +498,23 @@ special files).]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Simple_Name (Name : @key{in} String) @key{return} String;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the simple name portion of
-the file name specified by Name.
+the file name specified by Name.@Chg{Version=[5],New=[ The simple name of a
+root directory is the root itself.],Old=[]}
 The exception Name_Error is propagated if the string given as Name does not
 allow the identification of an external file (including directories and special
 files).]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[5],Text=[The result of Simple_Name corresponds to the
+    result of the @ldquote@;basename@rdquote command on Linux and Unix. If the
+    filename ends with a '/', and is not a root, then @ldquote@;basename@rdquote
+    returns the part in front of all of the trailing '/'s. It returns a root
+    intact. The null string is never returned. Similar rules should be used for
+    Windows filenames.]}
+@end{Discussion}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Containing_Directory (Name : @key{in} String) @key{return} String;]}
@@ -515,6 +537,12 @@ if the external file does not have a containing directory.]}
   current directory). Use Full_Name on the result of Containing_Directory
   if the full name is needed.]}
 @end{Discussion}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[5],Text=[Containing_Directory raises Use_Error when passed
+    a string representing a root directory.]}
+@end{Ramification}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Keepnext=[T],Text=[@key{function} Extension (Name : @key{in} String) @key{return} String;]}
@@ -559,16 +587,35 @@ special files).]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns the name of the external
 file with the specified
 Containing_Directory, Name, and Extension. If Extension is the null string,
 then Name is interpreted as a simple name;
 otherwise@Chg{Version=[3],New=[,],Old=[]} Name is interpreted as a
-base name. The exception Name_Error is propagated if the string given as
+base name. The exception Name_Error is propagated if@Chg{Version=[5],New=[:],Old=[ the
+string given as
 Containing_Directory is not null and does not allow the identification of a
 directory, or if the string given as Extension is not null and is not a
 possible extension, or if the string given as Name is not a possible simple
-name (if Extension is null) or base name (if Extension is nonnull).]}
+name (if Extension is null) or base name (if Extension is nonnull).]}]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[the string given as Containing_Directory is not
+    null and does not allow the identification of a directory;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[the string given as Extension is not null and is
+    not a possible extension;]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[the string given as Name is not a possible simple
+    name (if Extension is null) or base name (if Extension is nonnull); or]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[5],Text=[the string given as Name is a root directory, and
+    Containing_Directory or Extension is nonnull.]}
+@end{Itemize}
 
 @begin{Ramification}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -1263,6 +1310,13 @@ should be deleted first.]}
   unspecified in the 2007 Amendment.]}
 @end{Diffword2005}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0337-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the meaning of
+  Simple_Name in the case that the parameter is a root directory. This was
+  not previously deescribed.]}
+@end{Diffword2012}
+
 
 
 @LabeledAddedSubClause{Version=[3],Name=[The Package Directories.Hierarchical_File_Names]}
@@ -1344,6 +1398,14 @@ file names.]}
 @ChgAdded{Version=[3],Text=[Returns True if Name is a simple name, and returns
 False otherwise.]}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[5],Text=[Root directories are considered simple names, so
+    this function will return True if Name represents a root. Use
+    Is_Root_Directory if it is necessary to distinguish roots and other simple
+    names.]}
+@end{Ramification}
+
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[@key{function} Is_Root_Directory_Name (Name : @key{in} String) @key{return} Boolean;]}
@@ -1355,8 +1417,10 @@ directory that cannot be decomposed further), and returns False otherwise.]}
 
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[For Unix and Unix-like systems, "/" is the root.
-  For Windows, "C:\" and "\\Computer\Share" are roots.]}
+  @ChgRef{Version=[5],Kind=[DeletedNoDelMsg],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[For Unix and
+  Unix-like systems, "/" is the root. For Windows@latin1(174), "C:\" and
+  "\\Computer\Share" are roots.]}]}
 @end{ImplNote}
 
 @begin{Example}
@@ -1372,7 +1436,7 @@ otherwise.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Is_Parent_Directory_Name returns True if and only
-  if Name is ".." for both Unix and Windows.]}
+  if Name is ".." for both Unix and Windows@latin1(174).]}
 @end{ImplNote}
 
 @begin{Example}
@@ -1388,7 +1452,7 @@ otherwise.]}
 @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[Is_Current_Directory_Name returns True if and only
-  if Name is "." for both Unix and Windows.]}
+  if Name is "." for both Unix and Windows@latin1(174).]}
 @end{ImplNote}
 
 @begin{Example}
@@ -1412,7 +1476,9 @@ and returns False otherwise.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[Relative names include simple names as a special case.
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
+  @ChgAdded{Version=[3],Text=[Relative names include simple names
+  @Chg{Version=[5],New=[other than root directories ],Old=[]}as a special case.
   This function returns False if the syntax of the name is incorrect.]}
 @end{Ramification}
 
@@ -1483,21 +1549,24 @@ and Simple_Name (Relative_Name) is not a base name.]}
   rules necessary were more confusing than helpful.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
   @ChgAdded{Version=[3],Text=[We can say more about the details of these
   operations by adopting the notation of a subscript to specify how many path
   fragments a particular result has. Then, we can abbreviate "Full Name" as
   "Full" and "Relative Name" as "Rel". In this notation, Unix file name "a/b" is
   a Rel(2), "../c/d" is a Rel(3), and "/a/b" is a Full(2). Rel(1) is equivalent
-  to a simple name; thus we don't have to describe that separately.]}
+  to a simple name@Chg{Version=[5],New=[ that is not a root],Old=[]}; thus
+  we don't have to describe that separately.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Type=[Leading],Text=[In this notation,]}
   @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0337-1]}
 @ChgAdded{Version=[3],Text=[For N>1,
 Containing_Directory(Rel(N)) = Leftmost Rel(N-1),
 Containing_Directory(Full(N)) = Leftmost Full(N-1),
-Else if N = 1, raise Name_Error.]}
+Else if N = 1, raise @Chg{Version=[5],New=[Use_Error],Old=[Name_Error]}.]}
   @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}

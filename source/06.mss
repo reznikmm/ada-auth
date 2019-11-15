@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/09/09 02:53:19 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.151 $}
+@Comment{$Revision: 1.152 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -901,37 +901,220 @@ then the respective precondition or postcondition expressions are considered
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0273-1]}
-@ChgAdded{Version=[3],Type=[Leading],Text=[An @nt{expression} is
-@i{potentially unevaluated} if it occurs within:@Defn{potentially unevaluated expression}]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
+@ChgAdded{Version=[3],Type=[Leading],Text=[@Chg{Version=[5],New=[A subexpression of a postcondition expression is @i<known on entry> if it is any
+of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
+@i{potentially unevaluated} if it occurs within:@Defn{potentially unevaluated expression}]}]}
 
 @begin{Itemize}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[any part of an @nt{if_expression} other than the
-  first @nt{condition};]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[a static subexpression
+  (see @RefSecNum{Static Expressions and Static Subtypes})],Old=[any part
+  of an @nt{if_expression} other than the first @nt{condition}]};]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[a @SynI{dependent_}@nt{expression} of a
-  @nt{case_expression};]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[a literal whose type does
+  not have any Integer_Literal, Real_Literal, or String_Literal aspect
+  specified, or the function specified by such an attribute has aspect Global
+  specified to be @key[null]],Old=[a @SynI{dependent_}@nt{expression} of a
+  @nt{case_expression}]};]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+    @ChgAdded{Version=[5],Text=[We mention literals explicitly in case they
+    are not static (as when their subtype is not static, they are the literal
+    @key[null], and so on). We exclude literals of types with the aspects that
+    are not Global => @key[null] those cause a
+    user-written subprogram with possible side-effects to be called.]}
+  @end{Reason}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
-  @ChgAdded{Version=[4],Text=[a @nt{predicate} of a
-  @nt{quantified_expression};]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[4],Text=[@Chg{Version=[5],New=[a name statically denoting a
+  full constant declaration of a type for which all views are constant (see
+  @RefSecNum{Objects and Named Numbers})],Old=[a @nt{predicate} of a
+  @nt{quantified_expression}]};]}
 
-  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0198-1]}
-  @ChgAdded{Version=[5],Text=[the @nt{expression} of an
-  @nt{array_component_association}, if the associated choice is a
-  @nt{subtype_indication} or @nt{range} that defines a nonstatic or null range,
-  or is an @key[others] choice and the applicable index constraint is
-  nonstatic or null;]}
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Constants of types with immutably limited or
+      controlled parts are not allowed by this rule. Generic formal in objects
+      are allowed by this rule (as they are defined to be full constant
+      declarations).]}
+  @end{Ramification}
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[We only want things that cannot be changed. We
+      can't just say @ldquote@;constant@rdquote since that includes views of
+      variables in some cases (for instance, a dereference of an access to
+      constant object can be a view of a variable). There are other things we
+      could have allowed (like a loop parameter), but having a subprogram
+      declaration where those could be used (like inside of a loop) seems
+      unusual enough to not be worth defining.]}
+  @end{Reason}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[the right operand of a short-circuit control
-  form; or]}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a name statically denoting a non-aliased @key[in]
+    parameter of an elementary type;]}
 
-  @ChgRef{Version=[3],Kind=[AddedNormal]}
-  @ChgAdded{Version=[3],Text=[a @nt{membership_choice} other than the first
-  of a membership operation.]}
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[All such parameters are by-copy, so the value
+      won't change during the execution of the subprogram.]}
+  @end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[an Old @nt{attribute_reference};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[an invocation of a predefined operator where
+    all of the operands are known on entry;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a function call where the function has aspect
+    Global => @key[null] where all of the actual parameters are known on entry;]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Such a function can only depend on the values of
+      its parameters.]}
+  @end{Reason}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a @nt{selected_component} of a
+    known-on-entry @nt{prefix};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[an @nt{indexed_component} of a known-on-entry
+    @nt{prefix} where all index @nt{expression}s are known on entry;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a parenthesized known-on-entry @nt{expression};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a @nt{qualified_expression} or @nt{type_conversion}
+    whose operand is a known-on-entry expression;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[a @nt{conditional_expression} where all of
+    the @nt{condition}s, @Syni{selecting_}@nt{expression}s,
+    @nt{choice_condition}s, and @Syni{dependent_}@nt{expression}s are
+    known on entry.]}
+
+  @begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[It's OK if such an expression raises an
+      exception, so long as every evaluation of the expression raises
+      the same exception.]}
+  @end{Discussion}
+
 @end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0198-1],ARef=[AI12-0280-2]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A subexpression of a postcondition
+expression is
+@i<unconditionally evaluated>,@Defn2{Term=[unconditionally evaluated],Sec=[subexpression]}
+conditionally evaluated, or
+@i<repeatedly evaluated>.@Defn2{Term=[repeatedly evaluated],Sec=[subexpression]}
+The following subexpressions are repeatedly evaluated:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[A subexpression of a predicate of
+    a @nt{quantified_expression};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[A subexpression of
+    the expression of an @nt{array_component_association};]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[A subexpression of
+   the expression of an @nt{container_element_association}.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If a subexpression is not repeatedly
+evaluated, and not evaluated unconditionally, then it is @i<conditionally
+evaluated>,@Defn2{Term=[conditionally evaluated],Sec=[subexpression]} and
+there is a set of @i<determining expressions>@Defn{determining expression} that
+determine whether the subexpression is actually evaluated at run time. Such
+subexpressions and their determining expressions are as follows:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[For an @nt{if_expression} that is not repeatedly
+    evaluated, a subexpression of any part other than the first condition is
+    conditionally evaluated, and its determining expressions include all
+    @nt{condition}s of the @nt{if_expression} that precede the subexpression
+    textually;]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[For a @nt{case_expression} that is not repeatedly
+    evaluated, a subexpression of any @SynI[dependent_]@nt{expression} is
+    conditionally evaluated, and its determining expressions include the
+    @Syni{selecting_}@nt{expression}, or all of the @nt{choice_condition}s,
+    of the @nt{case_expression};]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For],Old=[the right operand
+  of]} a short-circuit control form@Chg{Version=[5],New=[ that is not
+  repeatedly evaluated, a subexpression of the right-hand operand is
+  conditionally evaluated, and its determining expressions include the left-hand
+  operand of the short-circuit control form;],Old=[; or]}]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[For a membership test that
+  is not repeatedly evaluated, a subexpression of ],Old=[]}
+  a @nt{membership_choice} other than the first @Chg{Version=[5],New=[is
+  conditionally evaluated, and its determining expressions include the
+  @Syni<tested_>@nt{simple_expression} and the preceding
+  @nt{membership_choice}s of the membership test],Old=[of
+  a membership operation]}.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
+@ChgAdded{Version=[5],Text=[A conditionally evaluated subexpression is @i<determined to be
+unevaluated> at run time if its set of determining expressions are all
+known on entry, and when evaluated on entry their values are such that
+the given subexpression is not evaluated.@Defn{determined to be unevaluated}
+@Defn2{Term=[unevaluated],Sec=[determined to be]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[To be precise, a conditionally
+    evaluated expression is determined to be unevaluated (including all of
+    its subexpressions) under the following circumstances:]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Within an @nt{if_expression}, a
+    @Syni{dependent_}@nt{expression} with an
+        associated @nt{condition} that evaluates to False, or a @nt{condition} or
+        @Syni{dependent_}@nt{expression} where a condition of a preceding part
+        of the @nt{if_expression} evaluates to True;]}
+
+  @ChgAdded{Version=[5],Text=[Within a @nt{case_expression}, a
+    @Syni{dependent_}@nt{expression} with an
+    @nt{discrete_choice_list} that is not covered by the value of the
+    @Syni{selecting_}@nt{expression}, or has a @nt{choice_condition}
+    that evaluates to False;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The right-hand
+  operand of a short-circuit control form where the
+  left-hand operand evaluates to False for @b<and then> or True for @b<or
+  else>;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A
+  @nt{membership_choice} of a membership test where the
+  individual membership test defined by any prior @nt{membership_choice}
+  evaluates to True.]}
+@end{Itemize}
+@end{Ramification}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0217-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{name} @i<statically names>
@@ -968,11 +1151,13 @@ an object if it:@Defn{Statically names}]}
 denotes an object of a nonlimited type}, the following attribute is defined:]}
 @begin(description)
 @ChgNote{For Version=[3], Kind=[AddedNormal].}
-@ChgAttribute{Version=[4],Kind=[Revised],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1], ARef=[AI12-0032-1],
+@ChgAttribute{Version=[5],Kind=[Revised],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Old>, ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1], ARef=[AI12-0032-1], ARef=[AI12-0280-2],
   InitialVersion=[3],Text=[@Chg{Version=[3],New=[@Chg{Version=[4],New=[Each],Old=[For each]}
    X'Old in a postcondition expression that
-   is enabled@Chg{Version=[4],New=[ denotes],Old=[,]} a constant
+   is enabled@Chg{Version=[5],New=[, other than
+   those that occur in subexpressions that are determined to be
+   unevaluated,],Old=[]}@Chg{Version=[4],New=[ denotes],Old=[,]} a constant
    @Chg{Version=[4],New=[that ],Old=[]}is implicitly
    declared at the beginning of the subprogram
    @Chg{Version=[4],New=[body,],Old=[or]}
@@ -985,6 +1170,15 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
    arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]}],Old=[]}]}@Comment{End of Annex text here.}
 
   @begin{Ramification}
+     @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+     @ChgAdded{Version=[5],Text=[If X'Old occurs in a subexpression that is
+       determined to be unevaluated, then there is no associated constant,
+       and no evaluation of the prefix takes place. In general, this will
+       require evaluating one or more known-on-entry subexpressions before
+       creating and initializing any X'Old constants. Note that any 'Old in
+       a known-on-entry subexpression evaluated this way represents the
+       current value of the prefix (the 'Old itself can be ignored).]}
+
      @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0193-1]}
      @ChgAdded{Version=[5],Text=[In the case of an accept statement, the
        constant is declared inside of the rendezvous. It is considered part of
@@ -1045,16 +1239,20 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   be of that type.]}]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2], ARef=[AI05-0262-1], ARef=[AI05-0273-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0217-1]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0217-1],ARef=[AI12-0280-2]}
   @ChgAdded{Version=[3],NoPrefix=[T],Text=[Reference to this attribute is only
   allowed within a postcondition expression. The @nt{prefix} of an Old
   @nt{attribute_reference} shall not contain a Result @nt{attribute_reference},
   nor an Old @nt{attribute_reference}, nor a use of an entity declared within
   the postcondition expression but not within @nt{prefix} itself (for example,
   the loop parameter of an enclosing @nt{quantified_expression}).
-  The @nt{prefix} of an Old @nt{attribute_reference} that is
-  potentially unevaluated shall statically
-  @Chg{Version=[5],New=[name],Old=[denote]} an entity.]}
+  The @nt{prefix} of an Old @nt{attribute_reference}
+  @Chg{Version=[5],New=[],Old=[that is
+  potentially unevaluated ]}shall statically
+  @Chg{Version=[5],New=[name],Old=[denote]} an entity@Chg{Version=[5],New=[,
+  unless the @nt{attribute_reference} is
+  unconditionally evaluated, or is conditionally evaluated where all of
+  the determining expressions are known on entry],Old=[]}.]}
 
 @begin{Discussion}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -1187,6 +1385,11 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   elaborated after the start of the protected action. Postcondition checks
   (which might reference these constants) are performed before the end of
   the protected action as described below.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[The @nt{prefix} of an Old @nt{attribute_reference}
+  has to statically name an entity if it appears within a repeatedly
+  evaluated expression.]}
 @end{Ramification}
 @end(description)
 @EndPrefixType{}
@@ -1544,6 +1747,28 @@ itself.]]}
 
 @end{Runtime}
 
+@begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+@ChgAdded{Version=[5],Text=[An implementation may evaluate known-on-entry
+subexpression of a postcondition expression of an entity at the place where
+X'Old constants are created for the entity, with the normal evaluation of
+the postcondition expression, or both.]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[We allow the evaluation of known-on-entry
+  subexpressions when they might be needed to determine whether to create a
+  particular 'Old constant. We allow them to be evaluated later as well, or for
+  the results to be saved somehow. This permission shouldn't matter, as the
+  results ought to be same wherever they are evaluated and there should not be
+  any side-effects. The main effect of the permission is to determine when any
+  exceptions caused by such subexpressions may be raised. We never require
+  waiting to determine the value of such subexpressions, even if they aren't
+  used to determine the creation of a constant for 'Old.]}
+@end{Reason}
+
+@end{ImplPerm}
+
 @begin{Notes}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2],ARef=[AI05-0262-1]}
   @ChgAdded{Version=[3],Text=[A precondition is checked just before the call. If
@@ -1656,6 +1881,12 @@ itself.]]}
   @nt{indexed_component}. This is considered a correction as the old rule
   is unintentionally too fierce, rejecting safe cases.]}
 
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
+  @ChgAdded{Version=[5],Text=[We make no restriction on the prefix of an
+  Old attribute if we can determine when the subprogram is entered (which
+  is the point when Old prefixes are evaluated) whether it will be needed
+  in the evaluation of the postcondition.]}
+
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0220-1],ARef=[AI12-0272-1]}
   @ChgAdded{Version=[5],Text=[Pre and Post can be given on an
   access-to-subprogram type and on a generic formal subprogram.]}
@@ -1711,9 +1942,9 @@ rhs="@Chg{Version=[5],New=<
   | @Syn2{global_mode} @Syn2{global_designator}
   | (@Syn2{global_mode} @Syn2{global_set}{, @Syn2{global_mode} @Syn2{global_set}})>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<[ @Syn2{global_mode_qualifier} ] @Syn2{basic_global_mode}>,Old=<>}"}
+rhs="@Chg{Version=[5],New=<[ @key{overriding} ][ @Syn2{global_mode_qualifier} ] @Syn2{basic_global_mode}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode_qualifier>,Old=<>}>,
@@ -1835,13 +2066,18 @@ Global aspect can be defined explicitly with a
 @nt{primitive_global_aspect_definition} or can be defined by combining the
 sets specified for other entities by referring to their Global attribute.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The global variables associated with
 any mode can be read as a side effect of an operation. The @key[in out] and
 @key[out] @nt{global_mode}s together identify the set of global variables that
-can be updated as a side effect of an operation. The @nt{global_mode_qualifier}
-@key[synchronized] reduces the set to those objects that are of one of the
-following sort of types:@Defn2{Term=[synchronized],Sec={global object}}]}
+can be updated as a side effect of an operation. The presence of the reserved
+word @key[overriding] indicates that the specification is overriding the mode of
+a formal parameter with another mode to reflect the overall effect of an
+invocation of the callable entity on the state associated with the corresponding
+actual parameter.@Defn2{Term=[overriding],Sec={global object}} The
+@nt{global_mode_qualifier} @key[synchronized] reduces the
+set to the parts of those objects that are of one of the following sort of
+types:@Defn2{Term=[synchronized],Sec={global object}}]}
 
 @begin{Itemize}
 
@@ -1865,10 +2101,10 @@ following sort of types:@Defn2{Term=[synchronized],Sec={global object}}]}
 
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Text=[An implementation-defined @nt{global_mode_qualifier}
-may be specified, which reduces the set according to an implementation-defined
-rule.]}
+may be specified, which alters the interpretation of the @nt{global_mode} or
+reduces the set according to an implementation-defined rule.]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
 Text=[@ChgAdded{Version=[5],Text=[Implementation-defined
@@ -1904,9 +2140,16 @@ given mode for the entities identified by the @nt{prefix}es of the
      for the following forms of @nt{global_name}:]}
 
 @begin{Itemize}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} identifies the
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
+    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} that is not
+       associated with an @key[overriding] mode identifies the
        specified global variable (or constant);]}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} that is associated
+       with an @key[overriding] mode identifies the variable parts associated
+       with the specified formal parameter whose parameter mode is being
+       overridden;]}
 
     @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0310-1]}
     @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set
@@ -1943,9 +2186,9 @@ given @nt{global_mode} shall be specified at most once without a
 @nt{primitive_global_aspect_definition}, a given entity shall be named at most
 once by a @nt{global_name}.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[If an entity has a Global aspect other than
-@key[in out all], then the
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If an entity has a Global aspect
+other than @key[in out all], then the
 associated operation(s) shall read only those variables global to the
 entity that are within the global variable set associated with the @key[in],
 @key[in out], or @key[out] modes, and the operation(s) shall update only those
@@ -1953,7 +2196,70 @@ variables global to the entity that are within the global variable set
 associated with either the @key[in out] or @key[out] @nt{global_mode}s. This
 includes any calls occurring during the execution of the operation, presuming
 those calls read and update all global variables permitted by their Global
-aspect (or Global'Class aspect, if a dispatching call).]}
+aspect (or Global'Class aspect, if a dispatching call). For the purposes of
+these checks:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+  @ChgAdded{Version=[5],Text=[if a formal parameter @i<P> of a callable entity
+    @i<C> is of an anonymous access-to-object type, no check against the Global
+    aspect occurs within @i<C> for the dereference of @i<P>, but a check against
+    the Global aspect applies at the point of call of @i<C>, presuming that
+    @i<P> is dereferenced and then read if of an access-to-constant type or
+    updated if of an access-to-variable type; if the actual parameter is of the
+    form @i<X>'Access (explicitly or implicitly), then at the point of call the
+    presumed dereference of @i<P> is treated as a read or update of @i<X>; if
+    the actual parameter @i<A> is of any other form, it is treated as a read or
+    update of @i<A>.@key[all];]}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[An access parameter @exam[@key[access] T] is
+      treated somewhat like a parameter specified as @exam[@key[in out] T]
+      while @exam[@key[access constant] T] is treated somewhat like
+      @exam[@key[in] T]. There is no burden to mention the dereference of
+      an access parameter in the Global aspect, as the effects of the
+      dereference are presumed at the call site, just like the effects
+      on @ldquote@;normal@rdquote parameters.
+      Note that an access-to-subprogram parameter L can already be
+      handled by @exam[... & L'Global].]}
+  @end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+  @ChgAdded{Version=[5],Text=[if a function returns an object of a type for
+    which the Implicit_Dereference aspect is True (see
+    @RefSecNum{User-Defined References}), or an object of an anonymous
+    access-to-object type, the Global aspect of the function shall reflect the
+    effects of dereferencing the result of the function, if these are over and
+    above reads or updates of parts of aliased formal parameters (or
+    dereferences of access parameters) passed to the function. The effects to
+    be reflected include reading the designated object, and updating the
+    designated object in the case of an access-to-variable result or an
+    Implicit_Dereference result with an access-to-variable access discriminant.
+    A dereference (explicit or implicit) of a @nt{function_call} on such
+    a function is not further checked at the point of call against any Global
+    or Global'Class aspects that apply to the caller.]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The function is in a better position than the
+      caller to enumerate the objects affected by dereferencing the result.
+      Because the access discriminant is often of an anonymous type, there is no
+      other place to declare these effects. In most cases, these effects will
+      already be reflected in the aliased or access parameters passed to the
+      function, so nothing need be added to the Global aspect for these.]}
+  @end{Reason}
+
+  @begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The last sentence is talking specifically about
+      dereferences associated directly with a @nt{function_call}. Other
+      dereferences (such as those associated with a rename of a call, or an
+      allocated result of a call) are not included @em they have to be covered
+      in the Global or Global'Class aspect in the normal way.]}
+  @end{Ramification}
+
+@end{Itemize}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
 @ChgAdded{Version=[5],Text=[If a variable global to the entity is read that is
@@ -2079,9 +2385,238 @@ Global aspect.]}]}
 @end{ImplPerm}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0310-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6],ARef=[AI12-0310-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The Global and Global'Class aspects are new.]}
+@end{Extend2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[Compound Objects and Internal Access Objects]}
+
+
+@begin{Intro}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgAdded{Version=[5],Text=[A compound object is an object whose
+logical representation is composed
+of multiple subordinate objects. Internal access objects are used to
+connect the various subordinate objects that make up such a compound object,
+and to navigate between these subordinate objects while manipulating a
+compound object.]}
+
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For an access-to-object subtype, or
+an object (including a component) of an access-to-object type, the following
+aspect is defined:]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Internal@\For an object (including a component),
+this specifies whether this object is an @i<internal access> object.@Defn{internal access object}@Defn2{Term=[object],Sec=[internal access]}
+For an access subtype, this specifies the default for objects of the subtype.
+The default for the first subtype of an access type is False. The
+default for a subtype defined by a @nt{subtype_indication} is the
+value of the Internal aspect of the subtype identified by the
+@nt{subtype_mark} of the @nt{subtype_indication}. An object of an
+access-to-object type that is not an internal access object, and
+is not the @key[null] literal or an @nt{allocator}, is an @i<external access>
+object.@Defn{external access object}@Defn2{Term=[object],Sec=[external access]}
+@Redundant[A reference to the Move attribute (see below) is an
+internal access object.]]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Internal],
+  Text=[@ChgAdded{Version=[5],Text=[Specifies that an access object is an
+    internal access object, or that all objects of an access subtype are
+    internal access objects.]}]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Note that this aspect may be specified for an
+    object of an anonymous access-to-object type.]}
+@end{Discussion}
+@end{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For a @Redundant[full] type, the
+following representation aspect is defined:]}
+
+@begin{Description}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[Compound@\This specifies whether this type is
+a @i<compound type>.@Defn{compound type} An object
+of a compound type is a @i<compound object>@Defn{compound object}. The logical
+representation of a compound object is composed of the (@i<root>)
+compound object itself,@Defn{root compound object}
+and zero or more subordinate objects
+connected to the root via internal access
+objects.AspectDefn{Compound}@Defn2{Term=[object],Sec=[compound]}]}
+
+@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Compound],
+  Text=[@ChgAdded{Version=[5],Text=[Specifies that a type is a compound type,
+    potentially consisting of multiple objects.]}]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We declare this to be a representation aspect so
+    that it can't be given on partial views.]}
+@end{Reason}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[There might be more than one type of subordinate
+    object comprising a compound object, and there might be multiple types of
+    internal access objects connecting the various objects together. The root
+    object itself might be a single (internal) access object.]}
+@end{Discussion}
+@end{Description}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes a variable that is an internal access object}, the following attribute
+is defined:]}
+@begin(description)
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Move>, ARef=[AI12-0240-6],
+  InitialVersion=[5],
+  Text=[@Chg{Version=[5],New=[X'Move saves a copy of the value of X, sets
+   X to the null value, and then returns the saved value. The result of
+   X'Move is an internal access object.],Old=[]}]}
+@end(description)
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[An object created by an
+@nt{allocator} is @i<reachable>@Defn{reachable} from a compound object @i<C>
+if:]}
+
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the object is designated by a part of @i<C> that
+    is an internal access object; or]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[the object is designated by a part of an
+    object reachable from @i<C> that is an internal access object.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Text=[An object that is reachable from a compound object
+is called a @i<subordinate> of that object.@Defn{subordinate object}@Defn2{Term=[object],Sec=[subordinate]}]}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Text=[If Compound is specified to be True for a type,
+the type shall be controlled, or have only a limited partial view (if any).]}
+
+@begin{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We don't want a nonlimited partial view that is
+     not controlled, because the predefined assignment is not going to do the
+     right thing. We allow the full type to be nonlimited since we presume the
+     implementor of the abstract data type knows what is needed to preserve the
+     desired properties of the type. Requiring the full type to be limited would
+     not really guarantee anything anyway, unless we require every subordinate
+     object to also be limited, which could interfere with existing practice.]}
+@end{Reason}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Nothwithstanding what this Standard
+  says elsewhere, a read of an object via a dereference of an internal access
+  object is considered a read of some part of a visible compound object.
+  Similarly, an update of an object via a dereference of an internal access
+  object is considered a write of some part of a visible compound object. Such a
+  read or update is allowed so long as there is at least one visible compound
+  object that allows the read or update (taking into account any mode
+  @key[overriding] specifications in the associated Global aspect @em see
+  @RefSecNum{The Global and Global'Class Aspects}), and that
+  compound object is either:]}
+
+@begin{Itemize}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[local to the immediately enclosing entity in which
+     the read or update occurs (including a formal parameter if it is a callable
+     entity), or]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[is within the set of global objects identified as
+     readable or updatable (as appropriate) by the Global aspect (see
+     @RefSecNum{The Global and Global'Class Aspects}) of that entity.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Parameters of a subprogram are considered
+      "local" for this purpose, and do not need to appear in the Global aspect
+      for the subprogram unless their parameter mode needs overriding. Thus, if
+      one or more formal parameters of a Global aspect for the subprogram. Thus,
+      if one or more formal subprogram are compound objects, the subprogram will
+      allow any reads of dereferences of internal access types, and if any of
+      those parameters have an applicable mode of @key[out] or @key[in out], any
+      sort of dereference of an internal access will be allowed. In particular,
+      nothing about the access type being dereferenced need appear in the Global
+      aspect (as would normally be required).]}
+@end{Ramification}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+@ChgAdded{Version=[5],Text=[An external access value shall not be converted to
+  an access subtype that has the Internal aspect True, nor be assigned to an
+  internal access object. An internal access value of a pool-specific type shall
+  not be converted to an access subtype that is also pool-specific and has the
+  Internal aspect False, nor be assigned to an external access object of a
+  pool-specific type.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[We do not allow an external access value to be
+      assigned or converted to be an internal access to ensure that internal
+      access objects never point outside the compound object with which they are
+      associated. We do not allow an internal access object to be assigned or
+      converted to be an external access of a pool-specific type, as the
+      presumption of a pool-specific type is that it only points to objects
+      within its pool and never points at a component of another object. But
+      given a compound object, an internal access object might in fact point to
+      something that is logically considered a component of the compound object.
+      Converting such an internal access to be a pool-specific external access
+      would be misleading, since one might presume that such a pool-specific
+      external access could not possibly be pointing at any part of a compound
+      object whose type does not match the designated type of the external
+      access. This might interfere with correct determination of whether a
+      dereference of the external access might conflict with use of the compound
+      object.]}
+
+@end{Ramification}
+
+@end{Legality}
+
+@begin{Erron}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}Execution
+is erroneous if an object @i<X> is read or updated via a
+dereference of an internal access object, and at that point:]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[@i<X> is not reachable from a visible compound
+    object that permits the given mode of access (taking restrictions imposed
+    by Global aspects into account), or]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[@i<X> is reachable from two different compound
+    objects neither of which is a subordinate of the other.]}
+@end{Itemize}
+@end{Erron}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The Internal and Compound aspects are new. The Move attribute is new.]}
 @end{Extend2012}
 
 
@@ -4241,11 +4776,13 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
   can always detect this case when the enclosing instance body is expanded.]}
 @end{Discussion}
 
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0333-1]}
   For a composite type with discriminants or
   that has implicit initial values for any subcomponents
   (see @RefSecNum{Object Declarations}),
   the behavior is as for an @key[in out] parameter
-  passed by copy.
+  passed by copy@Chg{Version=[5],New=[@Redundant[, except that no predicate
+  check is performed]],Old=[]}.
 @begin{Reason}
   This ensures that no part of an object of such a type
   can become @lquotes@;de-initialized@rquotes@; by being part of an @b(out)
@@ -4256,6 +4793,11 @@ is raised;@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}]
   and a record type with a component that has a @nt{default_expression},
   among other things.
 @end{Ramification}
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[No predicate check follows from the definition
+  of subtype conversion in @RefSecNum{Type Conversions}.]}
+@end{TheProof}
 
   For any other type, the formal parameter is uninitialized.
   If composite, a view conversion of the actual
@@ -4456,6 +4998,11 @@ as it is subsumed by earlier @Chg{Version=[3],New=[],Old=[clauses and ]}subclaus
   it is unlikely to change anything in a real program (it could only matter
   in a call with 4 or more parameters, and then only if two composite
   parameters have matching actuals). Thus we document it as a wording change.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Predicate checks are not made
+  for inbound @key{out} parameters. The actual rule change that has this
+  effect is found in @RefSecNum{Type Conversions} and is documented there.]}
 @end{DiffWord2012}
 
 

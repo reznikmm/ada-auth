@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/09/09 02:53:19 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.78 $}
+@Comment{$Revision: 1.79 $}
 
 @LabeledClause{Type Conversions}
 
@@ -950,6 +950,8 @@ Access Type Conversion
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00231-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0153-3],ARef=[AI05-0290-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0071-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0333-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditional "leading"}
 @IndexCheck{Range_Check}
 @IndexCheck{Discriminant_Check}
 @IndexCheck{Index_Check}
@@ -964,7 +966,8 @@ for the target subtype (see @RefSecNum{Subtype Predicates}), a check
 is performed that the @Chg{Version=[4],New=[value satisfies the
 predicates],Old=[predicate]} of the target
 subtype@Chg{Version=[4],New=[],Old=[ is satisfied for the
-value]}.@Defn2{Term=[predicate check],
+value]}@Chg{Version=[5],New=[, unless the conversion
+is:],Old=[]}.@Defn2{Term=[predicate check],
 Sec=[subtype conversion]}@Defn2{Term=[check, language-defined],
 Sec=[controlled by assertion policy]}],Old=[]}
 @begin{Ramification}
@@ -975,6 +978,24 @@ Sec=[controlled by assertion policy]}],Old=[]}
   for discriminated subtypes. The Length_Check for an array conversion is
   performed as part of the conversion to the target type.@Chg{Version=[2],
   New=[ The check for exclusion of null is an Access_Check.],Old=[]}
+@end{Ramification}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[a view conversion that is an actual
+  parameter of mode @key<out>; or]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[an implicit subtype conversion of an actual
+  parameter of mode @key<out> to the nominal subtype of its formal
+  parameter.]}
+@end{Itemize}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[The reverse conversion applied to by-copy @key{out}
+  parameters is @i<not> a view conversion and it is to the nominal subtype
+  of the @i<actual> parameter, therefore any enabled predicate
+  checks @i<are> performed.]}
 @end{Ramification}
 
 @PDefn2{Term=[evaluation], Sec=(view conversion)}
@@ -1371,6 +1392,18 @@ as a @nt<name>.
   @ChgAdded{Version=[3],Text=[Added rules so that predicate aspects (see
   @RefSecNum{Subtype Predicates}) are enforced on subtype conversion.]}
 @end{Diffword2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Predicate checks are no longer
+  made on any @key{out} parameters before a call (they're still made when the
+  call returns). This was already true for elementary @key{out} parameters. If
+  a program depends on a predicate check failing on an inbound @key{out}
+  composite parameter, it will get an incorrect result. This seems
+  quite unlikely, as programs (outside of ACATS tests) that depend on the
+  failure of checks are very rare, and the predicate might be checking
+  uninitialized components (making check failure unreliable).]}
+@end{Inconsistent2012}
 
 @begin{Incompatible2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0095-1]}
@@ -2363,9 +2396,14 @@ a short-circuit control form
 both of whose @nt{relation}s are static expressions;
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0214-2]}
 @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} all of whose
-@nt{condition}s, @SynI{selecting_}@nt{expression}s, and
-@SynI{dependent_}@nt{expression}s are static expressions;]}
+@nt{condition}s, @SynI{selecting_}@nt{expression}s,
+@Chg{Version=[5],New=[@nt{choice_condition}s, ],Old=[]}and
+@SynI{dependent_}@nt{expression}s are static expressions@Chg{Version=[5],New=[.
+In addition, for a @nt{case_expression} without a
+@SynI{selecting_}@nt{expression},
+exactly one of the @nt{choice_condition}s is True],Old=[]};]}
 
 a static expression enclosed in parentheses.
 @end{Itemize}
@@ -2629,8 +2667,14 @@ reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 @nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and
 whose value is not covered by the corresponding @nt{discrete_choice_list}; or]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
+@ChgAdded{Version=[5],Text=[a @SynI{dependent_}@nt{expression} of a
+@nt{case_expression} whose associated @nt{choice_condition}s are all static
+and all of whose values equal False; or]}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0214-2]}@Comment{Just a number change}
 @ChgAdded{Version=[3],Text=[a
 @Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}],Old=[@nt{choice_expression}]}
 (or a @nt{simple_expression}
