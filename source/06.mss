@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:19 $}
+@Comment{$Date: 2019/11/15 05:03:40 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.152 $}
+@Comment{$Revision: 1.153 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -926,8 +926,8 @@ of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
     @ChgAdded{Version=[5],Text=[We mention literals explicitly in case they
     are not static (as when their subtype is not static, they are the literal
     @key[null], and so on). We exclude literals of types with the aspects that
-    are not Global => @key[null] those cause a
-    user-written subprogram with possible side-effects to be called.]}
+    are not Global => @key[null] as those cause a
+    user-written subprogram with possible side effects to be called.]}
   @end{Reason}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0032-1]}
@@ -956,7 +956,7 @@ of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
   @end{Reason}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
-  @ChgAdded{Version=[5],Text=[a name statically denoting a non-aliased @key[in]
+  @ChgAdded{Version=[5],Text=[a name statically denoting a nonaliased @key[in]
     parameter of an elementary type;]}
 
   @begin{Ramification}
@@ -1000,8 +1000,7 @@ of:@Defn{Term=[known on entry],Sec=[postcondition]}],Old=[An @nt{expression} is
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
   @ChgAdded{Version=[5],Text=[a @nt{conditional_expression} where all of
     the @nt{condition}s, @Syni{selecting_}@nt{expression}s,
-    @nt{choice_condition}s, and @Syni{dependent_}@nt{expression}s are
-    known on entry.]}
+    and @Syni{dependent_}@nt{expression}s are known on entry.]}
 
   @begin{Discussion}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -1031,7 +1030,7 @@ The following subexpressions are repeatedly evaluated:]}
 
   @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
   @ChgAdded{Version=[5],Text=[A subexpression of
-   the expression of an @nt{container_element_association}.]}
+   the expression of a @nt{container_element_association}.]}
 @end{Itemize}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0280-2]}
@@ -1054,8 +1053,7 @@ subexpressions and their determining expressions are as follows:]}
   @ChgAdded{Version=[5],Text=[For a @nt{case_expression} that is not repeatedly
     evaluated, a subexpression of any @SynI[dependent_]@nt{expression} is
     conditionally evaluated, and its determining expressions include the
-    @Syni{selecting_}@nt{expression}, or all of the @nt{choice_condition}s,
-    of the @nt{case_expression};]}
+    @Syni{selecting_}@nt{expression} of the @nt{case_expression};]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0280-2]}
@@ -1099,8 +1097,7 @@ the given subexpression is not evaluated.@Defn{determined to be unevaluated}
   @ChgAdded{Version=[5],Text=[Within a @nt{case_expression}, a
     @Syni{dependent_}@nt{expression} with an
     @nt{discrete_choice_list} that is not covered by the value of the
-    @Syni{selecting_}@nt{expression}, or has a @nt{choice_condition}
-    that evaluates to False;]}
+    @Syni{selecting_}@nt{expression};]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[The right-hand
@@ -1761,7 +1758,7 @@ the postcondition expression, or both.]}
   particular 'Old constant. We allow them to be evaluated later as well, or for
   the results to be saved somehow. This permission shouldn't matter, as the
   results ought to be same wherever they are evaluated and there should not be
-  any side-effects. The main effect of the permission is to determine when any
+  any side effects. The main effect of the permission is to determine when any
   exceptions caused by such subexpressions may be raised. We never require
   waiting to determine the value of such subexpressions, even if they aren't
   used to determine the creation of a constant for 'Old.]}
@@ -1774,6 +1771,11 @@ the postcondition expression, or both.]}
   @ChgAdded{Version=[3],Text=[A precondition is checked just before the call. If
   another task can change any value that the precondition expression depends on,
   the precondition need not hold within the subprogram or entry body.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+  @ChgAdded{Version=[5],Text=[For an example of the use of these aspects and
+  attributes, see the Streams Subsystem definitions in
+  @RefSecNum{The Streams Subsystem}.]}
 @end{Notes}
 
 @begin{Extend2005}
@@ -1979,7 +1981,7 @@ rhs="@Chg{Version=[5],New=<
 @SynI{global_}@nt{attribute_reference} is an @nt{attribute_reference} whose
 @nt{attribute_designator} is Global.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0303-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set of
 variables (which, for the purposes of this clause includes all constants with
 some part being immutably limited, or of a controlled type, private type, or
@@ -2140,7 +2142,7 @@ given mode for the entities identified by the @nt{prefix}es of the
      for the following forms of @nt{global_name}:]}
 
 @begin{Itemize}
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6],ARef=[AI12-0303-1]}
     @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} that is not
        associated with an @key[overriding] mode identifies the
        specified global variable (or constant);]}
@@ -2383,6 +2385,13 @@ Global aspect.]}]}
 @end{Reason}
 
 @end{ImplPerm}
+
+@begin{Notes}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+  @ChgAdded{Version=[5],Text=[For an example of the use of these aspects and attributes,
+  see the Vector container definition in @RefSecNum{The Generic Package Containers.Vectors}.]}
+@end{Notes}
+
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6],ARef=[AI12-0310-1]}
@@ -6691,7 +6700,7 @@ elaborated the @nt{expression_@!function_@!declaration}.]}
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[This can only fail if the discriminant is an
-  access to a part of a non-aliased parameter, as there can be no local
+  access to a part of a nonaliased parameter, as there can be no local
   declarations here.]}
 @end{Ramification}
 

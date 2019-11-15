@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_strings.mss,v $ }
-@comment{ $Revision: 1.86 $ $Date: 2019/04/09 04:56:54 $ $Author: randy $ }
+@comment{ $Revision: 1.87 $ $Date: 2019/11/15 05:03:42 $ $Author: randy $ }
 @Part(predefstrings, Root="ada.mss")
-@Comment{$Date: 2019/04/09 04:56:54 $}
+@Comment{$Date: 2019/11/15 05:03:42 $}
 
 @RMNewPageVer{Version=[3]}@Comment{For printed version of Ada 2012 RM}
 @LabeledClause{String Handling}
@@ -4082,4 +4082,235 @@ Decode to convert all of the lines to an internal format.]}
   routines make the same checks on input as Decode routines.]}
 @end{Diffword2012}
 
+
+@LabeledAddedSubClause{Version=[5],Name=[Universal Text Buffers]}
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[A universal text buffer can be used to save and
+retrieve text of any language-defined string type. The types used to save and
+retrieve the text need not be the same.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The text buffer library packages have
+the following declarations:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings],Child=[Text_Buffers]}@key[package] Ada.Strings.Text_Buffers
+   @key[with] Pure, Nonblocking, Global => @key[null is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Text_Buffer_Count} @key[is range] 0 .. @RI<implementation-defined>;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @AdaObjDefn{New_Line_Count} : @key[constant] Text_Buffer_Count := @RI<implementation-defined>;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Root_Buffer_Type} @key[is abstract tagged private];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{Character_Count} (Buffer : Root_Buffer_Type)
+      @key[return] Text_Buffer_Count @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Clear} (Buffer : Root_Buffer_Type) @key[is abstract]
+      @key[with] Post'Class => Character_Count (Buffer) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Get} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[out] String;
+      Last   : @key[out] Natural) @key[is abstract]
+      @key[with] Post'Class =>
+         (@key[declare]
+            Num_Read : @key[constant] Text_Buffer_Count :=
+               Text_Buffer_Count'Min
+                  (Character_Count(Buffer)'Old, Item'Length);
+          @key[begin]
+             Last = Num_Read + Item'First - 1 @key[and then]
+             Character_Count (Buffer) =
+             Character_Count (Buffer)'Old - Num_Read);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Get} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[out] Wide_String;
+      Last   : @key[out] Natural) @key[is abstract]
+      @key[with] Post'Class =>
+         (@key[declare]
+            Num_Read : @key[constant] Text_Buffer_Count :=
+               Text_Buffer_Count'Min
+                  (Character_Count(Buffer)'Old, Item'Length);
+          @key[begin]
+             Last = Num_Read + Item'First - 1 @key[and then]
+             Character_Count (Buffer) =
+             Character_Count (Buffer)'Old - Num_Read);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Wide_Get} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[out] Wide_Wide_String;
+      Last   : @key[out] Natural) @key[is abstract]
+      @key[with] Post'Class =>
+         (@key[declare]
+            Num_Read : @key[constant] Text_Buffer_Count :=
+               Text_Buffer_Count'Min
+                  (Character_Count(Buffer)'Old, Item'Length);
+          @key[begin]
+             Last = Num_Read + Item'First - 1 @key[and then]
+             Character_Count (Buffer) =
+             Character_Count (Buffer)'Old - Num_Read);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] @AdaSubDefn{End_of_Line} (Buffer : @key[in] Root_Buffer_Type)
+      @key[return] Boolean @key[is abstract];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Put} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[in]     String) @key[is abstract]
+      @key[with] Post'Class =>
+         Character_Count (Buffer) =
+         Character_Count (Buffer)'Old + Item'Length;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Put} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[in]     Wide_String) @key[is abstract]
+      @key[with] Post'Class =>
+         Character_Count (Buffer) =
+         Character_Count (Buffer)'Old + Item'Length;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{Wide_Wide_Put} (
+      Buffer : @key[in out] Root_Buffer_Type;
+      Item   : @key[in]     Wide_Wide_String) @key[is abstract]
+      @key[with] Post'Class =>
+         Character_Count (Buffer) =
+         Character_Count (Buffer)'Old + Item'Length;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] @AdaSubDefn{New_Line} (Buffer : @key[in out] Root_Buffer_Type)
+      @key[is abstract]
+      @key[with] Post'Class =>
+         Character_Count (Buffer) =
+         Character_Count (Buffer)'Old + New_Line_Count;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... --@Examcom{ not specified by the language}
+@key[end] Ada.Strings.Text_Buffers;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings.Text_Buffers],Child=[Unbounded]}@key[package] Ada.Strings.Text_Buffers.Unbounded
+   @key[with] Preelaborate, Nonblocking, Global => @key[null is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Buffer_Type} @key[is new] Root_Buffer_Type @key[with private]
+      @key[with] Default_Initial_Condition =>
+         Character_Count (Buffer_Type) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   --@Examcom{ Nonabstract overridings of each inherited operation are declared here.}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... --@Examcom{ not specified by the language}
+@key[end] Ada.Strings.Text_Buffers.Unbounded;]}
+
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[@ChildUnit{Parent=[Ada.Strings.Text_Buffers],Child=[Bounded]}@key[package] Ada.Strings.Text_Buffers.Bounded
+   @key[with] Pure, Nonblocking, Global => @key[null is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] @AdaTypeDefn{Buffer_Type} (Max_Characters : Text_Buffer_Count)
+      @key[is new] Root_Buffer_Type @key[with private]
+      @key[with] Default_Initial_Condition =>
+         Character_Count (Buffer_Type) = 0;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   --@Examcom{ Nonabstract overridings of each inherited operation are declared here.}
+   --@Examcom{ For each of Put, Wide_Put, and Wide_Wide_Put,}
+   -- Pre => (@key[if] Character_Count (Buffer) + Item'Length > Buffer.Max_Characters
+   --         @key[then raise] Constraint_Error),
+   --@Examcom{ is added to the declaration. For New_Line,}
+   -- Pre => (@key[if] Character_Count (Buffer) + New_Line_Count > Buffer.Max_Characters
+   --         @key[then raise] Constraint_Error),
+   --@Examcom{ is added to the declaration.}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]
+   ... --@Examcom{ not specified by the language}
+@key[end] Ada.Strings.Text_Buffers.Bounded;]}
+
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[Character_Count returns the number of characters
+currently stored in a text buffer.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[This is lower-case "characters". The
+  representation isn't considered, so it is irrelevant what type of character
+  (Character, Wide_Character, or Wide_Wide_Character) was stored.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[New_Line stores New_Line_Count characters that
+represent a new line into a text buffer. End_of_Line returns True if the next
+characters to be retrieved from the text buffer represent a new line.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[A call to Put, Wide_Put, or Wide_Wide_Put stores a
+sequence of characters into the text buffer.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[A call to Get, Wide_Get, or Wide_Wide_Get returns
+the same sequence of characters as was present in the calls that stored the
+characters into the buffer. For a call to Get, if any character in the sequence
+is not defined in Character, the result is implementation defined. Similarly,
+for a call to Wide_Get, if any character in the sequence is not defined in
+Wide_Character, the result is implementation defined.]}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
+Text=[The value returned by a call to a Text_Buffer Get procedure if any
+character in the returned sequence is not defined in Character.]}]}
+
+@ChgImplDef{Version=[5],Kind=[AddedNormal],Text=[@ChgAdded{Version=[5],
+Text=[The value returned by a call to a Text_Buffer Wide_Get procedure if any
+character in the returned sequence is not defined in Wide_Character.]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[Even when the result is implementation defined,
+  the postconditions on the various Get routines require the length of the
+  returned string to match that of the number of characters removed from the
+  buffer.]}
+@end{Ramification}
+
+@end{StaticSem}
+
+@begin{ImplAdvice}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+@ChgAdded{Version=[5],Text=[Bounded buffer objects should be implemented without
+dynamic allocation.]}
+
+@ChgImplAdvice{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+Text=[Bounded buffer objects should be implemented without dynamic allocation.]}]}
+
+@end{ImplAdvice}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The packages Strings.Text_Buffers, Strings.Text_Buffers.Unbounded,
+  and Strings.Text_Buffers.Bounded are new.]}
+@end{Extend2012}
 

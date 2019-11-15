@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.102 $}
+@Comment{$Revision: 1.103 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -560,10 +560,13 @@ This allows the original cause of the exception to be determined.
 @leading@keepnext@i{Examples of raise statements:}
 @begin{Example}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00433-01]}
-@key[raise] Ada.IO_Exceptions.Name_Error;   --@RI[ see @RefSecNum{Exceptions In Input-Output}]@Chg{Version=[2],New=[
-@key[raise] Queue_Error @key[with] "Buffer Full"; --@RI[ see @RefSecNum{Example of Tasking and Synchronization}]],Old=[]}
+@key[raise] Ada.IO_Exceptions.Name_Error;   --@Examcom[ see @RefSecNum{Exceptions In Input-Output}]@Chg{Version=[2],New=[
+@key[raise] Queue_Error @key[with] "Buffer Full"; --@Examcom[ see @RefSecNum{Example of Tasking and Synchronization}]],Old=[]}
 
-@key[raise];                                --@RI[ re-raise the current exception]
+@key[raise];                                --@Examcom[ re-raise the current exception]
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[--@Examcom[ For an example of a raise expression, see the Streams Subsystem definitions in @RefSecNum{The Streams Subsystem}.]]}
 @end{Example}
 @end{Examples}
 

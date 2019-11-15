@@ -1,6 +1,6 @@
 @Part(frontmatter, root="ada.mss")
 @comment{$Source: e:\\cvsroot/ARM/Source/front_matter.mss,v $}
-@comment{$Revision: 1.94 $ $Date: 2019/05/08 22:01:14 $}
+@comment{$Revision: 1.95 $ $Date: 2019/11/15 05:03:41 $}
 
 @UnNumberedSection(Foreword)
 
@@ -126,7 +126,9 @@ Corrigendum 1 was published in @Chg{Version=[4],New=[February 2016],Old=[June 20
 @ChgAdded{Version=[2],Text=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[In
 June 2016, WG 9 approved a tentative schedule for the preparation of
 an Amendment or Revision to the International Standard, with a delivery
-no earlier than 2018. For the purposes of this document, we'll call this
+no earlier than 2018. In July 2019, WG 9 approved an additional review and
+prototyping period for this revision, extending the delivery no earlier
+than late 2020. For the purposes of this document, we'll call this
 Ada 202x, even though the final timing and form has not yet been determined.],Old=[]}],Old=[In
 October 2002, WG 9 approved a schedule and
 guidelines for the preparation of an Amendment to the International Standard.
@@ -1514,13 +1516,35 @@ wanted to remain anonymous, so they are not mentioned here.}
 @AddedSubHeading{Version=[5],Acknowledgements for the Ada 202x version}
 
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Text=<The editor [R. Brukardt (USA)] would like to thank the many
-people whose hard work and assistance has made this update possible.>}
+@ChgAdded{Version=[5],Text=<The editor [R. Brukardt] would like to thank the
+many people whose hard work and assistance has made this revision possible.>}
 
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Text=<But it's too early to thank people for a project
-that's just barely started.>}@Comment{Probably should thank the "Gang of Four",
-if the parallel stuff goes anywhere.}
+@ChgAdded{Version=[5],Text=[Thanks go out to all of the members of the
+ISO/IEC JTC 1/SC 22/WG 9 Ada Rapporteur Group, whose work in all steps of the
+process, from determining problems to address, reviewing feature designs, and
+creating and editing wording changes, was critical to the entire process.
+Especially valuable contributions came from the chairman of the
+ARG through June 2018, J. Cousins
+who guided the work and ensured we followed defined procedures; his replacement
+as chairman, S. Baird who ably powered through obstacles to complete the work
+while continuing to find obscure interactions; T. Taft, who often solved
+difficult problems that had stumped others; B. Moore, whose frequent suggestions
+for parallel constructs greatly improved the result.
+Other ARG members who substantially contributed were:
+R. Amiard, J. Barnes, A. Burns, G. Dismukes, R. Duff, E. Fish, E. Ploedereder,
+J.P. Rosen, F. Schanda, E. Schonberg, J. Squierk, T. Vardanega, and R. Wai.]}
+@Comment{E. Fish has 2.0 meeting points as of #62 (Oct 2019). Remove his name if
+he doesn't get more. C. Dross attended meeting #62 for only a few minutes. Add
+her name if that changes in the future.}
+
+@Comment{Leave the thanks for Pat until we get closer to done.
+@ChgRef{Version=[5],Kind=[Added]}
+@Chg{Version=[5],New=[Finally, special thanks go to the convenor of ISO/IEC JTC
+1/SC 22/WG 9, P. Rogers, who guided the document through the
+standardization process.],Old=[]} @Comment{The financial contributors
+wanted to remain anonymous, so they are not mentioned here.}}
+
 
 @NewPage
 @SubHeading{Changes}
@@ -1669,7 +1693,7 @@ of unchanged paragraphs are the same as in the @Chg{Version=[3],New=[1995
 edition of the],Old=[original]} Ada Reference Manual. Inserted text is indicated
 by underlining, and deleted text is
 indicated by strikethroughs. @Chg{Version=[2],New=[Some versions also use
-color to indicate the version of the change.],Old=[]}Where paragraphs are
+color to indicate the version of the change. ],Old=[]}Where paragraphs are
 inserted, the paragraph numbers are of the form pp.nn, where pp is the number
 of the preceding paragraph, and nn is an insertion number. For instance, the
 first paragraph inserted after paragraph 8 is numbered 8.1, the second

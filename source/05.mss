@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:19 $}
+@Comment{$Date: 2019/11/15 05:03:40 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -848,25 +848,15 @@ alternative is defined by the value of an expression.]
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2],ARef=[AI12-0341-1]}
 @Syn{lhs=<case_statement>,rhs="
    @key{case} @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@Syn2{expression} @key{is}
        @Syn2{case_statement_alternative}
       {@Syn2{case_statement_alternative}}
-   @key{end case};@Chg{Version=[5],New=[
- | @key{case select}
-       @Syn2{conditional_case_statement_alternative}
-      {@Syn2{conditional_case_statement_alternative}}
-   @key{end case};],Old=[]}"}
+   @key{end case};"}
 
 @Syn{lhs=<case_statement_alternative>,rhs="
    @key{when} @Syn2{discrete_choice_list} =>
       @Syn2{sequence_of_statements}"}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<conditional_case_statement_alternative>,Old=<>}>,
-rhs="@Chg{Version=[5],New=[   @key{when} @Syn2{choice_condition_list} =>
-      @Syn2{sequence_of_statements}],Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -1003,10 +993,8 @@ there is no @lquotes@;out-of-range@rquotes@; situation that can produce them.
 
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
 @PDefn2{Term=[execution], Sec=(case_statement)}
-For the execution of a @nt{case_statement}@Chg{Version=[5],New=[ with a
-@SynI{selecting_}@nt{expression},],Old=[]} the
+For the execution of a @nt{case_statement}@Chg{Version=[5],New=[,],Old=[]} the
 @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression}
 is first evaluated.
 
@@ -1029,25 +1017,6 @@ Constraint_Error is raised.
   is outside the base range of its type,
   or is an invalid representation.
 
-@end{Ramification}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{case_statement}
-without a @SynI{selecting_}@nt{expression}, all
-of the @nt{choice_condition}s are evaluated. If exactly one
-@nt{choice_condition} is True, the @nt{sequence_of_statements} of the
-@nt{conditional_case_statement_alternative}
-containing this @nt{choice_condition} is executed. Otherwise (no
-@nt{choice_condition} is True, or multiple @nt{choice_condition}s are True),
-Program_Error is
-raised.@Defn2{Term=[Program_Error],Sec=(raised by case statement)}]}
-
-@begin{Ramification}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This is not a check! It cannot be suppressed as we
-    would not know what statement to execute in such a case. This is consistent
-    with other case exceptions.]}
 @end{Ramification}
 
 @end{RunTime}
@@ -1182,13 +1151,6 @@ for @nt<name>s, rather than being separated out along with
   make this wording consistent with @nt{case_expression}, and to clarify
   which @nt{expression} is being talked about in the wording.]}
 @end{Diffword2005}
-
-@begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
-  The @nt{case_statement} without a @SynI{selecting_}@nt{expression}
-  is new.]}
-@end{Extend2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
@@ -1544,17 +1506,59 @@ Summation:
 @end{Example}
 
 @begin{WideAbove}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Type=[Leading],KeepNext=[T],
-Text=[@i{Example of a parallel loop:}]}
+Text=[@i{Example of a simple parallel loop:}]}
 @end{WideAbove}
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0119-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[-- @ExamCom{see @RefSecNum{Array Types}}
 @key[parallel]
 @key[for] I @key[in] Grid'Range(1) @key[loop]
    Grid(I, 1) := (@key[for all] J @key[in] Grid'Range(2) => Grid(I,J) = True);
 @key[end loop];]}
+@end{Example}
+
+@begin{WideAbove}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Type=[Leading],KeepNext=[T],
+Text=[@i{Example of a parallel loop with a chunk specification:}]}
+@end{WideAbove}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[declare]
+   @key[subtype] Chunk_Number @key[is] Natural @key[range] 1 .. 8;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   Partial_Sum,
+   Partial_Max : @key[array] (Chunk_Number) @key[of] Natural := (@key[others] => 0);
+   Partial_Min : @key[array] (Chunk_Number) @key[of] Natural := (@key[others] => Natural'Last);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={@key[begin]
+   @key[parallel] (Chunk @key[in] Chunk_Number)
+   @key[for] I @key[in] Grid'Range(1) @key[loop]
+      @key[declare]
+         True_Count : @key[constant] Natural :=
+           [@key[for] J @key[in] Grid'Range(2) => (@key[if] Grid (I, J) @key[then] 1 @key[else] 0)]'Reduce("+",0);
+      @key[begin]
+         Partial_Sum (Chunk) := @@ + True_Count;
+         Partial_Min (Chunk) := Natural'Min(@@, True_Count);
+         Partial_Max (Chunk) := Natural'Max(@@, True_Count);
+      @key[end];
+   @key[end loop];}}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   Put_Line("Total=" & Partial_Sum'Reduce("+", 0) &
+            ", Min=" & Partial_Min'Reduce(Natural'Min, Natural'Last) &
+            ", Max=" & Partial_Max'Reduce(Natural'Max, 0));
+@key[end];]}
+
+@begin{WideAbove}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@i{For an examples of an} @nt{iterator_filter}@i{,
+see @RefSecNum{Quantified Expressions}.}]}
+@end{WideAbove}
 @end{Example}
 @end{Examples}
 
@@ -2544,7 +2548,7 @@ shall be a dispatching subprogram.]]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0250-1],ARef=[AI12-0308-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0250-1],ARef=[AI12-0308-1],ARef=[AI12-0326-2]}
 @ChgAdded{Version=[5],Text=[A @nt{loop_statement} with an @nt{iteration_scheme}
 that has a @nt{procedural_iterator} is equivalent to a local declaration of a
 procedure P followed by a @nt{procedure_call_statement} that is formed from the
@@ -2556,7 +2560,8 @@ each formal parameter of this @nt{formal_part} with the @nt{identifier} of the
 corresponding formal parameter or element of the list of
 @nt{defining_identifier}s given in the @nt{iterator_parameter_specification}.
 The body of @i<P> consists of the conditionally executed
-@nt{sequence_of_statements}.]}
+@nt{sequence_of_statements}. The procedure P is called the
+@i<loop body procedure>.@Defn{loop body procedure}]}
 
 @begin{ImplNote}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1]}

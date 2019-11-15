@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/interface.mss,v $ }
-@comment{ $Revision: 1.84 $ $Date: 2019/04/09 04:56:53 $ $Author: randy $ }
+@comment{ $Revision: 1.85 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
 @Part(interface, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:53 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledNormativeAnnex{Interface to Other Languages}
 
 @begin{Intro}
@@ -1924,27 +1924,44 @@ specific numbers and types of parameters.
 @end{Notes}
 
 @begin{Examples}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @Leading@Keepnext@i{Example of using the Interfaces.C package:}
 @begin{Example}
-@RI{--Calling the C Library Function strcpy}
+@Examcom{--Calling the C Library @Chg{Version=[5],New=[Functions],Old=[Function]} strcpy@Chg{Version=[5],New=[ and printf],Old=[]}}
 @key(with) Interfaces.C;
 @key(procedure) Test @key(is)
    @key(package) C @key(renames) Interfaces.C;
    @key(use) @key(type) C.char_array;
-   @RI{-- Call <string.h>strcpy:}
-   @RI{-- C definition of strcpy:  char *strcpy(char *s1, const char *s2);}
-   @RI{--    This function copies the string pointed to by s2 (including the terminating null character)}
-   @RI{--     into the array pointed to by s1. If copying takes place between objects that overlap, }
-   @RI{--     the behavior is undefined. The strcpy function returns the value of s1.}
+   @Examcom{-- Call <string.h>strcpy:}
+   @Examcom{-- C definition of strcpy:  char *strcpy(char *s1, const char *s2);}
+   @Examcom{--    This function copies the string pointed to by s2 (including the terminating null character)}
+   @Examcom{--     into the array pointed to by s1. If copying takes place between objects that overlap,}
+   @Examcom{--     the behavior is undefined. The strcpy function returns the value of s1.}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
-   @RI{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
+   @Examcom{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
    @key(procedure) Strcpy (Target : @key(out) C.char_array;
                      Source : @key(in)  C.char_array)@Chg{Version=[3],New=[
       @key(with) Import => True, Convention => C, External_Name => "strcpy"],Old=[]};
 
 @ChgRef{Version=[3],Kind=[Deleted],ARef=[AI05-0229-1]}
-@ChgDeleted{Version=[3],Text=[   @key(pragma) Import(C, Strcpy, "strcpy");]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@Chg{Version=[5],New=[   @Examcom{-- Call <sdtio.h>printf:}
+   @Examcom{-- C definition of printf:  int printf ( const char * format, ... );}
+   @Examcom{--    This function writes the C string pointed by format to the standard output (stdout).}
+   @Examcom{--     If format includes format specifiers (subsequences beginning with %), the additional}
+   @Examcom{--     arguments following format are formatted and inserted in the resulting string}
+   @Examcom{--     replacing their respective specifiers. If the number of arguments does not match}
+   @Examcom{--     the number of format specifiers, or if the types of the arguments do not match}
+   @Examcom{--     the corresponding format specifier, the behaviour is undefined. On success, the}
+   @Examcom{--     printf function returns the total number of characters written to the standard output.}
+   @Examcom{--     If a writing error occurs, a negative number is returned.}],
+Old=[@Chg{Version=[3],New=[],Old=[   @key(pragma) Import(C, Strcpy, "strcpy");]}]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[   @Examcom{-- Note: since the C function's return value is of no interest, the Ada interface is a procedure}
+   @key(procedure) Printf (Format : @key(in) C.char_array)
+      @key(with) Import => True, Convention => C_Variadic_1, External_Name => "printf";]}
 
    Chars1 :  C.char_array(1..20);
    Chars2 :  C.char_array(1..20);
@@ -1954,7 +1971,10 @@ specific numbers and types of parameters.
 
    Strcpy(Chars1, Chars2);
 
-@RI{-- Now Chars1(1..6) = "qwert" & C.Nul}
+@Chg{Version=[5],New=[   ],Old=[]}@Examcom{-- Now Chars1(1..6) = "qwert" & C.Nul}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[   Printf("The String=%s, Length=%d", Chars1, Chars1'Length);]}
 
 @key(end) Test;
 @end{Example}

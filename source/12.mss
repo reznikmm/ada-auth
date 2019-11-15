@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.106 $}
+@Comment{$Revision: 1.107 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -815,10 +815,13 @@ This rule is partly a ramification of the @lquotes@;current instance@rquotes@;
 rule in @RefSec{The Context of Overload Resolution}.
 Note that that rule doesn't cover the @nt{generic_formal_part}.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
 Although the overloading rules are not observed in the instance,
-they are, of course, observed in the @ntf{_instantiation} in order to
+they are, of course, observed in the
+@Chg{Version=[5],New=[@nt{generic_instantiation}],Old=[@ntf{_instantiation}]}
+in order to
 determine the interpretation of the constituents of the
-@ntf{_instantiation}.
+@Chg{Version=[5],New=[@nt{generic_instantiation}],Old=[@ntf{_instantiation}]}.
 
 Since children are considered to occur within their parent's
 declarative region, the above rule applies to a name that denotes a
@@ -899,8 +902,9 @@ declaration of the actual.
 @begin{Example}
 @key[type] T1 @key[is] @key[tagged] @key[record] ... @key[end] @key[record];
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[generic]
-    @key[type] Formal @key[is] @key[new] T1;
+    @key[type] Formal @key[is new] T1@Chg{Version=[5],New=[ @key[with private]],Old=[]};
 @key[package] G @key[is]
     @key[type] Derived_From_Formal @key[is] @key[new] Formal @key[with] @key[record] ... @key[end] @key[record];
     @key[procedure] Foo(X : @key[in] Derived_From_Formal); --@RI{ Does not override anything.}
@@ -1020,8 +1024,10 @@ in implementation terms, it occupies a separate slot in
 the type descriptor.
 @end{Ramification}
 @begin{Reason}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
 The reason for this rule is so a programmer writing an
-@ntf{_instantiation} need not look at the private part of the generic in
+@Chg{Version=[5],New=[@nt{generic_instantiation}],Old=[@ntf{_instantiation}]}
+need not look at the private part of the generic in
 order to determine which subprograms will be overridden.
 @end{Reason}
 @end{StaticSem}
@@ -1100,11 +1106,13 @@ these subprograms from outside the instance are ambiguous. For example:
 @leading@;The following example illustrates some of the subtleties of the
 substitution of formals and actuals:
 @begin{Example}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[generic]
     @key[type] T1 @key[is] @key[private];
     --@RI{ A predefined "=" operator is implicitly declared here:}
     --@RI{ function "="(Left, Right : T1) return Boolean;}
-    --@RI{ Call this "="@-{1}.}
+    --@RI{ Call this "="@-{1}.}@Chg{Version=[5],New=[
+    ...],Old=[]}
 @key[package] G @key[is]
     @key[subtype] S1 @key[is] T1; --@RI{ So we can get our hands on the type from}
                       --@RI{ outside an instance.}
@@ -1121,6 +1129,7 @@ substitution of formals and actuals:
 @key[end] G;
 ...
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @key[package] P @key[is]
     @key[type] My_Int @key[is] @key[new] Integer;
     --@RI{ A predefined "=" operator is implicitly declared here:}
@@ -1133,7 +1142,7 @@ substitution of formals and actuals:
 @key[end] P;
 @key[use] P;
 ...
-@key[package] I @key[is] @key[new] G(T1 => My_Int); --@RI{ "="@-{5} is declared in I (see below).}
+@key[package] I @key[is] @key[new] G(T1 => My_Int@Chg{Version=[5],New=[, ...],Old=[]}); --@RI{ "="@-{5} is declared in I (see below).}
 @key[use] I;
 
 Another_T1_Obj : S1 := 13; --@RI{ Can't denote T1, but S1 will do.}
@@ -3298,10 +3307,11 @@ type or of the actual type corresponding to the controlling type.]}]}
 
 @begin{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[2],Text=[@key{generic}
    @key{type} NT(<>) @key{is new} T @key{with private};
    -- @RI[Presume that T has the following primitive operation:]
-   -- @key{with procedure} Bar (Obj : @key{in} T);
+   -- @key{@Chg{Version=[5],New=[],Old=[with ]}procedure} Bar (Obj : @key{in} T);
 @key{package} Gr ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -3464,11 +3474,12 @@ attribute is a function with a matching specification.
 An enumeration literal of a given type matches a parameterless formal
 function whose result type is the given type.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
 A @nt{default_name} denotes an entity that is visible or directly
 visible at the place of the @nt{generic_declaration};
 a box used as a default is equivalent to a name that denotes an
 entity that is directly visible at the place of the
-@ntf{_instantiation}.
+@Chg{Version=[5],New=[@nt{generic_instantiation}],Old=[@ntf{_instantiation}]}.
 @begin{TheProof}
 Visibility and name resolution are applied to the equivalent explicit
 actual parameter.

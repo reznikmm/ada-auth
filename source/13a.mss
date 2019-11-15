@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.127 $}
+@Comment{$Revision: 1.128 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -4809,12 +4809,28 @@ but it didn't seem worth the trouble.
 @end{Notes}
 
 @begin{Examples}
-@leading@keepnext@i{Example of an enumeration representation clause:}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
+@leading@keepnext@i{@Chg{Version=[5],New=[Examples],Old=[Example]} of
+@Chg{Version=[5],New=[],Old=[an ]}enumeration representation
+@Chg{Version=[5],New=[clauses],Old=[clause]}:}
 @begin{Example}
 @key[type] Mix_Code @key[is] (ADD, SUB, MUL, LDA, STA, STZ);
 
 @key[for] Mix_Code @key[use]
    (ADD => 1, SUB => 2, MUL => 3, LDA => 8, STA => 24, STZ =>33);
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[--@Examcom{ See @RefSecNum{Character Types}.}
+@key<for> Roman_Digit @key<use> ('I' => 1,
+                     'V' => 5,
+                     'X' => 10,
+                     'L' => 50,
+                     'C' => 100,
+                     'D' => 500,
+                     'M' => 1000);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[--@Examcom{ For an example of the use of attribute Enum_Rep, see @RefSecNum{User-defined Literals}.}]}
 @end{Example}
 @end{Examples}
 

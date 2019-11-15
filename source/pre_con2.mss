@@ -1,6 +1,6 @@
 @Part(precontainers-2, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con2.mss,v $ }
-@comment{ $Revision: 1.38 $ $Date: 2019/09/09 02:53:20 $ $Author: randy $ }
+@comment{ $Revision: 1.39 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[3],Name=[The Generic Package Containers.Multiway_Trees]}
 
@@ -5514,7 +5514,8 @@ as Containers.Vectors except:]}
     discriminant that specifies the capacity:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Vector (Capacity : Count_Type) @key[is tagged private];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Vector (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -5764,7 +5765,8 @@ as Containers.Doubly_Linked_Lists except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} List (Capacity : Count_Type) @key[is tagged private];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} List (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6042,8 +6044,9 @@ as Containers.Hashed_Maps except:]}
     modulus (number of distinct hash values) of the hash table as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type;
-            Modulus  : Hash_Type) @key[is tagged private];]}
+            Modulus  : Hash_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6316,7 +6319,8 @@ as Containers.Ordered_Maps except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type) @key[is tagged private];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Map (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6560,8 +6564,9 @@ as Containers.Hashed_Sets except:]}
     modulus (number of distinct hash values) of the hash table as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
 @ChgAdded{Version=[3],Noprefix=[T],Text=[  @key[type] Set (Capacity : Count_Type;
-            Modulus  : Hash_Type) @key[is tagged private];]}
+            Modulus  : Hash_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -6817,7 +6822,8 @@ as Containers.Ordered_Sets except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Set (Capacity : Count_Type) @key[is tagged private];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Set (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
@@ -7047,7 +7053,8 @@ semantics as Containers.Multiway_Trees except:]}
     as follows:]}
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Tree (Capacity : Count_Type) @key[is tagged private];]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0112-1]}
+@ChgAdded{Version=[3],Noprefix=[T],Text=[  @key{type} Tree (Capacity : Count_Type) @key[is tagged private]@Chg{Version=[5],New=[...],Old=[;]}]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
