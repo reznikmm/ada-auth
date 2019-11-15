@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:18 $}
+@Comment{$Date: 2019/11/15 05:03:40 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.155 $}
+@Comment{$Revision: 1.156 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1969,6 +1969,44 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{ImplNote}
 @end{Bounded}
 
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@key[subtype] Roman_Character @key[is] Character
+   @key[with] Static_Predicate =>
+      Roman_Character @key[in] 'I' | 'V' | 'X' | 'L' | 'C' | 'D' | 'M';]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[Max_Roman_Number : @key[constant] := 3_999;  --@Examcom{ MMMCMXCIX}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@key[type] Roman_Number @key[is] @key[range] 1 .. Max_Roman_Number
+   @key[with] String_Literal => To_Roman_Number;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@key[function] To_Roman_Number (S : String) @key[return] Roman_Number
+   @key[with] Pre => S'Length > 0 @key[and then]
+      (@key[for all] Char @key[of] S => Char @key[in] Roman_Character);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text={@key[function] To_Roman_Number (S : String) @key[return] Roman_Number @key[is]
+   (@key[declare]
+      R : @key[constant array] (Integer @key[range] <>) @key[of] Integer :=
+         (@key[for] D @key[in] S'Range => Roman_Digit'Enum_Rep
+             (Roman_Digit'Value (''' & S(D) & '''))) --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
+    @key[begin]
+      [@key[for] I @key[in] R'Range =>
+         (@key[if] I < R'Last @key[and then] R(I) < R(I + 1) @key[then] -1 @key[else] 1) * R(I))]
+            'Reduce("+", 0)
+   );}}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[X : Roman_Number := "III" * "IV" * "XII"; --@Examcom{ 144 (that is, CXLIV)}]}
+
+
+@end{Example}
+@end{Examples}
+
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The user-defined
@@ -3660,8 +3698,6 @@ Vector'(1 => 2.5)                                --@RI[  single-component vector
 @begin{Example}
 --@RI[ Three aggregates for the same value of subtype Matrix(1..2,1..3) (see @RefSecNum{Array Types}):]
 
-@Chg{Version=[5],New=<[>,Old=<(>}
-
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0306-1]}
 ((1.1, 1.2, 1.3), (2.1, 2.2, 2.3))
 (1 => @Chg{Version=[5],New=<[>,Old=<(>}1.1, 1.2, 1.3@Chg{Version=[5],New=<]>,Old=<)>}, 2 => @Chg{Version=[5],New=<[>,Old=<(>}2.1, 2.2, 2.3@Chg{Version=[5],New=<]>,Old=<)>})
@@ -3685,6 +3721,9 @@ F : String(1 .. 1) := (1 => 'F');  --@RI[ a one component aggregate: same as "F"
     (@key[for] I @key[in] 1 .. 4 =>
        (@key[for] J @key[in] 1 .. 4 =>
           (@key[if] I=J @key[then] 1.0 @key[else] 0.0))); --@RI[ Identity matrix]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=<Empty_Matrix : @b<constant> Matrix := []; --@RI[ A matrix without elements]>}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00433-01]}
@@ -4710,14 +4749,6 @@ S := Empty_Set;
 M : Map_Type;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text="--  @examcom<Create an empty map:>
-M := [];"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent to:>
-M := Empty_Map;]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=`--  @examcom<A simple named map aggregate:>
 M := [12 => "house", 14 => "beige"];'}
 
@@ -4769,20 +4800,8 @@ M := Empty_Map;
 @key[end loop];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text="--  @examcom<The above could have been written using an explicit key_>@nt{expression}@examcom<:>
-M := [@key[for] Key @key[of] Keys @key[use] Key => Integer'Image (Key)];"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[--  @examcom<Example aggregates using Vector_Type.>
 V : Vector_Type;]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text="--  @examcom<Create an empty vector aggregate:>
-V := [];"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent to:>
-V := Empty_Vector (0);]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=`--  @examcom<A positional vector aggregate:>
@@ -4805,17 +4824,6 @@ Assign_Element (V, 1, "this");
 Assign_Element (V, 2, "is");
 Assign_Element (V, 3, "a");
 Assign_Element (V, 4, "test");]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text="--  @examcom<A vector of images of dynamic length:>
-V := [@key[for] I @key[in] 1 .. N => Integer'Image (I)];"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent to:>
-V := New_Vector (1, N);
-@key[for] I @key[in] 1 .. N @key[loop]
-   Assign_Element (V, I, Integer'Image (I));
-@key[end loop];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text="--  @examcom<A vector made from the elements of a map:>
@@ -7169,35 +7177,17 @@ rhs="@Chg{Version=[3],New=<@SynI{boolean_}@Syn2{expression}>,Old=<>}"}
 @Comment{Moved from "If Statements"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2],ARef=[AI12-0341-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression>,Old=<>}>,
 rhs="@Chg{Version=[3],New=<
     @key[case] @SynI{selecting_}@Syn2{expression} @key[is]
     @Syn2[case_expression_alternative] {,
-    @Syn2[case_expression_alternative]}@Chg{Version=[5],New=<
-  | @key[case select]
-    @Syn2[conditional_case_expression_alternative] {,
-    @Syn2[conditional_case_expression_alternative]}>,Old=<>}>,Old=<>}"}
+    @Syn2[case_expression_alternative]}>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<case_expression_alternative>,Old=<>}>,
 rhs="@Chg{Version=[3],New=[
     @key[when] @Syn2{discrete_choice_list} =>
         @SynI{dependent_}@Syn2{expression}],Old=<>}"}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<conditional_case_expression_alternative>,Old=<>}>,
-rhs="@Chg{Version=[5],New=[
-    @key[when] @Syn2{choice_condition_list} =>
-        @SynI{dependent_}@Syn2{expression}],Old=<>}"}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<choice_condition>,Old=<>}>,
-rhs="@Chg{Version=[5],New=[@Syn2{choice_expression}],Old=<>}"}
-
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
-@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<choice_condition_list>,Old=<>}>,
-rhs="@Chg{Version=[5],New=[@Syn2{choice_condition} {'|' @Syn2{choice_condition}}],Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
 @ChgAdded{Version=[3],Text=[Wherever the Syntax Rules allow an @nt{expression},
@@ -7350,19 +7340,9 @@ type @i<T>.@PDefn2{Term=[expected type],Sec=[dependent_expression]}]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
 @ChgAdded{Version=[3],Text=[@PDefn2{Term=[expected type], Sec=(condition)}
-A @nt{condition} is expected to be of any boolean type.@Chg{Version=[5],New=[ A
-@nt{choice_condition} is expected to be of type
-Boolean.@PDefn2{Term=[expected type], Sec=(choice_condition)}],Old=[]}]}
-@Comment{First sentence moved from "If Statements"}
-
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-  @ChgAdded{Version=[5],Text=[We required a @nt{choice_condition} to have type
-  Boolean because we want all of the choices of a @nt{case_expression} or
-  @nt{case_statement} to be of the same type.]}
-@end{Reason}
+A @nt{condition} is expected to be of any boolean type.]}
+@Comment{Moved from "If Statements"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
 @ChgAdded{Version=[3],Text=[The expected type for the
@@ -7447,9 +7427,8 @@ the value of the @nt{if_expression} is True.@PDefn2{Term=[evaluation],Sec=[if_ex
 @end{Ramification}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0188-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
 @ChgAdded{Version=[3],Text=[For the evaluation of a
-@nt{case_expression}@Chg{Version=[5],New=[ with a @SynI<selecting_>@nt{expression}],Old=[]},
+@nt{case_expression},
 the @SynI<selecting_>@nt{expression} is first evaluated.
 If the value of the @SynI<selecting_>@nt{expression}
 is covered by the @nt{discrete_choice_list} of some
@@ -7460,39 +7439,26 @@ the @nt{case_expression_alternative} is evaluated, converted to the type of the
 Otherwise (the value is not covered by any
 @nt{discrete_choice_list}, perhaps due to being outside the base range),
 Constraint_Error is raised.@PDefn2{Term=[evaluation],Sec=[case_expression]}]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{case_expression}
-without a @SynI<selecting_>@nt{expression}, all
-of the @nt{choice_condition}s are evaluated. If exactly one
-@nt{choice_condition} is True, the @SynI<dependent_>@nt{expression} of the
-@nt{conditional_case_expression_alternative} containing this
-@nt{choice_condition} is evaluated, converted to the type of the
-@nt{case_expression}, and the resulting value is the value of the
-@nt{case_expression}. Otherwise (no @nt{choice_condition} is True, or multiple
-@nt{choice_condition}s are True), Program_Error is raised.]}
-
-  @begin{Ramification}
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-    @ChgAdded{Version=[5],Text=[This is not a check! It cannot be suppressed
-      as we would not know what value to return in such a case. This is
-      consistent with other case exceptions.]}
-  @end{Ramification}
-
 @end{Runtime}
 
+@begin{Examples}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[Put_Line ("Casey is " & (@b<if> Casey.Sex = M @b<then> "Male" @b<else> "Female")); --@RI[ see @RefSecNum{Incomplete Type Declarations}]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@key[function] Card_Color (Card : Suit) @key[return] Color @key[is] --@RI[ see @RefSecNum{Enumeration Types}]
+  (@key[case] Card @key[is]
+      @key[when] Clubs  | Spades   => Black,
+      @key[when] Hearts | Diamonds => Red);]}
+@end{Example}
+@end{Examples}
 
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0147-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}If expressions
   and case expressions are new.]}
 @end{Extend2005}
-
-@begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Case expressions
-  without a @SynI<selecting_>@nt{expression} are new.]}
-@end{Extend2012}
 
 
 @LabeledAddedSubclause{Version=[3],Name=[Quantified Expressions]}
@@ -7628,7 +7594,9 @@ is composite (as opposed to prime) can be written:]}
 
 @begin{Example}
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N / 2 => N @key[mod] X = 0);]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[3],Text=[@key[pragma] Assert (@key[for some] X @key[in] 2 .. N @Chg{Version=[5],New=[@key[when] X * X <= N],Old=[ / 2]} => N @key[mod] X = 0);@Chg{Version=[5],New=[
+   --@RI[ see ]@nt{iterator_filter}@RI[ in @RefSecNum{Loop Statements}]],Old=[]}]}
 @end{Example}
 
 @end{Examples}
@@ -8252,6 +8220,32 @@ of an array of integers in parallel:]}
 @ChgAdded{Version=[5],Text=[A'Parallel_Reduce(Integer'Min, Integer'Last)]}
 @end{Example}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A parallel reduction expression used
+to calculate the mean of the elements of a two dimensional array of
+subtype Matrix (see @RefSecNum{Array Types}) that are greater than 100.0:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] Accumulator @key[is record]
+   Sum   : Real; --@RI[ See @RefSecNum{Floating Point Types}.]
+   Count : Integer;
+@key[end record];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Accumulate (L, R : Accumulator) @key[return] Accumulator @key[is]
+  (Sum   => L.Sum   + R.Sum,
+   Count => L.Count + R.Count);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text={@key[function] Average_of_Values_Greater_Than_100 (M : Matrix) @key[return] Real @key[is]
+   (@key[declare]
+       Acc : @key[constant] Accumulator :=
+          [@key[parallel for] Val @key[of] M @key[when] Val > 100.0 => (Val, 1)]
+             'Reduce(Accumulate, (Sum => 0, Count => 0));
+    @key[begin]
+       Acc.Sum / Real(Acc.Count));}}
+@end{Example}
 @end{Examples}
 
 

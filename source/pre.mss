@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:21 $}
+@Comment{$Date: 2019/11/15 05:03:42 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.59 $}
+@comment{$Revision: 1.60 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -163,17 +163,19 @@ New=[],Old=[Standard (@i{...continued})
 @Chg{Version=[3],New=(@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}@\@\@\Maps @em @RefSecNum{The Package Strings.Maps}
-@\@\@\@\Constants @em @RefSecNum{String-Handling Sets and Mappings}
-@\@\@\Unbounded @em @RefSecNum{Unbounded-Length String Handling}
+@\@\@\@\Constants @em @RefSecNum{String-Handling Sets and Mappings}@Chg{Version=[5],New=[
+@\@\@\Text_Buffers @em @RefSecNum{Universal Text Buffers}
+@\@\@\@\Bounded @em @RefSecNum{Universal Text Buffers}
+@\@\@\@\Unbounded @em @RefSecNum{Universal Text Buffers}],Old=[]}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],
+New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Strings (@i{...continued})
+],Old=[]}@\@\@\Unbounded @em @RefSecNum{Unbounded-Length String Handling}
 @Chg{Version=[3],New=(@\@\@\@\Equal_Case_Insensitive @em @RefSecNum{String Comparison}
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
 @Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
-),Old=()}), Old=()}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],
-New=[Standard (@i{...continued})
-@\Ada (@i{...continued})
-@\@\Strings (@i{...continued})
-],Old=[]}@Chg{Version=[3],New=(@\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
+),Old=()}), Old=()}@Chg{Version=[3],New=(@\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
 @\@\@\@\Conversions @em @RefSecNum{String Encoding}
 @\@\@\@\Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Strings @em @RefSecNum{String Encoding}

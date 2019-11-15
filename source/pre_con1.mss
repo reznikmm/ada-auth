@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.7 $ $Date: 2019/09/09 02:53:20 $ $Author: randy $ }
+@comment{ $Revision: 1.8 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -2902,8 +2902,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgAdded{Version=[3],Text=[   @key{procedure} @AdaSubDefn{Assign} (Target : @key{in out} Map; Source : @key{in} Map)@Chg{Version=[5],New=[
       @key[with] Pre  => (@key[if] Tampering_With_Cursors_Prohibited (Target)
                     @key[then raise] Program_Error),
-           Post => Length (Source) = Length (Target) @key[and then]
-                   Capacity (Target) >= Length (Source)],Old=[]};]}
+           Post => Length (Source) = Length (Target)],Old=[]};]}
 
 @ChgRef{Version=[3],Kind=[Added],Aref=[AI05-0001-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0112-1]}
