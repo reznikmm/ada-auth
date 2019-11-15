@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/09/09 02:53:19 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.136 $}
+@Comment{$Revision: 1.137 $}
 
 @begin{Intro}
 
@@ -4304,8 +4304,11 @@ of the @nt<entry_declaration>@Chg{Version=[3],New=[ for the @nt{entry_body}],Old
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0030-2]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0090-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0335-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[]}@Comment{Conditiona Leading}
 @PDefn2{Term=[execution], Sec=(requeue_statement)}
-The execution of a @nt{requeue_statement} proceeds by first evaluating the
+The execution of a @nt{requeue_statement} @Chg{Version=[5],New=[begins with
+the following sequence of steps:],Old=[proceeds by first evaluating the
 @Chg{Version=[3],New=[@SynI{procedure_or_entry_}],Old=[@SynI(entry_)]}@nt<name>@Redundant[,
 including the @nt<prefix> identifying the target task
 or protected object and the @nt<expression> identifying the entry within an
@@ -4313,7 +4316,35 @@ entry family, if any]. @Chg{Version=[4],New=[Precondition checks are then
 performed as for a call to the requeue target entry or subprogram. ],Old=[]}The
 @nt{entry_body} or @nt{accept_statement} enclosing the @nt{requeue_statement} is
 then completed@Redundant[, finalized, and
-left (see @RefSecNum(Completion and Finalization))].
+left (see @RefSecNum(Completion and Finalization))].]}
+
+@begin{Enumerate}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The @SynI{procedure_or_entry_}@nt{name}
+  is evaluated. This includes evaluation of the @nt{prefix} (if any) identifying
+  the target task or protected object and of the @nt{expression} (if any)
+  identifying the entry within an entry family.]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0335-1]}
+  @ChgAdded{Version=[5],Text=[If the target object is not a part of a formal
+  parameter of the innermost enclosing callable construct, a check is made that
+  the accessibility level of the target object is not equal to or deeper than
+  the level of the innermost enclosing callable construct. If this check fails,
+  Program_Error is raised.@Defn2{Term=[Program_Error],Sec=(raised by failure of runtime check)}@IndexCheck{Accessibility_Check}]}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0090-1]}
+  @ChgAdded{Version=[5],Text=[Precondition checks are performed as for a call to
+  the requeue target.]}
+
+  @ChgRef{Version=[5],Kind=[Added]}
+  @ChgAdded{Version=[5],Text=[The @nt{entry_body} or @nt{accept_statement}
+  enclosing the @nt{requeue_statement} is then completed@Redundant[, finalized,
+  and left (see @RefSecNum(Completion and Finalization))].]}
+
+@end{Enumerate}
+
+
 
 @PDefn2{Term=[execution], Sec=(requeue task entry)}
 For the execution of a requeue on an entry of a target task,
@@ -4440,6 +4471,15 @@ The @nt<requeue_statement> is new.
   to be a problem, as in that case, the entry body would be called with some
   of its preconditions evaluating as False; the body is likely to assume that
   they are true and probably will have failed in some other way anyway.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0335-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> We now include an accessibility
+  check on requeues. This means Program_Error could be raised for a requeue
+  that worked in Ada 2012. This can only fail for an object for which the
+  statically deeper relationship does not apply, for instance a stand-alone
+  object of an anonymous access type. Most programs that are affected are
+  erroneous anyway (as they will eventually use a nonexistent object), so we
+  do not elieve this will matter in practice.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -4946,7 +4986,12 @@ environment (such as POSIX).]}
 @ChgAdded{Version=[2],Text=[   @AdaExcDefn{Unknown_Zone_Error} : @key<exception>;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
+@ChgAdded{Version=[2],Text=[   @key<function> @Chg{Version=[5],New=[@AdaSubDefn{Local_Time_Offset}],Old=[@AdaSubDefn{UTC_Time_Offset}]} (Date : Time := Clock) @key<return> Time_Offset;]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0336-1]}
+@ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{UTC_Time_Offset} (Date : Time := Clock) @key<return> Time_Offset
+      @key<renames> Local_Time_Offset;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[@key<end> Ada.Calendar.Time_Zones;]}
@@ -5124,6 +5169,12 @@ environment (such as POSIX).]}
                    Include_Time_Fraction : Boolean := False;
                    Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;]}
 
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{Local_Image} (Date : Time;
+                         Include_Time_Fraction : Boolean := False;
+                         Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String @key<is>
+      (Image (Date, Include_Time_Fraction, Local_Time_Offset (Date)));]}
+
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Date : String;
                    Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> Time;]}
@@ -5141,21 +5192,31 @@ environment (such as POSIX).]}
 @end{Example}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
-@ChgAdded{Version=[2],Text=[Type Time_Offset represents the number of minutes
-difference between the implementation-defined time zone used by Calendar
-and another time zone.]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
+@ChgAdded{Version=[2],Text=[Type Time_Offset represents
+@Chg{Version=[5],New=[for a given locality at a given moment ],Old=[]} the
+number of minutes
+@Chg{Version=[5],New=[the local time is,
+at that moment, ahead (+) or behind (-) Coordinated Universal Time
+(abbreviated UTC).@Redundant[ The Time_Offset for UTC is
+zero]],Old=[difference between the implementation-defined time zone used
+by Calendar and another time zone]}.]}
 
 @begin{DescribeCode}
 
 @begin{Example}@ChgRef{Version=[2],Kind=[AddedNormal]}
-@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> UTC_Time_Offset (Date : Time := Clock) @key<return> Time_Offset;]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
+@ChgAdded{Version=[2],Keepnext=[T],Text=[@key<function> @Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]} (Date : Time := Clock) @key<return> Time_Offset;]}
 @end{Example}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0119-1],ARef=[AI05-0269-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
 @ChgAdded{Version=[2],Type=[Trailing],Text=[Returns, as a number of minutes, the
-@Chg{Version=[3],New=[result of subtracting],Old=[difference between]}
-the implementation-defined time zone of Calendar@Chg{Version=[3],New=[ from],Old=[, and]}
-UTC time, at the time Date. If the time zone of the Calendar implementation is
+@Chg{Version=[5],New=[Time_Offset of],Old=[@Chg{Version=[3],New=[result of
+subtracting],Old=[difference between]}]}
+the implementation-defined time zone of
+Calendar@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],New=[ from],Old=[, and]}
+UTC time]}, at the time Date. If the time zone of the Calendar implementation is
 unknown, then Unknown_Zone_Error is raised.]}
 @begin{Ramification}
     @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0119-1]}
@@ -5164,10 +5225,11 @@ unknown, then Unknown_Zone_Error is raised.]}
 @end{Ramification}
 @begin{Discussion}
     @ChgRef{Version=[2],Kind=[AddedNormal]}
+    @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
     @ChgAdded{Version=[2],Text=[The Date parameter is needed to take
     into account time differences caused by daylight-savings time and other
-    time changes. This parameter is measured in the time zone of Calendar,
-    if any, not necessarily the UTC time zone.]}
+    time changes.@Chg{Version=[5],New=[],Old=[ This parameter is measured in
+    the time zone of Calendar, if any, not necessarily the UTC time zone.]}]}
 
     @ChgRef{Version=[2],Kind=[AddedNormal]}
     @ChgAdded{Version=[2],Text=[Other time zones can be supported with a
@@ -5591,10 +5653,13 @@ leap seconds on such targets.]}
 
 @begin{Notes}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
 @ChgAdded{Version=[2],Text=[The implementation-defined time zone of package Calendar
-may, but need not, be the local time zone. UTC_Time_Offset always returns the
+may, but need not, be the local time zone.
+@Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]} always returns the
 difference relative to the implementation-defined time zone of package
-Calendar. If UTC_Time_Offset does not raise Unknown_Zone_Error, UTC time
+Calendar. If @Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]}
+does not raise Unknown_Zone_Error, UTC time
 can be safely calculated (within the accuracy of the underlying time-base).]}
 
 @begin{Discussion}
@@ -5609,14 +5674,19 @@ can be safely calculated (within the accuracy of the underlying time-base).]}
 @end{Discussion}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00351-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
 @ChgAdded{Version=[2],Text=[Calling Split on the results of subtracting
-Duration(UTC_Time_Offset*60) from Clock provides the components (hours,
+Duration(@Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]}*60)
+from Clock provides the components (hours,
 minutes, and so on) of the UTC time. In the United States, for example,
-UTC_Time_Offset will generally be negative.]}
+@Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]} will generally
+be negative.]}
 @begin{Discussion}
   @ChgRef{Version=[2],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0336-1]}
   @ChgAdded{Version=[2],Text=[This is an illustration to help specify the value of
-  UTC_Time_Offset. A user should pass UTC_Time_Offset as the Time_Zone
+  @Chg{Version=[5],New=[Local_Time_Offset],Old=[UTC_Time_Offset]}. A user
+  should pass @Chg{Version=[5],New=[zero],Old=[UTC_Time_Offset]} as the Time_Zone
   parameter of Split, rather than trying to make the above calculation.]}
 @end{Discussion}
 @end{Notes}
@@ -5642,6 +5712,16 @@ UTC_Time_Offset will generally be negative.]}
   @ChgAdded{Version=[3],Text=[@b<Correction:> Clarified the sign of
   UTC_Time_Offset.]}
 @end{Diffword2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0336-1]}
+  @ChgAdded{Version=[3],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Changed the definition of Time_Offset to be compatible with most compilers.
+  Also added Local_Time_Offset and Local_Image to better describe the intent.
+  A program that expects the Ada 2012 definition of Time_Offset would get
+  incorrect answers. However, most compilers tested use the revised definition,
+  so the likelihood of a program breaking is quite low.]}
+@end{Inconsistent2012}
 
 
 @LabeledClause{Select Statements}

@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2019/09/09 02:53:19 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -848,16 +848,25 @@ alternative is defined by the value of an expression.]
 
 @begin{Syntax}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2],ARef=[AI12-0341-1]}
 @Syn{lhs=<case_statement>,rhs="
    @key{case} @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@Syn2{expression} @key{is}
        @Syn2{case_statement_alternative}
       {@Syn2{case_statement_alternative}}
-   @key{end} @key{case};"}
-
+   @key{end case};@Chg{Version=[5],New=[
+ | @key{case select}
+       @Syn2{conditional_case_statement_alternative}
+      {@Syn2{conditional_case_statement_alternative}}
+   @key{end case};],Old=[]}"}
 
 @Syn{lhs=<case_statement_alternative>,rhs="
    @key{when} @Syn2{discrete_choice_list} =>
       @Syn2{sequence_of_statements}"}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
+@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<conditional_case_statement_alternative>,Old=<>}>,
+rhs="@Chg{Version=[5],New=[   @key{when} @Syn2{choice_condition_list} =>
+      @Syn2{sequence_of_statements}],Old=<>}"}
 @end{Syntax}
 
 @begin{Resolution}
@@ -994,8 +1003,10 @@ there is no @lquotes@;out-of-range@rquotes@; situation that can produce them.
 
 @begin{RunTime}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0188-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0214-2]}
 @PDefn2{Term=[execution], Sec=(case_statement)}
-For the execution of a @nt{case_statement} the
+For the execution of a @nt{case_statement}@Chg{Version=[5],New=[ with a
+@SynI{selecting_}@nt{expression},],Old=[]} the
 @Chg{Version=[3],New=[@SynI{selecting_}],Old=[]}@nt{expression}
 is first evaluated.
 
@@ -1019,6 +1030,26 @@ Constraint_Error is raised.
   or is an invalid representation.
 
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{case_statement}
+without a @SynI{selecting_}@nt{expression}, all
+of the @nt{choice_condition}s are evaluated. If exactly one
+@nt{choice_condition} is True, the @nt{sequence_of_statements} of the
+@nt{conditional_case_statement_alternative}
+containing this @nt{choice_condition} is executed. Otherwise (no
+@nt{choice_condition} is True, or multiple @nt{choice_condition}s are True),
+Program_Error is
+raised.@Defn2{Term=[Program_Error],Sec=(raised by case statement)}]}
+
+@begin{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This is not a check! It cannot be suppressed as we
+    would not know what statement to execute in such a case. This is consistent
+    with other case exceptions.]}
+@end{Ramification}
+
 @end{RunTime}
 
 @begin{Notes}
@@ -1152,6 +1183,13 @@ for @nt<name>s, rather than being separated out along with
   which @nt{expression} is being talked about in the wording.]}
 @end{Diffword2005}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0214-2]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  The @nt{case_statement} without a @SynI{selecting_}@nt{expression}
+  is new.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0071-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Updated wording of
@@ -1179,11 +1217,12 @@ running sequentially or concurrently with one another],Old=[]}.]
 
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0139-2]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0119-1],ARef=[AI12-0189-1],ARef=[AI12-0251-1],ARef=[AI12-0266-1],ARef=[AI12-0326-2]}
 @Syn{lhs=<iteration_scheme>,rhs="@key{while} @Syn2{condition}
    | @key{for} @Syn2{loop_parameter_specification}@Chg{Version=[3],New=[
    | @key{for} @Syn2{iterator_specification}],Old=[]}@Chg{Version=[5],New=<
-   | @key{for} @Syn2{procedural_iterator}
+   | [@key[parallel]]
+     @key{for} @Syn2{procedural_iterator}
    | @key[parallel] [(@Syn2{chunk_specification})]
      @key{for} @Syn2{loop_parameter_specification}
    | @key[parallel] [(@Syn2{chunk_specification})]
@@ -2448,9 +2487,10 @@ rhs="@Chg{Version=[5],New={
 
 @begin{Resolution}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0326-2]}
 @ChgAdded{Version=[5],Text=[The @nt{name} or @nt{prefix} given in an
 @nt{iterator_procedure_call} shall resolve to denote a callable entity @i<C>
+(the @i<iterating procedure>@Defn{iterating procedure})
 that is a procedure, or an entry renamed as (viewed as) a procedure.
 @Redundant[When there is an @nt{iterator_actual_parameter_part}, the @nt{prefix}
 can be an @nt{implicit_dereference} of an access-to-subprogram value.]]}
@@ -2534,55 +2574,117 @@ The body of @i<P> consists of the conditionally executed
 @end{Example}
 @end{ImplNote}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The following aspect may be specified
-for a subprogram or entry S that has at least one formal parameter of an
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following aspects may be specified
+for a callable entity @i<S> that has at least one formal parameter of an
 anonymous access-to-subprogram type:]}
 
 @begin{Description}
    @ChgRef{Version=[5],Kind=[AddedNormal]}
-   @ChgAdded{Version=[5],Text=[Allows_Exit@\The Allows_Exit aspect is of type Boolean. The
-   specified value shall be static. The Allows_Exit of an inherited primitive
-   subprogram is True if Allows_Exit is True either for the corresponding
-   subprogram of the progenitor type or for any other inherited subprogram that
-   it overrides. If not specified or inherited as True, the Allows_Exit aspect
-   of a subprogram or entry is False.]}
+   @ChgAdded{Version=[5],Text=[Allows_Exit@\The Allows_Exit aspect is of type
+   Boolean. The specified value shall be static. The Allows_Exit aspect of an
+   inherited primitive subprogram is True if Allows_Exit is True either for the
+   corresponding subprogram of the progenitor type or for any other inherited
+   subprogram that it overrides. If not specified or inherited as True, the
+   Allows_Exit aspect of a callable entity is False. For an
+   entry, only a confirming specification of False is permitted for the
+   Allows_Exit aspect.]}
+
+   @begin{Reason}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Text=[An entry does not allow exit, because
+     implementing a transfer of control out of a task or protected entry creates
+     unnecessarily complex dynamic semantics.]}
+   @end{Reason}
 
    @ChgRef{Version=[5],Kind=[AddedNormal]}
    @ChgAdded{Version=[5],NoPrefix=[T],Text=[Specifying the Allows_Exit aspect
-   True for a subprogram asserts that the
-   subprogram is prepared to be completed by arbitrary transfers of control
-   from the subprogram represented by the access-to-subprogram
-   value@Redundant[, including propagation of exceptions. A subprogram for which
-   Allows_Exit is True should use finalization for any necessary cleanup, and
-   in particular should not use exception handling to implement cleanup].]}
+   to be True for a subprogram indicates that the
+   subprogram @i<allows exit>,@Defn2{Term=[subprogram],Sec=[allows exit]}@Defn{allows exit}
+   meaning that it is prepared to be completed by arbitrary transfers of
+   control from the loop body procedure@Redundant[, including propagation
+   of exceptions. A subprogram for which
+   Allows_Exit is True should use finalization as appropriate rather than
+   exception handling to recover resources and make any necessary final
+   updates to data structures].]}
 
    @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Allows_Exit],
-     Text=[@ChgAdded{Version=[5],Text=[An assertion that a subprogram
+     Text=[@ChgAdded{Version=[5],Text=[An indication of whether a subprogram
      will operate correctly for arbitrary transfers of control.]}]}
    @begin{Ramification}
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],Text=[A subprogram that does not need cleanup
-     meets the assertion, and thus can specify Allows_Exit to True.]}
+     satisfies the requirements, and thus can specify Allows_Exit as True.
+     If a subprogram @i<S> allows exit, it cannot expect to get control other
+     than via finalization if the loop body procedure initiates a transfer of
+     control as part of a @nt{procedural_iterator}. In particular, exception
+     handlers in @i<S>, even @key[when others] handlers, will not be executed
+     when a transfer of control occurs. The mechanism that the implementation
+     uses to implement such transfers of control needs to avoid triggering
+     exception handlers.]}
    @end{Ramification}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],Text=[Parallel_Iterator@\The Parallel_Iterator aspect
+     is of type Boolean. The specified value shall be static. The
+     Parallel_Iterator aspect of an inherited primitive subprogram is True if
+     Parallel_Iterator is True either for the corresponding subprogram of the
+     progenitor type or for any other inherited subprogram that it overrides. If
+     not specified or inherited as True, the Parallel_Iterator aspect of a
+     callable entity is False.]}
+
+   @ChgRef{Version=[5],Kind=[AddedNormal]}
+   @ChgAdded{Version=[5],NoPrefix=[T],Text=[Specifying the Parallel_Iterator
+     aspect to be True for a callable entity indicates that the entity might
+     invoke the loop body procedure from multiple distinct logical threads of
+     control. The Parallel_Iterator aspect for a subprogram shall be statically
+     False if the subprogram allows exit.]}
+
+   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Parallel_Iterator],
+     Text=[@ChgAdded{Version=[5],Text=[An indication of whether
+      a subprogram may use multiple threads of control to invoke a
+      loop body procedure.]}]}
+
+   @begin{Reason}
+     @ChgRef{Version=[5],Kind=[AddedNormal]}
+     @ChgAdded{Version=[5],Text=[Permitting exit from a parallel procedural
+       iterator introduces additional semantic and implementation complexity.]}
+   @end{Reason}
+
 @end{Description}
 @end{StaticSem}
 
 @begin{Legality}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
-@ChgAdded{Version=[5],Text=[If a subprogram or entry overrides an inherited
-dispatching subprogram that has a True Allows_Exit aspect, only a confirming
-specification of True is permitted for the aspect on the overriding
-declaration.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[If a callable entity overrides an inherited
+dispatching subprogram that allows exit, the overriding callable entity also
+shall allow exit. If a callable entity overrides an inherited dispatching
+subprogram that has a True Parallel_Iterator aspect, the overriding callable
+entity also shall have a True Parallel_Iterator aspect.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Since an entry never allows exit, attempting
+  to implement an allows exit subprogram with a task or protected entry
+  is always illegal. However, the Parallel_Iterator aspect can be
+  applied to an entry, so a subprogram with the Parallel_Iterator aspect
+  True can be implemented by an entry.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[A @nt{loop_statement} with a
+@nt{procedural_iterator} as its @nt{iteration_scheme}
+shall begin with the reserved word @key[parallel] if and only if the callable
+entity identified in the @nt{iterator_procedure_call} has a Parallel_iterator
+aspect of True.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0326-2]}
 @ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
 @nt{loop_statement} with a @nt{procedural_iterator} as its @nt{iteration_scheme}
 shall contain an @nt{exit_statement}, return statement, @nt{goto_statement}, or
 @nt{requeue_statement} that leaves the loop only if the callable entity
-@i<C> associated with the @nt{procedural_iterator} has an Allows_Exit aspect
-specified True.]}
+associated with the @nt{procedural_iterator} allows exit.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[The @nt{sequence_of_statements} of a
@@ -2606,6 +2708,73 @@ outside the @nt{loop_statement}.]}
 @end{Ramification}
 
 @end{Legality}
+
+@begin{Runtime}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[@Redundant[For the execution of a
+  @nt{loop_statement} with an @nt{iteration_scheme} that has a
+  @nt{procedural_iterator}, the procedure denoted by the @nt{name} or
+  @nt{prefix} of the @nt{iterator_procedure_call} (the @i<iterating
+  procedure>)@Defn{iterating procedure} is invoked, passing an access value
+  designating the loop body procedure as a parameter. The iterating procedure
+  then calls the loop body procedure zero or more times and returns, whereupon
+  the @nt{loop_statement} is complete. If the @key[parallel] reserved word is
+  present, the iterating procedure might invoke the loop body procedure from
+  multiple distinct logical threads of control.]]}
+
+@begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The stated dynamic semantics are implied by the
+    static semantics given above and the bounded errors given below.]}
+@end{TheProof}
+
+@end{Runtime}
+
+@begin{Bounded}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
+If the callable entity identified in the @nt{iterator_procedure_call} allows
+exit, then it is a bounded error for a call of the loop body procedure
+to be performed from within an abort-deferred operation (see
+@RefSecNum{Abort of a Task - Abort of a Sequence of Statements}),
+unless the entire @nt{loop_statement} was within the same abort-deferred
+operation. If detected, Program_Error is raised at the point of the
+call; otherwise, a transfer of control from the @nt{sequence_of_statements}
+of the @nt{loop_statement} might not terminate the @nt{loop_statement}, and the
+loop body procedure might be called
+again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+@ChgAdded{Version=[5],Text=[If a @nt{loop_statement} with the
+@nt{procedural_iterator} as its @nt{iteration_scheme}
+(see @RefSecNum{Loop Statements}) does not begin with the reserved word
+@key[parallel], it is a bounded error if the loop body procedure is invoked
+from a different logical thread of control than the one that initiates
+the @nt{loop_statement}. If detected, Program_Error is raised; otherwise,
+conflicts associated with concurrent executions of the loop body
+procedure can occur without being detected by the applicable conflict
+check policy (see @RefSecNum{Conflict Check Policies}). Furthermore, propagating
+an exception or making an attempt to exit in the presence of multiple threads of
+control might not terminate the @nt{loop_statement}, deadlock might occur, or
+the loop body procedure might be called
+again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
+
+  @begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0326-2]}
+    @ChgAdded{Version=[5],Text=[Other Ada rules are still in effect for the
+    allows exit subprogram @i<A>, of course. For instance, if a transfer of
+    control causes finalization which raises an exception, Program_Error will be
+    propagated by @i<A> (rather than the transfer of control). In such a case,
+    the bounded error above would still apply. Another example is the case where
+    an unrelated task is waiting on the normal completion of the loop body
+    procedure call in @i<A>. Such a task might end up waiting forever if a
+    transfer of control happens (this is a deadlock situation). This case does
+    not require additional wording, as the same thing would happen if an
+    exception is propagated from the loop body procedure or if @i<A> executed a
+    transfer of control (such as a return statement).]}
+  @end{Discussion}
+
+@end{Bounded}
 
 @begin{Examples}
 
@@ -2663,9 +2832,10 @@ environment variables (see @RefSecNum{The Package Environment_Variables}):]}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],
-    ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1]}
+    ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0294-1],ARef=[AI12-0326-2]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Procedural
-  iterators are new in Ada 202x.]}
+  iterators, and the Allows_Exit and Parallel_Iterator aspects are
+  new in Ada 202x.]}
 @end{Extend2012}
 
 

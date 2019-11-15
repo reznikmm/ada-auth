@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:36 $}
+@Comment{$Date: 2019/09/09 02:53:18 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.143 $}
+@Comment{$Revision: 1.144 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1922,14 +1922,19 @@ given subtype, then:]}
 @begin{DescribeCode}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0054-2],ARef=[AI12-0071-1]}
-  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0301-1]}
-  @ChgAdded{Version=[3],Text=[@Redundant[On every subtype conversion,
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0301-1],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[3],Text=[@Redundant[On @Chg{Version=[5],New=[a],Old=[every]}
+  subtype conversion,
   @Chg{Version=[4],New=[],Old=[the predicate of the target subtype
   is evaluated, and ]}a check is performed that
   the @Chg{Version=[4],New=[operand satisfies the predicates of the target
-  subtype], Old=[predicate is True]}. This includes all parameter passing,
+  subtype], Old=[predicate is True]}@Chg{Version=[5],New=[, unless it is a
+  conversion for an actual parameter of mode @key[out]
+  (see @RefSecNum{Type Conversions})],Old=[]}.@Chg{Version=[5],New=[],Old=[ This
+  includes all parameter passing,
   except for certain parameters passed by reference, which are covered by the
-  following rule: ] After normal completion and leaving of a subprogram,
+  following rule:]}] @Chg{Version=[5],New=[In addition, after],Old=[After]}
+  normal completion and leaving of a subprogram,
   for each @key[in out] or @key[out] parameter that is passed by reference,
   @Chg{Version=[4],New=[],Old=[the predicate of the subtype of the actual is
   evaluated, and ]}a check is performed that the @Chg{Version=[4],New=[value of
@@ -1950,6 +1955,18 @@ given subtype, then:]}
   Sec=[@nt{allocator}]}@Defn2{Term=[check, language-defined],
   Sec=[controlled by assertion policy]}@Chg{Version=[4],New=[],
   Old=[@Defn2{Term=(Assertion_Error), Sec=(raised by failure of runtime check)}]}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[Most parameter passing is covered by the subtype
+  conversion rule: all inbound @key[in] and @key[in out] parameters are converted
+  to the formal subtype, and the copy-back for by-copy @key[out] and @key[in out]
+  parameters are converted to the actual subtype. The remaining parameter
+  passing cases are covered by special rules: by-reference @key[out] and
+  @key[in out] parameters by the rule given above, and we don't want any
+  predicate checks on inbound @key[out] parameters, accomplished in part
+  by a special rule in @Refsecnum{Type Conversions}.]}
+@end{Ramification}
 
   @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0054-2]}
   @ChgAdded{Version=[4],Text=[If any of the predicate checks fail,
@@ -2157,6 +2174,12 @@ common exceptional conditions as follows:}]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Revised wording to list the
   boolean operators that can be predicate-static, to eliminate confusion
   about whether @key[not] is included.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0333-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Predicate checks are no
+  longer made for any inbound @key[out] parameters. The rule change for
+  this is found in @RefSecNum{Type Conversions}, so the inconsistency is
+  documented there.]}
 @end{Diffword2012}
 
 

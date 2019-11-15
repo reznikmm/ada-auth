@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:38 $}
+@Comment{$Date: 2019/09/09 02:53:21 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.58 $}
+@comment{$Revision: 1.59 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -68,11 +68,13 @@ the RHS column, misaligning it. Thus we have two lines, as small as possible.}
 @Chg{Version=[3],New=(@\@\@\Indefinite_Holders @em @RefSecNum{The Generic Package Containers.Indefinite_Holders}
 @\@\@\Indefinite_Multiway_Trees @em @RefSecNum{The Generic Package Containers.Indefinite_Multiway_Trees}
 ), Old=()}@\@\@\Indefinite_Ordered_Maps @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}
-@\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}
-@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[2],
-New=[@Chg{Version=[3],New=[Standard (@i{...continued})
+@\@\@\Indefinite_Ordered_Sets @em @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Sets}), Old=()}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Containers (@i{...continued})
+],Old=[]}@Chg{Version=[2],New=(@\@\@\Indefinite_Vectors @em @RefSecNum{The Generic Package Containers.Indefinite_Vectors}), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[2],
+New=[@Chg{Version=[3],New=[@Chg{Version=[5],New=[],Old=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Containers (@i{...continued})]}
 @\@\@\Multiway_Trees @em @RefSecNum{The Generic Package Containers.Multiway_Trees}
 ], Old=()}@\@\@\Ordered_Maps @em @RefSecNum{The Generic Package Containers.Ordered_Maps}
 @\@\@\Ordered_Sets @em @RefSecNum{The Generic Package Containers.Ordered_Sets}
@@ -113,8 +115,7 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\@\@\Names @em @RefSecNum{The Package Interrupts}
 @\@\IO_Exceptions @em @RefSecNum{Exceptions in Input-Output}
 @Chg{Version=[3],New=(@\@\Iterator_Interfaces @em @RefSecNum{User-Defined Iterator Types}
-@\@\Locales @em @RefSecNum{The Package Locales}
-), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+@\@\Locales @em @RefSecNum{The Package Locales}), Old=()}>@NewColumnVer{Version=[3]}@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[3],
 New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 ],Old=[]}@\@\Numerics @em @RefSecNum{The Numerics Packages}
@@ -168,16 +169,20 @@ New=[],Old=[Standard (@i{...continued})
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Hash @em @RefSecNum{String Hashing}
 @Chg{Version=[3],New=(@\@\@\@\Hash_Case_Insensitive @em @RefSecNum{String Hashing}
 @\@\@\@\Less_Case_Insensitive @em @RefSecNum{String Comparison}
-@\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
+),Old=()}), Old=()}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],
+New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+@\@\Strings (@i{...continued})
+],Old=[]}@Chg{Version=[3],New=(@\@\@\UTF_Encoding @em @RefSecNum{String Encoding}
 @\@\@\@\Conversions @em @RefSecNum{String Encoding}
 @\@\@\@\Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Strings @em @RefSecNum{String Encoding}
 @\@\@\@\Wide_Wide_Strings @em @RefSecNum{String Encoding}
-), Old=()}), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+), Old=()}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[5],New=[],Old=[@Chg{Version=[3],
 New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
 @\@\Strings (@i{...continued})
-],Old=[]}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
+],Old=[]}]}@\@\@\Wide_Bounded @em @RefSecNum{Wide_String Handling}
 @Chg{Version=[3],New=(@\@\@\@\Wide_Equal_Case_Insensitive
 @\@\@\@\@\@\@\@em @RefSecNum{Wide_String Handling}
 ), Old=()}@Chg{Version=[2],New=(@\@\@\@\Wide_Hash @em @RefSecNum{Wide_String Handling}
@@ -221,14 +226,16 @@ New=[Standard (@i{...continued})
 @\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
 ), Old=()}@\@\@\@\Wide_Wide_Hash @em @RefSecNum{Wide_Wide_String Handling}
 @Chg{Version=[3],New=(@\@\@\@\Wide_Wide_Hash_Case_Insensitive
-@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}
-@\@\Synchronous_Barriers @em @RefSecNum{Synchronous Barriers}
-), Old=[]}), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
-@Chg{Version=[3],New=[@\@\@\EDF @em @RefSecNum{Synchronous Task Control}
-], Old=[]}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+@\@\@\@\@\@\@\@em @RefSecNum{Wide_Wide_String Handling}), Old=[]}),Old=()}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],
 New=[Standard (@i{...continued})
 @\Ada (@i{...continued})
-],Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
+],Old=[]}@Chg{Version=[3],New=(@\@\Synchronous_Barriers @em @RefSecNum{Synchronous Barriers}
+), Old=()}@\@\Synchronous_Task_Control @em @RefSecNum{Synchronous Task Control}
+@Chg{Version=[3],New=[@\@\@\EDF @em @RefSecNum{Synchronous Task Control}
+], Old=[]}>@NewColumnVer{Version=[3]}@Noparanum@shrink<@Chg{Version=[3],
+New=[@Chg{Version=[5],New=[],Old=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+]}],Old=[]}@\@\Tags @em @RefSecNum{Tagged Types and Type Extensions}
 @Chg{Version=[2],New=(@\@\@\Generic_Dispatching_Constructor @em @RefSecNum{Tagged Types and Type Extensions}
 ), Old=()}@\@\Task_Attributes @em @RefSecNum{The Package Task_Attributes}
 @\@\Task_Identification @em @RefSecNum{The Package Task_Identification}
@@ -255,12 +262,15 @@ New=[@Chg{Version=[3],New=[],Old=[Standard (@i{...continued})
 @\@\@\Editing @em @RefSecNum{The Package Wide_Text_IO.Editing}
 @\@\@\Text_Streams @em @RefSecNum{The Package Wide_Text_IO.Text_Streams}
 @Chg{Version=[2],New=(@\@\@\Wide_Bounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
-@\@\@\Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
-@\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
+@\@\@\Wide_Unbounded_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}),Old=()}>@NewColumnVer{Version=[5]}@Noparanum@shrink<@Chg{Version=[5],
+New=[Standard (@i{...continued})
+@\Ada (@i{...continued})
+],Old=[]}@Chg{Version=[2],New=(@\@\Wide_Wide_Characters @em @RefSecNum{The Packages Characters, Wide_Characters, and Wide_Wide_Characters}
 @Chg{Version=[3],New=(@\@\@\Handling @em @RefSecNum{The Package Wide_Wide_Characters.Handling}
 ),Old=()}@Chg{Version=[5],New=(@\@\Wide_Wide_Command_Line @em @RefSecNum{The Packages Wide_Command_Line and Wide_Wide_Command_Line}
 @\@\Wide_Wide_Directories @em @RefSecNum{The Packages Wide_Directories and Wide_Wide_Directories}
-@\@\Wide_Wide_Environment_Variables @em @RefSecNum{The Packages Wide_Environment_Variables and Wide_Wide_Environment_Variables}
+@\@\Wide_Wide_Environment_Variables @em
+@\@\@\@\@\@\@RefSecNum{The Packages Wide_Environment_Variables and Wide_Wide_Environment_Variables}
 ),Old=()}@\@\Wide_Wide_Text_IO @em @RefSecNum{Wide Text Input-Output and Wide Wide Text Input-Output}
 @\@\@\Complex_IO @em @RefSecNum{The Package Wide_Wide_Text_IO.Complex_IO}
 @\@\@\Editing @em @RefSecNum{The Package Wide_Wide_Text_IO.Editing}

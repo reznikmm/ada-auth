@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.128 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.129 $ $Date: 2019/09/09 02:53:21 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2019/09/09 02:53:21 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -5570,7 +5570,7 @@ usage profile Jorvik is equivalent to the following set of pragmas:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The Jorvik profile removes a number
 of restrictions from the Ravenscar profile to allow additional applications to
-benefit from predicability and low overhead. Specifically, the following
+benefit from predictability and low overhead. Specifically, the following
 restrictions are removed:]}
 @begin{Display}
 @ChgRef{Version=[5],Kind=[AddedNormal]}

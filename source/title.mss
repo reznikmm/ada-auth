@@ -1,7 +1,7 @@
 @Part(title, Root="ada.mss")
 
 @comment{$Source: e:\\cvsroot/ARM/Source/title.mss,v $}
-@comment{$Revision: 1.83 $ $Date: 2019/06/11 04:31:38 $}
+@comment{$Revision: 1.84 $ $Date: 2019/09/09 02:53:21 $}
 
 @begin{ISOOnly}
 @Noparanum@Right{@Swiss{@Grow{@Chg{Version=[3],New=[@b{ISO/IEC JTC 1/SC 22 N}],Old=[@B{INTERNATIONAL STANDARD} ISO/IEC 8652:@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}
@@ -15,7 +15,7 @@
 @end{ISOOnly}
 @begin{NotISO}
 @Comment{@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x(E)],Old=[2012(E)@Chg{Version=[4], New=[ with COR.1:2016],Old=[]}]}],Old=[@Chg{Version=[2],New=[2007(E) Ed. 3],Old=[1995(E)@Chg{Version=[1], New=[ with COR.1:2001], Old=[]}]}]}}}}}
-@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[@Chg{Version=[2],New=[2007],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 21>,Old=[]}}}}
+@Noparanum@Right{@Swiss{@Grow{@B{Ada Reference Manual}, @Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[@Chg{Version=[2],New=[2007],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 22>,Old=[]}}}}
 @end{NotISO}
 
 @Noparanum@ @*
@@ -67,10 +67,10 @@ End comment}
 
 @Noparanum@ @;@comment{A dummy paragraph containing just a blank}
 
-@Noparanum@Center{@Swiss{@Grow{@Chg{Version=[5],New=[202x],Old=[@Chg{Version=[3],New=[2012],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 21>,Old=[]}}}}
+@Noparanum@Center{@Swiss{@Grow{@Chg{Version=[5],New=[202x],Old=[@Chg{Version=[3],New=[2012],Old=[1995]}]} Edition@Chg{Version=[5],New=<, Draft 22>,Old=[]}}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[@Grow{with 2016 corrections}]}],Old=[]}],Old=[@Chg{Version=[1], New=[@Grow{with 2001 corrections}], Old=[]}]}}}
 @Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and 2007 Amendment}], Old=[]}]}}}
-@Comment{@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 21>,Old=[]}}}}}
+@Comment{@Noparanum@Center{@Swiss{@Grow{ISO/IEC 8652:@Chg{Version=[3],New=[@Chg{Version=[5],New=[202x],Old=[2012]}],Old=[1995]}(E)@Chg{Version=[5],New=<, Draft 22>,Old=[]}}}}}
 @Comment{@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[@Grow{with Technical Corrigendum 1}]}],Old=[]}],Old=[@Chg{Version=[1], New=[@Grow{with Technical Corrigendum 1}], Old=[]}]}}}}
 @Comment{@Noparanum@Center{@Swiss{@Chg{Version=[3],New=[],Old=[@Chg{Version=[2], New=[@Grow{and Amendment 1}], Old=[]}]}}}}
 @end{NotISO}
