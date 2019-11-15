@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:19 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.149 $}
+@Comment{$Revision: 1.150 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -705,9 +705,10 @@ interface type.]}
    ...]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[2],Text=[   @key{procedure} Bar (X : T1'Class) @key{is}
    @key{begin}
-      Pkg.Foo (X); -- @RI[should call Foo #1 or an override thereof]
+      Pkg.Foo (@Chg{Version=[5],New=[Pkg.Ifc'Class (X)],Old=[X]}); -- @RI[should call Foo #1 or an override thereof]
    @key{end};]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
@@ -2319,6 +2320,87 @@ value.]}
 
 @end{Notes}
 
+@begin{Examples}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+@ChgAdded{Version=[5],Text=[@i{A work scheduler where only urgent work can be
+scheduled for weekends:}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[package] Work_Orders @key[is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   --@Examcom{ See 3.5.1 for type declarations of Level, Day, and Weekday}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] Work_Order @key[is private with]
+     Type_Invariant => Day_Scheduled (Work_Order) @key[in] Weekday
+                       @key[or else] Priority (Work_Order) = Urgent;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Schedule_Work (Urgency  : @key[in] Level;
+                           To_Occur : @key[in] Day) @key[return] Work_Order
+     @key[with] Pre => Urgency = Urgent @key[or else] To_Occur @key[in] Weekday;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Day_Scheduled (Order : @key[in] Work_Order) @key[return] Day;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Priority (Order : @key[in] Work_Order) @key[return] Level;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] Change_Priority (Order        : @key[in out] Work_Order;
+                              New_Priority : @key[in]     Level;
+                              Changed      : @key[out]    Boolean)
+      @key[with] Post => Changed = (Day_Scheduled(Order) @key[in] Weekday
+                              @key[or else] Priority(Order) = Urgent);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[private]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] Work_Order @key[is record]
+      Scheduled : Day;
+      Urgency   : Level;
+   @key[end record];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[end] Work_Orders;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[package body] Work_Orders @key[is]]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Schedule_Work (Urgency  : @key[in] Level;
+                           To_Occur : @key[in] Day) @key[return] Work_Order @key[is]
+     (Scheduled => To_Occur, Urgency => Urgency);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Day_Scheduled (Order : @key[in] Work_Order) @key[return] Day @key[is] (Order.Scheduled);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] Priority (Order : @key[in] Work_Order) @key[return] Level @key[is] (Order.Urgency);]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[procedure] Change_Priority (Order        : @key[in out] Work_Order;
+                              New_Priority : @key[in]     Level;
+                              Changed      : @key[out]    Boolean) @key[is]
+   @key[begin]
+      --@Examcom{ Ensure type invariant is not violated}
+      @key[if] Order.Urgency = Urgent @key[or else] (Order.Scheduled @key[in] Weekday) @key[then]
+         Changed := True;
+         Order.Urgency := New_Priority;
+      @key[else]
+         Changed := False;
+      @key[end if];
+   @key[end] Change_Priority;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[end] Work_Orders;]}
+@end{Example}
+@end{Examples}
+
+
 @begin{Extend2005}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0146-1],ARef=[AI05-0247-1],ARef=[AI05-0250-1],ARef=[AI05-0289-1]}
   @ChgAdded{Version=[3],Text=[@Defn{extensions to Ada 2005}
@@ -2555,6 +2637,11 @@ Default_Initial_Condition aspect.]}]}
 @end{Reason}
 @end{ImplPerm}
 
+@begin{Notes}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
+  @ChgAdded{Version=[5],Text=[For an example of the use of this aspect, see the
+  Vector container definition in @RefSecNum{The Generic Package Containers.Vectors}.]}
+@end{Notes}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0265-1],ARef=[AI12-0272-1]}

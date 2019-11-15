@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:19 $}
+@Comment{$Date: 2019/11/15 05:03:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.79 $}
+@Comment{$Revision: 1.80 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2396,14 +2396,9 @@ a short-circuit control form
 both of whose @nt{relation}s are static expressions;
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0147-1],ARef=[AI05-0188-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0214-2]}
 @ChgAdded{Version=[3],Text=[a @nt{conditional_expression} all of whose
 @nt{condition}s, @SynI{selecting_}@nt{expression}s,
-@Chg{Version=[5],New=[@nt{choice_condition}s, ],Old=[]}and
-@SynI{dependent_}@nt{expression}s are static expressions@Chg{Version=[5],New=[.
-In addition, for a @nt{case_expression} without a
-@SynI{selecting_}@nt{expression},
-exactly one of the @nt{choice_condition}s is True],Old=[]};]}
+and @SynI{dependent_}@nt{expression}s are static expressions;]}
 
 a static expression enclosed in parentheses.
 @end{Itemize}
@@ -2667,14 +2662,8 @@ reasoning applies to the "of a @nt{case_expression}" of the last bullet.]}
 @nt{case_expression} whose @SynI{selecting_}@nt{expression} is static and
 whose value is not covered by the corresponding @nt{discrete_choice_list}; or]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0214-2]}
-@ChgAdded{Version=[5],Text=[a @SynI{dependent_}@nt{expression} of a
-@nt{case_expression} whose associated @nt{choice_condition}s are all static
-and all of whose values equal False; or]}
-
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0158-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0039-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0214-2]}@Comment{Just a number change}
 @ChgAdded{Version=[3],Text=[a
 @Chg{Version=[4],New=[@SynI{choice_}@nt{simple_expression}],Old=[@nt{choice_expression}]}
 (or a @nt{simple_expression}
@@ -3357,21 +3346,21 @@ This subclause is new to Ada 95.
 @begin(description)
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Put_Image>, ARef=[AI12-0020-1], ARef=[AI12-0320-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Put_Image>, ARef=[AI12-0020-1], ARef=[AI12-0320-1], ARef=[AI12-0340-1],
   InitialVersion=[5], Text=[@Chg{Version=[5],New=[S'Put_Image denotes a
      procedure with the following specification:],Old=[]}
 @begin(Descexample)
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[@b(procedure) S'Put_Image
-   (@RI(Stream) : @key[not null access] Ada.Streams.Root_Stream_Type'Class;
+   (@RI(Buffer) : @key[in out] Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
     @RI(Arg)    : @key[in] T);]}
 @end(Descexample)
 @Comment{These two paragraphs have to be Added rather than AddedNormal so that
 the paragraphs in thee Annex have the correct paragraph numbers.}
-    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0315-1]}
+    @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0315-1],ARef=[AI12-0340-1]}
     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The
       default implementation of S'Put_Image writes
-      (using Wide_Wide_String'Write) an @i<image> of the value of
+      (using Wide_Wide_Put) an @i<image> of the value of
       @i<Arg>.]}]}@Comment{End of Annex text here.}
 
 @EndPrefixType{}
@@ -3404,16 +3393,17 @@ type.@AspectDefn{Put_Image}]}
 @end{Discussion}
 
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The behavior of the default
   implementation of S'Put_Image depends on the class of T. For
   an elementary type, the implementation is equivalent to:]}
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[procedure] Scalar_Type'Put_Image
-  (Stream : @key[access] Ada.Streams.Root_Stream_Type'Class; Arg : Scalar_Type) @key[is]
+  (Buffer : @key[in out] Ada.Strings.Text_Buffers.Root_Buffer_Type'Class;
+   Arg    : @key[in] Scalar_Type) @key[is]
 @key[begin]
-   Wide_Wide_String'Write (Stream, @i{<described below>});
+   Buffer.Wide_Wide_Put (@i{<described below>});
 @key[end] Scalar_Type'Put_Image;]}
 @end{Example}
 
@@ -3736,7 +3726,7 @@ default implementation of T'Put_Image also includes discriminant values, as in:]
 @begin{Description}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
   InitialVersion=[2], Text=[@Chg{Version=[5],New=[S'Wide_Wide_Image
      denotes a function with the following specification:],Old=[]}
 @begin(Descexample)
@@ -3749,15 +3739,15 @@ numbers come out correctly. Only the initial text gets overridden.}
      @ChgRef{Version=[5],Kind=[Added]}
      @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Wide_Image calls
       S'Put_Image passing @i<Arg>
-      (which will typically write a sequence of Wide_Wide_Character values
-      out to a stream) and then returns the result of reading the contents
-      of that stream via Wide_Wide_String'Read.]}]}@Comment{End of Annex text here.}
+      (which will typically store a sequence of character values
+      in a text buffer) and then returns the result of retrieving the
+      contents of that buffer with Wide_Wide_Get.]}]}@Comment{End of Annex text here.}
      @ChgRef{Version=[5],Kind=[AddedNormal]}
      @ChgAdded{Version=[5],Text=[The lower bound of the
-      result is 1.]}
+      result is one.]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Wide_Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
   InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Wide_Image denotes a
      function with the following specification:],Old=[]}
 @Comment{We use an InitialVersion of 0 here so this item uses the existing
@@ -3770,24 +3760,14 @@ will save a vast amount of messing around.}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
-     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns a
-     Wide_String corresponding to the result of a call on S'Wide_Wide_Image
-     with a parameter of @i<Arg>.]}]}@Comment{End of Annex text here.}
-     @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
-     result has the same sequence of
-     graphic characters as that returned by S'Wide_Wide_Image if all the graphic
-     characters are defined in Wide_Character; otherwise, the sequence of
-     characters is implementation defined (but no shorter than that of
-     S'Wide_Wide_Image for the same value of @i<Arg>).]}
-
-     @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
-     Text=[@ChgAdded{Version=[5],Text=[The
-     sequence of characters of the value returned by
-     S'Wide_Image when some of the graphic characters of
-     S'Wide_Wide_Image are not defined in Wide_Character.]}]}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Wide_Image calls S'Put_Image
+     passing @i<Arg> (which will typically store a sequence of character values
+     in a text buffer) and then returns the result of retrieving the
+     contents of that buffer with Wide_Get.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1],
+  Leading=<T>, Prefix=<S>, AttrName=<Image>, ARef=[AI12-0020-1], ARef=[AI12-0340-1],
   InitialVersion=[0], Text=[@Chg{Version=[5],New=[S'Image denotes a function
      with the following specification:],Old=[]}
 @Comment{We use an InitialVersion of 0 here so this item uses the existing
@@ -3800,21 +3780,11 @@ will save a vast amount of messing around.}
 @end(Descexample)
 
      @ChgRef{Version=[5],Kind=[AddedNormal]}
-     @ChgAdded{Version=[5],NoPrefix=[T],Text=[The function returns a
-     String corresponding to the result of a call on S'Wide_Wide_Image with
-     a parameter of @i<Arg>.]}]}@Comment{End of Annex text here.}
-     @ChgAdded{Version=[5],Text=[The lower bound of the result is one. The
-     result has the same sequence of
-     graphic characters as that returned by S'Wide_Wide_Image if all the graphic
-     characters are defined in Character; otherwise, the sequence of characters
-     is implementation defined (but no shorter than that of S'Wide_Wide_Image
-     for the same value of @i<Arg>).]}
-
-     @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
-     Text=[@ChgAdded{Version=[5],Text=[The
-     sequence of characters of the value returned by
-     S'Image when some of the graphic characters of
-     S'Wide_Wide_Image are not defined in Character.]}]}
+     @ChgAdded{Version=[5],NoPrefix=[T],Text=[S'Image calls S'Put_Image
+     passing @i<Arg> (which will typically store a sequence of character values
+     in a text buffer) and then returns the result of retrieving the
+     contents of that buffer with Get.]}]}@Comment{End of Annex text here.}
+     @ChgAdded{Version=[5],Text=[The lower bound of the result is one.]}
 
 @EndPrefixType{}
 @end(description)
@@ -3916,10 +3886,10 @@ subtype S in the following ways:]}
        @exam{"(F1 => TRUE, F2 => TRUE)"}.]}
 @end{Discussion}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Additional spaces, carriage returns, and line
-    feeds (Wide_Wide_Characters with positions 32, 10, and 13), may be inserted
-    to improve readability of the generated image.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[Additional spaces (Wide_Wide_Characters with
+    position 32), and calls to the New_Line operation of a text buffer, may be
+    inserted to improve readability of the generated image.]}
 
 @end{Itemize}
 
@@ -4028,7 +3998,7 @@ that would be meaningful based only on the relevant public interfaces.]}]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1],ARef=[AI12-0315-1],ARef=[AI12-0340-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Attribute
     Put_Image is new. Attributes Image, Wide_Image, and Wide_Wide_Image
     now can be used with any type, and are defined in terms of Put_Image so

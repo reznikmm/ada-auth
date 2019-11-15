@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:36 $}
+@Comment{$Date: 2019/11/15 05:03:40 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.146 $}
+@Comment{$Revision: 1.147 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -3084,10 +3084,11 @@ protected type, and as such ensures safe concurrent access.]}
 @ChgAdded{Version=[2],Text=[Cashier, Counter : Fast_Food_Queue;]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[2],Text=[...
--- @RI[Add George (see @RefSecNum{Incomplete Type Declarations}) to the cashier's queue:]
-Append (Cashier, George);
--- @RI[After payment, move George to the sandwich counter queue:]
+--@RI[ Add @Chg{Version=[5],New=[Casey],Old=[George]} (see @RefSecNum{Incomplete Type Declarations}) to the cashier's queue:]
+Append (Cashier, @Chg{Version=[5],New=[Casey],Old=[George]});
+--@RI[ After payment, move @Chg{Version=[5],New=[Casey],Old=[George]} to the sandwich counter queue:]
 Transfer (Cashier, Counter);
 ...]}
 @end{Example}
@@ -4359,10 +4360,11 @@ Next   : Link  := Head.Succ;
       @key(end) @key(case);
    @key(end) @key(record);
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
 My_Car, Your_Car, Next_Car : Car_Name := @key[new] Car;  --@RI[ see @RefSecNum{Allocators}]
-George : Person_Name := @key[new] Person(M);
+@Chg{Version=[5],New=[Casey],Old=[George]} : Person_Name := @key[new] Person(M);
    ...
-George.Vehicle := Your_Car;
+@Chg{Version=[5],New=[Casey],Old=[George]}.Vehicle := Your_Car;
 @end(Example)
 
 @end{Examples}
@@ -6174,11 +6176,12 @@ comparison.@end{ramification}
 @begin{Examples}
 @Leading@keepnext@i{Example of use of the Access attribute:}
 @begin{Example}
-Martha : Person_Name := @key[new] Person(F);       --@RI[ see @RefSecNum{Incomplete Type Declarations}]
-Cars   : @key[array] (1..2) @key[of] @key[aliased] Car;
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0312-1]}
+@Chg{Version=[5],New=[Becky],Old=[Martha]} : Person_Name := @key[new] Person(F);       --@RI[ see @RefSecNum{Incomplete Type Declarations}]
+Cars  @Chg{Version=[5],New=[],Old=[ ]}: @key[array] (1..2) @key[of] @key[aliased] Car;
    ...
-Martha.Vehicle := Cars(1)'Access;
-George.Vehicle := Cars(2)'Access;
+@Chg{Version=[5],New=[Becky],Old=[Martha]}.Vehicle := Cars(1)'Access;
+@Chg{Version=[5],New=[Casey],Old=[George]}.Vehicle := Cars(2)'Access;
 @end{Example}
 @end{Examples}
 

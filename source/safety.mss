@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.66 $ $Date: 2019/05/08 22:01:13 $ $Author: randy $ }
+@Comment{ $Revision: 1.67 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2019/05/08 22:01:13 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -919,7 +919,7 @@ task invokes the same subprogram.
 
 @begin{Runtime}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following
 @SynI{restriction_parameter_}@nt{identifier} is language defined:]}
 
@@ -928,17 +928,11 @@ task invokes the same subprogram.
   @ChgRef{Version=[5],Kind=[Added]}
   @ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],Sec=(Max_Image_Length)}
     @Defn{Max_Image_Length restriction}Max_Image_Length@\Specifies the maximum
-    length for a Wide_Wide_Image attribute result. Violation of this restriction
-    results in the raising of Program_Error at the point of the invocation of an
+    length for the result of an Image, Wide_Image, or Wide_Wide_Image attribute.
+    Violation of this restriction results in the raising of Program_Error at
+    the point of the invocation of an
     image attribute.@Defn2{Term=(Program_Error),Sec=(raised by failure of runtime check)}
     @IndexCheck{Program_Error_Check}]}
-
-@begin{Ramification}
-    @ChgRef{Version=[5],Kind=[Added]}
-    @ChgAdded{Version=[5],Text=[Image and Wide_Image are defined in terms of
-      Wide_Wide_Image, so this restriction also applies to evaluations of those
-      attributes.]}
-@end{Ramification}
 
 @end{description}
 
@@ -995,11 +989,19 @@ prior to program execution]:]}
 @end{InnerItemize}
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0020-1],ARef=[AI12-0340-1]}
 @ChgAdded{Version=[5],Text=[If a Max_Image_Length restriction applies to any
-compilation unit in the partition, then for any subtype S, S'Wide_Wide_Image
+compilation unit in the partition, then for any subtype S, S'Image,
+S'Wide_Image, and S'Wide_Wide_Image
 shall be implemented within that partition without any dynamic allocation.]}
 
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0340-1]}
+  @ChgAdded{Version=[5],Text=[Assuming the @ImplAdviceTitle is followed, this
+  can be accomplished by using an object of the
+  Text_Buffers.Bounded.Buffer_Type with the maximum characters as specified
+  in the Max_Image_Length restriction.]}
+@end{ImplNote}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0263-1],ARef=[AI05-0272-1]}
 @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0308-1]}

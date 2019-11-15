@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.89 $ $Date: 2019/06/11 04:31:38 $ $Author: randy $ }
+@comment{ $Revision: 1.90 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2019/06/11 04:31:38 $}
+@Comment{$Date: 2019/11/15 05:03:41 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -2095,8 +2095,7 @@ because the pragma was not used to mark variables as shared.
 @begin{Intro}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0234-1]}
 @ChgAdded{Version=[5],Text=[The language-defined package
-The language-defined generic package System.Atomic_Operations.Exchange provides
-The library package System.Atomic_Operations is the parent of a set of child
+System.Atomic_Operations is the parent of a set of child
 units that provide facilities for manipulating objects of atomic types and for
 supporting lock-free synchronization. The subprograms of this subsystem are
 Intrinsic subprograms (see @RefSecNum{Conformance Rules}) in order to provide
