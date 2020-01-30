@@ -289,6 +289,8 @@ package body ARM_Format is
     --  2/15/19 - RLB - Improved handling os deleted attribute references.
     --  4/23/19 - RLB - Added Line info to the nesting stack so we can find
     --			out where the problems lie.
+    --  6/ 5/19 - RLB - Displayed Line info to the nesting stack for begin/end
+    --			mismatches.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -4911,6 +4913,7 @@ Ada.Text_IO.Put_Line("    -- No Start Paragraph (Del-NewOnly)");
 			        Ada.Text_IO.Put_Line ("  ** Names of begin and end mismatch, line " & ARM_Input.Line_String (Input_Object));
 			        Ada.Text_IO.Put_Line ("     Begin name: " & Ada.Strings.Fixed.Trim(Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name, Ada.Strings.Right) &
 			                              "  End name: " & Ada.Strings.Fixed.Trim(Type_Name, Ada.Strings.Right));
+			        Ada.Text_IO.Put_Line ("     Begin line: " & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Open_Line);
 --Ada.Text_IO.Put_Line (" &Stack name is " & Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Name);
 			    else
 			        if Format_Object.Next_Paragraph_Subhead_Type /= Format_State.Nesting_Stack(Format_State.Nesting_Stack_Ptr).Old_Next_Subhead_Paragraph then
