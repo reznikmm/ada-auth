@@ -1,6 +1,6 @@
 @Part(precontainers-1, Root="ada.mss")
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_con1.mss,v $ }
-@comment{ $Revision: 1.8 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
+@comment{ $Revision: 1.9 $ $Date: 2020/01/30 01:09:46 $ $Author: randy $ }
 
 @LabeledAddedSubclause{Version=[2],Name=[Maps]}
 
@@ -2017,7 +2017,7 @@ package Containers.Hashed_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Hashed_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -3284,7 +3284,7 @@ package Containers.Ordered_Maps has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Map} (Base : @key{not null access} Ordered_Maps.Map) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -6237,7 +6237,7 @@ package Containers.Hashed_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -7441,7 +7441,7 @@ package Containers.Ordered_Sets has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Set} (Base : @key{not null access} Hashed_Sets.Set) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
