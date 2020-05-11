@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/06/11 04:31:37 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.124 $}
+@Comment{$Revision: 1.125 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -3361,11 +3361,14 @@ exists:]}
    @key[pragma] Preelaborate (Subpools);]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0356-1]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Storage_Pool_With_Subpools} @key[is]
-      @key[abstract new] Root_Storage_Pool @key[with private];]}
+      @key[abstract new] Root_Storage_Pool @key[with private];@Chg{Version=[5],New=[
+   @key[pragma] Preelaborable_Initialization (Root_Storage_Pool_With_Subpools);],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
-@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Subpool} @key[is abstract tagged limited private];]}
+@ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Root_Subpool} @key[is abstract tagged limited private];@Chg{Version=[5],New=[
+   @key[pragma] Preelaborable_Initialization (Root_Subpool);],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[AddedNormal]}
 @ChgAdded{Version=[3],Text=[   @key[type] @AdaTypeDefn{Subpool_Handle} @key[is access all] Root_Subpool'Class;

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_containers.mss,v $ }
-@comment{ $Revision: 1.109 $ $Date: 2019/09/09 02:53:20 $ $Author: randy $ }
+@comment{ $Revision: 1.110 $ $Date: 2020/01/30 01:09:46 $ $Author: randy $ }
 @Part(precontainers, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:20 $}
+@Comment{$Date: 2020/01/30 01:09:46 $}
 
 @RMNewPage
 @LabeledAddedClause{Version=[2],Name=[Containers]}
@@ -1584,7 +1584,7 @@ package Containers.Vectors has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{Vector} (Base : @key{not null access} Vectors.Vector) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,
@@ -5298,7 +5298,7 @@ package Containers.Doubly_Linked_Lists has the following declaration:]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1]}
 @ChgAdded{Version=[5],Text=[   @key{package} @AdaPackDefn{Stable} @key{is}]}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI05-0339-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI05-0111-1],ARef=[AI12-0339-1]}
 @ChgAdded{Version=[5],Text=[      @key{type} @AdaTypeDefn{List} (Base : @key{not null access} Doubly_Linked_Lists.List) @key{is}
          @key{tagged limited private}
          @key{with} Constant_Indexing => Constant_Reference,

@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:40 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.153 $}
+@Comment{$Revision: 1.154 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1318,6 +1318,7 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
 @end{Example}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Type=[Trailing],Text=[In this example, the compiler
   cannot know the value of I when the subprogram returns (since the subprogram
   execution can change it), and thus it does not know whether Table(I)'Old will
@@ -1330,8 +1331,8 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   of an access type. This would be mystifying (since the point of the short
   circuit is to eliminate this possibility, but it cannot do so). Therefore, we
   require the @nt{prefix} of any Old attribute in such a context to statically
-  denote an object, which eliminates anything that could change at during
-  execution.]}
+  denote an object, which eliminates anything that could change
+  @Chg{Version=[5],New=[],Old=[at ]}during execution.]}
 
   @ChgRef{Version=[3],Kind=[AddedNormal]}
   @ChgAdded{Version=[3],Text=[It is easy to work around most errors that occur
@@ -2405,7 +2406,7 @@ Global aspect.]}]}
 
 @begin{Intro}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Text=[A compound object is an object whose
 logical representation is composed
 of multiple subordinate objects. Internal access objects are used to
@@ -2417,7 +2418,7 @@ compound object.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For an access-to-object subtype, or
 an object (including a component) of an access-to-object type, the following
 aspect is defined:]}
@@ -2449,7 +2450,7 @@ internal access object.]]}
 @end{Discussion}
 @end{Description}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a @Redundant[full] type, the
 following representation aspect is defined:]}
 
@@ -2606,7 +2607,7 @@ the type shall be controlled, or have only a limited partial view (if any).]}
 
 @begin{Erron}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0240-6]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}Execution
 is erroneous if an object @i<X> is read or updated via a
 dereference of an internal access object, and at that point:]}
@@ -3517,10 +3518,22 @@ different @nt{default_expression}s.
 @Chg{Version=[3],New=[is],Old=[must be]} the same as the
 corresponding @nt{attribute_designator} in the other; and]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0342-1]}
 each @nt{primary} that is a literal in one
-has the same value as the corresponding literal in the other.
+@Chg{Version=[5],New=[is a user-defined literal if and only if the
+corresponding literal in the other is also a user-defined literal.
+Furthermore, if neither are user-defined literals
+then they shall have the same values@Redundant[, but they may have
+differing textual representations]; if both are user-defined literals then
+they shall have the same textual representation],Old=[has the same value as
+the corresponding literal in the other]}.
+
 @begin{Ramification}
-The literals may be written differently.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0342-1]}
+@Chg{Version=[5],New=[This rule applies to @nt{character_literal}s, so
+even though other rules would allow a rename of a character literal to
+conform to the literal, this rule prevents that],Old=[The literals
+may be written differently]}.
 @end{Ramification}
 @end{Itemize}
 @begin{Ramification}
@@ -3672,7 +3685,7 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Incompatible2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0107-1],ARef=[AI05-0159-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0107-1],ARef=[AI12-0159-1]}
   @ChgAdded{Version=[4],Text=[@Defn{extensions to Ada 2012}@b<Corrigendum:>
   We now define that a prefixed view of a subprogram with synchronization
   kind By_Protected_Procedure can be used as the prefix of 'Access for an
@@ -3682,12 +3695,16 @@ and "(X: T)" conforms fully with "(X: @key[in] T)".
 @end{Extend2012}
 
 @begin{Diffword2012}
-  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0050-1]}
+  @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0050-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> We now define how two
   expressions containing quantified expressions can fully conform. This
   isn't incompatible, as the original Ada 2012 never allowed such expressions
   to conform (the declarations in each formally being different). Neither is
   it an extension as one would expect these to conform.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+  @ChgAdded{Version=[5],Text=[The conformance of literals is tightened up to
+  not assume anything about the value of a user-defined literal.]}
 @end{Diffword2012}
 
 
@@ -5461,7 +5478,40 @@ Sec=(raised by failure of runtime check)}
     @nt{extended_return_statement}).]}
 @end{Honest}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI95-00318-02],ARef=[AI05-0058-1],ARef=[AI12-0343-1]}@Comment{Just moved this text from below.}
+@ChgAdded{Version=[5],Text=[For the execution of an
+@nt{extended_@!return_@!statement}, the
+@nt{handled_@!sequence_@!of_@!statements} is executed. Within this
+@nt{handled_@!sequence_@!of_@!statements}, the execution of a
+@nt{simple_@!return_@!statement} that applies to the
+@nt{extended_@!return_@!statement} causes a transfer of control that completes
+the @nt{extended_@!return_@!statement}. Upon completion
+of a return statement that applies to a callable construct by the
+normal completion of a @nt{simple_@!return_@!statement} or
+by reaching the @key[end return] of an @nt{extended_@!return_@!statement}, a
+transfer of control is performed which completes the execution of the callable
+construct, and returns to the caller.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0058-1]}
+  @ChgAdded{Version=[5],Text=[A transfer of control that completes an
+  @nt{extended_return_statement} (such as an exit or goto) does not cause
+  a return to the caller unless it is caused by @nt{simple_return_statement}
+  (that is, triggers the second sentence of this paragraph). The return to
+  the caller occurs for the @nt{simple_return_statement} that applies to an
+  @nt{extended_return_statement} because the last sentence says
+  @ldquote@;the normal completion of a @nt{simple_return_statement}@rdquote@;,
+  which includes the one nested in the @nt{extended_return_statement}.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0343-1]}
+  @ChgAdded{Version=[5],Text=[The check on the tag of the object occurs when
+  the object is created (before any @nt{sequence_of_statements}); the checks
+  which follow occur after the execution of any @nt{sequence_of_statements}.
+  This is implicit in the order of definition of these @RunTimeTitle@;.]}
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0073-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0343-1]}@Comment{Just a paragraph number change}
 @ChgAdded{Version=[3],Text=[@IndexCheck{Tag_Check}If the result subtype
 of the function is defined by
 an @nt{access_definition} designating a specific tagged type @i<T>, a check
@@ -5749,8 +5799,11 @@ that object.]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00318-02]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0058-1]}
-@Chg{Version=[2],New=[For the execution of an
-@nt{extended_@!return_@!statement}, the
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0343-1]}
+@Chg{Version=[5],New=[A check is performed that the return value satisfies the
+predicates of the return subtype. If this check fails, the effect is as defined in subclause
+@RefSec{Subtype Predicates}.@Defn2{Term=[Assertion_Error],Sec=(raised by failure of runtime check)}],Old=[@Chg{Version=[2],New=[For
+the execution of an @nt{extended_@!return_@!statement}, the
 @nt{handled_@!sequence_@!of_@!statements} is executed. Within this
 @nt{handled_@!sequence_@!of_@!statements}, the execution of a
 @nt{simple_@!return_@!statement} that applies to the
@@ -5762,19 +5815,30 @@ by reaching the @key[end return] of an @nt{extended_@!return_@!statement}],
 Old=[]}],Old=[Finally]}, a
 transfer of control is performed which completes the execution of the callable
 construct@Chg{Version=[2],New=[], Old=[ to which the @nt{return_@!statement}
-applies]}, and returns to the caller.
+applies]}, and returns to the caller.]}
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0058-1]}
-  @ChgAdded{Version=[3],Text=[A transfer of control that completes an
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0343-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[A transfer of
+  control that completes an
   @nt{extended_return_statement} (such as an exit or goto) does not cause
   a return to the caller unless it is caused by @nt{simple_return_statement}
   (that is, triggers the second sentence of this paragraph). The return to
   the caller occurs for the @nt{simple_return_statement} that applies to an
   @nt{extended_return_statement} because the last sentence says
   @ldquote@;the normal completion of a @nt{simple_return_statement}@rdquote@;,
-  which includes the one nested in the @nt{extended_return_statement}.]}
+  which includes the one nested in the @nt{extended_return_statement}.]}]}
 @end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0343-1]}
+  @ChgAdded{Version=[5],Text=[The subtype conversion of the return
+  expression for a @nt{simple_return_statement} performs this same check. The
+  permissions of @RefSecNum{Pragmas Assert and Assertion_Policy} ensure
+  that duplicate evaluation of a predicate at a single point is never
+  required, so a single evaluation of the predicate is enough in this case.]}
+@end{ImplNote}
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00318-02]}
 @ChgAdded{Version=[2],Text=[In the case of a function, the @nt{function_call}
@@ -6090,6 +6154,36 @@ syntactic, and refers exactly to @lquotes@;@nt{subprogram_body}@rquotes@;.
   @nt{extended_return_object_declaration} to make other rules easier to write
   and eliminate the problem described in AI05-0205-1.]}
 @end{DiffWord2005}
+
+@begin{Inconsistent2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0343-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[@Defn{inconsistencies with Ada 2012}@b<Correction:>
+  Reordered the checks associated with return statements to clarify when
+  they happen relative to the @nt{sequence_of_statements} of an
+  @nt{extended_return_statement}, and to add an additional predicate check
+  on the returned value. This latter check can fail if the value to be
+  returned is changed in the statements of an extended return. Thus, the
+  following function now raises Assertion_Error, while no exception would be
+  raised in Ada 2012:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] Rec @key[is record]
+  Count, Max : Natural;
+@key[end record with] Dynamic_Predicate => Rec.Count <= Rec.Max;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] Foo @key[return] Rec @key[is]
+@key[begin]
+    @key[return] Result : Rec := (Count => 5, Max => 10) @key[do]
+       Result.Max := 0;
+    @key[end return];
+@key[end] Foo;]}
+@end{Example}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This will detect a program bug (returning a
+  value that does not meet the predicate of the return subtype) rather than
+  leaving it hidden, so the inconsistency is tolerable.]}
+@end{Inconsistent2012}
 
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI05-0097-1]}

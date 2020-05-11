@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:40 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.82 $}
+@Comment{$Revision: 1.83 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -1556,7 +1556,7 @@ Text=[@i{Example of a parallel loop with a chunk specification:}]}
 
 @begin{WideAbove}
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
-@ChgAdded{Version=[5],Text=[@i{For an examples of an} @nt{iterator_filter}@i{,
+@ChgAdded{Version=[5],Text=[@i{For an example of an} @nt{iterator_filter}@i{,
 see @RefSecNum{Quantified Expressions}.}]}
 @end{WideAbove}
 @end{Example}

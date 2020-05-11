@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:40 $}
+@Comment{$Date: 2020/01/30 01:09:44 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.147 $}
+@Comment{$Revision: 1.148 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -1398,6 +1398,7 @@ Type extension is a new concept.
 
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00260-02],ARef=[AI95-00335-01]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0342-1]}
 @RootDefn{dispatching operation}
 @Defn2{Term=[dispatching call], Sec=(on a dispatching operation)}
 @Defn2{Term=[nondispatching call], Sec=(on a dispatching operation)}
@@ -1408,6 +1409,8 @@ Type extension is a new concept.
 @Defn2{Term=[controlling tag], Sec=(for a call on a dispatching operation)}
 The primitive subprograms of a tagged type@Chg{Version=[2],New=[, the
 subprograms declared by @nt{formal_@!abstract_@!subprogram_@!declaration}s,
+@Chg{Version=[5],New=[the subprograms identified by the user-defined literal
+aspects of a specific tagged type (see @RefSecNum{User-Defined Literals}),],Old=[]}
 and the stream attributes of a specific tagged type that are available (see
 @RefSecNum{Stream-Oriented Attributes}) at the end of the declaration list
 where the type is declared],Old=[]}
@@ -2119,6 +2122,12 @@ The concept of dispatching operations is new.
   @nt{declare_expression}s, and added a pointer to the existing special
   rules for @nt{conditional_expression}s, as the list of exceptions to the
   usual rules appear to be exhaustive.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to clarify that user-defined
+  literals are dispatching operations. User-defined literal aspects follow the
+  model of stream-oriented attributes, and thus need to be mentioned in the
+  same place.]}
 @end{Diffword2012}
 
 
@@ -2437,7 +2446,7 @@ allowed.]
   even considered by name resolution (see @RefSecNum{Subprogram Calls}).],Old=[]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0320-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0189-1],ARef=[AI12-0292-1],ARef=[AI12-0320-1]}
 @ChgAdded{Version=[5],Text=[If the @nt{name} or @nt{prefix} given in an
 @nt{iterator_procedure_call} (see @RefSecNum{Procedural Iterators}) denotes
 an abstract subprogram, the subprogram shall be a dispatching subprogram.]}
@@ -4674,8 +4683,12 @@ Run-time accessibility checks are also used,
 since the @LegalityTitle do not cover
 certain cases involving access parameters and generic packages.]
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0345-1]}
 @Leading@keepnext@;Each master, and each entity and view created by it,
-has an accessibility level:
+has an accessibility level@Chg{Version=[5],New=[; when two levels are defined to
+be the same, the accessibility levels of the two associated entities are said to
+be @i<tied>@Defn2{Term=[tied],Sec=[accessibility levels]} to each
+other],Old=[]}:
 @begin{Itemize}
 The accessibility level of a given master is deeper than
 that of each dynamically enclosing master,
@@ -4686,15 +4699,16 @@ given master directly depends
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00162-01],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0067-1],ARef=[AI12-0089-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0345-1]}
 An entity or view @Chg{Version=[2],New=[defined],Old=[created]} by a
 declaration@Chg{Version=[2],New=[ and created as part of its elaboration],Old=[]}
 has the same accessibility level
 as the innermost @Chg{Version=[2],New=[],Old=[enclosing ]}master
 @Chg{Version=[2],New=[of the declaration ],Old=[]}except in the
 cases of renaming and derived access types described below.
-@Chg{Version=[3],New=[Other than for an explicitly aliased
-parameter@Chg{Version=[4],New=[ of a function or generic function],Old=[]}, a
-formal],Old=[A]} parameter of a
+@Chg{Version=[5],New=[A formal],Old=[@Chg{Version=[3],New=[Other than for an
+explicitly aliased parameter@Chg{Version=[4],New=[ of a function or
+generic function],Old=[]}, a formal],Old=[A]}]} parameter of a
 @Chg{Version=[3],New=[callable entity],Old=[master]} has the same
 accessibility level as the master@Chg{Version=[3],New=[ representing the
 invocation of the entity],Old=[]}.
@@ -4855,9 +4869,11 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
   (even if the access result is of an access-to-subprogram type).]}
 
   @ChgRef{Version=[3],Kind=[Added]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1]}
   @ChgAdded{Version=[3],Text=[If the call itself defines the result of a
-  function to which one of the above rules applies, these rules are applied
-  recursively;]}
+  function to which one of the above rules applies, @Chg{Version=[5],New=[or
+  has an accessibility level that is tied to the result of such a
+  function, ],Old=[]}these rules are applied recursively;]}
 
   @ChgRef{Version=[3],Kind=[Added]}
   @ChgAdded{Version=[3],Text=[In other cases, the master of the call is that of
@@ -4904,11 +4920,13 @@ determined by the point of call as follows:@Defn{master of a call}@Defn2{Term=[c
     access type;]}
 
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[when the function result is built-in-place;]}
+  @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0345-1]}
+  @ChgAdded{Version=[3],Text=[when the function result is built-in-place@Chg{Version=[5],New=[.],Old=[;]}]}
 
   @ChgRef{Version=[3],Kind=[Added]}
-  @ChgAdded{Version=[3],Text=[when the function has an explicitly
-    aliased parameter.]}
+  @ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0345-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[when the function
+    has an explicitly aliased parameter.]}]}
   @end{Itemize}
 
   @ChgRef{Version=[3],Kind=[Added]}
@@ -5114,10 +5132,11 @@ is never deeper than that of the declaration of the stand-alone object].]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0240-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0070-1]}@ChgNote{Just to reflect the paragraph number change}
-@ChgAdded{Version=[3],Text=[The accessibility level of an explicitly aliased
-(see @RefSecNum{Subprogram Declarations}) formal parameter in a function body is
-determined by the point of call; it is the same level that the return object
-ultimately will have.]}
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0345-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[The accessibility level of an
+explicitly aliased (see @RefSecNum{Subprogram Declarations}) formal parameter in
+a function body is determined by the point of call; it is the same level that
+the return object ultimately will have.]}]}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0051-1],ARef=[AI05-0253-1]}
@@ -5299,8 +5318,9 @@ checks.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0142-4],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0277-1],ARef=[AI12-0324-1]}
-@ChgAdded{Version=[3],Text=[Inside a return statement that applies to a function
+@ChgRef{Version=[5],Kind=[DeletedAdded],ARef=[AI12-0277-1],ARef=[AI12-0324-1],ARef=[AI12-0345-1]}
+@ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[Inside a return
+statement that applies to a function
 @Chg{Version=[4],New=[or generic function ],Old=[]}@i<F>,
 @Chg{Version=[4],New=[or @Chg{Version=[5],New=[inside ],Old=[]}the
 return expression of an expression function
@@ -5311,7 +5331,7 @@ parameter of @i<F> is statically deeper than the level of the return object of
 the level of the explicitly aliased parameter; for statically comparing with the
 level of other entities, an explicitly aliased parameter of @i<F> is considered to
 have the accessibility level of @Chg{Version=[5],New=[a parameter of @i<F>
-that is not explicitly aliased],Old=[the body of @i<F>]}.]}
+that is not explicitly aliased],Old=[the body of @i<F>]}.]}]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0051-1],ARef=[AI05-0234-1],ARef=[AI05-0235-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0089-1],ARef=[AI12-0157-1]}
@@ -5327,16 +5347,16 @@ body@Chg{Version=[4],New=[ of @i<F>],Old=[]}.]}
 
 @begin{Honest}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0235-1]}
-  @ChgAdded{Version=[3],Text=[This rule has no effect if the previous bullet
-  also applies (that is, the @ldquote@;a level@rdquote is of
-  an explicitly aliased parameter).]}
+  @ChgRef{Version=[5],Kind=[Deleted],ARef=[AI12-0345-1]}
+  @ChgAdded{Version=[3],Text=[@Chg{Version=[5],New=[],Old=[This rule has no
+  effect if the previous bullet also applies (that is, the @ldquote@;a level@rdquote
+  is of an explicitly aliased parameter).]}]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[5],Text=[For an expression function @i{F}, the
     @ldquote@;body of @i{F}@rdquote is the
     @nt{expression_function_declaration} of @i{F}.]}
 @end{Honest}
-
 
 
 @Redundant[For determining whether one level is statically deeper than another
@@ -5359,6 +5379,32 @@ a deeper level than that of the type.
   @nt{type_declaration}, in an assume-the-worst manner.
 @end{Ramification}
 @end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0345-1]}
+@ChgAdded{Version=[5],Text=[Notwithstanding other rules given above, the
+accessibility level of an entity that is tied to that of an explicitly aliased
+formal parameter of an enclosing function is considered (both statically and
+dynamically) to be the same as that of an entity whose accessibility level is
+tied to that of the return object of that function.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This rule only applies when the level of an
+  explicitly aliased parameter of a function is compared to that of the return
+  object of the function. If a value designating the explicitly aliased
+  parameter is created and stored in a stand-alone object or passed as a
+  parameter, this special property is lost (even for the dynamic accessibility
+  of anonymous access types in these contexts).]}
+@end{Ramification}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[When this rule applies, no dynamic accessibility
+  check should be made, even when one would normally be part of the execution
+  of the construct. All places where this rule applies are known at
+  compile-time.]}
+@end{ImplNote}
+
 
 @Defn{library level}
 @Defn2{Term=[level],Sec=(library)}
@@ -6370,6 +6416,56 @@ uses of anonymous access types.]}
   exception in original Ada 2012 to become illegal or raise
   Program_Error because of an accessibility failure in Ada 202x. This is more
   likely to prevent a dangling pointer bug than to prevent something useful.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0345-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[@b<Correction:> Tightened the
+  cases where an explicitly aliased parameter has special accessibility, to
+  avoid needing to pass the required dynamic accessibility to functions that
+  have explicitly alised parameters. The changes affects programs that use
+  the dynamic accessibility of an explicitly aliased parameter within a return
+  statement of a function (typically using anonymous access types). This can
+  mean that a program that would have been legal and worked in Ada 2012 as
+  defined would raise Program_Error or be rejected in Ada 202x. One such
+  example is:]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] Rec @key[is record]
+    Comp : @key[aliased] Integer;
+    ...
+@key[end record];]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[function] F1 (A : @key[aliased in out] Rec) @key[return access] Integer @key[is]
+   @key[function] F2 (B : @key[access] Integer) @key[return access] Integer
+      @key[is] (B); -- @examcom{(1)}
+@key[begin]
+   @key[return] F2 (A.Comp'Access); -- @examcom{(2)}
+@key[end] F1;]}
+@end{Example}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Trailing],Text=[At (2), there is a check that the
+  dynamic accessibility level of B is not deeper than the master of the call
+  for F2 (which is defined to be the master of the call for F1). In Ada 2012,
+  since the reference is inside of a return statement, the dynamic accessibility
+  of A.Comp'Access is the master of the call for F1 - meaning the check at (2)
+  should pass. In Ada 202x, the the dynamic accessibility of A.Comp'Access is
+  local for for F1 - meaning the check at (2) should fail and raise
+  Program_Error.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[We're not aware of any Ada 2012 compilers that
+  correctly implemented the rule as written (because of the overhead that is
+  implied), so the practical effect of this change is to make the rules more
+  consistent with actual practice.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0345-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[@b<Correction:> Adjusted the rules
+  so that using a part of a return object in a return expression does not
+  break the connection between the inner and outer function calls. This
+  means that some cases that (unnecessarily) failed an accessibility check in
+  Ada 2012 will not do so in Ada 202x. This change will mostly remove latent
+  problems from Ada code; very little code depends on an accessibility check
+  failing.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}

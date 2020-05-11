@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.107 $}
+@Comment{$Revision: 1.108 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -2177,14 +2177,21 @@ a formal incomplete type. The only view of a formal incomplete type is an
 incomplete view. @Redundant[Thus, a formal incomplete type is subject to the same
 usage restrictions as any other incomplete type @em see @RefSecNum{Incomplete Type Declarations}.]]}
 
-@leading@;For a generic formal derived type with no @nt<discriminant_part>:
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0351-1]}
+@leading@;For a generic formal derived type with no @nt<discriminant_part>@Chg{Version=[5],New=[,
+the actual subtype shall be statically compatible with the ancestor subtype.
+Furthermore],Old=[]}:
 @begin(Itemize)
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0351-1]}
   If the ancestor subtype is constrained,
-  the actual subtype shall be constrained,
-  and shall be statically compatible with the ancestor;
+  the actual subtype shall be constrained@Chg{Version=[5],New=[],Old=[,
+  and shall be statically compatible with the ancestor]};
 @begin{Ramification}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0351-1]}
   In other words, any constraint on the ancestor subtype is considered
-  part of the @lquotes@;contract.@rquotes@;
+  part of the @lquotes@;contract@rquotes@;.@Chg{Version=[5],New=[ Predicates
+  are also considered part of the contract for @i<any> subtype, via the
+  static compatibility requirement.],Old=[]}
 @end{Ramification}
 
   If the ancestor subtype is an unconstrained access
@@ -2607,6 +2614,15 @@ runtime check to a compile-time check.
   be rare, as it only can happen if the formal derived type does not
   accurately describe the actual type; in most such cases, extension will be
   desired and a private extension used so that is allowed.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0351-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> The predicates of an ancestor
+  subtype are considered part of the contract for a formal derived type, even
+  if the ancestor subtype is unconstrained. This means, for instance, if the
+  ancestor subtype is a subtype of Float with a predicate, then an actual
+  subtype with a different predicate is illegal in Ada 202x while it would have
+  been allowed in Ada 2012. Cases like this are quite unlikely and will be
+  detected at compile-time if they occur.]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}
@@ -3795,7 +3811,7 @@ then the declarations that occur immediately within the
 @nt<generic_formal_part> of the template for the formal package
 are visible outside the formal package,
 and can be denoted by expanded names outside the formal
-package.@Chg{Version=[2],New=[If only some of the actual parameters are
+package.@Chg{Version=[2],New=[ If only some of the actual parameters are
 given by <>, then the declaration corresponding to those parameters (but
 not the others) are made visible.],Old=[]}
 @end{Ramification}

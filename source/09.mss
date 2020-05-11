@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:19 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.137 $}
+@Comment{$Revision: 1.138 $}
 
 @begin{Intro}
 
@@ -5171,8 +5171,7 @@ environment (such as POSIX).]}
 
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{Local_Image} (Date : Time;
-                         Include_Time_Fraction : Boolean := False;
-                         Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String @key<is>
+                         Include_Time_Fraction : Boolean := False) @key<return> String @key<is>
       (Image (Date, Include_Time_Fraction, Local_Time_Offset (Date)));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
