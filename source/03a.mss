@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:18 $}
+@Comment{$Date: 2020/01/30 01:09:44 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.144 $}
+@Comment{$Revision: 1.145 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1961,7 +1961,7 @@ given subtype, then:]}
   @ChgAdded{Version=[5],Text=[Most parameter passing is covered by the subtype
   conversion rule: all inbound @key[in] and @key[in out] parameters are converted
   to the formal subtype, and the copy-back for by-copy @key[out] and @key[in out]
-  parameters are converted to the actual subtype. The remaining parameter
+  parameters includes a conversion to the actual subtype. The remaining parameter
   passing cases are covered by special rules: by-reference @key[out] and
   @key[in out] parameters by the rule given above, and we don't want any
   predicate checks on inbound @key[out] parameters, accomplished in part

@@ -1,8 +1,8 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/pre_dirs.mss,v $ }
-@comment{ $Revision: 1.54 $ $Date: 2019/09/09 02:53:20 $ $Author: randy $ }
+@comment{ $Revision: 1.55 $ $Date: 2020/01/30 01:09:45 $ $Author: randy $ }
 @Part(predefdirs, Root="ada.mss")
 
-@Comment{$Date: 2019/09/09 02:53:20 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 
 @RMNewPageVer{Version=[2]}@Comment{For printed version of Ada 2005 RM}
 @LabeledAddedClause{Version=[2],Name=[The Package Directories]}
@@ -1311,7 +1311,7 @@ should be deleted first.]}
 @end{Diffword2005}
 
 @begin{Diffword2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI05-0337-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0337-1]}
   @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified the meaning of
   Simple_Name in the case that the parameter is a root directory. This was
   not previously deescribed.]}

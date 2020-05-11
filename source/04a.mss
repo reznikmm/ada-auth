@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:40 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.156 $}
+@Comment{$Revision: 1.157 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1495,6 +1495,13 @@ rhs="@Chg{Version=[3],New=<@SynI{indexable_container_object_}@Syn2{prefix} @Syn2
 is any indexable container type.@PDefn2{Term=[expected type],
   Sec=(@SynI{indexable_container_object_}@nt{prefix})}]}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A @nt{prefix} can be an @nt{implicit_dereference}
+  (see @RefSecNum{Names}), so an access-to-@SynI{indexable_container_object}
+  can be the prefix (English meaning!) of a @nt{generalized_indexing}.]}
+@end{Ramification}
+
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0139-2],ARef=[AI05-0292-1]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[If the Constant_Indexing aspect is
 specified for the type of the @SynI{indexable_container_object_}@nt{prefix} of a
@@ -1860,76 +1867,153 @@ values of the type.]}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The following nonoverridable,
-type-related operational aspects may be specified for any type @i<T>:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following
+type-related operational aspects
+(collectively known
+as @i<user-defined literal aspects>)@Defn{user-defined literal aspect}
+@Defn2{Term={aspect},Sec=[{user-defined literal]}
+may be specified for any type @i<T>:]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
 @ChgAdded{Version=[5],Text=[Integer_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+@SynI{function_}@nt{name} that statically denotes a function with one
 parameter of type String and a result type of @i<T>.@AspectDefn{Integer_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Integer_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined integer literals.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
 @ChgAdded{Version=[5],Text=[Real_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+@SynI{function_}@nt{name} that statically denotes a function with one
 parameter of type String and a result type of @i<T>.@AspectDefn{Real_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Real_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined real literals.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1],ARef=[AI12-0342-1]}
 @ChgAdded{Version=[5],Text=[String_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that denotes a primitive function of @i<T> with one
+@SynI{function_}@nt{name} that statically denotes a function with one
 parameter of type Wide_Wide_String and a result type of @i<T>.@AspectDefn{String_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined string literals.]}]}
 
 @end{Description}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[The following example is legal
+    because the preceding rules are @ResolutionTitle
+    (see @RefSecNum{Aspect Specifications}):]}
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[package] Pkg1 @key[is]
+   @key[type] T @key[is record] X, Y : Integer; @key[end record]
+     @key[with] Integer_Literal => Int_Lit;
+   @key[function] Int_Lit (X, Y : T) @key[return] Duration;    -- @Examcom{Wrong profile.}
+   @key[function] Int_Lit (Lit_Image : String) @key[return] T; -- @Examcom{Right profile.}
+@key[end] Pkg1;]}
+@end{Example}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[User-defined literal aspects are inherited according
+to the rules given in @RefSecNum{Operational and Representation Aspects}.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[This means that in this example]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[package] Pkg2 @key[is]
+   @key[type T1 is record]
+      X, Y : Integer;
+   @key[end record with] Integer_Literal => I_L;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[function] I_L (S : String) @key[return] T1 @key[is] ((0, 0));]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key[type] T2 @key[is new] T1;
+   @key[function] I_L (S : String) @key[return] T2 is ((1, 1));
+   X : T2 := 123;
+@key[end] Pkg2;]}
+@end{Example}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+  @ChgAdded{Version=[5],Type=[Trailing],Text=[the initial value of Pkg.X
+  is (0,0), not (1,1).]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[When a numeric literal is interpreted as value of
+a non-numeric type @i<T> or a @nt{string_literal} is interpreted a value of
+a type @i<T> that is not a string type (see @RefSecNum{Literals}), it is
+equivalent to a call to the subprogram denoted by the corresponding aspect of
+@i<T>: the Integer_Literal aspect for an integer literal, the Real_Literal
+aspect for a real literal, and the String_Literal aspect for a
+@nt{string_literal}. The actual parameter of this notional call is a
+@nt{string_literal} having the textual representation of the original (numeric
+or string) literal.]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[This equivalence defines, for example, the nominal
+  type, the nominal subtype, and the accessibility level of a user-defined
+  literal. It also has the consequence that a user-defined literal shall not be
+  of an abstract type (because that would be equivalent to a nondispatching call
+  to an abstract function). This equivalence also defines the @RunTimeTitle
+  of evaluating a user-defined literal.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The (sub)type of the actual parameter to this call
+  is determined by the profile of the appropriate aspect, and the bounds of the
+  @nt{string_literal} are defined by the usual rules for the bounds of a
+  @nt{string_literal}.]}
+@end{Discussion}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[Such a literal is said to be a
+@i<user-defined literal>.@Defn{user-defined literal}]}
 
 @end{StaticSem}
 
 @begin{Legality}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1],ARef=[AI12-0342-1]}
 @ChgAdded{Version=[5],Text=[The Integer_Literal or Real_Literal aspect shall not
 be specified for a type @i<T> if the full view of @i<T> is a numeric type.
 The String_Literal aspect shall not be specified for a type @i<T> if the
-full view of @i<T> is a string type.
-@PDefn{generic contract issue}
-In addition to the places where @LegalityTitle normally apply
-(see @RefSecNum{Generic Instantiation}),
-these rules also apply in the private part of an instance of a generic unit.]}
+full view of @i<T> is a string type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[For a nonabstract type, the function directly
+specified for a user-defined literal aspect shall not be abstract.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[For a tagged type with a partial view, a
+user-defined literal aspect shall not be directly specified on the full type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[If a nonabstract tagged type inherits any
+user-defined literal aspect, then each inherited aspect shall be directly
+specified as a nonabstract function for the type unless the inherited aspect
+denotes a nonabstract function and the type is a null extension.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
+@ChgAdded{Version=[5],Text=[In addition to the places where @LegalityTitle
+normally apply (see @RefSecNum{Generic Instantiation}), these rules also apply
+in the private part of an instance of a generic unit.@PDefn{generic contract issue}]}
+
 @end{Legality}
 
-@begin{Runtime}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1]}
-@ChgAdded{Version=[5],Text=[For the evaluation of an integer literal that
-has an expected type with a specified Integer_Literal aspect, the value is the
-result of a call on the function specified by the aspect, with the parameter
-being a String with lower bound one whose value corresponds to the textual
-representation of the integer literal. Similarly, the evaluation of a real
-literal that has an expected type with a specified Real_Literal aspect, the
-value is the result of a call on the function specified by the aspect, with the
-parameter being a String with lower bound one whose value corresponds to the
-textual representation of the real literal.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1]}
-@ChgAdded{Version=[5],Text=[For the evaluation of a @nt{string_literal} that
-has an expected type with a specified String_Literal aspect, the value is the
-result of a call on the function specified by the aspect, with the parameter
-being a Wide_Wide_String with lower bound one that corresponds to the literal.]}
-@end{Runtime}
-
 @begin{Bounded}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0325-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0325-1],ARef=[AI12-0342-1]}
 @ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}It
 is a bounded error if the evaluation of a literal that has an expected
-type with a specified Integer_Literal, Real_Literal, or String_Literal
-aspect, propagates an exception. Either Program_Error or the exception
+type with a specified user-defined literal aspect propagates an exception.
+Either Program_Error or the exception
 propagated by the evaluation is raised at the point of use of the value
 of the literal. If it is recognized prior to run time that evaluation
 of such a literal will inevitably (if executed) result in such a
@@ -1941,9 +2025,10 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
   @ChgAdded{Version=[5],Text=[As always, an implementation may apply "as-if"
   optimizations (those that result in the same external effects in the absence
   of erroneous execution) to the function calls associated with user-defined
-  literals. In particular, if the function associated with a _Literal aspect has
-  a Global aspect that indicates no references to global variables, then a
-  number of optimizations are available to the implementation:]}
+  literals. In particular, if the function associated with a user-defined
+  literal aspect has a Global aspect that indicates no references to global
+  variables, then a number of optimizations are available to the
+  implementation:]}
 @begin{Itemize}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
     @ChgAdded{Version=[5],Text=[The implementation can evaluate a user-defined
@@ -2008,7 +2093,7 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 @end{Examples}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0295-1],ARef=[AI12-0325-1],ARef=[AI12-0342-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}The user-defined
   literal aspects Integer_Literal, Real_Literal, and String_Literal are new.]}
 @end{Extend2012}
@@ -5829,12 +5914,15 @@ the designated profiles shall be subtype conformant.]}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0123-1]}
 @ChgRef{Version=[4],Kind=[RevisedAdded],ARef=[AI12-0101-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0352-1]}
 @ChgAdded{Version=[3],Text=[If the profile of an explicitly declared primitive
 equality operator of an untagged record type is type conformant with that of the
 corresponding predefined equality operator, the declaration shall occur before
 the type is frozen.@Chg{Version=[4],New=[],Old=[ In addition, if the untagged
 record type has a nonlimited partial view, then the declaration shall occur
-in the visible part of the enclosing package.]}
+in the visible part of the enclosing package.]}@Chg{Version=[5],New=[ In
+addition, no type shall have been derived from the untagged
+record type before the declaration of the primitive equality operator.],Old=[]}
 @PDefn{generic contract issue}
 In addition to the places where @LegalityTitle normally apply
 (see @RefSecNum{Generic Instantiation}),
@@ -6235,6 +6323,34 @@ membership test using @key(in)]} yields the result True if:
     @Chg{Version=[4],New=[@SynI{tested_}@nt{simple_expression}],Old=[@nt{simple_expression}]}
     is covered by the designated type of the tested type.]}
   @end{Inneritemize}
+
+@begin{Honest}
+    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+    @ChgAdded{Version=[5],Type=[Leading],Text=[In some of these cases, the
+    bulleted checks need to pass before any predicate check is executed.
+    Otherwise, a predicate check could be performed on an object of the
+    wrong type. Consider:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key[type] Root @key[is tagged null record];
+@key[type] Ext @key[is new] Root @key[with] Data : Integer; @key[end record];
+@key[function] Is_Even (Param : Ext) @key[return] Boolean @key[is]
+   (Param.Data @key[mod] 2 = 0);
+@key[subtype] Even_Ext @key[is] Ext
+  @key[with] Dynamic_Predicate => Is_Even (Even_Ext);
+@key[function] F (X : Root'Class) @key[return] Boolean @key[is]
+   (X @key[in] Even_Ext);
+Flag : Boolean := F (Root'(@key[null record]));]}
+@end{Example}
+
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[If the predicate check is performed before
+    the tag check or regardless of the result of that check, Is_Even would
+    be called on an object that does not have a Data component. Similar
+    cases can be constructed for general access types.]}
+@end{Honest}
+
 @end(itemize)
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0264-1]}
@@ -7790,9 +7906,9 @@ rhs="@Chg{Version=[5],New=<
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_attribute_designator>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<@SynI{reduction_}@Syn2{identifier}(@Syn2{reduction_specification})>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
 @AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<reduction_specification>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<@SynI{reducer_}@Syn2{name}, @SynI{initial_value_}@Syn2{expression}[, @SynI{combiner_}@Syn2{name}]>,Old=<>}"}
+rhs="@Chg{Version=[5],New=<@SynI{reducer_}@Syn2{name}, @SynI{initial_value_}@Syn2{expression}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0250-1],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The @nt{iterated_element_association} of a
@@ -7857,17 +7973,8 @@ subtype conformant with the following specification:]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[A @i<combiner subprogram>@Defn{combiner subprogram}
-is a reducer subprogram where the Value parameter is of subtype @i<Accum_Type>
-rather than subtype @i<Value_Type>.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The @SynI{reducer_}@nt{name} of a @nt{reduction_specification}
 denotes a reducer subprogram.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[The @SynI{combiner_}@nt{name}, if any, of a
-@nt{reduction_specification} denotes a combiner subprogram.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Text=[The expected type of an
@@ -7883,31 +7990,25 @@ subtype @i<Value_Type>.]}
 @end{Resolution}
 
 @begin{Legality}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[The @SynI{combiner_}@nt{name} of a
-@nt{reduction_specification} shall be specified if the subtypes of the
-parameters of the subprogram denoted by the @SynI{reducer_}@nt{name} of the
-@nt{reduction_specification} do not statically match each other and the
-@nt{reduction_attribute_reference} has a @nt{value_sequence} with the reserved
-word @key[parallel].]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
+@ChgAdded{Version=[5],Text=[If the @nt{reduction_attribute_reference} has a
+@nt{value_sequence} with the reserved word @key[parallel], the subtypes
+@i<Accum_Type> and @i<Value_Type> shall statically match.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
 @ChgAdded{Version=[5],Text=[If the @nt{identifier} of a
-@nt{reduction_attribute_designator} is Parallel_Reduce then the
-@SynI{combiner_}@nt{name} of the @nt{reduction_specification} shall be specified
-if the subtypes of all the parameters of the subprogram denoted by the
-@SynI{reducer_}@nt{name} of the @nt{reduction_specification} do not statically
-match.]}
+@nt{reduction_attribute_designator} is Parallel_Reduce, the subtypes
+@i<Accum_Type> and @i<Value_Type> shall statically match.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[For a @nt{reduction_attribute_reference} with a
   @nt{value_sequence} that does not have the reserved word @key[parallel] or has
   a @nt{prefix} and the @nt{identifier} of the
-  @nt{reduction_attribute_designator} is Reduce, the @SynI{combiner_}@nt{name}
-  of the @nt{reduction_specification} is optional because only one logical
-  thread of control is presumed so there is no need to provide a way to combine
-  multiple results.]}
+  @nt{reduction_attribute_designator} is Reduce, the subtypes
+  @i<Accum_Type> and @i<Value_Type> can be different because only one logical
+  thread of control is presumed so there is no need to combine multiple
+  results.]}
 @end{Reason}
 @end{Legality}
 
@@ -7916,21 +8017,6 @@ match.]}
 @ChgAdded{Version=[5],Text=[A @nt{reduction_attribute_reference} denotes a
 value, with nominal subtype being the subtype of the first parameter of the
 subprogram denoted by the @SynI{reducer_}@nt{name}.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[For a @nt{reduction_attribute_reference} that has
-a @nt{value_sequence} with the reserved word @key[parallel], if the
-@SynI{combiner_}@nt{name} is not specified, then the
-subprogram denoted by the @SynI{reducer_}@nt{name} also implicitly denotes the
-combiner subprogram.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-@ChgAdded{Version=[5],Text=[For a @nt{reduction_attribute_reference} where the
-@nt{identifier} of the @nt{reduction_attribute_designator} is Parallel_Reduce,
-if the @SynI{combiner_}@nt{name} is not specified, then the subprogram
-denoted by the @SynI{reducer_}@nt{name} also implicitly denotes the
-combiner subprogram.]}
-
 @end{StaticSem}
 
 @begin{Runtime}
@@ -7973,19 +8059,18 @@ reduction expression without a @nt{chunk_specification}.]}]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<V>, AttrName=<Reduce(Reducer, Initial_Value[, Combiner])>,
-  InitialVersion=[5], ARef=[AI12-0262-1],
+  Leading=<T>, Prefix=<V>, AttrName=<Reduce(Reducer, Initial_Value)>,
+  InitialVersion=[5], ARef=[AI12-0262-1], ARef=[AI12-0348-1],
   Text=[@Chg{Version=[5],New=[This attribute represents a @i<reduction expression>,
   and is in the form of a @nt{reduction_attribute_reference}.],Old=[]}]}@Comment{End of Annex text here.}
 @EndPrefixType{}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[@PDefn2{Term=[evaluation], Sec=(reduction_attribute_reference)}
     The evaluation of a use of this attribute begins by evaluating the parts
     of the
-    @nt{reduction_attribute_designator} (the @SynI{reducer_}@nt{name} Reducer,
-    the @SynI{initial_value_}@nt{expression} Initial_Value, and the
-    @SynI{combiner_}@nt{name} Combiner, if any), in
+    @nt{reduction_attribute_designator} (the @SynI{reducer_}@nt{name} Reducer
+    and the @SynI{initial_value_}@nt{expression} Initial_Value), in
     an arbitrary order.@PDefn2{Term=[arbitrary order],Sec=[allowed]} It then
     initializes the @i<accumulator> of the reduction expression to the value of
     the @SynI{initial_value_}@nt{expression} (the @i<initial
@@ -7993,14 +8078,13 @@ reduction expression without a @nt{chunk_specification}.]}]}
     @Defn2{Term=[initial value],Sec=[reduction attribute]} The
     @nt{value_sequence} V is then evaluated.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[If the @nt{value_sequence} does not
     have the reserved word @key[parallel], each value of the @nt{value_sequence}
     is passed, in order, as the second (Value) parameter to a call on Reducer,
     with the first (Accumulator) parameter being the prior value of the
     accumulator, saving the result as the new value of the accumulator. The
-    reduction expression yields the final value of the accumulator. Combiner, if
-    specified, is ignored for such a (sequential) reduction expression.]}
+    reduction expression yields the final value of the accumulator.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[If the reserved word @key[parallel]
@@ -8009,23 +8093,17 @@ reduction expression without a @nt{chunk_specification}.]}]}
     sequence has been partitioned into one or more subsequences (see
     above) each with its own separate logical thread of control.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[Each logical thread of control
-    creates a local accumulator for processing its subsequence. If there is a
-    separate Combiner subprogram specified, then the accumulator for each
-    subsequence is initialized to the initial value, and Reducer is called in
-    sequence order with each value of the subsequence as the second (Value)
-    parameter, and with this local accumulator as the first (Accumulator)
-    parameter, saving the result back into this local accumulator. If there is
-    no separate combiner specified, then the accumulator for a subsequence is
-    initialized to the first value of the subsequence, and calls on Reducer
-    start with the second value of the subsequence (if any). In either case, the
-    result for the subsequence is the final value of its local accumulator.]}
+    creates a local accumulator for processing its subsequence. The accumulator
+    for a subsequence is initialized to the first value of the subsequence, and
+    calls on Reducer start with the second value of the subsequence (if any).
+    The result for the subsequence is the final value of its local accumulator.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[After all logical threads of control
-    of a parallel reduction expression have completed, Combiner (or Reducer, if
-    Combiner is not specified) is called for each subsequence, in the original
+    of a parallel reduction expression have completed, Reducer is called
+    for each subsequence, in the original
     sequence order, passing the local accumulator for that subsequence as the
     second (Value) parameter, and the overall accumulator
     @Redundant[(initialized above to the initial value)] as the first
@@ -8038,9 +8116,9 @@ reduction expression without a @nt{chunk_specification}.]}]}
     @nt{value_sequence} yields an empty sequence of values, the reduction
     expression yields the initial value.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],NoPrefix=[T],Text=[If an exception is propagated by one
-    of the calls on Reducer or Combiner, that exception is propagated from the
+    of the calls on Reducer, that exception is propagated from the
     reduction expression. If different exceptions are propagated in different
     logical threads of control, one is chosen arbitrarily to be propagated from
     the reduction expression as a whole.]}
@@ -8052,23 +8130,25 @@ reduction expression without a @nt{chunk_specification}.]}]}
   @nt{prefix} where the @nt{identifier} of the
   @nt{reduction_attribute_designator} is Reduce (see below), generally the
   compiler can still choose to execute the reduction in parallel, presuming
-  doing so would not change the results. However, if Combiner is not specified,
-  then sequential execution is necessary if the subtypes of the parameters of
+  doing so would not change the results. However
+  sequential execution is necessary if the subtypes of the parameters of
   Reducer do not statically match, since there is no subprogram identified in
   the construct that could be used for combining the results in parallel.]}
 @end{ImplNote}
 
 @begin{Discussion}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
-  @ChgAdded{Version=[5],Text=[We say the calls to Combiner are sequentially
+  @ChgAdded{Version=[5],Text=[We say the calls to Reducer that combine the
+  results of parallel execution are sequentially
   ordered in increasing order because certain reductions, such as vector
-  concatentation, can be non-commutative operations. In order to return a
-  deterministic result for parallel execution that is consistent with sequential
-  execution, we need to specify an order for the iteration, and for the
-  combination of results from the logical threads of control. It is also
-  necessary that calls to Combiner are issued sequentially with respect to each
-  other, which may require extra synchronization if the calls to Combiner are
-  being executed by different logical threads of control.]}
+  concatenation, can be non-commutative (but still associative) operations.
+  In order to return a deterministic result for parallel execution that is
+  consistent with sequential execution, we need to specify an order for the
+  iteration, and for the combination of results from the logical threads of
+  control. It is also necessary that combining calls to Reducer are issued
+  sequentially with respect to each other, which may require extra
+  synchronization if the calls to Reducer are being executed by different
+  logical threads of control.]}
 @end{Discussion}
 
 @end(description)
@@ -8082,8 +8162,8 @@ are defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<X>, AttrName=<Reduce(Reducer, Initial_Value[, Combiner])>,
-  InitialVersion=[5], ARef=[AI12-0242-1],
+  Leading=<T>, Prefix=<X>, AttrName=<Reduce(Reducer, Initial_Value)>,
+  InitialVersion=[5], ARef=[AI12-0242-1], ARef=[AI12-0348-1],
   Text=[@Chg{Version=[5],New=[X'Reduce is a reduction expression that yields
   a result equivalent to replacing the @nt{prefix} of the attribute with the
   @nt{value_sequence}:],Old=[]}
@@ -8093,8 +8173,8 @@ are defined:]}
 @end{DescExample}]}@Comment{End of Annex text here.}
 
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<T>, Prefix=<X>, AttrName=<Parallel_Reduce(Reducer, Initial_Value[, Combiner])>,
-  InitialVersion=[5], ARef=[AI12-0242-1],
+  Leading=<T>, Prefix=<X>, AttrName=<Parallel_Reduce(Reducer, Initial_Value)>,
+  InitialVersion=[5], ARef=[AI12-0242-1], ARef=[AI12-0348-1],
   Text=[@Chg{Version=[5],New=[X'Parallel_Reduce is a reduction expression that
   yields a result equivalent to replacing the attribute @nt{identifier} with
   Reduce and the @nt{prefix} of the attribute with the
@@ -8109,41 +8189,42 @@ are defined:]}
 @end{Runtime}
 
 @begin{Bounded}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
 @ChgAdded{Version=[5],Text=[@PDefn2{Term=(bounded error),Sec=(cause)}
-If a parallel reduction expression has a combiner subprogram
-specified, then it is a bounded error if the initial value is not the
-(left) identity of the combiner subprogram. That is, the result of
-calling the combiner subprogram with the Accumulator being the initial
-value and the Value being any arbitrary value of subtype @i<Accum_Type> should
-produce a result equal to the Value parameter. The possible consequences
-are Program_Error, or a result that does not match the equivalent
-sequential reduction expression due to multiple uses of the
-non-identity initial value in the overall
-reduction.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
+For a parallel reduction expression, it is a bounded error if the reducer
+subprogram is not associative. That is, for any arbitrary values of subtype
+@i<Value_Type> @i<A>, @i<B>, @i<C> and a reducer function @i<R>, the result of
+@i<R> (@i<A>, @i<R> (@i<B>, @i<C>)) should produce a result equal to
+@i<R> (@i<R> (@i<A>, @i<B>), @i<C>)). The possible consequences
+are Program_Error, or a result that does not match the equivalent sequential
+reduction expression due to the order of calls on the reducer subprogram being
+unspecified in the overall reduction. Analogous rules apply in the case of a
+reduction procedure.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[There is no way to do the individual subsequence
-    reductions when the @i<Accum_Type> and the @i<Value_Type> are not the same, unless we
-    can initialize the local accumulator with an initial-value that is presumed
-    to be the identity. If the initial value is not the identity, and there is
-    more than one chunk, it will be included more than once in the overall
-    reduction. We associate this bounded error with there being a combiner
-    subprogram specified, since that is necessary only when @i<Accum_Type> and
-    @i<Value_Type> are different, and because the dynamic semantics above specify the
-    use of the initial value multiple times whenever a combiner is specified. We
-    chose to base the dynamic semantics rules on the presence of a separate
-    combiner, rather than on the matching between @i<Accum_Type> and @i<Value_Type>, since
-    the presence of the combiner is more visible in the source.]}
+  @ChgAdded{Version=[5],Text=[In a sequential reduction expression, the reducer
+    subprogram is called in a left-to-right order, whereas in a parallel
+    reduction expression, the reducer subprogram is called in an order that
+    depends on the number of logical threads of control that execute the
+    reduction and on the elements/components given to each chunk. If the
+    reducer is associative, this order does not matter, but in other cases,
+    very different results are possible. While one can specify the @i<maximum>
+    number of chunks, the actual number of chunks is unspecified. Similarly,
+    the split of elements has only weak requirements. Thus, to get a consistent
+    and portable result, an associative reducer is required for a parallel
+    reduction. We define this as a @BoundedTitle
+    to provide a stern warning about the required nature of the reducer
+    subprogram and to let compilers detect the problem when possible.]}
 @end{Reason}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[In this rule, @ldquote@;equal@rdquote means
-    semantically equal. We don't care if the bit patterns differ but the results
-    mean the same thing. In particular, if the primitive equal is user-defined,
-    that equality would be the one used to determine if this rule is violated.]}
+    semantically equal. We don't care if the bit patterns differ but that the
+    results mean the same thing. In particular, if the primitive equal is
+    user-defined, that equality would be the one used to determine if this
+    rule is violated.]}
 @end{Honest}
 @end{Bounded}
 
@@ -8160,12 +8241,12 @@ its result as a Reduction Expression:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[An expression function that computes
-the Sin of X using Taylor expansion:]}
+the Sine of X using a Taylor expansion:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text={@key[function] Sin (X : Float; Num_Terms : Positive := 5) @key[return] Float @key[is]
-   ([@key[for] I @key[in] 1..Num_Terms => (-1.0)**(I-1) * X**(2*I-1)/Float(Fact(2*I-1))]
+@ChgAdded{Version=[5],Text={@key[function] Sine (X : Float; Num_Terms : Positive := 5) @key[return] Float @key[is]
+   ([@key[for] I @key[in] 1..Num_Terms => (-1.0)**(I-1) * X**(2*I-1)/Float(Factorial(2*I-1))]
       'Reduce("+", 0.0));}}
 @end{Example}
 
@@ -8203,8 +8284,8 @@ array of integers:]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Determine if all elements in a two
-dimensional array of booleans are set to true:]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[Determine if all elements in a
+two-dimensional array of booleans are set to true:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -8222,7 +8303,7 @@ of an array of integers in parallel:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0312-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[A parallel reduction expression used
-to calculate the mean of the elements of a two dimensional array of
+to calculate the mean of the elements of a two-dimensional array of
 subtype Matrix (see @RefSecNum{Array Types}) that are greater than 100.0:]}
 
 @begin{Example}
@@ -8250,7 +8331,7 @@ subtype Matrix (see @RefSecNum{Array Types}) that are greater than 100.0:]}
 
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1],ARef=[AI12-0262-1],ARef=[AI12-0348-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Reduction
   expressions attributes are new.]}
 @end{Extend2012}

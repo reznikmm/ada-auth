@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:40 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.80 $}
+@Comment{$Revision: 1.81 $}
 
 @LabeledClause{Type Conversions}
 
@@ -3133,7 +3133,18 @@ of a @nt<subtype_@!indication> or the same evaluation of a @nt<range>
 of a @nt<discrete_@!subtype_@!definition>.]}
 @begin{Itemize}
 @ChgRef{Version=[2],Kind=[Added]}
+
 @Chg{Version=[2],New=[both are null constraints;],Old=[]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[A null constraint has nothing to do with
+  null exclusions! Unconstrained array subtypes, subtypes with unknown
+  discriminants, and subtypes with no explicit constraint have null
+  constraints (see @RefSecNum{Types and Subtypes}). This terminology
+  became confusing when null exclusions were introduced in the
+  2007 Amendment.]}
+@end{Discussion}
 
 @ChgRef{Version=[2],Kind=[Added]}
 @Chg{Version=[2],New=[both are static and have equal corresponding bounds or discriminant

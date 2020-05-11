@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.81 $ $Date: 2019/04/09 04:56:52 $ $Author: randy $ }
+@comment{ $Revision: 1.82 $ $Date: 2020/01/30 01:09:45 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2020/01/30 01:09:45 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -2166,9 +2166,13 @@ across active partitions:}
   @RI{-- Declarations are not shown, they are irrelevant here}
 @key{end} Tape_Driver;
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0347-1]}
 @key{with} Tapes, Name_Server;
 @key{package body} Tape_Driver @key{is}
-   @key{type} New_Tape @key{is new} Tapes.Tape @key{with} ...
+   @key{type} New_Tape @key{is new} Tapes.Tape @key{with} ...@Chg{Version=[5],New=[
+   @key{overriding}
+   @key{procedure} Rewind (T : @key{access} New_Tape);
+   @key{overriding}],Old=[]}
    @key{procedure} Copy
     (From, To : @key{access} New_Tape; Num_Recs: @key[in] Natural) @key{is}
    @key{begin}
