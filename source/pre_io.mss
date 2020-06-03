@@ -1,9 +1,9 @@
 @Part(predefio, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:52 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/pre_io.mss,v $}
-@Comment{$Revision: 1.75 $}
+@Comment{$Revision: 1.76 $}
 @LabeledClause{Input-Output}
 @begin{Intro}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00285-01]}
@@ -3622,8 +3622,8 @@ Ada.Long_@!Float_@!Wide_Text_IO.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00428-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0004-1],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[
-@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Bounded_IO]}
-@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Bounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Wide_Bounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Wide_Wide_Bounded_IO]}
 The specification of package Wide_Text_IO.Wide_@!Bounded_IO is the same as that
 for Text_IO.Bounded_IO, except that any occurrence of Bounded_String is
 replaced by @Chg{Version=[3],New=[Bounded_@!Wide_@!String],Old=[Wide_@!Bounded_@!String]},
@@ -3646,8 +3646,8 @@ is replaced by Wide_Wide_@!Bounded.]}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00285-01],ARef=[AI95-00301-01]}
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0092-1]}
 @ChgAdded{Version=[2],Text=[
-@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Unbounded_IO]}
-@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Unbounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_@!Text_IO],Child=[Wide_Unbounded_IO]}
+@ChildUnit{Parent=[Ada.Wide_Wide_@!Text_IO],Child=[Wide_Wide_Unbounded_IO]}
 The specification of package Wide_Text_IO.@!Wide_Unbounded_IO is the same as that
 for Text_IO.@!Unbounded_IO, except that any occurrence of Unbounded_@!String is
 replaced by @Chg{Version=[3],New=[Unbounded_@!Wide_@!String],Old=[Wide_@!Unbounded_@!String]},

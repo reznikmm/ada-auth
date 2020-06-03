@@ -1,9 +1,9 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13b.mss,v $}
-@Comment{$Revision: 1.125 $}
+@Comment{$Revision: 1.126 $}
 
 @RMNewPage
 @LabeledClause{The Package System}
@@ -6500,7 +6500,7 @@ frozen.]}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0014]}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0017-1],ARef=[AI05-0019-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0103-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1],ARef=[AI12-0155-1],ARef=[AI12-0168-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0155-1],ARef=[AI12-0168-1],ARef=[AI12-0373-1]}
 @Defn2{Term=[freezing],
   Sec=(entity caused by the end of an enclosing construct)}
 The end of a @nt{declarative_part}, @nt{protected_body},
@@ -6733,12 +6733,15 @@ then at the place where the expression causes freezing, @i(T) is frozen.]}
 @Leading@;The following rules define which entities are frozen at the place where
 a construct causes freezing:
 @begin{Itemize}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0367-1]}
 @Leading@PDefn2{Term=[freezing], Sec=(type caused by an expression)}
 At the place where an expression causes freezing,
 the type of the expression is frozen,
 unless the expression is an enumeration literal used as a
 @nt{discrete_choice} of the @nt{array_@!aggregate} of an
-@nt{enumeration_@!representation_@!clause}.
+@nt{enumeration_@!representation_@!clause}@Chg{Version=[5],New=[ or
+as the @nt{aspect_definition} of a 
+specification for aspect Default_Value],Old=[]}.
 @begin{Reason}
 We considered making enumeration literals never cause freezing,
 which would be more upward compatible,
@@ -6747,6 +6750,12 @@ caused us to change our mind.
 Furthermore, an enumeration literal is a static expression,
 so the implementation should be allowed to represent it using its
 representation.
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0367-1]}
+@ChgAdded{Version=[5],Text=[We exclude uses of enumeration literals that are
+used in part for setting the representation of the type (aspect Default_Value
+is defined to be a representation aspect) so we don't freeze the type while
+determining its representation.]}
 @end{Reason}
 @begin{Ramification}
 @Leading@;The following pathological example was legal in Ada 83,
@@ -7433,7 +7442,12 @@ Old=[@ntf{attribute_representation_clause}]} has been generalized.
   AARM note to be true, no compiler could actually get this wrong, so no
   incompatibility is possible.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0367-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Added a freezing exclusion for
+  enumeration literals in the expression of a Default_Value aspect; otherwise,
+  one could not set a default value for an enumeration type.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0373-1]}
   @ChgAdded{Version=[5],Text=[Added missing definition of freezing of library
   units.]}
 @end{DiffWord2012}

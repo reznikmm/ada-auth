@@ -1,10 +1,10 @@
 @Part(12, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Generic Units}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/12.mss,v $}
-@Comment{$Revision: 1.108 $}
+@Comment{$Revision: 1.109 $}
 
 @begin{Intro}
 @Defn{generic unit}
@@ -121,6 +121,19 @@ that are generic formal entities, as well as to their respective
 declarations.
 @Redundant[Examples: @lquotes@;generic formal procedure@rquotes@;
 or a @lquotes@;formal integer type declaration.@rquotes@;]
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0371-1]}
+@ChgAdded{Version=[5],Text=[The list of 
+@nt{generic_formal_parameter_declaration}s of a @nt{generic_formal_part}
+form a @i<declaration list> of the generic unit.@PDefn{declaration list}]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Aspect specifications (see 
+  @RefSecNum{Aspect Specifications}) given in a generic formal part can only
+  use declarations given in the formal part, and not those in the visible 
+  part of the generic unit.]}
+@end{Ramification}
 @end{StaticSem}
 
 @begin{RunTime}
@@ -241,6 +254,12 @@ because of confusion with normal formal parameters of subprograms.
   @nt{generic_subprogram_declaration} (as well as a @nt{generic_package_declaration}).
   This is described in @RefSecNum{Aspect Specifications}.]}
 @end{Extend2005}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0371-1]}
+  @ChgAdded{Version=[5],Text=[Defined a formal part as a declaration list, so
+  that the visibility of entities in aspect specifications is properly defined.]}
+@end{DiffWord2012}
 
 
 @RmNewPage@Comment{Insert page break so printed RM's look better.}
@@ -403,6 +422,7 @@ named associations.
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0004-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0205-1]}
 @Defn{generic actual parameter}
 @Defn{generic actual}
 @Defn{actual}
@@ -410,13 +430,23 @@ The @i{generic actual parameter} is either the
 @nt{explicit_generic_actual_parameter} given in a
 @Chg{Version=[3],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
 for each formal,
-or the corresponding @nt{default_@!expression} or @nt{default_@!name} if no
+or the corresponding @nt{default_@!expression}@Chg{Version=[5],New=[, @SynI{default_}@nt{subtype_mark},],Old=[]}
+or @nt{default_@!name} if no
 @Chg{Version=[3],New=[@nt{generic_@!association}],Old=[@ntf{generic_@!parameter_@!association}]}
 is given for the formal.
 When the meaning is clear from context,
-the term @lquotes@;generic actual,@rquotes@; or simply @lquotes@;actual,@rquotes@; is used as a synonym for
-@lquotes@;generic actual parameter@rquotes@;
+the term @lquotes@;generic actual@Chg{Version=[5],New=[],Old=[,]}@rquotes@;@Chg{Version=[5],New=[,],Old=[]}
+or simply @lquotes@;actual@Chg{Version=[5],New=[],Old=[,]}@rquotes@;@Chg{Version=[5],New=[,],Old=[]}
+is used as a synonym for @lquotes@;generic actual parameter@rquotes@;
 and also for the view denoted by one, or the value of one.
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
+  @ChgAdded{Version=[5],Text=[Any matching or other @LegalityTitle that apply 
+  to a a generic actual are applied to any @nt{default_expression}, 
+  @SynI{default_}@nt{subtype_mark}, or @nt{default_name} that are used as an
+  actual.]}
+@end{Ramification}
 @end{Intro}
 
 @begin{Legality}
@@ -443,10 +473,12 @@ for a positional @nt{generic_association} is the parameter with the
 corresponding position in the @nt{generic_formal_part} of the
 generic unit being instantiated.]}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0205-1]}
 A @nt{generic_instantiation} shall contain at
 most one @nt<generic_association> for each formal.
 Each formal without an association shall have a
-@nt{default_expression} or @nt{subprogram_default}.
+@nt{default_expression}@Chg{Version=[5],New=[, 
+@SynI{default_}@nt{subtype_mark},],Old=[]} or @nt{subprogram_default}.
 
 In a generic unit @LegalityName@;s
 are enforced at compile time of the
@@ -1297,6 +1329,12 @@ generic parameters.
   positional parameters, as this is missing from Ada 95 and Ada 2005.]}
 @end{Diffword2005}
 
+@begin{Diffword2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
+  @ChgAdded{Version=[5],Text=[Added uses of @SynI<default_>@nt{subtype_mark}s
+  so formal types can have defaults (see @RefSecNum{Formal Types}).]}
+@end{Diffword2012}
+
 
 @LabeledClause{Formal Objects}
 
@@ -1675,13 +1713,16 @@ scheme very well.
     | @Syn2{formal_incomplete_type_declaration}],Old=<@key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition};>}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI05-0213-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0205-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<formal_complete_type_declaration>,Old=<>}>,rhs="@Chg{Version=[3],New=<
     @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] @key{is} @Syn2{formal_type_definition}
-        [@Syn2{aspect_specification}];>,Old=<>}"}
+        @Chg{Version=[5],New=<[@key{or use} @SynI{default_}@Syn2{subtype_mark}] >,Old=[]}[@Syn2{aspect_specification}];>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[Added],ARef=[AI05-0213-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0205-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<formal_incomplete_type_declaration>,Old=<>}>,rhs="@Chg{Version=[3],New=<
-    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] [@key{is tagged}];>,Old=<>}"}
+    @key{type} @Syn2{defining_identifier}[@Syn2{discriminant_part}] [@key{is tagged}]@Chg{Version=[5],New=<
+        [@key{or use} @SynI{default_}@Syn2{subtype_mark}]>,Old=[]};>,Old=<>}"}
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00251-01]}
 @Syn{lhs=<formal_type_definition>,rhs="
@@ -1807,6 +1848,21 @@ both private and nonprivate actual types.
 It is legal to pass a class-wide subtype as the actual
 if it is in the right @Chg{Version=[2],New=[category],Old=[class]},
 so long as the formal has unknown discriminants.
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0205-1]}
+@ChgAdded{Version=[5],Text=[The @SynI{default_}@nt{subtype_mark}, if any, 
+shall denote a subtype which is allowed as an actual subtype for the formal 
+type.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
+  @ChgAdded{Version=[5],Text=[This rule is observed at compile time of the 
+  @nt{generic_declaration}, and is consistent with the handling of the 
+  @nt{default_name} of a formal subprogram. This means that a type declared
+  outside of the @nt{generic_declaration} cannot be used as the 
+  @SynI{default_}@nt{subtype_mark} for a formal type that depends on any other
+  formal type.]}
 @end{Ramification}
 @end{Legality}
 
@@ -1996,6 +2052,12 @@ had to.
   @ChgAdded{Version=[3],Text=[Formal incomplete types are added; these
   are documented as an extension in the next subclause.]}
 @end{DiffWord2005}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0205-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  Generic formal types now can include an optional default @nt{subtype_mark}.]} 
+@end{Extend2012}
 
 
 @LabeledSubClause{Formal Private and Derived Types}

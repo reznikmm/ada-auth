@@ -1,8 +1,8 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/safety.mss,v $ }
-@Comment{ $Revision: 1.67 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
+@Comment{ $Revision: 1.68 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
 @Part(safety, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 @LabeledRevisedNormativeAnnex{Version=[2],
 New=[High Integrity Systems], Old=[Safety and Security]}
 
@@ -914,6 +914,88 @@ subprogram is not invoked.
    Old=[]}No_Reentrancy @\During the execution of a subprogram by a task, no other
 task invokes the same subprogram.
 
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0079-3]}
+  @ChgAdded{Version=[5],Text=[@Defn2{Term=[restrictions],Sec=(No_Unspecified_Globals)}
+    @Defn{No_Unspecified_Globals restriction}No_Unspecified_Globals@\No 
+    library-level entity shall have a Global aspect of Unspecified,
+    either explicitly or by default. No library-level entity shall
+    have a Global'Class aspect of Unspecified, explicitly or by
+    default, if it is used as part of a dispatching call.]}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[Global'Class need not be specified on an
+      operation if there are no dispatching calls to the operation, or if all
+      of the dispatching calls are covered by 
+      @nt{dispatching_operation_specifier}s for operations with such calls
+      (see @RefSecNum{Extensions to Global and Global'Class Aspects}).]}
+@end{Ramification}
+
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0079-3]}
+  @ChgAdded{Version=[5],Type=[Leading],Text=[@Defn2{Term=[restrictions],Sec=(No_Hidden_Indirect_Globals)}
+    @Defn{No_Hidden_Indirect_Globals restriction}No_Hidden_Indirect_Globals@\When
+      within a context where the applicable Global aspect is neither
+      Unspecified nor @key[in out all], any execution within such a 
+      context does neither of the following:]}
+
+@begin{Itemize}
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[Update a variable that is reachable via a 
+      sequence of zero or more dereferences of access-to-object values from
+      a formal parameter of mode @key[in] (after any @key[overriding] @en 
+      see @RefSecNum{Extensions to Global and Global'Class Aspects}), or from
+      a global that is not within the applicable global variable set,
+      or has mode @key[in];]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],Text=[Read a variable that is updatable via a 
+      sequence of zero or more dereferences of access-to-object values 
+      from a global that is not within the applicable global variable set.]}
+@end{Itemize}
+
+@begin{Ramification}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[The above two rules specify that any
+      indirect references are covered by the Global or formal
+      parameter modes that apply, and are @i{not} subject to
+      alternative paths of access (such as aliasing) that could
+      result in conflicts.]}
+@end{Ramification}
+     
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],NoPrefix=[T],Text=[For the purposes of the above 
+      rules, if an applicable global variable set includes a package name,
+      and the collection of some pool-specific access type (see 
+      @RefSecNum{Completion and Finalization}) is implicitly declared in a
+      part of the declarative region of the package included within the
+      global variable set, then all objects allocated from that
+      collection are considered included within the global variable set.]}
+
+    @ChgRef{Version=[5],Kind=[Added]}
+    @ChgAdded{Version=[5],NoPrefix=[T],Text=[The consequences of violating the 
+      No_Hidden_Indirect_Globals restriction is implementation-defined. Any
+      aspects or other means for identifying such violations prior to or 
+      during execution are implementation-defined.]}
+    @ChgImplDef{Version=[5],Kind=[Added],Text=[@ChgAdded{Version=[5],
+       Text=[The consequences of violating No_Hidden_Indirect_Globals.]}]}
+
+@begin{Discussion}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[We do not make violations automatically
+        erroneous, because if the implementation chooses to never fully
+        trust it, there is nothing erroneous that can happen. If an
+        implementation chooses to trust the restriction, and performs
+        some optimization as a result of the restriction, the
+        implementation would define such a violation as erroneous. Such
+        an implementation might also endeavor to detect most violations,
+        perhaps by providing additional aspects, thereby reducing the
+        situations which result in erroneous execution. Implementations
+        might detect some but not all violations of the restrictions. 
+        Implementations that completely ignore the restriction should
+        treat the restriction as an unsupported capability of
+        @RefSec{High Integrity Systems}.]}
+@end{Discussion}
+
 @end{description}
 @end{StaticSem}
 
@@ -1240,6 +1322,10 @@ proscribed
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0020-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}Restriction
   Max_Image_Length is new.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+  @ChgAdded{Version=[5],Text=[Restrictions No_Unspecified_Globals
+  and No_Hidden_Indirect_Globals are new.]}
 @end{Extend2012}
 
 
@@ -1516,5 +1602,197 @@ then this exception could be handled within a library unit.]}
 @end{Extend95}
 
 
+@LabeledAddedClause{Version=[5],Name=[Extensions to Global and Global'Class Aspects]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[In addition to the entities specified in 
+@RefSecNum{The Global and Global'Class Aspects}, the Global aspect may be
+specified for a subtype (including a formal subtype), formal package,
+formal subprogram, and formal object of an anonymous
+access-to-subprogram type.]}
+
+@begin{Syntax}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following additional syntax is 
+provided for specifying Global and Global'Class aspects, to more precisely 
+describe the use of generic formal parameters and dispatching calls within 
+the execution of an operation:]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<extended_global_aspect_definition>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @key[use] @Syn2{formal_parameter_designator}
+  | @key[do] @Syn2{dispatching_operation_specifier}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<extended_global_aspect_element>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @key[use] @Syn2{formal_parameter_set}
+  | @key[do] @Syn2{dispatching_operation_set}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<extended_global_mode>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @key[overriding] @Syn2{basic_global_mode}>,Old=<>}"}
+     
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<formal_parameter_designator>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @Syn2{formal_group_designator}
+  | @Syn2{formal_parameter_name}>,Old=<>}"}
+        
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn<Version=[5],lhs=<@Chg{Version=[5],New=<formal_parameter_set>,Old=<>}>,
+rhs="@Chg<Version=[5],New=<
+    @Syn2{formal_group_designator}
+  | @Syn2[formal_parameter_name]{, @Syn2[formal_parameter_name]}>,Old=<>>">
+          
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<formal_group_designator>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<@key[null] | @key[all]>,Old=<>}"}
+          
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<formal_parameter_name>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @SynI{formal_}@Syn2{subtype_mark}
+  | @SynI{formal_subprogram_}@Syn2{name}
+  | @SynI{formal_access_to_subprogram_object_}@Syn2{name}>,Old=<>}"}
+         
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn<Version=[5],lhs=<@Chg{Version=[5],New=<dispatching_operation_set>,Old=<>}>,
+rhs="@Chg<Version=[5],New=<
+    @Syn2[dispatching_operation_specifier]{, @Syn2[dispatching_operation_specifier]}>,Old=<>>">
+          
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<dispatching_operation_specifier>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @SynI{dispatching_operation_}@Syn2{name} (@SynI{object_}@Syn2{name})>,Old=<>}"}
+
+@end{Syntax}
+
+@begin{Resolution}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[A @nt{formal_parameter_name} shall resolve to 
+statically denote a formal subtype, a formal subprogram, or a formal object of 
+an anonymous access-to-subprogram type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The @SynI{object_}@nt{name} that is associated with 
+an @key[overriding] mode shall resolve to statically denote a formal object, or 
+a formal parameter of the associated entity.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The @SynI{object_}@nt{name} of a 
+@nt{dispatching_operation_specifier} shall resolve to
+statically name an object (including possibly a formal parameter) of a
+tagged class-wide type @i{T}'Class; the @SynI{dispatching_operation_}@nt{name} of
+the @nt{dispatching_operation_specifier} shall resolve to statically denote a
+dispatching operation associated with @i{T}.]}
+
+@end{Resolution}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The presence of the reserved word @b<overriding>
+in a global mode indicates that the specification is overriding the mode of a 
+formal parameter with another mode to reflect the overall effect of an
+invocation of the callable entity on the state associated with the
+corresponding actual parameter.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The @nt{extended_global_aspect_definition} and
+@nt{extended_global_aspect_element} can be used to define as part of the 
+Global aspect the @i<formal parameter set>@Defn{formal parameter set} and
+the @i<dispatching operation set>@Defn{dispatching operation set} used within
+an operation. The formal parameter set is identified by a set of formal 
+parameter names after the reserved word @key[use]. Alternatively, the reserved 
+word @key[null] may be used to indicate none of the generic formal parameters, 
+or @key[all] to indicate all of the generic formal parameters, of any enclosing
+generic unit (or visible formal package) might be used within the execution of
+the operation. If there is no formal parameter set specified for an
+operation declared within a generic unit, it defaults to @key[use all].]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The dispatching operation set is identified by 
+a set of @nt{dispatching_operation_specifier}s after the reserved word 
+@key[do]. It indicates that the Global effects of dispatching calls that
+@i<match>@Defn2{Term=[match],Sec=(dispatching call to a @nt{dispatching_operation_specifier})}
+one of the specifiers need not be accounted for by other elements of the
+Global aspect, but are instead to be accounted for by the invoker of the
+operation. A dispatching call @i<matches> a @nt{dispatching_operation_specifier}
+if the @nt{name} or @nt{prefix} of the call statically denotes the same 
+operation(s) as that of the @nt{dispatching_operation_specifier}, and at least 
+one of the objects controlling the call is denoted by a name that statically 
+names the same object as that denoted by the @i<object_>@nt{name} of the
+@nt{dispatching_operation_specifier}. In the absence of any
+@nt{dispatching_operation_specifier}s, all dispatching calls within the
+operation are presumed to have the effects determined by the set of
+Global'Class aspects that apply to the invoked dispatching operation.]}
+
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[The object @ldquote@;controlling the call@rdquote
+  is not necessarily a controlling parameter of the call if the call is a 
+  function with a controlling result or has parameters that is such a 
+  function. It @i<is> one of the objects that provide the dispatching tag used 
+  for the call; that could, for example, be a parameter of a function used as 
+  a parameter to the call, or an object being assigned to, or a parameter of 
+  an enclosing call.]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The Global aspect for a subtype identifies the 
+global variables that might be referenced during default initialization, 
+adjustment as part of
+assignment, finalization of an object of the subtype, or conversion to
+the subtype, including the evaluation of any assertion expressions that
+apply. If not specified for the first subtype of a derived type, the
+aspect defaults to that of the ancestor subtype; if not specified for a
+nonderived first subtype the aspect defaults to that of the enclosing
+library unit. If not specified for a nonfirst subtype @i<S>, the Global
+aspect defaults to that of the subtype identified in the
+@nt{subtype_indication} defining @i<S>.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The Global'Class aspect may be specified for the 
+first subtype of a tagged type @i<T>, indicating an upper bound on the Global
+aspect of any descendant of @i<T>. If not specified, it defaults to Unspecified.]}
+
+@end{StaticSem}
+
+@begin{Legality}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[For a tagged subtype @i<T>, each mode of its 
+Global aspect shall identify a subset of the variables identified by the 
+corresponding mode, or by the @key[in out] mode, of the Global'Class aspect 
+of the first subtype of any ancestor of @i<T>.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[If the formal parameter set is anything but 
+@key[all] in the Global aspect for an operation declared within a generic
+unit, then the only generic formal subtypes that may be used, the only 
+formal subprograms that may be called, and the only formal objects of an 
+anonymous access-to-subprogram type that may be dereferenced as part of a call 
+or passed as the actual for an access parameter, are those included in the
+formal parameter set.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[Any dispatching call occurring within the 
+operation that does not match a @nt{dispatching_operation_specifier} is checked
+using the Global'Class aspect(s) applicable to the dispatching operation; if 
+there is a match, there is no checking against other elements of the Global 
+aspect(s) applicable at the point of call.]}
+
+@end{Legality}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  These extensions to the Global aspect are new.]}
+@end{Extend2012}
 
 

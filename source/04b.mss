@@ -1,9 +1,9 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04b.mss,v $}
-@Comment{$Revision: 1.81 $}
+@Comment{$Revision: 1.82 $}
 
 @LabeledClause{Type Conversions}
 
@@ -2345,9 +2345,10 @@ An implementation may define the staticness and other
 properties of implementation-defined attributes.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0368-1]}
 an @nt{attribute_reference} whose
-@nt{prefix} statically denotes a statically constrained array
-object or array subtype,
+@nt{prefix} statically @Chg{Version=[5],New=[names],Old=[denotes]} a
+statically constrained array object or array subtype,
 and whose @nt<attribute_designator>
 is First, Last, or Length,
 with an optional dimension;
@@ -2400,6 +2401,13 @@ both of whose @nt{relation}s are static expressions;
 @nt{condition}s, @SynI{selecting_}@nt{expression}s,
 and @SynI{dependent_}@nt{expression}s are static expressions;]}
 
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1]}
+@ChgAdded{Version=[5],Text=[a @nt{declare_expression} whose
+@Syni{body_}@nt{expression} is static and each of whose
+declarations, if any, is either the declaration of a static constant or is
+an @nt{object_renaming_declaration} with an @Syni{object_}@nt{name} that
+statically names the renamed object;]}
+
 a static expression enclosed in parentheses.
 @end{Itemize}
 @begin(Discussion)
@@ -2441,6 +2449,44 @@ denotes the entity and:
 @nt{Selected_component}s that are not expanded names
 and @nt{indexed_component}s do not statically denote things.
 @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{name} @i<statically names>
+an object if it:@Defn{Statically names}]}
+@begin{Itemize}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1]}
+  @ChgAdded{Version=[5],Text=[statically denotes the declaration of an object
+    @Redundant[(possibly through one or more renames)];]}
+    @begin{TheProof}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[Follows from the definition of statically
+      denotes.]}
+    @end{TheProof}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1],ARef=[AI12-0373-1]}
+  @ChgAdded{Version=[5],Text=[is a @nt{selected_component} whose prefix
+    statically names an object, there is no implicit dereference of the prefix,
+    and the @nt{selector_name} does not denote a
+    @nt{component_declaration} occurring within a @nt{variant_part}; or]}
+    @begin{Reason}
+      @ChgRef{Version=[5],Kind=[AddedNormal]}
+      @ChgAdded{Version=[5],Text=[We disallow components in a @nt{variant_part}
+      so that no discriminant checks are needed to evaluate the
+      @nt{selected_component}. Note that other kinds of discriminant-dependent
+      components do not need any checks on access (only when they are
+      changed).]}
+    @end{Reason}
+  @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1]}
+  @ChgAdded{Version=[5],Text=[is an @nt{indexed_component} whose prefix
+    statically names an object, there is no implicit dereference of the prefix,
+    the object is statically constrained, and the index expressions of the
+    object are static and have values that are within
+    the range of the index constraint.]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0368-1]}
+@ChgAdded{Version=[5],Text=[For an entity other than an object, a @nt{name}
+statically names an entity if the @nt{name} statically denotes the entity.]}
+
 
 @Leading@Defn2{Term=[static], Sec=(function)}
 A @i{static function} is one of the following:
@@ -3115,6 +3161,12 @@ raising.
   denote an entity if the associated @SynI{variable_}@nt{name} statically
   denotes an entity. This is necessary so that target names participate in
   the anti-order-dependence checks of @RefSecNum{Parameter Associations}.]}
+
+  @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI12-0368-1],ARef=[AI12-0373-1]}
+  @ChgAdded{Version=[3],Text=[Added wording to define staticness for
+  @nt{declare_expression}s. Also moved @ldquote@;statically names@rdquote@;
+  definition here and used it in array attribute prefix wording.]}
+
 @end{Diffword2012}
 
 
