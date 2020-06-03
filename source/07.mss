@@ -1,10 +1,10 @@
 @Part(07, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Packages}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/07.mss,v $}
-@Comment{$Revision: 1.150 $}
+@Comment{$Revision: 1.151 $}
 
 @begin{Intro}
 @redundant[@ToGlossaryAlso{Term=<Package>,
@@ -5460,11 +5460,16 @@ freezing point of the access type.@PDefn2{Term=[arbitrary order],Sec=[allowed]}]
 
   @begin{ImplNote}
   @ChgRef{Version=[3],Kind=[AddedNormal]}
+  @ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
   @ChgAdded{Version=[3],Text=[This permission is intended to allow the allocated
   objects to "belong" to the subpool objects and to allow those objects to be
   finalized at the time that the storage pool is finalized (if they are not
-  finalized earlier). This is expected to ease implementation, as the objects
-  will only need to belong to the subpool and not also to the collection.]}
+  finalized earlier). This is expected to ease implementation, as the
+  @Chg{Version=[5],New=[remaining yet-to-be deallocated ],Old=[]}objects
+  will only need to @Chg{Version=[5],New=[be accessible at run time from
+  the subpool header and not also from the overall access type collection
+  header. That is, they only need to belong to a single list,
+  rather two],Old=[belong to the subpool and not also to the collection]}.]}
   @end{ImplNote}
 
 @end{ImplPerm}

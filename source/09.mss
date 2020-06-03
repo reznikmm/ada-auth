@@ -1,10 +1,10 @@
 @Part(09, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Tasks and Synchronization}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/09.mss,v $}
-@Comment{$Revision: 1.138 $}
+@Comment{$Revision: 1.139 $}
 
 @begin{Intro}
 
@@ -1993,11 +1993,11 @@ following:@Defn{nonblocking-static}@Defn2{Term=[expression],Sec=[nonblocking-sta
     not known at compile-time.]}
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a program unit, task
 entry, formal package, formal
 subprogram, formal object of an anonymous access-to-subprogram type,
-enumeration literal, and for a type (including a formal type), the
+enumeration literal, and for a subtype (including a formal subtype), the
 following language-defined operational aspect is defined:]}
 
 @begin{Description}
@@ -2065,6 +2065,21 @@ be @i{nonblocking}.@Defn{allows blocking}@Defn{nonblocking}@Defn2{Term=[blocking
       pragma Detect_Blocking can be used to ensure that Program_Error is raised
       in a deadlock situation.]}
   @end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[For a generic unit @i{G}, if the 
+aspect Nonblocking is statically true for @i{G} (by
+inheritance or specification), then the nonblocking expression for @i{G} is the
+@key[and] of the nonblocking attribute for each formal parameter of @i{G}.]}
+
+  @begin{Reason}
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[This means that an instance of this generic will
+    be nonblocking only if all of the formal parameters are nonblocking (see 
+    below). This is the most usable definition. If one wants a generic whose 
+    instantiations will always be nonblocking, Nonblocking can be specified on
+    the formal parameters.]}
+  @end{Reason}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[For a generic instantiation and
@@ -2135,12 +2150,7 @@ is the same as the Nonblocking aspect for the type.]}
       might use some record equality. So we have to have the possibility of
       allowing blocking for them. We don't just copy the Nonblocking aspect of
       the type in every case, as someone could declare an elementary type to
-      allow blocking, but we don't want to have to worry about generic matching,
-      so the operators of elementary types are handled separately. In addition,
-      aspects of subprograms can be view-specific, while aspects of types cannot
-      be view specific (see @RefSecNum{Aspect Specifications}); thus in order to
-      handle private types completed by elementary types, we need to have this
-      rule apply to the operators, not the types.]}
+      allow blocking.]}
   @end{Reason}
 
   @begin{Ramification}
@@ -2155,16 +2165,19 @@ is the same as the Nonblocking aspect for the type.]}
 access-to-subprogram type, the Nonblocking aspect of the designated subprogram
 is that of the access-to-subprogram type.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[@Redundant[For a full type declaration
-that has a partial view, the aspect is the same as that of the partial view.]]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[For the base type of a scalar (sub)type,
+the Nonblocking aspect is the Boolean literal True.]}
 
-  @begin{TheProof}
+  @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[Type aspects are never view-specific; they
-      always have the same value for all views. This is formally stated in
-      @RefSecNum{Operational and Representation Aspects}.]}
-  @end{TheProof}
+    @ChgAdded{Version=[5],Text=[The first subtype of a scalar type can allow 
+    blocking (which can be useful so a predicate can allow blocking), but the
+    base type is always Nonblocking. We need this so the Nonblocking value
+    is well-defined for any subtype that is built from the base type (T'Base).
+    T'Base of any scalar type, including a generic formal type, is always 
+    nonblocking.]}
+  @end{Reason}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[For an inherited primitive dispatching
@@ -2177,10 +2190,10 @@ subprogram of the parent is nonblocking.]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[Unless directly specified, overridings
 of dispatching operations inherit this aspect.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-1]}
 @ChgAdded{Version=[5],Noprefix=[T],Text=[Unless directly specified, for a formal
-type, formal package, or formal subprogram, the Nonblocking aspect is that of
-the actual type, package, or subprogram.]}
+subtype, formal package, or formal subprogram, the Nonblocking aspect is that of
+the actual subtype, package, or subprogram.]}
 
   @begin{Reason}
     @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2215,7 +2228,8 @@ otherwise.]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} S that
-denotes a subprogram (including a formal subprogram)}:]}
+denotes a subprogram (including a formal subprogram)}, the following attribute 
+is defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
@@ -2244,7 +2258,7 @@ denotes a subprogram (including a formal subprogram)}:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} P that
-denotes a package (including a formal package)}:]}
+denotes a package (including a formal package)}, the following attribute is defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
@@ -2258,16 +2272,16 @@ denotes a package (including a formal package)}:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} S that
-denotes a subtype (including formal subtypes)}:]}
+denotes a subtype (including formal subtypes)}, the following attribute is defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<S>, AttrName=<Nonblocking>, ARef=[AI12-0064-2], ARef=[AI12-0319-1],
+  Leading=<F>, Prefix=<S>, AttrName=<Nonblocking>, ARef=[AI12-0064-2], ARef=[AI12-0319-1], ARef=[AI12-0374-1],
   InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes whether
     default initialization, finalization, assignment, predefined
     operators, and (in the case of
     access-to-subprogram subtypes) a subprogram designated by a value of
-    type S are considered nonblocking; the type of this attribute is the
+    subtype S are considered nonblocking; the type of this attribute is the
     predefined type Boolean.],Old=[]}]}@Comment{End of Annex text here.}
     @Chg{Version=[5],New=[S'Nonblocking represents the nonblocking expression of
     S; evaluation of S'Nonblocking evaluates that expression.],Old=[]}
@@ -2275,18 +2289,18 @@ denotes a subtype (including formal subtypes)}:]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
-denotes an object}:]}
+denotes an object}, the following attribute is defined:]}
 
 @begin(description)
 @ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Nonblocking>, ARef=[AI12-0319-1],
+  Leading=<F>, Prefix=<X>, AttrName=<Nonblocking>, ARef=[AI12-0319-1], ARef=[AI12-0374-1],
   InitialVersion=[5], Text=[@Chg{Version=[5],New=[Denotes whether
-    the type of X is considered nonblocking; the type of this
+    the subtype of X is considered nonblocking; the type of this
     attribute is the predefined type Boolean. X'Nonblocking represents the
     nonblocking expression of X; evaluation of X'Nonblocking evaluates that
     expression.],Old=[]}]}@Comment{End of Annex text here.}
-    @Chg{Version=[5],New=[S'Nonblocking represents the nonblocking expression of
-    S; evaluation of S'Nonblocking evaluates that expression.],Old=[]}
+    @Chg{Version=[5],New=[X'Nonblocking represents the nonblocking expression of
+    X; evaluation of X'Nonblocking evaluates that expression.],Old=[]}
 
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2301,6 +2315,29 @@ denotes an object}:]}
   describe whether the storage pool of an access type allows blocking.]}
 @end{Reason}
 @end(description)
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
+denotes an object of a class-wide type T'Class}, the following attribute 
+is defined:]}
+ 
+@begin(description)
+@Comment{We need to fix syntax in an AttrName; it works in the annex but not
+here.}
+@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
+  Leading=<F>, Prefix=<X>, AttrName=<Nonblocking(dispatching_operation_set)>, ARef=[AI12-0374-1],
+  InitialVersion=[5], Text=[@Chg{Version=[5],New=[X'Nonblocking(@nt{dispatching_operation_set}) 
+    represents the @key[and] of the Nonblocking aspect of
+    the tagged type @i<T1> identified by the tag of X, and the Nonblocking
+    aspects of the dispatching operations of @i<T1> corresponding to the
+    specified dispatching operations of T (or all dispatching operations
+    of T if the set is the reserved word @key[all]).],Old=[]}]}@Comment{End of Annex text here.}
+    @Chg{Version=[5],New=[If a @Syni{dispatching_}@nt{selector_name} within 
+    the set denotes multiple dispatching operations of T, the 
+    Nonblocking aspects of all of the corresponding dispatching operations 
+    of @i{T1} are @key[and]ed together.],Old=[]}
+@end(description)
+
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0247-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[The following are defined to be
@@ -2363,7 +2400,7 @@ then a call on the subprogram is a potentially blocking operation.]}
   @ChgAdded{Version=[5],Text=[A user-defined instance of a language-defined
   generic creates user-defined subprograms for the purpose of this rule.
   A dispatching call to a language-defined abstract subprogram always
-  callss a user-defined concrete subprogram, so that too is not
+  calls a user-defined concrete subprogram, so that too is not
   potentially blocking for the purposes of this rule.]}
 @end{Ramification}
 
@@ -2436,6 +2473,12 @@ unit is nonblocking.]}
     the Nonblocking aspect for any protected operation.]}
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[5],Text=[For a subtype for which aspect Nonblocking is True,
+any predicate expression that applies to the subtype shall only contain
+constructs that are allowed immediately within a nonblocking program
+unit.]}
+
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
 @ChgAdded{Version=[5],Text=[A subprogram shall be nonblocking if it overrides a
 nonblocking dispatching operation. An entry shall not implement a nonblocking
@@ -2473,15 +2516,28 @@ full view of a type that has a partial view.]}
     the full view.]}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
-@ChgAdded{Version=[5],Text=[Aspect Nonblocking shall be specified for a derived
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[5],Text=[Aspect Nonblocking shall be specified for 
+the first subtype of a derived
 type only if it fully conforms to the nonblocking expression of the ancestor
-type or if it is specified to have the Boolean literal True.]}
+subtype or if it is specified to have the Boolean literal True. Aspect
+Nonblocking shall be specified for a nonfirst
+subtype @i{S} only if it fully conforms to the nonblocking expression of the
+subtype identified in the @nt{subtype_indication} defining @i{S} or if it is
+specified to have the Boolean literal True. Aspect Nonblocking shall be
+specified for a first subtype @i{S} that completes an incomplete or partial
+view @i{P} only if it fully conforms to the nonblocking expression of the
+subtype @i{P} or if it is specified to have the Boolean literal True.]}
 
 @begin{Reason}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Boolean-valued aspects have a similar rule (see
-    @RefSecNum{Aspect Specifications}), we want this one to work similarly.]}
+  @ChgAdded{Version=[5],Text=[Boolean-valued aspects have a similar rule to
+    the first rule here (see @RefSecNum{Aspect Specifications}), we want this
+    one to work similarly. For the other rules, we need non-first subtypes
+    and completions to allow blocking only if the original first subtype
+    allows blocking, as that allows the programmer to know that any
+    operation on any subtype of a type are nonblocking if the first
+    subtype is nonblocking.]}
 @end{Reason}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2]}
@@ -2716,11 +2772,11 @@ a call to a subprogram is considered to allow blocking unless:]}
 @begin{Honest}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
   @ChgAdded{Version=[5],Text=[For checking in @i{P}, default initialization,
-   finalization, or assignment of a composite formal type @i{F} is considered
-   to call subprograms that have the nonblocking aspect of @i{F}'Nonblocking,
-   and this is checked for conformance against that of @i{P} as described above.
-   These operations of an elementary formal type are considered nonblocking,
-   and thus require no checks.]}
+   finalization, assignment, or conversion to a formal subtype @i{F}
+   is considered to call subprograms that have the nonblocking aspect of 
+   @i{F}'Nonblocking, and this is checked for conformance against that of 
+   @i{P} as described above. Note that the nonblocking aspect includes the
+   evaluation of any predicate for the subtype.]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0319-1]}
   @ChgAdded{Version=[5],Text=[Similarly, for checking in @i{P}, the implicit
@@ -2789,7 +2845,7 @@ implies that the operation will not block.]}
 @end{Incompatible2012}
 
 @begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0319-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0064-2],ARef=[AI12-0319-1],ARef=[AI12-0374-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   Aspect Nonblocking is new; it allows compile-time checks to prevent
   using potentially blocking operations in contexts where that is not
@@ -4479,7 +4535,7 @@ The @nt<requeue_statement> is new.
   statically deeper relationship does not apply, for instance a stand-alone
   object of an anonymous access type. Most programs that are affected are
   erroneous anyway (as they will eventually use a nonexistent object), so we
-  do not elieve this will matter in practice.]}
+  do not believe this will matter in practice.]}
 @end{Inconsistent2012}
 
 @begin{Incompatible2012}
@@ -5169,10 +5225,10 @@ environment (such as POSIX).]}
                    Include_Time_Fraction : Boolean := False;
                    Time_Zone  : Time_Zones.Time_Offset := 0) @key<return> String;]}
 
-@ChgRef{Version=[5],Kind=[Added]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0336-1],ARef=[AI12-0347-1]}
 @ChgAdded{Version=[5],Text=[   @key<function> @AdaSubDefn{Local_Image} (Date : Time;
                          Include_Time_Fraction : Boolean := False) @key<return> String @key<is>
-      (Image (Date, Include_Time_Fraction, Local_Time_Offset (Date)));]}
+      (Image (Date, Include_Time_Fraction, Time_Zones.Local_Time_Offset (Date)));]}
 
 @ChgRef{Version=[2],Kind=[AddedNormal]}
 @ChgAdded{Version=[2],Text=[   @key<function> @AdaSubDefn{Value} (Date : String;

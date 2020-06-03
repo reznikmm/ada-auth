@@ -1,10 +1,10 @@
 @Part(06, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Subprograms}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/06.mss,v $}
-@Comment{$Revision: 1.154 $}
+@Comment{$Revision: 1.155 $}
 
 @begin{Intro}
 @Defn{subprogram}
@@ -1113,36 +1113,6 @@ the given subexpression is not evaluated.@Defn{determined to be unevaluated}
 @end{Itemize}
 @end{Ramification}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0217-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{name} @i<statically names>
-an object if it:@Defn{Statically names}]}
-@begin{Itemize}
-  @ChgRef{Version=[5],Kind=[Added]}
-  @ChgAdded{Version=[5],Text=[statically denotes the declaration of an object
-    @Redundant[(possibly through one or more renames)];]}
-    @begin{TheProof}
-      @ChgRef{Version=[5],Kind=[AddedNormal]}
-      @ChgAdded{Version=[5],Text=[Follows from the definition of statically
-      denotes (see @RefSecNum{Static Expressions and Static Subtypes}).]}
-    @end{TheProof}
-  @ChgRef{Version=[5],Kind=[Added]}
-  @ChgAdded{Version=[5],Text=[is a @nt{selected_component} whose prefix
-    statically names an object, there is no implicit dereference of the prefix,
-    and the @nt{selector_name} names a component that does not depend on
-    a discriminant; or]}
-    @begin{Reason}
-      @ChgRef{Version=[5],Kind=[AddedNormal]}
-      @ChgAdded{Version=[5],Text=[We disallow components that depend on a
-      discriminant so that no discriminant checks are needed to evaluate the
-      @nt{selected_component}.]}
-    @end{Reason}
-  @ChgRef{Version=[5],Kind=[Added]}
-  @ChgAdded{Version=[5],Text=[is an @nt{indexed_component} whose prefix
-    statically names an object, the object is statically constrained, and the
-    index expressions of the object are static and have values that are within
-    the range of the index constraint.]}
-@end{Itemize}
-
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0145-2]}
 @ChgAdded{Version=[3],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
 denotes an object of a nonlimited type}, the following attribute is defined:]}
@@ -1246,7 +1216,8 @@ denotes an object of a nonlimited type}, the following attribute is defined:]}
   The @nt{prefix} of an Old @nt{attribute_reference}
   @Chg{Version=[5],New=[],Old=[that is
   potentially unevaluated ]}shall statically
-  @Chg{Version=[5],New=[name],Old=[denote]} an entity@Chg{Version=[5],New=[,
+  @Chg{Version=[5],New=[name (see @RefSecNum{Static Expressions and Static Subtypes})],
+  Old=[denote]} an entity@Chg{Version=[5],New=[,
   unless the @nt{attribute_reference} is
   unconditionally evaluated, or is conditionally evaluated where all of
   the determining expressions are known on entry],Old=[]}.]}
@@ -1738,16 +1709,25 @@ specific precondition and specific postcondition of the formal subprogram
 itself.]]}
 
 @begin{TheProof}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0272-1]}
   @ChgAdded{Version=[5],Text=[This follows from the general @RunTimeTitle
   rules given above, but we mention it explicitly so that there can be no
   doubt that it is intended.]}
 @end{TheProof}
 
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0371-1]}
+  @ChgAdded{Version=[5],Text=[The specific precondition and postcondition that 
+  apply to a generic formal subprogram also apply to any renaming of that 
+  subprogram, even if that renaming is visible in the instance and called from 
+  outside of the generic instance.]}
+@end{Honest}
+
 @end{Runtime}
 
 @begin{ImplPerm}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2]}
-@ChgAdded{Version=[5],Text=[An implementation may evaluate known-on-entry
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0280-2],ARef=[AI12-0373-1]}
+@ChgAdded{Version=[5],Text=[An implementation may evaluate a known-on-entry
 subexpression of a postcondition expression of an entity at the place where
 X'Old constants are created for the entity, with the normal evaluation of
 the postcondition expression, or both.]}
@@ -1909,20 +1889,18 @@ the postcondition expression, or both.]}
 
 @LabeledAddedSubclause{Version=[5],Name=[The Global and Global'Class Aspects]}
 
-
 @Comment{There is no section around these, weird, but consistent with Pre and
 Type_Invariant}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a
-program unit, formal package, formal subprogram, formal
-object of an anonymous access-to-subprogram type, and for a named
-access-to-subprogram type or composite type (including a formal type),
+subprogram, an entry, a named access-to-subprogram type, a task
+unit, a protected unit, or a library package or generic library package,
 the following language-defined aspect may be specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[Global@\The syntax for the
   @nt{aspect_definition} used to define a Global aspect is as
   follows:@AspectDefn{Global}]}
@@ -1933,27 +1911,23 @@ the following language-defined aspect may be specified with an
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-    @Syn2{primitive_global_aspect_definition}
-  | @SynI{global_}@Syn2{attribute_reference}
-  | @Syn2{global_aspect_definition} & @SynI{global_}@Syn2{attribute_reference}>,Old=<>}"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<primitive_global_aspect_definition>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<
     @key[null]
-  | @Syn2{global_mode} @Syn2{global_name}
+  | Unspecified
   | @Syn2{global_mode} @Syn2{global_designator}
-  | (@Syn2{global_mode} @Syn2{global_set}{, @Syn2{global_mode} @Syn2{global_set}})>,Old=<>}"}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
-@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<[ @key{overriding} ][ @Syn2{global_mode_qualifier} ] @Syn2{basic_global_mode}>,Old=<>}"}
+  | (@Syn2{global_aspect_element}{, @Syn2{global_aspect_element}})
+  | @Syn2{extended_global_aspect_definition}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode_qualifier>,Old=<>}>,
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_aspect_element>,Old=<>}>,
 rhs="@Chg{Version=[5],New=<
-    @key[synchronized]
-  | @i<implementation-defined_>@Syn2{identifier}>,Old=<>}"}
+    @Syn2{global_mode} @Syn2{global_set}
+  | @Syn2{extended_global_aspect_element}>,Old=<>}"}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_mode>,Old=<>}>,
+rhs="@Chg{Version=[5],New=<
+    @Syn2{basic_global_mode}
+  | @Syn2{extended_global_mode}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<basic_global_mode>,Old=<>}>,
@@ -1961,45 +1935,39 @@ rhs="@Chg{Version=[5],New=<@key[in] | @key[in out] | @key[out]>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_set>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<
-    @Syn2{global_name} {, @Syn2{global_name}}
-  | @Syn2{global_designator}>,Old=<>}"}
+rhs="@Chg{Version=[5],New=<@Syn2{global_name} {, @Syn2{global_name}}>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_designator>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<@key[all] | @key[null]>,Old=<>}"}
+rhs="@Chg{Version=[5],New=<@key[all] | @key[synchronized] | @Syn2[global_name]>,Old=<>}"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0310-1]}
 @noprefix@AddedSyn{Version=[5],lhs=<@Chg{Version=[5],New=<global_name>,Old=<>}>,
-rhs="@Chg{Version=[5],New=<
-    @SynI{object_}@Syn2{name}
-  | [@key[private of]] @SynI{package_}@Syn2{name}
-  | @Syni{access_}@Syn2{subtype_mark}
-  | @key[access] @Syn2{subtype_mark}>,Old=<>}"}
+rhs="@Chg{Version=[5],New=<@SynI{object_}@Syn2{name} | @SynI{package_}@Syn2{name}>,Old=<>}"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[A
-@SynI{global_}@nt{attribute_reference} is an @nt{attribute_reference} whose
-@nt{attribute_designator} is Global.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set 
+of variables (which, for the purposes of this clause includes all constants 
+with some part being immutably limited, or of a controlled type, private
+type, or private extension) that are global to a callable entity
+or task body, and that are read or updated as part of the execution 
+of the callable entity or task body. If specified for a protected 
+unit, it refers to all of the protected operations of the protected 
+unit. Constants of any type may also be mentioned in a Global aspect.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0303-1]}
-@ChgAdded{Version=[5],Noprefix=[T],Text=[The Global aspect identifies the set of
-variables (which, for the purposes of this clause includes all constants with
-some part being immutably limited, or of a controlled type, private type, or
-private extension) global to a callable entity that are potentially read or
-updated as part of the execution of a call on the entity. Constants of any type
-may also be mentioned in a Global aspect. If not specified, the aspect defaults
-to the Global aspect for the nearest enclosing program unit. If not specified
-for a library unit, the aspect defaults to @exam{Global => @key[null]} for a
-nongeneric library unit that is declared Pure, and to @exam{Global => @key[in
-out all]} otherwise.]}
-
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Noprefix=[T],Text=[If not specified or otherwise defined 
+below, the aspect defaults to the Global aspect for the enclosing library unit 
+if the entity is declared at library level, and to Unspecified otherwise. If 
+not specified for a library unit, the aspect defaults to 
+@exam[Global => @key{null}] for a library unit that is declared Pure, and 
+to @exam[Global => Unspecified] otherwise.]}
 @end{Description}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[For a
-dispatching subprogram or a tagged type, the following language-defined
-aspect may be specified with an
+dispatching subprogram, the following language-defined aspect may be
+specified with an
 @nt{aspect_specification} (see @RefSecNum{Aspect Specifications}):]}
 
 @begin{Description}
@@ -2012,7 +1980,7 @@ aspect may be specified with an
    set of variables global to a dispatching operation that can be read
    or updated as a result of a dispatching call on the operation. If not
    specified, the aspect defaults to the Global aspect for the
-   nearest enclosing program unit.@AspectDefn{Global'Class}]}
+   dispatching subprogram.@AspectDefn{Global'Class}]}
 
 @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Global'Class],
   Text=[@ChgAdded{Version=[5],Text=[Global object usage contract inherited
@@ -2022,119 +1990,77 @@ aspect may be specified with an
 
 @begin{Resolution}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[A @nt{global_name} that does not have the reserved
-word @key[access] shall resolve to statically denote an object, a package
-(including a limited view of a package), or an access-to-variable
-subtype.@Redundant[ The @nt{subtype_mark} of a @nt{global_name} that has the
-reserved word @key[access] shall resolve to denote a subtype (possibly an
-incomplete type).]]}
-
-@begin{TheProof}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[All @nt{subtype_mark}s have to resolve to denote
-  a subtype by @RefSecNum{Subtype Declarations}.]}
-@end{TheProof}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[A @nt{global_name} shall resolve to statically
+denote an object or a package (including a limited view of a package).]}
 @end{Resolution}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[A @nt{global_aspect_definition} defines the
 Global or Global'Class aspect of
 some entity. The Global aspect identifies the sets of global variables
-that can be read, written, or modified as a side effect of some
-operation. The Global'Class aspect associated with a tagged
-type @i<T> (or one of its dispatching operations) represents a restriction on
-the Global aspect on any descendant of type @i<T> (or its corresponding
-operation).]}
+that can be read, written, or modified as a side effect of executing the
+operation(s) associated with the entity. The Global'Class aspect
+associated with a dispatching operation of type @i{T} represents a
+restriction on the Global aspect on a corresponding operation of any
+descendant of type @i{T}.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[The Global aspect for a callable entity defines the
-global variables that might be referenced as part of a call on the entity. The
-Global aspect for a composite type identifies the global variables that might be
-referenced during default initialization, adjustment as part of assignment, or
-finalization of an object of the type. The Global aspect for an
-access-to-subprogram object (or type) identifies the global variables that might
-be referenced when calling via the object (or any object of that type). The
-Global aspect for any other elementary type is null.]}
+global variables that might be referenced as part of a call on the entity, 
+including any assertion expressions that might be evaluated as part of the 
+call, including preconditions, postconditions, predicates, and type
+invariants.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The Global aspect for an access-to-subprogram 
+object (or subtype) identifies the global variables that might be referenced 
+when calling via the object (or any object of that subtype) including 
+assertion expressions that apply.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[For a predefined operator of an elementary type, 
+or the function representing an enumeration literal, the Global aspect is 
+@key{null}. For a predefined operator of a composite type, the Global aspect 
+of the operator defaults to that of the enclosing library unit (unless a Global
+aspect is specified for the type @em see 
+@RefSecNum{Extensions to Global and Global'Class Aspects}).]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[The following is defined in terms of operations; the
 rules apply to all of the above kinds of entities.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[The sets of global variables associated with a
-Global aspect can be defined explicitly with a
-@nt{primitive_global_aspect_definition} or can be defined by combining the
-sets specified for other entities by referring to their Global attribute.]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The global variables associated with any 
+@nt{global_mode} can be read as a side effect of an operation. The @key[in out]
+and @key[out] @nt{global_mode}s together identify the set of global variables 
+that can be updated as a side effect of an operation. Creating an 
+access-to-variable value that designates an object is considered an update 
+of the designated object, and creating an access-to-constant value that 
+designates an object is considered a read of the designated object.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[The global variables associated with
-any mode can be read as a side effect of an operation. The @key[in out] and
-@key[out] @nt{global_mode}s together identify the set of global variables that
-can be updated as a side effect of an operation. The presence of the reserved
-word @key[overriding] indicates that the specification is overriding the mode of
-a formal parameter with another mode to reflect the overall effect of an
-invocation of the callable entity on the state associated with the corresponding
-actual parameter.@Defn2{Term=[overriding],Sec={global object}} The
-@nt{global_mode_qualifier} @key[synchronized] reduces the
-set to the parts of those objects that are of one of the following sort of
-types:@Defn2{Term=[synchronized],Sec={global object}}]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The overall set of objects associated with each 
+@nt{global_mode} includes all objects identified for the mode in the 
+@nt{global_aspect_definition}.]}
 
-@begin{Itemize}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[a protected, task, or synchronized tagged type;]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[an atomic type;]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[a descendant of the language-defined types
-    Suspension_Object or Synchronous_Barrier;]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[a record type all of whose components are
-    @i<sychronized> in this sense;]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[an array type whose component type is
-    @i<sychronized> in this sense.]}
-
-@end{Itemize}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Text=[An implementation-defined @nt{global_mode_qualifier}
-may be specified, which alters the interpretation of the @nt{global_mode} or
-reduces the set according to an implementation-defined rule.]}
-
-@ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
-Text=[@ChgAdded{Version=[5],Text=[Implementation-defined
-@nt{global_mode_qualifier}s allowed in the specification of a Global aspect.]}]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[The overall set of objects associated with each
-@nt{global_mode} includes all
-objects identified for the mode in the
-@nt{primitive_global_aspect_definition} (subject to the
-@nt{global_mode_qualifier}), if any, plus all objects associated with the
-given mode for the entities identified by the @nt{prefix}es of the
-@i<global_>@nt{attribute_reference}s, if any.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{global_set} identifies a
-@i<global variable set> as follows:@Defn{global variable set}]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[A @nt{global_set} identifies a 
+@i{global variable set} as follows:@Defn{global variable set}]}
 
 @begin{Itemize}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[@key[null] identifies the empty set of global
-    variables;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Text=[@key[all] identifies the set of all global
     variables;]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[@key[synchronized] identifies the set of all 
+    synchronized variables (see @RefSecNum{Shared Variables}),
+    as well as variables of a composite type all of whose
+    non-discriminant subcomponents are synchronized;]}
 
   @ChgRef{Version=[5],Kind=[AddedNormal]}
   @ChgAdded{Version=[5],Type=[Leading],Text=[@nt{global_name}{, @nt{global_name}}
@@ -2143,37 +2069,14 @@ given mode for the entities identified by the @nt{prefix}es of the
      for the following forms of @nt{global_name}:]}
 
 @begin{Itemize}
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6],ARef=[AI12-0303-1]}
-    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} that is not
-       associated with an @key[overriding] mode identifies the
+    @ChgRef{Version=[5],Kind=[AddedNormal]}
+    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} identifies the
        specified global variable (or constant);]}
 
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-    @ChgAdded{Version=[5],Text=[@Syni{object_}@nt{name} that is associated
-       with an @key[overriding] mode identifies the variable parts associated
-       with the specified formal parameter whose parameter mode is being
-       overridden;]}
-
-    @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0310-1]}
-    @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set
-       of all variables declared within the declarative region of the package
-       having the same accessibility level as the package, but not including
-       those within the declarative region of a public child of the package; if
-       the reserved words @key[private of] precede the @SynI<package_>@nt{name},
-       the set is reduced to those variables declared in the private part or
-       body of the package or within a private descendant of the package;]}
-
     @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@Syni{access_}@nt{subtype_mark} identifies
-       the set of (aliased) variables that
-       can be designated by values of the given access-to-variable type;]}
-
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[@key[access] @nt{subtype_mark} identifies the
-       set of (aliased) objects that
-       can be designated by values of an access-to-variable type with a
-       designated subtype statically matching the given @nt{subtype_mark}.]}
-
+    @ChgAdded{Version=[5],Text=[@Syni{package_}@nt{name} identifies the set 
+     of all variables declared in the private part or body of the package, or
+     anywhere within a private descendant of the package.]}
 @end{Itemize}
 @end{Itemize}
 
@@ -2182,99 +2085,83 @@ given mode for the entities identified by the @nt{prefix}es of the
 @begin{Legality}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[Within a @nt{primitive_global_aspect_definition}, a
-given @nt{global_mode} shall be specified at most once without a
-@nt{global_mode_qualifier}, and at most once with any given
-@nt{global_mode_qualifier}. Similarly, within a
-@nt{primitive_global_aspect_definition}, a given entity shall be named at most
+@ChgAdded{Version=[5],Text=[Within a @nt{global_aspect_definition}, a
+given @nt{global_mode} shall be specified at most once. Similarly, within a
+@nt{global_aspect_definition}, a given entity shall be named at most
 once by a @nt{global_name}.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[If an entity has a Global aspect
-other than @key[in out all], then the
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[If an entity (other than a library 
+package or generic library package) has a Global aspect other than Unspecified
+or @key[in out all], then the
 associated operation(s) shall read only those variables global to the
 entity that are within the global variable set associated with the @key[in],
-@key[in out], or @key[out] modes, and the operation(s) shall update only those
+@key[in out], or @key[out] @nt{global_mode}s, and the operation(s) shall update only those
 variables global to the entity that are within the global variable set
-associated with either the @key[in out] or @key[out] @nt{global_mode}s. This
-includes any calls occurring during the execution of the operation, presuming
-those calls read and update all global variables permitted by their Global
-aspect (or Global'Class aspect, if a dispatching call). For the purposes of
-these checks:]}
+associated with either the @key[in out] or @key[out] @nt{global_mode}s. In
+the absence of the No_Hidden_Indirect_Globals restriction (see
+@RefSecNum{High Integrity Restrictions}),
+this ignores objects reached via a dereference of an access value.  The
+above rule includes any possible Global effects of calls occurring
+during the execution of the operation, except for the following excluded
+calls:]}
 
 @begin{Itemize}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-  @ChgAdded{Version=[5],Text=[if a formal parameter @i<P> of a callable entity
-    @i<C> is of an anonymous access-to-object type, no check against the Global
-    aspect occurs within @i<C> for the dereference of @i<P>, but a check against
-    the Global aspect applies at the point of call of @i<C>, presuming that
-    @i<P> is dereferenced and then read if of an access-to-constant type or
-    updated if of an access-to-variable type; if the actual parameter is of the
-    form @i<X>'Access (explicitly or implicitly), then at the point of call the
-    presumed dereference of @i<P> is treated as a read or update of @i<X>; if
-    the actual parameter @i<A> is of any other form, it is treated as a read or
-    update of @i<A>.@key[all];]}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[calls to formal subprograms;]}
 
-  @begin{Ramification}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[An access parameter @exam[@key[access] T] is
-      treated somewhat like a parameter specified as @exam[@key[in out] T]
-      while @exam[@key[access constant] T] is treated somewhat like
-      @exam[@key[in] T]. There is no burden to mention the dereference of
-      an access parameter in the Global aspect, as the effects of the
-      dereference are presumed at the call site, just like the effects
-      on @ldquote@;normal@rdquote parameters.
-      Note that an access-to-subprogram parameter L can already be
-      handled by @exam[... & L'Global].]}
-  @end{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[calls associated with operations on 
+    formal subtypes;]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-  @ChgAdded{Version=[5],Text=[if a function returns an object of a type for
-    which the Implicit_Dereference aspect is True (see
-    @RefSecNum{User-Defined References}), or an object of an anonymous
-    access-to-object type, the Global aspect of the function shall reflect the
-    effects of dereferencing the result of the function, if these are over and
-    above reads or updates of parts of aliased formal parameters (or
-    dereferences of access parameters) passed to the function. The effects to
-    be reflected include reading the designated object, and updating the
-    designated object in the case of an access-to-variable result or an
-    Implicit_Dereference result with an access-to-variable access discriminant.
-    A dereference (explicit or implicit) of a @nt{function_call} on such
-    a function is not further checked at the point of call against any Global
-    or Global'Class aspects that apply to the caller.]}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[calls through formal objects of 
+    an access-to-subprogram type;]}
 
-  @begin{Reason}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[The function is in a better position than the
-      caller to enumerate the objects affected by dereferencing the result.
-      Because the access discriminant is often of an anonymous type, there is no
-      other place to declare these effects. In most cases, these effects will
-      already be reflected in the aliased or access parameters passed to the
-      function, so nothing need be added to the Global aspect for these.]}
-  @end{Reason}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[calls through access-to-subprogram parameters;]}
 
-  @begin{Ramification}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[The last sentence is talking specifically about
-      dereferences associated directly with a @nt{function_call}. Other
-      dereferences (such as those associated with a rename of a call, or an
-      allocated result of a call) are not included @em they have to be covered
-      in the Global or Global'Class aspect in the normal way.]}
-  @end{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[calls on operations with Global aspect 
+    Unspecified.]}
 
 @end{Itemize}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[If a variable global to the entity is read that is
-within the global variable set associated with the @key[out] @nt{global_mode},
-it shall be updated somewhere within the callable entity (or an entity it
-calls).]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[The possible Global effects of these excluded 
+calls (other than those that are Unspecified) are taken into account by the 
+caller of the original operation, by presuming they occur at least once 
+during its execution. For calls that are not excluded, the possible Global 
+effects of the call are those permitted by the Global aspect of the associated
+entity, or by its Global'Class aspect if a dispatching call.]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[For a predefined equality operator of a composite
+    type, the possible Global effects includes those of the equality
+    operations invoked as part of the evaluation of the operator (which
+    might not be predefined and thus might have a different Global
+    specification than the component types).]}
+@end{Ramification}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[If a Global aspect other than Unspecified or
+@key[in out all] applies to an access-to-subprogram type, then the @nt{prefix}
+of an Access @nt{attribute_reference} producing a value of such a type shall denote 
+a subprogram whose Global aspect is not Unspecified and is 
+@i<covered>@Defn{Term=[covered],Sec=(global aspect)} by that of the result 
+type, where a global aspect @i<G1> is @i<covered> by a global aspect @i<G2>
+if the set of variables that @i<G1> identifies as readable or updatable is
+a subset of the corresponding set for @i<G2>. Similarly on a conversion to 
+such a type, the operand shall be of a named access-to-subprogram type whose
+Global aspect is covered by that of the target type.]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[If an implementation-defined
-@nt{global_mode_qualifier} applies to a given
+@nt{global_mode} applies to a given
 set of variables, an implementation-defined rule determines what sort
-of references to them are permitted.]}
+of references to them are permitted.]}@Comment{The @ChgImplDef is provided
+above.}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
 @ChgAdded{Version=[5],Text=[For a subprogram that is a dispatching operation
@@ -2282,94 +2169,44 @@ of a tagged type @i<T>,
 each mode of its Global aspect shall identify a subset of the variables
 identified by the corresponding mode, or by the @key[in out] mode, of the
 Global'Class aspect of a corresponding dispatching subprogram of any
-ancestor of @i<T>. A corresponding rule applies to the Global aspect of a
-tagged type @i<T> relative to the Global'Class aspect of any ancestor of @i<T>.]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} S that
-statically denotes a subprogram (including a formal subprogram), formal object
-of an anonymous access-to-subprogram type, or a type (including a formal type)},
-the following attribute is defined:]}
-
-@begin(description)
-@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<S>, AttrName=<Global>, ARef=[AI12-0079-1],
-  InitialVersion=[5],Text=[@Chg{Version=[5],New=[Identifies the global
-    variable set for each of the three @nt{global_mode}s, for the given
-    subprogram, object, or type; a reference to this attribute may only
-    appear within a @nt{global_aspect_definition}.],Old=[]}]}@Comment{End of Annex text here.}
-@end(description)
-@EndPrefixType{}
+ancestor of @i<T>, unless the aspect of that ancestor is Unspecified.]}
 
 @end{Legality}
 
 @begin{ImplPerm}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For a call on a subprogram that has a
-Global aspect that indicates that there are no references to global variables,
-the implementation may omit the call:]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[Implementations need not require that references to
+a constant object that are considered variables in the above rules, be 
+accounted for by the Global or Global'Class aspect, if the implementation can 
+determine that the constant object is immutable.]}
 
-@begin{Itemize}
-
+@begin{Ramification}
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[if the results are not needed after the call; or]}
+  @ChgAdded{Version=[5],Text=[In particular, this allows the implementation
+  to violate privacy in order to determine whether a constant needs to be
+  covered by a Global aspect.]}
+@end{Ramification}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[simply reuse the results produced by an earlier
-  call on the same subprogram, provided that none of the parameters nor any
-  object accessible via access values from the parameters have any part that is
-  of a type whose full type is an immutably limited type, and the addresses and
-  values of all by-reference actual parameters, the values of all by-copy-in
-  actual parameters, and the values of all objects accessible via access values
-  from the parameters, are the same as they were at the earlier call.]}
-
-@end{Itemize}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
-@ChgAdded{Version=[5],Text=[@Redundant[This permission applies even if the
-subprogram produces other side effects when called.]]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
+@ChgAdded{Version=[5],Text=[Implementations may perform additional checks on 
+calls to operations with an Unspecified Global aspect to ensure that they 
+do not violate any limitations associated with the point of call.]}
 
 @begin{Discussion}
-
   @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[This permission doesn't really allow a compiler to
-    do anything that it couldn't do anyway (as any optimization that gives the
-    required semantics for program executions that aren't erroneous is always
-    allowed), but we considered it important to make Ada programmers aware that
-    such optimizations are possible. Specifically, an implementation can trust
-    the information given in a Global aspect, as any subprogram that violates it
-    is either illegal or would result in erroneous execution. Specifically, the
-    Global contract can be violated by erroneous execution resulting from
-    dereferencing a dangling reference (see
-    @RefSecNum{Unchecked Storage Deallocation}), by giving an incorrect
-    contract on an interfaced
-    subprogram (see @RefSecNum{Interfacing Aspects}), by specifying the address
-    of a global object for a
-    local object (see @RefSecNum{Operational and Representation Aspects}),
-    or by using Unchecked_Conversion (see @RefSecNum{Unchecked Type Conversions})
-    or Address_to_Access_Conversions
-    (see @RefSecNum{The Package System.Address_to_Access_Conversions}) to create
-    local accesses to global objects.]}
-
-    @Comment{Removed "misuse of unmanaged owned
-    access values (see 3.10.3), " until such time as AI12-0240-x is approved.}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Since optimizations like these don't require a
-    special permission, implementations can also use similar optimizations that
-    go beyond the permission above. For instance, if there are two calls with
-    the same parameters on a subprogram whose Global aspect only indicates
-    reading of a global object @i<G>, then the second call can be omitted and
-    reuse the result of the first call if the compiler can prove (with the help
-    of the Global aspect of any subprograms called) that @i<G> is not written to
-    between the calls.]}
-
+  @ChgAdded{Version=[5],Text=[In this sense, @exam{Global => Unspecified}
+  is not permission to violate the caller's Global restrictions. It is rather 
+  that the implementor of the subprogram is presuming other means are being
+  used to ensure safety. Note the No_Unspecified_Globals Restriction
+  (@RefSecNum{High Integrity Restrictions}), which prevents the use of 
+  Unspecified with the Global aspect in a given partition.]}
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0303-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-3]}
 @ChgAdded{Version=[5],Text=[Implementations may extend the syntax or semantics
-of the Global aspect in an implementation-defined manner.]}
+of the Global aspect in an implementation-defined manner@Redundant[; for 
+example, supporting additional @nt{global_mode}s].]}
 
 @ChgImplDef{Version=[5],Kind=[AddedNormal],InitialVersion=[5],
 Text=[@ChgAdded{Version=[5],Text=[Any extensions of the
@@ -2398,235 +2235,6 @@ Global aspect.]}]}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1],ARef=[AI12-0240-6],ARef=[AI12-0310-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   The Global and Global'Class aspects are new.]}
-@end{Extend2012}
-
-
-@LabeledAddedSubclause{Version=[5],Name=[Compound Objects and Internal Access Objects]}
-
-
-@begin{Intro}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Text=[A compound object is an object whose
-logical representation is composed
-of multiple subordinate objects. Internal access objects are used to
-connect the various subordinate objects that make up such a compound object,
-and to navigate between these subordinate objects while manipulating a
-compound object.]}
-
-@end{Intro}
-
-@begin{StaticSem}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For an access-to-object subtype, or
-an object (including a component) of an access-to-object type, the following
-aspect is defined:]}
-
-@begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Internal@\For an object (including a component),
-this specifies whether this object is an @i<internal access> object.@Defn{internal access object}@Defn2{Term=[object],Sec=[internal access]}
-For an access subtype, this specifies the default for objects of the subtype.
-The default for the first subtype of an access type is False. The
-default for a subtype defined by a @nt{subtype_indication} is the
-value of the Internal aspect of the subtype identified by the
-@nt{subtype_mark} of the @nt{subtype_indication}. An object of an
-access-to-object type that is not an internal access object, and
-is not the @key[null] literal or an @nt{allocator}, is an @i<external access>
-object.@Defn{external access object}@Defn2{Term=[object],Sec=[external access]}
-@Redundant[A reference to the Move attribute (see below) is an
-internal access object.]]}
-
-@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Internal],
-  Text=[@ChgAdded{Version=[5],Text=[Specifies that an access object is an
-    internal access object, or that all objects of an access subtype are
-    internal access objects.]}]}
-
-@begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[Note that this aspect may be specified for an
-    object of an anonymous access-to-object type.]}
-@end{Discussion}
-@end{Description}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For a @Redundant[full] type, the
-following representation aspect is defined:]}
-
-@begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[Compound@\This specifies whether this type is
-a @i<compound type>.@Defn{compound type} An object
-of a compound type is a @i<compound object>@Defn{compound object}. The logical
-representation of a compound object is composed of the (@i<root>)
-compound object itself,@Defn{root compound object}
-and zero or more subordinate objects
-connected to the root via internal access
-objects.AspectDefn{Compound}@Defn2{Term=[object],Sec=[compound]}]}
-
-@ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Compound],
-  Text=[@ChgAdded{Version=[5],Text=[Specifies that a type is a compound type,
-    potentially consisting of multiple objects.]}]}
-
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[We declare this to be a representation aspect so
-    that it can't be given on partial views.]}
-@end{Reason}
-
-@begin{Discussion}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[There might be more than one type of subordinate
-    object comprising a compound object, and there might be multiple types of
-    internal access objects connecting the various objects together. The root
-    object itself might be a single (internal) access object.]}
-@end{Discussion}
-@end{Description}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[For @PrefixType{a @nt{prefix} X that
-denotes a variable that is an internal access object}, the following attribute
-is defined:]}
-@begin(description)
-@ChgAttribute{Version=[5],Kind=[AddedNormal],ChginAnnex=[T],
-  Leading=<F>, Prefix=<X>, AttrName=<Move>, ARef=[AI12-0240-6],
-  InitialVersion=[5],
-  Text=[@Chg{Version=[5],New=[X'Move saves a copy of the value of X, sets
-   X to the null value, and then returns the saved value. The result of
-   X'Move is an internal access object.],Old=[]}]}
-@end(description)
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[An object created by an
-@nt{allocator} is @i<reachable>@Defn{reachable} from a compound object @i<C>
-if:]}
-
-@begin{Itemize}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[the object is designated by a part of @i<C> that
-    is an internal access object; or]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[the object is designated by a part of an
-    object reachable from @i<C> that is an internal access object.]}
-@end{Itemize}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Text=[An object that is reachable from a compound object
-is called a @i<subordinate> of that object.@Defn{subordinate object}@Defn2{Term=[object],Sec=[subordinate]}]}
-
-@end{StaticSem}
-
-@begin{Legality}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Text=[If Compound is specified to be True for a type,
-the type shall be controlled, or have only a limited partial view (if any).]}
-
-@begin{Reason}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[We don't want a nonlimited partial view that is
-     not controlled, because the predefined assignment is not going to do the
-     right thing. We allow the full type to be nonlimited since we presume the
-     implementor of the abstract data type knows what is needed to preserve the
-     desired properties of the type. Requiring the full type to be limited would
-     not really guarantee anything anyway, unless we require every subordinate
-     object to also be limited, which could interfere with existing practice.]}
-@end{Reason}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[Nothwithstanding what this Standard
-  says elsewhere, a read of an object via a dereference of an internal access
-  object is considered a read of some part of a visible compound object.
-  Similarly, an update of an object via a dereference of an internal access
-  object is considered a write of some part of a visible compound object. Such a
-  read or update is allowed so long as there is at least one visible compound
-  object that allows the read or update (taking into account any mode
-  @key[overriding] specifications in the associated Global aspect @em see
-  @RefSecNum{The Global and Global'Class Aspects}), and that
-  compound object is either:]}
-
-@begin{Itemize}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[local to the immediately enclosing entity in which
-     the read or update occurs (including a formal parameter if it is a callable
-     entity), or]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[is within the set of global objects identified as
-     readable or updatable (as appropriate) by the Global aspect (see
-     @RefSecNum{The Global and Global'Class Aspects}) of that entity.]}
-
-@begin{Ramification}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[Parameters of a subprogram are considered
-      "local" for this purpose, and do not need to appear in the Global aspect
-      for the subprogram unless their parameter mode needs overriding. Thus, if
-      one or more formal parameters of a Global aspect for the subprogram. Thus,
-      if one or more formal subprogram are compound objects, the subprogram will
-      allow any reads of dereferences of internal access types, and if any of
-      those parameters have an applicable mode of @key[out] or @key[in out], any
-      sort of dereference of an internal access will be allowed. In particular,
-      nothing about the access type being dereferenced need appear in the Global
-      aspect (as would normally be required).]}
-@end{Ramification}
-@end{Itemize}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Text=[An external access value shall not be converted to
-  an access subtype that has the Internal aspect True, nor be assigned to an
-  internal access object. An internal access value of a pool-specific type shall
-  not be converted to an access subtype that is also pool-specific and has the
-  Internal aspect False, nor be assigned to an external access object of a
-  pool-specific type.]}
-
-@begin{Ramification}
-    @ChgRef{Version=[5],Kind=[AddedNormal]}
-    @ChgAdded{Version=[5],Text=[We do not allow an external access value to be
-      assigned or converted to be an internal access to ensure that internal
-      access objects never point outside the compound object with which they are
-      associated. We do not allow an internal access object to be assigned or
-      converted to be an external access of a pool-specific type, as the
-      presumption of a pool-specific type is that it only points to objects
-      within its pool and never points at a component of another object. But
-      given a compound object, an internal access object might in fact point to
-      something that is logically considered a component of the compound object.
-      Converting such an internal access to be a pool-specific external access
-      would be misleading, since one might presume that such a pool-specific
-      external access could not possibly be pointing at any part of a compound
-      object whose type does not match the designated type of the external
-      access. This might interfere with correct determination of whether a
-      dereference of the external access might conflict with use of the compound
-      object.]}
-
-@end{Ramification}
-
-@end{Legality}
-
-@begin{Erron}
-
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-@ChgAdded{Version=[5],Type=[Leading],Text=[@PDefn2{Term=(erroneous execution),Sec=(cause)}Execution
-is erroneous if an object @i<X> is read or updated via a
-dereference of an internal access object, and at that point:]}
-@begin{Itemize}
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[@i<X> is not reachable from a visible compound
-    object that permits the given mode of access (taking restrictions imposed
-    by Global aspects into account), or]}
-
-  @ChgRef{Version=[5],Kind=[AddedNormal]}
-  @ChgAdded{Version=[5],Text=[@i<X> is reachable from two different compound
-    objects neither of which is a subordinate of the other.]}
-@end{Itemize}
-@end{Erron}
-
-@begin{Extend2012}
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0240-6]}
-  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
-  The Internal and Compound aspects are new. The Move attribute is new.]}
 @end{Extend2012}
 
 

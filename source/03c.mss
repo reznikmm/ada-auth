@@ -1,9 +1,9 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:44 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03c.mss,v $}
-@Comment{$Revision: 1.148 $}
+@Comment{$Revision: 1.149 $}
 
 @LabeledClause{Tagged Types and Type Extensions}
 
@@ -4770,10 +4770,13 @@ invocation of the entity],Old=[]}.
   would be a portability issue.]}
 @end{Reason}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0371-1]}
 The accessibility level of
 a view of an object or subprogram defined by a @nt{renaming_declaration}
 is the same as that of
-the renamed view.
+the renamed view@Chg{Version=[5],New=[, unless the renaming is of a formal 
+subprogram, in that case the accessibility level is
+that of the instance],Old=[]}.
 
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00416-01]}
 The accessibility level of
@@ -6482,6 +6485,15 @@ uses of anonymous access types.]}
   depending on this accessibility was not portable, and such code could have
   created an immediately dangling pointer if the conversion actually made
   a copy (which is necessary in some instances).]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0371-1]}
+  @ChgAdded{Version=[5],Text=[The accessibility of a renaming of a formal 
+  subprogram in a generic package specification has changed to reflect the
+  fact that a wrapper may be needed for the formal subprogram. Thus, 
+  'Access of such a renaming found in an instance that is not library-level
+  may become illegal. We think this case is unlikely to occur in practice,
+  and a simple workaround is available (rename the actual at the point of
+  the instance, use that rename as the prefix of 'Access).]}
 @end{Incompatible2012}
 
 @begin{DiffWord2012}

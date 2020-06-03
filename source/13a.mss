@@ -1,10 +1,10 @@
 @Part(13, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Representation Issues}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/13a.mss,v $}
-@Comment{$Revision: 1.128 $}
+@Comment{$Revision: 1.129 $}
 
 @begin{Intro}
 @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -424,14 +424,14 @@ Storage_Pool clause
 
 Storage_Size clause
 
-@ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00270-01]}
-@ChgAdded{Version=[2],Text=[Stream_Size clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@ChgDeleted{Version=[1],Text=[Read clause]}
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00270-01]}
+@Chg{Version=[1],New=[@Chg{Version=[2],New=[Stream_Size clause],Old=[]}],Old=[Read clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009],ARef=[AI95-00137-01]}
-@ChgDeleted{Version=[1],Text=[Write clause]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0005-1]}
+@Chg{Version=[1],New=[@Chg{Version=[5],New=[pragma Unchecked_Union],Old=[]}],Old=[Write clause]}
 
 @ChgRef{Version=[1],Kind=[Deleted],Ref=[8652/0009],ARef=[AI95-00137-01]}
 @ChgDeleted{Version=[1],Text=[Input clause]}
@@ -455,6 +455,22 @@ and Volatile_Components (when applied to @Chg{Version=[3],New=[a],Old=[an
 array]} type)
 
 pragma Discard_Names (when applied to an enumeration or tagged type)
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragmas Priority and Interrupt_Priority (when applied
+to a task or protected type)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragma CPU (when applied
+to a task or protected type)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragma Dispatching_Domain]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragma Relative_Deadline (when applied
+to a task or protected type)]}
+
 @end{Itemize}
 
 @Leading@;The following representation items are subtype-specific:
@@ -473,6 +489,9 @@ Alignment clause (when applied to an object)
 
 Size clause (when applied to an object)
 
+@ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
+@ChgAdded{Version=[2],Text=[pragma Inline (applies to subprograms)]}
+
 pragmas Import, Export, and Convention (when applied to anything other
 than a type)
 
@@ -488,13 +507,69 @@ pragma Asynchronous (applies to procedures)
 
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00414-01]}
 @ChgAdded{Version=[2],Text=[pragma No_Return (applies to subprograms)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragmas Attach_Handler and Interrupt_Handler (apply
+to protected units)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragmas Priority and Interrupt_Priority (when applied
+to a subprogram)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragma CPU (when applied
+to a subprogram)]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[pragma Relative_Deadline (when applied
+to a subprogram)]}
+
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0229-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0005-1]}
 @ChgAdded{Version=[3],Text=[While an @nt{aspect_specification} is not
 a representation item, a similar categorization applies to the aspect
-that corresponds to each of these representation items (along with
-aspects that do not have associated representation items).]}
+that corresponds to each of these representation items@Chg{Version=[5],New=[.
+In adition, there are representation],Old=[ (along with]}
+aspects that do not have associated representation items@Chg{Version=[5],New=[],
+Old=[)]}.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following representation aspects
+that do not have associated representation items are type-related:]}
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[aspect Default_Value]}
+
+@ChgAdded{Version=[5],Text=[aspect Default_Component_Value]}
+
+@ChgAdded{Version=[5],Text=[aspect Exclusion_Functions]}
+
+@ChgAdded{Version=[5],Text=[aspects Link_Name and External_Name (when applied to a type)]}
+
+@ChgAdded{Version=[5],Text=[aspect Max_Entry_Queue_Length (when applied to a task or protected type)]}
+@end{Itemize}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Text=[There are no subtype-specific representation aspects
+that do not have associated representation items.]}
+
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0005-1]}
+@ChgAdded{Version=[5],Type=[Leading],Text=[The following representation aspects
+that do not have associated representation items also do not apply to subtypes, so 
+they are neither type-related nor subtype-specific:]}
+@begin{Itemize}
+@ChgRef{Version=[5],Kind=[Added]}
+@ChgAdded{Version=[5],Text=[aspect Static (applies to expression functions)]}
+
+@ChgAdded{Version=[5],Text=[aspect Synchronization (applies to procedures)]}
+
+@ChgAdded{Version=[5],Text=[aspects Link_Name and External_Name (when applied to
+anything other than a type)]}
+
+@ChgAdded{Version=[5],Text=[aspect Max_Entry_Queue_Length (when applied to an entry)]}
+@end{Itemize}
 @end{Ramification}
 
 @ChgRef{Version=[1],Kind=[Added],Ref=[8652/0009],ARef=[AI95-00137-01]}
@@ -577,7 +652,7 @@ after using the entity in ways that require the representation to be known.
   to complicate the wording solely to support obsolescent features.]}]}
 @end{Honest}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1],ARef=[AI12-0206-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0181-1],ARef=[AI12-0222-1]}
 @ChgAdded{Version=[5],Text=[An @nt{expression} or @nt{name} that freezes an
 entity shall not occur within an @nt{aspect_specification} that specifies a
 representation or operational aspect of that entity.]}
@@ -657,14 +732,20 @@ parameter.]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
-For an untagged derived type, @Chg{Version=[3],New=[it is illegal to
-specify a],Old=[no]} type-related representation
-@Chg{Version=[3],New=[aspect],Old=[items are allowed]} if the parent type is a
-by-reference type, or has any user-defined primitive
-subprograms.@Chg{Version=[4],New=[ Similarly, it is illegal to specify a
-nonconfirming type-related representation aspect for
-an untagged by-reference type
-after one or more types have been derived from it.],Old=[]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1]}
+@Chg{Version=[5],New=[],Old=[For an untagged derived 
+type, ]}@Chg{Version=[3],New=[@Chg{Version=[5],New=[It],Old=[it]} 
+is illegal to specify a@Chg{Version=[5],New=[ nonconfirming],Old=[]}],Old=[no]} 
+type-related representation
+@Chg{Version=[3],New=[aspect],Old=[items are allowed]}
+@Chg{Version=[5],New=[for an untagged by-reference type @i<T> if it is derived 
+from ],Old=[if the parent type is]} a by-reference type, or 
+@Chg{Version=[5],New=[if one or more types],Old=[has any user-defined primitive
+subprograms.]}@Chg{Version=[4],New=[@Chg{Version=[5],New=[],Old=[ Similarly, 
+it is illegal to specify a nonconfirming type-related representation aspect
+for an untagged by-reference type after one or more types]} have been
+derived from @Chg{Version=[5],New=[@i<T> prior 
+to the specification of the aspect],Old=[it]}.],Old=[]}
 @begin{Ramification}
   @ChgRef{Version=[1],Kind=[Revised],Ref=[8652/0009],ARef=[AI95-00137-01]}
   @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0295-1]}
@@ -677,13 +758,14 @@ after one or more types have been derived from it.],Old=[]}
 @begin{Reason}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1],ARef=[AI05-0295-1]}
 @ChgRef{Version=[4],Kind=[Revised],ARef=[AI12-0109-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0376-1]}
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
   untagged by-reference types is because a change of representation
   is impossible when passing by reference (to an inherited
   subprogram).@Chg{Version=[4],New=[ (A by-reference object cannot be copied
-  to change its representation.)],Old=[]}
+  to change its representation.)],Old=[]}@Chg{Version=[5],New=[],Old=[
   The reason for forbidding
   @Chg{Version=[3],New=[specification of ],Old=[]}type-related
   representation @Chg{Version=[3],New=[aspects],Old=[items]} on
@@ -693,7 +775,7 @@ after one or more types have been derived from it.],Old=[]}
   because such changes of representation are likely to be
   expensive at run time.
   Changes of subtype-specific representation attributes, however, are
-  likely to be cheap.
+  likely to be cheap.]}
   This rule is not needed for tagged types,
   because other rules prevent a type-related representation
   @Chg{Version=[3],New=[aspect],Old=[item]}
@@ -1590,6 +1672,14 @@ Some of the more stringent requirements are moved to
   that any implementation accepted them or that they appear in any program.]}
 @end{Incompatible2012}
 
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0376-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  It is now allowed to specify type-related representation aspects for an
+  untagged derived type that has primitive operations, so long as the type is
+  not a by-reference type.]}
+@end{Extend2012}
+
 @begin{DiffWord2012}
   @ChgRef{Version=[4],Kind=[AddedNormal],ARef=[AI12-0116-1]}
   @ChgAdded{Version=[4],Text=[@b<Corrigendum:> Clarified that an aspect
@@ -1628,7 +1718,7 @@ rhs=`@Chg{Version=[3],New="
 rhs="@Chg{Version=[3],New=<@SynI<aspect_>@Syn2<identifier>['Class]>,Old=<>}"}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1],ARef=[AI12-0187-1],ARef=[AI12-0285-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0187-1],ARef=[AI12-0285-1],ARef=[AI12-0373-1]}
 @AddedSyn{Version=[3],lhs=<@Chg{Version=[3],New=<aspect_definition>,Old=<>}>,
 rhs="@Chg{Version=[5],New=[
     ],Old=[]}@Chg{Version=[3],New=<@Syn2<name> | @Syn2<expression> | @Syn2<identifier>@Chg{Version=[5],New=[
@@ -1799,7 +1889,7 @@ aspect.]}
 @end{Itemize}
 
 @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0183-1]}
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0079-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[3],Text=[The usage names in an @nt{aspect_definition}
 @Redundant[ are not resolved at the point of the associated declaration, but
 rather] are resolved at the end of the immediately enclosing declaration
@@ -1903,10 +1993,18 @@ subprogram or generic subprogram],Old=[another declaration]}.]}
 @end{Reason}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI05-0183-1],ARef=[AI12-0138-1]}
-@ChgAdded{Version=[4],Text=[If an aspect of a derived type is inherited from an
-ancestor type and has the boolean value True, the inherited value shall not be
-overridden to have the value False for the derived type, unless otherwise
-specified in this International Standard.]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0374-1]}
+@ChgAdded{Version=[4],Text=[If an aspect of a derived 
+type@Chg{Version=[5],New=[ (or its first subtype)],Old=[]} is inherited from
+an ancestor @Chg{Version=[5],New=[(sub)type],Old=[type]} and has the boolean 
+value True, the inherited value shall not be
+overridden to have the value False for the derived 
+type@Chg{Version=[5],New=[ (or its first subtype)],Old=[]}, unless otherwise
+specified in this International Standard.@Chg{Version=[5],New=[ If an aspect
+of a nonfirst subtype is inherited from the subtype in the 
+@nt{subtype_indication} that defines it, and has the value True, the 
+inherited value shall not be overridden to have the value False for the
+nonfirst subtype, unless otherwise specified in this International Standard.],Old=[]}]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
 @ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1]}
@@ -1969,10 +2067,10 @@ these rules about nonoverridable aspects also apply in the private part
 of an instance of a generic unit.]}
 
 @ChgRef{Version=[4],Kind=[Added],ARef=[AI12-0138-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0256-1]}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0206-1],ARef=[AI12-0256-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[4],Text=[@Redundant[The Default_Iterator, Iterator_Element,
 Implicit_Dereference, Constant_Indexing, @Chg{Version=[5],New=[],Old=[and
-]}Variable_Indexing@Chg{Version=[5],New=[, Max_Entry_Queue_Length, and
+]}Variable_Indexing@Chg{Version=[5],New=[, Aggregate, Max_Entry_Queue_Length, and
 No_Controlled_Parts],Old=[]} aspects are nonoverridable.]]}
 
 @begin{Discussion}
@@ -2252,7 +2350,7 @@ such aspects and the legality rules for such aspects.]}]}
   entities that don't have any language-defined aspects, since Nonblocking
   (see @RefSecNum{Intertask Communication}) is language-defined.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0079-1]}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0373-1]}
   @ChgAdded{Version=[5],Text=[Added the missing definition for resolution of
   entities found in aspects of library units.]}
 @end{Diffword2012}
@@ -5503,8 +5601,9 @@ bits that represent a component as an unsigned integer value).
 Low_Order_First @Redundant[(known in the vernacular as @lquotes@;little endian@rquotes@;)]
 means the opposite: the first bit is the least significant.
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
 @Leading@;For @PrefixType{every specific record subtype S},
-the following attribute is defined:
+the following @Chg{Version=[5],New=[representation@PDefn2{Term=[representation attribute], Sec=(Bit_Order)} ],Old=[]}attribute is defined:
 @begin{Description}
 @Attribute{Prefix=<S>, AttrName=<Bit_Order>,
   Text=<Denotes the bit ordering for the type of S.
