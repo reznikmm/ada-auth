@@ -1,3 +1,3 @@
 Del .\Object\_Janus.Prj
 Jmanager Add_Project (.\Object\,Default)
-Jmanager Add_Link (.\Object\,Default,C:\Jnt312\Rts\Console, JNT_RTS_CONSOLE)
+Jmanager Add_Link (.\Object\,Default,C:\JWin321\Rts\Console, JWIN_RTS_CONSOLE)
