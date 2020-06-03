@@ -21,7 +21,7 @@ package body ARM_Format is
     --
     -- ---------------------------------------
     -- Copyright 2000, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009,
-    --           2010, 2011, 2012, 2013, 2016, 2017, 2019
+    --           2010, 2011, 2012, 2013, 2016, 2017, 2019, 2020
     -- AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -291,6 +291,7 @@ package body ARM_Format is
     --			out where the problems lie.
     --  6/ 5/19 - RLB - Displayed Line info to the nesting stack for begin/end
     --			mismatches.
+    --  5/ 7/20 - RLB - Minor cleanups in tracing code.
 
     type Command_Kind_Type is (Normal, Begin_Word, Parameter);
 
@@ -1333,7 +1334,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 	            Format_Object.Current_Paragraph_String(1 .. PNum_Pred'Last-1) :=
 		        PNum_Pred(2..PNum_Pred'Last);
 		    AARM_Sub_Num (Format_Object.Next_AARM_Sub);
-	            Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len;
+	            --Format_Object.Current_Paragraph_Len := Format_Object.Current_Paragraph_Len; -- Unchanged.
 	            if Update_Numbers then
 		        Format_Object.Next_AARM_Sub := Character'Succ(Format_Object.Next_AARM_Sub);
 			Format_Object.Next_AARM_Insert_Para := 1;
@@ -2114,7 +2115,7 @@ Ada.Text_IO.Put_Line ("%% Oops, can't find out if AARM paragraph, line " & ARM_I
 		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
 			-- Nothing at all should be showm.
 			null;
-if Format_Object.Next_Paragraph_Subhead_Type /= Plain or else
+if Format_Object.Next_Paragraph_Subhead_Type /= Plain and then
    Format_Object.Next_Paragraph_Subhead_Type /= Introduction then
    Ada.Text_IO.Put_Line("    -- No subhead (DelNoMsg); on line " & Arm_Input.Line_String(Input_Object));
 end if;
@@ -2125,7 +2126,7 @@ end if;
 		       ARM_Format."=" (Format_Object.Changes, ARM_Format.New_Only) then
 			-- Nothing at all should be showm.
 			null;
-if Format_Object.Next_Paragraph_Subhead_Type /= Plain or else
+if Format_Object.Next_Paragraph_Subhead_Type /= Plain and then
    Format_Object.Next_Paragraph_Subhead_Type /= Introduction then
    Ada.Text_IO.Put_Line("    -- No subhead (Del-no paranum); on line " & Arm_Input.Line_String(Input_Object));
 end if;
@@ -11349,6 +11350,11 @@ Ada.Text_IO.Put_Line ("Attempt to write into a deleted paragraph, on line " & AR
 	Format_Object.Include_Annotations := Real_Include_Annotations;
 	if Format_State.Nesting_Stack_Ptr /= 0 then
 	    Ada.Text_IO.Put_Line ("   ** Unfinished commands detected.");
+	    for I in reverse 1 .. Format_State.Nesting_Stack_Ptr loop
+	        Ada.Text_IO.Put_Line ("      Open command=" &
+		    Format_State.Nesting_Stack(I).Name & "; Line=" &
+		    Format_State.Nesting_Stack(I).Open_Line);
+	    end loop;
 	end if;
     end Format;
 

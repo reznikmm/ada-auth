@@ -8,7 +8,7 @@
     -- determines the details of the text.
     --
     -- ---------------------------------------
-    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2019
+    -- Copyright 2000, 2002, 2004, 2005, 2006, 2007, 2009, 2011, 2019, 2020
     --   AXE Consultants. All rights reserved.
     -- P.O. Box 1512, Madison WI  53701
     -- E-Mail: randy@rrsoftware.com
@@ -47,6 +47,7 @@
     --  5/06/09 - RLB - Added Labeled_Deleted_xxx.
     --  5/07/09 - RLB - Changed above to load dead clauses.
     -- 10/18/11 - RLB - Changed to GPLv3 license.
+    --  5/07/20 - RLB - Added additional tracing.
 
 separate(ARM_Format)
 procedure Scan (Format_Object : in out Format_Type;
@@ -61,6 +62,7 @@ procedure Scan (Format_Object : in out Format_Type;
     type Items is record
         Command : Command_Type;
         Close_Char : Character; -- Ought to be }, ], >, or ).
+        Open_Line : String(1..12); -- For debugging only.
     end record;
     Nesting_Stack : array (1 .. 60) of Items;
     Nesting_Stack_Ptr : Natural := 0;
@@ -76,9 +78,13 @@ procedure Scan (Format_Object : in out Format_Type;
 	    Nesting_Stack_Ptr := Nesting_Stack_Ptr + 1;
 	    Nesting_Stack (Nesting_Stack_Ptr) :=
 	        (Command => Command,
-		 Close_Char => ARM_Input.Get_Close_Char (Param_Ch));
+		 Close_Char => ARM_Input.Get_Close_Char (Param_Ch),
+                 Open_Line => (1..12 => ' ')); -- Set below.
 --Ada.Text_IO.Put_Line (" &Stack (" & Command_Type'Image(Command) & "); Close-Char=" &
 --  Nesting_Stack(Nesting_Stack_Ptr).Close_Char);
+	    Ada.Strings.Fixed.Move (Target => Nesting_Stack (Nesting_Stack_Ptr).Open_Line,
+		Source => ARM_File.Line_String (Input_Object),
+		Drop   => Ada.Strings.Right);
         else
 	    Ada.Text_IO.Put_Line ("** Nesting stack overflow on line" & ARM_File.Line_String (Input_Object));
 	    for I in reverse Nesting_Stack'range loop
@@ -1011,7 +1017,12 @@ begin
     ARM_File.Close (Input_Object);
     if Nesting_Stack_Ptr /= 0 then
         Ada.Text_IO.Put_Line ("   ** Unfinished commands detected.");
+	for I in reverse 1 .. Nesting_Stack_Ptr loop
+	    Ada.Text_IO.Put_Line ("      Open command=" &
+                Nesting_Stack(I).Command'Image & "; Close_Char=" &
+                Nesting_Stack(I).Close_Char & "; Line=" &
+		Nesting_Stack(I).Open_Line);
+	end loop;
     end if;
 end Scan;
-
 
