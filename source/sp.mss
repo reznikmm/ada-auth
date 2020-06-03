@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/sp.mss,v $ }
-@comment{ $Revision: 1.90 $ $Date: 2019/11/15 05:03:41 $ $Author: randy $ }
+@comment{ $Revision: 1.91 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
 @Part(sysprog, Root="ada.mss")
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 
 @LabeledNormativeAnnex{Systems Programming}
 
@@ -1148,11 +1148,16 @@ This cuts out @nt<attribute_reference>s that are not static, except for
 Access and Address.
 @end{Ramification}
 
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0368-1]}
 any @nt<name> that is not part of a static expression is an expanded
-name or @nt<direct_name> that statically denotes some entity;
+name or @nt<direct_name> that statically
+@Chg{Version=[5],New=[names],Old=[denotes]} some entity;
 @begin{Ramification}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0368-1]}
 This cuts out @nt<function_call>s and @nt<type_conversion>s that are not
-static, including calls on attribute functions like 'Image and 'Value.
+static, including calls on attribute functions like 'Image and 'Value.@Chg{Version=[5],New=[
+We do allow components if those components don't require any evaluation or
+checks.],Old=[]}
 @end{Ramification}
 
 any @nt<discrete_choice> of an @nt<array_aggregate> is static;
@@ -1211,6 +1216,12 @@ code is executed at run time for the elaboration of entities.]}]}
   @ChgAdded{Version=[2],Text=[Added wording to exclude the additional kinds
   of types allowed in preelaborated units from the @ImplReqTitle.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0368-1]}
+  @ChgAdded{Version=[5],Text=[Added wording to allow components so long as
+  no evaluation or checks are required for the reference.]}
+@end{DiffWord2012}
 
 
 @LabeledRevisedClause{Version=[4],New=[Aspect Discard_Names],
@@ -1674,15 +1685,11 @@ as an actual for a generic formal object of mode @key{in out}, then the
 type of the generic formal object shall be atomic. If the @nt<prefix> of
 an @nt<attribute_reference> for an Access attribute denotes an atomic
 object @Redundant[(including a component)], then the designated type of
-the resulting access type shall be atomic. If an atomic type is used as
-an actual for a generic formal @Chg{Version=[5],New=[],Old=[derived ]}type,
-then @Chg{Version=[5],New=[],Old=[the ancestor of ]}the
-formal type shall be atomic@Chg{Version=[3],New=[],Old=[ or allow pass by copy]}.
-@Chg{Version=[5],New=[If the aspect Atomic_Components is True for a type used
-as an actual for a generic formal array type, the aspect shall be True for
-the formal type. ],Old=[]}Corresponding rules apply to volatile
-objects@Chg{Version=[5],New=[,],Old=[]} and types@Chg{Version=[5],New=[
-for which the Volatile or Volatile_Components aspect is True],Old=[]}.
+the resulting access type shall be atomic.@Chg{Version=[5],New=[],Old=[ If an 
+atomic type is used as an actual for a generic formal derived type,
+then the ancestor of the formal type 
+shall be atomic@Chg{Version=[3],New=[],Old=[ or allow pass by copy]}.]}
+Corresponding rules apply to volatile objects@Chg{Version=[5],New=[],Old=[ and types]}.
 
 @begin{Ramification}
   @ChgRef{Version=[3],Kind=[AddedNormal],ARef=[AI05-0142-4]}
@@ -1696,9 +1703,12 @@ for which the Volatile or Volatile_Components aspect is True],Old=[]}.
 @ChgAdded{Version=[3],Text=[If @Chg{Version=[5],New=[the Atomic,
 Atomic_Components, Volatile, Volatile_Components, Independent, or
 Independent_Components aspect is True for a generic formal type, then that
-aspect shall be True for the actual type],Old=[a volatile type is used as an
-actual for a generic formal array type, then the element type of the formal type
-shall be volatile]}.]}
+aspect shall be True for the actual type. If ],Old=[]}a volatile type is used 
+as an actual for a generic formal array type, then the element type of the 
+formal type shall be volatile.@Chg{Version=[5],New=[ If an
+atomic type is used as an actual for a generic formal derived type,
+then the ancestor of the formal type shall be atomic. A corresponding
+rule applies to volatile types.],Old=[]}]}
 
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0229-1]}
 If @Chg{Version=[3],New=[an aspect],Old=[a pragma]} Volatile,
@@ -1845,9 +1855,9 @@ further specify the parameter passing rules involving atomic and volatile
 types and objects.
 @end{Reason}
 
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0128-1],ARef=[AI12-0347-1]}
 @ChgAdded{Version=[5],Text=[All reads of or writes to any nonatomic subcomponent
-of an atomic object shall be implemented by reading and/or writing all of the
+of an atomic object are performed by reading and/or writing all of the
 nearest enclosing atomic object.]}
 
 @begin{ImplNote}
@@ -1932,6 +1942,16 @@ otherwise, a],Old=[A]} warning might be appropriate if
 no packing whatsoever can be achieved.]}
 @end{ImplNote}
 @end{ImplReq}
+
+@begin{ImplPerm}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0282-1]}
+@ChgAdded{Version=[5],Text=[Within the body of an instance of a generic unit
+that has a formal type @i<T> that is not atomic and an actual type that is 
+atomic, if an object @i<O> of type @i<T> is declared and explicitly specified 
+as atomic, the implementation may introduce an additional copy on passing @i<O> 
+to a subprogram with a parameter of type @i<T> that is normally passed by 
+reference. A corresponding permission applies to volatile parameter passing.]}
+@end{ImplPerm}
 
 @begin{ImplAdvice}
 @ChgRef{Version=[2],Kind=[AddedNormal],ARef=[AI95-00259-01]}
@@ -2351,27 +2371,27 @@ used in conjunction with Atomic_Test_And_Set.]}
 @end{Extend2012}
 
 
-@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Arithmetic]}
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Integer_Arithmetic]}
 
 
 @begin{Intro}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1],ARef=[AI12-0364-1]}
 @ChgAdded{Version=[5],Text=[The language-defined generic package
-System.Atomic_Operations.Arithmetic provides operations to perform arithmetic
+System.Atomic_Operations.Integer_Arithmetic provides operations to perform arithmetic
 atomically on objects of integer types.]}
 @end{Intro}
 
 @begin{StaticSem}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1],ARef=[AI12-0364-1]}
 @ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The generic library
-package System.Atomic_Operations.Arithmetic has the following declaration:]}
+package System.Atomic_Operations.Integer_Arithmetic has the following declaration:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key{generic}
-   @key{type} Atomic_Type @key{is range }<> @key{with} Atomic;
-@key{package} System.Atomic_Operations.Arithmetic@ChildUnit{Parent=[System.Atomic_Operations],Child=[Arithmetic]}
+   @key{type} Atomic_Type @key{is range} <> @key{with} Atomic;
+@key{package} System.Atomic_Operations.Integer_Arithmetic@ChildUnit{Parent=[System.Atomic_Operations],Child=[Integer_Arithmetic]}
    @key{with} Pure, Nonblocking @key{is}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -2401,7 +2421,7 @@ package System.Atomic_Operations.Arithmetic has the following declaration:]}
       @key{with} Convention => Intrinsic;]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Arithmetic;]}
+@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Integer_Arithmetic;]}
 @end{Example}
 
 @begin{DescribeCode}
@@ -2444,7 +2464,6 @@ as follows:]}
 @ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
 @exam{Tmp := Item; Item := Item + Value; @key[return] Tmp;}]}
 
-
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Subtract
@@ -2462,6 +2481,121 @@ as follows:]}
 
 @begin{Extend2012}
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0321-1]}
+  @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
+  This package is new.]}
+@end{Extend2012}
+
+
+@LabeledAddedSubclause{Version=[5],Name=[The Package System.Atomic_Operations.Modular_Arithmetic]}
+
+
+@begin{Intro}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Text=[The language-defined generic package
+System.Atomic_Operations.Modular_Arithmetic provides operations to perform arithmetic
+atomically on objects of modular types.]}
+@end{Intro}
+
+@begin{StaticSem}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],KeepNext=[T],Type=[Leading],Text=[The generic library
+package System.Atomic_Operations.Modular_Arithmetic has the following declaration:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{generic}
+   @key{type} Atomic_Type @key{is mod} <> @key{with} Atomic;
+@key{package} System.Atomic_Operations.Modular_Arithmetic@ChildUnit{Parent=[System.Atomic_Operations],Child=[Modular_Arithmetic]}
+   @key{with} Pure, Nonblocking @key{is}]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Atomic_Add} (Item  : @key{aliased in out} Atomic_Type;
+                         Value : Atomic_Type)
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{procedure} @AdaSubDefn{Atomic_Subtract} (Item  : @key{aliased in out} Atomic_Type;
+                              Value : Atomic_Type)
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Fetch_And_Add}
+     (Item  : @key{aliased in out} Atomic_Type;
+      Value : Atomic_Type) @key{return} Atomic_Type
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Atomic_Fetch_And_Subtract}
+     (Item  : @key{aliased in out} Atomic_Type;
+      Value : Atomic_Type) @key{return} Atomic_Type
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[   @key{function} @AdaSubDefn{Is_Lock_Free} (Item : @key{aliased} Atomic_Type) @key{return} Boolean
+      @key{with} Convention => Intrinsic;]}
+
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],Text=[@key{end} System.Atomic_Operations.Modular_Arithmetic;]}
+@end{Example}
+
+@begin{DescribeCode}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Text=[The operations of this package are defined
+as follows:]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Atomic_Add (Item  : @key[aliased in out] Atomic_Type;
+                      Value : Atomic_Type)
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Item := Item + Value;}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{procedure} Atomic_Subtract (Item  : @key[aliased in out] Atomic_Type;
+                           Value : Atomic_Type)
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Item := Item - Value;}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Add
+   (Item  : @key[aliased in out] Atomic_Type;
+    Value : Atomic_Type) @key[return] Atomic_Type
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Tmp := Item; Item := Item + Value; @key[return] Tmp;}]}
+
+@begin{Example}
+@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgAdded{Version=[5],KeepNext=[T],Text=[@key{function} Atomic_Fetch_And_Subtract
+   (Item  : @key[aliased in out] Atomic_Type;
+    Value : Atomic_Type) @key[return] Atomic_Type
+   @key[with] Convention => Intrinsic;]}
+@end{Example}
+
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
+@ChgAdded{Version=[5],Type=[Trailing],Text=[Atomically performs:
+@exam{Tmp := Item; Item := Item - Value; @key[return] Tmp;}]}
+
+@end{DescribeCode}
+@end{StaticSem}
+
+@begin{Extend2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0364-1]}
   @ChgAdded{Version=[5],Text=[@Defn{extensions to Ada 2012}
   This package is new.]}
 @end{Extend2012}

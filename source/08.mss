@@ -1,10 +1,10 @@
 @Part(08, Root="ada.mss")
 
-@Comment{$Date: 2019/04/09 04:56:51 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Visibility Rules}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/08.mss,v $}
-@Comment{$Revision: 1.115 $}
+@Comment{$Revision: 1.116 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -2632,9 +2632,10 @@ is the profile given in the @nt<subprogram_specification>.
 
 @begin{Legality}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0239-1]}
-The profile of a renaming-as-declaration
-shall be @Chg{Version=[3],New=[mode conformant],Old=[mode-conformant]},
- with that of the renamed callable entity.
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
+The profile of a renaming-as-declaration shall 
+be @Chg{Version=[3],New=[mode conformant@Chg{Version=[5],New=[],Old=[,]}],Old=[mode-conformant]}
+with that of the renamed callable entity.
 @Defn2{Term=[mode conformance],Sec=(required)}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00423-01]}

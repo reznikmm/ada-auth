@@ -1,10 +1,10 @@
 @Part(03, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:44 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Declarations and Types}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/03a.mss,v $}
-@Comment{$Revision: 1.145 $}
+@Comment{$Revision: 1.146 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -16,6 +16,7 @@ named numbers.
 @LabeledClause{Declarations}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
 @PDefn{entity}
 The language defines
 several kinds of named @i(entities) that are declared
@@ -25,7 +26,19 @@ The entity's @i(name)
 is defined by the declaration, usually by a
 @nt<defining_@!identifier>,
 but sometimes by a @nt{defining_@!character_@!literal}
-or @nt{defining_@!operator_@!symbol}.
+or @nt{defining_@!operator_@!symbol}.@Chg{Version=[5],New=[
+There are also entities that are not directly declared; some
+of these are elements of other entities, or are
+allocated dynamically. Such entities can be denoted using
+@nt{indexed_component}, @nt{selected_component}, or dereference @nt{name}s
+(see @RefSecNum{Names}).],Old=[]}
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0373-1]}
+  @ChgAdded{Version=[5],Text=[Some entities are always anonymous. For instance,
+  a type is never named (the name represents the first subtype).
+  We don't mention those here as this paragraph is about @i{named} entities.]}
+@end{Discussion}
 
 There are several forms of declaration. A @nt<basic_declaration>
 is a form of declaration defined as follows.
@@ -7643,8 +7656,8 @@ evaluation rules.]}
 @Leading@;The following attributes are defined for
 @PrefixType{every fixed point subtype S}:
 @begin(description)
-@ChgAttribute{Version=[1], Kind=[Revised], ChginAnnex=[F], Leading=[F],
-  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005], ARef=[AI95-00054-01],
+@ChgAttribute{Version=[5], Kind=[Revised], ChginAnnex=[F], Leading=[F],
+  Prefix=<S>, AttrName=<Small>, Ref=[8652/0005], ARef=[AI95-00054-01], ARef=[AI12-0367-1],
   Text=[S'Small
      denotes the @i(small) of the type of S.
      The value of this attribute is of the type @i(universal_real).]}
@@ -7655,7 +7668,8 @@ evaluation rules.]}
      via an @nt{attribute_@!definition_@!clause}
      (see @RefSecNum{Operational and Representation Attributes});
      the expression of such a clause shall be
-     static.@Chg{Version=[3],New=[@AspectDefn{Small}],Old=[]}
+     static@Chg{Version=[5],New=[ and 
+     positive],Old=[]}.@Chg{Version=[3],New=[@AspectDefn{Small}],Old=[]}
 
   @ChgAspectDesc{Version=[3],Kind=[AddedNormal],Aspect=[Small],
     Text=[@ChgAdded{Version=[3],Text=[Scale factor for a fixed point type.]}]}
@@ -7785,3 +7799,10 @@ Other attributes of fixed point types are defined in
 @ChgAdded{Version=[2],Text=[@b<Corrigendum:> Clarified that @i<small> may be
 specified only for ordinary fixed point types.]}
 @end{DiffWord95}
+
+@begin{DiffWord2012}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0367-1]}
+  @ChgAdded{Version=[5],Text=[@b<Correction:> Clarified that @i<small> may be
+  specified only with positive values.]}
+@end{DiffWord2012}
+

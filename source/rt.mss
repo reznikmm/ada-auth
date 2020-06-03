@@ -1,7 +1,7 @@
 @Comment{ $Source: e:\\cvsroot/ARM/Source/rt.mss,v $ }
-@comment{ $Revision: 1.129 $ $Date: 2019/09/09 02:53:21 $ $Author: randy $ }
+@comment{ $Revision: 1.130 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
 @Part(realtime, Root="ada.mss")
-@Comment{$Date: 2019/09/09 02:53:21 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 
 @LabeledNormativeAnnex{Real-Time Systems}
 
@@ -551,10 +551,7 @@ subprogram of each descendant of @i<T>.]}
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[If the Yield aspect is specified
 for a dispatching subprogram that inherits the aspect, the specified
-value shall be confirming. If the Nonblocking aspect (see
-@RefSecNum{Intertask Communication}) of
-the associated callable entity is statically True, the Yield aspect
-shall not be specified as True.]}
+value shall be confirming.]}
 
 @ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0279-1],ARef=[AI12-0294-1]}
 @ChgAdded{Version=[5],Text=[If the Nonblocking aspect (see
@@ -854,7 +851,7 @@ deferred while the affected task performs a protected action.]}
   task dispatching points to only allow adding task dispatching points. If an
   implementation was using this permission to remove task dispatching points,
   and a program depended on that behavior to work, it could fail when used with
-  Ada 2012. We are not aware of any such implementations, and such behavior was
+  Ada 202x. We are not aware of any such implementations, and such behavior was
   never portable to other implementations, so we do not expect this to matter
   in practice.]}
 @end{Inconsistent2012}
@@ -3751,7 +3748,7 @@ construction of highly efficient tasking run-time systems.]
 @end{Intro}
 
 @begin{StaticSem}
-@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0290-1]}
+@ChgRef{Version=[5],Kind=[Added],ARef=[AI12-0290-1],ARef=[AI12-0369-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[@Defn{pure-barrier-eligible}A
 scalar @nt{expression} within a protected unit is said to be
 @i<pure-barrier-eligible> if it is one of the following:]}
@@ -3760,8 +3757,9 @@ scalar @nt{expression} within a protected unit is said to be
 @ChgAdded{Version=[5],Text=[a static expression;]}
 
 @ChgRef{Version=[5],Kind=[Added]}
-@ChgAdded{Version=[5],Text=[a @nt{name} that statically denotes a scalar
-component of the immediately enclosing protected unit;]}
+@ChgAdded{Version=[5],Text=[a @nt{name} that statically names (see
+@RefSecNum{Static Expressions and Static Subtypes}) a scalar
+subcomponent of the immediately enclosing protected unit;]}
 
 @ChgRef{Version=[5],Kind=[Added]}
 @ChgAdded{Version=[5],Text=[a Count @nt{attribute_reference} whose @nt{prefix}
@@ -4014,14 +4012,17 @@ the Ravenscar profile, no runtime checks are needed.]}
 
 @ChgRef{Version=[2],Kind=[Added],ARef=[AI95-00305-01]}
 @ChgRef{Version=[3],Kind=[RevisedAdded],ARef=[AI05-0013-1]}
-@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0290-1]}@ChgNote{Just changes the paragraph number}
+@ChgRef{Version=[5],Kind=[RevisedAdded],ARef=[AI12-0369-1]}
 @ChgAdded{Version=[2],Text=[@Defn2{Term=[restrictions],Sec=(Simple_Barriers)}@Chg{Version=[3],New=[@Defn{Simple_Barriers restriction}],
    Old=[]}Simple_Barriers @\The
    Boolean expression in @Chg{Version=[3],New=[each],Old=[an]} entry barrier
    @Chg{Version=[3],New=[is],Old=[shall be]} either a static
    @Chg{Version=[3],New=[],Old=[Boolean ]}expression or a
-   @Chg{Version=[3],New=[name that statically denotes a],Old=[Boolean]}
-   component of the enclosing protected object.]}
+   @Chg{Version=[3],New=[@Chg{Version=[5],New=[@nt{name}],Old=[name]}
+   that statically @Chg{Version=[5],New=[names (see
+   @RefSecNum{Static Expressions and Static Subtypes})],Old=[denotes]}
+   a],Old=[Boolean]} @Chg{Version=[5],New=[subcomponent],Old=[component]}
+   of the enclosing protected object.]}
 
 @end{Description}
 
@@ -4292,11 +4293,17 @@ The above Storage_Checks can be suppressed with pragma Suppress.
   task is running on an implementation-defined CPU so that task scheduling
   can be analyzed.]}
 
-  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0290-1]}
-  @ChgAdded{Version=[5],Text=[@b{Corrigendum:} Restriction
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0290-1],ARef=[AI12-0369-1]}
+  @ChgAdded{Version=[5],Text=[Restriction
   Pure_Barriers is newly added to Ada; it allows the Jorvik profile to use
   more expressive barriers than the Ravenscar profile without having to
   worry about exceptions or side-effects.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0369-1]}
+  @ChgAdded{Version=[5],Text=[Restriction Simple_Barriers (which is part of
+  the Ravenscar profile) is extended to allow statically named record and array
+  subcomponents; this allows common static analysis patterns to be used with
+  Ravenscar.]}
 @end{Extend2012}
 
 
@@ -5426,7 +5433,7 @@ Text=[The metrics for entry-less protected objects.]}]}
 @end{Metrics}
 
 
-@LabeledRevisedClause{Version=[5],InitialVersion=[3],New=[The Ravenscar and Jorvik Profiles],Old=[The Ravenscar Profile]}}
+@LabeledRevisedClause{Version=[5],InitialVersion=[3],New=[The Ravenscar and Jorvik Profiles],Old=[The Ravenscar Profile]}
 @Comment<@LabeledRevisedClause{Version=[3],InitialVersion=[2],New=[The Ravenscar Profile],Old=[Run-time Profiles]}>
 
 @begin{Intro}

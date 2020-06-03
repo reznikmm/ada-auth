@@ -1,7 +1,7 @@
 @comment{ $Source: e:\\cvsroot/ARM/Source/ds.mss,v $ }
-@comment{ $Revision: 1.82 $ $Date: 2020/01/30 01:09:45 $ $Author: randy $ }
+@comment{ $Revision: 1.83 $ $Date: 2020/06/03 00:09:01 $ $Author: randy $ }
 @Part(dist, Root="ada.mss")
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 
 @LabeledNormativeAnnex{Distributed Systems}
 
@@ -126,6 +126,14 @@ protected objects).
 
 @end{Discussion}
 
+@begin{Ramification}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0359-1]}
+  @ChgAdded{Version=[5],Text=[A passive partition has no execution resources of
+  its own, so while a call of a subprogram in a passive partition is a remote
+  access to that subprogram, it is @i<not> a remote subprogram call (see
+  @RefSecNum{Remote Subprogram Calls}). The calling active partition executes
+  the body of the subprogram of the passive partition.]}
+@end{Ramification}
 @end{LinkTime}
 
 @begin{RunTime}
@@ -605,6 +613,30 @@ the shared passive library units
 on which it depends semantically to be included in that same
 partition; they will typically reside in separate passive
 partitions.
+
+@begin{Honest}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0359-1]}
+  @ChgAdded{Version=[5],Text=[This rule is necessary so that the shared data
+  of a shared passive partition is not duplicated in each partition. It does
+  not imply a particular implementation; in particular, code can be replicated
+  in each active partition.]}
+@end{Honest}
+
+@begin{ImplNote}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0359-1]}
+  @ChgAdded{Version=[5],Text=[One possible implementation for a shared passive
+  partition is as a shared library that is mapped into the address space of of
+  each active partition. In such case, both the code and the data of the passive
+  partition would be mapped into the active partitions and directly
+  called/accessed from each active partition. For instance, on Microsoft Windows
+  a DLL has the correct semantics.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal]}
+  @ChgAdded{Version=[5],Text=[Alternatively, the shared data can be represented
+  as a file or persistent memory, with the shared code being replicated in each
+  active partition. Code replication is an as-if optimization; it should be
+  impossible to tell where the code lives since no elaboration is necessary.]}
+@end{ImplNote}
 
 @end{LinkTime}
 
@@ -1579,20 +1611,29 @@ become inaccessible to one another.
 @LabeledClause{Remote Subprogram Calls}
 
 @begin{Intro}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0359-1]}
 @Defn{remote subprogram call}
 @RootDefn{asynchronous remote procedure call}
 @Defn{calling partition}
 @Defn{called partition}
 @Defn{remote subprogram binding}
 A @i{remote subprogram call} is a subprogram call that invokes the
-execution of a subprogram in another partition.
-The partition that
+execution of a subprogram in another
+@Chg{Version=[5],New=[(active) ],Old=[]}partition. The partition that
 originates the remote subprogram call is the @i{calling partition}, and the
 partition that executes the corresponding subprogram body is the @i{called
 partition}.
 Some remote procedure calls are allowed to return prior to the completion of
 subprogram execution. These are called @i{asynchronous remote procedure
 calls}.
+
+@begin{Discussion}
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0359-1]}
+  @ChgAdded{Version=[5],Text=[Remote subprogram calls are always between active
+  partitions; a passive partition has no execution resources of its own and thus
+  cannot execute anything, while a remote subprogram call is always executed by
+  the called partition.]}
+@end{Discussion}
 
 @Leading@;There are three different ways of performing a remote subprogram call:
 @begin{Itemize}
@@ -1995,6 +2036,10 @@ not include the library unit that defines the exception.
   @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0283-1]}
   @ChgAdded{Version=[5],Text=[Added a rule to ensure that potentially blocking
   remote calls are not considered nonblocking.]}
+
+  @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0359-1]}
+  @ChgAdded{Version=[5],Text=[Clarified that remote subprogram calls are
+  always to active partitions.]}
 @end{DiffWord2012}
 
 

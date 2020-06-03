@@ -1,10 +1,10 @@
 @Part(05, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Statements}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/05.mss,v $}
-@Comment{$Revision: 1.83 $}
+@Comment{$Revision: 1.84 $}
 
 @begin{Intro}
 @Redundant[A @nt{statement} defines an action to be performed upon
@@ -731,8 +731,8 @@ subclause @RefSecNum{Assignment Statements}.]}
 
 @begin{Examples}
 @begin{Example}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
-@ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1;>
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3],ARef=[AI12-0379-1]}
+@ChgAdded{Version=[5],Text=[Board(1, 1) := @@ + 1.0;  -- @Examcom<An abbreviation for Board(1, 1) := Board(1, 1) + 1.0;>
                        -- @Examcom<(Board is declared in @RefSecNum{Index Constraints and Discrete Ranges}).>]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0125-3]}
@@ -2783,7 +2783,7 @@ again.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]
 
 @begin{Examples}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0189-1],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[Example of iterating over a map from
 My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):]}
 
@@ -2805,7 +2805,7 @@ My_Key_Type to My_Element_Type (see @RefSecNum{Maps}):]}
          My_Element_Type'Image (Element (C)));
    @key[end] P;
 @key[begin]
-   My_Map.Iterator (P'Access);
+   My_Map.Iterate (P'Access);
 @key[end];]}
 @end{Example}
 

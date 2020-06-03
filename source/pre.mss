@@ -1,10 +1,10 @@
 @Part(predef, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:42 $}
+@Comment{$Date: 2020/06/03 00:09:01 $}
 @LabeledNormativeAnnex{Predefined Language Environment}
 
 @comment{$Source: e:\\cvsroot/ARM/Source/pre.mss,v $}
-@comment{$Revision: 1.60 $}
+@comment{$Revision: 1.61 $}
 @comment{$RLB: Eliminated includes. $}
 
 @begin{Intro}
@@ -290,8 +290,9 @@ New=[Standard (@i{...continued})
 @Noparanum@shrink<@\System @em @RefSecNum{The Package System}
 @\@\Address_To_Access_Conversions @em @RefSecNum{The Package System.Address_To_Access_Conversions}
 @Chg{Version=[5],New=(@\@\Atomic_Operations @em @RefSecNum{The Package System.Atomic_Operations}
-@\@\@\Arithmetic @em @RefSecNum{The Package System.Atomic_Operations.Arithmetic}
 @\@\@\Exchange @em @RefSecNum{The Package System.Atomic_Operations.Exchange}
+@\@\@\Integer_Arithmetic @em @RefSecNum{The Package System.Atomic_Operations.Integer_Arithmetic}
+@\@\@\Modular_Arithmetic @em @RefSecNum{The Package System.Atomic_Operations.Modular_Arithmetic}
 @\@\@\Test_And_Set @em @RefSecNum{The Package System.Atomic_Operations.Test_And_Set}
 ),Old=()}@\@\Machine_Code @em @RefSecNum{Machine Code Insertions}
 @Chg{Version=[3],New=(@\@\Multiprocessors @em @RefSecNum{Multiprocessor Implementation}

@@ -1,10 +1,10 @@
 @Part(11, Root="ada.mss")
 
-@Comment{$Date: 2019/11/15 05:03:41 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Exceptions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/11.mss,v $}
-@Comment{$Revision: 1.103 $}
+@Comment{$Revision: 1.104 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1738,7 +1738,7 @@ unless suppressed.]}
   @ChgAdded{Version=[5],Text=[This allows the Standard to express runtime
   requirements on the client of a language-defined unit as preconditions or
   predicates (which are invariably clearer than English prose would be). Some
-  such requirements can be Suppressed. Ada 2012 and earlier version did not
+  such requirements can be Suppressed. Ada 2012 and earlier versions did not
   provide a mechanism to suppress such code.]}
 @end{Reason}
 @end{ImplReq}

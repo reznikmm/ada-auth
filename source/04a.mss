@@ -1,10 +1,10 @@
 @Part(04, Root="ada.mss")
 
-@Comment{$Date: 2020/01/30 01:09:45 $}
+@Comment{$Date: 2020/06/03 00:09:00 $}
 @LabeledSection{Names and Expressions}
 
 @Comment{$Source: e:\\cvsroot/ARM/Source/04a.mss,v $}
-@Comment{$Revision: 1.157 $}
+@Comment{$Revision: 1.158 $}
 
 @begin{Intro}
 @ChgRef{Version=[3],Kind=[Revised],ARef=[AI05-0299-1]}
@@ -1698,11 +1698,20 @@ In either case, the @nt{character_literal} denotes the
   @nt<selector_name> that is a @nt<character_literal>.
 @end{Discussion}
 
-@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0325-1]}
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0325-1],ARef=[AI12-0373-1]}
 @PDefn2{Term=[expected type],Sec=(string_literal)}
 The expected type for a @nt{primary} that is a @nt<string_literal>
 shall be a single string type@Chg{Version=[5],New=[ or a type with a
-specified String_Literal aspect (see @RefSecNum{User-Defined Literals}).],Old=[]}.
+specified String_Literal aspect (see @RefSecNum{User-Defined Literals}). 
+In either case, the @nt{string_literal} is interpreted to be of its 
+expected type. If the expected type of an integer literal is a type with a 
+specified Integer_Literal aspect (see @RefSecNum{User-Defined Literals}), 
+the literal is interpreted to@PDefn2{Term=[expected type],Sec=(integer_literal)}
+be of its expected type; otherwise it is interpreted to be of type 
+@i<universal_integer>. If the expected type of a real literal is a type with 
+a specified Real_Literal aspect (see @RefSecNum{User-Defined Literals}), 
+it is interpreted to be of its@PDefn2{Term=[expected type],Sec=(real_literal)}
+expected type; otherwise, it is interpreted to be of type @i<universal_real>.],Old=[]}.
 @end{Resolution}
 
 @begin{Legality}
@@ -1733,8 +1742,9 @@ rule, to simplify implementations.]}
 
 @begin{StaticSem}
 @ChgRef{Version=[2],Kind=[Revised],ARef=[AI95-00230-01]}
-An integer literal is of type @i{universal_integer}.
-A real literal is of type @i{universal_real}.@Chg{Version=[2],New=[ The literal
+@ChgRef{Version=[5],Kind=[Revised],ARef=[AI12-0373-1]}
+@Chg{Version=[5],New=[],Old=[An integer literal is of type @i{universal_integer}.
+A real literal is of type @i{universal_real}.]}@Chg{Version=[2],New=[@Chg{Version=[5],New=[],Old=[ ]}The literal
 @key<null> is of type @i<universal_access>.@Chg{Version=[3],
 New=[@PDefn{universal_integer}@PDefn{universal_real}@PDefn{universal_access}],Old=[]}],Old=[]}
 @end{StaticSem}
@@ -1876,26 +1886,29 @@ as @i<user-defined literal aspects>)@Defn{user-defined literal aspect}
 may be specified for any type @i<T>:]}
 
 @begin{Description}
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[Integer_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that statically denotes a function with one
-parameter of type String and a result type of @i<T>.@AspectDefn{Integer_Literal}]}
+@SynI{function_}@nt{name} that statically denotes a function with a result type
+of @i<T> and one @key[in] parameter that is of type String and is 
+not explictly aliased.@AspectDefn{Integer_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Integer_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined integer literals.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0249-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[Real_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that statically denotes a function with one
-parameter of type String and a result type of @i<T>.@AspectDefn{Real_Literal}]}
+@SynI{function_}@nt{name} that statically denotes a function with a result type
+of @i<T> and one @key[in] parameter that is of type String and is 
+not explictly aliased.@AspectDefn{Real_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[Real_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined real literals.]}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1],ARef=[AI12-0342-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0295-1],ARef=[AI12-0342-1],ARef=[AI12-0373-1]}
 @ChgAdded{Version=[5],Text=[String_Literal@\This aspect is specified by a
-@SynI{function_}@nt{name} that statically denotes a function with one
-parameter of type Wide_Wide_String and a result type of @i<T>.@AspectDefn{String_Literal}]}
+@SynI{function_}@nt{name} that statically denotes a function with a result type
+of @i<T> and one @key[in] parameter that is of type Wide_Wide_String and is 
+not explictly aliased.@AspectDefn{String_Literal}]}
 
   @ChgAspectDesc{Version=[5],Kind=[AddedNormal],Aspect=[String_Literal],
     Text=[@ChgAdded{Version=[5],Text=[Defines a function to implement user-defined string literals.]}]}
@@ -1948,7 +1961,7 @@ to the rules given in @RefSecNum{Operational and Representation Aspects}.]}
 @end{Discussion}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0342-1]}
-@ChgAdded{Version=[5],Text=[When a numeric literal is interpreted as value of
+@ChgAdded{Version=[5],Text=[When a numeric literal is interpreted as a value of
 a non-numeric type @i<T> or a @nt{string_literal} is interpreted a value of
 a type @i<T> that is not a string type (see @RefSecNum{Literals}), it is
 equivalent to a call to the subprogram denoted by the corresponding aspect of
@@ -2078,7 +2091,7 @@ time.@Defn2{Term=[Program_Error],Sec=(raised by detection of a bounded error)}]}
    (@key[declare]
       R : @key[constant array] (Integer @key[range] <>) @key[of] Integer :=
          (@key[for] D @key[in] S'Range => Roman_Digit'Enum_Rep
-             (Roman_Digit'Value (''' & S(D) & '''))) --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
+             (Roman_Digit'Value (''' & S(D) & '''))); --@Examcom{ See @RefSecNum{Character Types} and @RefSecNum{Enumeration Representation Clauses}}
     @key[begin]
       [@key[for] I @key[in] R'Range =>
          (@key[if] I < R'Last @key[and then] R(I) < R(I + 1) @key[then] -1 @key[else] 1) * R(I))]
@@ -4162,14 +4175,14 @@ postcondition:]}
    @key[with] Post => V = (V'Old @key[with delta] A .. B => 42.0, V'First => 0.0);]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0324-1],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression can
 be nontrivial:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[New_Cell : Cell := (Min_Cell (Link) @key[with delta] Value => 42);
-   --@Examcom{ see @RefSecNum{Incomplete Type Declarations} for Cell and Link; @RefSecNum{Subprogram Declarations} for Min_Cell}]}
+@ChgAdded{Version=[5],Text=[New_Cell : Cell := (Min_Cell (Head) @key[with delta] Value => 42);
+   --@Examcom{ see @RefSecNum{Incomplete Type Declarations} for Cell and Head; @RefSecNum{Subprogram Declarations} for Min_Cell}]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[A1 : Vector := ((0 => 1.0, 1 => 2.0, 2 => 3.0)
@@ -4181,13 +4194,13 @@ be nontrivial:]}
 @ChgAdded{Version=[5],Text=[Tomorrow := ((Yesterday @key[with delta] Day => 12) @key[with delta] Month => Apr); --@Examcom{ see @RefSecNum{Record Types}}]}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0127-1],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Type=[Leading],Keepnext=[T],Text=[The base expression may
 also be class-wide:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@key[function] Translate (P : Point'Class; X, Y : Float) @key[return] Point'Class @key[is]
+@ChgAdded{Version=[5],Text=[@key[function] Translate (P : Point'Class; X, Y : Real) @key[return] Point'Class @key[is]
    (P @key[with delta] X => P.X + X,
                  Y => P.Y + Y); --@Examcom{ see @RefSecNum{Tagged Types and Type Extensions} for declaration of type Point}]}
 @end{Example}
@@ -4744,37 +4757,8 @@ Set_Type, Map_Type, and Vector_Type:]}
       --  @examcom<lower bound of their index subtype.>]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[@key[private]]}
+@ChgAdded{Version=[5],Text=[-- @examcom{Private part not shown.}]}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] Set_Type @key[is new] Bit_Vector (Small_Natural); -- @examcom<See @RefSecNum{Array Types}.>]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[function] Empty_Set @key[return] Set_Type @key[is] (@key[others] => False);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[package] Int_String_Maps @key[is]
-      @key[new] Ada.Containers.Indefinite_Ordered_Maps  -- @examcom<See @RefSecNum{The Generic Package Containers.Indefinite_Ordered_Maps}.>
-         (Key_Type => Integer, Element_Type => String);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] Map_Type @key[is new] Int_String_Maps.Map @key[with null record];]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[procedure] Add_To_Map (M : @key[in out] Map_Type; Key : @key[in] Integer; Value : @key[in] String)
-      @key[renames] Insert;]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   Empty_Map : @key[constant] Map_Type :=
-      (Int_String_Maps.Empty_Map @key[with null record]);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[package] String_Vectors @key[is]
-      @key[new] Ada.Containers.Indefinite_Vectors -- @examcom<See @RefSecNum{The Generic Package Containers.Indefinite_Vectors}.>
-         (Index_Type => Positive, Element_Type => String);]}
-
-@ChgRef{Version=[5],Kind=[AddedNormal]}
-@ChgAdded{Version=[5],Text=[   @key[type] Vector_Type @key[is new] String_Vectors.Vector;]}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0212-1]}
@@ -4820,12 +4804,12 @@ S := Empty_Set;
 S := [@key[for] Item @key[in] 1 .. 5 => Item,
       @key[for] Item @key[in] 1 .. 5 => -Item];"}
 
-@ChgRef{Version=[5],Kind=[AddedNormal]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent (assuming set semantics) to:>
 S := Empty_Set;
 @key[for] Item @key[in] -5 .. 5 @key[loop]
    @key[if] Item /= 0 @key[then]
-      Include (S, Item * 2);
+      Include (S, Item);
    @key[end if];
 @key[end loop];]}
 
@@ -4858,13 +4842,13 @@ Add_To_Map (M, 14, "beige");]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text="--  @examcom<A map aggregate using an >@nt<iterated_element_association>
 --  @examcom<and a key_>@nt{expression}@examcom<, built from from a table of key/value pairs:>
-M := [@key[for] P @key[of] Table @key[use] P.Key => P.Value];"}
+M := [@key[for] P @key[of] Table @key[use] P.Key => P.Value.@key[all]];"}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[--  @examcom<Is equivalent to:>
 M := Empty_Map;
 @key[for] P @key[of] Table @key[loop]
-   Add_To_Map (M, P.Key, P.Value);
+   Add_To_Map (M, P.Key, P.Value.@key[all]);
 @key[end loop];]}
 
 @ChgRef{Version=[5],Kind=[AddedNormal]}
@@ -6334,7 +6318,7 @@ membership test using @key(in)]} yields the result True if:
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text=[@key[type] Root @key[is tagged null record];
-@key[type] Ext @key[is new] Root @key[with] Data : Integer; @key[end record];
+@key[type] Ext @key[is new] Root @key[with record] Data : Integer; @key[end record];
 @key[function] Is_Even (Param : Ext) @key[return] Boolean @key[is]
    (Param.Data @key[mod] 2 = 0);
 @key[subtype] Even_Ext @key[is] Ext
@@ -8250,17 +8234,17 @@ the Sine of X using a Taylor expansion:]}
       'Reduce("+", 0.0));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[A reduction expression that outputs
 the sum of squares:]}
 
 @begin{Example}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={Put_Line ("Sum of Squares is" &
-          Integer'Image([@key[for] I @key[in] 1 .. 10 => I**2]'Reduce("+", 0));}}
+          Integer'Image([@key[for] I @key[in] 1 .. 10 => I**2]'Reduce("+", 0)));}}
 @end{Example}
 
-@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1]}
+@ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0262-1],ARef=[AI12-0379-1]}
 @ChgAdded{Version=[5],Type=[Leading],Text=[An expression function to compute the
 value of Pi:]}
 
@@ -8268,10 +8252,11 @@ value of Pi:]}
 @ChgRef{Version=[5],Kind=[AddedNormal]}
 @ChgAdded{Version=[5],Text={--  @Examcom{See @RefSecNum{Floating Point Types}.}
 @key[function] Pi (Number_Of_Steps : Natural := 10_000) @key[return] Real @key[is]
-  (1.0 / Number_Of_Steps *
+  (1.0 / Real (Number_Of_Steps) *
     [@key[for] I @key[in] 1 .. Number_Of_Steps =>
-        (4.0 / (1.0 + ((Real (I) - 0.5) * (1.0 / Number_Of_Steps))**2))]
-           'Reduce("+", 0.0));}}
+        (4.0 / (1.0 + ((Real (I) - 0.5) * 
+           (1.0 / Real (Number_Of_Steps)))**2))]
+              'Reduce("+", 0.0));}}
 @end{Example}
 
 @ChgRef{Version=[5],Kind=[AddedNormal],ARef=[AI12-0242-1]}
