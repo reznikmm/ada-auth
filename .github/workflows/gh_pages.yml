@@ -1,0 +1,68 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    name: Build GitHub Pages
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt install dosfstools gnat gprbuild
+          dd if=/dev/zero of=/tmp/vfat.img bs=1048576 count=800
+          mkfs.vfat /tmp/vfat.img
+          mkdir ada-auth
+          sudo mount /tmp/vfat.img ada-auth -o loop,uid=$UID
+      - name: Checkout ada-auth
+        uses: actions/checkout@v2
+        with:
+          path: ada-auth
+          fetch-depth: 0
+      - name: Generate HTML
+        run: |
+          gprbuild -p -P ada-auth/ada_form.gpr
+          mkdir ada-auth/source/output
+          for VERSION in 5 4 ; do
+           for RM in rm aarm; do
+            mkdir /tmp/$RM-$VERSION-{N,P,A}C
+            (cd ada-auth/source
+             if [ $VERSION -eq 5 ]; then
+              ../.obj/Arm_Form $RM HTML New-Only     5 5 /tmp/$RM-$VERSION-NC/
+              ../.obj/Arm_Form $RM HTML Show-Changes 1 5 /tmp/$RM-$VERSION-AC/
+              ../.obj/Arm_Form $RM HTML Show-Changes 5 5 /tmp/$RM-$VERSION-PC/
+             else
+              git checkout version-$VERSION
+              gprbuild -P ../ada_form.gpr
+              ../.obj/Arm_Form $RM HTML New-Only     $VERSION; mv Output/* /tmp/$RM-$VERSION-NC/
+              ../.obj/Arm_Form $RM HTML Show-Changes $VERSION; mv Output/* /tmp/$RM-$VERSION-AC/
+              ../.obj/Arm_Form $RM HTML Changes-Only $VERSION; mv Output/* /tmp/$RM-$VERSION-PC/
+             fi
+             cd /tmp/
+             for J in $RM-$VERSION-{N,P,A}C/*-Ttl.html; do
+               mv $J ${J^^[tl]}
+             done
+             )
+           done
+          done
+
+          # Set up .netrc file with GitHub credentials
+          cat << EOF > $HOME/.netrc
+          machine github.com
+          login sync_bot
+          password $GITHUB_ACCESS_TOKEN
+          EOF
+          chmod 600 $HOME/.netrc
+          cd ada-auth
+          git checkout gh-pages
+          rm -rf {rm,aarm}-*
+          cp -r -f /tmp/{rm,aarm}-* .
+          git add {rm,aarm}-*
+          if [ `git status -s |wc -l` != 0 ]; then
+            git config user.email "reznikmm@gmail.com"
+            git config user.name "Max Reznik"
+            git commit -m "Update for $GITHUB_SHA"
+            git push
+            git status
+          fi
