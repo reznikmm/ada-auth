@@ -1,0 +1,33 @@
+on:
+  workflow_dispatch:
+  schedule:
+    - cron:  '40 05 * * 6'
+name: Sync with ada-auth webcvs
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Sync with ada-auth webcvs
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout ada-auth
+        with:
+          path: ada-auth
+          fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          path: cvsweb2git
+          repository: reznikmm/cvsweb2git
+      - run: |
+          LAST=`cd ada-auth; git log -n 1 --format=format:%ad --date=format:%Y.%m.%d.%H.%M.%S`
+          docker build -t im --build-arg GITUID=$UID ada-auth/.github/workflows
+          docker run -v $PWD/cvsweb2git:/home/user/cvsweb2git -v $PWD/ada-auth:/home/user/ada-auth im /home/user/update.sh
+          NEXT=`cd ada-auth; git log -n 1 --format=format:%ad --date=format:%Y.%m.%d.%H.%M.%S`
+          # Set up .netrc file with GitHub credentials
+          cat << EOF > $HOME/.netrc
+          machine github.com
+          login reznikmm
+          password $GITHUB_ACCESS_TOKEN
+          EOF
+          chmod 600 $HOME/.netrc
+          cd ada-auth
+          [ $LAST != $NEXT ] && git push || echo No new commits found.
