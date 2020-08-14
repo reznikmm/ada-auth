@@ -1,0 +1,27 @@
+on: [workflow_dispatch]
+name: Build
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Sync with ada-auth webcvs
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout ada-auth
+        with:
+          path: ada-auth
+          fetch-depth: 0
+      - uses: actions/checkout@v2
+        with:
+          path: cvsweb2git
+          repository: reznikmm/cvsweb2git
+      - run: |
+          docker build -t im --build-arg GITUID=$UID ada-auth/.github/workflows
+          docker run -v $PWD/cvsweb2git:/home/user/cvsweb2git -v $PWD/ada-auth:/home/user/ada-auth im /home/user/update.sh
+          # Set up .netrc file with GitHub credentials
+          cat << EOF > $HOME/.netrc
+          machine github.com
+          login reznikmm
+          password $GITHUB_ACCESS_TOKEN
+          EOF
+          chmod 600 $HOME/.netrc
+          cd ada-auth; git push
